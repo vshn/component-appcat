@@ -1,7 +1,65 @@
 parameters:
   appcat:
-    =_metadata: {}
-    secrets: {}
-    additionalResources: {}
-    composites: {}
-    compositions: {}
+
+    images:
+      provider-kubernetes:
+        registry: docker.io
+        repository: crossplane/provider-kubernetes
+        tag: v0.4.0
+      provider-exoscale:
+        registry: ghcr.io
+        repository: vshn/provider-exoscale/provider
+        tag: v0.5.0
+      provider-cloudscale:
+        registry: ghcr.io
+        repository: vshn/provider-cloudscale/provider
+        tag: v0.5.0
+
+    providers:
+      cloudscale:
+        enabled: false
+        apiToken: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-cloudscale/secret-key}'
+      exoscale:
+        enabled: false
+        apiKey: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/access-key}'
+        apiSecret: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/secret-key}'
+
+
+    # Config for "converged" vendor agnositc composites
+    converged:
+      objectstorage:
+        enabled: false
+
+        # Compositions that provide a composition for the composite with it's configuration
+        defaultComposition: ${facts:cloud}
+        compositions:
+          exoscale:
+            enabled: true
+            secretNamespace: provider-cloudscale-secrets-objectsusers
+            bucketDeletionPolicy: ${parameters:appcat:converged:objectstorage:bucketDeletionPolicy}
+          cloudscale:
+            enabled: true
+            secretNamespace: provider-cloudscale-secrets-objectsusers
+            bucketDeletionPolicy: ${parameters:appcat:converged:objectstorage:bucketDeletionPolicy}
+
+        # Generic config for objecstorage composite
+        bucketDeletionPolicy: DeleteAll
+
+    # Config for exoscale composites
+    exoscale:
+      enabled: false
+      mysql:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-mysql
+      postgres:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-postgres
+      redis:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-redis
+      kafka:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-kafka
+      opensearch:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-opensearch
