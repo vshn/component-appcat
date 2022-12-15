@@ -1,7 +1,17 @@
 classes:
   - ..provider.exoscale
-
-# parameters: {}
+  - ..composite.objectstorage
+  - ..composite.dbaas.exoscale.kafka
+  - ..composite.dbaas.exoscale.redis
+  - ..composite.dbaas.exoscale.mysql
+  - ..composite.dbaas.exoscale.postgres
+  - ..composite.dbaas.exoscale.opensearch
+  - ..composition.dbaas.exoscale.kafka
+  - ..composition.dbaas.exoscale.redis
+  - ..composition.dbaas.exoscale.mysql
+  - ..composition.dbaas.exoscale.postgres
+  - ..composition.dbaas.exoscale.opensearch
+  - ..composition.objectstorage.exoscale
 
 parameters:
   crossplane:

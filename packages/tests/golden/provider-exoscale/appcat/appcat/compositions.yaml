@@ -1,0 +1,635 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscale.objectbuckets.appcat.vshn.io
+  name: exoscale.objectbuckets.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: appcat.vshn.io/v1
+    kind: XObjectBucket
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: IAMKey
+        metadata: {}
+        spec:
+          forProvider:
+            keyName: ''
+            services:
+              sos:
+                buckets:
+                  - ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: AWS_ACCESS_KEY_ID
+          name: AWS_ACCESS_KEY_ID
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: AWS_SECRET_ACCESS_KEY
+          name: AWS_SECRET_ACCESS_KEY
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: status.conditions
+          toFieldPath: status.accessUserConditions
+          type: ToCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - combine:
+            strategy: string
+            string:
+              fmt: '%s.%s'
+            variables:
+              - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+              - fromFieldPath: metadata.labels[crossplane.io/claim-name]
+          toFieldPath: spec.forProvider.keyName
+          type: CombineFromComposite
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.bucketName
+          toFieldPath: spec.forProvider.services.sos.buckets[0]
+          type: FromCompositeFieldPath
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: Bucket
+        metadata: {}
+        spec:
+          forProvider:
+            bucketDeletionPolicy: DeleteAll
+            bucketName: ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale
+      connectionDetails:
+        - fromFieldPath: status.endpoint
+          name: ENDPOINT
+          type: FromFieldPath
+        - fromFieldPath: status.endpointURL
+          name: ENDPOINT_URL
+          type: FromFieldPath
+        - fromFieldPath: spec.forProvider.zone
+          name: AWS_REGION
+          type: FromFieldPath
+        - fromFieldPath: status.atProvider.bucketName
+          name: BUCKET_NAME
+          type: FromFieldPath
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: status.conditions
+          toFieldPath: status.bucketConditions
+          type: ToCompositeFieldPath
+        - fromFieldPath: spec.parameters.bucketName
+          toFieldPath: spec.forProvider.bucketName
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscalekafka.exoscale.appcat.vshn.io
+  name: exoscalekafka.exoscale.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: exoscale.appcat.vshn.io/v1
+    kind: XExoscaleKafka
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: Kafka
+        metadata: {}
+        spec:
+          forProvider:
+            ipFilter: ''
+            kafkaSettings: {}
+            maintenance:
+              dayOfWeek: ''
+              timeOfDay: ''
+            size:
+              plan: ''
+            terminationProtection: false
+            version: ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale-dbaas
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: KAFKA_URI
+          name: KAFKA_URI
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: KAFKA_HOST
+          name: KAFKA_HOST
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: KAFKA_PORT
+          name: KAFKA_PORT
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: KAFKA_NODES
+          name: KAFKA_NODES
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: service.cert
+          name: service.cert
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: service.key
+          name: service.key
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: ca.crt
+          name: ca.crt
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.kafkaSettings
+          toFieldPath: spec.forProvider.kafkaSettings
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.zone
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.network.ipFilter
+          toFieldPath: spec.forProvider.ipFilter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.size.plan
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.dayOfWeek
+          toFieldPath: spec.forProvider.maintenance.dayOfWeek
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.timeOfDay
+          toFieldPath: spec.forProvider.maintenance.timeOfDay
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.version
+          toFieldPath: spec.forProvider.version
+          type: FromCompositeFieldPath
+        - fromFieldPath: status.atProvider.version
+          toFieldPath: status.version
+          type: ToCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscalemysql.exoscale.appcat.vshn.io
+  name: exoscalemysql.exoscale.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: exoscale.appcat.vshn.io/v1
+    kind: XExoscaleMySQL
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: MySQL
+        metadata: {}
+        spec:
+          forProvider:
+            backup:
+              timeOfDay: ''
+            ipFilter: ''
+            maintenance:
+              dayOfWeek: ''
+              timeOfDay: ''
+            mysqlSettings: {}
+            size:
+              plan: ''
+            terminationProtection: false
+            version: ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale-dbaas
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: MYSQL_USER
+          name: MYSQL_USER
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: MYSQL_PASSWORD
+          name: MYSQL_PASSWORD
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: MYSQL_URL
+          name: MYSQL_URL
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: MYSQL_DB
+          name: MYSQL_DB
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: MYSQL_HOST
+          name: MYSQL_HOST
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: MYSQL_PORT
+          name: MYSQL_PORT
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: ca.crt
+          name: ca.crt
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.version
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.mysqlSettings
+          toFieldPath: spec.forProvider.mysqlSettings
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.zone
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.network.ipFilter
+          toFieldPath: spec.forProvider.ipFilter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.size.plan
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.dayOfWeek
+          toFieldPath: spec.forProvider.maintenance.dayOfWeek
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.timeOfDay
+          toFieldPath: spec.forProvider.maintenance.timeOfDay
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.timeOfDay
+          toFieldPath: spec.forProvider.backup.timeOfDay
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscaleopensearch.exoscale.appcat.vshn.io
+  name: exoscaleopensearch.exoscale.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: exoscale.appcat.vshn.io/v1
+    kind: XExoscaleOpenSearch
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: OpenSearch
+        metadata: {}
+        spec:
+          forProvider:
+            backup:
+              timeOfDay: ''
+            ipFilter: ''
+            maintenance:
+              dayOfWeek: ''
+              timeOfDay: ''
+            opensearchSettings: {}
+            size:
+              plan: ''
+            terminationProtection: false
+            version: ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale-dbaas
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: OPENSEARCH_USER
+          name: OPENSEARCH_USER
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: OPENSEARCH_PASSWORD
+          name: OPENSEARCH_PASSWORD
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: OPENSEARCH_URI
+          name: OPENSEARCH_URI
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: OPENSEARCH_DASHBOARD_URI
+          name: OPENSEARCH_DASHBOARD_URI
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: OPENSEARCH_HOST
+          name: OPENSEARCH_HOST
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: OPENSEARCH_PORT
+          name: OPENSEARCH_PORT
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.majorVersion
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.opensearchSettings
+          toFieldPath: spec.forProvider.openSearchSettings
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.zone
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.network.ipFilter
+          toFieldPath: spec.forProvider.ipFilter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.size.plan
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.dayOfWeek
+          toFieldPath: spec.forProvider.maintenance.dayOfWeek
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.timeOfDay
+          toFieldPath: spec.forProvider.maintenance.timeOfDay
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.timeOfDay
+          toFieldPath: spec.forProvider.backup.timeOfDay
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscalepostgres.exoscale.appcat.vshn.io
+  name: exoscalepostgres.exoscale.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: exoscale.appcat.vshn.io/v1
+    kind: XExoscalePostgreSQL
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: PostgreSQL
+        metadata: {}
+        spec:
+          forProvider:
+            backup:
+              timeOfDay: ''
+            ipFilter: ''
+            maintenance:
+              dayOfWeek: ''
+              timeOfDay: ''
+            pgSettings: {}
+            size:
+              plan: ''
+            terminationProtection: false
+            version: ''
+            zone: ''
+          providerConfigRef:
+            name: exoscale-dbaas
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: POSTGRESQL_USER
+          name: POSTGRESQL_USER
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: POSTGRESQL_PASSWORD
+          name: POSTGRESQL_PASSWORD
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: POSTGRESQL_URL
+          name: POSTGRESQL_URL
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: POSTGRESQL_DB
+          name: POSTGRESQL_DB
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: POSTGRESQL_HOST
+          name: POSTGRESQL_HOST
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: POSTGRESQL_PORT
+          name: POSTGRESQL_PORT
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: ca.crt
+          name: ca.crt
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.version
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.pgSettings
+          toFieldPath: spec.forProvider.pgSettings
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.zone
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.network.ipFilter
+          toFieldPath: spec.forProvider.ipFilter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.size.plan
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.dayOfWeek
+          toFieldPath: spec.forProvider.maintenance.dayOfWeek
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.timeOfDay
+          toFieldPath: spec.forProvider.maintenance.timeOfDay
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.timeOfDay
+          toFieldPath: spec.forProvider.backup.timeOfDay
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: exoscaleredis.exoscale.appcat.vshn.io
+  name: exoscaleredis.exoscale.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: exoscale.appcat.vshn.io/v1
+    kind: XExoscaleRedis
+  patchSets:
+    - name: annotations
+      patches:
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+          type: FromCompositeFieldPath
+    - name: labels
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+          type: FromCompositeFieldPath
+  resources:
+    - base:
+        apiVersion: exoscale.crossplane.io/v1
+        kind: Redis
+        metadata: {}
+        spec:
+          forProvider:
+            ipFilter: ''
+            maintenance:
+              dayOfWeek: ''
+              timeOfDay: ''
+            redisSettings: {}
+            size:
+              plan: ''
+            terminationProtection: false
+            zone: ''
+          providerConfigRef:
+            name: exoscale-dbaas
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-exoscale-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: REDIS_HOST
+          name: REDIS_HOST
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: REDIS_PORT
+          name: REDIS_PORT
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: REDIS_USERNAME
+          name: REDIS_USERNAME
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: REDIS_PASSWORD
+          name: REDIS_PASSWORD
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: REDIS_URL
+          name: REDIS_URL
+          type: FromConnectionSecretKey
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.redisSettings
+          toFieldPath: spec.forProvider.redisSettings
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.zone
+          toFieldPath: spec.forProvider.zone
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.network.ipFilter
+          toFieldPath: spec.forProvider.ipFilter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.size.plan
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.dayOfWeek
+          toFieldPath: spec.forProvider.maintenance.dayOfWeek
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.timeOfDay
+          toFieldPath: spec.forProvider.maintenance.timeOfDay
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane

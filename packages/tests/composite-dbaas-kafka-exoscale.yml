@@ -1,6 +1,0 @@
-classes:
-  - ..composite.dbaas.exoscale.kafka
-
-parameters:
-  facts:
-    cloud: exoscale

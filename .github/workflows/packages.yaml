@@ -18,15 +18,6 @@ jobs:
         instance:
           - provider-cloudscale
           - provider-exoscale
-          - composite-objectstorage-cloudscale
-          - composite-objectstorage-exoscale
-          - composition-objectstorage-cloudscale
-          - composition-objectstorage-exoscale
-          - composition-dbaas-postgres-exoscale
-          - composition-dbaas-mysql-exoscale
-          - composition-dbaas-redis-exoscale
-          - composition-dbaas-kafka-exoscale
-          - composition-dbaas-opensearch-exoscale
     defaults:
       run:
         working-directory: ${{ env.PACKAGE_SUBDIR }}
@@ -44,15 +35,6 @@ jobs:
         instance:
           - provider-cloudscale
           - provider-exoscale
-          - composite-objectstorage-cloudscale
-          - composite-objectstorage-exoscale
-          - composition-objectstorage-cloudscale
-          - composition-objectstorage-exoscale
-          - composition-dbaas-postgres-exoscale
-          - composition-dbaas-mysql-exoscale
-          - composition-dbaas-redis-exoscale
-          - composition-dbaas-kafka-exoscale
-          - composition-dbaas-opensearch-exoscale
     defaults:
       run:
         working-directory: ${{ env.PACKAGE_SUBDIR }}

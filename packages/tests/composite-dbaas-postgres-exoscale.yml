@@ -1,6 +1,0 @@
-classes:
-  - ..composite.dbaas.exoscale.postgres
-
-parameters:
-  facts:
-    cloud: exoscale

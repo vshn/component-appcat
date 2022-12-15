@@ -1,6 +1,0 @@
-classes:
-  - ..composite.dbaas.exoscale.redis
-
-parameters:
-  facts:
-    cloud: exoscale

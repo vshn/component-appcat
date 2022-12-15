@@ -1,6 +1,0 @@
-classes:
-  - ..composite.dbaas.exoscale.opensearch
-
-parameters:
-  facts:
-    cloud: exoscale

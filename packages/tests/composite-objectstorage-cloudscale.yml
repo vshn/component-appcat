@@ -1,5 +1,0 @@
-classes:
-  - ..composite.objectstorage
-parameters:
-  facts:
-    cloud: cloudscale
