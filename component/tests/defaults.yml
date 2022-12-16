@@ -1,6 +1,8 @@
 # Overwrite parameters here
 
 parameters:
+  crossplane:
+    namespace: syn-crossplane
   appcat:
     secrets:
       test-secret:

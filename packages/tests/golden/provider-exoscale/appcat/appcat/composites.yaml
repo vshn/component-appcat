@@ -968,7 +968,7 @@ spec:
     - ENDPOINT_URL
     - BUCKET_NAME
   defaultCompositionRef:
-    name: x-fake-cloud.objectbuckets.appcat.vshn.io
+    name: exoscale.objectbuckets.appcat.vshn.io
   group: appcat.vshn.io
   names:
     kind: XObjectBucket

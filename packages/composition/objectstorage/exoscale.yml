@@ -121,10 +121,3 @@ parameters:
                 - type: FromCompositeFieldPath
                   fromFieldPath: spec.parameters.region
                   toFieldPath: spec.forProvider.zone
-
-    additionalResources:
-      provider-exoscale-secrets-iamkeys:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: ${pkg.appcat.composition.objectstorage.exoscale:secretNamespaces:iamkeys}

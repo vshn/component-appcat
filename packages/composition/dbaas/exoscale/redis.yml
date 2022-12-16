@@ -90,10 +90,3 @@ parameters:
                 - type: FromCompositeFieldPath
                   fromFieldPath: spec.parameters.maintenance.timeOfDay
                   toFieldPath: spec.forProvider.maintenance.timeOfDay
-
-    additionalResources:
-      provider-exoscale-secrets-redis:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:redis}

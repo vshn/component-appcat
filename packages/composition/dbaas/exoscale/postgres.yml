@@ -107,10 +107,3 @@ parameters:
                 - type: FromCompositeFieldPath
                   fromFieldPath: spec.parameters.backup.timeOfDay
                   toFieldPath: spec.forProvider.backup.timeOfDay
-
-    additionalResources:
-      provider-exoscale-secrets-postgres:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:postgres}

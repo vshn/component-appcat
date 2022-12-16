@@ -1,5 +1,4 @@
 classes:
-  - ..provider.exoscale
   - ..composite.objectstorage
   - ..composite.dbaas.exoscale.kafka
   - ..composite.dbaas.exoscale.redis
@@ -12,8 +11,29 @@ classes:
   - ..composition.dbaas.exoscale.postgres
   - ..composition.dbaas.exoscale.opensearch
   - ..composition.objectstorage.exoscale
+applications:
+  - crossplane
+  - appcat
 
 parameters:
+  components:
+    crossplane:
+      url: https://github.com/projectsyn/component-crossplane.git
+      version: v2.3.0
+    appcat:
+      url: https://github.com/vshn/component-appcat.git
+      version: refactor/v1
+      path: component
+
+
+  facts:
+    cloud: exoscale
+
   crossplane:
     # This is not resolving during "commodore package compile", so we provide it explicitly
     namespace: syn-crossplane
+
+  appcat:
+    providers:
+      exoscale:
+        enabled: true

@@ -27,4 +27,4 @@ JB_CMD         ?= $(DOCKER_CMD) $(DOCKER_ARGS) --entrypoint /usr/local/bin/jb do
 GOLDEN_FILES    ?= $(shell find tests/golden/$(instance) -type f)
 
 instance ?= defaults
-test_instances = tests/defaults.yml
+test_instances = tests/defaults.yml tests/cloudscale.yml tests/exoscale.yml

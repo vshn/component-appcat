@@ -124,28 +124,3 @@ parameters:
                       map:
                         rma: rma
                         lpg: lpg
-
-    additionalResources:
-      provider-cloudscale-secrets-objectsusers:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: ${pkg.appcat.composition.objectstorage.cloudscale:secretNamespaces:objectsusers}
-
-    secrets:
-      cloudscale-api-token:
-        metadata:
-          namespace: ${crossplane:namespace}
-        stringData:
-          CLOUDSCALE_API_TOKEN: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/objectstorage/provider-cloudscale/token}'
-
-  crossplane:
-    providerConfigs:
-      cloudscale:
-        apiVersion: cloudscale.crossplane.io/v1
-        spec:
-          credentials:
-            source: InjectedIdentity
-            apiTokenSecretRef:
-              name: cloudscale-api-token
-              namespace: ${crossplane:namespace}

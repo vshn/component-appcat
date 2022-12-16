@@ -9,3 +9,7 @@ parameters:
           - ${_base_directory}/component/main.jsonnet
         input_type: jsonnet
         output_path: appcat/
+      - input_paths:
+          - ${_base_directory}/component/provider.jsonnet
+        input_type: jsonnet
+        output_path: appcat/

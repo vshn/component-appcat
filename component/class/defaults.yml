@@ -1,5 +1,10 @@
 parameters:
   appcat:
+    # Legacy
+    secrets: {}
+    additionalResources: {}
+    composites: {}
+    compositions: {}
 
     images:
       provider-kubernetes:
@@ -18,11 +23,30 @@ parameters:
     providers:
       cloudscale:
         enabled: false
-        apiToken: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-cloudscale/secret-key}'
+        connectionSecretNamespace: syn-provider-cloudscale-secrets
+        credentials:
+          name: cloudscale-api-token
+          namespace: ${crossplane:namespace}
+          data:
+            CLOUDSCALE_API_TOKEN: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/objectstorage/provider-cloudscale/token}'
+        spec:
+          package: ${appcat:images:provider-cloudscale:registry}/${appcat:images:provider-cloudscale:repository}:${appcat:images:provider-cloudscale:tag}
+        config: {}
+
+
       exoscale:
         enabled: false
-        apiKey: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/access-key}'
-        apiSecret: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/secret-key}'
+        connectionSecretNamespace: syn-provider-exoscale-secrets
+        credentials:
+          name: exoscale-api-access
+          namespace: ${crossplane:namespace}
+          data:
+            EXOSCALE_API_KEY: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/access-key}'
+            EXOSCALE_API_SECRET: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/secret-key}'
+        spec:
+          package: ${appcat:images:provider-exoscale:registry}/${appcat:images:provider-exoscale:repository}:${appcat:images:provider-exoscale:tag}
+        config: {}
+
 
 
     # Config for "converged" vendor agnositc composites
@@ -36,11 +60,11 @@ parameters:
           exoscale:
             enabled: true
             secretNamespace: provider-cloudscale-secrets-objectsusers
-            bucketDeletionPolicy: ${parameters:appcat:converged:objectstorage:bucketDeletionPolicy}
+            bucketDeletionPolicy: ${appcat:converged:objectstorage:bucketDeletionPolicy}
           cloudscale:
             enabled: true
             secretNamespace: provider-cloudscale-secrets-objectsusers
-            bucketDeletionPolicy: ${parameters:appcat:converged:objectstorage:bucketDeletionPolicy}
+            bucketDeletionPolicy: ${appcat:converged:objectstorage:bucketDeletionPolicy}
 
         # Generic config for objecstorage composite
         bucketDeletionPolicy: DeleteAll

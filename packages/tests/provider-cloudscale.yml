@@ -1,10 +1,29 @@
 classes:
-  - ..provider.cloudscale
   - ..composite.objectstorage
   - ..composition.objectstorage.cloudscale
+
+applications:
+  - crossplane
+  - appcat
+
 parameters:
+  components:
+    crossplane:
+      url: https://github.com/projectsyn/component-crossplane.git
+      version: v2.3.0
+    appcat:
+      url: https://github.com/vshn/component-appcat.git
+      version: refactor/v1
+      path: component
+
   facts:
     cloud: cloudscale
+
   crossplane:
     # This is not resolving during "commodore package compile", so we provide it explicitly
     namespace: syn-crossplane
+
+  appcat:
+    providers:
+      cloudscale:
+        enabled: true
