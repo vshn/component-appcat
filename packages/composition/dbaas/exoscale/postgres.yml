@@ -41,7 +41,7 @@ parameters:
                     name: "" # patched
                     namespace: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:postgres}
                   providerConfigRef:
-                    name: exoscale-dbaas
+                    name: exoscale
               connectionDetails:
                 - fromConnectionSecretKey: POSTGRESQL_USER
                   type: FromConnectionSecretKey
@@ -114,14 +114,3 @@ parameters:
         kind: Namespace
         metadata:
           name: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:postgres}
-
-  crossplane:
-    providerConfigs:
-      exoscale-dbaas:
-        apiVersion: exoscale.crossplane.io/v1
-        spec:
-          credentials:
-            source: InjectedIdentity
-            apiSecretRef:
-              name: exoscale-api-access
-              namespace: ${crossplane:namespace}

@@ -38,7 +38,7 @@ parameters:
                     name: "" # patched
                     namespace: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:kafka}
                   providerConfigRef:
-                    name: exoscale-dbaas
+                    name: exoscale
               connectionDetails:
                 - fromConnectionSecretKey: KAFKA_URI
                   type: FromConnectionSecretKey

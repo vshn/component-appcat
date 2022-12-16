@@ -40,7 +40,7 @@ parameters:
                     name: "" # patched
                     namespace: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:opensearch}
                   providerConfigRef:
-                    name: exoscale-dbaas
+                    name: exoscale
               connectionDetails:
                 - fromConnectionSecretKey: OPENSEARCH_USER
                   type: FromConnectionSecretKey

@@ -161,7 +161,7 @@ spec:
             version: ''
             zone: ''
           providerConfigRef:
-            name: exoscale-dbaas
+            name: exoscale
           writeConnectionSecretToRef:
             name: ''
             namespace: syn-provider-exoscale-secrets
@@ -268,7 +268,7 @@ spec:
             version: ''
             zone: ''
           providerConfigRef:
-            name: exoscale-dbaas
+            name: exoscale
           writeConnectionSecretToRef:
             name: ''
             namespace: syn-provider-exoscale-secrets
@@ -375,7 +375,7 @@ spec:
             version: ''
             zone: ''
           providerConfigRef:
-            name: exoscale-dbaas
+            name: exoscale
           writeConnectionSecretToRef:
             name: ''
             namespace: syn-provider-exoscale-secrets
@@ -479,7 +479,7 @@ spec:
             version: ''
             zone: ''
           providerConfigRef:
-            name: exoscale-dbaas
+            name: exoscale
           writeConnectionSecretToRef:
             name: ''
             namespace: syn-provider-exoscale-secrets
@@ -583,7 +583,7 @@ spec:
             terminationProtection: false
             zone: ''
           providerConfigRef:
-            name: exoscale-dbaas
+            name: exoscale
           writeConnectionSecretToRef:
             name: ''
             namespace: syn-provider-exoscale-secrets

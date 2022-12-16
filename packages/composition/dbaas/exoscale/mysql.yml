@@ -41,7 +41,7 @@ parameters:
                     name: "" # patched
                     namespace: ${pkg.appcat.composition.dbaas.exoscale:secretNamespaces:mysql}
                   providerConfigRef:
-                    name: exoscale-dbaas
+                    name: exoscale
               connectionDetails:
                 - fromConnectionSecretKey: MYSQL_USER
                   type: FromConnectionSecretKey
