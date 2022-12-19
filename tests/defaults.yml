@@ -1,0 +1,59 @@
+parameters:
+  crossplane:
+    namespace: syn-crossplane
+  appcat:
+    secrets:
+      test-secret:
+        metadata:
+          namespace: test-namespace
+        stringData:
+          key: value
+
+    additionalResources:
+      test-namespace:
+        apiVersion: v1
+        kind: Namespace
+
+    composites:
+      "test.no.default.rbac.rules":
+        createDefaultRBACRoles: false
+        spec:
+          group: appcat.vshn.io
+          names:
+            kind: XTest-1
+            plural: xtest-1
+          claimNames:
+            kind: Test-1
+            plural: tests-1
+          versions:
+            - name: v1
+              schema:
+                openAPIV3Schema:
+                  type: object
+      "test.with.default.rbac.rules":
+        spec:
+          group: appcat.vshn.io
+          names:
+            kind: XTest-2
+            plural: xtest-2
+          claimNames:
+            kind: Test-2
+            plural: tests-2
+          versions:
+            - name: v1
+              schema:
+                openAPIV3Schema:
+                  type: object
+
+    compositions:
+      "test-common-resources":
+        commonPatchSets:
+          annotations: {}
+          labels: {}
+        commonResources:
+          observeClaimNamespace: {}
+        spec:
+          resources: []
+      "test-no-common-resources":
+        spec:
+          resources: []

@@ -13,4 +13,3 @@ parameters:
         # It's recommended to set this version to match the package version used, from a higher place in the hierarchy.
         # See documentation for common parameters for an example how to to that.
         version: master
-        path: component

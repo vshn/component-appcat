@@ -13,3 +13,8 @@
 
 # jsonnet builder
 component/jsonnetfile.json
+
+compiled/
+vendor/
+dependencies/
+hack/

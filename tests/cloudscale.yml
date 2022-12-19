@@ -1,15 +1,9 @@
-applications:
-  - crossplane
-  - appcat
-
 parameters:
-  components:
-    crossplane:
-      url: https://github.com/projectsyn/component-crossplane.git
-      version: v2.3.0
-    appcat:
-      url: https://github.com/vshn/component-appcat.git
-      version: refactor/v1
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/projectsyn/component-crossplane/v2.3.0/lib/crossplane.libsonnet
+        output_path: vendor/lib/crossplane.libsonnet
 
   facts:
     cloud: cloudscale
@@ -22,7 +16,6 @@ parameters:
     providers:
       cloudscale:
         enabled: true
-
     converged:
       objectstorage:
         enabled: true

@@ -1,0 +1,46 @@
+apiVersion: apiextensions.crossplane.io/v1
+createDefaultRBACRoles: false
+kind: CompositeResourceDefinition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: test.no.default.rbac.rules
+  name: test.no.default.rbac.rules
+spec:
+  claimNames:
+    kind: Test-1
+    plural: tests-1
+  group: appcat.vshn.io
+  names:
+    kind: XTest-1
+    plural: xtest-1
+  versions:
+    - name: v1
+      schema:
+        openAPIV3Schema:
+          type: object
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: test.with.default.rbac.rules
+  name: test.with.default.rbac.rules
+spec:
+  claimNames:
+    kind: Test-2
+    plural: tests-2
+  group: appcat.vshn.io
+  names:
+    kind: XTest-2
+    plural: xtest-2
+  versions:
+    - name: v1
+      schema:
+        openAPIV3Schema:
+          type: object

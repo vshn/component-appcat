@@ -1,5 +1,4 @@
 classes:
-  - ..composite.objectstorage
   - ..composite.dbaas.exoscale.kafka
   - ..composite.dbaas.exoscale.redis
   - ..composite.dbaas.exoscale.mysql
@@ -10,7 +9,6 @@ classes:
   - ..composition.dbaas.exoscale.mysql
   - ..composition.dbaas.exoscale.postgres
   - ..composition.dbaas.exoscale.opensearch
-  - ..composition.objectstorage.exoscale
 applications:
   - crossplane
   - appcat
@@ -23,8 +21,6 @@ parameters:
     appcat:
       url: https://github.com/vshn/component-appcat.git
       version: refactor/v1
-      path: component
-
 
   facts:
     cloud: exoscale
@@ -37,3 +33,10 @@ parameters:
     providers:
       exoscale:
         enabled: true
+    converged:
+      objectstorage:
+        enabled: true
+        compositions:
+          cloudscale:
+            enabled: false
+

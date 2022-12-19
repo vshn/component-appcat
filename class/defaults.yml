@@ -1,0 +1,91 @@
+parameters:
+  appcat:
+    # Legacy
+    secrets: {}
+    additionalResources: {}
+    composites: {}
+    compositions: {}
+
+    images:
+      provider-kubernetes:
+        registry: docker.io
+        repository: crossplane/provider-kubernetes
+        tag: v0.4.0
+      provider-exoscale:
+        registry: ghcr.io
+        repository: vshn/provider-exoscale/provider
+        tag: v0.5.0
+      provider-cloudscale:
+        registry: ghcr.io
+        repository: vshn/provider-cloudscale/provider
+        tag: v0.5.0
+
+    providers:
+      cloudscale:
+        enabled: false
+        connectionSecretNamespace: syn-provider-cloudscale-secrets
+        credentials:
+          name: cloudscale-api-token
+          namespace: ${crossplane:namespace}
+          data:
+            CLOUDSCALE_API_TOKEN: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/objectstorage/provider-cloudscale/token}'
+        spec:
+          package: ${appcat:images:provider-cloudscale:registry}/${appcat:images:provider-cloudscale:repository}:${appcat:images:provider-cloudscale:tag}
+        config: {}
+
+
+      exoscale:
+        enabled: false
+        connectionSecretNamespace: syn-provider-exoscale-secrets
+        credentials:
+          name: exoscale-api-access
+          namespace: ${crossplane:namespace}
+          data:
+            EXOSCALE_API_KEY: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/access-key}'
+            EXOSCALE_API_SECRET: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-exoscale/secret-key}'
+        spec:
+          package: ${appcat:images:provider-exoscale:registry}/${appcat:images:provider-exoscale:repository}:${appcat:images:provider-exoscale:tag}
+        config: {}
+
+
+    # Config for "converged" vendor agnositc composites
+    converged:
+      objectstorage:
+        enabled: false
+
+        # Compositions that provide a composition for the composite with it's configuration
+        defaultComposition: ${facts:cloud}
+        secretNamespace: ${crossplane:namespace}
+        compositions:
+          exoscale:
+            enabled: true
+            secretNamespace: ${appcat:converged:objectstorage:secretNamespace}
+            providerSecretNamespace: ${appcat:providers:exoscale:connectionSecretNamespace}
+            bucketDeletionPolicy: ${appcat:converged:objectstorage:bucketDeletionPolicy}
+          cloudscale:
+            enabled: true
+            secretNamespace: ${appcat:converged:objectstorage:secretNamespace}
+            providerSecretNamespace: ${appcat:providers:cloudscale:connectionSecretNamespace}
+            bucketDeletionPolicy: ${appcat:converged:objectstorage:bucketDeletionPolicy}
+
+        # Generic config for objecstorage composite
+        bucketDeletionPolicy: DeleteAll
+
+    # Config for exoscale composites
+    exoscale:
+      enabled: false
+      mysql:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-mysql
+      postgres:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-postgres
+      redis:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-redis
+      kafka:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-kafka
+      opensearch:
+        enabled: true
+        secretNamespace: provider-exoscale-secrets-opensearch

@@ -15,7 +15,6 @@ parameters:
         # It's recommended to set this version to match the package version used, from a higher place in the hierarchy.
         # See documentation for common parameters for an example how to that.
         version: master
-        path: component
       crossplane:
         url: https://github.com/projectsyn/component-crossplane.git
         version: v2.3.0
