@@ -1,8 +1,0 @@
-applications:
-  - crossplane
-
-parameters:
-  components:
-    crossplane:
-      url: https://github.com/projectsyn/component-crossplane.git
-      version: v2.3.0
