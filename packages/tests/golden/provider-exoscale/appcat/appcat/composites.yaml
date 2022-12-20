@@ -6,6 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '10'
   labels:
 <<<<<<< HEAD
+<<<<<<< HEAD
     name: xexoscalekafkas.exoscale.appcat.vshn.io
   name: xexoscalekafkas.exoscale.appcat.vshn.io
 spec:
@@ -394,6 +395,8 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '10'
   labels:
+=======
+>>>>>>> 65fe005 (Refactor mysql XRD and composition)
     name: xexoscaleopensearches.exoscale.appcat.vshn.io
   name: xexoscaleopensearches.exoscale.appcat.vshn.io
 spec:
