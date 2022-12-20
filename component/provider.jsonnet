@@ -67,4 +67,58 @@ local providerSecret(credentials) =
       providerSecret(provider.credentials),
       kube.Namespace(provider.connectionSecretNamespace),
     ],
+  [if params.providers.kubernetes.enabled then '10_provider_kubernetes']:
+    local provider = params.providers.kubernetes;
+    local sa = kube.ServiceAccount(provider.controllerConfig.serviceAccountName) {
+      metadata+: {
+        namespace: provider.namespace,
+      },
+    };
+    local role = kube.ClusterRole('crossplane:provider:provider-kubernetes:system:custom') {
+      rules: [
+        {
+          apiGroups: [ 'kubernetes.crossplane.io' ],
+          resources: [ '*' ],
+          verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create' ],
+        },
+        {
+          apiGroups: [ '', 'coordination.k8s.io' ],
+          resources: [ 'secrets', 'configmaps', 'events', 'leases' ],
+          verbs: [ '*' ],
+        },
+        {
+          apiGroups: [ '' ],
+          resources: [ 'namespaces' ],
+          verbs: [ 'get', 'list', 'watch' ],
+        },
+      ],
+    };
+    local rolebinding = kube.ClusterRoleBinding('crossplane:provider:provider-kubernetes:system:custom') {
+      roleRef_: role,
+      subjects_: [ sa ],
+    };
+    [
+      crossplane.Provider('kubernetes') {
+        spec+: {
+          controllerConfigRef: {
+            name: 'kubernetes',
+          },
+        } + provider.spec,
+      },
+      crossplane.ControllerConfig('kubernetes') {
+        spec+: provider.controllerConfig,
+      },
+      crossplane.ProviderConfig('kubernetes') {
+        apiVersion: 'exoscale.crossplane.io/v1',
+        spec+: addCredentials(
+          provider.config,
+          {
+            source: 'InjectIdentity',
+          }
+        ),
+      },
+      sa,
+      role,
+      rolebinding,
+    ],
 }

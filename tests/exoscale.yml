@@ -16,6 +16,8 @@ parameters:
     providers:
       exoscale:
         enabled: true
+      kubernetes:
+        enabled: true
     converged:
       objectstorage:
         enabled: true

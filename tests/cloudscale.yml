@@ -16,6 +16,8 @@ parameters:
     providers:
       cloudscale:
         enabled: true
+      kubernetes:
+        enabled: true
     converged:
       objectstorage:
         enabled: true

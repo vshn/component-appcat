@@ -47,6 +47,15 @@ parameters:
           package: ${appcat:images:provider-exoscale:registry}/${appcat:images:provider-exoscale:repository}:${appcat:images:provider-exoscale:tag}
         config: {}
 
+      kubernetes:
+        enabled: false
+        namespace:  ${crossplane:namespace}
+        spec:
+          package: ${appcat:images:provider-kubernetes:registry}/${appcat:images:provider-kubernetes:repository}:${appcat:images:provider-kubernetes:tag}
+        controllerConfig:
+          serviceAccountName: provider-kubernetes
+        config: {}
+
 
     # Config for "converged" vendor agnositc composites
     converged:
