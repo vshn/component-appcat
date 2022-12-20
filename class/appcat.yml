@@ -13,5 +13,6 @@ parameters:
           - ${_base_directory}/component/provider.jsonnet
           - ${_base_directory}/component/objectstorage.jsonnet
           - ${_base_directory}/component/exoscale_kafka.jsonnet
+          - ${_base_directory}/component/exoscale_redis.jsonnet
         input_type: jsonnet
         output_path: appcat/

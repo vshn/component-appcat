@@ -28,7 +28,5 @@ parameters:
         enabled: false
       postgres:
         enabled: false
-      redis:
-        enabled: false
       opensearch:
         enabled: false
