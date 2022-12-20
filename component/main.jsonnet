@@ -143,4 +143,5 @@ local xrdBrowseRole = kube.ClusterRole('appcat:browse') + {
   [if std.length(composites) > 0 then 'composites']: composites,
   [if std.length(compositions) > 0 then 'compositions']: compositions,
   [if std.length(clusterRoles) > 0 then 'clusterRoles']: clusterRoles + [ xrdBrowseRole ],
+  '10_clusterrole_view': xrdBrowseRole,
 }

@@ -1,6 +1,3 @@
-classes:
-  - ..composite.dbaas.exoscale.opensearch
-  - ..composition.dbaas.exoscale.opensearch
 applications:
   - crossplane
   - appcat
@@ -33,5 +30,3 @@ parameters:
             enabled: false
     exoscale:
       enabled: true
-      opensearch:
-        enabled: false

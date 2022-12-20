@@ -47,14 +47,14 @@ spec:
             name: ''
             namespace: syn-provider-exoscale-secrets
       connectionDetails:
+        - fromConnectionSecretKey: OPENSEARCH_URI
+          name: OPENSEARCH_URI
+          type: FromConnectionSecretKey
         - fromConnectionSecretKey: OPENSEARCH_USER
           name: OPENSEARCH_USER
           type: FromConnectionSecretKey
         - fromConnectionSecretKey: OPENSEARCH_PASSWORD
           name: OPENSEARCH_PASSWORD
-          type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_URI
-          name: OPENSEARCH_URI
           type: FromConnectionSecretKey
         - fromConnectionSecretKey: OPENSEARCH_DASHBOARD_URI
           name: OPENSEARCH_DASHBOARD_URI
