@@ -22,3 +22,13 @@ parameters:
         compositions:
           cloudscale:
             enabled: false
+    exoscale:
+      enabled: true
+      mysql:
+        enabled: false
+      postgres:
+        enabled: false
+      redis:
+        enabled: false
+      opensearch:
+        enabled: false

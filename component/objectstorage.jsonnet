@@ -5,47 +5,16 @@ local kube = import 'lib/kube.libjsonnet';
 local comp = import 'lib/appcat-compositions.libsonnet';
 local crossplane = import 'lib/crossplane.libsonnet';
 
-local rbac = import 'rbac.libsonnet';
+local common = import 'common.libsonnet';
+local xrds = import 'xrds.libsonnet';
 
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local objStoParams = params.converged.objectstorage;
 
-local sync_options = {
-  metadata+: {
-    annotations+: {
-      'argocd.argoproj.io/sync-options': 'SkipDryRunOnMissingResource=true',
-      'argocd.argoproj.io/sync-wave': '10',
-    },
-  },
-};
-
-local loadCRD(crd) = std.parseJson(kap.yaml_load('appcat/crds/%s' % crd));
-
-local xrdFromCrd(name, crd, defaultComposition='', connectionSecretKeys=[]) =
-  kube._Object('apiextensions.crossplane.io/v1', 'CompositeResourceDefinition', name) + sync_options + {
-    spec: {
-      claimNames: {
-        kind: crd.spec.names.kind,
-        plural: crd.spec.names.plural,
-      },
-      names: {
-        kind: 'X%s' % crd.spec.names.kind,
-        plural: 'x%s' % crd.spec.names.plural,
-      },
-      connectionSecretKeys: connectionSecretKeys,
-      [if defaultComposition != '' then 'defaultCompositionRef']: {
-        name: defaultComposition,
-      },
-      group: crd.spec.group,
-      versions: crd.spec.versions,
-    },
-  };
-
-
-local xrd = xrdFromCrd(
+local xrd = xrds.XRDFromCRD(
   'xobjectbuckets.appcat.vshn.io',
-  loadCRD('appcat.vshn.io_objectbuckets.yaml'),
+  xrds.LoadCRD('appcat.vshn.io_objectbuckets.yaml'),
   defaultComposition='%s.objectbuckets.appcat.vshn.io' % objStoParams.defaultComposition,
   connectionSecretKeys=[
     'AWS_ACCESS_KEY_ID',
@@ -100,7 +69,7 @@ local compositionCloudscale =
     },
   };
 
-  kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'cloudscale.objectbuckets.appcat.vshn.io') + sync_options + {
+  kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'cloudscale.objectbuckets.appcat.vshn.io') + common.SyncOptions + {
     spec: {
       compositeTypeRef: comp.CompositeRef(xrd),
       writeConnectionSecretsToNamespace: compParams.secretNamespace,
@@ -284,7 +253,7 @@ local compositionExsoscale =
 
 if objStoParams.enabled then {
   '20_xrd_objectstorage': xrd,
-  '20_rbac_objectstorage': rbac.CompositeClusterRoles(xrd),
+  '20_rbac_objectstorage': xrds.CompositeClusterRoles(xrd),
   [if objStoParams.compositions.cloudscale.enabled then '21_composition_objectstorage_cloudscale']: compositionCloudscale,
   [if objStoParams.compositions.exoscale.enabled then '21_composition_objectstorage_exoscale']: compositionExsoscale,
 } else {}

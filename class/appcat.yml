@@ -11,9 +11,7 @@ parameters:
         output_path: appcat/
       - input_paths:
           - ${_base_directory}/component/provider.jsonnet
-        input_type: jsonnet
-        output_path: appcat/
-      - input_paths:
           - ${_base_directory}/component/objectstorage.jsonnet
+          - ${_base_directory}/component/exoscale_kafka.jsonnet
         input_type: jsonnet
         output_path: appcat/

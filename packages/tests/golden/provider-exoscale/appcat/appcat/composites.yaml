@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '10'
   labels:
+<<<<<<< HEAD
     name: xexoscalekafkas.exoscale.appcat.vshn.io
   name: xexoscalekafkas.exoscale.appcat.vshn.io
 spec:
@@ -194,6 +195,8 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '10'
   labels:
+=======
+>>>>>>> a765882 (Refactor kafka XRD and composition)
     name: xexoscalemysqls.exoscale.appcat.vshn.io
   name: xexoscalemysqls.exoscale.appcat.vshn.io
 spec:

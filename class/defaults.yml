@@ -74,18 +74,25 @@ parameters:
     # Config for exoscale composites
     exoscale:
       enabled: false
+      secretNamespace: ${crossplane:namespace}
+      providerSecretNamespace: ${appcat:providers:exoscale:connectionSecretNamespace}
       mysql:
         enabled: true
-        secretNamespace: provider-exoscale-secrets-mysql
+        secretNamespace: ${appcat:exoscale:secretNamespace}
+        providerSecretNamespace: ${appcat:exoscale:providerSecretNamespace}
       postgres:
         enabled: true
-        secretNamespace: provider-exoscale-secrets-postgres
+        secretNamespace: ${appcat:exoscale:secretNamespace}
+        providerSecretNamespace: ${appcat:exoscale:providerSecretNamespace}
       redis:
         enabled: true
-        secretNamespace: provider-exoscale-secrets-redis
+        secretNamespace: ${appcat:exoscale:secretNamespace}
+        providerSecretNamespace: ${appcat:exoscale:providerSecretNamespace}
       kafka:
         enabled: true
-        secretNamespace: provider-exoscale-secrets-kafka
+        secretNamespace: ${appcat:exoscale:secretNamespace}
+        providerSecretNamespace: ${appcat:exoscale:providerSecretNamespace}
       opensearch:
         enabled: true
-        secretNamespace: provider-exoscale-secrets-opensearch
+        secretNamespace: ${appcat:exoscale:secretNamespace}
+        providerSecretNamespace: ${appcat:exoscale:providerSecretNamespace}

@@ -109,6 +109,8 @@ local connFromFieldPath(name, field) = {
   conn: {
     FromSecretKey(name, from=name):
       connFromSecretKey(name, from=name),
+    AllFromSecretKeys(keys):
+      [ connFromSecretKey(key, from=key) for key in keys ],
     FromFieldPath(name, field):
       connFromFieldPath(name, field),
   },
