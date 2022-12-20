@@ -5,12 +5,12 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '10'
   labels:
-    name: exoscaleopensearch.exoscale.appcat.vshn.io
-  name: exoscaleopensearch.exoscale.appcat.vshn.io
+    name: exoscalepostgres.exoscale.appcat.vshn.io
+  name: exoscalepostgres.exoscale.appcat.vshn.io
 spec:
   compositeTypeRef:
     apiVersion: exoscale.appcat.vshn.io/v1
-    kind: XExoscaleOpenSearch
+    kind: XExoscalePostgreSQL
   patchSets:
     - name: annotations
       patches:
@@ -25,7 +25,7 @@ spec:
   resources:
     - base:
         apiVersion: exoscale.crossplane.io/v1
-        kind: OpenSearch
+        kind: PostgreSQL
         metadata: {}
         spec:
           forProvider:
@@ -35,7 +35,7 @@ spec:
             maintenance:
               dayOfWeek: ''
               timeOfDay: ''
-            opensearchSettings: {}
+            pgSettings: {}
             size:
               plan: ''
             terminationProtection: false
@@ -47,23 +47,26 @@ spec:
             name: ''
             namespace: syn-provider-exoscale-secrets
       connectionDetails:
-        - fromConnectionSecretKey: OPENSEARCH_USER
-          name: OPENSEARCH_USER
+        - fromConnectionSecretKey: POSTGRESQL_URL
+          name: POSTGRESQL_URL
           type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_PASSWORD
-          name: OPENSEARCH_PASSWORD
+        - fromConnectionSecretKey: POSTGRESQL_DB
+          name: POSTGRESQL_DB
           type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_URI
-          name: OPENSEARCH_URI
+        - fromConnectionSecretKey: POSTGRESQL_HOST
+          name: POSTGRESQL_HOST
           type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_DASHBOARD_URI
-          name: OPENSEARCH_DASHBOARD_URI
+        - fromConnectionSecretKey: POSTGRESQL_PORT
+          name: POSTGRESQL_PORT
           type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_HOST
-          name: OPENSEARCH_HOST
+        - fromConnectionSecretKey: POSTGRESQL_USER
+          name: POSTGRESQL_USER
           type: FromConnectionSecretKey
-        - fromConnectionSecretKey: OPENSEARCH_PORT
-          name: OPENSEARCH_PORT
+        - fromConnectionSecretKey: POSTGRESQL_PASSWORD
+          name: POSTGRESQL_PASSWORD
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: ca.crt
+          name: ca.crt
           type: FromConnectionSecretKey
       patches:
         - patchSetName: annotations
@@ -77,10 +80,10 @@ spec:
           toFieldPath: spec.writeConnectionSecretToRef.name
           type: FromCompositeFieldPath
         - fromFieldPath: spec.parameters.service.majorVersion
-          toFieldPath: spec.forProvider.majorVersion
+          toFieldPath: spec.forProvider.version
           type: FromCompositeFieldPath
-        - fromFieldPath: spec.parameters.service.opensearchSettings
-          toFieldPath: spec.forProvider.openSearchSettings
+        - fromFieldPath: spec.parameters.service.pgSettings
+          toFieldPath: spec.forProvider.pgSettings
           type: FromCompositeFieldPath
         - fromFieldPath: spec.parameters.service.zone
           toFieldPath: spec.forProvider.zone

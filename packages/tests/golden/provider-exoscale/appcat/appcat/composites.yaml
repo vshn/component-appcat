@@ -580,6 +580,7 @@ spec:
               type: object
           type: object
       served: true
+<<<<<<< HEAD
 ---
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
@@ -777,3 +778,5 @@ spec:
               type: object
           type: object
       served: true
+=======
+>>>>>>> 58529b1 (Refactor postgres XRD and composition)

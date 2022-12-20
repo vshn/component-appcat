@@ -24,7 +24,5 @@ parameters:
             enabled: false
     exoscale:
       enabled: true
-      postgres:
-        enabled: false
       opensearch:
         enabled: false
