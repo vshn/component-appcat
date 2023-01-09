@@ -1,0 +1,7 @@
+apiVersion: appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata: 
+  name: pg-db
+spec:
+  writeConnectionSecretToRef:
+    name: fix-this-field

@@ -1,0 +1,223 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: xvshnpostgresqls.appcat.vshn.io
+  name: xvshnpostgresqls.appcat.vshn.io
+spec:
+  claimNames:
+    kind: VSHNPostgreSQL
+    plural: vshnpostgresqls
+  connectionSecretKeys:
+    - endpoint
+    - port
+    - password
+  defaultCompositionRef:
+    name: vshnpostgresql.appcat.vshn.io
+  group: appcat.vshn.io
+  names:
+    kind: XVSHNPostgreSQL
+    plural: xvshnpostgresqls
+  versions:
+    - name: v1
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: VSHNPostgreSQL is the API for creating Postgresql clusters.
+          properties:
+            spec:
+              description: VSHNPostgreSQLSpec defines the desired state of a VSHNPostgreSQL.
+              properties:
+                parameters:
+                  default: {}
+                  description: VSHNPostgreSQLParameters are the configurable fields
+                    of a VSHNPostgreSQL.
+                  properties:
+                    backup:
+                      description: Backup contains settings to control the backups
+                        of an instance.
+                      properties:
+                        timeOfDay:
+                          default: '21:30:00'
+                          description: 'TimeOfDay for doing daily backups, in UTC.
+                            Format: "hh:mm:ss".'
+                          pattern: ^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$
+                          type: string
+                      type: object
+                    maintenance:
+                      description: Maintenance contains settings to control the maintenance
+                        of an instance.
+                      properties:
+                        dayOfWeek:
+                          default: tuesday
+                          description: DayOfWeek specifies at which weekday the maintenance
+                            is held place. Allowed values are [monday, tuesday, wednesday,
+                            thursday, friday, saturday, sunday, never]
+                          enum:
+                            - monday
+                            - tuesday
+                            - wednesday
+                            - thursday
+                            - friday
+                            - saturday
+                            - sunday
+                            - never
+                          type: string
+                        timeOfDay:
+                          default: '22:30:00'
+                          description: 'TimeOfDay for installing updates in UTC. Format:
+                            "hh:mm:ss".'
+                          pattern: ^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$
+                          type: string
+                      type: object
+                    network:
+                      description: Network contains any network related settings.
+                      properties:
+                        ipFilter:
+                          default:
+                            - 0.0.0.0/0
+                          description: IPFilter is a list of allowed IPv4 CIDR ranges
+                            that can access the service. If no IP Filter is set, you
+                            may not be able to reach the service. A value of `0.0.0.0/0`
+                            will open the service to all addresses on the public internet.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    service:
+                      default: {}
+                      description: Service contains  PostgreSQL DBaaS specific properties
+                      properties:
+                        majorVersion:
+                          default: '15'
+                          description: majorVersion contains supported version of
+                            PostgreSQL. "15" is default version
+                          enum:
+                            - '12'
+                            - '13'
+                            - '14'
+                            - '15'
+                          type: string
+                        pgSettings:
+                          description: PGSettings contains additional PostgreSQL settings.
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                      type: object
+                    size:
+                      default: {}
+                      description: Size contains settings to control the sizing of
+                        a service.
+                      properties:
+                        cpu:
+                          default: 500m
+                          type: string
+                        disk:
+                          default: 5Gi
+                          type: string
+                        memory:
+                          default: 128Mi
+                          type: string
+                      type: object
+                  type: object
+              type: object
+            status:
+              description: VSHNPostgreSQLStatus reflects the observed state of a VSHNPostgreSQL.
+              properties:
+                accessUserConditions:
+                  description: AccessUserConditions contains a copy of the claim's
+                    underlying user account conditions.
+                  items:
+                    properties:
+                      lastTransitionTime:
+                        description: LastTransitionTime is the last time the condition
+                          transitioned from one status to another.
+                        format: date-time
+                        type: string
+                      message:
+                        description: Message is a human-readable message indicating
+                          details about the transition.
+                        maxLength: 32768
+                        type: string
+                      observedGeneration:
+                        description: ObservedGeneration represents the .metadata.generation
+                          that the condition was set based upon. For instance, if
+                          .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration
+                          is 9, the condition is out of date with respect to the current
+                          state of the instance.
+                        format: int64
+                        minimum: 0
+                        type: integer
+                      reason:
+                        description: Reason contains a programmatic identifier indicating
+                          the reason for the condition's last transition.
+                        maxLength: 1024
+                        pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                        type: string
+                      status:
+                        description: Status of the condition, one of True, False,
+                          Unknown.
+                        enum:
+                          - 'True'
+                          - 'False'
+                          - Unknown
+                        type: string
+                      type:
+                        description: Type of condition.
+                        maxLength: 316
+                        pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                        type: string
+                    type: object
+                  type: array
+                bucketConditions:
+                  description: BucketConditions contains a copy of the claim's underlying
+                    bucket conditions.
+                  items:
+                    properties:
+                      lastTransitionTime:
+                        description: LastTransitionTime is the last time the condition
+                          transitioned from one status to another.
+                        format: date-time
+                        type: string
+                      message:
+                        description: Message is a human-readable message indicating
+                          details about the transition.
+                        maxLength: 32768
+                        type: string
+                      observedGeneration:
+                        description: ObservedGeneration represents the .metadata.generation
+                          that the condition was set based upon. For instance, if
+                          .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration
+                          is 9, the condition is out of date with respect to the current
+                          state of the instance.
+                        format: int64
+                        minimum: 0
+                        type: integer
+                      reason:
+                        description: Reason contains a programmatic identifier indicating
+                          the reason for the condition's last transition.
+                        maxLength: 1024
+                        pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                        type: string
+                      status:
+                        description: Status of the condition, one of True, False,
+                          Unknown.
+                        enum:
+                          - 'True'
+                          - 'False'
+                          - Unknown
+                        type: string
+                      type:
+                        description: Type of condition.
+                        maxLength: 316
+                        pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                        type: string
+                    type: object
+                  type: array
+              type: object
+          required:
+            - spec
+          type: object
+      served: true

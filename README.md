@@ -67,3 +67,10 @@ For information about how to contribute see [CONTRIBUTING](CONTRIBUTING.md).
 [commodore]: https://syn.tools/commodore/
 [asciidoc]: https://asciidoctor.org/
 [antora]: https://antora.org/
+
+
+---
+How to run it?
+- make kind-all
+- k create namespace syn-crossplane
+- make generate-xrd &&  make gen-golden-all && bash update.sh apply && k apply -f clusterRole.yaml  && k delete -f claim.yaml && k apply -f claim.yaml

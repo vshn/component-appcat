@@ -2,7 +2,7 @@
 PACKAGE_NAME ?= $(shell basename ${PWD} | sed s/package-//)
 
 root_volume     ?= -v "$${PWD}:/$(PACKAGE_NAME)"
-commodore_args  ?= tests/$(instance).yml
+commodore_args  ?= tests/$(instance).yml -v
 
 ifneq "$(shell which docker 2>/dev/null)" ""
 	DOCKER_CMD    ?= $(shell which docker)
