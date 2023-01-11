@@ -113,10 +113,13 @@ spec:
           type: FromCompositeFieldPath
         - fromFieldPath: spec.parameters.region
           toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.deletionPolicy
+          toFieldPath: spec.forProvider.bucketDeletionPolicy
           transforms:
             - map:
                 lpg: lpg
                 rma: rma
               type: map
-          type: FromCompositeFieldPath
+          type: ToCompositeFieldPath
   writeConnectionSecretsToNamespace: syn-crossplane

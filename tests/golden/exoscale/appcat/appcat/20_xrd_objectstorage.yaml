@@ -25,14 +25,7 @@ spec:
     kind: XObjectBucket
     plural: xobjectbuckets
   versions:
-    - additionalPrinterColumns:
-        - jsonPath: .spec.parameters.bucketName
-          name: Bucket Name
-          type: string
-        - jsonPath: .spec.parameters.region
-          name: Region
-          type: string
-      name: v1
+    - name: v1
       referenceable: true
       schema:
         openAPIV3Schema:
@@ -51,6 +44,16 @@ spec:
                         by the S3 protocol, which follows RFC 1123. Be aware that
                         S3 providers may require a unique name across the platform
                         or region.
+                      type: string
+                    deletionPolicy:
+                      default: DeleteAll
+                      description: DeletionPolicy determines how object buckets should
+                        be deleted. `DeleteAll` recursively deletes all objects in
+                        the object bucket and then removes it. `DeleteIfEmpty` only
+                        deletes the object bucket if it's empty.
+                      enum:
+                        - DeleteAll
+                        - DeleteIfEmpty
                       type: string
                     region:
                       description: Region is the name of the region where the bucket
