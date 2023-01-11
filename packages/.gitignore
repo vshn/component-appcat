@@ -1,8 +1,0 @@
-# Commodore
-/.cache/
-/compiled/
-/dependencies/
-/inventory/
-/vendor/
-/jsonnetfile.json
-/jsonnetfile.lock.json

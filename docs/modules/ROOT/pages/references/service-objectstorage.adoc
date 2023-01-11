@@ -1,0 +1,80 @@
+= Objecstorage Service
+
+The parent key for all of the following parameters is `appcat.services.generic.objectstorage`.
+
+== `enabled`
+[horizontal]
+type:: bool
+default:: `false`
+
+If the objecstorage service should be available.
+
+== `secretNamespace`
+[horizontal]
+type:: string
+default:: `${crossplane:namespace}`
+
+In which namespace an XR's connection secret is written to.
+
+Defaults to the crossplane namespace.
+
+== `bucketDeletionPolicy`
+[horizontal]
+type:: enum
+values:: `[DeleteAll, DeleteIfEmpty]`
+default:: `DeleteAll`
+
+The behavior what to do with the bucket and its data when the user deletes the claim.
+
+With DeleteIfEmpty, the bucket can only be deleted if all objects within are deleted as well (empty bucket). If there are objects, the Bucket resource won’t be removed until the bucket is emptied.
+
+With DeleteAll, all objects in the bucket are recursively deleted. Once all objects are deleted the bucket (and the Bucket resource) are removed.
+
+
+== `defaultComposition`
+[horizontal]
+type:: enum
+default:: `${facts:cloud}`
+
+The default composition to use when a user creates a Claim of the composite resource.
+
+== `compositions.exoscale`
+[horizontal]
+type:: dict
+
+Configuration of the Exoscale composition for objecstorage.
+
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace`,  `providerSecretNamespace`, which configures where the provider will store connection secrets for managed resources, and `bucketDeletionPolicy`
+
+The composition is enabled by default.
+The parameter `secretNamespace`,  `providerSecretNamespace`, and `bucketDeletionPolicy` will default to the top level configuration.
+
+
+[IMPORTANT]
+====
+If you enable the Exoscale composition, make sure that the provider exoscale is deployed.
+Either by enabling it in `appcat.providers` or separately from this component.
+
+You can also have a look at the xref:tutorials/install-exoscale.adoc[tutorial for installing the Exoscale stack.]
+====
+
+
+== `compositions.cloudscale`
+[horizontal]
+type:: dict
+
+Configuration of the Cloudscale composition for objecstorage.
+
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace`,  `providerSecretNamespace`, which configures where the provider will store connection secrets for managed resources, and `bucketDeletionPolicy`
+
+The composition is enabled by default.
+The parameter `secretNamespace`,  `providerSecretNamespace`, and `bucketDeletionPolicy` will default to the top level configuration.
+
+
+[IMPORTANT]
+====
+If you enable the Cloudscale composition, make sure that the provider Cloudscale is deployed.
+Either by enabling it in `appcat.providers` or separately from this component.
+
+You can also have a look at the xref:tutorials/install-cloudscale.adoc[tutorial for installing the Cloudscale stack.]
+====

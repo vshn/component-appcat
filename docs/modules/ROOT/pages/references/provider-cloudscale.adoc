@@ -1,11 +1,52 @@
-= pkg.appcat.provider.cloudscale
+= Provider Cloudscale
 
-The parent key for all of the following parameters is `pkg.appcat.provider.cloudscale`.
+The parent key for all of the following parameters is `appcat.provider.cloudscale`.
 
-== `images:provider-cloudscale`
+== `enabled`
+[horizontal]
+type:: bool
+default:: `false`
 
+If the provider should be installed.
+
+== `connectionSecretNamespace`
+[horizontal]
+type:: string
+default:: `syn-provider-cloudscale-secrets`
+
+A namespace to store the connection secrets in.
+The namespace will be created and managed by this component.
+
+== `credentials`
 [horizontal]
 type:: dict
-default:: see `packages/provider/cloudscale.yml`
 
-The package image repository for https://github.com/vshn/provider-cloudscale[provider-cloudscale].
+Credentials to connect to the cloudscale.ch API.
+You can specify the name and namespace of the created secret, and the `stringData` in the `data` field.
+
+
+== `spec`
+[horizontal]
+type:: dict
+
+The `spec` parameters contains the `spec` of the `Provider` resource.
+
+Consult the https://docs.crossplane.io/v1.10/concepts/packages/#installing-a-package[upstream documentation] for configuration options.
+
+== `providerConfig`
+[horizontal]
+type:: dict
+
+The `spec` of the `ProviderConfig`.
+By default, the component will add the credentials to the provider config.
+
+Look at https://github.com/vshn/provider-cloudscale/blob/master/apis/provider/v1/providerconfig_types.go[the provider cloudscale] for available configuration options.
+
+== `controllerConfig`
+[horizontal]
+type:: dict
+
+The `spec` of the `ControllerConfig`.
+If the component is deployed on OpenShift, it will automatically add the necessary security context changes to the config.
+
+Consult the https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/ControllerConfig/v1alpha1[upstream documentation] for configuration options.

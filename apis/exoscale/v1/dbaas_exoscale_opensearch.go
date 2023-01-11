@@ -7,11 +7,6 @@ import (
 	appcatv1 "github.com/vshn/component-appcat/apis/v1"
 )
 
-// Remove some fields that are removed by Crossplane anyway.
-// Some properties need to be added and removed by Crossplane (https://doc.crds.dev/github.com/crossplane/crossplane/apiextensions.crossplane.io/CompositeResourceDefinition/v1@v1.10.0)
-//go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[].schema.openAPIV3Schema.properties; del(.metadata), del(.kind), del(.apiVersion))"
-//go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[]; .referenceable=true, del(.storage), del(.subresources))"
-
 // Workaround to make nested defaulting work.
 // kubebuilder is unable to set a {} default
 //go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.default={})"
@@ -20,9 +15,6 @@ import (
 //go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.service.default={})"
 //go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.size.default={})"
 //go:generate yq -i e ../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.network.default={})"
-
-// Patch the XRD with this generated CRD scheme
-//go:generate yq -i e ../../../packages/composite/dbaas/exoscale/opensearch.yml --expression ".parameters.appcat.composites.\"xexoscaleopensearches.exoscale.appcat.vshn.io\".spec.versions=load(\"../../generated/exoscale.appcat.vshn.io_exoscaleopensearches.yaml\").spec.versions"
 
 // +kubebuilder:object:root=true
 // +kubebuilder:printcolumn:name="Plan",type="string",JSONPath=".spec.parameters.size.plan"

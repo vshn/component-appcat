@@ -1,6 +1,0 @@
-classes:
-  - ..composite.dbaas.exoscale.mysql
-
-parameters:
-  facts:
-    cloud: exoscale

@@ -5,29 +5,13 @@
 * xref:tutorials/install-exoscale.adoc[Install Exoscale Stack]
 
 .Technical reference
-* xref:references/component-parameters.adoc[Component Parameters]
+* xref:references/component-parameters.adoc[Parameters]
 
 * Provider Parameters
-** xref:references/provider-cloudscale.adoc[provider.cloudscale]
-** xref:references/provider-exoscale.adoc[provider.exoscale]
-** xref:references/provider-kubernetes.adoc[provider.kubernetes]
+** xref:references/provider-cloudscale.adoc[Provider Cloudscale]
+** xref:references/provider-exoscale.adoc[Provider Exoscale]
+** xref:references/provider-kubernetes.adoc[Provider Kubernetes]
 
-* XRD Parameters
-** xref:references/composite/common.adoc[Common Parameters]
-** xref:references/composite/objectstorage.adoc[composite.objectstorage]
-** xref:references/composite/dbaas/exoscale/postgres.adoc[composite.dbaas.exoscale.postgres]
-** xref:references/composite/dbaas/exoscale/mysql.adoc[composite.dbaas.exoscale.mysql]
-** xref:references/composite/dbaas/exoscale/redis.adoc[composite.dbaas.exoscale.redis]
-** xref:references/composite/dbaas/exoscale/kafka.adoc[composite.dbaas.exoscale.kafka]
-** xref:references/composite/dbaas/exoscale/opensearch.adoc[composite.dbaas.exoscale.opensearch]
-
-* Composition Parameters
-** xref:references/composition/objectstorage/common.adoc[Common Parameters]
-** xref:references/composition/objectstorage/cloudscale.adoc[composition.objectstorage.cloudscale]
-** xref:references/composition/objectstorage/exoscale.adoc[composition.objectstorage.exoscale]
-** xref:references/composition/dbaas/exoscale/common.adoc[Common Parameters]
-** xref:references/composition/dbaas/exoscale/postgres.adoc[composition.dbaas.exoscale.postgres]
-** xref:references/composition/dbaas/exoscale/mysql.adoc[composition.dbaas.exoscale.mysql]
-** xref:references/composition/dbaas/exoscale/redis.adoc[composition.dbaas.exoscale.redis]
-** xref:references/composition/dbaas/exoscale/kafka.adoc[composition.dbaas.exoscale.kafka]
-** xref:references/composition/dbaas/exoscale/opensearch.adoc[composition.dbaas.exoscale.opensearch]
+* Service Parameters
+** xref:references/services-exoscale.adoc[Exoscale Services]
+** xref:references/service-objectstorage.adoc[Objectstorage Service]

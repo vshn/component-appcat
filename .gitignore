@@ -13,3 +13,9 @@
 
 # jsonnet builder
 component/jsonnetfile.json
+component/jsonnetfile.lock.json
+
+compiled/
+vendor/
+dependencies/
+hack/

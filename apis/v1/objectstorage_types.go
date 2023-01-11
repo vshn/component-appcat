@@ -2,17 +2,19 @@ package v1
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-// Remove some fields that are removed by Crossplane anyway.
-// Some properties need to be added and removed by Crossplane (https://doc.crds.dev/github.com/crossplane/crossplane/apiextensions.crossplane.io/CompositeResourceDefinition/v1@v1.10.0)
-//go:generate yq -i e ../generated/appcat.vshn.io_objectbuckets.yaml --expression "with(.spec.versions[].schema.openAPIV3Schema.properties; del(.metadata), del(.kind), del(.apiVersion))"
-//go:generate yq -i e ../generated/appcat.vshn.io_objectbuckets.yaml --expression "with(.spec.versions[]; .referenceable=true, del(.storage), del(.subresources))"
-
-// Patch the XRD with this generated CRD scheme
-//go:generate yq -i e ".parameters.appcat.composites.\"xobjectbuckets.appcat.vshn.io\".spec.versions=load(\"../generated/appcat.vshn.io_objectbuckets.yaml\").spec.versions" ../../packages/composite/objectstorage.yml
-
 // +kubebuilder:object:root=true
 // +kubebuilder:printcolumn:name="Bucket Name",type="string",JSONPath=".spec.parameters.bucketName"
 // +kubebuilder:printcolumn:name="Region",type="string",JSONPath=".spec.parameters.region"
+
+const (
+	// DeleteAll recursively deletes all objects in the object bucket and then removes it.
+	DeleteAll DeletionPolicy = "DeleteAll"
+	// DeleteIfEmpty only deletes the object bucket if it's empty.
+	DeleteIfEmpty DeletionPolicy = "DeleteIfEmpty"
+)
+
+// DeletionPolicy determines how object buckets should be deleted.
+type DeletionPolicy string
 
 // ObjectBucket is the API for creating S3 buckets.
 type ObjectBucket struct {
@@ -43,6 +45,13 @@ type ObjectBucketParameters struct {
 	// Region is the name of the region where the bucket shall be created.
 	// The region must be available in the S3 endpoint.
 	Region string `json:"region"`
+
+	// +kubebuilder:validation:Enum="DeleteAll";"DeleteIfEmpty";
+	// +kubebuilder:default="DeleteAll"
+	// DeletionPolicy determines how object buckets should be deleted.
+	// `DeleteAll` recursively deletes all objects in the object bucket and then removes it.
+	// `DeleteIfEmpty` only deletes the object bucket if it's empty.
+	DeletionPolicy DeletionPolicy `json:"deletionPolicy,omitempty"`
 }
 
 // ObjectBucketStatus reflects the observed state of a ObjectBucket.

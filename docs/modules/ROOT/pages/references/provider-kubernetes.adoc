@@ -1,11 +1,44 @@
-= pkg.appcat.provider.kubernetes
+= Provider Kubernetes
 
-The parent key for all of the following parameters is `pkg.appcat.provider.kubernetes`.
+The parent key for all of the following parameters is `appcat.provider.kubernetes`.
 
-== `images:provider-kubernetes`
+== `enabled`
+[horizontal]
+type:: bool
+default:: `false`
 
+If the provider should be installed.
+
+== `namespace`
+[horizontal]
+type:: string
+default:: `${crossplane:namespace}`
+
+The namespace the provider kubernetes will be running in.
+This is in almost all cases the same namespace crossplane itself is running and won't need to be changed.
+
+== `spec`
 [horizontal]
 type:: dict
-default:: see `packages/provider/kubernetes.yml`
 
-The package image repository for https://github.com/crossplane-contrib/provider-kubernetes[provider-kubernetes].
+The `spec` parameters contains the `spec` of the `Provider` resource.
+
+Consult the https://docs.crossplane.io/v1.10/concepts/packages/#installing-a-package[upstream documentation] for configuration options.
+
+== `providerConfig`
+[horizontal]
+type:: dict
+
+The `spec` of the `ProviderConfig`.
+
+Look at the https://doc.crds.dev/github.com/crossplane-contrib/provider-kubernetes/kubernetes.crossplane.io/ProviderConfig/v1alpha1@v0.6.0[upstream documentation] for available configuration options.
+
+== `controllerConfig`
+[horizontal]
+type:: dict
+
+The `spec` of the `ControllerConfig`.
+By default, the component will set a fixed service account name.
+If the component is deployed on OpenShift, it will automatically add the necessary security context changes to the config.
+
+Consult the https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/ControllerConfig/v1alpha1[upstream documentation] for configuration options.
