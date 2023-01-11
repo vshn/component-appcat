@@ -1,7 +1,0 @@
-parameters:
-  appcat:
-    =_metadata: {}
-    secrets: {}
-    additionalResources: {}
-    composites: {}
-    compositions: {}

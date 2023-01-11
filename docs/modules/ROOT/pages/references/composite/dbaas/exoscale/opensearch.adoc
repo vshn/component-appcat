@@ -1,8 +1,0 @@
-= pkg.appcat.composite.dbaas.exoscale.opensearch
-
-The parent key for all of the following parameters is `pkg.appcat.composite.dbaas.exoscale.opensearch`.
-
-[NOTE]
-====
-Currently, there's nothing to configure.
-====

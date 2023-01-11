@@ -3,8 +3,8 @@
 This tutorial will guide you through the installation process of installing the following parts:
 
 - A Crossplane provider to manage exoscale.com resources.
-- A Crossplane composite (XRD) which serves as the user's "interface" (API) for ordering S3 buckets.
-- A Crossplane composition that "implements" an XRD using the exoscale.com provider.
+- The AppCat Objectstorage service with the cloudscale implementation.
+- The Exoscale specific AppCat services
 
 == Requirements
 
@@ -32,13 +32,13 @@ vault login -method=oidc
 ----
 
 . Create an Organization on Exoscale Portal.
-. Create a new IAM key within the new project, give it a memorable name like `appcat-objects-${CLUSTER_ID}` and give it restricted access with only `sos` service.
+. Create a new IAM key within the new project, give it a memorable name like `appcat-${CLUSTER_ID}` and give it access to the `sos` and `dbaas` services.
 
 . Save the token in Vault.
 +
 [source,bash]
 ----
-parent="clusters/kv/${TENANT_ID}/${CLUSTER_ID}/appcat/objectstorage/provider-exoscale"
+parent="clusters/kv/${TENANT_ID}/${CLUSTER_ID}/appcat/provider-exoscale"
 vault kv put "${parent}" access-key=<the-exoscale-access-key> secret-key=<the-exoscale-secret-key>
 ----
 
@@ -48,27 +48,36 @@ vault kv put "${parent}" access-key=<the-exoscale-access-key> secret-key=<the-ex
 +
 [source,yaml,attributes="verbatim"]
 ----
-classes:
-  - appcat.provider.exoscale <1>
-  - appcat.provider.kubernetes <2>
-  - appcat.composite.objectstorage <3>
-  - appcat.composition.objectstorage.exoscale <4>
-applications: <5>
-  - pkg.appcat
+applications: <1>
+  - appcat
+  - crossplane
 
 parameters:
-  packages:
-    appcat:
-      url: {page-origin-url}
-      version: master <6>
-      path: packages
+  appcat:
+    providers:
+      exoscale:
+        enabled: true <2>
+    services:
+      generic:
+        objectstorage:
+          enabled: true <3>
+          compositions:
+            cloudscale:
+              enable: false <4>
+      exoscale:
+        enabled: true <5>
+
+  crossplane:
+    helmValues:
+      rbacManager:
+        managementPolicy: Basic <6>
 ----
-<1> The config for the operator (provider) that talks to exoscale.com API.
-<2> The config for the provider-kubernetes is required as a dependency.
-<3> The XRD is configured in this package.
-<4> The composition is configured in this package.
-<5> We need to enable the packages as part of the applications.
-    This gives us access to the provided classes.
-<6> The version of the package (applies to all appcat packages!).
+<1> Enable the `appcat` and `crossplane` components
+<2> Enable the provider exoscale
+<3> Enable the AppCat Objectstorage service
+<4> Explicitly disable the cloudscale implementation at we don't deploy the provider cloudscale
+<3> Enable the AppCat Exoscale services
+<6> Ensure that RBAC management policy is set to `Basic` only.
+
 
 . Compile and push cluster catalog

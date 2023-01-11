@@ -1,9 +1,0 @@
-classes:
-  - ..composition.dbaas.exoscale.redis
-  # composition requires provider-kubernetes as dependency
-  - ..provider.kubernetes
-
-parameters:
-  crossplane:
-    # This is not resolving during "commodore package compile", so we provide it explicitly
-    namespace: syn-crossplane

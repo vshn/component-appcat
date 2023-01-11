@@ -2,94 +2,60 @@
 
 The parent key for all of the following parameters is `appcat`.
 
-== `secrets`
 
+== `images`
 [horizontal]
 type:: dict
-default:: `{}`
-example::
-[source,yaml]
-----
-secrets:
-  my-secret: <1>
-    metadata:
-      namespace: syn-crossplane
-    stringData:
-      key: '?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/example}'
-----
-<1> `metadata.name` of the Secret
+default:: https://github.com/vshn/component-appcat/blob/master/class/defaults.yml[See `class/defaults.yml`]
 
-Deploys Secrets as shown in the example.
-If a key under `secrets.*` is set to `null` (for example through hierarchy), then the Secret is removed.
+This parameter allows selecting the Docker images to us.
+Each image is specified using keys `registry`, `repository` and `tag`.
+This structure allows easily injecting a registry mirror, if required.
 
-== `additionalResources`
 
+== `providers`
+
+
+=== `providers.cloudscale`
 [horizontal]
 type:: dict
-default:: `{}`
-example::
-[source,yaml]
-----
-additionalResources:
-  my-secret: <1>
-    apiVersion: v1 <2>
-    kind: ConfigMap <3>
-    metadata:
-      namespace: syn-crossplane
-    data:
-      key: value
-----
-<1> `metadata.name` of the object
-<2> `apiVersion` of the object (_required_)
-<3> `kind` of the object (_required_)
+reference:: xref:references/provider-cloudscale.adoc[See provider parameters]
 
-Similar to `secrets`, but able to deploy arbitrary static resources.
-This can be used to deploy single ad-hoc resources, but it's not intended to manage whole deployments.
 
-[TIP]
-====
-Consider adding dedicated parameters if there's a pattern of commonly deployed resources.
-====
+This parameter allows configuring https://github.com/vshn/provider-cloudscale[the provider cloudscale].
 
-== `composites`
 
+=== `providers.exoscale`
 [horizontal]
 type:: dict
-default:: `{}`
-example::
-[source,yaml]
-----
-composites:
-  "xobjectbuckets.appcat.vshn.io": <1>
-    spec: <2>
-      group: appcat.vshn.io
-      names:
-        kind: XObjectBucket
-        plural: xobjectbuckets
-      claimNames:
-        kind: ObjectBucket
-        plural: objectbuckets
-      versions:
-        - name: v1
-          schema:
-            openAPIV3Schema: {...}
-----
-<1> `metadata.name` of the object
-<2> `spec` of a composite ("XRD") verbatim
+reference:: xref:references/provider-exoscale.adoc[See provider parameters]
 
-Deploys the composite resource definitions (XRDs) to the cluster.
 
-== `compositions`
+This parameter allows configuring https://github.com/vshn/provider-exoscale[the provider exoscale].
 
+
+=== `providers.kubernetes`
 [horizontal]
 type:: dict
-default:: `{}`
-example::
-[source,yaml]
-----
-compositions:
-  test-composition: <1>
-    spec: {...} <2>
-----
-<1> `metadata.name` of the object
-<2> `spec` of a composition
+reference:: xref:references/provider-kubernetes.adoc[See provider parameters]
+
+
+This parameter allows configuring https://github.com/crossplane-contrib/provider-kubernetes[the provider kubernetes].
+
+
+== `services`
+
+=== `services.exoscale`
+[horizontal]
+type:: dict
+reference:: xref:references/services-exoscale.adoc[See service parameters]
+
+This parameter allows enabling and configuring exoscale specific AppCat services.
+
+
+=== `services.generic.objectstorage`
+[horizontal]
+type:: dict
+reference:: xref:references/service-objectstorage.adoc[See service parameters]
+
+This parameter allows enabling and configuring the generic objectstorage AppCat service.

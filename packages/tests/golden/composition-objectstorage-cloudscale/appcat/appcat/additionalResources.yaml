@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations: {}
-  labels:
-    name: syn-provider-cloudscale-secrets
-  name: syn-provider-cloudscale-secrets

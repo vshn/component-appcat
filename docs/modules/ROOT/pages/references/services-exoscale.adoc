@@ -1,0 +1,86 @@
+= Exoscale Services
+
+The parent key for all of the following parameters is `appcat.services.exoscale`.
+
+[IMPORTANT]
+====
+If you enable any of the exoscale service, make sure that the provider exoscale is deployed.
+Either by enabling it in `appcat.providers` or separately from this component.
+
+You can also have a look at the xref:tutorials/install-exoscale.adoc[tutorial for installing the Exoscale stack.]
+====
+
+=== `enabled`
+[horizontal]
+type:: bool
+default:: `false`
+
+If exoscale services should be available at all.
+When set to false no exoscale services will be deployed, even if a specific service was enabled.
+
+=== `secretNamespace`
+[horizontal]
+type:: string
+default:: `${crossplane:namespace}`
+
+In which namespace an XR's connection secret is written to.
+
+Defaults to the crossplane namespace.
+
+=== `providerSecretNamespace`
+[horizontal]
+type:: string
+default:: `${appcat:providers:exoscale:connectionSecretNamespace}^
+
+In which namespace the provider is putting the connection secrets of the managed resource.
+
+Defaults to what defined in the provider config.
+
+== `mysql`
+[horizontal]
+type:: dict
+
+Configuration option for Exoscale MySQL.
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace` and `providerSecretNamespace`.
+
+It's enabled by default and use the top level defined namespaces for `secretNamespace` and `providerSecretNamespace`.
+
+== `postgres`
+[horizontal]
+type:: dict
+
+Configuration option for Exoscale PostgrSQL.
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace` and `providerSecretNamespace`.
+
+It's enabled by default and use the top level defined namespaces for `secretNamespace` and `providerSecretNamespace`.
+
+
+== `redis`
+[horizontal]
+type:: dict
+
+Configuration option for Exoscale Redis.
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace` and `providerSecretNamespace`.
+
+It's enabled by default and use the top level defined namespaces for `secretNamespace` and `providerSecretNamespace`.
+
+
+== `kafka`
+[horizontal]
+type:: dict
+
+Configuration option for Exoscale Kafka.
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace` and `providerSecretNamespace`.
+
+It's enabled by default and use the top level defined namespaces for `secretNamespace` and `providerSecretNamespace`.
+
+
+== `opensearch`
+[horizontal]
+type:: dict
+
+Configuration option for Exoscale OpenSearch.
+You have to option to enable or disable it through the `enabled` parameter and can set the `secretNamespace` and `providerSecretNamespace`.
+
+It's enabled by default and use the top level defined namespaces for `secretNamespace` and `providerSecretNamespace`.
+

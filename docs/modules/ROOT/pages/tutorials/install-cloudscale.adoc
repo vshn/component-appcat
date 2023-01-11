@@ -3,8 +3,7 @@
 This tutorial will guide you through the installation process of installing the following parts:
 
 - A Crossplane provider to manage cloudscale.ch resources.
-- A Crossplane composite (XRD) which serves as the user's "interface" (API) for ordering S3 buckets.
-- A Crossplane composition that "implements" an XRD using the cloudscale.ch provider.
+- The AppCat Objectstorage service with the cloudscale implementation.
 
 == Requirements
 
@@ -48,32 +47,32 @@ vault kv put "${parent}" token=<the-cloudscale-token>
 +
 [source,yaml,attributes="verbatim"]
 ----
-classes:
-  - appcat.provider.cloudscale <1>
-  - appcat.provider.kubernetes <2>
-  - appcat.composite.objectstorage <3>
-  - appcat.composition.objectstorage.cloudscale <4>
-applications: <5>
-  - pkg.appcat
+applications: <1>
+  - appcat
+  - crossplane
 
 parameters:
-  packages:
-    appcat:
-      url: {page-origin-url}
-      version: master <6>
-      path: packages
+  appcat:
+    providers:
+      cloudscale:
+        enabled: true <2>
+    services:
+      generic:
+        objectstorage:
+          enabled: true <3>
+          compositions:
+            exoscale:
+              enable: false <4>
+
   crossplane:
     helmValues:
       rbacManager:
-        managementPolicy: Basic <7>
+        managementPolicy: Basic <5>
 ----
-<1> The config for the operator (provider) that talks to cloudscale.ch API.
-<2> The config for the provider-kubernetes is required as a dependency.
-<3> The XRD is configured in this package.
-<4> The composition is configured in this package.
-<5> We need to enable the packages as part of the applications.
-    This gives us access to the provided classes.
-<6> The version of the package (applies to all appcat packages!).
-<7> Ensure that RBAC management policy is set to `Basic` only.
+<1> Enable the `appcat` and `crossplane` components
+<2> Enable the provider cloudscale
+<3> Enable the AppCat Objectstorage service
+<4> Explicitly disable the exoscale implementation at we don't deploy the provider exoscale
+<5> Ensure that RBAC management policy is set to `Basic` only.
 
 . Compile and push cluster catalog

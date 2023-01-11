@@ -1,8 +1,0 @@
-= pkg.appcat.composite.dbaas.exoscale.redis
-
-The parent key for all of the following parameters is `pkg.appcat.composite.dbaas.exoscale.redis`.
-
-[NOTE]
-====
-Currently, there's nothing to configure.
-====

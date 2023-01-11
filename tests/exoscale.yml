@@ -1,0 +1,31 @@
+parameters:
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/projectsyn/component-crossplane/v2.3.0/lib/crossplane.libsonnet
+        output_path: vendor/lib/crossplane.libsonnet
+
+  facts:
+    cloud: exoscale
+
+  crossplane:
+    namespace: syn-crossplane
+
+  appcat:
+    providers:
+      exoscale:
+        enabled: true
+      kubernetes:
+        enabled: true
+
+
+    services:
+      exoscale:
+        enabled: true
+
+      generic:
+        objectstorage:
+          enabled: true
+          compositions:
+            cloudscale:
+              enabled: false
