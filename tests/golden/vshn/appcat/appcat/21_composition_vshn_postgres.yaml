@@ -49,6 +49,127 @@ spec:
                 fmt: vshn-postgresql-%s
               type: string
           type: FromCompositeFieldPath
+
+##########################################################################################
+#                             Object for storage (S3)
+    
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: ''
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: appcat.vshn.io/v1
+              kind: ObjectBucket
+              metadata:
+                namespace: default
+                name: '' #patched
+              spec:
+                parameters:
+                  bucketName: '' #patched
+                  region: ch-dk-2
+                compositionRef:
+                  name: exoscale.objectbuckets.appcat.vshn.io
+                writeConnectionSecretToRef:
+                  namespace: ''
+                  name: '' # patched
+          providerConfigRef:
+            name: kubernetes
+
+      patches:
+        - patchSetName: annotations
+          type: PatchSet
+        - patchSetName: labels
+          type: PatchSet
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          transforms:
+            - string:
+                fmt: exoscale-s3-%s
+              type: string
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.parameters.bucketName
+          transforms:
+            - string:
+                fmt: exoscale-s3-%s
+              type: string
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.namespace
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/claim-name]
+          toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+
+##########################################################################################
+#                         Object to create S3 Storage within this PG Instance
+#              see: https://stackgres.io/doc/latest/tutorial/complete-cluster/backup-configuration/
+
+
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: '' # patched
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: stackgres.io/v1beta1
+              kind: SGObjectStorage
+              metadata:
+                namespace: default
+                name: test-storage1
+              spec:
+                type: 's3Compatible'
+                s3:
+                  bucket: '' # patched
+                  awsCredentials:
+                    secretKeySelectors:
+                      accessKeyId: 
+                        name: '' # patched
+                        key: 'AWS_ACCESS_KEY_ID'
+                      secretAccessKey: 
+                        name: '' # patched
+                        key: 'AWS_SECRET_ACCESS_KEY'
+                  endpoint: https://sos-ch-dk-2.exo.io
+          providerConfigRef:
+            name: kubernetes
+        patches:
+          - patchSetName: annotations
+            type: PatchSet
+          - patchSetName: labels
+            type: PatchSet
+          # - fromFieldPath: metadata.labels[crossplane.io/composite]
+          #   toFieldPath: metadata.name
+          #   transforms:
+          #     - string:
+          #         fmt: vshn-objectstorage-%s
+          #       type: string
+          #   type: FromCompositeFieldPath
+          # - fromFieldPath: metadata.labels[crossplane.io/composite]
+          #   toFieldPath: spec.parameters.bucketName
+          #   transforms:
+          #     - string:
+          #         fmt: vshn-objectstorage-%s
+          #       type: string
+          #   type: FromCompositeFieldPath
+          - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+            toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.namespace
+            type: FromCompositeFieldPath
+          - fromFieldPath: metadata.labels[crossplane.io/claim-name]
+            toFieldPath: spec.forProvider.spec.s3.awsCredentials.secretKeySelectors.accessKeyId.name
+            type: FromCompositeFieldPath
+          - fromFieldPath: metadata.labels[crossplane.io/claim-name]
+            toFieldPath: spec.forProvider.spec.s3.awsCredentials.secretKeySelectors.secretAccessKey.name
+            type: FromCompositeFieldPath
+
+
+
+
+##########################################################################################
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
