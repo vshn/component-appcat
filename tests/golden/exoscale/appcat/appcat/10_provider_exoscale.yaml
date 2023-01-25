@@ -36,8 +36,8 @@ metadata:
   name: exoscale-api-access
   namespace: syn-crossplane
 stringData:
-  EXOSCALE_API_KEY: EXOb50bf34e209dfe11105ea95c
-  EXOSCALE_API_SECRET: t6iAk5Coo79-mDqTkow0p2c-HuJQZen-yZfVBaE1U3s
+  EXOSCALE_API_KEY: t-silent-test-1234/c-green-test-1234/appcat/provider-exoscale/access-key
+  EXOSCALE_API_SECRET: t-silent-test-1234/c-green-test-1234/appcat/provider-exoscale/secret-key
 type: Opaque
 ---
 apiVersion: v1
