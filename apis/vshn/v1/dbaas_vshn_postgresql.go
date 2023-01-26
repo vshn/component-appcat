@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"github.com/vshn/component-appcat/apis/v1"
+	v1 "github.com/vshn/component-appcat/apis/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -11,6 +11,7 @@ import (
 //go:generate yq -i e ../../generated/vshn.appcat.vshn.io_vshnpostgresqls.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.default={})"
 //go:generate yq -i e ../../generated/vshn.appcat.vshn.io_vshnpostgresqls.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.size.default={})"
 //go:generate yq -i e ../../generated/vshn.appcat.vshn.io_vshnpostgresqls.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.service.default={})"
+//go:generate yq -i e ../../generated/vshn.appcat.vshn.io_vshnpostgresqls.yaml --expression "with(.spec.versions[]; .schema.openAPIV3Schema.properties.spec.properties.parameters.properties.service.backup.default={})"
 
 // +kubebuilder:object:root=true
 
@@ -47,7 +48,7 @@ type VSHNPostgreSQLParameters struct {
 	Network VSHNDBaaSNetworkSpec `json:"network,omitempty"`
 
 	// Backup contains settings to control the backups of an instance.
-	Backup VSHNDBaaSBackupSpec `json:"backup,omitempty"`
+	Backup VSHNPostgreSQLBackup `json:"backup,omitempty"`
 }
 
 // VSHNPostgreSQLServiceSpec contains PostgreSQL DBaaS specific properties
@@ -108,14 +109,15 @@ type VSHNDBaaSNetworkSpec struct {
 	IPFilter []string `json:"ipFilter,omitempty"`
 }
 
-// VSHNDBaaSBackupSpec contains settings to control the backups of an instance.
-type VSHNDBaaSBackupSpec struct {
-	// +kubebuilder:validation:Pattern="^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$"
-	// +kubebuilder:default="21:30:00"
+type VSHNPostgreSQLBackup struct {
+	// +kubebuilder:validation:Pattern=^(\*|([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])|\*\/([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])) (\*|([0-9]|1[0-9]|2[0-3])|\*\/([0-9]|1[0-9]|2[0-3])) (\*|([1-9]|1[0-9]|2[0-9]|3[0-1])|\*\/([1-9]|1[0-9]|2[0-9]|3[0-1])) (\*|([1-9]|1[0-2])|\*\/([1-9]|1[0-2])) (\*|([0-6])|\*\/([0-6]))$
+	// +kubebuilder:default=* * * * *
+	Schedule string `json:"schedule,omitempty"`
 
-	// TimeOfDay for doing daily backups, in UTC.
-	// Format: "hh:mm:ss".
-	TimeOfDay string `json:"timeOfDay,omitempty"`
+	// +kubebuilder:validation:Pattern="^[1-9][0-9]*$"
+	// +kubebuilder:default=6
+	// +kubebuilder:validation:XIntOrString
+	Retention int `json:"retention,omitempty"`
 }
 
 // VSHNPostgreSQLStatus reflects the observed state of a VSHNPostgreSQL.

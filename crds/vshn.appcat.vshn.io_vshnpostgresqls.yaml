@@ -37,10 +37,14 @@ spec:
                     backup:
                       description: Backup contains settings to control the backups of an instance.
                       properties:
-                        timeOfDay:
-                          default: "21:30:00"
-                          description: 'TimeOfDay for doing daily backups, in UTC. Format: "hh:mm:ss".'
-                          pattern: ^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$
+                        retention:
+                          default: 6
+                          pattern: ^[1-9][0-9]*$
+                          type: integer
+                          x-kubernetes-int-or-string: true
+                        schedule:
+                          default: '* * * * *'
+                          pattern: ^(\*|([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])|\*\/([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])) (\*|([0-9]|1[0-9]|2[0-3])|\*\/([0-9]|1[0-9]|2[0-3])) (\*|([1-9]|1[0-9]|2[0-9]|3[0-1])|\*\/([1-9]|1[0-9]|2[0-9]|3[0-1])) (\*|([1-9]|1[0-2])|\*\/([1-9]|1[0-2])) (\*|([0-6])|\*\/([0-6]))$
                           type: string
                       type: object
                     maintenance:
@@ -94,6 +98,8 @@ spec:
                           x-kubernetes-preserve-unknown-fields: true
                       type: object
                       default: {}
+                      backup:
+                        default: {}
                     size:
                       description: Size contains settings to control the sizing of a service.
                       properties:

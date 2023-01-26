@@ -227,6 +227,12 @@ spec:
                 fmt: sgbackup-%s
               type: string
           type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.schedule
+          toFieldPath: spec.forProvider.manifest.spec.configurations.backups[0].cronSchedule
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.retention
+          toFieldPath: spec.forProvider.manifest.spec.configurations.backups[0].retention
+          type: FromCompositeFieldPath
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object

@@ -136,12 +136,17 @@ local controllerConfigRef(config) =
         },
         {
           apiGroups: [ 'stackgres.io' ],
-          resources: [ 'sginstanceprofiles', 'sgclusters', 'sgpgconfigs' ],
+          resources: [ 'sginstanceprofiles', 'sgclusters', 'sgpgconfigs', 'sgobjectstorages' ],
           verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
         },
         {
           apiGroups: [ 'networking.k8s.io' ],
           resources: [ 'networkpolicies' ],
+          verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+        },
+        {
+          apiGroups: [ 'appcat.vshn.io' ],
+          resources: [ 'objectbuckets' ],
           verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
         },
       ],
