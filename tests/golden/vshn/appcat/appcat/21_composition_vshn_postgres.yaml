@@ -173,7 +173,7 @@ spec:
               spec:
                 configurations:
                   backups:
-                    - cronSchedule: '*/1 * * * *'
+                    - cronSchedule: 0 22 * * *
                       retention: 6
                       sgObjectStorage: ''
                   sgPostgresConfig: ''
@@ -317,13 +317,13 @@ spec:
                 namespace: ''
               spec:
                 compositionRef:
-                  name: exoscale.objectbuckets.appcat.vshn.io
+                  name: cloudscale.objectbuckets.appcat.vshn.io
                 parameters:
                   bucketName: ''
-                  region: ch-gva-2
+                  region: lpg
                 writeConnectionSecretToRef:
                   name: ''
-                  namespace: ''
+                  namespace: syn-crossplane
           providerConfigRef:
             name: kubernetes
       patches:
@@ -335,7 +335,7 @@ spec:
           toFieldPath: metadata.name
           transforms:
             - string:
-                fmt: '%s-s3-bucket'
+                fmt: s3-bucket-%s
               type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
@@ -393,8 +393,8 @@ spec:
                         key: AWS_SECRET_ACCESS_KEY
                         name: ''
                   bucket: ''
-                  endpoint: https://sos-ch-gva-2.exo.io
-                  region: ch-gva-2
+                  endpoint: objects.lpg.cloudscale.ch
+                  region: lpg
                 type: s3Compatible
           providerConfigRef:
             name: kubernetes
@@ -428,11 +428,18 @@ spec:
           toFieldPath: spec.forProvider.manifest.spec.s3Compatible.bucket
           transforms:
             - string:
-                fmt: s3-bucket-%s
+                fmt: '%s-s3-bucket'
               type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.namespace
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.manifest.spec.s3Compatible.endpoint
+          transforms:
+            - string:
+                fmt: https://s3-bucket-%s.objects.lpg.cloudscale.ch
+              type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: spec.forProvider.manifest.spec.s3Compatible.awsCredentials.secretKeySelectors.accessKeyId.name

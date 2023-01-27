@@ -57,6 +57,10 @@ parameters:
         enabled: false
         secretNamespace: ${crossplane:namespace}
         postgres:
+          # bucket_region: 'lpg' || 'ch-gva-2' 
+          bucket_region: 'lpg' 
+          # bucket_endpoint: 'objects.lpg.cloudscale.ch' || sos-ch-dk-2.exo.io
+          bucket_endpoint: 'objects.lpg.cloudscale.ch'
           enabled: true
           enableNetworkPolicy: true
           secretNamespace: ${appcat:services:vshn:secretNamespace}

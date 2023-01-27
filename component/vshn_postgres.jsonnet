@@ -12,6 +12,9 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local pgParams = params.services.vshn.postgres;
 
+assert std.length(pgParams.bucket_region) != 0 : 'bucket_region variable must be set, it should be one of: https://docs.appuio.cloud/appcat/references/clouds.html ';
+assert std.length(pgParams.bucket_endpoint) != 0 : "bucket_endpoint variable must be set and correspond to valid s3 bucket endpoint in either cloudscale or exoscale, for cloudscale pattern is: objects.$region.cloudscale.ch, for exoscale pattern is: sos-$region}.exo.io. This variable can't start with https://, just host part.";
+
 local defaultDB = 'postgres';
 local defaultUser = 'postgres';
 local defaultPort = '5432';
@@ -123,7 +126,7 @@ local composition =
                                   [
                                     {
                                       sgObjectStorage: '',
-                                      cronSchedule: '*/1 * * * *',
+                                      cronSchedule: '0 22 * * *',
                                       retention: 6,
                                     },
                                   ],
@@ -218,13 +221,13 @@ local composition =
                                spec: {
                                  parameters: {
                                    bucketName: '',
-                                   region: 'ch-gva-2',
+                                   region: pgParams.bucket_region,
                                  },
                                  compositionRef: {
-                                   name: 'exoscale.objectbuckets.appcat.vshn.io',
+                                   name: 'cloudscale.objectbuckets.appcat.vshn.io',
                                  },
                                  writeConnectionSecretToRef: {
-                                   namespace: '',
+                                   namespace: pgParams.secretNamespace,
                                    name: '',
                                  },
                                },
@@ -246,8 +249,8 @@ local composition =
                                     type: 's3Compatible',
                                     s3Compatible: {
                                       bucket: '',
-                                      region: 'ch-gva-2',
-                                      endpoint: 'https://sos-ch-gva-2.exo.io',
+                                      region: pgParams.bucket_region,
+                                      endpoint: pgParams.bucket_endpoint,
                                       awsCredentials: {
                                         secretKeySelectors: {
                                           accessKeyId: {
@@ -351,7 +354,7 @@ local composition =
           patches: [
             comp.PatchSetRef('annotations'),
             comp.PatchSetRef('labels'),
-            comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 's3-bucket'),
+            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'metadata.name', 's3-bucket'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.name', 's3-bucket'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-postgresql'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.parameters.bucketName', 's3-bucket'),
@@ -368,8 +371,12 @@ local composition =
             comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 'object-storage'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.name', 'sgbackup'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-postgresql'),
-            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.bucket', 's3-bucket'),
+            comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.bucket', 's3-bucket'),
             comp.FromCompositeFieldPath('metadata.labels[crossplane.io/claim-namespace]', 'spec.forProvider.spec.writeConnectionSecretToRef.namespace'),
+            //pgParams.bucket_endpoint
+            comp.FromCompositeFieldPathWithTransform('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.endpoint', 'https://s3-bucket-', '.' + pgParams.bucket_endpoint),
+
+            //
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.awsCredentials.secretKeySelectors.accessKeyId.name', 's3-bucket'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.awsCredentials.secretKeySelectors.secretAccessKey.name', 's3-bucket'),
           ],

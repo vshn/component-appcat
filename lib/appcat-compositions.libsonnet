@@ -7,6 +7,18 @@ local fromCompositeFieldPath(from, to) = {
   toFieldPath: to,
 };
 
+local fromCompositeFieldPathWithTransform(from, to, prefix, suffix) = fromCompositeFieldPath(from, to) + {
+  // this is an enhanced patch type with a transform function that adds the 3rd argument as a suffix
+  transforms: [
+    {
+      type: 'string',
+      string: {
+        fmt: prefix + '%s' + suffix,
+      },
+    },
+  ],
+};
+
 local fromCompositeFieldPathWithTransformSuffix(from, to, suffix) = fromCompositeFieldPath(from, to) + {
   // this is an enhanced patch type with a transform function that adds the 3rd argument as a suffix
   transforms: [
@@ -170,6 +182,8 @@ local kubeObject(apiVersion, kind) = {
     fromCompositeFieldPathWithTransformPrefix(from, to, prefix),
   CombineCompositeFromTwoFieldPaths(fromOne, fromTwo, to, format):
     combineCompositeFromTwoFieldPaths(fromOne, fromTwo, to, format),
+  FromCompositeFieldPathWithTransform(from, to, prefix, suffix):
+    fromCompositeFieldPathWithTransform(from, to, prefix, suffix),
   ToCompositeFieldPath(from, to):
     toCompositeFieldPath(from, to),
   PatchSetRef(name):
