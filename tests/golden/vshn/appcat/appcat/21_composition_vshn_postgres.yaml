@@ -273,8 +273,12 @@ spec:
                 fmt: '%s-connection'
               type: string
           type: FromCompositeFieldPath
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
+          transforms:
+            - string:
+                fmt: vshn-postgresql-%s
+              type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/claim-name]
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -311,19 +315,17 @@ spec:
           forProvider:
             manifest:
               apiVersion: appcat.vshn.io/v1
-              kind: ObjectBucket
+              kind: XObjectBucket
               metadata:
                 name: ''
                 namespace: ''
               spec:
-                compositionRef:
-                  name: cloudscale.objectbuckets.appcat.vshn.io
                 parameters:
                   bucketName: ''
-                  region: lpg
+                  region: replace-me
                 writeConnectionSecretToRef:
                   name: ''
-                  namespace: syn-crossplane
+                  namespace: ''
           providerConfigRef:
             name: kubernetes
       patches:
@@ -335,7 +337,7 @@ spec:
           toFieldPath: metadata.name
           transforms:
             - string:
-                fmt: s3-bucket-%s
+                fmt: '%s-s3-bucket'
               type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
@@ -359,8 +361,12 @@ spec:
                 fmt: s3-bucket-%s
               type: string
           type: FromCompositeFieldPath
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.namespace
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.namespace
+          transforms:
+            - string:
+                fmt: vshn-postgresql-%s
+              type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.name
@@ -393,8 +399,9 @@ spec:
                         key: AWS_SECRET_ACCESS_KEY
                         name: ''
                   bucket: ''
-                  endpoint: objects.lpg.cloudscale.ch
-                  region: lpg
+                  enablePathStyleAddressing: true
+                  endpoint: replace-me
+                  region: replace-me
                 type: s3Compatible
           providerConfigRef:
             name: kubernetes
@@ -428,18 +435,11 @@ spec:
           toFieldPath: spec.forProvider.manifest.spec.s3Compatible.bucket
           transforms:
             - string:
-                fmt: '%s-s3-bucket'
+                fmt: s3-bucket-%s
               type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.spec.writeConnectionSecretToRef.namespace
-          type: FromCompositeFieldPath
-        - fromFieldPath: metadata.labels[crossplane.io/composite]
-          toFieldPath: spec.forProvider.manifest.spec.s3Compatible.endpoint
-          transforms:
-            - string:
-                fmt: https://s3-bucket-%s.objects.lpg.cloudscale.ch
-              type: string
           type: FromCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: spec.forProvider.manifest.spec.s3Compatible.awsCredentials.secretKeySelectors.accessKeyId.name

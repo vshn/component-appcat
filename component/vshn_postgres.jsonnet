@@ -209,7 +209,7 @@ local composition =
                             },
                           },
                         };
-  local objectBucket = comp.KubeObject('appcat.vshn.io/v1', 'ObjectBucket') +
+  local objectBucket = comp.KubeObject('appcat.vshn.io/v1', 'XObjectBucket') +
                        {
                          spec+: {
                            forProvider+: {
@@ -223,11 +223,8 @@ local composition =
                                    bucketName: '',
                                    region: pgParams.bucket_region,
                                  },
-                                 compositionRef: {
-                                   name: 'cloudscale.objectbuckets.appcat.vshn.io',
-                                 },
                                  writeConnectionSecretToRef: {
-                                   namespace: pgParams.secretNamespace,
+                                   namespace: '',
                                    name: '',
                                  },
                                },
@@ -249,6 +246,7 @@ local composition =
                                     type: 's3Compatible',
                                     s3Compatible: {
                                       bucket: '',
+                                      enablePathStyleAddressing: true,
                                       region: pgParams.bucket_region,
                                       endpoint: pgParams.bucket_endpoint,
                                       awsCredentials: {
@@ -340,7 +338,7 @@ local composition =
             comp.PatchSetRef('annotations'),
             comp.PatchSetRef('labels'),
             comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 'connection'),
-            comp.FromCompositeFieldPath('metadata.labels[crossplane.io/claim-namespace]', 'spec.forProvider.manifest.metadata.namespace'),
+            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-postgresql'),
             comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/claim-name]', 'spec.forProvider.manifest.metadata.name', 'connection'),
 
             comp.CombineCompositeFromTwoFieldPaths('metadata.labels[crossplane.io/composite]', 'metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.stringData.POSTGRESQL_HOST', '%s.vshn-postgresql-%s.svc.cluster.local'),
@@ -354,11 +352,12 @@ local composition =
           patches: [
             comp.PatchSetRef('annotations'),
             comp.PatchSetRef('labels'),
-            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'metadata.name', 's3-bucket'),
+            comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 's3-bucket'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.name', 's3-bucket'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-postgresql'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.parameters.bucketName', 's3-bucket'),
-            comp.FromCompositeFieldPath('metadata.labels[crossplane.io/claim-namespace]', 'spec.forProvider.spec.writeConnectionSecretToRef.namespace'),
+
+            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.writeConnectionSecretToRef.namespace', 'vshn-postgresql'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.writeConnectionSecretToRef.name', 's3-bucket'),
           ],
         },
@@ -371,10 +370,8 @@ local composition =
             comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 'object-storage'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.name', 'sgbackup'),
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-postgresql'),
-            comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.bucket', 's3-bucket'),
+            comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.bucket', 's3-bucket'),
             comp.FromCompositeFieldPath('metadata.labels[crossplane.io/claim-namespace]', 'spec.forProvider.spec.writeConnectionSecretToRef.namespace'),
-            //pgParams.bucket_endpoint
-            comp.FromCompositeFieldPathWithTransform('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.endpoint', 'https://s3-bucket-', '.' + pgParams.bucket_endpoint),
 
             //
             comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.spec.s3Compatible.awsCredentials.secretKeySelectors.accessKeyId.name', 's3-bucket'),

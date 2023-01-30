@@ -118,7 +118,7 @@ rules:
   - apiGroups:
       - appcat.vshn.io
     resources:
-      - objectbuckets
+      - xobjectbuckets
     verbs:
       - get
       - list

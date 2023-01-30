@@ -146,7 +146,7 @@ local controllerConfigRef(config) =
         },
         {
           apiGroups: [ 'appcat.vshn.io' ],
-          resources: [ 'objectbuckets' ],
+          resources: [ 'xobjectbuckets' ],
           verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
         },
       ],
