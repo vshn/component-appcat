@@ -337,7 +337,7 @@ spec:
               spec:
                 parameters:
                   bucketName: ''
-                  region: ch-gva-2
+                  region: ''
                 writeConnectionSecretToRef:
                   name: ''
                   namespace: ''
@@ -418,8 +418,8 @@ spec:
                         name: ''
                   bucket: ''
                   enablePathStyleAddressing: true
-                  endpoint: https://sos-ch-gva-2.exo.io
-                  region: ch-gva-2
+                  endpoint: ''
+                  region: ''
                 type: s3Compatible
           providerConfigRef:
             name: kubernetes
