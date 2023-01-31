@@ -59,7 +59,7 @@ parameters:
         postgres:
           # bucket_region: 'lpg' || 'ch-gva-2' 
           bucket_region: ''
-          # bucket_endpoint: 'objects.lpg.cloudscale.ch' || sos-ch-gva-2.exo.io
+          # bucket_endpoint: 'https://objects.lpg.cloudscale.ch' || 'https://sos-ch-gva-2.exo.io'
           bucket_endpoint: ''
           enabled: true
           enableNetworkPolicy: true
