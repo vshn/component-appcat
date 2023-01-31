@@ -124,4 +124,12 @@ type VSHNPostgreSQLBackup struct {
 type VSHNPostgreSQLStatus struct {
 	// PostgreSQLConditions contains the status conditions of the backing object.
 	PostgreSQLConditions []v1.Condition `json:"postgresqlConditions,omitempty"`
+	NamespaceDebug       []v1.Condition `json:"namespaceDebug,omitempty"`
+	ProfileDebug         []v1.Condition `json:"profileDebug,omitempty"`
+	PGConfigDebug        []v1.Condition `json:"pgconfigDebug,omitempty"`
+	PGClusterDebug       []v1.Condition `json:"pgclusterDebug,omitempty"`
+	SecretsDebug         []v1.Condition `json:"secretDebug,omitempty"`
+	S3BucketDebug        []v1.Condition `json:"s3BucketDebug,omitempty"`
+	S3BackupConfigDebug  []v1.Condition `json:"s3BackupConfigDebug,omitempty"`
+	NetworkPolicyDebug   []v1.Condition `json:"networkPolicyDebug,omitempty"`
 }

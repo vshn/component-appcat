@@ -42,6 +42,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.namespaceDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -88,6 +91,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.profileDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -134,6 +140,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.pgconfigDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -191,6 +200,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.pgclusterDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -266,6 +278,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.secretDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -322,7 +337,7 @@ spec:
               spec:
                 parameters:
                   bucketName: ''
-                  region: replace-me
+                  region: ch-gva-2
                 writeConnectionSecretToRef:
                   name: ''
                   namespace: ''
@@ -333,6 +348,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.s3BucketDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -400,8 +418,8 @@ spec:
                         name: ''
                   bucket: ''
                   enablePathStyleAddressing: true
-                  endpoint: replace-me
-                  region: replace-me
+                  endpoint: https://sos-ch-gva-2.exo.io
+                  region: ch-gva-2
                 type: s3Compatible
           providerConfigRef:
             name: kubernetes
@@ -410,6 +428,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.s3BackupConfigDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
@@ -484,6 +505,9 @@ spec:
           type: PatchSet
         - patchSetName: labels
           type: PatchSet
+        - fromFieldPath: status.conditions
+          toFieldPath: status.networkPolicyDebug
+          type: ToCompositeFieldPath
         - fromFieldPath: metadata.labels[crossplane.io/composite]
           toFieldPath: metadata.name
           transforms:
