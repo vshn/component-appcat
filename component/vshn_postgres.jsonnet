@@ -12,9 +12,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local pgParams = params.services.vshn.postgres;
 
-assert std.length(pgParams.bucket_region) != 0 : 'bucket_region variable must be set, it should be one of: https://docs.appuio.cloud/appcat/references/clouds.html ';
-assert std.length(pgParams.bucket_endpoint) != 0 : "bucket_endpoint variable must be set and correspond to valid s3 bucket endpoint in either cloudscale or exoscale, for cloudscale pattern is: objects.$region.cloudscale.ch, for exoscale pattern is: sos-$region}.exo.io. This variable can't start with https://, just host part.";
-
 local defaultDB = 'postgres';
 local defaultUser = 'postgres';
 local defaultPort = '5432';
