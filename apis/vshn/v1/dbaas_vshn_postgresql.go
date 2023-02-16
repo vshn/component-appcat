@@ -70,7 +70,7 @@ type VSHNPostgreSQLServiceSpec struct {
 // VSHNDBaaSSchedulingSpec contains settings to control the scheduling of an instance.
 type VSHNDBaaSSchedulingSpec struct {
 	// NodeSelector is a selector which must match a node’s labels for the pod to be scheduled on that node
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector string `json:"nodeSelector,omitempty"`
 }
 
 // VSHNDBaaSMaintenanceScheduleSpec contains settings to control the maintenance of an instance.
