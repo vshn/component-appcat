@@ -19,6 +19,12 @@ spec:
   compositeTypeRef:
     apiVersion: vshn.appcat.vshn.io/v1
     kind: XVSHNPostgreSQL
+  functions:
+    - container:
+        image: ghcr.io/vshn/vshn-postgres-func:v0.0.1
+        imagePullPolicy: IfNotPresent
+      name: vshn-postgres-func
+      type: Container
   resources:
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1

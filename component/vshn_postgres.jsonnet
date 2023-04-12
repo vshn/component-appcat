@@ -1019,6 +1019,16 @@ local composition(restore=false) =
     spec: {
       compositeTypeRef: comp.CompositeRef(xrd),
       writeConnectionSecretsToNamespace: pgParams.secretNamespace,
+      functions: [
+        {
+          name: 'vshn-postgres-func',
+          type: 'Container',
+          container: {
+            image: 'ghcr.io/vshn/vshn-postgres-func:v0.0.1',
+            imagePullPolicy: 'IfNotPresent',
+          },
+        },
+      ],
       resources: [
                    namespaceObserve,
                    namespaceConditions,
