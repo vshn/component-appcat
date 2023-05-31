@@ -3,7 +3,7 @@ module github.com/vshn/component-appcat/dev/scripts/exoscale-plans
 go 1.20
 
 require (
-	github.com/exoscale/egoscale v0.100.1
+	github.com/exoscale/egoscale v1.19.0
 	k8s.io/apimachinery v0.27.2
 )
 
