@@ -3,7 +3,7 @@ parameters:
     charts:
       redis:
         source: https://charts.bitnami.com/bitnami
-        version: 17.6.0
+        version: 18.0.1
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io
