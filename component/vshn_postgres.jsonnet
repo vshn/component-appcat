@@ -224,6 +224,40 @@ local sgInstanceProfile = {
                   requests: {
                     cpu: null,
                     memory: null,
+                    containers: {
+                      'backup.create-backup': {
+                        cpu: '250m',
+                        memory: '256Mi',
+                      },
+                      'cluster-controller': {
+                        cpu: '32m',
+                        memory: '188Mi',
+                      },
+                      'dbops.run-dbops': {
+                        cpu: '250m',
+                        memory: '256Mi',
+                      },
+                      'dbops.set-dbops-result': {
+                        cpu: '250m',
+                        memory: '256Mi',
+                      },
+                      envoy: {
+                        cpu: '32m',
+                        memory: '64Mi',
+                      },
+                      pgbouncer: {
+                        cpu: '16m',
+                        memory: '32Mi',
+                      },
+                      'postgres-util': {
+                        cpu: '10m',
+                        memory: '4Mi',
+                      },
+                      'prometheus-postgres-exporter': {
+                        cpu: '10m',
+                        memory: '32Mi',
+                      },
+                    },
                   },
                   containers: {
                     'backup.create-backup': {
@@ -232,7 +266,7 @@ local sgInstanceProfile = {
                     },
                     'cluster-controller': {
                       cpu: '32m',
-                      memory: '188Mi',
+                      memory: '768Mi',
                     },
                     'dbops.run-dbops': {
                       cpu: '250m',
