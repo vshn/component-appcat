@@ -272,6 +272,18 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - appcat.vshn.io
+    resources:
+      - objectbuckets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
