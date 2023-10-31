@@ -30,7 +30,7 @@ spec:
         data:
           bucketRegion: lpg
           controlNamespace: syn-appcat-control
-          imageTag: v4.37.0
+          imageTag: sli_minio
           maintenanceSA: helm-based-service-maintenance
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
@@ -43,7 +43,7 @@ spec:
         image: redis
         imagePullPolicy: IfNotPresent
         runner:
-          endpoint: unix-abstract:crossplane/fn/default.sock
+          endpoint: 172.17.0.1:9547
         timeout: 20s
       name: redis-func
       type: Container

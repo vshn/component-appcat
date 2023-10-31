@@ -39,7 +39,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.37.0
+        tag: sli_minio
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -54,7 +54,8 @@ parameters:
     appuioManaged: true
     tenantID: ${cluster:tenant}
     quotasEnabled: false
-    grpcEndpoint: unix-abstract:crossplane/fn/default.sock
+    grpcEndpoint: 172.17.0.1:9547
+    #grpcEndpoint: unix-abstract:crossplane/fn/default.sock
 
     controller:
       enabled: false
@@ -168,7 +169,16 @@ parameters:
                 # If the alert is pending for more than 5m this indicates a real problem.
                 for: 6m
               ticket_alert: {}
-
+        minio:
+          uptime:
+            objective: 99.9
+            alerting:
+              page_alert:
+                # This should reduce non actionable alerts because of single instance restarts.
+                # The page alert looks (ammong other things) at the burn rate over the last 5min.
+                # If the alert is pending for more than 5m this indicates a real problem.
+                for: 6m
+              ticket_alert: {}
     providers:
       cloudscale:
         enabled: false

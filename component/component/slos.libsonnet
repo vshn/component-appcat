@@ -149,6 +149,51 @@ local prometheusRule(name) =
         },
       },
     ],
+    'vshn-minio-ha': [
+      newSLO('uptime', 'vshn-minio-ha', params.slos.vshn.minio.uptime) {
+        description: 'Uptime SLO for High Available Minio by VSHN',
+        sli: {
+          events: {
+            // The  0*rate(...) makes sure that the query reports an error rate for all instances, even if that instance has never produced a single error
+            error_query: '(sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[{{.window}}]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[{{.window}}]))  by (service, namespace, name, organization, sla) or vector(0)) - scalar(appcat:cluster:maintenance) > 0 or sum(0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[{{.window}}])) by (service, namespace, name, organization, sla)',
+            total_query: 'sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[{{.window}}])) by (service, namespace, name, organization, sla)',
+          },
+        },
+        alerting+: {
+          name: 'SLO_AppCat_HAVSHNMinioUptime',
+          annotations+: {
+            summary: 'Probes to HA Minio by VSHN instance fail',
+          },
+          labels+: {
+            service: 'VSHNMinio',
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
+          },
+        },
+      },
+    ],
+    // minio without HA
+    'vshn-minio': [
+      newSLO('uptime', 'vshn-minio', params.slos.vshn.minio.uptime) {
+        description: 'Uptime SLO for Minio by VSHN',
+        sli: {
+          events: {
+            // The  0*rate(...) makes sure that the query reports an error rate for all instances, even if that instance has never produced a single error
+            error_query: '(sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="false"}[{{.window}}]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[{{.window}}]))  by (service, namespace, name, organization, sla) or vector(0)) - scalar(appcat:cluster:maintenance) > 0 or sum(0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[{{.window}}])) by (service, namespace, name, organization, sla)',
+            total_query: 'sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="false"}[{{.window}}])) by (service, namespace, name, organization, sla)',
+          },
+        },
+        alerting+: {
+          name: 'SLO_AppCat_VSHNMinioUptime',
+          annotations+: {
+            summary: 'Probes to Minio by VSHN instance fail',
+          },
+          labels+: {
+            service: 'VSHNMinio',
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
+          },
+        },
+      },
+    ],
   },
   Get(name): prometheusRule(name),
 }

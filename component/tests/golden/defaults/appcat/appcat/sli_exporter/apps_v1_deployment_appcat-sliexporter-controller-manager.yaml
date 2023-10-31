@@ -28,7 +28,7 @@ spec:
           value: "false"
         - name: APPCAT_SLI_VSHNREDIS
           value: "false"
-        image: ghcr.io/vshn/appcat:v4.37.0
+        image: ghcr.io/vshn/appcat:sli_minio
         livenessProbe:
           httpGet:
             path: /healthz

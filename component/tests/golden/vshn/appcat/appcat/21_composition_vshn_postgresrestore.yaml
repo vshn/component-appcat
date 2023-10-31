@@ -33,7 +33,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
           externalDatabaseConnectionsEnabled: 'true'
-          imageTag: v4.37.0
+          imageTag: sli_minio
           quotasEnabled: 'false'
           sgNamespace: stackgres
           sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "2Gi"},
@@ -57,7 +57,7 @@ spec:
         image: postgresql
         imagePullPolicy: IfNotPresent
         runner:
-          endpoint: unix-abstract:crossplane/fn/default.sock
+          endpoint: 172.17.0.1:9547
         timeout: 20s
       name: pgsql-func
       type: Container

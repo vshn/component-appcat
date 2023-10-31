@@ -25,7 +25,7 @@ spec:
         data:
           controlNamespace: syn-appcat-control
           defaultPlan: standard-1
-          imageTag: v4.37.0
+          imageTag: sli_minio
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
           minioChartVersion: 5.0.13
@@ -41,7 +41,7 @@ spec:
         image: minio
         imagePullPolicy: IfNotPresent
         runner:
-          endpoint: unix-abstract:crossplane/fn/default.sock
+          endpoint: 172.17.0.1:9547
         timeout: 20s
       name: minio-func
       type: Container
