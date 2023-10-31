@@ -54,8 +54,8 @@ parameters:
     appuioManaged: true
     tenantID: ${cluster:tenant}
     quotasEnabled: false
-    grpcEndpoint: 172.17.0.1:9547
-    #grpcEndpoint: unix-abstract:crossplane/fn/default.sock
+    #grpcEndpoint: 172.17.0.1:9547
+    grpcEndpoint: unix-abstract:crossplane/fn/default.sock
 
     controller:
       enabled: false

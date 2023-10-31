@@ -41,7 +41,7 @@ spec:
         image: minio
         imagePullPolicy: IfNotPresent
         runner:
-          endpoint: 172.17.0.1:9547
+          endpoint: unix-abstract:crossplane/fn/default.sock
         timeout: 20s
       name: minio-func
       type: Container
