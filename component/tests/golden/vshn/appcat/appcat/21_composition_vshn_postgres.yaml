@@ -33,7 +33,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
           externalDatabaseConnectionsEnabled: 'true'
-          imageTag: v4.37.0
+          imageTag: aws_demo
           quotasEnabled: 'false'
           sgNamespace: stackgres
           sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "2Gi"},

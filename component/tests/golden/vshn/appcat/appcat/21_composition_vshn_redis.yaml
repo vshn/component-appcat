@@ -30,7 +30,7 @@ spec:
         data:
           bucketRegion: lpg
           controlNamespace: syn-appcat-control
-          imageTag: v4.37.0
+          imageTag: aws_demo
           maintenanceSA: helm-based-service-maintenance
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount

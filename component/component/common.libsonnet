@@ -13,9 +13,11 @@ local params = inv.parameters.appcat;
 
 local exoscaleZones = [ 'de-fra-1', 'de-muc-1', 'at-vie-1', 'ch-gva-2', 'ch-dk-2', 'bg-sof-1' ];
 local cloudscaleZones = [ 'lpg', 'rma' ];
+local awsZones = [ 'us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'af-south-1', 'ap-east-1', 'ap-south-2', 'ap-southeast-3', 'ap-southeast-4', 'ap-south-1', 'ap-northeast-3', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'ca-central-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-south-1', 'eu-west-3', 'eu-south-2', 'eu-north-1', 'eu-central-2', 'il-central-1', 'me-south-1', 'me-central-1', 'sa-east-us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'af-south-1', 'ap-east-1', 'ap-south-2', 'ap-southeast-3', 'ap-southeast-4', 'ap-south-1', 'ap-northeast-3', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'ca-central-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-south-1', 'eu-west-3', 'eu-south-2', 'eu-north-1', 'eu-central-2', 'il-central-1', 'me-south-1', 'me-central-1', 'sa-east-11' ];
 
 local strExoscaleZones = std.join(', ', exoscaleZones);
 local strCloudscaleZones = std.join(', ', cloudscaleZones);
+local strAwsZones = std.join(', ', awsZones);
 
 local syncOptions = {
   metadata+: {
@@ -38,6 +40,20 @@ local vshnMetaDBaaSExoscale(dbname) = {
     labels+: {
       'metadata.appcat.vshn.io/offered': 'true',
       'metadata.appcat.vshn.io/serviceID': 'exoscale-' + std.asciiLower(dbname),
+    },
+  },
+};
+
+local vshnMetaDBaaSAws(dbname) = {
+  metadata+: {
+    annotations+: {
+      'metadata.appcat.vshn.io/displayname': 'AWS ' + dbname,
+      'metadata.appcat.vshn.io/description': dbname + ' DBaaS instances by AWS',
+      'metadata.appcat.vshn.io/zone': strAwsZones,
+    },
+    labels+: {
+      'metadata.appcat.vshn.io/offered': 'true',
+      'metadata.appcat.vshn.io/serviceID': 'aws-' + std.asciiLower(dbname),
     },
   },
 };
@@ -177,6 +193,8 @@ local argoCDAnnotations() = {
   SyncOptions: syncOptions,
   VshnMetaDBaaSExoscale(dbname):
     vshnMetaDBaaSExoscale(dbname),
+  VshnMetaDBaaSAws(dbname):
+    vshnMetaDBaaSAws(dbname),
   VshnMetaObjectStorage(provider):
     vshnMetaObjectStorage(provider),
   MergeArgs(args, additional):

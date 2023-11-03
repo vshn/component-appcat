@@ -1,0 +1,29 @@
+parameters:
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/projectsyn/component-crossplane/v2.3.0/lib/crossplane.libsonnet
+        output_path: vendor/lib/crossplane.libsonnet
+
+  crossplane:
+    namespace: syn-crossplane
+  appcat:
+    providers:
+      kubernetes:
+        enabled: true
+      aws:
+        enabled: true
+        aws_providers:
+          - rds
+        controllerConfig:
+          roleArn: arn:aws:iam::123456789012:role/role-name
+    services:
+      generic:
+        objectstorage:
+          enabled: false
+      vshn:
+        enabled: false
+      aws:
+        enabled: true
+        rds:
+          enabled: true

@@ -1,0 +1,290 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: kubernetes
+  name: kubernetes
+spec:
+  controllerConfigRef:
+    name: kubernetes
+  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v0.9.0
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: kubernetes
+  name: kubernetes
+spec:
+  serviceAccountName: provider-kubernetes
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    name: kubernetes
+  name: kubernetes
+spec:
+  credentials:
+    source: InjectedIdentity
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations: {}
+  labels:
+    name: provider-kubernetes
+  name: provider-kubernetes
+  namespace: syn-crossplane
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations: {}
+  labels:
+    name: crossplane-provider-provider-kubernetes-system-custom
+  name: crossplane:provider:provider-kubernetes:system:custom
+rules:
+  - apiGroups:
+      - kubernetes.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - helm.crossplane.io
+    resources:
+      - releases
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - ''
+      - coordination.k8s.io
+    resources:
+      - secrets
+      - configmaps
+      - events
+      - leases
+    verbs:
+      - '*'
+  - apiGroups:
+      - ''
+    resources:
+      - namespaces
+      - serviceaccounts
+      - secrets
+      - pods
+      - pods/log
+      - pods/portforward
+      - pods/status
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - watch
+      - patch
+      - update
+      - delete
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets/scale
+    verbs:
+      - update
+      - patch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+    verbs:
+      - get
+      - delete
+      - watch
+      - list
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resourceNames:
+      - appcat:services:read
+    resources:
+      - clusterroles
+    verbs:
+      - bind
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sginstanceprofiles
+      - sgclusters
+      - sgpgconfigs
+      - sgobjectstorages
+      - sgbackups
+      - sgdbops
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - networkpolicies
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - appcat.vshn.io
+    resources:
+      - xobjectbuckets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - cert-manager.io
+    resources:
+      - issuers
+      - certificates
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - clusterrolebindings
+      - roles
+      - rolebindings
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshnpostgresqls
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshnredis
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - prometheusrules
+      - podmonitors
+      - alertmanagerconfigs
+      - servicemonitors
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - k8up.io
+    resources:
+      - schedules
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - k8up.io
+    resources:
+      - snapshots
+    verbs:
+      - get
+  - apiGroups:
+      - minio.crossplane.io
+    resources:
+      - providerconfigs
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations: {}
+  labels:
+    name: crossplane-provider-provider-kubernetes-system-custom
+  name: crossplane:provider:provider-kubernetes:system:custom
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane:provider:provider-kubernetes:system:custom
+subjects:
+  - kind: ServiceAccount
+    name: provider-kubernetes
+    namespace: syn-crossplane

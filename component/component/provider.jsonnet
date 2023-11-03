@@ -109,6 +109,74 @@ local controllerConfigRef(config) =
       providerSecret(provider.credentials),
       kube.Namespace(provider.connectionSecretNamespace),
     ],
+  [if params.providers.aws.enabled then '10_provider_aws']:
+    local provider = params.providers.aws;
+
+    local sa = kube.ServiceAccount(provider.controllerConfig.serviceAccountName) {
+      metadata+: {
+        namespace: provider.namespace,
+        annotations: {
+          'eks.amazonaws.com/role-arn': provider.controllerConfig.roleArn,
+        },
+      },
+    };  
+    local controllerConf = [
+      crossplane.ControllerConfig('aws') {
+        metadata+: {
+          annotations: {
+            'eks.amazonaws.com/role-arn': provider.controllerConfig.roleArn,
+          },
+        },
+      }
+    ];
+    [
+      crossplane.Provider(aws_provider) {
+        spec+: {
+          package: provider.image.registry + "/" + provider.image.repository + "-" + aws_provider + ":" + provider.image.tag
+        } + controllerConfigRef(controllerConf)
+      } 
+      for aws_provider in provider.aws_providers
+    ] +
+    [
+      crossplane.ProviderConfig('aws') {
+        apiVersion: 'aws.upbound.io/v1beta1',
+        spec+: addCredentials(
+          provider.providerConfig,
+          {
+            source: 'Secret',
+            secretRef: {
+              name: provider.credentials.name,
+              namespace: provider.credentials.namespace,
+              key: 'creds'
+            }
+          }
+        ),
+      },
+      sa,
+    ]
+    +
+    controllerConf
+    +
+    [
+       kube.Secret(provider.credentials.name) {
+        metadata+: {
+          namespace: provider.credentials.namespace,
+        },
+        stringData: {
+          creds: std.manifestIni(
+            {
+              sections: {
+                default: {
+                  aws_access_key_id: provider.credentials.aws_access_key_id,
+                  aws_secret_access_key: provider.credentials.  aws_secret_access_key,
+                }
+              }
+            }
+          ),
+        },
+      },
+      kube.Namespace(provider.connectionSecretNamespace),
+    ],
   [if params.providers.kubernetes.enabled then '10_provider_kubernetes']:
     local provider = params.providers.kubernetes;
 

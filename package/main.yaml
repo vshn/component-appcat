@@ -3,11 +3,11 @@ applications:
   - crossplane
 parameters:
   pkg.appcat:
-    componentVersion: v2.4.3
+    componentVersion: aws_demo
     image:
       registry: ghcr.io
       repository: vshn/appcat
-      tag: v4.38.0
+      tag: aws_demo
   components:
     appcat:
       url: https://github.com/vshn/component-appcat.git

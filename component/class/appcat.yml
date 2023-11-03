@@ -64,6 +64,7 @@ parameters:
           - ${_base_directory}/component/vshn_minio.jsonnet
           - ${_base_directory}/component/vshn_services.jsonnet
           - ${_base_directory}/component/statefuleset-resize-controller.jsonnet
+          - ${_base_directory}/component/aws_rds.jsonnet
         input_type: jsonnet
         output_path: appcat/
 

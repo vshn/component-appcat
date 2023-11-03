@@ -28,6 +28,10 @@ parameters:
         registry: ghcr.io
         repository: vshn/provider-minio/provider
         tag: v0.1.0
+      provider-aws:
+        registry: xpkg.upbound.io
+        repository: upbound/provider-aws
+        tag: v0.43.0
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -39,7 +43,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.37.0
+        tag: aws_demo
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -195,6 +199,28 @@ parameters:
         spec:
           package: ${appcat:images:provider-exoscale:registry}/${appcat:images:provider-exoscale:repository}:${appcat:images:provider-exoscale:tag}
         controllerConfig: {}
+        providerConfig: {}
+
+      aws:
+        enabled: false
+        connectionSecretNamespace: syn-provider-aws-secrets
+        namespace: ${crossplane:namespace}
+        image:
+          registry: ${appcat:images:provider-aws:registry}
+          repository: ${appcat:images:provider-aws:repository}
+          tag: ${appcat:images:provider-aws:tag}
+        aws_providers:
+          - rds
+          - cloudwatch
+        credentials:
+          name: aws-api-token
+          namespace: ${crossplane:namespace}
+          aws_access_key_id: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-aws/aws_access_key}"
+          aws_secret_access_key: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-aws/aws_secret_key}"
+        controllerConfig:
+          serviceAccountName: provider-aws
+          roleArn: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-aws/role-arn}"
+
         providerConfig: {}
 
       kubernetes:
@@ -428,6 +454,16 @@ parameters:
                 memory: "1Gi"
                 disk: 50Gi
           instances: []
+
+      # Config for AWS composites
+      aws:
+        enabled: false
+        secretNamespace: ${crossplane:namespace}
+        providerSecretNamespace: ${appcat:providers:aws:connectionSecretNamespace}
+        rds:
+          enabled: true
+          secretNamespace: ${appcat:services:aws:secretNamespace}
+          providerSecretNamespace: ${appcat:services:aws:providerSecretNamespace}
 
       # Config for exoscale composites
       exoscale:

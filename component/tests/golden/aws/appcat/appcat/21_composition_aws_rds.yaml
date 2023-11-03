@@ -1,0 +1,298 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+    metadata.appcat.vshn.io/description: RDS DBaaS instances by AWS
+    metadata.appcat.vshn.io/displayname: AWS RDS
+    metadata.appcat.vshn.io/zone: us-east-2, us-east-1, us-west-1, us-west-2, af-south-1,
+      ap-east-1, ap-south-2, ap-southeast-3, ap-southeast-4, ap-south-1, ap-northeast-3,
+      ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, ca-central-1,
+      eu-central-1, eu-west-1, eu-west-2, eu-south-1, eu-west-3, eu-south-2, eu-north-1,
+      eu-central-2, il-central-1, me-south-1, me-central-1, sa-east-us-east-2, us-east-1,
+      us-west-1, us-west-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-3, ap-southeast-4,
+      ap-south-1, ap-northeast-3, ap-northeast-2, ap-southeast-1, ap-southeast-2,
+      ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-south-1,
+      eu-west-3, eu-south-2, eu-north-1, eu-central-2, il-central-1, me-south-1, me-central-1,
+      sa-east-11
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/serviceID: aws-rds
+    name: awsrds.aws.appcat.vshn.io
+  name: awsrds.aws.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: aws.appcat.vshn.io/v1
+    kind: XAwsRds
+  resources:
+    - base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: Instance
+        metadata: {}
+        spec:
+          forProvider:
+            Region: ''
+            allocatedStorage: 0
+            autoGeneratePassword: true
+            autoMinorVersionUpgrade: true
+            backupRetentionPeriod: 0
+            backupWindow: ''
+            enabledCloudwatchLogsExports: []
+            engine: ''
+            engineVersion: ''
+            instanceClass: ''
+            maintenanceWindow: ''
+            passwordSecretRef:
+              key: password
+              name: ''
+              namespace: syn-provider-aws-secrets
+            publiclyAccessible: false
+            skipFinalSnapshot: true
+            storageEncrypted: true
+            storageType: ''
+            username: ''
+          providerConfigRef:
+            name: aws
+          writeConnectionSecretToRef:
+            name: ''
+            namespace: syn-provider-aws-secrets
+      connectionDetails:
+        - fromConnectionSecretKey: address
+          name: address
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: endpoint
+          name: endpoint
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: host
+          name: host
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: port
+          name: port
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: username
+          name: username
+          type: FromConnectionSecretKey
+        - fromConnectionSecretKey: password
+          name: password
+          type: FromConnectionSecretKey
+      patches:
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.passwordSecretRef.name
+          transforms:
+            - string:
+                fmt: '%s-gen-password'
+                type: Format
+              type: string
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.dbName
+          toFieldPath: spec.forProvider.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.engine
+          toFieldPath: spec.forProvider.engine
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.engineVersion
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.region
+          toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.adminUser
+          toFieldPath: spec.forProvider.username
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.plan
+          toFieldPath: spec.forProvider.instanceClass
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.storageSize
+          toFieldPath: spec.forProvider.allocatedStorage
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.size.storageType
+          toFieldPath: spec.forProvider.storageType
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.maintenance.maintenanceWindow
+          toFieldPath: spec.forProvider.maintenanceWindow
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.backupWindow
+          toFieldPath: spec.forProvider.backupWindow
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.backup.retentionPeriod
+          toFieldPath: spec.forProvider.backupRetentionPeriod
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.optionGroupName
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.parameterGroupName
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.engine
+          toFieldPath: spec.forProvider.enabledCloudwatchLogsExports
+          transforms:
+            - map:
+                mariadb:
+                  - audit
+                  - error
+                  - general
+                  - slowquery
+                mssql:
+                  - agent
+                  - error
+                mysql:
+                  - audit
+                  - error
+                  - general
+                  - slowquery
+                oracle:
+                  - alert
+                  - audit
+                  - listener
+                  - trace
+                postgresql:
+                  - postgresql
+                  - upgrade
+              type: map
+          type: FromCompositeFieldPath
+    - base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: OptionGroup
+        metadata: {}
+        spec:
+          forProvider:
+            engineName: ''
+            majorEngineVersion: ''
+            option:
+              - optionName: MARIADB_AUDIT_PLUGIN
+            optionGroupDescription: Appcat Managed Option Group
+            region: ''
+          providerConfigRef:
+            name: aws
+      patches:
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.engine
+          toFieldPath: spec.forProvider.engineName
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.majorEngineVersion
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.region
+          toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.rdsOptions
+          toFieldPath: spec.forProvider.option
+          type: FromCompositeFieldPath
+    - base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: ParameterGroup
+        metadata: {}
+        spec:
+          forProvider:
+            description: Appcat Managed Parameter Group
+            family: ''
+            parameter:
+              - applyMethod: immediate
+                name: general_log
+                value: '1'
+              - applyMethod: immediate
+                name: slow_query_log
+                value: '1'
+              - applyMethod: immediate
+                name: log_output
+                value: FILE
+            region: ''
+          providerConfigRef:
+            name: aws
+      patches:
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          type: FromCompositeFieldPath
+        - combine:
+            strategy: string
+            string:
+              fmt: '%s%s'
+            variables:
+              - fromFieldPath: spec.parameters.service.engine
+              - fromFieldPath: spec.parameters.service.majorVersion
+          toFieldPath: spec.forProvider.family
+          type: CombineFromComposite
+        - fromFieldPath: spec.parameters.service.rdsOptions
+          toFieldPath: spec.forProvider.parameter
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.region
+          toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+    - base:
+        apiVersion: cloudwatch.aws.upbound.io/v1beta1
+        kind: MetricAlarm
+        metadata: {}
+        spec:
+          forProvider:
+            alarmDescription: 'Appcat Managed Metric: RDS CPU Utilization'
+            comparisonOperator: GreaterThanOrEqualToThreshold
+            dimensions: {}
+            evaluationPeriods: 1
+            insufficientDataActions: []
+            metricName: CPUUtilization
+            namespace: AWS/RDS
+            period: 60
+            region: ''
+            statistic: Average
+            threshold: 80
+          providerConfigRef:
+            name: aws
+      patches:
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          transforms:
+            - string:
+                fmt: '%s-cpu'
+                type: Format
+              type: string
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.region
+          toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.dimensions.DBInstanceIdentifier
+          type: FromCompositeFieldPath
+    - base:
+        apiVersion: cloudwatch.aws.upbound.io/v1beta1
+        kind: MetricAlarm
+        metadata: {}
+        spec:
+          forProvider:
+            alarmDescription: 'Appcat Managed Metric: RDS Disk Utilization'
+            comparisonOperator: LessThanOrEqualToThreshold
+            dimensions: {}
+            evaluationPeriods: 1
+            insufficientDataActions: []
+            metricName: FreeStorageSpace
+            namespace: AWS/RDS
+            period: 60
+            region: ''
+            statistic: Average
+            threshold: 500000000
+          providerConfigRef:
+            name: aws
+      patches:
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: metadata.name
+          transforms:
+            - string:
+                fmt: '%s-disk'
+                type: Format
+              type: string
+          type: FromCompositeFieldPath
+        - fromFieldPath: spec.parameters.service.region
+          toFieldPath: spec.forProvider.region
+          type: FromCompositeFieldPath
+        - fromFieldPath: metadata.labels[crossplane.io/composite]
+          toFieldPath: spec.forProvider.dimensions.DBInstanceIdentifier
+          type: FromCompositeFieldPath
+  writeConnectionSecretsToNamespace: syn-crossplane
