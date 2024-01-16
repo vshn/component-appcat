@@ -42,7 +42,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.49.0
+        tag: upgrade/stackgres_version
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -457,7 +457,7 @@ parameters:
                 memory: "30Mi"
               limits:
                 cpu: "32m"
-                memory: "2Gi"
+                memory: "64Mi"
             runDbops:
               requests:
                 cpu: "100m"

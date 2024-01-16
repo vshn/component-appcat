@@ -31,7 +31,7 @@ spec:
           chartRepository: https://charts.bitnami.com/bitnami
           chartVersion: 10.1.3
           controlNamespace: syn-appcat-control
-          imageTag: v4.49.0
+          imageTag: upgrade_stackgres_version
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           plans: '{"standard-1": {"size": {"cpu": "250m", "disk": "16Gi", "enabled":

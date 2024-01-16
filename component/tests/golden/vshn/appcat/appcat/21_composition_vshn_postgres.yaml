@@ -150,7 +150,7 @@ spec:
                           memory: 500Mi
                         cluster-controller:
                           cpu: 32m
-                          memory: 2Gi
+                          memory: 64Mi
                         dbops.run-dbops:
                           cpu: 250m
                           memory: 256Mi
@@ -1016,11 +1016,11 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
           externalDatabaseConnectionsEnabled: 'true'
-          imageTag: v4.49.0
+          imageTag: upgrade_stackgres_version
           quotasEnabled: 'false'
           serviceName: postgresql
           sgNamespace: stackgres
-          sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "2Gi"},
+          sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "64Mi"},
             "requests": {"cpu": "32m", "memory": "30Mi"}}, "createBackup": {"limits":
             {"cpu": "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory":
             "64Mi"}}, "envoy": {"limits": {"cpu": "64m", "memory": "64Mi"}, "requests":

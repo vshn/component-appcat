@@ -30,7 +30,7 @@ spec:
           value: "false"
         - name: APPCAT_SLI_TRACK_OC_MAINTENANCE_STATUS
           value: "false"
-        image: ghcr.io/vshn/appcat:v4.49.0
+        image: ghcr.io/vshn/appcat:upgrade_stackgres_version
         livenessProbe:
           httpGet:
             path: /healthz
