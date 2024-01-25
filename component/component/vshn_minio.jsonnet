@@ -25,6 +25,39 @@ local connectionSecretKeys = [
 
 local promRuleMinioSLA = prom.PromRuleSLA(params.services.vshn.minio.sla, 'VSHNMinio');
 
+
+local prometheusRule = prom.GeneratePrometheusNonSLORules(
+  'minio',
+  'minio',
+  [
+    {
+      name: 'minio-diskOffline',
+      rules: [
+        {
+          alert: 'minioDiskOfflineCritical',
+          annotations: {
+            description: "Minio server reports it's disk is down - {{ $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace }}.",
+            summary: 'Minio disk is offline for at least 30 seconds.',
+          },
+
+          expr: 'minio_cluster_drive_offline_total != 0',
+          'for': '30s',
+          labels: {
+            severity: 'critical',
+            syn_team: 'schedar',
+          },
+        },
+      ],
+    },
+  ]
+) + {
+  patches: [
+    comp.FromCompositeFieldPathWithTransformSuffix('metadata.labels[crossplane.io/composite]', 'metadata.name', 'prometheusrule'),
+    comp.FromCompositeFieldPathWithTransformPrefix('metadata.labels[crossplane.io/composite]', 'spec.forProvider.manifest.metadata.namespace', 'vshn-minio'),
+  ],
+};
+
+
 local minioPlans = common.FilterDisabledParams(minioParams.plans);
 
 local xrd = xrds.XRDFromCRD(
@@ -70,6 +103,15 @@ local composition =
               } + if minioParams.proxyFunction then {
                 proxyEndpoint: minioParams.grpcEndpoint,
               } else {},
+            },
+          },
+          {
+            input: {
+              apiVersion: 'pt.fn.crossplane.io/v1beta1',
+              kind: 'Resources',
+              resources: [
+                prometheusRule,
+              ],
             },
           },
         ],

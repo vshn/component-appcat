@@ -42,4 +42,119 @@ spec:
             name: xfn-config
           name: xfn-config
       step: minio-func
+    - input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - base:
+              apiVersion: kubernetes.crossplane.io/v1alpha1
+              kind: Object
+              metadata:
+                name: prometheusrule
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: monitoring.coreos.com/v1
+                    kind: PrometheusRule
+                    metadata:
+                      name: minio-rules
+                    spec:
+                      groups:
+                        - name: minio-storage
+                          rules:
+                            - alert: minioPersistentVolumeFillingUp
+                              annotations:
+                                description: The volume claimed by the instance {{
+                                  $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace
+                                  }} is only {{ $value | humanizePercentage }} free.
+                                runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup
+                                summary: PersistentVolume is filling up.
+                              expr: label_replace( bottomk(1, (kubelet_volume_stats_available_bytes{job="kubelet",
+                                metrics_path="/metrics"} / kubelet_volume_stats_capacity_bytes{job="kubelet",
+                                metrics_path="/metrics"}) < 0.03 and kubelet_volume_stats_used_bytes{job="kubelet",
+                                metrics_path="/metrics"} > 0 unless on(namespace,
+                                persistentvolumeclaim) kube_persistentvolumeclaim_access_mode{
+                                access_mode="ReadOnlyMany"} == 1 unless on(namespace,
+                                persistentvolumeclaim) kube_persistentvolumeclaim_labels{label_excluded_from_alerts="true"}
+                                == 1) * on(namespace) group_left(label_appcat_vshn_io_claim_namespace)
+                                kube_namespace_labels, "name", "$1", "namespace",
+                                "vshn-minio-(.+)-.+")
+                              for: 1m
+                              labels:
+                                severity: critical
+                                syn_team: schedar
+                            - alert: minioPersistentVolumeFillingUp
+                              annotations:
+                                description: Based on recent sampling, the volume
+                                  claimed by the instance {{ $labels.name }} in namespace
+                                  {{ $labels.label_appcat_vshn_io_claim_namespace
+                                  }} is expected to fill up within four days. Currently
+                                  {{ $value | humanizePercentage }} is available.
+                                runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup
+                                summary: PersistentVolume is filling up.
+                              expr: label_replace( bottomk(1, (kubelet_volume_stats_available_bytes{job="kubelet",
+                                metrics_path="/metrics"} / kubelet_volume_stats_capacity_bytes{job="kubelet",
+                                metrics_path="/metrics"}) < 0.15 and kubelet_volume_stats_used_bytes{job="kubelet",
+                                metrics_path="/metrics"} > 0 and predict_linear(kubelet_volume_stats_available_bytes{job="kubelet",
+                                metrics_path="/metrics"}[6h], 4 * 24 * 3600) < 0  unless
+                                on(namespace, persistentvolumeclaim) kube_persistentvolumeclaim_access_mode{
+                                access_mode="ReadOnlyMany"} == 1 unless on(namespace,
+                                persistentvolumeclaim) kube_persistentvolumeclaim_labels{label_excluded_from_alerts="true"}
+                                == 1) * on(namespace) group_left(label_appcat_vshn_io_claim_namespace)
+                                kube_namespace_labels, "name", "$1", "namespace",
+                                "vshn-minio-(.+)-.+")
+                              for: 1h
+                              labels:
+                                severity: warning
+                        - name: minio-memory
+                          rules:
+                            - alert: minioMemoryCritical
+                              annotations:
+                                description: |-
+                                  The memory claimed by the instance {{ $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace }} has been over 85% for 2 hours.
+                                    Please reducde the load of this instance, or increase the memory.
+                                runbook_url: https://hub.syn.tools/appcat/runbooks/vshn-generic.html#MemoryCritical
+                                summary: Memory usage critical
+                              expr: label_replace( topk(1, (max(container_memory_working_set_bytes{container="minio"})
+                                without (name, id)  / on(container,pod,namespace)  kube_pod_container_resource_limits{resource="memory"}
+                                * 100) > 85) * on(namespace) group_left(label_appcat_vshn_io_claim_namespace)
+                                kube_namespace_labels, "name", "$1", "namespace",
+                                "vshn-minio-(.+)-.+")
+                              for: 120m
+                              labels:
+                                severity: critical
+                                syn_team: schedar
+                        - name: minio-diskOffline
+                          rules:
+                            - alert: minioDiskOfflineCritical
+                              annotations:
+                                description: Minio server reports it's disk is down
+                                  - {{ $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace
+                                  }}.
+                                summary: Minio disk is offline for at least 30 seconds.
+                              expr: minio_cluster_drive_offline_total != 0
+                              for: 30s
+                              labels:
+                                severity: critical
+                                syn_team: schedar
+                providerConfigRef:
+                  name: kubernetes
+            name: prometheusrule
+            patches:
+              - fromFieldPath: metadata.labels[crossplane.io/composite]
+                toFieldPath: metadata.name
+                transforms:
+                  - string:
+                      fmt: '%s-prometheusrule'
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.labels[crossplane.io/composite]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+                transforms:
+                  - string:
+                      fmt: vshn-minio-%s
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
   writeConnectionSecretsToNamespace: syn-crossplane
