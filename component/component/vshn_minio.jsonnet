@@ -36,7 +36,8 @@ local prometheusRule = prom.GeneratePrometheusNonSLORules(
         {
           alert: 'minioDiskOfflineCritical',
           annotations: {
-            description: "Minio server reports it's disk is down - {{ $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace }}.",
+            description: "Minio server reports it's disk is down - {{ $labels.name }} in namespace {{ $labels.label_appcat_vshn_io_claim_namespace }}.
+            ",
             summary: 'Minio disk is offline for at least 30 seconds.',
           },
 
@@ -106,6 +107,10 @@ local composition =
             },
           },
           {
+            step: 'patch-and-transform',
+            functionRef: {
+              name: 'function-patch-and-transform',
+            },
             input: {
               apiVersion: 'pt.fn.crossplane.io/v1beta1',
               kind: 'Resources',

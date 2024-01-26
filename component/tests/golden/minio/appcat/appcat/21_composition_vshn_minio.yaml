@@ -42,7 +42,9 @@ spec:
             name: xfn-config
           name: xfn-config
       step: minio-func
-    - input:
+    - functionRef:
+        name: function-patch-and-transform
+      input:
         apiVersion: pt.fn.crossplane.io/v1beta1
         kind: Resources
         resources:
@@ -157,4 +159,5 @@ spec:
                       type: Format
                     type: string
                 type: FromCompositeFieldPath
+      step: patch-and-transform
   writeConnectionSecretsToNamespace: syn-crossplane
