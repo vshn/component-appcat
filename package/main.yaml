@@ -7,7 +7,7 @@ parameters:
     image:
       registry: ghcr.io
       repository: vshn/appcat
-      tag: v4.61.0
+      tag: keycloak/staging_le
   components:
     appcat:
       url: https://github.com/vshn/component-appcat.git

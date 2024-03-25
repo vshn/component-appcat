@@ -33,6 +33,7 @@ spec:
           controlNamespace: syn-appcat-control
           imageTag: v4.61.0
           isOpenshift: 'false'
+          issuer_name: letsencrypt-staging
           maintenanceSA: helm-based-service-maintenance
           plans: '{"standard-2": {"size": {"cpu": "500m", "disk": "16Gi", "enabled":
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",

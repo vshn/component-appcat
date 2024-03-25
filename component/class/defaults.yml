@@ -45,7 +45,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.61.0
+        tag: keycloak/staging_le
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -696,6 +696,7 @@ parameters:
           additionalInputs:
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
+            issuer_name: letsencrypt-production
           openshiftTemplate:
             serviceName: keycloakbyvshn
             description: "Keycloak is an open source identity and access management solution."
