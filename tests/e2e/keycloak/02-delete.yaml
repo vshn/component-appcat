@@ -7,3 +7,7 @@ delete:
   - apiVersion: batch/v1
     kind: Job
     name: connect-keycloak-e2e
+  - apiVersion: v1
+    kind: Pod
+    labels:
+      e2e-test: keycloak-e2e
