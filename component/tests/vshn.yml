@@ -21,7 +21,7 @@ parameters:
   appcat:
 
     grpcEndpoint: host.docker.internal:9443
-    proxyFunction: false
+    proxyFunction: true
 
     quotasEnabled: false
     appuioManaged: false
@@ -80,10 +80,11 @@ parameters:
         externalDatabaseConnectionsEnabled: true
         emailAlerting:
           enabled: true
-          smtpPassword: "whatever"
+          smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
         mariadb:
           enabled: true
         keycloak:
+          emailAlerting: true
           enabled: true
           additionalInputs:
             # https://vault-prod.syn.vshn.net/ui/vault/secrets/clusters%2Fkv/kv/__shared__%2F__shared__%2Fappcat/details?version=1

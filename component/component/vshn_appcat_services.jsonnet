@@ -95,7 +95,7 @@ local vshn_appcat_service(name, serviceParams) =
                         ownerKind: xrd.spec.names.kind,
                         ownerGroup: xrd.spec.group,
                         ownerVersion: xrd.spec.versions[0].name,
-                      }
+                      } + common.EmailAlerting(params.services.vshn.emailAlerting)
                       + std.get(serviceParams, 'additionalInputs', default={}, inc_hidden=true)
                       + if serviceParams.proxyFunction then {
                         proxyEndpoint: serviceParams.grpcEndpoint,

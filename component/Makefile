@@ -51,7 +51,7 @@ docs-serve: ## Preview the documentation
 
 .PHONY: ensure_git_hook
 ensure_git_hook: ## Ensure the git hook is installed
-	cp ../.githooks/pre-commit ../.git/hooks/pre-commit
+	cp -f ../.githooks/pre-commit ../.git/hooks/pre-commit
 
 .PHONY: test
 test: commodore_args += -f tests/$(instance).yml

@@ -21,7 +21,8 @@ defaults_file = os.path.join(current_dir, '../../component/class/defaults.yml')
 
 keys_to_check_yaml = [
     'parameters.appcat.services.vshn.keycloak.additionalInputs.registry_password',
-    'parameters.appcat.services.vshn.keycloak.additionalInputs.registry_username'
+    'parameters.appcat.services.vshn.keycloak.additionalInputs.registry_username',
+    'parameters.appcat.services.vshn.emailAlerting.smtpPassword',
     ]
 
 with open(tests_vshn_file, 'r') as f:

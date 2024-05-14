@@ -46,7 +46,7 @@ parameters:
         externalDatabaseConnectionsEnabled: true
         emailAlerting:
           enabled: true
-          smtpPassword: "whatever"
+          smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
         postgres:
           enabled: false
         redis:

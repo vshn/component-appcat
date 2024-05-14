@@ -45,7 +45,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.71.2
+        tag: keycloak_mariadb_alerting
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -77,7 +77,7 @@ parameters:
     appuioManaged: true
     quotasEnabled: false
     grpcEndpoint: host.docker.internal:9443
-    proxyFunction: false
+    proxyFunction: true
 
     billing:
       namespace: ${appcat:namespace}

@@ -31,7 +31,13 @@ spec:
           chartRepository: https://charts.bitnami.com/bitnami
           chartVersion: 11.6.2
           controlNamespace: syn-appcat-control
-          imageTag: v4.71.2
+          emailAlertingEnabled: 'true'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: myuser@example.com
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: myuser@example.com
+          imageTag: keycloak_mariadb_alerting
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
@@ -44,6 +50,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: host.docker.internal:9443
           quotasEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
           serviceName: mariadb
