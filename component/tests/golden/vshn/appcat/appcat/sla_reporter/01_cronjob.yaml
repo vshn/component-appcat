@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:keycloak_mariadb_alerting
+              image: ghcr.io/vshn/appcat:providersUpdates
               name: sla-reporter
               resources:
                 limits:

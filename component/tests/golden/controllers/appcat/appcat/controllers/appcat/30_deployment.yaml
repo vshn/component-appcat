@@ -23,7 +23,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:keycloak_mariadb_alerting
+          image: ghcr.io/vshn/appcat:providersUpdates
           livenessProbe:
             httpGet:
               path: /healthz

@@ -28,7 +28,7 @@ spec:
         data:
           controlNamespace: syn-appcat-control
           defaultPlan: standard-1
-          imageTag: keycloak_mariadb_alerting
+          imageTag: providersUpdates
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
@@ -39,7 +39,6 @@ spec:
           plans: '{"standard-1": {"size": {"cpu": "1", "disk": "50Gi", "enabled":
             true, "memory": "1Gi"}}}'
           providerEnabled: 'false'
-          proxyEndpoint: host.docker.internal:9443
           serviceName: minio
           sliNamespace: appcat-slos
         kind: ConfigMap

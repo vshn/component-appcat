@@ -36,7 +36,7 @@ spec:
           value: "true"
         - name: APPCAT_SLI_VSHNMARIADB
           value: "true"
-        image: ghcr.io/vshn/appcat:keycloak_mariadb_alerting
+        image: ghcr.io/vshn/appcat:providersUpdates
         livenessProbe:
           httpGet:
             path: /healthz
