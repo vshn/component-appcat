@@ -13,6 +13,9 @@ parameters:
       keycloak:
         source: https://codecentric.github.io/helm-charts
         version: 2.3.0
+      forgejo:
+        source: oci://code.forgejo.org/forgejo-helm
+        version: 7.0.0
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io
@@ -49,7 +52,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.75.0
+        tag: add/forgejo
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -344,6 +347,8 @@ parameters:
         MariaDB:
           uptime: ${appcat:slos:uptimeDefaults}
         Keycloak:
+          uptime: ${appcat:slos:uptimeDefaults}
+        Forgejo:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
@@ -728,6 +733,58 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
+          imageRegistry: ""
+          bucket_region: "lpg"
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-2
+          sla: 99.25
+          plans:
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 16Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 16Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 16Gi
+        forgejo:
+          billing: true
+          serviceName: VSHNForgejo
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - FORGEJO_HOST
+            - FORGEJO_PASSWORD
+            - FORGEJO_URL
+            - FORGEJO_USERNAME
+            - ca.crt
+          mode: standalone
+          offered: true
+          enabled: false
+          restoreSA: forgejoserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs: {}
+          openshiftTemplate:
+            serviceName: forgejovshn
+            description: "Forgejo"
+            message: 'Forgejo'
+            url: https://vs.hn/vshn-keycloak
+            tags: "idp,forgejo"
+            icon: "icon-keycloak"
+            defaultVersion: "22"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:forgejo:version}
           imageRegistry: ""
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}

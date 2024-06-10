@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations: {}
+  labels:
+    name: vshn-vshnforgejo-sla
+  name: vshn-vshnforgejo-sla
+  namespace: appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnforgejo-sla-target
+      rules:
+        - expr: vector(99.25)
+          labels:
+            service: VSHNForgejo
+          record: sla:objective:ratio

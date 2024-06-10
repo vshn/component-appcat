@@ -39,7 +39,11 @@ metadata:
   name: kubernetes
 spec:
   credentials:
-    source: InjectedIdentity
+    secretRef:
+      key: kubeconfig
+      name: worker-cluster
+      namespace: syn-appcat
+    source: Secret
 ---
 apiVersion: v1
 kind: ServiceAccount

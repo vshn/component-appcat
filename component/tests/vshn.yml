@@ -22,7 +22,7 @@ parameters:
   appcat:
 
     grpcEndpoint: host.docker.internal:9443
-    proxyFunction: false
+    proxyFunction: true
 
     quotasEnabled: false
     appuioManaged: false
@@ -30,8 +30,8 @@ parameters:
       salesOrder: ST10120
       vshn:
         enableCronjobs: false
-        meteringRules: true
-      enableMockOrgInfo: true
+        meteringRules: false
+      enableMockOrgInfo: false
       instanceUOM: uom_uom_45_1e112771
       network_policies:
         target_namespaces:
@@ -41,8 +41,8 @@ parameters:
       cloudZone: ${global:appuio_metered_billing_zone_label_map:${cluster:name}}
 
     slos:
-      enabled: true
-      alertsEnabled: true
+      enabled: false
+      alertsEnabled: false
       sli_exporter:
         enableMaintenceObserver: false
       sla_reporter:
@@ -50,26 +50,40 @@ parameters:
         slo_mimir_svc: kube-prometheus-kube-prome-prometheus
         slo_mimir_namespace: prometheus-system
     controller:
-      enabled: true
+      enabled: false
       postgres:
-        enabled: true
+        enabled: false
     providers:
       kubernetes:
         enabled: true
+        providerConfig:
+          credentials:
+            source: Secret
+            secretRef:
+              namespace: syn-appcat
+              name: worker-cluster
+              key: kubeconfig
       helm:
         enabled: true
+        providerConfig:
+          credentials:
+            source: Secret
+            secretRef:
+              namespace: syn-appcat
+              name: worker-cluster
+              key: kubeconfig
       minio:
         enabled: true
         additionalProviderConfigs:
           - name: minio
-            minioURL: http://minio-server.minio.svc:9000/
+            minioURL: http://minio.192.168.228.1.nip.io:8088/
             credentials:
               apiSecretRef:
                 name: minio-secret
                 namespace: syn-crossplane
 
     apiserver:
-      enabled: true
+      enabled: false
       env:
         APPCAT_HANDLER_ENABLED: "true"
         VSHN_POSTGRES_BACKUP_HANDLER_ENABLED: "true"
@@ -83,6 +97,8 @@ parameters:
           enabled: true
           smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
         mariadb:
+          enabled: true
+        forgejo:
           enabled: true
         keycloak:
           enabled: true

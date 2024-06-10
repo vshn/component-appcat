@@ -495,7 +495,7 @@ local xobjectBucket = {
         region: pgParams.bucket_region,
       },
       writeConnectionSecretToRef: {
-        namespace: '',
+        namespace: params.crossplaneNamespace,
         name: '',
       },
     },
@@ -505,7 +505,7 @@ local xobjectBucket = {
     comp.FromCompositeFieldPath('metadata.name', 'metadata.name'),
     comp.FromCompositeFieldPath('metadata.name', 'spec.parameters.bucketName'),
 
-    comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.writeConnectionSecretToRef.namespace', 'vshn-postgresql'),
+    // comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.writeConnectionSecretToRef.namespace', 'vshn-postgresql'),
     comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.writeConnectionSecretToRef.name', 'pgbucket'),
   ],
 };
