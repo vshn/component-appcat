@@ -23,7 +23,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.77.2
+          image: ghcr.io/vshn/appcat:feature_nextcloud
           livenessProbe:
             httpGet:
               path: /healthz

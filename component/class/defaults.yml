@@ -13,6 +13,9 @@ parameters:
       keycloak:
         source: https://codecentric.github.io/helm-charts
         version: 2.3.0
+      nextcloud:
+        source: https://nextcloud.github.io/helm/
+        version: 5.0.0
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io
@@ -49,7 +52,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.77.2
+        tag: feature/nextcloud
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
@@ -344,6 +347,8 @@ parameters:
         MariaDB:
           uptime: ${appcat:slos:uptimeDefaults}
         Keycloak:
+          uptime: ${appcat:slos:uptimeDefaults}
+        Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
@@ -728,6 +733,60 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
+          imageRegistry: ""
+          bucket_region: "lpg"
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-2
+          sla: 99.25
+          plans:
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 16Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 16Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 16Gi
+        nextcloud:
+          billing: true
+          serviceName: VSHNNextcloud
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - NEXTCLOUD_HOST
+            - NEXTCLOUD_PASSWORD
+            - NEXTCLOUD_URL
+            - NEXTCLOUD_USERNAME
+            - ca.crt
+          mode: standalone
+          offered: true
+          enabled: false
+          restoreSA: nextcloudserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs:
+            ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-production
+          openshiftTemplate:
+            serviceName: nextcloudbyvshn
+            description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."
+            message: 'Your Nextcloud by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-nextcloud
+            tags: "idp,nextcloud"
+            icon: "icon-nextcloud"
+            defaultVersion: "22"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:nextcloud:version}
           imageRegistry: ""
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}

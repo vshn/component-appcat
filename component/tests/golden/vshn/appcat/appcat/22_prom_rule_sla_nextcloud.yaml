@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations: {}
+  labels:
+    name: vshn-vshnnextcloud-sla
+  name: vshn-vshnnextcloud-sla
+  namespace: appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnnextcloud-sla-target
+      rules:
+        - expr: vector(99.25)
+          labels:
+            service: VSHNNextcloud
+          record: sla:objective:ratio

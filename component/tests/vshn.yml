@@ -21,8 +21,8 @@ parameters:
 
   appcat:
 
-    grpcEndpoint: host.docker.internal:9443
-    proxyFunction: false
+    grpcEndpoint: 172.18.0.1:9443
+    proxyFunction: true
 
     quotasEnabled: false
     appuioManaged: false
@@ -93,6 +93,14 @@ parameters:
             ingress_annotations: |
               nginx.ingress.kubernetes.io/backend-protocol: HTTPS
               cert-manager.io/cluster-issuer: letsencrypt-staging
+        nextcloud:
+          enabled: true
+          additionalInputs:
+            ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-staging
+              nginx.ingress.kubernetes.io/enable-cors: "true"
+              nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
+
         postgres:
           sgNamespace: stackgres
           bucket_region: 'us-east-1'
