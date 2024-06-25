@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels: null
+  name: postgresql-podmonitor
+  namespace: syn-appcat
+spec:
+  namespaceSelector:
+    matchNames:
+      - syn-appcat
+  podMetricsEndpoints:
+    - metricRelabelings:
+        - action: keep
+          regex: (billing_cloud_collector_http_requests_odoo_failed_total|billing_cloud_collector_http_requests_odoo_succeeded_total|billing_cloud_collector_http_requests_provider_failed_total|billing_cloud_collector_http_requests_provider_succeeded_total)
+          sourceLabels:
+            - __name__
+      port: 2112
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: billing-collector-cloudservices
+      app.kubernetes.io/managed-by: commodore
+      app.kubernetes.io/name: billing-collector-cloudservices

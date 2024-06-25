@@ -43,7 +43,7 @@ spec:
                 name: exoscale-dbaas-env
             - secretRef:
                 name: credentials-exoscale-dbaas
-          image: ghcr.io/vshn/billing-collector-cloudservices:v3.2.0
+          image: ghcr.io/vshn/billing-collector-cloudservices:addMetrics
           imagePullPolicy: IfNotPresent
           name: exporter
           ports: []

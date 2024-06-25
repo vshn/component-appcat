@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels: {}
+  name: cloudservices-billing
+  namespace: syn-appcat
+spec:
+  groups:
+    - name: odoo_http_failures
+      rules:
+        - alert: HighOdooHTTPFailureRate
+          annotations:
+            description: The rate of failed Odoo HTTP requests (`billing_cloud_collector_http_requests_odoo_failed_total`)
+              has increased significantly in the last minute.
+            summary: High rate of Odoo HTTP failures detected
+          expr: |
+            increase(billing_cloud_collector_http_requests_odoo_failed_total[1m]) > 0
+          for: 1m
+          labels:
+            severity: critical
+            syn_team: schedar
+        - alert: HighOdooHTTPFailureRate
+          annotations:
+            description: The rate of failed Odoo HTTP requests (`billing_cloud_collector_http_requests_provider_failed_total`)
+              has increased significantly in the last minute.
+            summary: High rate of Odoo HTTP failures detected
+          expr: |
+            increase(billing_cloud_collector_http_requests_provider_failed_total[1m]) > 0
+          for: 1m
+          labels:
+            severity: critical
+            syn_team: schedar
