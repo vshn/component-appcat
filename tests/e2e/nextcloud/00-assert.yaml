@@ -1,0 +1,35 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 600
+---
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNNextcloud
+metadata:
+  name: nextcloud-e2e
+  finalizers:
+  - finalizer.apiextensions.crossplane.io
+spec:
+  compositeDeletePolicy: Background
+  compositionRef:
+    name: vshnnextcloud.vshn.appcat.vshn.io
+  compositionUpdatePolicy: Automatic
+  parameters:
+    backup: {}
+    service:
+      postgreSQLParameters:
+        instances: 1
+      relativePath: /
+      serviceLevel: besteffort
+      version: "23"
+      #version: 23.0.5-202402021353-44-af6cea11
+    size:
+      plan: standard-2
+    tls:
+      authClients: true
+      enabled: true
+  writeConnectionSecretToRef:
+    name: nextcloud-e2e
+status:
+  conditions:
+    - status: "True"
+    - status: "True"

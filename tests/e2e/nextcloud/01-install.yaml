@@ -1,0 +1,13 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNNextcloud
+metadata:
+  name: nextcloud-e2e
+spec:
+  parameters:
+    service:
+      fqdn: nextcloud-e2e.example.com
+      postgreSQLParameters:
+        backup:
+          deletionProtection: false
+  writeConnectionSecretToRef:
+    name: nextcloud-e2e

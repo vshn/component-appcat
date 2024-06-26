@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: connect-nextcloud-e2e
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        e2e-test: nextcloud-e2e
+    spec:
+      restartPolicy: Never
+      activeDeadlineSeconds: 180
+      volumes:
+        - name: certs
+          secret:
+            secretName: nextcloud-e2e
+      containers:
+        - name: connect
+          image: curlimages/curl:8.6.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - |
+              echo "Testing health..."
+              while ! curl --cacert /certs/ca.crt -ivv https://$KEYCLOAK_HOST:8443/health
+              do
+                sleep 1
+                echo "not ready"
+              done
+          envFrom:
+            - secretRef:
+                name: nextcloud-e2e
+          volumeMounts:
+            - name: certs
+              mountPath: /certs

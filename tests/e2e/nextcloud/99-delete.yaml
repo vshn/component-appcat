@@ -1,0 +1,13 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+delete:
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNNextcloud
+    name: nextcloud-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: connect-nextcloud-e2e
+  - apiVersion: v1
+    kind: Pod
+    labels:
+      e2e-test: nextcloud-e2e
