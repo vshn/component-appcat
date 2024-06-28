@@ -53,7 +53,7 @@ parameters:
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver
-        tag: v0.1.7
+        tag: v3.1.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
