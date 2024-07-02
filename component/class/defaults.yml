@@ -776,6 +776,8 @@ parameters:
           additionalInputs:
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+              haproxy.router.openshift.io/timeout: 120s
+              haproxy.router.openshift.io/hsts_header: max-age=31536000;preload
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."
