@@ -1,0 +1,61 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '10'
+    metadata.appcat.vshn.io/description: Minio instances by VSHN
+    metadata.appcat.vshn.io/displayname: Minio by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-minio
+    metadata.appcat.vshn.io/flavor: distributed
+    metadata.appcat.vshn.io/plans: '{"standard-1":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"1Gi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/minio.html
+    metadata.appcat.vshn.io/zone: rma1
+  labels:
+    metadata.appcat.vshn.io/offered: 'false'
+    metadata.appcat.vshn.io/serviceID: vshn-minio
+    name: vshnminio.vshn.appcat.vshn.io
+  name: vshnminio.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNMinio
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat
+      input:
+        apiVersion: v1
+        data:
+          bucketRegion: ''
+          chartRepository: https://charts.min.io
+          chartVersion: 5.0.13
+          controlNamespace: syn-appcat-control
+          defaultPlan: standard-1
+          emailAlertingEnabled: 'true'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: myuser@example.com
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: myuser@example.com
+          imageTag: v4.80.0
+          isOpenshift: 'false'
+          maintenanceSA: helm-based-service-maintenance
+          minioChartRepository: https://charts.min.io
+          minioChartVersion: 5.0.13
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNMinio
+          ownerVersion: v1
+          plans: '{"standard-1": {"size": {"cpu": "1", "disk": "50Gi", "enabled":
+            true, "memory": "1Gi"}}}'
+          providerEnabled: 'true'
+          quotasEnabled: 'false'
+          serviceName: minio
+          sliNamespace: appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: minio-func
+  writeConnectionSecretsToNamespace: syn-crossplane

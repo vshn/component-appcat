@@ -137,7 +137,7 @@ local vshn_appcat_service(name, serviceParams) =
     },
   };
 
-  local osTemplate =
+  local osTemplate = if std.objectHas(serviceParams, 'openshiftTemplate') then
     common.OpenShiftTemplate(serviceParams.openshiftTemplate.serviceName,
                              serviceParams.serviceName,
                              serviceParams.openshiftTemplate.description,
@@ -184,7 +184,7 @@ local vshn_appcat_service(name, serviceParams) =
     [if std.objectHas(serviceParams, 'restoreSA') then '20_role_vshn_%s_restore' % name]: [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
     ['20_plans_vshn_%s' % name]: plansCM,
     ['22_prom_rule_sla_%s' % name]: promRuleSLA,
-    [if isOpenshift then '21_openshift_template_%s_vshn' % name]: osTemplate,
+    [if isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
     [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s' % name]: slos.Get('vshn-' + name),
     [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s_ha' % name]: slos.Get('vshn-' + name + '-ha'),
   } else {}

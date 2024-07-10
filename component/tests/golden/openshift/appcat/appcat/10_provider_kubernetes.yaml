@@ -130,6 +130,7 @@ rules:
       - watch
       - list
       - patch
+      - create
   - apiGroups:
       - rbac.authorization.k8s.io
     resourceNames:

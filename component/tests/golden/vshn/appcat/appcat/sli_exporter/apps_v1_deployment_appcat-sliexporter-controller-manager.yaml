@@ -31,7 +31,7 @@ spec:
         - name: APPCAT_SLI_TRACK_OC_MAINTENANCE_STATUS
           value: "false"
         - name: APPCAT_SLI_VSHNMINIO
-          value: "false"
+          value: "true"
         - name: APPCAT_SLI_VSHNKEYCLOAK
           value: "true"
         - name: APPCAT_SLI_VSHNMARIADB

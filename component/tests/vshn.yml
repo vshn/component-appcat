@@ -152,7 +152,7 @@ parameters:
                   appuio.io/node-class: "plus"
               note: "Will be scheduled on APPUiO Cloud plus nodes"
         minio:
-          enabled: false
+          enabled: true
           instances:
             - name: minio-cluster
               namespace: syn-appcat
