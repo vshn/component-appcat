@@ -41,6 +41,7 @@ spec:
           imageTag: v4.80.0
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
+          mode: standalone
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNMariaDB
           ownerVersion: v1

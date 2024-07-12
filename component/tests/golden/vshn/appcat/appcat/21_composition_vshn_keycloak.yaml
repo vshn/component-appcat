@@ -44,6 +44,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
+          mode: standalone
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNKeycloak
           ownerVersion: v1

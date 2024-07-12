@@ -43,6 +43,7 @@ spec:
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
           minioChartVersion: 5.0.13
+          mode: distributed
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNMinio
           ownerVersion: v1

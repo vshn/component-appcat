@@ -110,6 +110,7 @@ local vshn_appcat_service(name, serviceParams) =
                         ownerKind: xrd.spec.names.kind,
                         ownerGroup: xrd.spec.group,
                         ownerVersion: xrd.spec.versions[0].name,
+                        mode: serviceParams.mode,
                       } + common.EmailAlerting(params.services.vshn.emailAlerting)
                       + restoreSA
                       + additonalInputs
