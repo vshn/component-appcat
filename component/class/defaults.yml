@@ -52,7 +52,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.80.0
+        tag: minio/fix_ocp_template
       apiserver:
         registry: ghcr.io
         repository: vshn/appcat-apiserver

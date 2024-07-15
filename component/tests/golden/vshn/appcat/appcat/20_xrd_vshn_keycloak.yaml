@@ -10441,6 +10441,8 @@ spec:
                                           - name
                                           - namespace
                                         type: object
+                                    required:
+                                      - user
                                     type: object
                                   type: array
                                 extensions:
