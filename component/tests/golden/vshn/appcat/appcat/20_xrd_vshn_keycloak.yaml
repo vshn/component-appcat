@@ -11864,6 +11864,7 @@ spec:
                           enum:
                             - '23'
                             - '24'
+                            - '25'
                           type: string
                       type: object
                     size:
