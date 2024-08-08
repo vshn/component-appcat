@@ -3,6 +3,6 @@ kind: Function
 metadata:
   name: function-patch-and-transform
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.1.4
+  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.7.0
   runtimeConfigRef:
     name: function-patch-and-transform
