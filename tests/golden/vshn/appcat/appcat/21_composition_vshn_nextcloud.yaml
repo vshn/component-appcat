@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: lpg
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 5.0.0
+          chartVersion: 5.5.2
           controlNamespace: syn-appcat-control
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'

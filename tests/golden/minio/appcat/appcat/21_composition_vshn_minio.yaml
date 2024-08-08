@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: ''
           chartRepository: https://charts.min.io
-          chartVersion: 5.0.13
+          chartVersion: 5.2.0
           controlNamespace: syn-appcat-control
           defaultPlan: standard-1
           emailAlertingEnabled: 'true'
@@ -42,7 +42,7 @@ spec:
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
-          minioChartVersion: 5.0.13
+          minioChartVersion: 5.2.0
           mode: distributed
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNMinio
