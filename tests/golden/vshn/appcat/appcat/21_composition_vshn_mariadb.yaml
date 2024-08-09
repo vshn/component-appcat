@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: lpg
           chartRepository: https://charts.bitnami.com/bitnami
-          chartVersion: 11.6.2
+          chartVersion: 19.0.3
           controlNamespace: syn-appcat-control
           defaultPlan: standard-1
           emailAlertingEnabled: 'true'
