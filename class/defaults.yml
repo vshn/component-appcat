@@ -55,7 +55,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.92.0
+        tag: add/ci_improvements
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -697,7 +697,7 @@ parameters:
           additionalInputs:
             providerEnabled: ${appcat:providers:minio:enabled}
             minioChartRepository: ${appcat:charts:minio:source} # for backwards compatibility for now
-            minioChartVersion: ${appcat:charts:minio:version}  # for backwards compatibility for now
+            minioChartVersion: ${appcat:charts:minio:version} # for backwards compatibility for now
           instances: []
         mariadb:
           billing: true
