@@ -8,7 +8,7 @@ metadata:
     name: provider-exoscale
   name: provider-exoscale
 spec:
-  package: ghcr.io/vshn/provider-exoscale/provider:v0.11.1
+  package: ghcr.io/vshn/provider-exoscale/provider:cruft/reject
   runtimeConfigRef:
     name: provider-exoscale
 ---

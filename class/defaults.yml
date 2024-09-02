@@ -31,7 +31,7 @@ parameters:
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale/provider
-        tag: v0.11.1
+        tag: cruft/reject
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale/provider
@@ -699,7 +699,7 @@ parameters:
           additionalInputs:
             providerEnabled: ${appcat:providers:minio:enabled}
             minioChartRepository: ${appcat:charts:minio:source} # for backwards compatibility for now
-            minioChartVersion: ${appcat:charts:minio:version}  # for backwards compatibility for now
+            minioChartVersion: ${appcat:charts:minio:version} # for backwards compatibility for now
           instances: []
         mariadb:
           billing: true
