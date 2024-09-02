@@ -18,7 +18,7 @@ spec:
       containers:
         - args:
             - --inplace
-          image: ghcr.io/vshn/statefulset-resize-controller:v0.3.1
+          image: ghcr.io/vshn/statefulset-resize-controller:cruft_reject
           livenessProbe:
             httpGet:
               path: /healthz
