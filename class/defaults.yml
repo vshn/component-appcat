@@ -39,7 +39,7 @@ parameters:
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio/provider
-        tag: v0.4.0
+        tag: renovate/gh-pages-6.x
       provider-sql:
         registry: xpkg.upbound.io
         repository: crossplane-contrib/provider-sql
