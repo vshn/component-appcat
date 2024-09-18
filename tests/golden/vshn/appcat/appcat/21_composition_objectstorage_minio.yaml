@@ -26,6 +26,7 @@ spec:
         apiVersion: v1
         data:
           providerConfig: minio
+          proxyEndpoint: 172.17.0.1:9443
           serviceName: miniobucket
         kind: ConfigMap
         metadata:
@@ -63,6 +64,7 @@ spec:
         apiVersion: v1
         data:
           providerConfig: minio-cluster
+          proxyEndpoint: 172.17.0.1:9443
           serviceName: miniobucket
         kind: ConfigMap
         metadata:

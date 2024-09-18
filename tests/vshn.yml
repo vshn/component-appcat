@@ -21,8 +21,8 @@ parameters:
 
   appcat:
 
-    grpcEndpoint: host.docker.internal:9443
-    proxyFunction: false
+    grpcEndpoint: 172.17.0.1:9443
+    proxyFunction: true
 
     quotasEnabled: false
     appuioManaged: false

@@ -3,6 +3,6 @@ kind: Function
 metadata:
   name: function-appcat
 spec:
-  package: ghcr.io/vshn/appcat:v4.93.1-func
+  package: ghcr.io/vshn/appcat:fix_broken_buckets-func
   runtimeConfigRef:
     name: function-appcat

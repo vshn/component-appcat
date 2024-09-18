@@ -40,7 +40,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
           externalDatabaseConnectionsEnabled: 'true'
-          imageTag: v4.93.1
+          imageTag: fix_broken_buckets
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
@@ -77,6 +77,7 @@ spec:
             {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
+          proxyEndpoint: 172.17.0.1:9443
           quotasEnabled: 'false'
           serviceName: postgresql
           sgNamespace: stackgres

@@ -55,7 +55,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.93.1
+        tag: fix_broken_buckets
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -472,6 +472,7 @@ parameters:
         additionalProviderConfigs: []
 
     services:
+      enableDiffRBAC: false
       # Used for deploying jobs
       controlNamespace: "syn-appcat-control"
       # Works only for VSHN services for now

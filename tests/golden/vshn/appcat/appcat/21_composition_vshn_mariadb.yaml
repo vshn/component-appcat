@@ -38,7 +38,7 @@ spec:
           emailAlertingSmtpFromAddress: myuser@example.com
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
-          imageTag: v4.93.1
+          imageTag: fix_broken_buckets
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
@@ -52,6 +52,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: 172.17.0.1:9443
           quotasEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
           serviceName: mariadb

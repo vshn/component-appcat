@@ -5,13 +5,13 @@ metadata:
     syn: 'true'
     syn_component: appcat
     syn_team: schedar
-  name: vshn-vshnredis-sla
+  name: vshn-vshnredis-guaranteed-uptime
   namespace: appcat-slos
 spec:
   groups:
-    - name: appcat-vshnredis-sla-target
+    - name: appcat-vshnredis-guaranteed-uptime-target
       rules:
-        - alert: vshn-vshnredis-sla
+        - alert: vshn-vshnredis-guaranteed-uptime
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="VSHNRedis", ha="false", maintenance="false"}[1m]) > 0.75

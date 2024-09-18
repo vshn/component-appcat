@@ -70,7 +70,7 @@ parameters:
           - ${_base_directory}/component/functions.jsonnet
           - ${_base_directory}/component/vshn_appcat_services.jsonnet
           - ${_base_directory}/component/billing.jsonnet
-          - ${_base_directory}/component/rbac_e2e.jsonnet
+          - ${_base_directory}/component/rbac_testing.jsonnet
         input_type: jsonnet
         output_path: appcat/
 

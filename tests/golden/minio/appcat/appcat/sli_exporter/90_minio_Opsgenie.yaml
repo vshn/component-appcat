@@ -5,13 +5,13 @@ metadata:
     syn: 'true'
     syn_component: appcat
     syn_team: schedar
-  name: vshn-minio-sla
+  name: vshn-minio-guaranteed-uptime
   namespace: appcat-slos
 spec:
   groups:
-    - name: appcat-minio-sla-target
+    - name: appcat-minio-guaranteed-uptime-target
       rules:
-        - alert: vshn-minio-sla
+        - alert: vshn-minio-guaranteed-uptime
           expr: rate(appcat_probes_seconds_count{reason!="success", service="minio",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="minio", ha="false", maintenance="false"}[1m]) > 0.75

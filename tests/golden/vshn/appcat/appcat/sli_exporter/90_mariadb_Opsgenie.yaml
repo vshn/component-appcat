@@ -5,13 +5,13 @@ metadata:
     syn: 'true'
     syn_component: appcat
     syn_team: schedar
-  name: vshn-mariadb-sla
+  name: vshn-mariadb-guaranteed-uptime
   namespace: appcat-slos
 spec:
   groups:
-    - name: appcat-mariadb-sla-target
+    - name: appcat-mariadb-guaranteed-uptime-target
       rules:
-        - alert: vshn-mariadb-sla
+        - alert: vshn-mariadb-guaranteed-uptime
           expr: rate(appcat_probes_seconds_count{reason!="success", service="mariadb",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="mariadb", ha="false", maintenance="false"}[1m]) > 0.75

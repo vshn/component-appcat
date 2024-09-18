@@ -5,13 +5,13 @@ metadata:
     syn: 'true'
     syn_component: appcat
     syn_team: schedar
-  name: vshn-vshnpostgresql-sla
+  name: vshn-vshnpostgresql-guaranteed-uptime
   namespace: appcat-slos
 spec:
   groups:
-    - name: appcat-vshnpostgresql-sla-target
+    - name: appcat-vshnpostgresql-guaranteed-uptime-target
       rules:
-        - alert: vshn-vshnpostgresql-sla
+        - alert: vshn-vshnpostgresql-guaranteed-uptime
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="VSHNPostgreSQL", ha="false", maintenance="false"}[1m]) > 0.75

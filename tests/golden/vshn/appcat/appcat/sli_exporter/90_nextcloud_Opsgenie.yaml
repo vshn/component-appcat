@@ -5,13 +5,13 @@ metadata:
     syn: 'true'
     syn_component: appcat
     syn_team: schedar
-  name: vshn-nextcloud-sla
+  name: vshn-nextcloud-guaranteed-uptime
   namespace: appcat-slos
 spec:
   groups:
-    - name: appcat-nextcloud-sla-target
+    - name: appcat-nextcloud-guaranteed-uptime-target
       rules:
-        - alert: vshn-nextcloud-sla
+        - alert: vshn-nextcloud-guaranteed-uptime
           expr: rate(appcat_probes_seconds_count{reason!="success", service="nextcloud",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="nextcloud", ha="false", maintenance="false"}[1m]) > 0.75
