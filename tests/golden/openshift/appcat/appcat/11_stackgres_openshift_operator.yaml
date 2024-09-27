@@ -27,7 +27,7 @@ spec:
       limits:
         cpu: '2'
         memory: 1Gi
-  installPlanApproval: Manual
+  installPlanApproval: Automatic
   name: stackgres
   source: redhat-marketplace
   sourceNamespace: openshift-marketplace
