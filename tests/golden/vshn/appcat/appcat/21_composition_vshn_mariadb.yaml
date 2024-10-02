@@ -38,7 +38,7 @@ spec:
           emailAlertingSmtpFromAddress: myuser@example.com
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
-          imageTag: v4.95.1
+          imageTag: v4.96.0
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
