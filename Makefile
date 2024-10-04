@@ -95,3 +95,25 @@ clean: ## Clean the project
 .PHONY: pre-commit-hook
 pre-commit-hook: ## Install pre-commit hook in .git/hooks
 	/usr/bin/cp -fa .githooks/pre-commit .git/hooks/pre-commit
+
+.PHONY: local-appcat-development
+local-appcat-development : instance=vshn
+local-appcat-development: local-sed-substitution gen-golden kindev-install ## Run local development for appcat
+
+local-sed-substitution:
+	sed -i 's/grpcEndpoint.*/grpcEndpoint: $(LINUX_IP_ADDRESS):9443/g' tests/vshn.yml
+	sed -i 's/proxyFunction.*/proxyFunction: true/g' tests/vshn.yml
+
+kindev-install:
+	kubectl apply -f https://raw.githubusercontent.com/vshn/appcat/refs/heads/master/hack/functionproxy/function.yaml
+	kubectl apply -f https://raw.githubusercontent.com/vshn/appcat/refs/heads/master/hack/functionproxy/proxyconfig.yaml
+
+.PHONY: local-appcat-development-revert
+local-appcat-development-revert : instance=vshn
+local-appcat-development-revert: revert-sed-substitution gen-golden  ## Revert local development for appcat
+	kubectl delete -f https://raw.githubusercontent.com/vshn/appcat/refs/heads/master/hack/functionproxy/function.yaml
+	kubectl delete -f https://raw.githubusercontent.com/vshn/appcat/refs/heads/master/hack/functionproxy/proxyconfig.yaml
+
+
+revert-sed-substitution:
+	git checkout master tests/vshn.yml
