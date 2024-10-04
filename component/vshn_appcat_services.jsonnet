@@ -177,6 +177,43 @@ local vshn_appcat_service(name, serviceParams) =
     },
   };
 
+
+  local scc =
+    {
+      allowHostDirVolumePlugin: true,
+      allowHostIPC: true,
+      allowHostNetwork: true,
+      allowHostPID: true,
+      allowHostPorts: true,
+      allowPrivilegeEscalation: false,
+      allowPrivilegedContainer: true,
+      allowedCapabilities: [
+      'MKNOD',
+      'CHOWN',
+      'SYS_CHROOT',
+      'FOWNER',
+      ],
+      apiVersion: 'security.openshift.io/v1',
+      defaultAddCapabilities: [
+      'MKNOD',
+      'CHOWN',
+      'SYS_CHROOT',
+      'FOWNER',
+      ],
+      kind: 'SecurityContextConstraints',
+      metadata: {
+      annotations: {},
+      name: 'appcat-collabora',
+      },
+      readOnlyRootFilesystem: false,
+      runAsUser: {
+      type: 'MustRunAsNonRoot',
+      },
+      seLinuxContext: {
+      type: 'MustRunAs',
+      },
+    };
+
   if params.services.vshn.enabled && serviceParams.enabled then {
     ['20_xrd_vshn_%s' % name]: xrd,
     ['20_rbac_vshn_%s' % name]: xrds.CompositeClusterRoles(xrd),
@@ -185,6 +222,7 @@ local vshn_appcat_service(name, serviceParams) =
     ['20_plans_vshn_%s' % name]: plansCM,
     ['22_prom_rule_sla_%s' % name]: promRuleSLA,
     [if isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
+    [if isOpenshift then '21_scc_appcat']: scc,
     [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s' % name]: slos.Get('vshn-' + name),
     [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s_ha' % name]: slos.Get('vshn-' + name + '-ha'),
     ['sli_exporter/90_%s_Opsgenie' % name]: opsgenieRules.GenGenericAlertingRule(name),

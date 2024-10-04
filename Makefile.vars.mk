@@ -52,3 +52,6 @@ YAMLLINT_ARGS   ?= --no-warnings
 YAMLLINT_CONFIG ?= .yamllint.yml
 YAMLLINT_IMAGE  ?= docker.io/cytopia/yamllint:latest
 YAMLLINT_DOCKER ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) $(YAMLLINT_IMAGE)
+
+
+LINUX_IP_ADDRESS := $(shell ip -4 addr show dev docker0 | grep inet | awk -F' ' '{print $$2}' | awk -F'/' '{print $$1}')

@@ -55,7 +55,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.98.0
+        tag: nextcloud_collabora
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -861,6 +861,8 @@ parameters:
               cert-manager.io/cluster-issuer: letsencrypt-production
               haproxy.router.openshift.io/timeout: 120s
               haproxy.router.openshift.io/hsts_header: max-age=31536000;preload
+            collabora_ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-production
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."
