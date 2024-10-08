@@ -6,7 +6,7 @@ sum by (label_appcat_vshn_io_claim_namespace,label_appcat_vshn_io_sla,label_appc
         # Fetch all namespaces with label label_appuio_io_billing_name=~"appcat-.+"
         (kube_namespace_labels{label_appuio_io_billing_name=~"appcat-.+"} *
         on (namespace) group_right(label_appuio_io_organization,label_appcat_vshn_io_claim_namespace,label_appcat_vshn_io_sla,label_appcat_vshn_io_claim_name,label_appuio_io_billing_name,label_appuio_io_organization)
-        kube_pod_info{created_by_kind!="Job"}
+        (kube_pod_info{created_by_kind!="Job"} * on(namespace, pod) kube_pod_labels{label_appcat_io_billing="true"}))
         # We join it with appuio_control_organization_info to map the organization to a sales_order
         # This metric is not available on the cluster's prometheus, only on mimir, this is just included for completenes sake.
         #* on(label_appuio_io_organization) group_left(sales_order) label_replace(appuio_control_organization_info, "label_appuio_io_organization", "$1", "name", "(.*)")

@@ -9,7 +9,7 @@ sum by (label_appcat_vshn_io_claim_namespace,label_appcat_vshn_io_sla,label_appu
           label_replace(
               kube_namespace_labels{ label_appuio_io_billing_name=~"appcat-.+"} *
               on (namespace) group_right(label_appcat_vshn_io_claim_namespace,label_appcat_vshn_io_sla, label_appuio_io_billing_name,label_appcat_vshn_io_claim_name,sales_order,label_appuio_io_billing_name)
-              kube_pod_info{created_by_kind!="Job"},
+              (kube_pod_info{created_by_kind!="Job"} * on(namespace, pod) kube_pod_labels{label_appcat_io_billing="true"})),
             "sales_order",
             "{{salesOrderID}}",
             "",
