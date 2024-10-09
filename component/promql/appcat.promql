@@ -20,7 +20,7 @@ sum_over_time(
                   # Fetch all namespaces with label label_appuio_io_billing_name=~"appcat-.+"
                   kube_namespace_labels{{{ORGLABEL}} label_appuio_io_billing_name=~"appcat-.+"} *
                   on (namespace) group_right(label_appuio_io_organization,label_appcat_vshn_io_claim_namespace,label_appcat_vshn_io_sla, label_appuio_io_billing_name)
-                  kube_pod_info{created_by_kind!="Job"},
+                  (kube_pod_info{created_by_kind!="Job"} * on(namespace, pod) kube_pod_labels{label_appcat_io_billing="true"})),
                   {{TENANT_REPLACE}}
                 ),
                 "claim_namespace",
