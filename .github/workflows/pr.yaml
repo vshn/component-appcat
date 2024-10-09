@@ -1,0 +1,21 @@
+name: PR Automation
+
+on:
+  pull_request: {}
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  check-labels:
+    # Act doesn't set a pull request number by default, so we skip if it's 0
+    if: github.event.pull_request.number != 0
+    name: Check labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://agilepathway/pull-request-label-checker:v1.6.51
+        with:
+          one_of: enhancement,feature,minor,change,breaking,major,bug,fix,patch,documentation,dependency
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
