@@ -3,22 +3,22 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.16.0
+        version: 1.17.1
       redis:
         source: https://charts.bitnami.com/bitnami
-        version: 17.7.1
+        version: 17.17.1
       mariadb:
         source: https://charts.bitnami.com/bitnami
         version: 11.6.2
       minio:
         source: https://charts.min.io
-        version: 5.0.13
+        version: 5.3.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
         version: 2.4.3
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 5.0.0
+        version: 5.5.6
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io

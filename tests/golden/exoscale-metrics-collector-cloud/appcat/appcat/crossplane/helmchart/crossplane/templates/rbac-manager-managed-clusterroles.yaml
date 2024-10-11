@@ -12,8 +12,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
   name: crossplane-admin
 ---
 aggregationRule:
@@ -30,8 +30,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
   name: crossplane-edit
 ---
 aggregationRule:
@@ -48,8 +48,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
   name: crossplane-view
 ---
 aggregationRule:
@@ -66,8 +66,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
   name: crossplane-browse
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -80,8 +80,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
     rbac.crossplane.io/aggregate-to-admin: 'true'
   name: crossplane:aggregate-to-admin
 rules:
@@ -129,6 +129,12 @@ rules:
     verbs:
       - '*'
   - apiGroups:
+      - secrets.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - apiGroups:
       - apiextensions.k8s.io
     resources:
       - customresourcedefinitions
@@ -147,8 +153,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
     rbac.crossplane.io/aggregate-to-edit: 'true'
   name: crossplane:aggregate-to-edit
 rules:
@@ -186,6 +192,12 @@ rules:
       - '*'
     verbs:
       - '*'
+  - apiGroups:
+      - secrets.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -197,8 +209,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
     rbac.crossplane.io/aggregate-to-view: 'true'
   name: crossplane:aggregate-to-view
 rules:
@@ -234,6 +246,14 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - secrets.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -245,8 +265,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
     rbac.crossplane.io/aggregate-to-browse: 'true'
   name: crossplane:aggregate-to-browse
 rules:
@@ -277,8 +297,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: crossplane-1.16.0
+    app.kubernetes.io/version: 1.17.1
+    helm.sh/chart: crossplane-1.17.1
   name: crossplane-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
