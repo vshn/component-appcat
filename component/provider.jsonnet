@@ -163,6 +163,17 @@ local providerRBAC = {
         resources: [ 'ingresses' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ '' ],
+        resources: [ 'persistentvolumeclaims' ],
+        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
+      },
+      {
+        // This is needed for the privileged SCC - Nextcloud -> Collabora
+        apiGroups: [ 'security.openshift.io' ],
+        resources: [ 'securitycontextconstraints' ],
+        verbs: [ '*' ],
+      },
     ],
   },
   helm: {
