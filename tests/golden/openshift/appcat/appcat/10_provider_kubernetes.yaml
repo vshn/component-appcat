@@ -102,16 +102,11 @@ rules:
       - pods/log
       - pods/portforward
       - pods/status
+      - pods/attach
+      - pods/exec
       - services
     verbs:
-      - get
-      - list
-      - watch
-      - create
-      - watch
-      - patch
-      - update
-      - delete
+      - '*'
   - apiGroups:
       - apps
     resources:
