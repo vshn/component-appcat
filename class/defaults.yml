@@ -6,19 +6,19 @@ parameters:
         version: 1.16.0
       redis:
         source: https://charts.bitnami.com/bitnami
-        version: 17.7.1
+        version: 20.2.1
       mariadb:
         source: https://charts.bitnami.com/bitnami
-        version: 11.6.2
+        version: 19.1.0
       minio:
         source: https://charts.min.io
         version: 5.0.13
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 2.4.3
+        version: 18.4.4
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 5.0.0
+        version: 6.1.0
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io
