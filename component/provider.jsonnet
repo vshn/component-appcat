@@ -54,7 +54,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ '' ],
-        resources: [ 'namespaces', 'serviceaccounts', 'secrets', 'pods', 'pods/log', 'pods/portforward', 'pods/status',"pods/attach", "pods/exec", 'services' ],
+        resources: [ 'namespaces', 'serviceaccounts', 'secrets', 'pods', 'pods/log', 'pods/portforward', 'pods/status', 'pods/attach', 'pods/exec', 'services' ],
         verbs: [ '*' ],
       },
       {
