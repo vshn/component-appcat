@@ -97,6 +97,25 @@ webhooks:
       service:
         name: webhook-service
         namespace: syn-appcat
+        path: /validate-helm-crossplane-io-v1beta1-release
+    failurePolicy: Fail
+    name: releases.vshn.appcat.vshn.io
+    rules:
+      - apiGroups:
+          - helm.crossplane.io
+        apiVersions:
+          - v1beta1
+        operations:
+          - DELETE
+        resources:
+          - releases
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: webhook-service
+        namespace: syn-appcat
         path: /validate-vshn-appcat-vshn-io-v1-vshnkeycloak
     failurePolicy: Fail
     name: vshnkeycloak.vshn.appcat.vshn.io
