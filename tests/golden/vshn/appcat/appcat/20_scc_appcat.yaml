@@ -1,0 +1,27 @@
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegeEscalation: false
+allowPrivilegedContainer: true
+allowedCapabilities:
+  - MKNOD
+  - CHOWN
+  - SYS_CHROOT
+  - FOWNER
+apiVersion: security.openshift.io/v1
+defaultAddCapabilities:
+  - MKNOD
+  - CHOWN
+  - SYS_CHROOT
+  - FOWNER
+kind: SecurityContextConstraints
+metadata:
+  annotations: {}
+  name: appcat-collabora
+readOnlyRootFilesystem: false
+runAsUser:
+  type: MustRunAsNonRoot
+seLinuxContext:
+  type: MustRunAs
