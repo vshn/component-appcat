@@ -78,6 +78,7 @@ spec:
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
           quotasEnabled: 'false'
+          salesOrder: '10431'
           serviceName: postgresql
           sgNamespace: stackgres
           sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "256Mi"},

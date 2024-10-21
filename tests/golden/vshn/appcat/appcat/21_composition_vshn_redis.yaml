@@ -601,8 +601,10 @@ spec:
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNRedis
           ownerVersion: v1
+          proxyEndpoint: host.docker.internal:9443
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
+          salesOrder: ''
           serviceName: redis
           sliNamespace: appcat-slos
         kind: ConfigMap

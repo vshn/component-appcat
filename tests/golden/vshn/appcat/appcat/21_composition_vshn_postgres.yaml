@@ -77,7 +77,9 @@ spec:
             {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
+          proxyEndpoint: host.docker.internal:9443
           quotasEnabled: 'false'
+          salesOrder: ''
           serviceName: postgresql
           sgNamespace: stackgres
           sideCars: '{"clusterController": {"limits": {"cpu": "32m", "memory": "256Mi"},

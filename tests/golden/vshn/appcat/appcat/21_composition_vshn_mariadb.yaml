@@ -52,8 +52,10 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: host.docker.internal:9443
           quotasEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
+          salesOrder: ''
           serviceName: mariadb
           sliNamespace: appcat-slos
         kind: ConfigMap

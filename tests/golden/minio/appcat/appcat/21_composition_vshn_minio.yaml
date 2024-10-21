@@ -51,6 +51,7 @@ spec:
             true, "memory": "1Gi"}}}'
           providerEnabled: 'false'
           quotasEnabled: 'false'
+          salesOrder: '10431'
           serviceName: minio
           sliNamespace: appcat-slos
         kind: ConfigMap

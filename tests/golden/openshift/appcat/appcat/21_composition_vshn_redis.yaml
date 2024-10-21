@@ -577,6 +577,7 @@ spec:
           ownerVersion: v1
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
+          salesOrder: '10431'
           serviceName: redis
           sliNamespace: appcat-slos
         kind: ConfigMap

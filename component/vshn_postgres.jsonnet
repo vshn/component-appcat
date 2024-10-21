@@ -13,6 +13,7 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local pgParams = params.services.vshn.postgres;
 local opsgenieRules = import 'vshn_alerting.jsonnet';
+local appuioManaged = inv.parameters.appcat.appuioManaged;
 
 local defaultDB = 'postgres';
 local defaultUser = 'postgres';
@@ -220,6 +221,7 @@ local composition =
                       bucketEndpoint: pgParams.bucket_endpoint,
                       isOpenshift: std.toString(isOpenshift),
                       sliNamespace: params.slos.namespace,
+                      salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                     } + std.get(pgParams, 'additionalInputs', default={}, inc_hidden=true)
                     + common.EmailAlerting(params.services.emailAlerting)
                     + if pgParams.proxyFunction then {

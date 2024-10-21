@@ -157,8 +157,8 @@ local generateCloudAndManaged = function(name)
   // For postgresql we have a missmatch between the label and the name in our definition.
   local queryName = if name == 'postgres' then name + 'ql' else name;
 
-  local managedQuery = 'appcat:metering{label_appuio_io_billing_name="appcat-' + queryName + '",label_appcat_vshn_io_sla="%s", tenant_name!="APPUiO"}';
-  local cloudQuery = 'appcat:metering{label_appuio_io_billing_name="appcat-' + queryName + '",label_appcat_vshn_io_sla="%s", tenant_name="APPUiO"} * on(label_appuio_io_organization) group_left(sales_order) label_replace(appuio_control_organization_info{namespace="appuio-control-api-production"}, "label_appuio_io_organization", "$1", "organization", "(.*)")';
+  local managedQuery = 'sum_over_time(appcat:metering{label_appuio_io_billing_name="appcat-' + queryName + '",label_appcat_vshn_io_sla="%s", tenant_name!="APPUiO"}[60:1])/60';
+  local cloudQuery = 'sum_over_time(appcat:metering{label_appuio_io_billing_name="appcat-' + queryName + '",label_appcat_vshn_io_sla="%s", tenant_name="APPUiO"} * on(label_appuio_io_organization) group_left(sales_order) label_replace(appuio_control_organization_info{namespace="appuio-control-api-production"}, "label_appuio_io_organization", "$1", "organization", "(.*)")[60:1])/60';
 
   local permutations = [
     {
