@@ -5610,8 +5610,20 @@ spec:
                           type: boolean
                       type: object
                     service:
+                      collabora:
+                        default: {}
                       description: Service contains nextcloud DBaaS specific properties
                       properties:
+                        collabora:
+                          properties:
+                            enabled:
+                              default: false
+                              type: boolean
+                            fqdn:
+                              type: string
+                          required:
+                            - enabled
+                          type: object
                         fqdn:
                           description: |-
                             FQDN contains the FQDN which will be used for the ingress.

@@ -54,8 +54,8 @@ local providerRBAC = {
       },
       {
         apiGroups: [ '' ],
-        resources: [ 'namespaces', 'serviceaccounts', 'secrets', 'pods', 'pods/log', 'pods/portforward', 'pods/status', 'services' ],
-        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
+        resources: [ 'namespaces', 'serviceaccounts', 'secrets', 'pods', 'pods/log', 'pods/portforward', 'pods/status', 'pods/attach', 'pods/exec', 'services' ],
+        verbs: [ '*' ],
       },
       {
         apiGroups: [ 'apps' ],
@@ -65,7 +65,7 @@ local providerRBAC = {
       {
         apiGroups: [ 'apps' ],
         resources: [ 'statefulsets', 'deployments' ],
-        verbs: [ 'get', 'delete', 'watch', 'list', 'patch' ],
+        verbs: [ 'get', 'delete', 'watch', 'list', 'patch', 'update', 'create' ],
       },
       {
         apiGroups: [ 'rbac.authorization.k8s.io' ],
@@ -162,6 +162,22 @@ local providerRBAC = {
         apiGroups: [ 'policy' ],
         resources: [ 'poddisruptionbudgets' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'networking.k8s.io' ],
+        resources: [ 'ingresses' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ '' ],
+        resources: [ 'persistentvolumeclaims' ],
+        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
+      },
+      {
+        // This is needed for the privileged SCC - Nextcloud -> Collabora
+        apiGroups: [ 'security.openshift.io' ],
+        resources: [ 'securitycontextconstraints' ],
+        verbs: [ '*' ],
       },
     ],
   },
