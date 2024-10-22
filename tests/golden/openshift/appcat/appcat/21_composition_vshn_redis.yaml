@@ -385,7 +385,7 @@ spec:
                   chart:
                     name: redis
                     repository: https://charts.bitnami.com/bitnami
-                    version: 17.7.1
+                    version: 20.2.1
                   values:
                     architecture: standalone
                     commonConfiguration: ''
