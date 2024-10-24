@@ -113,10 +113,6 @@ local promQueryTemplate = importstr 'promql/appcat.promql';
 local promQueryWithLabel = std.strReplace(promQueryTemplate, '{{ORGLABEL}}', tenant.label);
 local promQuery = std.strReplace(promQueryWithLabel, '{{TENANT_REPLACE}}', tenant.replace);
 
-local meteringQueryCloud = importstr 'promql/metering_cloud.promql';
-local meteringQueryManagedRaw = importstr 'promql/metering_managed.promql';
-local meteringQueryManaged = std.strReplace(meteringQueryManagedRaw, '{{salesOrderID}}', params.billing.salesOrder);
-
 local legacyBillingRule = std.prune(kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'appcat-billing') {
   metadata+: {
     namespace: params.namespace,
@@ -129,25 +125,6 @@ local legacyBillingRule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Pr
           {
             expr: promQuery,
             record: 'appcat:billing',
-          },
-        ],
-      },
-    ],
-  },
-});
-
-local meteringRule = std.prune(kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'appcat-metering') {
-  metadata+: {
-    namespace: params.namespace,
-  },
-  spec: {
-    groups: [
-      {
-        name: 'appcat-metering-rules',
-        rules: [
-          {
-            expr: if params.appuioManaged then meteringQueryManaged else meteringQueryCloud,
-            record: 'appcat:metering',
           },
         ],
       },
@@ -286,7 +263,6 @@ local haPrometheusRule = {
   '10_appcat_legacy_billing_recording_rule': legacyBillingRule,
   '10_appcat_backup_monitoring': backupPrometheusRule,
   '10_appcat_ha_monitoring': haPrometheusRule,
-  [if params.billing.vshn.meteringRules then '10_appcat_metering_recording_rule']: meteringRule,
   [if params.services.vshn.enabled && params.services.emailAlerting.enabled then '10_mailgun_secret']: emailSecret,
   [if params.billing.enableMockOrgInfo then '10_mock_org_info']: mockOrgInfo,
 }

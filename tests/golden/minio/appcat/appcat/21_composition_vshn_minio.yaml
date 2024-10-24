@@ -38,7 +38,7 @@ spec:
           emailAlertingSmtpFromAddress: myuser@example.com
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
-          imageTag: v4.98.0
+          imageTag: change-billing
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
@@ -51,6 +51,7 @@ spec:
             true, "memory": "1Gi"}}}'
           providerEnabled: 'false'
           quotasEnabled: 'false'
+          salesOrder: '10431'
           serviceName: minio
           sliNamespace: appcat-slos
         kind: ConfigMap

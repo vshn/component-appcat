@@ -15,6 +15,7 @@ local opsgenieRules = import 'vshn_alerting.jsonnet';
 
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
+local appuioManaged = inv.parameters.appcat.appuioManaged;
 
 local serviceNameLabelKey = 'appcat.vshn.io/servicename';
 local serviceNamespaceLabelKey = 'appcat.vshn.io/claim-namespace';
@@ -110,6 +111,7 @@ local vshn_appcat_service(name, serviceParams) =
                         ownerKind: xrd.spec.names.kind,
                         ownerGroup: xrd.spec.group,
                         ownerVersion: xrd.spec.versions[0].name,
+                        salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       } + common.EmailAlerting(params.services.emailAlerting)
                       + restoreSA
                       + additonalInputs

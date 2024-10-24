@@ -569,7 +569,7 @@ spec:
           emailAlertingSmtpFromAddress: myuser@example.com
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: myuser@example.com
-          imageTag: v4.98.0
+          imageTag: change-billing
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
@@ -577,6 +577,7 @@ spec:
           ownerVersion: v1
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
+          salesOrder: '10431'
           serviceName: redis
           sliNamespace: appcat-slos
         kind: ConfigMap

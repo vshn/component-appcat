@@ -14,6 +14,7 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local redisParams = params.services.vshn.redis;
 local opsgenieRules = import 'vshn_alerting.jsonnet';
+local appuioManaged = inv.parameters.appcat.appuioManaged;
 
 local defaultUser = 'default';
 local defaultPort = '6379';
@@ -487,6 +488,7 @@ local composition =
                       ownerVersion: xrd.spec.versions[0].name,
                       isOpenshift: std.toString(isOpenshift),
                       sliNamespace: params.slos.namespace,
+                      salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                     } + common.EmailAlerting(params.services.emailAlerting)
                     + if redisParams.proxyFunction then {
                       proxyEndpoint: redisParams.grpcEndpoint,
