@@ -3,6 +3,6 @@ kind: Function
 metadata:
   name: function-appcat
 spec:
-  package: ghcr.io/vshn/appcat:v4.100.2-func
+  package: ghcr.io/vshn/appcat:v4.101.1-func
   runtimeConfigRef:
     name: function-appcat
