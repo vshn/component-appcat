@@ -11765,6 +11765,12 @@ spec:
                                       - user
                                     type: object
                                   type: array
+                                disableConnectionPooling:
+                                  default: false
+                                  description: Disable connection pooling. This means
+                                    that PgBouncer will be disabled and all connections
+                                    will be made directly to the PostgreSQL instance.
+                                  type: boolean
                                 extensions:
                                   description: Extensions allow to enable/disable
                                     any of the supported
