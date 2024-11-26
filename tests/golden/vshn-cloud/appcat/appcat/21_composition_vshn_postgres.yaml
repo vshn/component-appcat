@@ -41,7 +41,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.116.0
+          imageTag: v4.115.1
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",

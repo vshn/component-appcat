@@ -597,7 +597,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.116.0
+          imageTag: v4.115.1
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io

@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: stackgres-sgconfig-restapi-patcher
+  name: stackgres-sgconfig-restapi-patcher
+  namespace: syn-stackgres-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: stackgres-sgconfig-restapi-patcher
+  name: stackgres-sgconfig-restapi-patcher
+  namespace: syn-stackgres-operator
+rules:
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sgconfigs
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: stackgres-sgconfig-restapi-patcher
+  name: stackgres-sgconfig-restapi-patcher
+  namespace: syn-stackgres-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: stackgres-sgconfig-restapi-patcher
+subjects:
+  - kind: ServiceAccount
+    name: stackgres-sgconfig-restapi-patcher
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations: {}
+  labels:
+    name: stackgres-sgconfig-restapi-patcher
+  name: stackgres-sgconfig-restapi-patcher
+  namespace: syn-stackgres-operator
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        name: stackgres-sgconfig-restapi-patcher
+    spec:
+      containers:
+        - args:
+            - |-
+              cat <<EOF | kubectl -n ${TARGET_NAMESPACE} patch sgconfig stackgres-operator --type merge -p "$(cat)"
+              spec:
+                restapi:
+                  image:
+                    name: stackgres/restapi
+                    pullPolicy: IfNotPresent
+                  name: stackgres-restapi
+              EOF
+          command:
+            - sh
+            - -c
+          env:
+            - name: TARGET_NAMESPACE
+              value: syn-stackgres-operator
+          image: docker.io/bitnami/kubectl:1.25.15
+          name: patch-restapi
+      imagePullSecrets: []
+      initContainers: []
+      restartPolicy: Never
+      serviceAccountName: stackgres-sgconfig-restapi-patcher
+      terminationGracePeriodSeconds: 30
+      volumes: []

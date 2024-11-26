@@ -40,6 +40,84 @@ local stackgresOperatorNs = kube.Namespace(params.stackgres.namespace) {
   },
 };
 
+local sa = kube.ServiceAccount('stackgres-sgconfig-restapi-patcher') {
+  metadata+: {
+    namespace: params.stackgres.namespace,
+  },
+};
+
+local role = kube.Role('stackgres-sgconfig-restapi-patcher') {
+  metadata+: {
+    namespace: params.stackgres.namespace,
+  },
+  rules: [
+    {
+      apiGroups: [
+        'stackgres.io',
+      ],
+      resources: [
+        'sgconfigs',
+      ],
+      verbs: [
+        'get',
+        'list',
+        'watch',
+        'patch',
+      ],
+    },
+  ],
+};
+
+local rolebinding = kube.RoleBinding('stackgres-sgconfig-restapi-patcher') {
+  metadata+: {
+    namespace: params.stackgres.namespace,
+  },
+  roleRef: {
+    apiGroup: 'rbac.authorization.k8s.io',
+    kind: 'Role',
+    name: 'stackgres-sgconfig-restapi-patcher',
+  },
+  subjects: [
+    {
+      kind: 'ServiceAccount',
+      name: 'stackgres-sgconfig-restapi-patcher',
+    },
+  ],
+};
+
+local stackgresOperatorConfigPatch = kube.Job('stackgres-sgconfig-restapi-patcher') {
+  metadata+: {
+    namespace: params.stackgres.namespace,
+  },
+  spec+: {
+    template+: {
+      spec+: {
+        restartPolicy: 'Never',
+        serviceAccountName: 'stackgres-sgconfig-restapi-patcher',
+        containers: [
+          {
+            name: 'patch-restapi',
+            image: params.images.kubectl.registry + '/' + params.images.kubectl.image + ':' + params.images.kubectl.tag,
+            command: [
+              'sh',
+              '-c',
+            ],
+            args: [
+              'cat <<EOF | kubectl -n ${TARGET_NAMESPACE} patch sgconfig stackgres-operator --type merge -p "$(cat)"\nspec:\n  restapi:\n    image:\n      name: stackgres/restapi\n      pullPolicy: IfNotPresent\n    name: stackgres-restapi\nEOF',
+            ],
+            env: [
+              {
+                name: 'TARGET_NAMESPACE',
+                value: params.stackgres.namespace,
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+};
+
 local stackgresNetworkPolicy = kube.NetworkPolicy('allow-stackgres-api') + {
   metadata+: {
     namespace: params.stackgres.namespace,
@@ -312,6 +390,7 @@ if params.services.vshn.enabled && pgParams.enabled && vars.isSingleOrControlPla
     [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
     [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
     [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
+    [if isOpenshift then '13_stackgres_openshift_operator_restapi']: [ sa, role, rolebinding, stackgresOperatorConfigPatch ],
     [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_slo_vshn_postgresql']: slos.Get('vshn-postgresql'),
     [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_slo_vshn_postgresql_ha']: slos.Get('vshn-postgresql-ha'),
     [if params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL'),
