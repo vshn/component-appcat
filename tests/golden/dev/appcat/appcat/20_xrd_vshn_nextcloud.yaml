@@ -5634,13 +5634,10 @@ spec:
                           type: object
                         fqdn:
                           description: |-
-                            FQDN contains the FQDNs array, which will be used for the ingress.
+                            FQDN contains the FQDN which will be used for the ingress.
                             If it's not set, no ingress will be deployed.
                             This also enables strict hostname checking for this FQDN.
-                          items:
-                            type: string
-                          minItems: 1
-                          type: array
+                          type: string
                         postgreSQLParameters:
                           default: {}
                           description: |-
@@ -11832,6 +11829,15 @@ spec:
                                     - besteffort
                                     - guaranteed
                                   type: string
+                                tls:
+                                  description: TLS settings for the instance.
+                                  properties:
+                                    enabled:
+                                      default: true
+                                      description: Enabled specifies if the instance
+                                        should use TLS for the instance.
+                                      type: boolean
+                                  type: object
                                 vacuumEnabled:
                                   default: false
                                   type: boolean
