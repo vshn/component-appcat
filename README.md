@@ -31,10 +31,12 @@ This process is not suitable for installing the component on a production system
 
 Kindev provides a forgejo instance and ArgoCD that we can use the git repositories from it. ArgoCD is available at http://argocd.127.0.0.1.nip.io:8088/.
 
-To push any of the golden tests to it you can use `gmake push-golden -e instance=vshn`, it will:
+To push any of the golden tests you can use `make push-golden -e instance=vshn`, it will:
 * Compile the given golden test
 * Push it to forgejo
 * Create or update an ArgoCD app according to the app config in the component
+
+There's also a push target for the split setup: `make push-non-converged`, this will create two distinct apps on ArgoCD to deploy the respective parts to the right clusters.
 
 There's a known issue:
 On the very first sync after setting up kindev, ArgoCD doesn't recognize the `server-side` flag. Thus, the sync will fail. Simply click sync again in the ArgoCD GUI to trigger it again.

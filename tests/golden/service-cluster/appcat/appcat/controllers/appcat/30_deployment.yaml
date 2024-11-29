@@ -24,11 +24,6 @@ spec:
             - --event-forwarding=false
             - --quotas=false
           env:
-            - name: CONTROL_PLANE_KUBECONFIG
-              valueFrom:
-                secretKeyRef:
-                  key: kubeconfig
-                  name: vcluster-kubeconfig
             - name: PLANS_NAMESPACE
               value: syn-appcat
           image: ghcr.io/vshn/appcat:add_sli-exporter-control-plane-support

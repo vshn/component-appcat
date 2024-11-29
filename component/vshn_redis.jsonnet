@@ -562,15 +562,17 @@ local plansCM = kube.ConfigMap('vshnredisplans') + {
   },
 };
 
-if params.services.vshn.enabled && redisParams.enabled && vars.isSingleOrControlPlaneCluster then {
-  '20_xrd_vshn_redis': xrd,
-  '20_rbac_vshn_redis': xrds.CompositeClusterRoles(xrd),
-  '20_role_vshn_redisrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
-  '20_plans_vshn_redis': plansCM,
-  '21_composition_vshn_redis': composition,
+(if params.services.vshn.enabled && redisParams.enabled && vars.isSingleOrControlPlaneCluster then {
+   '20_xrd_vshn_redis': xrd,
+   '20_rbac_vshn_redis': xrds.CompositeClusterRoles(xrd),
+   '20_role_vshn_redisrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
+   '20_plans_vshn_redis': plansCM,
+   '21_composition_vshn_redis': composition,
+   [if isOpenshift then '21_openshift_template_redis_vshn']: osTemplate,
+ } else {})
++ if vars.isSingleOrServiceCluster then {
   '22_prom_rule_sla_redis': promRuleRedisSLA,
-  [if isOpenshift then '21_openshift_template_redis_vshn']: osTemplate,
-  [if params.services.vshn.enabled && params.services.vshn.redis.enabled then 'sli_exporter/90_slo_vshn_redis']: slos.Get('vshn-redis'),
-  [if params.services.vshn.enabled && params.services.vshn.redis.enabled then 'sli_exporter/90_slo_vshn_redis_ha']: slos.Get('vshn-redis-ha'),
+  [if params.services.vshn.enabled && params.services.vshn.redis.enabled then 'sli_exporter/70_slo_vshn_redis']: slos.Get('vshn-redis'),
+  [if params.services.vshn.enabled && params.services.vshn.redis.enabled then 'sli_exporter/80_slo_vshn_redis_ha']: slos.Get('vshn-redis-ha'),
   [if params.services.vshn.enabled && params.services.vshn.redis.enabled then 'sli_exporter/90_VSHNRedis_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNRedis'),
 } else {}

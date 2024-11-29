@@ -239,6 +239,15 @@ local haPrometheusRule = {
   },
 };
 
+local controlKubeConfig = kube.Secret('controlclustercredentials') + {
+  metadata+: {
+    namespace: params.slos.sli_exporter.kustomize_input.namespace,
+  },
+  stringData+: {
+    config: params.slos.sli_exporter.controlPlaneKubeconfig,
+  },
+};
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -248,6 +257,7 @@ local haPrometheusRule = {
   '10_appcat_ha_monitoring': haPrometheusRule,
   [if params.services.vshn.enabled && params.services.emailAlerting.enabled then '10_mailgun_secret']: emailSecret,
   [if params.billing.enableMockOrgInfo then '10_mock_org_info']: mockOrgInfo,
+  [if params.slos.enabled && vars.isServiceCluster && !std.isEmpty(params.slos.sli_exporter.controlPlaneKubeconfig) then 'sli_exporter/10_service_cluster_kubeconfig']: controlKubeConfig,
   // This is ugly, but otherwise the post-processing will fail for
   // golden tests where things get dynamically enabeld or disabled, so we
   // can't use an enabled filter in the post processing...

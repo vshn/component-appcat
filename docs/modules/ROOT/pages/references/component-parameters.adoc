@@ -202,3 +202,32 @@ type:: dict
 reference:: xref:references/appcat-billing.adoc[See AppCat billing parameters]
 
 This parameter allows configuring billing for AppCat.
+
+== `clusterManagementSystem`
+[horizontal]
+type:: dict
+
+Specifies if the setup runs in converged mode or in split mode.
+
+=== `controlPlaneCluster`
+[horizontal]
+type:: bool
+default:: true
+
+Configures the cluster to be a control plane.
+
+=== `serviceCluster`
+[horizontal]
+type:: bool
+default:: true
+
+Configures the cluster to be a service cluster.
+
+=== `controlPlaneKubeconfig`
+[horizontal]
+type:: string
+default:: ""
+
+Configures the kubeconfig to use to connect back to the control plane cluster.
+The kubeconfig is only used if the configuration is not in converged mode.
+It has to be created beforehand with the proper RBAC.

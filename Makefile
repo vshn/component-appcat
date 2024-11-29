@@ -98,12 +98,22 @@ pre-commit-hook: ## Install pre-commit hook in .git/hooks
 
 .PHONY: push-golden
 instance=dev
+repo=appcat
+cluster=https://kubernetes.default.svc
 push-golden: commodore_args += -f tests/$(instance).yml
-push-golden: clean .compile ## Push the target instance to the local forgejo instance, so it can be applied by argocd
-	yq eval-all '. as $$item ireduce ({}; . * $$item )' hack/base_app.yaml tests/golden/$(instance)/appcat/apps/appcat.yaml | kubectl apply -f -
-	cd compiled/appcat/appcat && \
+push-golden: clean gen-golden ## Push the target instance to the local forgejo instance, so it can be applied by argocd
+	cd tests/golden/$(instance)/appcat/appcat && \
 	git init && \
 	git add . && \
 	git commit -m "update" && \
-	git remote add origin http://gitea_admin:admin@forgejo.127.0.0.1.nip.io:8088/gitea_admin/appcat.git && \
-	git push -u origin master --force
+	git remote add origin http://gitea_admin:adminadmin@forgejo.127.0.0.1.nip.io:8088/gitea_admin/$(repo).git && \
+	git push -u origin master --force && \
+	rm -rf .git
+	yq eval-all '. as $$item ireduce ({}; . * $$item )' hack/base_app.yaml tests/golden/$(instance)/appcat/apps/appcat.yaml \
+	| yq '.metadata.name = "$(repo)"' | yq '.spec.source.repoURL = "http://forgejo-http.forgejo.svc:3000/gitea_admin/$(repo)"' \
+	| yq '.spec.destination.server = "$(cluster)"' | kubectl apply -f -
+
+.PHONY: push-non-converged
+push-non-converged: ## This pushes the configuration for a split setup to argocd
+	$(MAKE) push-golden -e instance=service-cluster -e repo=service-cluster
+	$(MAKE) push-golden -e instance=control-plane -e repo=control-plane cluster=https://controlplane.vcluster.svc

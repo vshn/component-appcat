@@ -46,12 +46,29 @@ local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(params.quotasEnabled),
 ];
 
-local mergedEnv = com.envList(controllersParams.extraEnv) + [
+local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
   {
     name: 'PLANS_NAMESPACE',
     value: params.namespace,
   },
-];
+  if !std.isEmpty(controllersParams.controlPlaneKubeconfig) then {
+    name: 'CONTROL_PLANE_KUBECONFIG',
+    secretKeyRef: {
+      name: 'controlclustercredentials',
+      key: 'kubeconfig',
+    },
+  } else null,
+]);
+
+local controlKubeConfig = kube.Secret('controlclustercredentials') + {
+  metadata+: {
+    namespace: controllersParams.namespace,
+  },
+  stringData+: {
+    config: params.clusterManagementSystem.controlPlaneKubeconfig,
+  },
+};
+
 
 local controller = loadManifest('deployment.yaml') {
   metadata+: {
@@ -187,4 +204,5 @@ if controllersParams.enabled then {
   'controllers/appcat/10_webhook_certificate': webhookCertificate,
   'controllers/appcat/20_service_account': serviceAccount,
   'controllers/appcat/30_deployment': controller,
+  [if !std.isEmpty(controllersParams.controlPlaneKubeconfig) then 'controllers/appcat/10_controlplane_credentials']: controlKubeConfig,
 } else {}

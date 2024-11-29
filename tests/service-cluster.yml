@@ -46,7 +46,7 @@ parameters:
       sli_exporter:
         enableMaintenceObserver: false
       sla_reporter:
-        enabled: true
+        enabled: false
         slo_mimir_svc: kube-prometheus-kube-prome-prometheus
         slo_mimir_namespace: prometheus-system
     controller:
@@ -55,11 +55,6 @@ parameters:
         - "--appcat-webhooks=false"
         - "--provider-webhooks=false"
         - "--event-forwarding=false"
-      extraEnv:
-        CONTROL_PLANE_KUBECONFIG:
-          secretKeyRef:
-            name: vcluster-kubeconfig
-            key: kubeconfig
       postgres:
         enabled: false
     providers:
@@ -91,13 +86,13 @@ parameters:
         enabled: true
         externalDatabaseConnectionsEnabled: true
         mariadb:
-          enabled: false
+          enabled: true
         keycloak:
-          enabled: false
+          enabled: true
         nextcloud:
-          enabled: false
+          enabled: true
         postgres:
-          enabled: false
+          enabled: true
         redis:
           enabled: true
         minio:

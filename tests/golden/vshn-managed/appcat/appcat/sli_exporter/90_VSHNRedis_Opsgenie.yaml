@@ -12,6 +12,9 @@ spec:
     - name: appcat-vshnredis-sla-target
       rules:
         - alert: vshn-vshnredis-new-sla
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="VSHNRedis", ha="false", maintenance="false"}[1m]) > 0.75
@@ -25,6 +28,9 @@ spec:
             syn_component: appcat
             syn_team: schedar
         - alert: vshn-vshnredis-new-sla-ha
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
             ha="true"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="VSHNRedis", ha="true"}[1m]) > 0.75

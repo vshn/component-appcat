@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    name: vshn-vshnminio-sla
+  name: vshn-vshnminio-sla
+  namespace: appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnminio-sla-target
+      rules:
+        - expr: vector(99.25)
+          labels:
+            service: VSHNMinio
+          record: sla:objective:ratio

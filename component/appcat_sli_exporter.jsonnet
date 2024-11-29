@@ -17,35 +17,29 @@ local deployment_patch = kube._Object('apps/v1', 'Deployment', 'controller-manag
   spec+: {
     template: {
       spec: {
+        [if !std.isEmpty(sli_exporter_params.controlPlaneKubeconfig) then 'volumes']: [
+          {
+            name: 'kubeconfig',
+            secret: {
+              secretName: 'controlclustercredentials',
+            },
+          },
+        ],
         containers: [
           {
             name: 'manager',
             resources: sli_exporter_params.resources,
+            [if !std.isEmpty(sli_exporter_params.controlPlaneKubeconfig) then 'volumeMounts']: [
+              {
+                mountPath: '/.kube',
+                name: 'kubeconfig',
+              },
+            ],
             env: [
-              {
-                name: 'APPCAT_SLI_VSHNPOSTGRESQL',
-                value: std.manifestJson(params.services.vshn.enabled && params.services.vshn.postgres.enabled),
-              },
-              {
-                name: 'APPCAT_SLI_VSHNREDIS',
-                value: std.manifestJson(params.services.vshn.enabled && params.services.vshn.redis.enabled),
-              },
-              {
-                name: 'APPCAT_SLI_TRACK_OC_MAINTENANCE_STATUS',
-                value: std.manifestJson(params.services.vshn.enabled && params.slos.sli_exporter.enableMaintenceObserver),
-              },
-              {
-                name: 'APPCAT_SLI_VSHNMINIO',
-                value: std.manifestJson(params.services.vshn.enabled && params.services.vshn.minio.enabled),
-              },
-              {
-                name: 'APPCAT_SLI_VSHNKEYCLOAK',
-                value: std.manifestJson(params.services.vshn.enabled && params.services.vshn.keycloak.enabled),
-              },
-              {
-                name: 'APPCAT_SLI_VSHNMARIADB',
-                value: std.manifestJson(params.services.vshn.enabled && params.services.vshn.mariadb.enabled),
-              },
+              if !std.isEmpty(sli_exporter_params.controlPlaneKubeconfig) then {
+                name: 'KUBECONFIG',
+                value: '/.kube/config',
+              } else {},
             ],
           },
           {
@@ -68,7 +62,7 @@ local namespace_patch = kube.Namespace('system') {
 };
 
 local kustomization =
-  if params.slos.enabled && vars.isSingleOrControlPlaneCluster then
+  if params.slos.enabled && vars.isSingleOrServiceCluster then
     local image = params.images.appcat;
     com.Kustomization(
       'https://github.com/vshn/appcat/config/sliexporter/default',
@@ -93,6 +87,5 @@ local kustomization =
   else {
     kustomization: { resources: [] },
   };
-
 
 kustomization

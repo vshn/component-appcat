@@ -105,6 +105,7 @@ parameters:
     clusterManagementSystem:
       controlPlaneCluster: true
       serviceCluster: true
+      controlPlaneKubeconfig: "" # make vcluster-in-cluster-kubeconfig in kindev
 
     crossplane:
       namespace: syn-crossplane
@@ -305,6 +306,7 @@ parameters:
       quotasEnabled: ${appcat:quotasEnabled}
       extraArgs: []
       extraEnv: {}
+      controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
       tls:
         certSecretName: webhook-cert
       resources:
@@ -391,6 +393,7 @@ parameters:
             memory: 300Mi
         kustomize_input:
           namespace: ${appcat:slos:namespace}
+        controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
       alerting:
         labels:
           syn: "true"

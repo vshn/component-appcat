@@ -94,7 +94,16 @@ local netPol = kube.NetworkPolicy('allow-from-%s' % slos_params.namespace) {
   },
 };
 
+local ns = kube.Namespace(slos_params.namespace) + {
+  metadata+: {
+    annotations+: {
+      'openshift.io/node-selector': 'node-role.kubernetes.io/infra=',
+    },
+  },
+};
+
 if sla_reporter_params.enabled && vars.isSingleOrControlPlaneCluster then {
+  [if !vars.isSingleOrServiceCluster then '00_namespace']: ns,
   '01_cronjob': CronJob,
   '02_object_bucket': ObjectStorage,
   '03_network_policy': netPol,

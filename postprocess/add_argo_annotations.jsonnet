@@ -53,7 +53,8 @@ local annotationMap = {
 };
 
 local addArgoWave(obj) =
-  local annotations = std.get(annotationMap, obj.kind, if std.objectHas(obj.metadata, 'annotations') then obj.metadata.annotations else null);
+  local annotations = if std.objectHas(obj, 'kind') && std.objectHas(obj, 'metadata') then
+    std.get(annotationMap, obj.kind, if std.objectHas(obj.metadata, 'annotations') then obj.metadata.annotations else null) else null;
   if std.type(obj) == 'object' then obj {
     metadata+: {
       [if std.type(annotations) != 'null' then 'annotations']+: annotations,

@@ -181,18 +181,20 @@ local vshn_appcat_service(name, serviceParams) =
     },
   };
 
-  if params.services.vshn.enabled && serviceParams.enabled && vars.isSingleOrControlPlaneCluster then {
-    ['20_xrd_vshn_%s' % name]: xrd,
-    ['20_rbac_vshn_%s' % name]: xrds.CompositeClusterRoles(xrd),
-    ['21_composition_vshn_%s' % name]: composition,
-    [if std.objectHas(serviceParams, 'restoreSA') then '20_role_vshn_%s_restore' % name]: [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
-    ['20_plans_vshn_%s' % name]: plansCM,
-    ['22_prom_rule_sla_%s' % name]: promRuleSLA,
-    [if isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
-    [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s' % name]: slos.Get('vshn-' + name),
-    [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/90_slo_vshn_%s_ha' % name]: slos.Get('vshn-' + name + '-ha'),
-    ['sli_exporter/90_%s_Opsgenie' % name]: opsgenieRules.GenGenericAlertingRule(name),
+  (if params.services.vshn.enabled && serviceParams.enabled && vars.isSingleOrControlPlaneCluster then {
+     ['20_xrd_vshn_%s' % name]: xrd,
+     ['20_rbac_vshn_%s' % name]: xrds.CompositeClusterRoles(xrd),
+     ['21_composition_vshn_%s' % name]: composition,
+     [if std.objectHas(serviceParams, 'restoreSA') then '20_role_vshn_%s_restore' % name]: [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
+     ['20_plans_vshn_%s' % name]: plansCM,
+     [if isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
 
+   } else {})
+  + if vars.isSingleOrServiceCluster then {
+    ['22_prom_rule_sla_%s' % name]: promRuleSLA,
+    [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/70_slo_vshn_%s' % name]: slos.Get('vshn-' + name),
+    [if params.services.vshn.enabled && serviceParams.enabled then 'sli_exporter/80_slo_vshn_%s_ha' % name]: slos.Get('vshn-' + name + '-ha'),
+    ['sli_exporter/90_%s_Opsgenie' % name]: opsgenieRules.GenGenericAlertingRule(name),
   } else {}
 ;
 

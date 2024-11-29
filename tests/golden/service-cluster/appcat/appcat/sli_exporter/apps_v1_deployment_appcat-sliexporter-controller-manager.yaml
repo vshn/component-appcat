@@ -23,19 +23,7 @@ spec:
             - sliprober
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
-          env:
-            - name: APPCAT_SLI_VSHNPOSTGRESQL
-              value: 'true'
-            - name: APPCAT_SLI_VSHNREDIS
-              value: 'true'
-            - name: APPCAT_SLI_TRACK_OC_MAINTENANCE_STATUS
-              value: 'true'
-            - name: APPCAT_SLI_VSHNMINIO
-              value: 'false'
-            - name: APPCAT_SLI_VSHNKEYCLOAK
-              value: 'true'
-            - name: APPCAT_SLI_VSHNMARIADB
-              value: 'true'
+          env: []
           image: ghcr.io/vshn/appcat:add_sli-exporter-control-plane-support
           livenessProbe:
             httpGet:

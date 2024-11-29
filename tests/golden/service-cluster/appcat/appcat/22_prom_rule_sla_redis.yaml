@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    name: vshn-vshnredis-sla
+  name: vshn-vshnredis-sla
+  namespace: appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnredis-sla-target
+      rules:
+        - expr: vector(99.25)
+          labels:
+            service: VSHNRedis
+          record: sla:objective:ratio

@@ -12,6 +12,9 @@ spec:
     - name: appcat-mariadb-sla-target
       rules:
         - alert: vshn-mariadb-new-sla
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="mariadb",
             ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="mariadb", ha="false", maintenance="false"}[1m]) > 0.75
@@ -25,6 +28,9 @@ spec:
             syn_component: appcat
             syn_team: schedar
         - alert: vshn-mariadb-new-sla-ha
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="mariadb",
             ha="true"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
             service="mariadb", ha="true"}[1m]) > 0.75

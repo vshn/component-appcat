@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    name: vshn-vshnmariadb-sla
+  name: vshn-vshnmariadb-sla
+  namespace: appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnmariadb-sla-target
+      rules:
+        - expr: vector(99.25)
+          labels:
+            service: VSHNMariaDB
+          record: sla:objective:ratio

@@ -298,22 +298,25 @@ local plansCM = kube.ConfigMap('vshnpostgresqlplans') + {
   },
 };
 
-if params.services.vshn.enabled && pgParams.enabled && vars.isSingleOrControlPlaneCluster then
-  assert std.length(pgParams.bucket_region) != 0 : 'appcat.services.vshn.postgres.bucket_region is empty';
-  assert std.length(pgParams.bucket_endpoint) != 0 : 'appcat.services.vshn.postgres.bucket_endpoint is empty';
-  {
-    '20_xrd_vshn_postgres': xrd,
-    '20_rbac_vshn_postgres': xrds.CompositeClusterRoles(xrd),
-    '20_role_vshn_postgresrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
-    '20_plans_vshn_postgresql': plansCM,
-    '21_composition_vshn_postgres': composition,
-    '22_prom_rule_sla_postgres': promRulePostgresSLA,
-    [if isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
-    [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
-    [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
-    [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
-    [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_slo_vshn_postgresql']: slos.Get('vshn-postgresql'),
-    [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_slo_vshn_postgresql_ha']: slos.Get('vshn-postgresql-ha'),
-    [if params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL'),
+(if params.services.vshn.enabled && pgParams.enabled && vars.isSingleOrControlPlaneCluster then
+   assert std.length(pgParams.bucket_region) != 0 : 'appcat.services.vshn.postgres.bucket_region is empty';
+   assert std.length(pgParams.bucket_endpoint) != 0 : 'appcat.services.vshn.postgres.bucket_endpoint is empty';
+   {
+     '20_xrd_vshn_postgres': xrd,
+     '20_rbac_vshn_postgres': xrds.CompositeClusterRoles(xrd),
+     '20_role_vshn_postgresrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
+     '20_plans_vshn_postgresql': plansCM,
+     '21_composition_vshn_postgres': composition,
 
-  } else {}
+     [if isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
+     [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
+     [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
+     [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
+   } else {})
++ if vars.isSingleOrServiceCluster then {
+  '22_prom_rule_sla_postgres': promRulePostgresSLA,
+  [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/70_slo_vshn_postgresql']: slos.Get('vshn-postgresql'),
+  [if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/80_slo_vshn_postgresql_ha']: slos.Get('vshn-postgresql-ha'),
+  [if params.services.vshn.enabled && params.services.vshn.postgres.enabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL'),
+
+} else {}
