@@ -11719,7 +11719,6 @@ spec:
                                   type: boolean
                               type: object
                             service:
-                              default: {}
                               description: Service contains PostgreSQL DBaaS specific
                                 properties
                               properties:
@@ -11848,7 +11847,6 @@ spec:
                                     - guaranteed
                                   type: string
                                 tls:
-                                  default: {}
                                   description: TLS settings for the instance.
                                   properties:
                                     enabled:
