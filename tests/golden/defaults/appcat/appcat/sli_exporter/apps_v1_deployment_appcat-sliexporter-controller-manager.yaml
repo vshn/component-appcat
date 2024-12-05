@@ -36,7 +36,7 @@ spec:
               value: 'false'
             - name: APPCAT_SLI_VSHNMARIADB
               value: 'false'
-          image: ghcr.io/vshn/appcat:v4.115.1
+          image: ghcr.io/vshn/appcat:id-addon-billing
           livenessProbe:
             httpGet:
               path: /healthz
