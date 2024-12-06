@@ -11,6 +11,8 @@ parameters:
   facts:
     cloud: cloudscale
     sales_order: "10431"
+    service_level: "premium"
+
 
   global:
     appuio_metered_billing_zone_label_map:

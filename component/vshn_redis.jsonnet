@@ -40,6 +40,8 @@ local connectionSecretKeys = [
 ];
 
 local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
+local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
+
 local securityContext = if isOpenshift then false else true;
 
 local redisPlans = common.FilterDisabledParams(redisParams.plans);
@@ -49,7 +51,7 @@ local xrd = xrds.XRDFromCRD(
   xrds.LoadCRD('vshn.appcat.vshn.io_vshnredis.yaml', params.images.appcat.tag),
   defaultComposition='vshnredis.vshn.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
-) + xrds.WithPlanDefaults(redisPlans, redisParams.defaultPlan);
+) + xrds.WithPlanDefaults(redisPlans, redisParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
 
 local promRuleRedisSLA = prom.PromRuleSLA(params.services.vshn.redis.sla, 'VSHNRedis');
 

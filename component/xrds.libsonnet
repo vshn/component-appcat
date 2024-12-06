@@ -144,6 +144,64 @@ local withPlanDefaults(plans, defaultPlan) = {
 };
 
 
+local setServiceLevel(bestEffortCluster) = {
+
+  description:
+    if bestEffortCluster then
+      "ServiceLevel defines the service level of this service. For this cluster only 'besteffort' is allowed."
+    else
+      'ServiceLevel defines the service level of this service. Either Best Effort or Guaranteed Availability is allowed.',
+  enum:
+    if bestEffortCluster then
+      [ 'besteffort' ]
+    else
+      [ 'besteffort', 'guaranteed' ],
+};
+
+// set one element enum array with single element "besteffort" if specific condition is met
+local filterOutGuaraanteed(bestEffortCluster) = {
+  spec+: {
+    versions: [
+      v {
+        schema+: {
+          openAPIV3Schema+: {
+            properties+: {
+              spec+: {
+                properties+: {
+                  parameters+: {
+                    properties+: {
+                      service+: {
+                        properties+:
+                          if std.objectHas(super.properties, 'postgreSQLParameters') then {
+                            postgreSQLParameters+: {
+                              properties+: {
+                                service+: {
+                                  properties+: {
+                                    serviceLevel+: setServiceLevel(bestEffortCluster),
+                                  },
+                                },
+                              },
+                            },
+                            serviceLevel+: setServiceLevel(bestEffortCluster),
+                          } else if std.objectHas(super.properties, 'serviceLevel') then {
+                            // this else-if exists, to ensure that xrds without any serviceLevel won't receive it via +: operator
+                            // for example our VSHN Minio has no idea about serviceLevels
+                            serviceLevel+: setServiceLevel(bestEffortCluster),
+                          } else {},
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      }
+      for v in super.versions
+    ],
+  },
+};
+
 {
   CompositeClusterRoles(composite):
     compositeClusterRoles(composite),
@@ -153,4 +211,6 @@ local withPlanDefaults(plans, defaultPlan) = {
     xrdFromCRD(name, crd, defaultComposition=defaultComposition, connectionSecretKeys=connectionSecretKeys),
   WithPlanDefaults(plans, defaultPlan):
     withPlanDefaults(plans, defaultPlan),
+  FilterOutGuaraanteed(bestEffortCluster):
+    filterOutGuaraanteed(bestEffortCluster),
 }

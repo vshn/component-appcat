@@ -12,6 +12,8 @@ parameters:
     cloud: cloudscale
     distribution: openshift4
     sales_order: "ST10120"
+    service_level: "premium"
+
 
   global:
     appuio_metered_billing_zone_label_map:

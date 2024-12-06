@@ -24,6 +24,8 @@ local defaultPort = '5432';
 local certificateSecretName = 'tls-certificate';
 
 local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
+local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
+
 local operatorlib = import 'lib/openshift4-operators.libsonnet';
 
 local stackgresOperatorNs = kube.Namespace(params.stackgres.namespace) {
@@ -113,7 +115,7 @@ local xrd = xrds.XRDFromCRD(
   xrds.LoadCRD('vshn.appcat.vshn.io_vshnpostgresqls.yaml', params.images.appcat.tag),
   defaultComposition='vshnpostgres.vshn.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
-) + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan);
+) + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
 
 local promRulePostgresSLA = prom.PromRuleSLA(params.services.vshn.postgres.sla, 'VSHNPostgreSQL');
 

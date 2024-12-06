@@ -30,6 +30,8 @@ local getServiceNamePlural(serviceName) =
 local vshn_appcat_service(name, serviceParams) =
   local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 
+  local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
+
   local connectionSecretKeys = serviceParams.connectionSecretKeys;
   local promRuleSLA = prom.PromRuleSLA(serviceParams.sla, serviceParams.serviceName);
   local plans = common.FilterDisabledParams(serviceParams.plans);
@@ -60,7 +62,7 @@ local vshn_appcat_service(name, serviceParams) =
     xrds.LoadCRD('vshn.appcat.vshn.io_' + serviceNamePlural + '.yaml', params.images.appcat.tag),
     defaultComposition=std.asciiLower(serviceParams.serviceName) + '.vshn.appcat.vshn.io',
     connectionSecretKeys=connectionSecretKeys,
-  ) + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan);
+  ) + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
 
   local additonalInputs = if std.objectHas(serviceParams, 'additionalInputs') then {
     [k]: std.toString(serviceParams.additionalInputs[k])
