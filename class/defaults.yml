@@ -39,7 +39,7 @@ parameters:
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio
-        tag: v0.4.3
+        tag: renovate/github.com-crossplane-crossplane-runtime-1.x
       provider-sql:
         registry: xpkg.upbound.io
         repository: crossplane-contrib/provider-sql
