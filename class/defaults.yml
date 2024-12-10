@@ -80,7 +80,7 @@ parameters:
       kubectl:
         registry: docker.io
         image: bitnami/kubectl
-        tag: '1.25.15'
+        tag: '1.31.4'
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
