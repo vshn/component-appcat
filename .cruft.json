@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/projectsyn/commodore-component-template.git",
-  "commit": "0aba6c3dc0f4bcbe81aab1cdcc977f32b00f1cb2",
+  "commit": "a0ae007e2702ad346c25755b0ef91ec5e40ccf50",
   "checkout": "main",
   "context": {
     "cookiecutter": {
@@ -13,6 +13,12 @@
       "add_golden": "y",
       "add_matrix": "y",
       "add_go_unit": "n",
+      "automerge_patch": "y",
+      "automerge_patch_v0": "n",
+      "automerge_patch_regexp_blocklist": "",
+      "automerge_patch_v0_regexp_allowlist": "",
+      "automerge_minor_regexp_allowlist": "",
+      "auto_release": "y",
       "copyright_holder": "VSHN AG <info@vshn.ch>",
       "copyright_year": "2023",
       "github_owner": "vshn",
