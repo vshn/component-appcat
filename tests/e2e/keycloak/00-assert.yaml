@@ -14,7 +14,9 @@ spec:
     name: vshnkeycloak.vshn.appcat.vshn.io
   compositionUpdatePolicy: Automatic
   parameters:
-    backup: {}
+    backup:
+      retention:
+        keepDaily: 6
     security:
       deletionProtection: true
     service:
