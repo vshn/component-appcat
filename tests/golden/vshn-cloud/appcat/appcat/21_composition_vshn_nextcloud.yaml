@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: lpg
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 6.2.4
+          chartVersion: 6.5.1
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
