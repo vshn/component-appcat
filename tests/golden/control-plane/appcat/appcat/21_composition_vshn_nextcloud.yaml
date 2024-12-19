@@ -45,7 +45,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.118.2
+          imageTag: fix_conflicting-labels
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
