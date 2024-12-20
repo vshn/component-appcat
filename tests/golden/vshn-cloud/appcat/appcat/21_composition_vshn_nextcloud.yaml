@@ -34,7 +34,7 @@ spec:
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
           collaboraMemoryRequests: 256Mi
-          collabora_image: docker.io/collabora/code:24.04.9.2.1
+          collabora_image: docker.io/collabora/code:24.04.11.1.1
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2
