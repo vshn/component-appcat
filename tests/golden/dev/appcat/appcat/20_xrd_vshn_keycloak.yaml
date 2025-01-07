@@ -17,8 +17,10 @@ spec:
     - KEYCLOAK_URL
     - KEYCLOAK_USERNAME
     - ca.crt
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: vshnkeycloak.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNKeycloak

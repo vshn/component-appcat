@@ -53,6 +53,7 @@ local vshnMetaVshn(servicename, flavor, offered, plans) = {
     labels+: {
       'metadata.appcat.vshn.io/offered': offered,
       'metadata.appcat.vshn.io/serviceID': 'vshn-' + std.asciiLower(servicename),
+      'metadata.appcat.vshn.io/revision': params.images.appcat.tag,
     },
   },
 };
@@ -220,6 +221,8 @@ local removeFields(obj, names) = [
   for name in names
 ];
 
+local getCurrentFunctionName() = std.strReplace('function-appcat' + '-' + getAppCatImageTag(), '.', '-');
+
 {
   SyncOptions: syncOptions,
   VshnMetaDBaaSExoscale(dbname):
@@ -264,4 +267,6 @@ local removeFields(obj, names) = [
     keysAndStringValues(object, fieldName),
   RemoveFields(obj, names):
     removeFields(obj, names),
+  GetCurrentFunctionName():
+    getCurrentFunctionName(),
 }

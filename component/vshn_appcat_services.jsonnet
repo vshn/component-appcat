@@ -60,6 +60,7 @@ local vshn_appcat_service(name, serviceParams) =
   local xrd = xrds.XRDFromCRD(
     'x' + serviceNamePlural + '.vshn.appcat.vshn.io',
     xrds.LoadCRD('vshn.appcat.vshn.io_' + serviceNamePlural + '.yaml', params.images.appcat.tag),
+    false,
     defaultComposition=std.asciiLower(serviceParams.serviceName) + '.vshn.appcat.vshn.io',
     connectionSecretKeys=connectionSecretKeys,
   ) + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
@@ -87,7 +88,7 @@ local vshn_appcat_service(name, serviceParams) =
             {
               step: name + '-func',
               functionRef: {
-                name: 'function-appcat',
+                name: common.GetCurrentFunctionName(),
               },
               input: kube.ConfigMap('xfn-config') + {
                 metadata: {

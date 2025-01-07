@@ -17,8 +17,10 @@ spec:
     - NEXTCLOUD_URL
     - NEXTCLOUD_USERNAME
     - ca.crt
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: vshnnextcloud.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNNextcloud

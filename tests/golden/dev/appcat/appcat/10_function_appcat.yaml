@@ -1,11 +1,116 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ac32b13c (wip)
 apiVersion: pkg.crossplane.io/v1beta1
 kind: Function
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat
+<<<<<<< HEAD
+<<<<<<< HEAD
+  name: function-appcat-v4-118-3
 spec:
   package: ghcr.io/vshn/appcat:v4.121.0-func
   runtimeConfigRef:
+    name: enable-proxy
+=======
+>>>>>>> e01f7bf9 (WIP)
+=======
+=======
+  name: function-appcat-v4-120-2
+spec:
+  package: ghcr.io/vshn/appcat:v4.120.2-func
+  runtimeConfigRef:
     name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+<<<<<<< HEAD
+>>>>>>> c3239032 (WIP)
+=======
+  name: function-appcat-v4-120-4
+spec:
+  package: ghcr.io/vshn/appcat:v4.120.4-func
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-120-2
+spec:
+  package: ghcr.io/vshn/appcat:v4.120.2-func
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+>>>>>>> cf91bed4 (WIP)
+  name: function-appcat-v4-120-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.120.0-func
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-119-1
+spec:
+  package: ghcr.io/vshn/appcat:v4.119.1-func
+  runtimeConfigRef:
+    name: function-appcat
+<<<<<<< HEAD
+>>>>>>> ac32b13c (wip)
+=======
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-118-3
+spec:
+  package: ghcr.io/vshn/appcat:v4.118.3-func
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+<<<<<<< HEAD
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-118-2
+spec:
+  package: ghcr.io/vshn/appcat:v4.118.2-func
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+>>>>>>> c3239032 (WIP)
+=======
+>>>>>>> cf91bed4 (WIP)

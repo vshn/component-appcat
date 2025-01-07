@@ -113,6 +113,7 @@ local connectionSecretKeys = [
 local xrd = xrds.XRDFromCRD(
   'xvshnpostgresqls.vshn.appcat.vshn.io',
   xrds.LoadCRD('vshn.appcat.vshn.io_vshnpostgresqls.yaml', params.images.appcat.tag),
+  false,
   defaultComposition='vshnpostgres.vshn.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
 ) + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
@@ -198,7 +199,7 @@ local composition =
           {
             step: 'pgsql-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {

@@ -20,8 +20,10 @@ spec:
     - REDIS_USERNAME
     - REDIS_PASSWORD
     - REDIS_URL
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: vshnredis.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNRedis

@@ -22,8 +22,10 @@ spec:
     - POSTGRESQL_USER
     - POSTGRESQL_PASSWORD
     - LOADBALANCER_IP
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: vshnpostgres.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNPostgreSQL

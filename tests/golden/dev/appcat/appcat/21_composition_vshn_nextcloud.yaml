@@ -13,6 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: v4.120.2
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -23,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat
+        name: function-appcat-v4-120-2
       input:
         apiVersion: v1
         data:
@@ -46,8 +47,12 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
+<<<<<<< HEAD
           imageRegistry: ''
           imageTag: v4.121.0
+=======
+          imageTag: v4.120.2
+>>>>>>> cf91bed4 (WIP)
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'

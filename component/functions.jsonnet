@@ -23,6 +23,7 @@ local getFunction(name, package, runtimeConfigName) = {
     runtimeConfigRef: {
       name: runtimeConfigName,
     },
+    skipDependencyResolution: true,
   },
 };
 
@@ -86,11 +87,20 @@ local appcatProxyRuntimeConfig = {
   },
 };
 
-local appcatImageTag = std.strReplace(appcatImage.tag, '/', '_');
+local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':';
 
-local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':' + appcatImageTag;
+local unescapedVersions = importstr './hack/versionlist';
+local versions = std.split(std.strReplace(unescapedVersions, '/', '_'), '\n');
 
-local appcat = getFunction('function-appcat', appcatFunctionImage, if !params.proxyFunction then 'function-appcat' else 'enable-proxy');
+local appcat = std.foldl(
+  function(out, v)
+    out + [
+      if v != '' then
+        getFunction('function-appcat-' + std.strReplace(v, '.', '-'), appcatFunctionImage + v + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy'),
+    ],
+  versions,
+  [ getFunction('function-appcat-' + std.strReplace(params.images.appcat.tag, '.', '-'), appcatFunctionImage + params.images.appcat.tag + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy') ]
+);
 
 local saAppCat = kube.ServiceAccount('function-appcat') {
   metadata+: {

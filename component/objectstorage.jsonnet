@@ -16,6 +16,7 @@ local objStoParams = params.services.generic.objectstorage;
 local xrd = xrds.XRDFromCRD(
   'xobjectbuckets.appcat.vshn.io',
   xrds.LoadCRD('appcat.vshn.io_objectbuckets.yaml', params.images.appcat.tag),
+  true,
   defaultComposition='%s.objectbuckets.appcat.vshn.io' % objStoParams.defaultComposition,
   connectionSecretKeys=[
     'AWS_ACCESS_KEY_ID',
@@ -24,7 +25,7 @@ local xrd = xrds.XRDFromCRD(
     'ENDPOINT',
     'ENDPOINT_URL',
     'BUCKET_NAME',
-  ]
+  ],
 );
 
 local compositionCloudscale =
@@ -43,7 +44,7 @@ local compositionCloudscale =
           {
             step: 'cloudscalebucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {
@@ -82,7 +83,7 @@ local compositionExoscale =
           {
             step: 'exoscalebucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {
@@ -120,7 +121,7 @@ local minioComp(name) =
           {
             step: 'miniobucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {

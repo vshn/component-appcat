@@ -18,6 +18,7 @@ spec:
     - ENDPOINT
     - ENDPOINT_URL
     - BUCKET_NAME
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: minio.objectbuckets.appcat.vshn.io
   group: appcat.vshn.io

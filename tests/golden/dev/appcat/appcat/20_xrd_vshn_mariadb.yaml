@@ -18,8 +18,10 @@ spec:
     - MARIADB_USERNAME
     - MARIADB_PASSWORD
     - MARIADB_URL
+  defaultCompositeDeletePolicy: Foreground
   defaultCompositionRef:
     name: vshnmariadb.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNMariaDB

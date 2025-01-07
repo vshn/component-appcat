@@ -49,6 +49,7 @@ local redisPlans = common.FilterDisabledParams(redisParams.plans);
 local xrd = xrds.XRDFromCRD(
   'xvshnredis.vshn.appcat.vshn.io',
   xrds.LoadCRD('vshn.appcat.vshn.io_vshnredis.yaml', params.images.appcat.tag),
+  false,
   defaultComposition='vshnredis.vshn.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
 ) + xrds.WithPlanDefaults(redisPlans, redisParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
@@ -470,7 +471,7 @@ local composition =
           {
             step: 'redis-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {
