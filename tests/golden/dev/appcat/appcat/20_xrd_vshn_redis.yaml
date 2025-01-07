@@ -46,7 +46,6 @@ spec:
                         should get backed up.
                       properties:
                         retention:
-                          default: {}
                           description: K8upRetentionPolicy describes the retention
                             configuration for a K8up backup.
                           properties:
