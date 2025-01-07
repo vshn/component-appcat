@@ -18,6 +18,7 @@ spec:
     - AWS_ACCESS_KEY_ID
   defaultCompositionRef:
     name: vshnminio.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNMinio

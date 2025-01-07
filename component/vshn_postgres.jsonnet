@@ -224,7 +224,7 @@ local composition =
           {
             step: 'pgsql-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {

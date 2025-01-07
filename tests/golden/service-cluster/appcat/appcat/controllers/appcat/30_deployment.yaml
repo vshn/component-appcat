@@ -31,9 +31,16 @@ spec:
             - name: PLANS_NAMESPACE
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
+<<<<<<< HEAD
               value: /config/config
           image: ghcr.io/vshn/appcat:add_func-revisions
           imagePullPolicy: IfNotPresent
+=======
+              secretKeyRef:
+                key: kubeconfig
+                name: controlclustercredentials
+          image: ghcr.io/vshn/appcat:v4.120.2
+>>>>>>> da0b5f38 (PoC to demonstrate function revisions)
           livenessProbe:
             httpGet:
               path: /healthz

@@ -22,6 +22,7 @@ spec:
     - LOADBALANCER_IP
   defaultCompositionRef:
     name: vshnmariadb.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNMariaDB

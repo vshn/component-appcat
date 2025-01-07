@@ -26,6 +26,7 @@ local connectionSecretKeys = [
 local xrd = xrds.XRDFromCRD(
   'xexoscalepostgresqls.exoscale.appcat.vshn.io',
   xrds.LoadCRD('exoscale.appcat.vshn.io_exoscalepostgresqls.yaml', params.images.appcat.tag),
+  false,
   defaultComposition='exoscalepostgres.exoscale.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
 );

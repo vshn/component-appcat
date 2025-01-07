@@ -19,6 +19,7 @@ spec:
     - service.cert
     - service.key
     - ca.crt
+  defaultCompositionUpdatePolicy: Manual
   group: exoscale.appcat.vshn.io
   names:
     kind: XExoscaleKafka

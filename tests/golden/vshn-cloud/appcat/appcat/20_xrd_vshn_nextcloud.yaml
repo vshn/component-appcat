@@ -21,6 +21,7 @@ spec:
     - ca.crt
   defaultCompositionRef:
     name: vshnnextcloud.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNNextcloud

@@ -26,6 +26,7 @@ local connectionSecretKeys = [
 local xrd = xrds.XRDFromCRD(
   'xexoscalemysqls.exoscale.appcat.vshn.io',
   xrds.LoadCRD('exoscale.appcat.vshn.io_exoscalemysqls.yaml', params.images.appcat.tag),
+  false,
   defaultComposition='exoscalemysql.exoscale.appcat.vshn.io',
   connectionSecretKeys=connectionSecretKeys,
 );

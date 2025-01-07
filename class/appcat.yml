@@ -47,6 +47,14 @@ parameters:
           - -o
           - ${_base_directory}/sloth-output
 
+      - input_type: external
+        input_paths:
+          - /bin/bash
+        args:
+          - ${_base_directory}/hack/getversionlist.sh
+          - ${_base_directory}/hack/versionlist
+        output_path: .
+
       - input_paths:
           - ${_base_directory}/component/main.jsonnet
         input_type: jsonnet

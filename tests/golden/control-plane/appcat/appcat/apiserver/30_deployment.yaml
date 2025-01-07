@@ -31,7 +31,11 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
+<<<<<<< HEAD
           image: ghcr.io/vshn/appcat:add_func-revisions
+=======
+          image: ghcr.io/vshn/appcat:v4.120.2
+>>>>>>> da0b5f38 (PoC to demonstrate function revisions)
           livenessProbe:
             failureThreshold: 3
             httpGet:

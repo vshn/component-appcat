@@ -10,3 +10,4 @@ spec:
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-patch-and-transform
+  skipDependencyResolution: true

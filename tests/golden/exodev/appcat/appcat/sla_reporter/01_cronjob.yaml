@@ -30,7 +30,11 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
+<<<<<<< HEAD
               image: ghcr.io/vshn/appcat:add_func-revisions
+=======
+              image: ghcr.io/vshn/appcat:v4.120.2
+>>>>>>> da0b5f38 (PoC to demonstrate function revisions)
               name: sla-reporter
               resources:
                 limits:
