@@ -25,7 +25,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat
+        name: function-appcat-v4-118-3
       input:
         apiVersion: v1
         data:

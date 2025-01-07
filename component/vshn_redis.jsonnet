@@ -469,7 +469,7 @@ local composition =
           {
             step: 'redis-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {

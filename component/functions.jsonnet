@@ -90,7 +90,7 @@ local appcatImageTag = std.strReplace(appcatImage.tag, '/', '_');
 
 local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':' + appcatImageTag;
 
-local appcat = getFunction('function-appcat', appcatFunctionImage, if !params.proxyFunction then 'function-appcat' else 'enable-proxy');
+local appcat = getFunction(common.GetCurrentFunctionName(), appcatFunctionImage, if !params.proxyFunction then 'function-appcat' else 'enable-proxy');
 
 local saAppCat = kube.ServiceAccount('function-appcat') {
   metadata+: {
