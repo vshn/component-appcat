@@ -90,7 +90,9 @@ local appcatImageTag = std.strReplace(appcatImage.tag, '/', '_');
 
 local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':' + appcatImageTag;
 
-local appcat = getFunction(common.GetCurrentFunctionName(), appcatFunctionImage, if !params.proxyFunction then 'function-appcat' else 'enable-proxy');
+local versions = std.split(importstr './hack/versionlist', '\n');
+
+local appcat = std.foldl(function(x) x, versions, []);
 
 local saAppCat = kube.ServiceAccount('function-appcat') {
   metadata+: {
