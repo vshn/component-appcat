@@ -86,13 +86,20 @@ local appcatProxyRuntimeConfig = {
   },
 };
 
-local appcatImageTag = std.strReplace(appcatImage.tag, '/', '_');
+local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':';
 
-local appcatFunctionImage = appcatImage.registry + '/' + appcatImage.repository + ':' + appcatImageTag;
+local unescapedVersions = importstr './hack/versionlist';
+local versions = std.split(std.strReplace(unescapedVersions, '/', '_'), '\n');
 
-local versions = std.split(importstr './hack/versionlist', '\n');
-
-local appcat = std.foldl(function(x) x, versions, []);
+local appcat = std.foldl(
+  function(out, v)
+    out + [
+      if v != '' then
+        getFunction('function-appcat-' + std.strReplace(v, '.', '-'), appcatFunctionImage + v + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy'),
+    ],
+  versions,
+  []
+);
 
 local saAppCat = kube.ServiceAccount('function-appcat') {
   metadata+: {
