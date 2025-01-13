@@ -23,7 +23,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.120.0
+          image: ghcr.io/vshn/appcat:fix-typo-sgpostgresconf
           livenessProbe:
             httpGet:
               path: /healthz
