@@ -30,7 +30,7 @@ spec:
               secretKeyRef:
                 key: kubeconfig
                 name: controlclustercredentials
-          image: ghcr.io/vshn/appcat:v4.120.0
+          image: ghcr.io/vshn/appcat:fix-typo-stackgres
           livenessProbe:
             httpGet:
               path: /healthz
