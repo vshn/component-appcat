@@ -8,7 +8,7 @@ metadata:
     name: provider-kubernetes
   name: provider-kubernetes
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v0.14.1
+  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v0.15.1
   runtimeConfigRef:
     name: provider-kubernetes
 ---
