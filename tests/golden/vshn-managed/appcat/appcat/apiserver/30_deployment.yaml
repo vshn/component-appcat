@@ -29,7 +29,11 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
+<<<<<<< HEAD
           image: ghcr.io/vshn/appcat:v4.120.4
+=======
+          image: ghcr.io/vshn/appcat:change_fix_connection_details
+>>>>>>> 06ce6a57 ([create-pull-request] automated change)
           livenessProbe:
             failureThreshold: 3
             httpGet:

@@ -26,7 +26,11 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
+<<<<<<< HEAD
           image: ghcr.io/vshn/appcat:v4.120.4
+=======
+          image: ghcr.io/vshn/appcat:change_fix_connection_details
+>>>>>>> 06ce6a57 ([create-pull-request] automated change)
           livenessProbe:
             httpGet:
               path: /healthz
