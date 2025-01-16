@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  plans: '{"standard-2": {"size": {"cpu": "500m", "disk": "16Gi", "enabled": true,
+    "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi", "enabled":
+    true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled":
+    true, "memory": "8Gi"}}}'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: vshnforgejoplans
+  name: vshnforgejoplans
+  namespace: syn-appcat

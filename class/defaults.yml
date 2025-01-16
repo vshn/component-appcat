@@ -22,6 +22,9 @@ parameters:
       nextcloud:
         source: https://nextcloud.github.io/helm/
         version: 6.2.4
+      forgejo:
+        source: oci://code.forgejo.org/forgejo-helm/forgejo
+        version: v10.1.2
     images:
       provider-kubernetes:
         registry: xpkg.upbound.io
@@ -58,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.120.2
+        tag: add/forgejo
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -102,6 +105,10 @@ parameters:
         registry: quay.io
         image: oc
         tag: v4.13
+      forgejo:
+        registry: ghcr.io
+        image: vshn/forgejo
+        tag: latest
     =_crd_version: ${appcat:images:appcat:tag}
 
     namespace: syn-appcat
@@ -430,6 +437,8 @@ parameters:
           uptime: ${appcat:slos:uptimeDefaults}
         Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
+        Forgejo:
+          uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
       cloudscale:
@@ -550,6 +559,61 @@ parameters:
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
         secretNamespace: ${appcat:crossplane:namespace}
+        forgejo:
+          billing: true
+          serviceName: VSHNForgejo
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - FORGEJO_HOST
+            - FORGEJO_PASSWORD
+            - FORGEJO_URL
+            - FORGEJO_USERNAME
+            - ca.crt
+          mode: standalone
+          offered: true
+          enabled: true
+          restoreSA: forgejoserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs:
+            forgejo_image: ${appcat:images:forgejo:registry}/${appcat:images:forgejo:image}
+            busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
+            oc_image: ${appcat:images:oc:registry}/${appcat:images:oc:image}:${appcat:images:oc:tag}
+          openshiftTemplate:
+            serviceName: forgejobyvshn
+            description: "forgejo is an open source suite of client-server software for creating and using file hosting services."
+            message: 'Your forgejo by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-forgejo
+            tags: "idp,forgejo"
+            icon: "icon-forgejo"
+            defaultVersion: "22"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:forgejo:version}
+          imageRegistry: ""
+          bucket_region: "lpg"
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-2
+          sla: 99.25
+          plans:
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 16Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 16Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 16Gi
         postgres:
           billing: true
           # bucket_region: 'lpg' || 'ch-gva-2'
