@@ -119,6 +119,7 @@ parameters:
       controlPlaneCluster: true
       serviceCluster: true
       controlPlaneKubeconfig: ""
+      serviceClusterKubeconfigs: []
 
     crossplane:
       namespace: syn-crossplane

@@ -8,4 +8,4 @@ metadata:
 spec:
   package: ghcr.io/vshn/appcat:v4.120.2-func
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy

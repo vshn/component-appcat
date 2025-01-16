@@ -42,7 +42,10 @@ metadata:
   name: minio
 spec:
   credentials:
-    source: InjectedIdentity
+    apiSecretRef:
+      name: minio-secret
+      namespace: syn-crossplane
+  minioURL: http://minio-server.minio.svc:9000/
 ---
 apiVersion: v1
 kind: ServiceAccount
