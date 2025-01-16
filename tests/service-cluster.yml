@@ -22,7 +22,7 @@ parameters:
     clusterManagementSystem:
       controlPlaneCluster: false
       serviceCluster: true
-      controlPlaneKubeconfig: "changeme" # make vcluster-in-cluster-kubeconfig in kindev
+      controlPlaneKubeconfig: "dummy" # `make vcluster-in-cluster-kubeconfig` in kindev
 
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false

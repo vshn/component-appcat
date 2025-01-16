@@ -56,6 +56,7 @@ local compositionCloudscale =
                 providerConfig: 'cloudscale',
                 serviceName: 'cloudscalebucket',
                 providerSecretNamespace: compParams.providerSecretNamespace,
+                crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
                 proxyEndpoint: compParams.grpcEndpoint,
               } else {},
@@ -95,6 +96,7 @@ local compositionExoscale =
                 providerConfig: 'exoscale',
                 serviceName: 'exoscalebucket',
                 providerSecretNamespace: compParams.providerSecretNamespace,
+                crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
                 proxyEndpoint: compParams.grpcEndpoint,
               } else {},
@@ -132,6 +134,7 @@ local minioComp(name) =
               data: {
                 providerConfig: name,
                 serviceName: 'miniobucket',
+                crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
                 proxyEndpoint: compParams.grpcEndpoint,
               } else {},

@@ -53,10 +53,7 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
   },
   if controllersParams.controlPlaneKubeconfig != '' then {
     name: 'CONTROL_PLANE_KUBECONFIG',
-    secretKeyRef: {
-      name: 'controlclustercredentials',
-      key: 'kubeconfig',
-    },
+    value: '/config/config',
   } else null,
 ]);
 
@@ -85,7 +82,14 @@ local controller = loadManifest('deployment.yaml') {
               secretName: controllersParams.tls.certSecretName,
             },
           },
-        ],
+        ] + if controllersParams.controlPlaneKubeconfig != '' then [
+          {
+            name: 'kubeconfig',
+            secret: {
+              secretName: 'controlclustercredentials',
+            },
+          },
+        ] else [],
         containers: [
           if c.name == 'manager' then
             c {
@@ -98,7 +102,12 @@ local controller = loadManifest('deployment.yaml') {
                   name: 'webhook-certs',
                   mountPath: '/etc/webhook/certs',
                 },
-              ],
+              ] + if controllersParams.controlPlaneKubeconfig != '' then [
+                {
+                  name: 'kubeconfig',
+                  mountPath: '/config',
+                },
+              ] else [],
             }
           else
             c

@@ -6,10 +6,6 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat
 spec:
-<<<<<<< HEAD
-  package: ghcr.io/vshn/appcat:v4.120.4-func
-=======
   package: ghcr.io/vshn/appcat:change_fix_connection_details-func
->>>>>>> 06ce6a57 ([create-pull-request] automated change)
   runtimeConfigRef:
     name: function-appcat

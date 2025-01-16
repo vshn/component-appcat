@@ -248,6 +248,21 @@ local controlKubeConfig = kube.Secret('controlclustercredentials') + {
   },
 };
 
+local serviceClusterKubeconfigs =
+  std.foldl(
+    function(agg, kubeConf)
+      agg + kube.Secret('kubeconfig-' + kubeConf.name) + {
+        metadata+: {
+          namespace: params.crossplane.namespace,
+        },
+        stringData+: {
+          kubeconfig: std.manifestJson(std.parseYaml(kubeConf.config)),
+        },
+      },
+    params.clusterManagementSystem.serviceClusterKubeconfigs,
+    {}
+  );
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -262,4 +277,5 @@ local controlKubeConfig = kube.Secret('controlclustercredentials') + {
   // golden tests where things get dynamically enabeld or disabled, so we
   // can't use an enabled filter in the post processing...
   'controllers/sts-resizer/.keep': '',
+  [if std.length(params.clusterManagementSystem.serviceClusterKubeconfigs) != 0 then '10_service_cluster_kubeconfigs']: serviceClusterKubeconfigs,
 }

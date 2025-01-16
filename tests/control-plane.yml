@@ -27,18 +27,12 @@ parameters:
     clusterManagementSystem:
       controlPlaneCluster: true
       serviceCluster: false
-      commonProviderConfigs:
+      serviceClusterKubeconfigs:
         - name: kind
-          spec:
-            credentials:
-              source: Secret
-              secretRef:
-                key: kubeconfig
-                name: kind
-                namespace: syn-crossplane
+          config: "dummy" # `make vcluster-host-kubeconfig` in kindev
 
-    grpcEndpoint: 172.18.0.1:9443
-    proxyFunction: false
+    grpcEndpoint: 172.17.0.1:9443
+    proxyFunction: true
 
     quotasEnabled: false
     appuioManaged: false
@@ -76,10 +70,34 @@ parameters:
         enabled: true
       kubernetes:
         enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: Secret
+                secretRef:
+                  key: kubeconfig
+                  name: kubeconfig-kind
+                  namespace: syn-crossplane
       helm:
         enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: Secret
+                secretRef:
+                  key: kubeconfig
+                  name: kubeconfig-kind
+                  namespace: syn-crossplane
       minio:
         enabled: true
+        defaultProviderConfig:
+          minioURL: http://minio-server.minio.svc:9000/
+          credentials:
+            apiSecretRef:
+              name: minio-secret
+              namespace: syn-crossplane
 
     apiserver:
       enabled: true

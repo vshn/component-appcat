@@ -26,11 +26,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-<<<<<<< HEAD
-          image: ghcr.io/vshn/appcat:v4.120.4
-=======
           image: ghcr.io/vshn/appcat:change_fix_connection_details
->>>>>>> 06ce6a57 ([create-pull-request] automated change)
           livenessProbe:
             httpGet:
               path: /healthz
@@ -61,7 +57,7 @@ spec:
             - --upstream=http://127.0.0.1:8080/
             - --logtostderr=true
             - --v=10
-          image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+          image: quay.io/brancz/kube-rbac-proxy:v0.18.2
           name: kube-rbac-proxy
           ports:
             - containerPort: 8443

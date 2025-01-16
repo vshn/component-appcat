@@ -28,7 +28,7 @@ spec:
         apiVersion: v1
         data:
           bucketRegion: lpg
-          busybox_image: docker.io/busybox
+          busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 6.2.4
           collaboraCPULimit: '1'
@@ -46,11 +46,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-<<<<<<< HEAD
-          imageTag: v4.120.4
-=======
           imageTag: change_fix_connection_details
->>>>>>> 06ce6a57 ([create-pull-request] automated change)
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
@@ -58,7 +54,7 @@ spec:
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
-          nextcloud_image: docker.io/nextcloud
+          nextcloud_image: docker.io/library/nextcloud
           oc_image: quay.io/appuio/oc:v4.13
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud
@@ -67,6 +63,7 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
+          proxyEndpoint: 172.17.0.1:9443
           quotasEnabled: 'false'
           restoreSA: nextcloudserviceaccount
           salesOrder: ''

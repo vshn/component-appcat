@@ -40,11 +40,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-<<<<<<< HEAD
-          imageTag: v4.120.4
-=======
           imageTag: change_fix_connection_details
->>>>>>> 06ce6a57 ([create-pull-request] automated change)
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
