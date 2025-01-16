@@ -5,8 +5,8 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-70'
   labels:
-    name: xvshnforgejos.vshn.appcat.vshn.io
-  name: xvshnforgejos.vshn.appcat.vshn.io
+    name: xvshnforgejoes.vshn.appcat.vshn.io
+  name: xvshnforgejoes.vshn.appcat.vshn.io
 spec:
   claimNames:
     kind: VSHNForgejo

@@ -24,8 +24,11 @@ local getServiceNamePlural(serviceName) =
   local serviceNameLower = std.asciiLower(serviceName);
   if std.endsWith(serviceName, 's') then
     serviceNameLower
+    # special case for forgejo :)))
+  else if std.endsWith(serviceName, 'gejo') then
+    serviceNameLower + 'es'
   else
-    serviceNameLower + 's';
+      serviceNameLower + 's';
 
 local vshn_appcat_service(name, serviceParams) =
   local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
