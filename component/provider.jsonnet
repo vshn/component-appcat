@@ -89,6 +89,11 @@ local providerRBAC = {
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {
+        apiGroups: [ 'vshn.appcat.vshn.io' ],
+        resources: [ 'xvshnforgejoes', 'vshnforgejoes' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
         apiGroups: [ 'cert-manager.io' ],
         resources: [ 'issuers', 'certificates' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],

@@ -1,0 +1,14 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNForgejo
+metadata:
+  name: forgejo-e2e
+spec:
+  parameters:
+    service:
+      adminEmail: "lukasz.sknera@vshn.vshn"
+      fqdn:
+        - "somesuperingressname.apps.lab-cloudscale-rma-0.appuio.cloud"
+    security:
+      deletionProtection: false
+  writeConnectionSecretToRef:
+    name: mysupersecret

@@ -6,6 +6,15 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat
 spec:
+<<<<<<< HEAD
   package: ghcr.io/vshn/appcat:v4.121.2-func
+=======
+  package: ghcr.io/vshn/appcat:add_forgejo-func
+<<<<<<< HEAD
+  packagePullPolicy: Always
+>>>>>>> 12c1e3b3 (bootstraping forgejo)
+=======
+  packagePullPolicy: IfNotPresent
+>>>>>>> 9d91102a (playing with codey)
   runtimeConfigRef:
     name: function-appcat

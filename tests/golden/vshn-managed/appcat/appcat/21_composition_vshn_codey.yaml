@@ -1,0 +1,86 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: codey instances by VSHN
+    metadata.appcat.vshn.io/displayname: codey by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-codey
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"mini":{"size":{"cpu":"500m","disk":"10Gi","enabled":true,"memory":"2Gi"}},"small":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"4Gi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/codey.html
+    metadata.appcat.vshn.io/zone: rma1
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/serviceID: vshn-codey
+    name: codey.io
+  name: codey.io
+spec:
+  compositeTypeRef:
+    apiVersion: codey.io/v1
+    kind: XCodey
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata: {}
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: vshn.appcat.vshn.io/v1
+                    kind: VSHNForgejo
+                    metadata:
+                      name: codey-testing
+                      namespace: default
+                    spec:
+                      parameters:
+                        security:
+                          deletionProtection: false
+                        service:
+                          adminEmail: lukasz.widera@vshn.ch
+                          fqdn:
+                            - myforgejo2.127.0.0.1.nip.io
+                          majorVersion: 10.0.0
+                        size:
+                          plan: mini
+                      writeConnectionSecretToRef:
+                        name: ''
+                        namespace: ''
+                providerConfigRef:
+                  name: kubernetes
+            name: xvshnforgejo
+            patches:
+              - fromFieldPath: metadata.name
+                toFieldPath: metadata.name
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.service.adminEmail
+                toFieldPath: spec.forProvider.manifest.spec.parameters.service.adminEmail
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.service.majorVersion
+                toFieldPath: spec.forProvider.manifest.spec.parameters.service.majorVersion
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.service.fqdn
+                toFieldPath: spec.forProvider.manifest.spec.parameters.service.fqdn
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.size
+                toFieldPath: spec.forProvider.manifest.spec.parameters.size.plan
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.labels["crossplane.io/claim-name"]
+                toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.name
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.namespace
+                type: FromCompositeFieldPath
+      step: patch-and-transform
+  writeConnectionSecretsToNamespace: syn-crossplane

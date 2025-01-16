@@ -30,7 +30,16 @@ spec:
               secretKeyRef:
                 key: kubeconfig
                 name: controlclustercredentials
+<<<<<<< HEAD
           image: ghcr.io/vshn/appcat:v4.121.2
+=======
+          image: ghcr.io/vshn/appcat:add_forgejo
+<<<<<<< HEAD
+          imagePullPolicy: Always
+>>>>>>> 12c1e3b3 (bootstraping forgejo)
+=======
+          imagePullPolicy: IfNotPresent
+>>>>>>> 9d91102a (playing with codey)
           livenessProbe:
             httpGet:
               path: /healthz

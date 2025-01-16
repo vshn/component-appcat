@@ -597,8 +597,12 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
+<<<<<<< HEAD
           imageRegistry: ''
           imageTag: v4.121.2
+=======
+          imageTag: add_forgejo
+>>>>>>> 12c1e3b3 (bootstraping forgejo)
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io

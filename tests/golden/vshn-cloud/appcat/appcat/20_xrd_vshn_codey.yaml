@@ -1,0 +1,83 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-70'
+  labels:
+    name: xcodeys.codey.io
+  name: xcodeys.codey.io
+spec:
+  claimNames:
+    kind: Codey
+    plural: codeys
+  connectionSecretKeys:
+    - CODEY_USERNAME
+    - CODEY_PASSWORD
+    - CODEY_URL
+  defaultCompositionRef:
+    name: codey.io
+  group: codey.io
+  names:
+    kind: XCodey
+    plural: xcodeys
+  versions:
+    - name: v1
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: Codey is the API for creating Codey instances.
+          properties:
+            spec:
+              description: Spec defines the desired state of a Codey.
+              properties:
+                parameters:
+                  default: {}
+                  description: Parameters are the configurable fields of a Codey.
+                  properties:
+                    service:
+                      description: Service contains Codey DBaaS specific properties
+                      properties:
+                        adminEmail:
+                          description: AdminEmail for email notifications.
+                          type: string
+                        fqdn:
+                          description: |-
+                            FQDN contains the FQDNs array, which will be used for the ingress.
+                            If it's not set, no ingress will be deployed.
+                            This also enables strict hostname checking for this FQDN.
+                          items:
+                            type: string
+                          minItems: 1
+                          type: array
+                        majorVersion:
+                          description: |-
+                            Version contains supported version of Codey.
+                            Multiple versions are supported.
+                          type: string
+                      required:
+                        - adminEmail
+                        - fqdn
+                      type: object
+                    size:
+                      default: mini
+                      description: Size contains settings to control the sizing of
+                        a service.
+                      enum:
+                        - mini
+                        - small
+                      type: string
+                  type: object
+              type: object
+            status:
+              description: Status reflects the observed state of a Codey.
+              properties:
+                instanceNamespace:
+                  description: InstanceNamespace contains the name of the namespace
+                    where the instance resides
+                  type: string
+              type: object
+          required:
+            - spec
+          type: object
+      served: true

@@ -24,12 +24,13 @@ local getServiceNamePlural(serviceName) =
   local serviceNameLower = std.asciiLower(serviceName);
   if std.endsWith(serviceName, 's') then
     serviceNameLower
+  else if std.endsWith(serviceName, 'jo') then
+    serviceNameLower + 'es'
   else
     serviceNameLower + 's';
 
 local vshn_appcat_service(name, serviceParams) =
   local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
-
   local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
 
   local connectionSecretKeys = serviceParams.connectionSecretKeys;
