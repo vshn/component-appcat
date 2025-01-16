@@ -91,7 +91,7 @@ parameters:
       collabora:
         registry: docker.io
         image: collabora/code
-        tag: "24.04.9.2.1"
+        tag: "24.04.11.3.1"
       nextcloud:
         registry: docker.io
         image: nextcloud
