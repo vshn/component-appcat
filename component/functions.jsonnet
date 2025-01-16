@@ -23,6 +23,7 @@ local getFunction(name, package, runtimeConfigName) = {
     runtimeConfigRef: {
       name: runtimeConfigName,
     },
+    skipDependencyResolution: true,
   },
 };
 
