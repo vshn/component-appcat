@@ -305,6 +305,7 @@ local composition =
               imageRegistry: redisParams.imageRegistry,
             },
             image: {
+              registry: redisParams.imageRegistry,
               repository: 'bitnami/redis',
             },
             commonConfiguration: '',
@@ -494,6 +495,7 @@ local composition =
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       crossplaneNamespace: params.crossplane.namespace,
                       ignoreNamespaceForBilling: params.billing.ignoreNamespace,
+                      imageRegistry: redisParams.imageRegistry,
                     } + common.EmailAlerting(params.services.emailAlerting)
                     + if redisParams.proxyFunction then {
                       proxyEndpoint: redisParams.grpcEndpoint,

@@ -116,6 +116,7 @@ local vshn_appcat_service(name, serviceParams) =
                         salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                         crossplaneNamespace: params.crossplane.namespace,
                         ignoreNamespaceForBilling: params.billing.ignoreNamespace,
+                        imageRegistry: serviceParams.imageRegistry,
                       } + common.EmailAlerting(params.services.emailAlerting)
                       + restoreSA
                       + additonalInputs

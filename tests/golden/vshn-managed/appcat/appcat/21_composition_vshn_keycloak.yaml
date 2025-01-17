@@ -40,7 +40,8 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.120.2
+          imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
+          imageTag: update-appuio-registry
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
