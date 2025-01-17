@@ -46,6 +46,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
+          imageRegistry: ''
           imageTag: update-appuio-registry
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging

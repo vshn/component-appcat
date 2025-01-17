@@ -566,6 +566,7 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           sgNamespace: syn-stackgres-operator
           defaultPlan: standard-2
+          imageRegistry: ""
           sla: 99.25
           plans:
             standard-2:
@@ -747,6 +748,7 @@ parameters:
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
+          imageRegistry: ""
           sla: 99.25
           plans:
             standard-1:
@@ -861,7 +863,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
-          imageRegistry: ""
+          imageRegistry: "docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed"
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}

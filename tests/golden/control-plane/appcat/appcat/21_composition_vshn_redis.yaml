@@ -397,6 +397,7 @@ spec:
                     global:
                       imageRegistry: ''
                     image:
+                      registry: ''
                       repository: bitnami/redis
                     master:
                       containerSecurityContext:
@@ -597,6 +598,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
+          imageRegistry: ''
           imageTag: update-appuio-registry
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
