@@ -58,7 +58,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.120.2
+        tag: change/fix_connection_details
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -119,6 +119,7 @@ parameters:
       controlPlaneCluster: true
       serviceCluster: true
       controlPlaneKubeconfig: ""
+      serviceClusterKubeconfigs: []
 
     crossplane:
       namespace: syn-crossplane

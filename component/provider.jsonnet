@@ -250,13 +250,15 @@ local providerRBAC = {
 };
 
 local additionalProviderConfigs(provider) =
-  [
-    crossplane.ProviderConfig(config.name) {
-      apiVersion: provider.apiVersion,
-      spec+: config.spec,
-    }
-    for config in provider.additionalProviderConfigs
-  ];
+  std.foldl(
+    function(agg, config)
+      agg + crossplane.ProviderConfig(config.name) {
+        apiVersion: provider.apiVersion,
+        spec+: config.spec,
+      },
+    provider.additionalProviderConfigs,
+    {}
+  );
 
 local provider(name, provider) =
   local sa = kube.ServiceAccount(provider.runtimeConfig.serviceAccountName) {

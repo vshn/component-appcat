@@ -26,6 +26,7 @@ spec:
         apiVersion: v1
         data:
           providerConfig: minio
+          proxyEndpoint: host.docker.internal:9443
           serviceName: miniobucket
         kind: ConfigMap
         metadata:
