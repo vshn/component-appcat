@@ -78,7 +78,7 @@ parameters:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.16.0
+        tag: v1.18.2
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
