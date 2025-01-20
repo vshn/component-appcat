@@ -8,7 +8,7 @@ metadata:
     name: provider-sql
   name: provider-sql
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-sql:v0.9.0
+  package: xpkg.upbound.io/crossplane-contrib/provider-sql:v0.11.0
   runtimeConfigRef:
     name: provider-sql
 ---
