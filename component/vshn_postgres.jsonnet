@@ -63,6 +63,13 @@ local stackgresNetworkPolicy = kube.NetworkPolicy('allow-stackgres-api') + {
               },
             },
           },
+          {
+            namespaceSelector: {
+              matchLabels: {
+                'name': 'syn-crossplane',
+              },
+            },
+          },
         ],
       },
     ],
