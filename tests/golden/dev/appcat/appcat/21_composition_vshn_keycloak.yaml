@@ -40,20 +40,8 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-<<<<<<< HEAD
-<<<<<<< HEAD
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: v4.121.2
-=======
-<<<<<<< HEAD
-          imageTag: v4.120.4
-=======
           imageTag: postgres-major-upgrades
->>>>>>> 3d2a5324 ([create-pull-request] automated change)
->>>>>>> c7fa32c8 (Resolve conflicts)
-=======
-          imageTag: postgres-major-upgrades
->>>>>>> e89e050b (Update golden tests)
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging

@@ -66,7 +66,7 @@ local stackgresNetworkPolicy = kube.NetworkPolicy('allow-stackgres-api') + {
           {
             namespaceSelector: {
               matchLabels: {
-                'name': 'syn-crossplane',
+                name: 'syn-crossplane',
               },
             },
           },
@@ -314,10 +314,10 @@ local appcatFuncRoleBinding = kube.RoleBinding('appcat-function') + {
   roleRef_: kube.Role('appcat-function:stackgres-restapi-admin'),
   subjects: [
     {
-      kind: "ServiceAccount",
-      name: "function-appcat",
+      kind: 'ServiceAccount',
+      name: 'function-appcat',
       namespace: params.crossplane.namespace,
-    }
+    },
   ],
 };
 
@@ -327,9 +327,9 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
   },
   rules+: [
     {
-      apiGroups: [''],
-      resources: ['secrets'],
-      resourceNames: ["stackgres-restapi-admin"],
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      resourceNames: [ 'stackgres-restapi-admin' ],
       verbs: [ 'get' ],
     },
   ],

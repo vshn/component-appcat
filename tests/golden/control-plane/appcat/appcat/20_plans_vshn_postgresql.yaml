@@ -16,7 +16,7 @@ data:
     "16m", "memory": "4Mi"}}, "postgresUtil": {"limits": {"cpu": "20m", "memory":
     "20Mi"}, "requests": {"cpu": "10m", "memory": "4Mi"}}, "prometheusPostgresExporter":
     {"limits": {"cpu": "150m", "memory": "256Mi"}, "requests": {"cpu": "10m", "memory":
-    "16Mi"}}, "runDbops": {"limits": {"cpu": "250m", "memory": "256Mi"}, "requests":
+    "16Mi"}}, "runDbops": {"limits": {"cpu": "500m", "memory": "1Gi"}, "requests":
     {"cpu": "100m", "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m",
     "memory": "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
 kind: ConfigMap
