@@ -25,6 +25,7 @@ spec:
       input:
         apiVersion: v1
         data:
+          crossplaneNamespace: syn-crossplane
           providerConfig: minio
           serviceName: miniobucket
         kind: ConfigMap

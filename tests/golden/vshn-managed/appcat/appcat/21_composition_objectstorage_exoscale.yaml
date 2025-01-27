@@ -26,6 +26,7 @@ spec:
       input:
         apiVersion: v1
         data:
+          crossplaneNamespace: syn-crossplane
           providerConfig: exoscale
           providerSecretNamespace: syn-provider-exoscale-secrets
           serviceName: exoscalebucket

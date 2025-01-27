@@ -25,7 +25,9 @@ spec:
       input:
         apiVersion: v1
         data:
+          crossplaneNamespace: syn-crossplane
           providerConfig: minio
+          proxyEndpoint: 172.17.0.1:9443
           serviceName: miniobucket
         kind: ConfigMap
         metadata:
