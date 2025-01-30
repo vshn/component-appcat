@@ -34,8 +34,8 @@ local securityContext = if isOpenshift then false else true;
 local codeyPlans = common.FilterDisabledParams(codeyParams.plans);
 
 local xrd = xrds.XRDFromCRD(
-  'xcodeys.codey.io',
-  xrds.LoadCRD('codey.io_codeys.yaml', params.images.appcat.tag),
+  'xinstances.codey.io',
+  xrds.LoadCRD('codey.io_instances.yaml', params.images.appcat.tag),
   defaultComposition='codey.io',
   connectionSecretKeys=connectionSecretKeys,
 );
@@ -67,7 +67,7 @@ local composition =
 
   kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'codey.io') +
   common.SyncOptions +
-  common.vshnMetaVshnDBaas('codey', 'standalone', 'true', codeyPlans) +
+  common.vshnMetaVshnDBaas('instance', 'standalone', 'true', codeyPlans) +
   {
     spec: {
       compositeTypeRef: comp.CompositeRef(xrd),

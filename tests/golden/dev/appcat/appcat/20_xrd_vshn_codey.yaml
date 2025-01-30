@@ -5,12 +5,12 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-70'
   labels:
-    name: xcodeys.codey.io
-  name: xcodeys.codey.io
+    name: xinstances.codey.io
+  name: xinstances.codey.io
 spec:
   claimNames:
-    kind: Codey
-    plural: codeys
+    kind: Instance
+    plural: instances
   connectionSecretKeys:
     - CODEY_USERNAME
     - CODEY_PASSWORD
@@ -19,24 +19,24 @@ spec:
     name: codey.io
   group: codey.io
   names:
-    kind: XCodey
-    plural: xcodeys
+    kind: XInstance
+    plural: xinstances
   versions:
     - name: v1
       referenceable: true
       schema:
         openAPIV3Schema:
-          description: Codey is the API for creating Codey instances.
+          description: Instance is the API for creating Instance instances.
           properties:
             spec:
-              description: Spec defines the desired state of a Codey.
+              description: Spec defines the desired state of a Instance.
               properties:
                 parameters:
                   default: {}
-                  description: Parameters are the configurable fields of a Codey.
+                  description: Parameters are the configurable fields of a Instance.
                   properties:
                     service:
-                      description: Service contains Codey DBaaS specific properties
+                      description: Service contains Instance DBaaS specific properties
                       properties:
                         adminEmail:
                           description: AdminEmail for email notifications.
@@ -52,7 +52,7 @@ spec:
                           type: array
                         majorVersion:
                           description: |-
-                            Version contains supported version of Codey.
+                            Version contains supported version of Instance.
                             Multiple versions are supported.
                           type: string
                       required:
@@ -77,7 +77,7 @@ spec:
                   type: object
               type: object
             status:
-              description: Status reflects the observed state of a Codey.
+              description: Status reflects the observed state of a Instance.
               properties:
                 instanceNamespace:
                   description: InstanceNamespace contains the name of the namespace
