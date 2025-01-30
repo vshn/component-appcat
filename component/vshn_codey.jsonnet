@@ -108,7 +108,7 @@ local composition =
                     comp.FromCompositeFieldPath('metadata.labels["crossplane.io/composite"]', 'metadata.name'),
                     comp.FromCompositeFieldPath('spec.parameters.service.adminEmail', 'spec.parameters.service.adminEmail'),
                     comp.FromCompositeFieldPath('spec.parameters.service.majorVersion', 'spec.parameters.service.majorVersion'),
-                    comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'spec.parameters.service.fqdn[0]',"app.codey.ch"),
+                    comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'spec.parameters.service.fqdn[0]', 'app.codey.ch'),
                     comp.FromCompositeFieldPath('spec.parameters.size.plan', 'spec.parameters.size.plan'),
                   ],
                 },
