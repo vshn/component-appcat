@@ -51,8 +51,8 @@ local composition =
       parameters: {
         service: {
           adminEmail: 'lukasz.widera@vshn.ch',
-          version: '10.0.0',
-          fqdn: [ 'myforgejo2.127.0.0.1.nip.io' ],
+          majorVersion: '10.0.0',
+          fqdn: [ 'myforgejo.127.0.0.1.nip.io' ],
         },
         size: {
           plan: 'mini',
@@ -107,10 +107,9 @@ local composition =
                   patches: [
                     comp.FromCompositeFieldPath('metadata.labels["crossplane.io/composite"]', 'metadata.name'),
                     comp.FromCompositeFieldPath('spec.parameters.service.adminEmail', 'spec.parameters.service.adminEmail'),
-                    comp.FromCompositeFieldPath('spec.parameters.service.majorVersion', 'spec.parameters.service.version'),
-                    comp.FromCompositeFieldPath('spec.parameters.service.fqdn', 'spec.parameters.service.fqdn'),
+                    comp.FromCompositeFieldPath('spec.parameters.service.majorVersion', 'spec.parameters.service.majorVersion'),
+                    comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'spec.parameters.service.fqdn[0]',"app.codey.ch"),
                     comp.FromCompositeFieldPath('spec.parameters.size.plan', 'spec.parameters.size.plan'),
-
                   ],
                 },
               ],

@@ -5,14 +5,14 @@ metadata:
     argocd.argoproj.io/sync-wave: '-100'
   labels:
     rbac.authorization.k8s.io/aggregate-to-view: 'true'
-  name: appcat:composite:xcodeys.codey.io:claim-view
+  name: appcat:composite:xinstances.codey.io:claim-view
 rules:
   - apiGroups:
       - codey.io
     resources:
-      - codeys
-      - codeys/status
-      - codeys/finalizers
+      - instances
+      - instances/status
+      - instances/finalizers
     verbs:
       - get
       - list
@@ -26,13 +26,13 @@ metadata:
   labels:
     rbac.authorization.k8s.io/aggregate-to-admin: 'true'
     rbac.authorization.k8s.io/aggregate-to-edit: 'true'
-  name: appcat:composite:xcodeys.codey.io:claim-edit
+  name: appcat:composite:xinstances.codey.io:claim-edit
 rules:
   - apiGroups:
       - codey.io
     resources:
-      - codeys
-      - codeys/status
-      - codeys/finalizers
+      - instances
+      - instances/status
+      - instances/finalizers
     verbs:
       - '*'
