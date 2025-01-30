@@ -1,0 +1,80 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-70'
+  labels:
+    name: xinstances.codey.io
+  name: xinstances.codey.io
+spec:
+  claimNames:
+    kind: Instance
+    plural: instances
+  connectionSecretKeys:
+    - CODEY_USERNAME
+    - CODEY_PASSWORD
+    - CODEY_URL
+  defaultCompositionRef:
+    name: codey.io
+  group: codey.io
+  names:
+    kind: XInstance
+    plural: xinstances
+  versions:
+    - name: v1
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: Instance is the API for creating Instance instances.
+          properties:
+            spec:
+              description: Spec defines the desired state of a Instance.
+              properties:
+                parameters:
+                  default: {}
+                  description: Parameters are the configurable fields of a Instance.
+                  properties:
+                    service:
+                      description: Service contains Instance DBaaS specific properties
+                      properties:
+                        adminEmail:
+                          description: AdminEmail for email notifications.
+                          type: string
+                        majorVersion:
+                          description: |-
+                            Version contains supported version of Instance.
+                            Multiple versions are supported.
+                          type: string
+                      required:
+                        - adminEmail
+                      type: object
+                    size:
+                      default: {}
+                      description: Size contains settings to control the sizing of
+                        a service.
+                      properties:
+                        plan:
+                          default: mini
+                          description: |-
+                            Size contains settings to control the sizing of a service.
+                            Plan is the name of the resource plan that defines the compute resources.
+                          enum:
+                            - mini
+                            - small
+                          type: string
+                      type: object
+                  type: object
+              type: object
+            status:
+              description: Status reflects the observed state of a Instance.
+              properties:
+                instanceNamespace:
+                  description: InstanceNamespace contains the name of the namespace
+                    where the instance resides
+                  type: string
+              type: object
+          required:
+            - spec
+          type: object
+      served: true

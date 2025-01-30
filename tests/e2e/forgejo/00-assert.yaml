@@ -1,0 +1,34 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 60
+---
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNForgejo
+metadata:
+  finalizers:
+  - finalizer.apiextensions.crossplane.io
+  name: forgejo-e2e
+spec:
+  compositionUpdatePolicy: Automatic
+  parameters:
+    backup: {}
+    security:
+      allowAllNamespaces: false
+      deletionProtection: false
+    service:
+      adminEmail: lukasz.sknera@vshn.vshn
+      fqdn:
+      - somesuperingressname.apps.lab-cloudscale-rma-0.appuio.cloud
+      serviceLevel: besteffort
+      version: 10.0.0
+    size:
+      plan: small
+  resourceRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNForgejo
+  writeConnectionSecretToRef:
+    name: mysupersecret
+status:
+  conditions:
+  - status: "True"
+  - status: "True"

@@ -1,0 +1,45 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
+  name: vshn-vshnforgejo-new-sla
+  namespace: syn-appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnforgejo-sla-target
+      rules:
+        - alert: vshn-vshnforgejo-new-sla
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+          expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNForgejo",
+            ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
+            service="VSHNForgejo", ha="false", maintenance="false"}[1m]) > 0.75
+          labels:
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
+              }}'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
+            service: VSHNForgejo
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - alert: vshn-vshnforgejo-new-sla-ha
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+          expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNForgejo",
+            ha="true"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
+            service="VSHNForgejo", ha="true"}[1m]) > 0.75
+          labels:
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
+              }}'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
+            service: VSHNForgejo
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar

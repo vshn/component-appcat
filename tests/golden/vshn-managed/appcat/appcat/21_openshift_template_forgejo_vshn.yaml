@@ -1,0 +1,41 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+message: Your Forgejo by VSHN instance is being provisioned, please see ${SECRET_NAME}
+  for access.
+metadata:
+  annotations:
+    description: Forgejo is a self-hosted lightweight software forge.
+    iconClass: icon-forgejo
+    openshift.io/display-name: VSHNForgejo
+    openshift.io/documentation-url: https://vs.hn/vshn-forgejo
+    openshift.io/provider-display-name: VSHN
+    openshift.io/support-url: https://www.vshn.ch/en/contact/
+    tags: codehosting,forgejo
+  labels:
+    name: forgejobyvshn
+  name: forgejobyvshn
+  namespace: openshift
+objects:
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNForgejo
+    metadata:
+      annotations: {}
+      labels:
+        name: ${INSTANCE_NAME}
+      name: ${INSTANCE_NAME}
+    spec:
+      parameters:
+        service:
+          version: ${VERSION}
+        size:
+          plan: ${PLAN}
+      writeConnectionSecretToRef:
+        name: ${SECRET_NAME}
+parameters:
+  - name: PLAN
+    value: standard-4
+  - name: SECRET_NAME
+    value: forgejo-credentials
+  - name: INSTANCE_NAME
+  - name: VERSION
+    value: '22'
