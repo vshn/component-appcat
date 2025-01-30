@@ -68,7 +68,7 @@ spec:
               - fromFieldPath: spec.parameters.service.fqdn
                 toFieldPath: spec.parameters.service.fqdn
                 type: FromCompositeFieldPath
-              - fromFieldPath: spec.parameters.size
+              - fromFieldPath: spec.parameters.size.plan
                 toFieldPath: spec.parameters.size.plan
                 type: FromCompositeFieldPath
       step: patch-and-transform

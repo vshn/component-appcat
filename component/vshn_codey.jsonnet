@@ -109,7 +109,7 @@ local composition =
                     comp.FromCompositeFieldPath('spec.parameters.service.adminEmail', 'spec.parameters.service.adminEmail'),
                     comp.FromCompositeFieldPath('spec.parameters.service.majorVersion', 'spec.parameters.service.version'),
                     comp.FromCompositeFieldPath('spec.parameters.service.fqdn', 'spec.parameters.service.fqdn'),
-                    comp.FromCompositeFieldPath('spec.parameters.size', 'spec.parameters.size.plan'),
+                    comp.FromCompositeFieldPath('spec.parameters.size.plan', 'spec.parameters.size.plan'),
 
                   ],
                 },
