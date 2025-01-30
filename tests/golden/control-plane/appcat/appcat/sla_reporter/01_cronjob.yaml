@@ -30,11 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-<<<<<<< HEAD
-              image: ghcr.io/vshn/appcat:v4.121.2
-=======
               image: ghcr.io/vshn/appcat:add_forgejo
->>>>>>> 12c1e3b3 (bootstraping forgejo)
               name: sla-reporter
               resources:
                 limits:

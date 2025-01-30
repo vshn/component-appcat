@@ -28,7 +28,7 @@ spec:
         apiVersion: v1
         data:
           bucketRegion: lpg
-          busybox_image: dockerhub.vshn.net/busybox
+          busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
           chartVersion: 11.0.1
           controlNamespace: syn-appcat-control
@@ -42,6 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           forgejo_image: ghcr.io/vshn/forgejo
           ignoreNamespaceForBilling: vshn-test
+          imageRegistry: ''
           imageTag: add_forgejo
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production

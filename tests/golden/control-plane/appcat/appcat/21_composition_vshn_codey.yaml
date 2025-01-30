@@ -29,58 +29,47 @@ spec:
         kind: Resources
         resources:
           - base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
-              kind: Object
-              metadata: {}
+              apiVersion: vshn.appcat.vshn.io/v1
+              kind: XVSHNForgejo
+              metadata:
+                name: vshnforgejo
               spec:
-                forProvider:
-                  manifest:
-                    apiVersion: vshn.appcat.vshn.io/v1
-                    kind: VSHNForgejo
-                    metadata:
-                      name: codey-testing
-                      namespace: default
-                    spec:
-                      parameters:
-                        security:
-                          deletionProtection: false
-                        service:
-                          adminEmail: lukasz.widera@vshn.ch
-                          fqdn:
-                            - myforgejo2.127.0.0.1.nip.io
-                          majorVersion: 10.0.0
-                        size:
-                          plan: mini
-                      writeConnectionSecretToRef:
-                        name: ''
-                        namespace: ''
-                providerConfigRef:
-                  name: kubernetes
-            name: xvshnforgejo
+                parameters:
+                  security:
+                    deletionProtection: false
+                  service:
+                    adminEmail: lukasz.widera@vshn.ch
+                    fqdn:
+                      - myforgejo2.127.0.0.1.nip.io
+                    version: 10.0.0
+                  size:
+                    plan: mini
+            connectionDetails:
+              - fromConnectionSecretKey: FORGEJO_PASSWORD
+                name: CODEY_PASSWORD
+                type: FromConnectionSecretKey
+              - fromConnectionSecretKey: FORGEJO_URL
+                name: CODEY_URL
+                type: FromConnectionSecretKey
+              - fromConnectionSecretKey: FORGEJO_USERNAME
+                name: CODEY_USERNAME
+                type: FromConnectionSecretKey
+            name: vshnforgejo
             patches:
-              - fromFieldPath: metadata.name
+              - fromFieldPath: metadata.labels["crossplane.io/composite"]
                 toFieldPath: metadata.name
                 type: FromCompositeFieldPath
-              - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
-                toFieldPath: spec.forProvider.manifest.metadata.namespace
-                type: FromCompositeFieldPath
               - fromFieldPath: spec.parameters.service.adminEmail
-                toFieldPath: spec.forProvider.manifest.spec.parameters.service.adminEmail
+                toFieldPath: spec.parameters.service.adminEmail
                 type: FromCompositeFieldPath
               - fromFieldPath: spec.parameters.service.majorVersion
-                toFieldPath: spec.forProvider.manifest.spec.parameters.service.majorVersion
+                toFieldPath: spec.parameters.service.version
                 type: FromCompositeFieldPath
               - fromFieldPath: spec.parameters.service.fqdn
-                toFieldPath: spec.forProvider.manifest.spec.parameters.service.fqdn
+                toFieldPath: spec.parameters.service.fqdn
                 type: FromCompositeFieldPath
               - fromFieldPath: spec.parameters.size
-                toFieldPath: spec.forProvider.manifest.spec.parameters.size.plan
-                type: FromCompositeFieldPath
-              - fromFieldPath: metadata.labels["crossplane.io/claim-name"]
-                toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.name
-                type: FromCompositeFieldPath
-              - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
-                toFieldPath: spec.forProvider.manifest.spec.writeConnectionSecretToRef.namespace
+                toFieldPath: spec.parameters.size.plan
                 type: FromCompositeFieldPath
       step: patch-and-transform
   writeConnectionSecretsToNamespace: syn-crossplane

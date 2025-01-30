@@ -15,7 +15,6 @@ spec:
     - CODEY_USERNAME
     - CODEY_PASSWORD
     - CODEY_URL
-    - FORGEJO_PASSWORD
   defaultCompositionRef:
     name: codey.io
   group: codey.io
