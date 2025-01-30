@@ -9,11 +9,6 @@ metadata:
   - finalizer.apiextensions.crossplane.io
   name: forgejo-e2e
 spec:
-  compositeDeletePolicy: Background
-  compositionRef:
-    name: vshnforgejo.vshn.appcat.vshn.io
-  compositionRevisionRef:
-    name: vshnforgejo.vshn.appcat.vshn.io-8c5a0ce
   compositionUpdatePolicy: Automatic
   parameters:
     backup: {}
@@ -27,7 +22,7 @@ spec:
       serviceLevel: besteffort
       version: 10.0.0
     size:
-      plan: standard-2
+      plan: small
   resourceRef:
     apiVersion: vshn.appcat.vshn.io/v1
     kind: XVSHNForgejo
