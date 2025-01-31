@@ -29,7 +29,19 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
+<<<<<<< HEAD
+<<<<<<< HEAD
           image: ghcr.io/vshn/appcat:v4.121.2
+=======
+<<<<<<< HEAD
+          image: ghcr.io/vshn/appcat:v4.120.4
+=======
+          image: ghcr.io/vshn/appcat:postgres-major-upgrades
+>>>>>>> 3d2a5324 ([create-pull-request] automated change)
+>>>>>>> c7fa32c8 (Resolve conflicts)
+=======
+          image: ghcr.io/vshn/appcat:postgres-major-upgrades
+>>>>>>> e89e050b (Update golden tests)
           livenessProbe:
             failureThreshold: 3
             httpGet:

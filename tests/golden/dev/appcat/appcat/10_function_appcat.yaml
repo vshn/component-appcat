@@ -6,6 +6,18 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat
 spec:
+<<<<<<< HEAD
+<<<<<<< HEAD
   package: ghcr.io/vshn/appcat:v4.121.2-func
+=======
+<<<<<<< HEAD
+  package: ghcr.io/vshn/appcat:v4.120.4-func
+=======
+  package: ghcr.io/vshn/appcat:postgres-major-upgrades-func
+>>>>>>> 3d2a5324 ([create-pull-request] automated change)
+>>>>>>> c7fa32c8 (Resolve conflicts)
+=======
+  package: ghcr.io/vshn/appcat:postgres-major-upgrades-func
+>>>>>>> e89e050b (Update golden tests)
   runtimeConfigRef:
     name: function-appcat

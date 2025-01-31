@@ -597,8 +597,20 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
+<<<<<<< HEAD
+<<<<<<< HEAD
           imageRegistry: ''
           imageTag: v4.121.2
+=======
+<<<<<<< HEAD
+          imageTag: v4.120.4
+=======
+          imageTag: postgres-major-upgrades
+>>>>>>> 3d2a5324 ([create-pull-request] automated change)
+>>>>>>> c7fa32c8 (Resolve conflicts)
+=======
+          imageTag: postgres-major-upgrades
+>>>>>>> e89e050b (Update golden tests)
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
