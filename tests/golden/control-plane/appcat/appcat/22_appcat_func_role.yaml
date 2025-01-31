@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-function-stackgres-restapi-admin
+  name: appcat-function:stackgres-restapi-admin
+  namespace: stackgres
+rules:
+  - apiGroups:
+      - ''
+    resourceNames:
+      - stackgres-restapi-admin
+    resources:
+      - secrets
+    verbs:
+      - get

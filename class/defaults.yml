@@ -58,7 +58,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.121.2
+        tag: postgres-major-upgrades
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -606,8 +606,8 @@ parameters:
                 cpu: "100m"
                 memory: "64Mi"
               limits:
-                cpu: "250m"
-                memory: "256Mi"
+                cpu: "500m"
+                memory: "1Gi"
             setDbopsResult:
               requests:
                 cpu: "100m"
@@ -686,6 +686,13 @@ parameters:
               limits:
                 cpu: "250m"
                 memory: "256Mi"
+            setMajorVersionUpgrade:
+              requests:
+                cpu: "250m"
+                memory: "256Mi"
+              limits:
+                cpu: "500m"
+                memory: "512Mi"
         redis:
           billing: true
           enabled: true

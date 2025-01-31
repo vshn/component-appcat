@@ -63,6 +63,13 @@ local stackgresNetworkPolicy = kube.NetworkPolicy('allow-stackgres-api') + {
               },
             },
           },
+          {
+            namespaceSelector: {
+              matchLabels: {
+                name: 'syn-crossplane',
+              },
+            },
+          },
         ],
       },
     ],
@@ -300,6 +307,34 @@ local plansCM = kube.ConfigMap('vshnpostgresqlplans') + {
   },
 };
 
+local appcatFuncRoleBinding = kube.RoleBinding('appcat-function') + {
+  metadata+: {
+    namespace: pgParams.sgNamespace,
+  },
+  roleRef_: kube.Role('appcat-function:stackgres-restapi-admin'),
+  subjects: [
+    {
+      kind: 'ServiceAccount',
+      name: 'function-appcat',
+      namespace: params.crossplane.namespace,
+    },
+  ],
+};
+
+local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
+  metadata+: {
+    namespace: pgParams.sgNamespace,
+  },
+  rules+: [
+    {
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      resourceNames: [ 'stackgres-restapi-admin' ],
+      verbs: [ 'get' ],
+    },
+  ],
+};
+
 (if params.services.vshn.enabled && pgParams.enabled && vars.isSingleOrControlPlaneCluster then
    assert std.length(pgParams.bucket_region) != 0 : 'appcat.services.vshn.postgres.bucket_region is empty';
    assert std.length(pgParams.bucket_endpoint) != 0 : 'appcat.services.vshn.postgres.bucket_endpoint is empty';
@@ -309,6 +344,8 @@ local plansCM = kube.ConfigMap('vshnpostgresqlplans') + {
      '20_role_vshn_postgresrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
      '20_plans_vshn_postgresql': plansCM,
      '21_composition_vshn_postgres': composition,
+     '22_appcat_func_role': appcatFuncRole,
+     '22_appcat_func_role_binding': appcatFuncRoleBinding,
 
      [if isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
      [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,

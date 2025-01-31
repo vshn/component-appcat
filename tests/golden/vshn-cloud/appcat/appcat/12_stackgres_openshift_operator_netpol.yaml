@@ -13,6 +13,9 @@ spec:
         - namespaceSelector:
             matchLabels:
               appcat.vshn.io/servicename: postgresql-standalone
+        - namespaceSelector:
+            matchLabels:
+              name: syn-crossplane
   podSelector:
     matchLabels:
       app: StackGresConfig

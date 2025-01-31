@@ -41,17 +41,18 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.121.2
+          imageTag: postgres-major-upgrades
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
             "memory": "100Mi"}}, "relocateBinaries": {"limits": {"cpu": "300m", "memory":
             "500Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "setDbopsRunning":
             {"limits": {"cpu": "250m", "memory": "256Mi"}, "requests": {"cpu": "250m",
-            "memory": "256Mi"}}, "setupArbitraryUser": {"limits": {"cpu": "300m",
-            "memory": "500Mi"}, "requests": {"cpu": "100m", "memory": "500Mi"}}, "setupScripts":
+            "memory": "256Mi"}}, "setMajorVersionUpgrade": {"limits": {"cpu": "500m",
+            "memory": "512Mi"}, "requests": {"cpu": "250m", "memory": "256Mi"}}, "setupArbitraryUser":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
-            "memory": "500Mi"}}}'
+            "memory": "500Mi"}}, "setupScripts": {"limits": {"cpu": "300m", "memory":
+            "500Mi"}, "requests": {"cpu": "100m", "memory": "500Mi"}}}'
           isOpenshift: 'true'
           keepMetrics: '["pg_locks_count", "pg_postmaster_start_time_seconds", "pg_replication_lag",
             "pg_settings_effective_cache_size_bytes", "pg_settings_maintenance_work_mem_bytes",
@@ -91,7 +92,7 @@ spec:
             {"limits": {"cpu": "20m", "memory": "20Mi"}, "requests": {"cpu": "10m",
             "memory": "4Mi"}}, "prometheusPostgresExporter": {"limits": {"cpu": "150m",
             "memory": "256Mi"}, "requests": {"cpu": "10m", "memory": "16Mi"}}, "runDbops":
-            {"limits": {"cpu": "250m", "memory": "256Mi"}, "requests": {"cpu": "100m",
+            {"limits": {"cpu": "500m", "memory": "1Gi"}, "requests": {"cpu": "100m",
             "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m", "memory":
             "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
           sliNamespace: syn-appcat-slos
