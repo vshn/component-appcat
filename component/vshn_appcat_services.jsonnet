@@ -110,6 +110,7 @@ local vshn_appcat_service(name, serviceParams) =
                         quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
                         isOpenshift: std.toString(isOpenshift),
                         sliNamespace: params.slos.namespace,
+                        ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
                         ownerKind: xrd.spec.names.kind,
                         ownerGroup: xrd.spec.group,
                         ownerVersion: xrd.spec.versions[0].name,

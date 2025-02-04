@@ -545,6 +545,7 @@ parameters:
         secretNamespace: syn-appcat
         secretName: mailgun-smtp-credentials
       vshn:
+        ocpDefaultAppsDomain: ""
         enabled: false
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
