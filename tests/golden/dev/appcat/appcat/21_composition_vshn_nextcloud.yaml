@@ -55,6 +55,7 @@ spec:
           mode: standalone
           nextcloud_image: dockerhub.vshn.net/library/nextcloud
           oc_image: quay.io/appuio/oc:v4.13
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud
           ownerVersion: v1

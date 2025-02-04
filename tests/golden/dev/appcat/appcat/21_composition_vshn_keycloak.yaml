@@ -48,6 +48,7 @@ spec:
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNKeycloak
           ownerVersion: v1
