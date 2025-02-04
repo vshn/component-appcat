@@ -47,6 +47,7 @@ spec:
           minioChartRepository: https://charts.min.io
           minioChartVersion: 5.0.13
           mode: distributed
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNMinio
           ownerVersion: v1
