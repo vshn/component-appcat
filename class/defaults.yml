@@ -34,7 +34,7 @@ parameters:
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
-        tag: v0.11.5
+        tag: renovate/github.com-exoscale-egoscale-v3-3.x
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale
