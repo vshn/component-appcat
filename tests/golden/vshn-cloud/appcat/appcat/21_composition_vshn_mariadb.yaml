@@ -41,10 +41,11 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.121.3
+          imageTag: change_ingress-tls
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNMariaDB
           ownerVersion: v1
