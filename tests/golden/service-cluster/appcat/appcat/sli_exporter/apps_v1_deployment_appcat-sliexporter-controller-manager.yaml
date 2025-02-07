@@ -26,7 +26,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.123.1
+          image: ghcr.io/vshn/appcat:super-deletion-protection
           livenessProbe:
             httpGet:
               path: /healthz
