@@ -5,30 +5,13 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 
 
-local promRuleSLA(value, service) = std.prune(kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'vshn-' + std.asciiLower(service) + '-sla') {
-  metadata+: {
-    labels: {
-      name: 'vshn-' + std.asciiLower(service) + '-sla',
-    },
-    namespace: params.slos.namespace,
+local promRecordingRuleSLA(value, service) = {
+  expr: 'vector(' + value + ')',
+  labels: {
+    service: service,
   },
-  spec: {
-    groups: [
-      {
-        name: 'appcat-' + std.asciiLower(service) + '-sla-target',
-        rules: [
-          {
-            expr: 'vector(' + value + ')',
-            labels: {
-              service: service,
-            },
-            record: 'sla:objective:ratio',
-          },
-        ],
-      },
-    ],
-  },
-});
+  record: 'sla:objective:ratio',
+};
 
 local bottomPod(query) = 'label_replace( bottomk(1, %(query)s) * on(namespace) group_left(label_appcat_vshn_io_claim_namespace) kube_namespace_labels, "name", "$1", "namespace", "vshn-replacemeplease-(.+)-.+")' % query;
 local topPod(query) = 'label_replace( topk(1, %(query)s) * on(namespace) group_left(label_appcat_vshn_io_claim_namespace) kube_namespace_labels, "name", "$1", "namespace", "vshn-replacemeplease-(.+)-.+")' % query;
@@ -127,8 +110,8 @@ local generatePrometheusNonSLORules(serviceName, memoryContainerName, additional
 {
   GeneratePrometheusNonSLORules(serviceName, memoryContainerName, additionalAlertsRuleGroup):
     generatePrometheusNonSLORules(serviceName, memoryContainerName, additionalAlertsRuleGroup),
-  PromRuleSLA(value, service):
-    promRuleSLA(value, service),
+  PromRecordingRuleSLA(value, service):
+    promRecordingRuleSLA(value, service),
   TopPod(query):
     topPod(query),
   BottomPod(query):

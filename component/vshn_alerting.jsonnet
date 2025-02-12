@@ -5,7 +5,7 @@ local params = inv.parameters.appcat;
 local vars = import 'config/vars.jsonnet';
 
 
-local genGenericAlertingRule(serviceName) = {
+local genGenericAlertingRule(serviceName, recordingRule=null) = {
   apiVersion: 'monitoring.coreos.com/v1',
   kind: 'PrometheusRule',
   metadata: {
@@ -60,7 +60,7 @@ local genGenericAlertingRule(serviceName) = {
               syn_component: 'appcat',
             },
           },
-        ],
+        ] + (if recordingRule != null then [ recordingRule ] else []),
       },
     ],
   },

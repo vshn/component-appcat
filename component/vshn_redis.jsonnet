@@ -53,7 +53,7 @@ local xrd = xrds.XRDFromCRD(
   connectionSecretKeys=connectionSecretKeys,
 ) + xrds.WithPlanDefaults(redisPlans, redisParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
 
-local promRuleRedisSLA = prom.PromRuleSLA(params.services.vshn.redis.sla, 'VSHNRedis');
+local promRuleRedisSLA = prom.PromRecordingRuleSLA(params.services.vshn.redis.sla, 'VSHNRedis');
 
 local restoreServiceAccount = kube.ServiceAccount('redisrestoreserviceaccount') + {
   metadata+: {
@@ -576,9 +576,8 @@ local plansCM = kube.ConfigMap('vshnredisplans') + {
  } else {})
 + if vars.isSingleOrServiceCluster then
   if params.services.vshn.enabled && params.services.vshn.redis.enabled then {
-    '22_prom_rule_sla_redis': promRuleRedisSLA,
     'sli_exporter/70_slo_vshn_redis': slos.Get('vshn-redis'),
     'sli_exporter/80_slo_vshn_redis_ha': slos.Get('vshn-redis-ha'),
-    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNRedis_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNRedis'),
+    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNRedis_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNRedis', promRuleRedisSLA),
   } else {}
 else {}

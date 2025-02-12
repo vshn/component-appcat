@@ -117,7 +117,7 @@ local xrd = xrds.XRDFromCRD(
   connectionSecretKeys=connectionSecretKeys,
 ) + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
 
-local promRulePostgresSLA = prom.PromRuleSLA(params.services.vshn.postgres.sla, 'VSHNPostgreSQL');
+local promRulePostgresSLA = prom.PromRecordingRuleSLA(params.services.vshn.postgres.sla, 'VSHNPostgreSQL');
 
 local restoreServiceAccount = kube.ServiceAccount('copyserviceaccount') + {
   metadata+: {
@@ -317,9 +317,8 @@ local plansCM = kube.ConfigMap('vshnpostgresqlplans') + {
    } else {})
 + if vars.isSingleOrServiceCluster then
   if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then {
-    '22_prom_rule_sla_postgres': promRulePostgresSLA,
     'sli_exporter/70_slo_vshn_postgresql': slos.Get('vshn-postgresql'),
     'sli_exporter/80_slo_vshn_postgresql_ha': slos.Get('vshn-postgresql-ha'),
-    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL'),
+    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL', promRulePostgresSLA),
   } else {}
 else {}

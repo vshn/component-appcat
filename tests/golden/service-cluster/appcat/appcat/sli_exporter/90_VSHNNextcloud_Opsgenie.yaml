@@ -43,3 +43,7 @@ spec:
             syn: 'true'
             syn_component: appcat
             syn_team: schedar
+        - expr: vector(99.25)
+          labels:
+            service: VSHNNextcloud
+          record: sla:objective:ratio
