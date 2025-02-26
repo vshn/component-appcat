@@ -41,7 +41,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.125.2
+          imageTag: fix_users_obj
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
