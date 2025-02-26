@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.18.3
+        version: 1.16.0
       redis:
         source: https://charts.bitnami.com/bitnami
         version: 17.7.1
@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.125.3
+        tag: add/forgejo-maintenance
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -77,11 +77,11 @@ parameters:
       collector:
         registry: ghcr.io
         repository: vshn/billing-collector-cloudservices
-        tag: v3.6.0
+        tag: v3.5.0
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.18.3
+        tag: v1.16.0
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -134,10 +134,17 @@ parameters:
         prometheus_rule_labels:
           prometheus: platform
         instance: null
+      providers: {}
+      serviceAccounts: {}
+      clusterRoles: {}
+      clusterRoleBindings: {}
+      controllerConfigs: {}
+      providerConfigs: {}
       helmValues:
         xfn:
           enabled: true
         args:
+          - --enable-environment-configs
           - --enable-usages
         image:
           repository: ${appcat:images:crossplane:registry}/${appcat:images:crossplane:image}
