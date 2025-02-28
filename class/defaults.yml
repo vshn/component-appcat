@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.17.0
+        version: 1.18.3
       redis:
         source: https://charts.bitnami.com/bitnami
         version: 17.7.1
@@ -81,7 +81,7 @@ parameters:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.17.5
+        tag: v1.18.3
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -134,12 +134,6 @@ parameters:
         prometheus_rule_labels:
           prometheus: platform
         instance: null
-      providers: {}
-      serviceAccounts: {}
-      clusterRoles: {}
-      clusterRoleBindings: {}
-      controllerConfigs: {}
-      providerConfigs: {}
       helmValues:
         xfn:
           enabled: true
