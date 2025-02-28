@@ -23,7 +23,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.125.1
+          image: ghcr.io/vshn/appcat:fix_broken_pg_url
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

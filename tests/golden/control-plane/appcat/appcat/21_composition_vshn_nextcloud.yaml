@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.125.1
+          imageTag: fix_broken_pg_url
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
