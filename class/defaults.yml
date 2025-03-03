@@ -37,7 +37,7 @@ parameters:
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
-        tag: v1.0.0
+        tag: renovate/sigs.k8s.io-controller-tools-0.x
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale
