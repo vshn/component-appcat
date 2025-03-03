@@ -24,7 +24,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:v4.125.3
+          image: ghcr.io/vshn/appcat:fix_deletion_protection_unmanaged_non_converged
           livenessProbe:
             httpGet:
               path: /healthz

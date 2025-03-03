@@ -598,7 +598,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.125.3
+          imageTag: fix_deletion_protection_unmanaged_non_converged
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
