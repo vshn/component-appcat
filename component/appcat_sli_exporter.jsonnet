@@ -16,6 +16,11 @@ local deployment_patch = kube._Object('apps/v1', 'Deployment', 'controller-manag
   },
   spec+: {
     template: {
+      metadata+: {
+        annotations+: {
+          kubeconfighash: std.md5(params.clusterManagementSystem.controlPlaneKubeconfig),
+        },
+      },
       spec: {
         [if sli_exporter_params.controlPlaneKubeconfig != '' then 'volumes']: [
           {

@@ -12,6 +12,8 @@ spec:
       appcat-controller: appcat-controller
   template:
     metadata:
+      annotations:
+        kubeconfighash: 275876e34cf609db118f3d84b799a790
       labels:
         appcat-controller: appcat-controller
     spec:
