@@ -74,6 +74,11 @@ local controller = loadManifest('deployment.yaml') {
   spec+: {
     replicas: 2,
     template+: {
+      metadata+: {
+        annotations+: {
+          kubeconfighash: std.md5(params.clusterManagementSystem.controlPlaneKubeconfig),
+        },
+      },
       spec+: {
         volumes: [
           {

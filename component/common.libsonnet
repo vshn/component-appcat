@@ -220,6 +220,12 @@ local removeFields(obj, names) = [
   for name in names
 ];
 
+local controlPlaneSa = kube.ServiceAccount('appcat-control-plane') + {
+  metadata+: {
+    namespace: params.namespace,
+  },
+};
+
 {
   SyncOptions: syncOptions,
   VshnMetaDBaaSExoscale(dbname):
@@ -264,4 +270,5 @@ local removeFields(obj, names) = [
     keysAndStringValues(object, fieldName),
   RemoveFields(obj, names):
     removeFields(obj, names),
+  ControlPlaneSa: controlPlaneSa,
 }

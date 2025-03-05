@@ -66,9 +66,9 @@ parameters:
       cloudscale:
         enabled: false
       kubernetes:
-        enabled: false
+        enabled: true
       helm:
-        enabled: false
+        enabled: true
       minio:
         enabled: false
       sql:
@@ -96,6 +96,7 @@ parameters:
           enabled: true
         postgres:
           enabled: true
+          sgNamespace: stackgres
         redis:
           enabled: true
         minio:

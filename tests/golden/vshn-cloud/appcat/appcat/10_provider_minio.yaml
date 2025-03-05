@@ -97,6 +97,23 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
   labels:
+    name: crossplane-provider-provider-minio-control-plane
+  name: crossplane:provider:provider-minio:control-plane
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane:provider:provider-minio:system:custom
+subjects:
+  - kind: ServiceAccount
+    name: appcat-control-plane
+    namespace: syn-appcat
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
     name: crossplane-provider-provider-minio-system-custom
   name: crossplane:provider:provider-minio:system:custom
 roleRef:

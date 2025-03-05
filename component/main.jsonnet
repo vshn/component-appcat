@@ -96,26 +96,6 @@ local ns = kube.Namespace(params.namespace) {
   },
 };
 
-local tenant = {
-  // We hardcode the cluster tenant on appuio managed
-  [if params.appuioManaged then 'replace']: std.strReplace(|||
-    "tenant_id",
-    "$1",
-    "",
-    ""
-  |||, '$1', params.billing.tenantID),
-  [if params.appuioManaged then 'label']: '',
-
-  // We use the organization label on appuio cloud
-  [if !params.appuioManaged then 'replace']: |||
-    "tenant_id",
-    "$1",
-    "label_appuio_io_organization",
-    "(.*)"
-  |||,
-  [if !params.appuioManaged then 'label']: 'label_appuio_io_organization=~".+",',
-};
-
 local mockOrgInfo = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'mock-org-info') {
   metadata+: {
     namespace: params.namespace,
@@ -263,6 +243,57 @@ local serviceClusterKubeconfigs =
     {}
   );
 
+local serviceClusterSA = kube.ServiceAccount('appcat-service-cluster') + {
+  metadata+: {
+    namespace: params.namespace,
+  },
+};
+
+local serviceClusterRoleBindingCrossplane = kube.ClusterRoleBinding('appcat:service:cluster:crossplane') {
+  roleRef: {
+    kind: 'ClusterRole',
+    name: 'crossplane-view',
+    apiGroup: 'rbac.authorization.k8s.io',
+  },
+  subjects_: [ serviceClusterSA ],
+};
+
+// The SLI probier needs additional RBAC to read the connection detail secrets
+local serviceClusterRole = kube.ClusterRole('appcat:service:cluster:custom') + {
+  rules: [
+    {
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      verbs: [ 'get', 'list', 'watch' ],
+    },
+  ],
+};
+
+local serviceClusterRoleBindingCustom = kube.ClusterRoleBinding('appcat:service:cluster:custom') {
+  roleRef_: serviceClusterRole,
+  subjects_: [ serviceClusterSA ],
+};
+
+local serviceClusterSATokenSecret = kube.Secret('appcat-service-cluster') + {
+  metadata+: {
+    namespace: params.namespace,
+    annotations: {
+      'kubernetes.io/service-account.name': serviceClusterSA.metadata.name,
+    },
+  },
+  type: 'kubernetes.io/service-account-token',
+};
+
+local controlPlaneSATokenSecret = kube.Secret('appcat-control-plane') + {
+  metadata+: {
+    namespace: params.namespace,
+    annotations: {
+      'kubernetes.io/service-account.name': common.ControlPlaneSa.metadata.name,
+    },
+  },
+  type: 'kubernetes.io/service-account-token',
+};
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -278,4 +309,14 @@ local serviceClusterKubeconfigs =
   // can't use an enabled filter in the post processing...
   'controllers/sts-resizer/.keep': '',
   [if std.length(params.clusterManagementSystem.serviceClusterKubeconfigs) != 0 then '10_service_cluster_kubeconfigs']: serviceClusterKubeconfigs,
-}
+} + (if vars.isSingleOrServiceCluster then {
+       '11_control_plane_sa': common.ControlPlaneSa,
+       '11_control_plane_sa_token_secret': controlPlaneSATokenSecret,
+     } else {})
++ if vars.isSingleOrControlPlaneCluster then {
+  '11_service_cluster_sa': serviceClusterSA,
+  '11_service_cluster_sa_token_secret': serviceClusterSATokenSecret,
+  '11_service_cluster_sa_custom_role': serviceClusterRole,
+  '11_service_cluster_role_binding_crossplane': serviceClusterRoleBindingCrossplane,
+  '11_service_cluster_role_binding_custom': serviceClusterRoleBindingCustom,
+} else {}

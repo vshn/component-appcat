@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-service-cluster-crossplane
+  name: appcat:service:cluster:crossplane
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane-view
+subjects:
+  - kind: ServiceAccount
+    name: appcat-service-cluster
+    namespace: syn-appcat

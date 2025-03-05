@@ -1,4 +1,5 @@
 local common = import 'common.libsonnet';
+local vars = import 'config/vars.jsonnet';
 local com = import 'lib/commodore.libjsonnet';
 local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
@@ -297,20 +298,26 @@ local provider(name, provider) =
     subjects_: [ sa ],
   };
 
+  local controlPlaneRolebinding = if std.objectHas(providerRBAC, name) then kube.ClusterRoleBinding('crossplane:provider:provider-' + name + ':control-plane') {
+    roleRef_: role,
+    subjects_: [ common.ControlPlaneSa ],
+  };
+
   {
     ['10_provider_%s' % name]:
       std.filter(
         function(elem) elem != null,
         [
-          providerManifest,
-          runtimeConf,
-          if std.objectHas(provider, 'defaultProviderConfig') then defaultConfig,
-          sa,
+          if vars.isSingleOrControlPlaneCluster then providerManifest,
+          if vars.isSingleOrControlPlaneCluster then runtimeConf,
+          if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'defaultProviderConfig') then defaultConfig,
+          if vars.isSingleOrControlPlaneCluster then sa,
           role,
-          rolebinding,
-          if std.objectHas(provider, 'credentials') then providerSecret(provider.credentials),
-          if std.objectHas(provider, 'connectionSecretNamespace') then kube.Namespace(provider.connectionSecretNamespace),
-          if std.objectHas(provider, 'additionalProviderConfigs') && std.length(provider.additionalProviderConfigs) > 0 then additionalProviderConfigs(provider),
+          if vars.isSingleOrServiceCluster then controlPlaneRolebinding,
+          if vars.isSingleOrControlPlaneCluster then rolebinding,
+          if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'credentials') then providerSecret(provider.credentials),
+          if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'connectionSecretNamespace') then kube.Namespace(provider.connectionSecretNamespace),
+          if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'additionalProviderConfigs') && std.length(provider.additionalProviderConfigs) > 0 then additionalProviderConfigs(provider),
         ]
       ),
   };
