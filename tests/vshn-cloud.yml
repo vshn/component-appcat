@@ -214,6 +214,13 @@ parameters:
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-staging
 
+        forgejo:
+          enabled: true
+          # https://vault-prod.syn.vshn.net/ui/vault/secrets/clusters%2Fkv/kv/__shared__%2F__shared__%2Fappcat/details?version=2
+          additionalInputs:
+            registry_username: ""
+            registry_password: ""
+
         postgres:
           enabled: true
           sgNamespace: stackgres

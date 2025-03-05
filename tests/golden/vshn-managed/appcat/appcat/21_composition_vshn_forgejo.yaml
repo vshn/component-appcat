@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.125.3
+          imageTag: add_forgejo-maintenance
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'true'
@@ -58,6 +58,8 @@ spec:
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
           quotasEnabled: 'false'
+          registry_password: ''
+          registry_username: ''
           restoreSA: forgejoserviceaccount
           salesOrder: ST10120
           serviceName: forgejo
