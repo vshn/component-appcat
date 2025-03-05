@@ -58,8 +58,8 @@ spec:
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
           quotasEnabled: 'false'
-          registry_password: __shared__/__shared__/appcat/codeberg_registry_password
-          registry_username: __shared__/__shared__/appcat/codeberg_registry_username
+          registry_password: ''
+          registry_username: ''
           restoreSA: forgejoserviceaccount
           salesOrder: ''
           serviceName: forgejo
