@@ -8,7 +8,7 @@ metadata:
     name: provider-helm
   name: provider-helm
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.18.1
+  package: xpkg.upbound.io/upbound/provider-helm:v0.20.4
   runtimeConfigRef:
     name: provider-helm
 ---
