@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.126.0
+          imageTag: change_ingress-tls
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
@@ -55,6 +55,7 @@ spec:
           mode: standalone
           nextcloud_image: docker.io/library/nextcloud
           oc_image: quay.io/appuio/oc:v4.13
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud
           ownerVersion: v1

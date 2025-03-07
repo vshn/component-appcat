@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.126.0
+        tag: change/ingress-tls
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -544,6 +544,7 @@ parameters:
         secretNamespace: syn-appcat
         secretName: mailgun-smtp-credentials
       vshn:
+        ocpDefaultAppsDomain: ""
         enabled: false
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false

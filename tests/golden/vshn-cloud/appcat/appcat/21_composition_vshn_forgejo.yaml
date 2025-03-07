@@ -42,13 +42,14 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.126.0
+          imageTag: change_ingress-tls
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
           oc_image: quay.io/appuio/oc:v4.13
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNForgejo
           ownerVersion: v1
