@@ -28,7 +28,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:v4.126.0
+          image: ghcr.io/vshn/appcat:fix_kc_db_pw_racecondition
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

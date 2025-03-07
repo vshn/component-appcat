@@ -23,7 +23,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.126.0
+          image: ghcr.io/vshn/appcat:fix_kc_db_pw_racecondition
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
