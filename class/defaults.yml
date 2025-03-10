@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.128.0
+        tag: v4.129.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -568,6 +568,8 @@ parameters:
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             oc_image: ${appcat:images:oc:registry}/${appcat:images:oc:image}:${appcat:images:oc:tag}
+            registry_username: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_username}"
+            registry_password: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
           openshiftTemplate:
