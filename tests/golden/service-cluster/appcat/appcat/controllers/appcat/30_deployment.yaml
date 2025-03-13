@@ -30,7 +30,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:v4.130.1
+          image: ghcr.io/vshn/appcat:pimp-my-pipeline
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
