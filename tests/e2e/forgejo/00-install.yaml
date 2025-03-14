@@ -9,6 +9,14 @@ spec:
       fqdn:
         - forgejo-e2e.apps.lab-cloudscale-rma-0.appuio.cloud
         - sub1.forgejo-e2e.apps.lab-cloudscale-rma-0.appuio.cloud
+      forgejoSettings:
+        APP_NAME: "forgejo-e2e"
+        config:
+          actions:
+            ENABLED: "false"
+          mailer:
+            ENABLED: "true"
+            PROTOCOL: sendmail
     security:
       deletionProtection: false
   writeConnectionSecretToRef:
