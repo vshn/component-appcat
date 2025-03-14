@@ -16,7 +16,6 @@ spec:
             ENABLED: "false"
           mailer:
             ENABLED: "true"
-            PROTOCOL: sendmail
     security:
       deletionProtection: false
   writeConnectionSecretToRef:

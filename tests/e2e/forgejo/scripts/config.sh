@@ -15,8 +15,8 @@ app_name=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data."_generals_"'
 [[ $app_name == "forgejo-e2e" ]]
 
 # ---------------------
-# Ensure mailer.PROTOCOL is unset
-[[ $(kubectl -n "$ns" get $inline_secret -o yaml | yq .data.mailer | base64 -d | grep PROTOCOL | wc -l) -eq 0 ]]
+# Ensure mailer.PROTOCOL cannot be set to a bad value
+kubectl -n "$NAMESPACE" patch vshnforgejo forgejo-e2e --type merge -p '{"spec":{"parameters":{"service":{"forgejoSettings":{"config":{"mailer":{"PROTOCOL":"sendmail"}}}}}}}' && exit 1 || true
 
 # ---------------------
 # Actions test, should fail
@@ -33,6 +33,6 @@ actions_enabled=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data.action
 payload='{"name": "my-repo"}'
 curl -X POST -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/user/repos"
 
-# 3. Check if actions is enabled for repo (must be false)
+# 3. Check if actions are enabled for repo (must be false)
 actions_state=$(curl -s -X GET -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/repos/$username/my-repo" | jq .has_actions)
 [[ $actions_state == "false" ]]
