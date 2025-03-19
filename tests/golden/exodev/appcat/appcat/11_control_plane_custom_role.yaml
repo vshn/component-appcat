@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-controlplane-custom
+  name: appcat:controlplane:custom
+rules:
+  - apiGroups:
+      - k8up.io
+    resources:
+      - snapshots
+    verbs:
+      - get
+      - list
+      - watch
