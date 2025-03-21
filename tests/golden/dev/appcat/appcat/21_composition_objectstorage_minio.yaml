@@ -27,6 +27,7 @@ spec:
         data:
           crossplaneNamespace: syn-crossplane
           providerConfig: minio
+          serviceID: vshn-miniobucket
           serviceName: miniobucket
         kind: ConfigMap
         metadata:

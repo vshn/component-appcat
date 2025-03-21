@@ -15,6 +15,7 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local pgParams = params.services.vshn.postgres;
 local appuioManaged = inv.parameters.appcat.appuioManaged;
+local serviceName = 'postgresql';
 
 
 local defaultDB = 'postgres';
@@ -215,7 +216,8 @@ local composition =
                 name: 'xfn-config',
               },
               data: {
-                      serviceName: 'postgresql',
+                      serviceName: serviceName,
+                      serviceID: common.ServiceID(serviceName),
                       imageTag: common.GetAppCatImageTag(),
                       sgNamespace: pgParams.sgNamespace,
                       externalDatabaseConnectionsEnabled: std.toString(params.services.vshn.externalDatabaseConnectionsEnabled),

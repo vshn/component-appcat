@@ -16,6 +16,8 @@ local cloudscaleZones = [ 'lpg', 'rma' ];
 local strExoscaleZones = std.join(', ', exoscaleZones);
 local strCloudscaleZones = std.join(', ', cloudscaleZones);
 
+local serviceID(name) = 'vshn-' + std.asciiLower(name);
+
 local syncOptions = {
   metadata+: {
     annotations+: {
@@ -52,7 +54,7 @@ local vshnMetaVshn(servicename, flavor, offered, plans) = {
     },
     labels+: {
       'metadata.appcat.vshn.io/offered': offered,
-      'metadata.appcat.vshn.io/serviceID': 'vshn-' + std.asciiLower(servicename),
+      'metadata.appcat.vshn.io/serviceID': serviceID(servicename),
     },
   },
 };
@@ -271,4 +273,6 @@ local controlPlaneSa = kube.ServiceAccount('appcat-control-plane') + {
   RemoveFields(obj, names):
     removeFields(obj, names),
   ControlPlaneSa: controlPlaneSa,
+  ServiceID(name):
+    serviceID(name),
 }

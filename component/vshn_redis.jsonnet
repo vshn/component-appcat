@@ -19,6 +19,7 @@ local appuioManaged = inv.parameters.appcat.appuioManaged;
 
 local defaultUser = 'default';
 local defaultPort = '6379';
+local serviceName = 'redis';
 
 local caCertificateSecretName = 'tls-ca-certificate';
 local serverCertificateSecretName = 'tls-server-certificate';
@@ -480,7 +481,8 @@ local composition =
                 name: 'xfn-config',
               },
               data: {
-                      serviceName: 'redis',
+                      serviceName: serviceName,
+                      serviceID: common.ServiceID(serviceName),
                       imageTag: common.GetAppCatImageTag(),
                       bucketRegion: redisParams.bucket_region,
                       maintenanceSA: 'helm-based-service-maintenance',

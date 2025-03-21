@@ -12,6 +12,9 @@ local xrds = import 'xrds.libsonnet';
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local objStoParams = params.services.generic.objectstorage;
+local cloudscaleServiceName = 'cloudscalebucket';
+local exoscaleServiceName = 'exoscalebucket';
+local minioServiceName = 'miniobucket';
 
 local xrd = xrds.XRDFromCRD(
   'xobjectbuckets.appcat.vshn.io',
@@ -54,7 +57,8 @@ local compositionCloudscale =
               },
               data: {
                 providerConfig: 'cloudscale',
-                serviceName: 'cloudscalebucket',
+                serviceName: cloudscaleServiceName,
+                serviceID: common.ServiceID(cloudscaleServiceName),
                 providerSecretNamespace: compParams.providerSecretNamespace,
                 crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
@@ -94,7 +98,8 @@ local compositionExoscale =
               },
               data: {
                 providerConfig: 'exoscale',
-                serviceName: 'exoscalebucket',
+                serviceName: exoscaleServiceName,
+                serviceID: common.ServiceID(exoscaleServiceName),
                 providerSecretNamespace: compParams.providerSecretNamespace,
                 crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
@@ -133,7 +138,8 @@ local minioComp(name) =
               },
               data: {
                 providerConfig: name,
-                serviceName: 'miniobucket',
+                serviceName: minioServiceName,
+                serviceID: common.ServiceID(minioServiceName),
                 crossplaneNamespace: params.crossplane.namespace,
               } + if compParams.proxyFunction then {
                 proxyEndpoint: compParams.grpcEndpoint,

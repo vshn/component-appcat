@@ -64,6 +64,7 @@ spec:
           quotasEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
           salesOrder: ST10120
+          serviceID: vshn-mariadb
           serviceName: mariadb
           sliNamespace: syn-appcat-slos
         kind: ConfigMap

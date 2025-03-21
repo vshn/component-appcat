@@ -607,6 +607,7 @@ spec:
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
           salesOrder: ST10120
+          serviceID: vshn-redis
           serviceName: redis
           sliNamespace: syn-appcat-slos
         kind: ConfigMap

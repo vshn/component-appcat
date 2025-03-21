@@ -61,6 +61,7 @@ spec:
           registry_username: ''
           restoreSA: keycloakserviceaccount
           salesOrder: ST10120
+          serviceID: vshn-keycloak
           serviceName: keycloak
           sliNamespace: syn-appcat-slos
         kind: ConfigMap

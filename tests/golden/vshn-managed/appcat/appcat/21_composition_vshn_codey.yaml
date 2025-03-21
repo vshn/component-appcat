@@ -4,16 +4,16 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-60'
-    metadata.appcat.vshn.io/description: instance instances by VSHN
-    metadata.appcat.vshn.io/displayname: instance by VSHN
-    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-instance
+    metadata.appcat.vshn.io/description: codey instances by VSHN
+    metadata.appcat.vshn.io/displayname: codey by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-codey
     metadata.appcat.vshn.io/flavor: standalone
     metadata.appcat.vshn.io/plans: '{"mini":{"size":{"cpu":"500m","disk":"10Gi","enabled":true,"memory":"2Gi"}},"small":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"4Gi"}}}'
-    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/instance.html
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/codey.html
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/serviceID: vshn-instance
+    metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
 spec:
@@ -77,4 +77,17 @@ spec:
                 toFieldPath: spec.parameters.size.plan
                 type: FromCompositeFieldPath
       step: patch-and-transform
+    - functionRef:
+        name: function-appcat
+      input:
+        apiVersion: v1
+        data:
+          serviceID: vshn-codey
+          serviceName: codey
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: codey-func
   writeConnectionSecretsToNamespace: syn-crossplane

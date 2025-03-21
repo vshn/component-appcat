@@ -20,6 +20,7 @@ local appuioManaged = inv.parameters.appcat.appuioManaged;
 local serviceNameLabelKey = 'appcat.vshn.io/servicename';
 local serviceNamespaceLabelKey = 'appcat.vshn.io/claim-namespace';
 local serviceCLaimNameLabelKey = 'appcat.vshn.io/claim-name';
+local serviceName = 'codey';
 
 local connectionSecretKeys = [
   'CODEY_USERNAME',
@@ -67,7 +68,7 @@ local composition =
 
   kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'codey.io') +
   common.SyncOptions +
-  common.vshnMetaVshnDBaas('instance', 'standalone', 'true', codeyPlans) +
+  common.vshnMetaVshnDBaas('codey', 'standalone', 'true', codeyPlans) +
   {
     spec: {
       compositeTypeRef: comp.CompositeRef(xrd),
@@ -115,6 +116,24 @@ local composition =
               ],
             },
           },
+          {
+            step: 'codey-func',
+            functionRef: {
+              name: 'function-appcat',
+            },
+            input: kube.ConfigMap('xfn-config') + {
+              metadata: {
+                labels: {
+                  name: 'xfn-config',
+                },
+                name: 'xfn-config',
+              },
+              data: {
+                    serviceName: serviceName,
+                    serviceID: common.ServiceID(serviceName),
+              },
+          },
+        },
         ],
     },
   };

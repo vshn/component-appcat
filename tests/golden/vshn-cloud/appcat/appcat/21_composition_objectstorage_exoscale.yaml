@@ -29,6 +29,7 @@ spec:
           crossplaneNamespace: syn-crossplane
           providerConfig: exoscale
           providerSecretNamespace: syn-provider-exoscale-secrets
+          serviceID: vshn-exoscalebucket
           serviceName: exoscalebucket
         kind: ConfigMap
         metadata:

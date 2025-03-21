@@ -63,6 +63,7 @@ spec:
           registry_username: ''
           restoreSA: forgejoserviceaccount
           salesOrder: ''
+          serviceID: vshn-forgejo
           serviceName: forgejo
           sliNamespace: syn-appcat-slos
         kind: ConfigMap

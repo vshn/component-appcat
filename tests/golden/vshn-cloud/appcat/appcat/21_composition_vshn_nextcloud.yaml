@@ -66,6 +66,7 @@ spec:
           quotasEnabled: 'false'
           restoreSA: nextcloudserviceaccount
           salesOrder: ''
+          serviceID: vshn-nextcloud
           serviceName: nextcloud
           sliNamespace: syn-appcat-slos
         kind: ConfigMap

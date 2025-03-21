@@ -28,6 +28,7 @@ spec:
           crossplaneNamespace: syn-crossplane
           providerConfig: cloudscale
           providerSecretNamespace: syn-provider-cloudscale-secrets
+          serviceID: vshn-cloudscalebucket
           serviceName: cloudscalebucket
         kind: ConfigMap
         metadata:

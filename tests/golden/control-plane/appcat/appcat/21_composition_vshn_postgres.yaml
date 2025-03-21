@@ -81,6 +81,7 @@ spec:
             "memory": "3984Mi"}}}'
           quotasEnabled: 'false'
           salesOrder: ''
+          serviceID: vshn-postgresql
           serviceName: postgresql
           sgNamespace: stackgres
           sideCars: '{"clusterController": {"limits": {"cpu": "250m", "memory": "256Mi"},
