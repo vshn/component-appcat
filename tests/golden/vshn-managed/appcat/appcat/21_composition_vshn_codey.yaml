@@ -65,7 +65,7 @@ spec:
               - fromFieldPath: spec.parameters.service.majorVersion
                 toFieldPath: spec.parameters.service.majorVersion
                 type: FromCompositeFieldPath
-              - fromFieldPath: metadata.name
+              - fromFieldPath: metadata.labels["crossplane.io/claim-name"]
                 toFieldPath: spec.parameters.service.fqdn[0]
                 transforms:
                   - string:
