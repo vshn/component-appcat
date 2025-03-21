@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.133.0
+          image: ghcr.io/vshn/appcat:v4.133.1
           livenessProbe:
             httpGet:
               path: /healthz
