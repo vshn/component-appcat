@@ -9,4 +9,4 @@ spec:
   package: ghcr.io/vshn/appcat:change_repositories-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy

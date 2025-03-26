@@ -28,6 +28,7 @@ spec:
         apiVersion: v1
         data:
           bucketRegion: lpg
+          busybox_image: docker.io/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
           chartVersion: 2.4.3
           controlNamespace: syn-appcat-control

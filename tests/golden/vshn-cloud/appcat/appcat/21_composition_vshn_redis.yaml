@@ -397,7 +397,6 @@ spec:
                     global:
                       imageRegistry: dockerhub.vshn.net
                     image:
-                      registry: dockerhub.vshn.net
                       repository: bitnami/redis
                     master:
                       containerSecurityContext:

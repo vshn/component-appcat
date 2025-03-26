@@ -105,6 +105,15 @@ parameters:
         registry: quay.io
         image: appuio/oc
         tag: v4.13
+      forgejo:
+        registry: code.forgejo.org
+      redis:
+        registry: docker.io
+      mariadb:
+        registry: docker.io
+      keycloak:
+        registry: docker-registry.inventage.com:10121
+        image: keycloak-competence-center/keycloak-managed
     =_crd_version: ${appcat:images:appcat:tag}
 
     namespace: syn-appcat
@@ -573,7 +582,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:forgejo:version}
-          imageRegistry: ""
+          imageRegistry: "${appcat:images:forgejo:registry}"
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -753,7 +762,7 @@ parameters:
           enableNetworkPolicy: true
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:redis:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:redis:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -856,7 +865,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:mariadb:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:mariadb:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -909,6 +918,7 @@ parameters:
           restoreSA: keycloakserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
+            busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
@@ -924,7 +934,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
-          imageRegistry: "docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed"
+          imageRegistry: ${appcat:images:keycloak:registry}/${appcat:images:keycloak:image}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -986,7 +996,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:nextcloud:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:nextcloud:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}

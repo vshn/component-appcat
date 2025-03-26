@@ -395,7 +395,7 @@ spec:
                     commonConfiguration: ''
                     fullnameOverride: redis
                     global:
-                      imageRegistry: ''
+                      imageRegistry: docker.io
                     image:
                       repository: bitnami/redis
                     master:
@@ -597,7 +597,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: ''
+          imageRegistry: docker.io
           imageTag: change_repositories
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
