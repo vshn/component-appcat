@@ -302,12 +302,11 @@ local composition =
             },
             fullnameOverride: 'redis',
             global: {
-              imageRegistry: redisParams.imageRegistry,
+              [if redisParams.imageRegistry != '' then 'imageRegistry']: redisParams.imageRegistry,
             },
-            image: std.mergePatch(
-              if redisParams.imageRegistry != '' then { registry: redisParams.imageRegistry } else {},
-              { repository: 'bitnami/redis' }
-            ),
+            image: {
+              repository: 'bitnami/redis',
+            },
             commonConfiguration: '',
             master: {
               persistence: {

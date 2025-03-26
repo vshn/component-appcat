@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: ''
+          imageRegistry: dockerhub.vshn.net
           imageTag: change_repositories
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
@@ -63,6 +63,7 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
+          proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
           restoreSA: nextcloudserviceaccount
           salesOrder: ''
