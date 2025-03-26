@@ -6,16 +6,16 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.18.3
+        version: 1.18.4
       redis:
         source: https://charts.bitnami.com/bitnami
-        version: 17.7.1
+        version: 17.7.6
       mariadb:
         source: https://charts.bitnami.com/bitnami
         version: 14.0.10
       minio:
         source: https://charts.min.io
-        version: 5.0.13
+        version: 5.0.15
       keycloak:
         source: https://codecentric.github.io/helm-charts
         version: 2.4.3
