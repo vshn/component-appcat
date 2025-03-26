@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.135.0
+        tag: change/repositories
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -99,12 +99,18 @@ parameters:
         registry: docker.io
         image: library/nextcloud
       busybox:
-        registry: docker.io
+        registry: test
         image: library/busybox
       oc:
         registry: quay.io
         image: appuio/oc
         tag: v4.13
+      forgejo:
+        registry: code.forgejo.org
+      redis:
+        registry: docker.io
+      mariadb:
+        registry: docker.io
     =_crd_version: ${appcat:images:appcat:tag}
 
     namespace: syn-appcat
@@ -573,7 +579,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:forgejo:version}
-          imageRegistry: ""
+          imageRegistry: "${appcat:images:forgejo:registry}"
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -753,7 +759,7 @@ parameters:
           enableNetworkPolicy: true
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:redis:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:redis:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -856,7 +862,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:mariadb:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:mariadb:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
@@ -909,6 +915,7 @@ parameters:
           restoreSA: keycloakserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
+            busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
@@ -986,7 +993,7 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:nextcloud:version}
-          imageRegistry: ""
+          imageRegistry: ${appcat:images:nextcloud:registry}
           bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}

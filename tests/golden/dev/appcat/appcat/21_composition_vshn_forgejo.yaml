@@ -41,8 +41,8 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: ''
-          imageTag: v4.135.0
+          imageRegistry: code.forgejo.org
+          imageTag: change_repositories
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
@@ -58,6 +58,7 @@ spec:
             true, "memory": "8Gi"}}, "mini": {"size": {"cpu": "500m", "disk": "10Gi",
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
+          proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''
