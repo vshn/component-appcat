@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat
 spec:
-  package: ghcr.io/vshn/appcat:v4.135.0-func
+  package: ghcr.io/vshn/appcat:adjust_forgejo-backup-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

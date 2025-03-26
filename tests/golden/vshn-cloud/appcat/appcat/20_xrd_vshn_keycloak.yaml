@@ -11426,10 +11426,10 @@ spec:
                             - guaranteed
                           type: string
                         version:
-                          default: '26'
+                          default: '25'
                           description: |-
                             Version contains supported version of keycloak.
-                            Multiple versions are supported. Default version is 26.
+                            Multiple versions are supported. Default version is 25.
                           enum:
                             - '25'
                             - '26'
