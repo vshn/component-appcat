@@ -46,6 +46,16 @@ local e2eClusterRole = kube.ClusterRole('appcat:e2e') + {
       resources: [ 'jobs', 'cronjobs', 'jobs/finalizers', 'cronjobs/finalizers' ],
       verbs: [ 'get', 'list', 'create', 'delete', 'update', 'watch' ],
     },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      verbs: [ 'list', 'get' ],
+    },
+    {
+      apiGroups: [ 'apps' ],
+      resources: [ 'deployments' ],
+      verbs: [ 'list', 'get', 'watch' ],
+    },
   ],
 };
 
