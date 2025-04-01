@@ -25,7 +25,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.138.0
+          image: ghcr.io/vshn/appcat:set-back-pg-repack-version
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
