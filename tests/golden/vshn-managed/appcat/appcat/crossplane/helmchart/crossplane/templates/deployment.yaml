@@ -41,6 +41,7 @@ spec:
             - core
             - start
             - --enable-usages
+            - --poll-interval=1h
           env:
             - name: GOMAXPROCS
               valueFrom:

@@ -148,6 +148,7 @@ parameters:
           enabled: true
         args:
           - --enable-usages
+          - --poll-interval=1h
         image:
           repository: ${appcat:images:crossplane:registry}/${appcat:images:crossplane:image}
           tag: ${appcat:images:crossplane:tag}
