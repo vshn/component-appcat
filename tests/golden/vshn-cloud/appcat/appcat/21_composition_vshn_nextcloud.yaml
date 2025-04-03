@@ -47,9 +47,11 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/library/nextcloud
-          imageTag: v4.138.0
+          imageTag: ingressLabels
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
+          ingress_labels: |
+            managedBy: Appcat
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
