@@ -77,17 +77,4 @@ spec:
                 toFieldPath: spec.parameters.size.plan
                 type: FromCompositeFieldPath
       step: patch-and-transform
-    - functionRef:
-        name: function-appcat
-      input:
-        apiVersion: v1
-        data:
-          serviceID: vshn-codey
-          serviceName: codey
-        kind: ConfigMap
-        metadata:
-          labels:
-            name: xfn-config
-          name: xfn-config
-      step: codey-func
   writeConnectionSecretsToNamespace: syn-crossplane

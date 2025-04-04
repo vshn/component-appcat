@@ -116,24 +116,24 @@ local composition =
               ],
             },
           },
-          {
-            step: 'codey-func',
-            functionRef: {
-              name: 'function-appcat',
-            },
-            input: kube.ConfigMap('xfn-config') + {
-              metadata: {
-                labels: {
-                  name: 'xfn-config',
-                },
-                name: 'xfn-config',
-              },
-              data: {
-                serviceName: serviceName,
-                serviceID: common.VSHNServiceID(serviceName),
-              },
-            },
-          },
+          // {
+          //   step: 'codey-func',
+          //   functionRef: {
+          //     name: 'function-appcat',
+          //   },
+          //   input: kube.ConfigMap('xfn-config') + {
+          //     metadata: {
+          //       labels: {
+          //         name: 'xfn-config',
+          //       },
+          //       name: 'xfn-config',
+          //     },
+          //     data: {
+          //       serviceName: serviceName,
+          //       serviceID: common.VSHNServiceID(serviceName),
+          //     },
+          //   },
+          // },
         ],
     },
   };
