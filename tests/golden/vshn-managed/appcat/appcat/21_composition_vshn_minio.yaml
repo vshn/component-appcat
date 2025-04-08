@@ -27,7 +27,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          bucketRegion: ''
+          bucketRegion: lpg
           chartRepository: https://charts.min.io
           chartVersion: 5.0.13
           controlNamespace: syn-appcat-control

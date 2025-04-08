@@ -60,6 +60,7 @@ spec:
                         Be aware that S3 providers may require a unique name across the platform or region.
                       type: string
                     region:
+                      default: lpg
                       description: |-
                         Region is the name of the region where the bucket shall be created.
                         The region must be available in the S3 endpoint.
@@ -100,7 +101,6 @@ spec:
                       type: object
                   required:
                     - bucketName
-                    - region
                   type: object
               type: object
             status:

@@ -126,6 +126,21 @@ parameters:
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
+    bucketRegionOverride: ""
+
+    cloudRegionMap:
+      cloudscale:
+        - lpg
+        - rma
+      exoscale:
+        - ch-gva-2
+        - ch-dk-2
+        - de-fra-1
+        - de-muc-1
+        - at-vie-1
+        - at-vie-2
+        - bg-sof-1
+
     # Single or multiple cluster setup
     clusterManagementSystem:
       controlPlaneCluster: true
@@ -584,7 +599,6 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:forgejo:version}
           imageRegistry: "${appcat:images:forgejo:registry}"
-          bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: small
@@ -616,10 +630,6 @@ parameters:
                 disk: 500Gi
         postgres:
           billing: true
-          # bucket_region: 'lpg' || 'ch-gva-2'
-          bucket_region: ""
-          # bucket_endpoint: 'https://objects.lpg.cloudscale.ch' || 'https://sos-ch-gva-2.exo.io'
-          bucket_endpoint: ""
           enabled: true
           additionalInputs:
             # Depending on the cluster, this needs to be set
@@ -764,7 +774,6 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:redis:version}
           imageRegistry: ${appcat:images:redis:registry}
-          bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -814,7 +823,6 @@ parameters:
           enableNetworkPolicy: true
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:minio:version}
-          bucket_region: ""
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -867,7 +875,6 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:mariadb:version}
           imageRegistry: ${appcat:images:mariadb:registry}
-          bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -936,7 +943,6 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
           imageRegistry: ${appcat:images:keycloak:registry}/${appcat:images:keycloak:image}
-          bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
@@ -998,7 +1004,6 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:nextcloud:version}
           imageRegistry: ${appcat:images:nextcloud:registry}
-          bucket_region: "lpg"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
@@ -1047,7 +1052,6 @@ parameters:
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           imageRegistry: ""
-          bucket_region: "lpg"
           defaultPlan: mini
           sla: 99.25
           plans:

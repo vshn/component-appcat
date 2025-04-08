@@ -10,7 +10,7 @@ metadata:
     metadata.appcat.vshn.io/flavor: standalone
     metadata.appcat.vshn.io/plans: '{"standard-2":{"size":{"cpu":"500m","disk":"16Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"standard-8":{"size":{"cpu":"2","disk":"16Gi","enabled":true,"memory":"8Gi"}}}'
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/keycloak.html
-    metadata.appcat.vshn.io/zone: rma1
+    metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
@@ -27,7 +27,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          bucketRegion: lpg
+          bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
           chartVersion: 2.4.3

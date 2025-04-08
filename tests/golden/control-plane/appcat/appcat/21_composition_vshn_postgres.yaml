@@ -30,8 +30,7 @@ spec:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
-          bucketEndpoint: http://minio-server.minio:9000
-          bucketRegion: ch-gva-2
+          bucketRegion: lpg
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           emailAlertingEnabled: 'false'

@@ -10,8 +10,8 @@ local inv = kap.inventory();
 local facts = inv.parameters.facts;
 local params = inv.parameters.appcat;
 
-local exoscaleZones = [ 'de-fra-1', 'de-muc-1', 'at-vie-1', 'ch-gva-2', 'ch-dk-2', 'bg-sof-1' ];
-local cloudscaleZones = [ 'lpg', 'rma' ];
+local exoscaleZones = params.cloudRegionMap.exoscale;
+local cloudscaleZones = params.cloudRegionMap.cloudscale;
 
 local strExoscaleZones = std.join(', ', exoscaleZones);
 local strCloudscaleZones = std.join(', ', cloudscaleZones);
@@ -229,6 +229,16 @@ local controlPlaneSa = kube.ServiceAccount('appcat-control-plane') + {
   },
 };
 
+local getBucketRegion() =
+  if params.bucketRegionOverride != '' then
+    params.bucketRegionOverride
+  else
+    local regions = std.get(params.cloudRegionMap, facts.cloud);
+
+    local nonLocalRegions = std.filter(function(x) x != facts.region, regions);
+
+    nonLocalRegions[0];
+
 {
   SyncOptions: syncOptions,
   VshnMetaDBaaSExoscale(dbname):
@@ -278,4 +288,6 @@ local controlPlaneSa = kube.ServiceAccount('appcat-control-plane') + {
     vshnServiceID(name),
   ObjectBucketServiceID(name):
     objectBucketServiceID(name),
+  GetBucketRegion():
+    getBucketRegion(),
 }

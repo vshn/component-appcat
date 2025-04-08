@@ -104,7 +104,7 @@ local vshn_appcat_service(name, serviceParams) =
                         imageTag: common.GetAppCatImageTag(),
                         chartRepository: params.charts[name].source,
                         chartVersion: params.charts[name].version,
-                        bucketRegion: serviceParams.bucket_region,
+                        bucketRegion: common.GetBucketRegion(),
                         maintenanceSA: 'helm-based-service-maintenance',
                         controlNamespace: params.services.controlNamespace,
                         plans: std.toString(plans),

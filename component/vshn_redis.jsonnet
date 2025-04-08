@@ -483,7 +483,7 @@ local composition =
                       serviceName: serviceName,
                       serviceID: common.VSHNServiceID(serviceName),
                       imageTag: common.GetAppCatImageTag(),
-                      bucketRegion: redisParams.bucket_region,
+                      bucketRegion: common.GetBucketRegion(),
                       maintenanceSA: 'helm-based-service-maintenance',
                       controlNamespace: params.services.controlNamespace,
                       restoreSA: 'redisrestoreserviceaccount',
