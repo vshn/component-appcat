@@ -294,6 +294,22 @@ local controlPlaneSATokenSecret = kube.Secret('appcat-control-plane') + {
   type: 'kubernetes.io/service-account-token',
 };
 
+// The API server needs additional RBAC to read the k8up snapshots
+local controlPlaneRole = kube.ClusterRole('appcat:controlplane:custom') + {
+  rules: [
+    {
+      apiGroups: [ 'k8up.io' ],
+      resources: [ 'snapshots' ],
+      verbs: [ 'get', 'list', 'watch' ],
+    },
+  ],
+};
+
+local controlPlaneRoleBindingCustom = kube.ClusterRoleBinding('appcat:controlplane:custom') {
+  roleRef_: controlPlaneRole,
+  subjects_: [ common.ControlPlaneSa ],
+};
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -312,6 +328,8 @@ local controlPlaneSATokenSecret = kube.Secret('appcat-control-plane') + {
 } + (if vars.isSingleOrServiceCluster then {
        '11_control_plane_sa': common.ControlPlaneSa,
        '11_control_plane_sa_token_secret': controlPlaneSATokenSecret,
+       '11_control_plane_custom_role': controlPlaneRole,
+       '11_control_plan_role_binding_custom': controlPlaneRoleBindingCustom,
      } else {})
 + if vars.isSingleOrControlPlaneCluster then {
   '11_service_cluster_sa': serviceClusterSA,

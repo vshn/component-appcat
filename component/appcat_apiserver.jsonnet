@@ -1,4 +1,5 @@
 local common = import 'common.libsonnet';
+local vars = import 'config/vars.jsonnet';
 local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
 local inv = kap.inventory();
@@ -207,7 +208,7 @@ local apiCertificate = {
   },
 };
 
-if apiserverParams.enabled == true then {
+if apiserverParams.enabled && vars.isSingleOrControlPlaneCluster then {
   'apiserver/10_cluster_role_api_server': clusterRoleAPIServer,
   'apiserver/10_cluster_role_basic_users': clusterRoleUsers,
   'apiserver/10_cluster_role_view': clusterRoleView,
