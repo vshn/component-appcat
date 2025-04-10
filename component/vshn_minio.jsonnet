@@ -41,7 +41,7 @@ local prometheusRule = prom.GeneratePrometheusNonSLORules('minio', 'minio', []) 
 
 if params.services.vshn.enabled && minioParams.enabled && std.length(instances) != 0 && vars.isSingleOrControlPlaneCluster then {
   '22_minio_instances': instances,
- # '22_minio_prometheus_rule': prometheusRule,
+  '22_minio_prometheus_rule': prometheusRule,
   [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNMinio_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNMinio'),
 
 } else {}
