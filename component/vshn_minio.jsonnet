@@ -33,11 +33,11 @@ local instances = [
 ];
 
 local prometheusRule = prom.GeneratePrometheusNonSLORules('minio', 'minio', []) + {
-    patches: [
-      comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'metadata.name', 'prometheusrule'),
-      comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.forProvider.manifest.metadata.namespace', 'vshn-minio'),
-    ],
-  };
+  patches: [
+    comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'metadata.name', 'prometheusrule'),
+    comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.forProvider.manifest.metadata.namespace', 'vshn-minio'),
+  ],
+};
 
 if params.services.vshn.enabled && minioParams.enabled && std.length(instances) != 0 && vars.isSingleOrControlPlaneCluster then {
   '22_minio_instances': instances,
