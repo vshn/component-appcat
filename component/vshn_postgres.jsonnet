@@ -246,8 +246,7 @@ local composition =
                       ownerKind: xrd.spec.names.kind,
                       ownerGroup: xrd.spec.group,
                       ownerVersion: xrd.spec.versions[0].name,
-                      bucketRegion: pgParams.bucket_region,
-                      bucketEndpoint: pgParams.bucket_endpoint,
+                      bucketRegion: common.GetBucketRegion(),
                       isOpenshift: std.toString(isOpenshift),
                       sliNamespace: params.slos.namespace,
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
@@ -355,8 +354,6 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
 };
 
 (if params.services.vshn.enabled && pgParams.enabled && vars.isSingleOrControlPlaneCluster then
-   assert std.length(pgParams.bucket_region) != 0 : 'appcat.services.vshn.postgres.bucket_region is empty';
-   assert std.length(pgParams.bucket_endpoint) != 0 : 'appcat.services.vshn.postgres.bucket_endpoint is empty';
    {
      '20_xrd_vshn_postgres': xrd,
      '20_rbac_vshn_postgres': xrds.CompositeClusterRoles(xrd),

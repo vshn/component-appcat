@@ -28,7 +28,30 @@ local xrd = xrds.XRDFromCRD(
     'ENDPOINT_URL',
     'BUCKET_NAME',
   ]
-);
+) + {
+  spec+: {
+    versions: [
+      v { schema+: {
+        openAPIV3Schema+: {
+          properties+: {
+            spec+: {
+              properties+: {
+                parameters+: {
+                  properties+: {
+                    region+: {
+                      default: common.GetBucketRegion(),
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      } }
+      for v in super.versions
+    ],
+  },
+};
 
 local compositionCloudscale =
   local provider = 'cloudscale.ch';

@@ -211,8 +211,6 @@ parameters:
         postgres:
           enabled: true
           sgNamespace: stackgres
-          bucket_region: 'ch-gva-2'
-          bucket_endpoint: 'http://minio-server.minio:9000'
           additionalInputs:
             loadbalancerAnnotations: |
                 foo: bar

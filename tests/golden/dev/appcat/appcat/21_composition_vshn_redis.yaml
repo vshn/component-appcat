@@ -14,7 +14,7 @@ metadata:
       be scheduled on APPUiO Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"plus-512m":{"note":"Will
       be scheduled on APPUiO Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"125m","disk":"16Gi","enabled":true,"memory":"512Mi"}},"standard-1":{"size":{"cpu":"250m","disk":"16Gi","enabled":true,"memory":"1Gi"}},"standard-2":{"size":{"cpu":"500m","disk":"16Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"standard-512m":{"size":{"cpu":"125m","disk":"16Gi","enabled":true,"memory":"512Mi"}}}'
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/redis.html
-    metadata.appcat.vshn.io/zone: rma1
+    metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/serviceID: vshn-redis
@@ -587,7 +587,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          bucketRegion: lpg
+          bucketRegion: rma
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           emailAlertingEnabled: 'true'
@@ -598,7 +598,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.143.0
+          imageTag: change_migrate_buckets
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io

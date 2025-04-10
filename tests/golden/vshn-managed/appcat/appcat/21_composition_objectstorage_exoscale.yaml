@@ -8,8 +8,8 @@ metadata:
     metadata.appcat.vshn.io/displayname: Exoscale Object Storage
     metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/objstor
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/objectstorage.html
-    metadata.appcat.vshn.io/zone: de-fra-1, de-muc-1, at-vie-1, ch-gva-2, ch-dk-2,
-      bg-sof-1
+    metadata.appcat.vshn.io/zone: ch-gva-2, ch-dk-2, de-fra-1, de-muc-1, at-vie-1,
+      at-vie-2, bg-sof-1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/serviceID: exoscale-objectbucket

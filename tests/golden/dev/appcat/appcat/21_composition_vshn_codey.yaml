@@ -10,7 +10,7 @@ metadata:
     metadata.appcat.vshn.io/flavor: standalone
     metadata.appcat.vshn.io/plans: '{"mini":{"size":{"cpu":"500m","disk":"10Gi","enabled":true,"memory":"2Gi"}},"small":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"4Gi"}}}'
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/codey.html
-    metadata.appcat.vshn.io/zone: rma1
+    metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/serviceID: vshn-codey

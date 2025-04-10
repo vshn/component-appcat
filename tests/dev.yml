@@ -10,6 +10,7 @@ parameters:
 
   facts:
     cloud: cloudscale
+    region: lpg
     sales_order: "10431"
     appcat_dev: true
     service_level: "zero"
@@ -23,6 +24,9 @@ parameters:
     namespace: syn-crossplane
 
   appcat:
+
+    # bucketRegionOverride: minio
+
     images:
       nextcloud:
         registry: dockerhub.vshn.net
@@ -123,8 +127,6 @@ parameters:
 
         postgres:
           sgNamespace: stackgres
-          bucket_region: 'ch-gva-2'
-          bucket_endpoint: 'http://minio-server.minio:9000'
           additionalInputs:
             loadbalancerAnnotations: |
                 foo: bar

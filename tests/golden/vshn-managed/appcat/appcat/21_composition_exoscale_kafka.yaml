@@ -10,8 +10,8 @@ metadata:
     metadata.appcat.vshn.io/plans: |
       {"business-16":{"note":"kafka business-16","size":{"cpu":"4","disk":"2010Gi","memory":"16Gi"}},"business-32":{"note":"kafka business-32","size":{"cpu":"8","disk":"4020Gi","memory":"32Gi"}},"business-4":{"note":"kafka business-4","size":{"cpu":"2","disk":"480Gi","memory":"4Gi"}},"business-8":{"note":"kafka business-8","size":{"cpu":"4","disk":"960Gi","memory":"8Gi"}},"premium-15x-16":{"note":"kafka premium-15x-16","size":{"cpu":"4","disk":"10005Gi","memory":"16Gi"}},"premium-15x-32":{"note":"kafka premium-15x-32","size":{"cpu":"8","disk":"20010Gi","memory":"32Gi"}},"premium-15x-8":{"note":"kafka premium-15x-8","size":{"cpu":"4","disk":"5010Gi","memory":"8Gi"}},"premium-30x-16":{"note":"kafka premium-30x-16","size":{"cpu":"4","disk":"20010Gi","memory":"16Gi"}},"premium-30x-32":{"note":"kafka premium-30x-32","size":{"cpu":"8","disk":"40020Gi","memory":"32Gi"}},"premium-30x-8":{"note":"kafka premium-30x-8","size":{"cpu":"4","disk":"10020Gi","memory":"8Gi"}},"premium-6x-16":{"note":"kafka premium-6x-16","size":{"cpu":"4","disk":"4020Gi","memory":"16Gi"}},"premium-6x-32":{"note":"kafka premium-6x-32","size":{"cpu":"8","disk":"8010Gi","memory":"32Gi"}},"premium-6x-8":{"note":"kafka premium-6x-8","size":{"cpu":"4","disk":"2010Gi","memory":"8Gi"}},"premium-9x-16":{"note":"kafka premium-9x-16","size":{"cpu":"4","disk":"6003Gi","memory":"16Gi"}},"premium-9x-32":{"note":"kafka premium-9x-32","size":{"cpu":"8","disk":"12006Gi","memory":"32Gi"}},"premium-9x-8":{"note":"kafka premium-9x-8","size":{"cpu":"4","disk":"3006Gi","memory":"8Gi"}},"startup-2":{"note":"kafka startup-2","size":{"cpu":"2","disk":"90Gi","memory":"2Gi"}}}
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/exoscale_dbaas.html
-    metadata.appcat.vshn.io/zone: de-fra-1, de-muc-1, at-vie-1, ch-gva-2, ch-dk-2,
-      bg-sof-1
+    metadata.appcat.vshn.io/zone: ch-gva-2, ch-dk-2, de-fra-1, de-muc-1, at-vie-1,
+      at-vie-2, bg-sof-1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/serviceID: exoscale-kafka
