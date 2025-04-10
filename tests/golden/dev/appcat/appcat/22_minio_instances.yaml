@@ -1,0 +1,18 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNMinio
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false,SkipDryRunOnMissingResource=true
+  labels:
+    name: minio
+  name: minio
+  namespace: syn-appcat
+spec:
+  parameters:
+    service:
+      mode: standalone
+    size:
+      disk: 20Gi
+  writeConnectionSecretToRef:
+    name: minio-cluster-credentials

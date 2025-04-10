@@ -8,6 +8,10 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local minioParams = params.services.vshn.minio;
 local opsgenieRules = import 'vshn_alerting.jsonnet';
+local prom = import 'prometheus.libsonnet';
+local comp = import 'lib/appcat-compositions.libsonnet';
+
+
 local vars = import 'config/vars.jsonnet';
 
 local instances = [
@@ -28,8 +32,16 @@ local instances = [
   for instance in minioParams.instances
 ];
 
+local prometheusRule = prom.GeneratePrometheusNonSLORules('minio', 'minio', []) + {
+  patches: [
+    comp.FromCompositeFieldPathWithTransformSuffix('metadata.name', 'metadata.name', 'prometheusrule'),
+    comp.FromCompositeFieldPathWithTransformPrefix('metadata.name', 'spec.forProvider.manifest.metadata.namespace', 'vshn-minio'),
+  ],
+};
+
 if params.services.vshn.enabled && minioParams.enabled && std.length(instances) != 0 && vars.isSingleOrControlPlaneCluster then {
   '22_minio_instances': instances,
+  '22_minio_prometheus_rule': prometheusRule,
   [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNMinio_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNMinio'),
 
 } else {}
