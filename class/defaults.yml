@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.18.3
+        version: 1.19.1
       redis:
         source: https://charts.bitnami.com/bitnami
         version: 17.7.1
@@ -29,7 +29,7 @@ parameters:
       provider-kubernetes:
         registry: xpkg.upbound.io
         repository: upbound/provider-kubernetes
-        tag: v0.17.0
+        tag: v0.17.1
       provider-helm:
         registry: xpkg.upbound.io
         repository: upbound/provider-helm
@@ -81,7 +81,7 @@ parameters:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.18.3
+        tag: v1.19.1
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
