@@ -101,6 +101,7 @@ spec:
                       type: object
                   required:
                     - bucketName
+                    - region
                   type: object
               type: object
             status:

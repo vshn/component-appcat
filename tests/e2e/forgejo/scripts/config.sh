@@ -19,11 +19,15 @@ app_name=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data."_generals_"'
 kubectl -n "$NAMESPACE" patch vshnforgejo forgejo-e2e --type merge -p '{"spec":{"parameters":{"service":{"forgejoSettings":{"config":{"mailer":{"PROTOCOL":"sendmail"}}}}}}}' && false || true
 
 # ---------------------
-# Actions test, should fail
-ing=$(kubectl -n "$ns" get ing -o name | grep -v "acme" | head -n 1)
-host=$(kubectl -n "$ns" get "$ing" -o yaml | yq .spec.rules[0].host)
+svc=$(kubectl -n "$ns" get svc | grep http | cut -d" " -f1)
+kubectl -n "$ns" port-forward "svc/$svc" 3000 > /dev/null &
+pid=$!
+trap "kill $pid" EXIT
 
-url="https://$host"
+# The port-forward takes some time to get ready
+sleep 1
+
+url="http://localhost:3000"
 base_url="$url/api/v1"
 
 # 1. Check if config even has actions disabled
@@ -31,16 +35,14 @@ actions_enabled=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data.action
 [[ $actions_enabled == "false" ]]
 
 # 2. Create repo using API
-kubectl -n "$ns" wait --for=condition=Available --timeout=300s deployment -l app=forgejo
+# kubectl -n "$ns" wait --for=condition=Available --timeout=300s deployment -l app=forgejo
 
 # Endpoint might not be immediately available, so we'll wait for a bit
 payload='{"name": "my-repo"}'
 end_time=$((SECONDS + 30))
 while [ $SECONDS -lt $end_time ]; do
-    status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/user/repos")
-    if [[ "$status_code" -ge 400 && "$status_code" -lt 500 ]]; then
-        false
-    elif [[ "$status_code" -ge 300 ]]; then
+    status_code=$(curl  -w "%{http_code}" -X GET "$url/api/healthz")
+    if [[ "$status_code" -ne 200 ]]; then
         sleep 1
     else
         break

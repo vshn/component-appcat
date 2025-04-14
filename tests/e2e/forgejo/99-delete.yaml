@@ -1,7 +1,5 @@
-# Remove any leftover objects
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
-timeout: 600
 delete:
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNForgejo
