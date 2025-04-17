@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat
 spec:
-  package: ghcr.io/vshn/appcat:v4.145.0-func
+  package: ghcr.io/vshn/appcat:add_forgejo_e2e_fixes-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy

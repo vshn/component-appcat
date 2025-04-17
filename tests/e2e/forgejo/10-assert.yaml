@@ -1,6 +1,6 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestAssert
-timeout: 600
+timeout: 180
 ---
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNForgejo
@@ -13,7 +13,6 @@ spec:
     backup: {}
     security:
       allowAllNamespaces: false
-      deletionProtection: false
     service:
       adminEmail: example@vshn.vshn
       fqdn:
@@ -27,7 +26,7 @@ spec:
     apiVersion: vshn.appcat.vshn.io/v1
     kind: XVSHNForgejo
   writeConnectionSecretToRef:
-    name: mysupersecret
+    name: forgejo-e2e
 status:
   conditions:
   - status: "True"

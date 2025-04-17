@@ -25,7 +25,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.145.0
+          image: ghcr.io/vshn/appcat:add_forgejo_e2e_fixes
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

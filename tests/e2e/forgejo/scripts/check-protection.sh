@@ -1,0 +1,1 @@
+../../common/scripts/check-protection.sh

@@ -16,7 +16,5 @@ spec:
             ENABLED: "false"
           mailer:
             ENABLED: "true"
-    security:
-      deletionProtection: false
   writeConnectionSecretToRef:
-    name: mysupersecret
+    name: forgejo-e2e
