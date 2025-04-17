@@ -19,15 +19,15 @@ app_name=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data."_generals_"'
 kubectl -n "$NAMESPACE" patch vshnforgejo forgejo-e2e --type merge -p '{"spec":{"parameters":{"service":{"forgejoSettings":{"config":{"mailer":{"PROTOCOL":"sendmail"}}}}}}}' && false || true
 
 # ---------------------
-svc=$(kubectl -n "$ns" get svc | grep http | cut -d" " -f1)
-kubectl -n "$ns" port-forward "svc/$svc" 3000 > /dev/null &
-pid=$!
-trap "kill $pid" EXIT
+# svc=$(kubectl -n "$ns" get svc | grep http | cut -d" " -f1)
+# kubectl -n "$ns" port-forward "svc/$svc" 3000 > /dev/null &
+# pid=$!
+# trap "kill $pid" EXIT
 
 # The port-forward takes some time to get ready
 sleep 1
 
-url="http://localhost:3000"
+url="http://FORGEJO_HOST:3000"
 base_url="$url/api/v1"
 
 # 1. Check if config even has actions disabled
@@ -35,7 +35,6 @@ actions_enabled=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data.action
 [[ $actions_enabled == "false" ]]
 
 # 2. Create repo using API
-# kubectl -n "$ns" wait --for=condition=Available --timeout=300s deployment -l app=forgejo
 
 # Endpoint might not be immediately available, so we'll wait for a bit
 payload='{"name": "my-repo"}'

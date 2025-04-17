@@ -8,7 +8,8 @@ delete:
     name: forgejo-e2e
   - apiVersion: batch/v1
     kind: Job
-    name: connect-forgejo-e2e
+    labels:
+      e2e-test: forgejo-e2e
   - apiVersion: v1
     kind: Pod
     labels:

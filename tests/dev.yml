@@ -95,6 +95,7 @@ parameters:
         enabled: true
         smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
       vshn:
+        e2eTests: true
         enabled: true
         externalDatabaseConnectionsEnabled: true
         mariadb:
