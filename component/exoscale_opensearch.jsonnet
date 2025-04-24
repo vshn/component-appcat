@@ -12,7 +12,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local osParams = params.services.exoscale.opensearch;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local connectionSecretKeys = [
   'OPENSEARCH_USER',
   'OPENSEARCH_PASSWORD',
@@ -160,5 +159,5 @@ if params.services.exoscale.enabled && osParams.enabled && vars.isSingleOrContro
   '20_xrd_exoscale_opensearch': xrd,
   '20_rbac_exoscale_opensearch': xrds.CompositeClusterRoles(xrd),
   '21_composition_exoscale_opensearch': composition,
-  [if isOpenshift then '21_openshift_template_opensearch_exoscale']: osTemplate,
+  [if vars.isOpenshift then '21_openshift_template_opensearch_exoscale']: osTemplate,
 } else {}

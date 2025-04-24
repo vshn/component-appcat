@@ -3,11 +3,12 @@ local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
 
 local common = import 'common.libsonnet';
+local vars = import 'config/vars.jsonnet';
+
 
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local nextcloudParams = params.services.vshn.nextcloud;
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 
 
 local scc =
@@ -46,5 +47,5 @@ local scc =
   };
 
 if params.services.vshn.enabled then {
-  [if params.services.vshn.nextcloud.enabled && isOpenshift then '22_scc_appcat']: scc,
+  [if params.services.vshn.nextcloud.enabled && vars.isOpenshift then '22_scc_appcat']: scc,
 } else {}

@@ -34,7 +34,6 @@ local xrdBrowseRole = kube.ClusterRole('appcat:browse') + {
 };
 
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local finalizerRole = kube.ClusterRole('crossplane:appcat:finalizer') {
   metadata+: {
     labels: {
@@ -236,7 +235,7 @@ local serviceClusterKubeconfigs =
           namespace: params.crossplane.namespace,
         },
         stringData+: {
-          kubeconfig: std.manifestJson(std.parseYaml(kubeConf.config)),
+          kubeconfig: kubeConf.config,
         },
       },
     params.clusterManagementSystem.serviceClusterKubeconfigs,
@@ -312,7 +311,7 @@ local controlPlaneRoleBindingCustom = kube.ClusterRoleBinding('appcat:controlpla
 
 {
   '10_clusterrole_view': xrdBrowseRole,
-  [if isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
+  [if vars.isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
   '10_clusterrole_services_read': readServices,
   '10_appcat_namespace': ns,
   '10_appcat_backup_monitoring': backupPrometheusRule,

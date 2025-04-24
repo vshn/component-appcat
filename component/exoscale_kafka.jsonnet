@@ -12,8 +12,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local kafkaParams = params.services.exoscale.kafka;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
-
 local connectionSecretKeys = [
   'KAFKA_URI',
   'KAFKA_HOST',
@@ -153,5 +151,5 @@ if params.services.exoscale.enabled && kafkaParams.enabled && vars.isSingleOrCon
   '20_xrd_exoscale_kafka': xrd,
   '20_rbac_exoscale_kafka': xrds.CompositeClusterRoles(xrd),
   '21_composition_exoscale_kafka': composition,
-  [if isOpenshift then '21_openshift_template_kafka_exoscale']: osTemplate,
+  [if vars.isOpenshift then '21_openshift_template_kafka_exoscale']: osTemplate,
 } else {}

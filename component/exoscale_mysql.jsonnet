@@ -13,7 +13,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local mysqlParams = params.services.exoscale.mysql;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local connectionSecretKeys = [
   'MYSQL_URL',
   'MYSQL_DB',
@@ -162,5 +161,5 @@ if params.services.exoscale.enabled && mysqlParams.enabled && vars.isSingleOrCon
   '20_xrd_exoscale_mysql': xrd,
   '20_rbac_exoscale_mysql': xrds.CompositeClusterRoles(xrd),
   '21_composition_exoscale_mysql': composition,
-  [if isOpenshift then '21_openshift_template_mysql_exoscale']: osTemplate,
+  [if vars.isOpenshift then '21_openshift_template_mysql_exoscale']: osTemplate,
 } else {}

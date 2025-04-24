@@ -28,9 +28,7 @@ local connectionSecretKeys = [
   'CODEY_URL',
 ];
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
-
-local securityContext = if isOpenshift then false else true;
+local securityContext = if vars.isOpenshift then false else true;
 
 local codeyPlans = common.FilterDisabledParams(codeyParams.plans);
 
