@@ -561,6 +561,7 @@ parameters:
       vshn:
         ocpDefaultAppsDomain: ""
         enabled: false
+        isServiceClusterOpenshift: false
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}

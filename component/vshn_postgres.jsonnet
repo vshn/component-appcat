@@ -247,7 +247,7 @@ local composition =
                       ownerGroup: xrd.spec.group,
                       ownerVersion: xrd.spec.versions[0].name,
                       bucketRegion: common.GetBucketRegion(),
-                      isOpenshift: std.toString(isOpenshift),
+                      isOpenshift: if vars.isControlPlane then std.toString(params.services.isServiceClusterOpenshift) else std.toString(isOpenshift),
                       sliNamespace: params.slos.namespace,
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       crossplaneNamespace: params.crossplane.namespace,
