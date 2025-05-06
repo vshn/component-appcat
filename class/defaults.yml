@@ -9,16 +9,16 @@ parameters:
         version: 1.19.1
       redis:
         source: https://charts.bitnami.com/bitnami
-        version: 17.7.1
+        version: 20.6.3
       mariadb:
         source: https://charts.bitnami.com/bitnami
-        version: 14.0.10
+        version: 20.2.2
       minio:
         source: https://charts.min.io
         version: 5.0.13
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 2.4.3
+        version: 18.10.0
       nextcloud:
         source: https://nextcloud.github.io/helm/
         version: 6.2.4

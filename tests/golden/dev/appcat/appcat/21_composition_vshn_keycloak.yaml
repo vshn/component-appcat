@@ -30,7 +30,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 2.4.3
+          chartVersion: 18.10.0
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2

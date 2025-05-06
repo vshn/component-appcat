@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: rma
           chartRepository: https://charts.bitnami.com/bitnami
-          chartVersion: 14.0.10
+          chartVersion: 20.2.2
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
