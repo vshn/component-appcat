@@ -7,6 +7,13 @@ local fromCompositeFieldPath(from, to) = {
   toFieldPath: to,
 };
 
+local fromCompositeFieldPathHardValue(to, value) = fromCompositeFieldPath(from='metadata.uid', to=to) + {
+  transforms: [ {
+    type: 'string',
+    string: { fmt: value, type: 'Format' },
+  } ],
+};
+
 
 local fromCompositeFieldPathWithTransform(from, to, prefix, suffix) = fromCompositeFieldPath(from, to) + {
   // this is an enhanced patch type with a transform function that adds the 3rd argument as a suffix
@@ -254,6 +261,8 @@ local namespacePermissions(namespacePrefix) = {
     fromCompositeFieldPathWithTransform(from, to, prefix, suffix),
   ToCompositeFieldPath(from, to):
     toCompositeFieldPath(from, to),
+  FromCompositeFieldPathHardValue(to, value):
+    fromCompositeFieldPathHardValue(to, value),
   CompositeRef(xrd, version=''):
     compositeRef(xrd, version=version),
   KubeObject(apiVersion, kind):

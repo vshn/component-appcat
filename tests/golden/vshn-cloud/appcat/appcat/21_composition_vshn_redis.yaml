@@ -389,7 +389,7 @@ spec:
                   chart:
                     name: redis
                     repository: https://charts.bitnami.com/bitnami
-                    version: 17.7.1
+                    version: 19.6.4
                   values:
                     architecture: standalone
                     commonConfiguration: ''
@@ -581,6 +581,38 @@ spec:
               - fromFieldPath: spec.parameters.service.redisSettings
                 toFieldPath: spec.forProvider.values.commonConfiguration
                 type: FromCompositeFieldPath
+              - fromFieldPath: metadata.uid
+                toFieldPath: spec.forProvider.values.metrics.resources.requests.cpu
+                transforms:
+                  - string:
+                      fmt: 100m
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.uid
+                toFieldPath: spec.forProvider.values.metrics.resources.requests.memory
+                transforms:
+                  - string:
+                      fmt: 128Mi
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.uid
+                toFieldPath: spec.forProvider.values.metrics.resources.limits.cpu
+                transforms:
+                  - string:
+                      fmt: 150m
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.uid
+                toFieldPath: spec.forProvider.values.metrics.resources.limits.memory
+                transforms:
+                  - string:
+                      fmt: 192Mi
+                      type: Format
+                    type: string
+                type: FromCompositeFieldPath
       step: patch-and-transform
     - functionRef:
         name: function-appcat
@@ -598,7 +630,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.146.0
+          imageTag: remove-redis-6.2
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
