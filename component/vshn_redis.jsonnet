@@ -43,7 +43,11 @@ local connectionSecretKeys = [
 local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
 
-local securityContext = if isOpenshift then false else true;
+local securityContext = 
+  if vars.isControlPlane then
+    if params.services.isServiceClusterOpenshift then false else true
+  else
+    if isOpenshift then false else true;
 
 local redisPlans = common.FilterDisabledParams(redisParams.plans);
 
