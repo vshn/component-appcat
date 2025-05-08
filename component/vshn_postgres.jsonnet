@@ -247,7 +247,7 @@ local composition =
                       ownerGroup: xrd.spec.group,
                       ownerVersion: xrd.spec.versions[0].name,
                       bucketRegion: common.GetBucketRegion(),
-                      isOpenshift: std.toString(isOpenshift),
+                      isOpenshift: if vars.isControlPlane then std.toString(params.services.isServiceClusterOpenshift) else std.toString(isOpenshift),
                       sliNamespace: params.slos.namespace,
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       crossplaneNamespace: params.crossplane.namespace,
@@ -362,14 +362,15 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
      '21_composition_vshn_postgres': composition,
 
      [if isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
-     [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
-     [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
-     [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
    } else {})
 + (if vars.isSingleOrServiceCluster then {
      '22_appcat_func_role': appcatFuncRole,
      '22_appcat_func_role_binding': appcatFuncRoleBinding,
      '22_appcat_postgres_maintenance_cluster_role': maintenanceClusterRole,
+
+     [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
+     [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
+     [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
    } else {})
 + if vars.isSingleOrServiceCluster then
   if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then {
