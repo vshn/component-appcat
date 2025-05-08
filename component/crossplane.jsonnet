@@ -58,7 +58,7 @@ local monitoring =
       },
       spec+: {
         selector: {
-          release: 'crossplane',
+          app: name,
         },
         ports: [ {
           name: 'metrics',
@@ -122,5 +122,5 @@ if vars.isSingleOrControlPlaneCluster then
     },
     '01_rbac_finalizer_clusterrole': rbacFinalizerRole,
     '01_rbac_finalizer_clusterrolebinding': rbacFinalizerRoleBinding,
-    [if params.monitoring.enabled then '20_monitoring']: monitoring,
+    [if params.monitoring.enabled then '20_monitoring']: std.prune(monitoring),
   } else {}

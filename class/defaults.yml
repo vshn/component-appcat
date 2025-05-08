@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.146.0
+        tag: v4.147.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -154,7 +154,7 @@ parameters:
       namespaceAnnotations:
         openshift.io/node-selector: node-role.kubernetes.io/infra=
       monitoring:
-        enabled: false
+        enabled: true
         prometheus_rule_labels:
           prometheus: platform
         instance: null
