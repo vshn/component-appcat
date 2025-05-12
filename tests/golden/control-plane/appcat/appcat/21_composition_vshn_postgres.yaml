@@ -41,7 +41,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.152.0
+          imageTag: add_forgejo-resize
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
@@ -84,7 +84,7 @@ spec:
           serviceID: vshn-postgresql
           serviceName: postgresql
           sgNamespace: stackgres
-          sideCars: '{"clusterController": {"limits": {"cpu": "500m", "memory": "512Mi"},
+          sideCars: '{"clusterController": {"limits": {"cpu": "250m", "memory": "256Mi"},
             "requests": {"cpu": "32m", "memory": "128Mi"}}, "createBackup": {"limits":
             {"cpu": "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory":
             "64Mi"}}, "envoy": {"limits": {"cpu": "500m", "memory": "512Mi"}, "requests":

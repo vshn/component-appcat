@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: lpg
           chartRepository: https://charts.min.io
-          chartVersion: 5.4.0
+          chartVersion: 5.0.13
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
@@ -41,11 +41,11 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.152.0
+          imageTag: add_forgejo-resize
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
-          minioChartVersion: 5.4.0
+          minioChartVersion: 5.0.13
           mode: distributed
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

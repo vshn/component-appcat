@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    metadata.appcat.vshn.io/enabled-service-hash: b6c054e9708103a0e85eca4b28b56903
   labels:
     api: appcat
     apiserver: 'true'
@@ -31,7 +29,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:v4.152.0
+          image: ghcr.io/vshn/appcat:add_forgejo-resize
           livenessProbe:
             failureThreshold: 3
             httpGet:

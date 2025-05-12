@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    metadata.appcat.vshn.io/enabled-service-hash: fb306fcdbba94a72d71c1cc09fcb5d8a
   labels:
     appcat-controller: appcat-controller
   name: appcat-controller
@@ -32,7 +30,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:v4.152.0
+          image: ghcr.io/vshn/appcat:add_forgejo-resize
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

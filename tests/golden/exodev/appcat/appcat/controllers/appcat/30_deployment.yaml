@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    metadata.appcat.vshn.io/enabled-service-hash: c86b376dac7b8a5093b8e838f3fdeb4e
   labels:
     appcat-controller: appcat-controller
   name: appcat-controller
@@ -27,7 +25,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.152.0
+          image: ghcr.io/vshn/appcat:add_forgejo-resize
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
