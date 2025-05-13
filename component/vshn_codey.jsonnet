@@ -47,6 +47,10 @@ local composition =
     kind: 'XVSHNForgejo',
     metadata: {
       name: 'vshnforgejo',
+      annotations: {
+        'metadata.appcat.vshn.io/abstraction': 'codey',
+        'metadata.appcat.vshn.io/codeyplans': std.manifestJsonMinified(codeyPlans),
+      },
     },
     spec: {
       parameters: {
@@ -63,7 +67,6 @@ local composition =
       },
     },
   };
-
 
   kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'codey.io') +
   common.SyncOptions +
