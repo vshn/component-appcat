@@ -9,4 +9,4 @@ spec:
   package: ghcr.io/vshn/appcat:add_forgejo-resize-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: enable-proxy
+    name: function-appcat
