@@ -32,6 +32,9 @@ spec:
               apiVersion: vshn.appcat.vshn.io/v1
               kind: XVSHNForgejo
               metadata:
+                annotations:
+                  metadata.appcat.vshn.io/abstraction: codey
+                  metadata.appcat.vshn.io/codeyplans: '{"mini":{"size":{"cpu":"500m","disk":"10Gi","enabled":true,"memory":"2Gi"}},"small":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"4Gi"}}}'
                 name: vshnforgejo
               spec:
                 parameters:
