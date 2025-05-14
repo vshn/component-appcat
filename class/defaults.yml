@@ -154,7 +154,7 @@ parameters:
       namespaceAnnotations:
         openshift.io/node-selector: node-role.kubernetes.io/infra=
       monitoring:
-        enabled: false
+        enabled: true
         prometheus_rule_labels:
           prometheus: platform
         instance: null

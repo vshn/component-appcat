@@ -25,6 +25,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -79,6 +83,8 @@ spec:
           ports:
             - containerPort: 8081
               name: readyz
+            - containerPort: 8080
+              name: metrics
             - containerPort: 9443
               name: webhooks
           resources:

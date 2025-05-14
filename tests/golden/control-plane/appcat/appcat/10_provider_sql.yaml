@@ -63,6 +63,38 @@ rules:
       - create
       - delete
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-sql
+    name: provider-sql-metrics
+  name: provider-sql-metrics
+  namespace: syn-crossplane
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+  selector:
+    pkg.crossplane.io/provider: provider-sql
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-sql
+    name: provider-sql
+  name: provider-sql
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: provider-sql
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
