@@ -47,10 +47,6 @@ local composition =
     kind: 'XVSHNForgejo',
     metadata: {
       name: 'vshnforgejo',
-      annotations: {
-        'metadata.appcat.vshn.io/abstraction': 'codey',
-        'metadata.appcat.vshn.io/codeyplans': std.manifestJsonMinified(codeyPlans),
-      },
     },
     spec: {
       parameters: {
@@ -66,6 +62,13 @@ local composition =
         },
       },
     },
+  };
+
+  // Unrolled codeyPlans usable for PnT map transform
+  local codeyPlanMappings = {
+    cpu: { [plan]: codeyPlans[plan].size.cpu for plan in std.objectFields(codeyPlans) },
+    memory: { [plan]: codeyPlans[plan].size.memory for plan in std.objectFields(codeyPlans) },
+    disk: { [plan]: codeyPlans[plan].size.disk for plan in std.objectFields(codeyPlans) },
   };
 
   kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'codey.io') +
@@ -112,7 +115,11 @@ local composition =
                     comp.FromCompositeFieldPath('spec.parameters.service.adminEmail', 'spec.parameters.service.adminEmail'),
                     comp.FromCompositeFieldPath('spec.parameters.service.majorVersion', 'spec.parameters.service.majorVersion'),
                     comp.FromCompositeFieldPathWithTransform('metadata.labels["crossplane.io/claim-name"]', 'spec.parameters.service.fqdn[0]', '', '.app.codey.ch'),
-                    comp.FromCompositeFieldPath('spec.parameters.size.plan', 'spec.parameters.size.plan'),
+                    comp.FromCompositeFieldPathWithTransformMap('spec.parameters.size.plan', 'spec.parameters.size.cpu', codeyPlanMappings.cpu),
+                    comp.FromCompositeFieldPathWithTransformMap('spec.parameters.size.plan', 'spec.parameters.size.requests.cpu', codeyPlanMappings.cpu),
+                    comp.FromCompositeFieldPathWithTransformMap('spec.parameters.size.plan', 'spec.parameters.size.memory', codeyPlanMappings.memory),
+                    comp.FromCompositeFieldPathWithTransformMap('spec.parameters.size.plan', 'spec.parameters.size.requests.memory', codeyPlanMappings.memory),
+                    comp.FromCompositeFieldPathWithTransformMap('spec.parameters.size.plan', 'spec.parameters.size.disk', codeyPlanMappings.disk),
                   ],
                 },
               ],

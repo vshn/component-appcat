@@ -32,9 +32,6 @@ spec:
               apiVersion: vshn.appcat.vshn.io/v1
               kind: XVSHNForgejo
               metadata:
-                annotations:
-                  metadata.appcat.vshn.io/abstraction: codey
-                  metadata.appcat.vshn.io/codeyplans: '{"mini":{"size":{"cpu":"500m","disk":"10Gi","enabled":true,"memory":"2Gi"}},"small":{"size":{"cpu":"1","disk":"50Gi","enabled":true,"memory":"4Gi"}}}'
                 name: vshnforgejo
               spec:
                 parameters:
@@ -76,7 +73,44 @@ spec:
                     type: string
                 type: FromCompositeFieldPath
               - fromFieldPath: spec.parameters.size.plan
-                toFieldPath: spec.parameters.size.plan
+                toFieldPath: spec.parameters.size.cpu
+                transforms:
+                  - map:
+                      mini: 500m
+                      small: '1'
+                    type: map
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.size.plan
+                toFieldPath: spec.parameters.size.requests.cpu
+                transforms:
+                  - map:
+                      mini: 500m
+                      small: '1'
+                    type: map
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.size.plan
+                toFieldPath: spec.parameters.size.memory
+                transforms:
+                  - map:
+                      mini: 2Gi
+                      small: 4Gi
+                    type: map
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.size.plan
+                toFieldPath: spec.parameters.size.requests.memory
+                transforms:
+                  - map:
+                      mini: 2Gi
+                      small: 4Gi
+                    type: map
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.size.plan
+                toFieldPath: spec.parameters.size.disk
+                transforms:
+                  - map:
+                      mini: 10Gi
+                      small: 50Gi
+                    type: map
                 type: FromCompositeFieldPath
       step: patch-and-transform
   writeConnectionSecretsToNamespace: syn-crossplane
