@@ -363,36 +363,21 @@ rules:
       - get
       - list
 ---
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app.kubernetes.io/name: kubernetes
-      name: kubernetes-metrics
-    name: kubernetes-metrics
-    namespace: syn-appcat
-  spec:
-    ports:
-      - name: metrics
-        port: 8080
-    selector:
-      pkg.crossplane.io/provider: kubernetes
-    type: ClusterIP
-- apiVersion: monitoring.coreos.com/v1
-  kind: ServiceMonitor
-  metadata:
-    labels:
-      app.kubernetes.io/name: kubernetes
-      name: kubernetes
-    name: kubernetes
-    namespace: syn-appcat
-  spec:
-    endpoints:
-      - path: /metrics
-        port: metrics
-    selector:
-      matchLabels:
-        app.kubernetes.io/name: kubernetes
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-kubernetes
+    name: provider-kubernetes
+  name: provider-kubernetes
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: provider-kubernetes
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

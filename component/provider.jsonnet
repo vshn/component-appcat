@@ -313,45 +313,45 @@ local provider(name, provider) =
     subjects_: [ common.ControlPlaneSa ],
   };
 
-  local monitoring =
-  [
-    kube.Service(name + '-metrics') {
+  local providerName = 'provider-' + name;
+
+  local metricsService =
+    kube.Service(providerName + '-metrics') {
       metadata+: {
-        namespace: params.namespace,
+        namespace: 'syn-crossplane',
         labels+: {
-          'app.kubernetes.io/name': name,
+          'app.kubernetes.io/name': providerName,
         },
       },
       spec+: {
         selector: {
-          "pkg.crossplane.io/provider": name,
+          'pkg.crossplane.io/provider': providerName,
         },
         ports: [ {
           name: 'metrics',
           port: 8080,
         } ],
       },
-    },
-    kube._Object('monitoring.coreos.com/v1', 'ServiceMonitor', name) {
-      metadata+: {
-        namespace: params.namespace,
-        labels+: {
-          'app.kubernetes.io/name': name,
-        },
-      },
-      spec: {
-        endpoints: [ {
-          port: 'metrics',
-          path: '/metrics',
-        } ],
-        selector: {
-          matchLabels: {
-            'app.kubernetes.io/name': name,
-          },
-        },
+    };
+  local ServiceMonitor = kube._Object('monitoring.coreos.com/v1', 'ServiceMonitor', providerName) {
+    metadata+: {
+      namespace: 'syn-crossplane',
+      labels+: {
+        'app.kubernetes.io/name': providerName,
       },
     },
-  ];
+    spec: {
+      endpoints: [ {
+        port: 'metrics',
+        path: '/metrics',
+      } ],
+      selector: {
+        matchLabels: {
+          'app.kubernetes.io/name': providerName,
+        },
+      },
+    },
+  };
 
   {
     ['10_provider_%s' % name]:
@@ -362,7 +362,9 @@ local provider(name, provider) =
           if vars.isSingleOrControlPlaneCluster then runtimeConf,
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'defaultProviderConfig') then defaultConfig,
           if vars.isSingleOrControlPlaneCluster then sa,
-          role, std.prune(monitoring),
+          role,
+          if vars.isSingleOrControlPlaneCluster then std.prune(metricsService),
+          std.prune(ServiceMonitor),
           if vars.isSingleOrServiceCluster then controlPlaneRolebinding,
           if vars.isSingleOrControlPlaneCluster then rolebinding,
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'credentials') then providerSecret(provider.credentials),

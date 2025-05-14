@@ -57,36 +57,37 @@ metadata:
   name: provider-cloudscale
   namespace: syn-crossplane
 ---
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app.kubernetes.io/name: cloudscale
-      name: cloudscale-metrics
-    name: cloudscale-metrics
-    namespace: syn-appcat
-  spec:
-    ports:
-      - name: metrics
-        port: 8080
-    selector:
-      pkg.crossplane.io/provider: cloudscale
-    type: ClusterIP
-- apiVersion: monitoring.coreos.com/v1
-  kind: ServiceMonitor
-  metadata:
-    labels:
-      app.kubernetes.io/name: cloudscale
-      name: cloudscale
-    name: cloudscale
-    namespace: syn-appcat
-  spec:
-    endpoints:
-      - path: /metrics
-        port: metrics
-    selector:
-      matchLabels:
-        app.kubernetes.io/name: cloudscale
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-cloudscale
+    name: provider-cloudscale-metrics
+  name: provider-cloudscale-metrics
+  namespace: syn-crossplane
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+  selector:
+    pkg.crossplane.io/provider: provider-cloudscale
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-cloudscale
+    name: provider-cloudscale
+  name: provider-cloudscale
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: provider-cloudscale
 ---
 apiVersion: v1
 data: {}
