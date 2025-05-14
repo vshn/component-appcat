@@ -57,6 +57,37 @@ metadata:
   name: provider-exoscale
   namespace: syn-crossplane
 ---
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app.kubernetes.io/name: exoscale
+      name: exoscale-metrics
+    name: exoscale-metrics
+    namespace: syn-appcat
+  spec:
+    ports:
+      - name: metrics
+        port: 8080
+    selector:
+      pkg.crossplane.io/provider: exoscale
+    type: ClusterIP
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    labels:
+      app.kubernetes.io/name: exoscale
+      name: exoscale
+    name: exoscale
+    namespace: syn-appcat
+  spec:
+    endpoints:
+      - path: /metrics
+        port: metrics
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: exoscale
+---
 apiVersion: v1
 data: {}
 kind: Secret

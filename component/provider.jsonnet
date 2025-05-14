@@ -313,6 +313,46 @@ local provider(name, provider) =
     subjects_: [ common.ControlPlaneSa ],
   };
 
+  local monitoring =
+  [
+    kube.Service(name + '-metrics') {
+      metadata+: {
+        namespace: params.namespace,
+        labels+: {
+          'app.kubernetes.io/name': name,
+        },
+      },
+      spec+: {
+        selector: {
+          "pkg.crossplane.io/provider": name,
+        },
+        ports: [ {
+          name: 'metrics',
+          port: 8080,
+        } ],
+      },
+    },
+    kube._Object('monitoring.coreos.com/v1', 'ServiceMonitor', name) {
+      metadata+: {
+        namespace: params.namespace,
+        labels+: {
+          'app.kubernetes.io/name': name,
+        },
+      },
+      spec: {
+        endpoints: [ {
+          port: 'metrics',
+          path: '/metrics',
+        } ],
+        selector: {
+          matchLabels: {
+            'app.kubernetes.io/name': name,
+          },
+        },
+      },
+    },
+  ];
+
   {
     ['10_provider_%s' % name]:
       std.filter(
@@ -322,7 +362,7 @@ local provider(name, provider) =
           if vars.isSingleOrControlPlaneCluster then runtimeConf,
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'defaultProviderConfig') then defaultConfig,
           if vars.isSingleOrControlPlaneCluster then sa,
-          role,
+          role, std.prune(monitoring),
           if vars.isSingleOrServiceCluster then controlPlaneRolebinding,
           if vars.isSingleOrControlPlaneCluster then rolebinding,
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'credentials') then providerSecret(provider.credentials),

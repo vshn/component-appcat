@@ -91,6 +91,37 @@ rules:
       - create
       - delete
 ---
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app.kubernetes.io/name: minio
+      name: minio-metrics
+    name: minio-metrics
+    namespace: syn-appcat
+  spec:
+    ports:
+      - name: metrics
+        port: 8080
+    selector:
+      pkg.crossplane.io/provider: minio
+    type: ClusterIP
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    labels:
+      app.kubernetes.io/name: minio
+      name: minio
+    name: minio
+    namespace: syn-appcat
+  spec:
+    endpoints:
+      - path: /metrics
+        port: metrics
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: minio
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
