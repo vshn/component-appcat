@@ -131,7 +131,7 @@ parameters:
           sgNamespace: stackgres
           additionalInputs:
             loadbalancerAnnotations: |
-                foo: bar
+              foo: bar
           plans:
             standard-8:
               enabled: false

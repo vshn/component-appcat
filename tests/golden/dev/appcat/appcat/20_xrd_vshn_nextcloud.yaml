@@ -5389,7 +5389,6 @@ spec:
                                 URL in Your Nextcloud instance.
                               type: string
                             version:
-                              default: {}
                               description: Version defines the Collabora version to
                                 use.
                               type: string
