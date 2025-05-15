@@ -276,6 +276,7 @@ local composition =
             name: 'redis',
             repository: params.charts.redis.source,
             version: redisParams.helmChartVersion,
+            url: std.format('%s:%s', [ params.charts.redis.source, redisParams.helmChartVersion ]),
           },
           values: {
             metrics: {
@@ -299,6 +300,17 @@ local composition =
               serviceMonitor: {
                 enabled: true,
                 namespace: '',  // patched
+              },
+              // When migrating to comp functions we can use `common.GetBitnamiNano()`
+              resources: {
+                requests: {
+                  cpu: '100m',
+                  memory: '128Mi',
+                },
+                limits: {
+                  cpu: '150m',
+                  memory: '196Mi',
+                },
               },
             },
             fullnameOverride: 'redis',
