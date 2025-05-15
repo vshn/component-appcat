@@ -975,6 +975,7 @@ parameters:
             - NEXTCLOUD_PASSWORD
             - NEXTCLOUD_URL
             - NEXTCLOUD_USERNAME
+            - COLLABORA_HOST
             - ca.crt
           mode: standalone
           offered: true

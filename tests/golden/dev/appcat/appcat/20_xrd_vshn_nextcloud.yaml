@@ -16,6 +16,7 @@ spec:
     - NEXTCLOUD_PASSWORD
     - NEXTCLOUD_URL
     - NEXTCLOUD_USERNAME
+    - COLLABORA_HOST
     - ca.crt
   defaultCompositionRef:
     name: vshnnextcloud.vshn.appcat.vshn.io
