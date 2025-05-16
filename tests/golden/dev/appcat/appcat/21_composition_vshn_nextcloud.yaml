@@ -35,7 +35,8 @@ spec:
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
           collaboraMemoryRequests: 256Mi
-          collabora_image: docker.io/collabora/code:24.04.9.2.1
+          collabora_image: docker.io/collabora/code
+          collabora_image_tag: latest
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2
@@ -47,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.148.0
+          imageTag: fix_collabora_image_version
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'

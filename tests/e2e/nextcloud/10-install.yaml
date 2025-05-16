@@ -7,5 +7,8 @@ spec:
     service:
       fqdn:
         - nextcloud-e2e.example.com
+      collabora:
+        enabled: true
+        fqdn: collabora-e2e.example.com
   writeConnectionSecretToRef:
     name: nextcloud-e2e

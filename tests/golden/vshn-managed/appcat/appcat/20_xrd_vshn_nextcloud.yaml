@@ -16,6 +16,7 @@ spec:
     - NEXTCLOUD_PASSWORD
     - NEXTCLOUD_URL
     - NEXTCLOUD_USERNAME
+    - COLLABORA_HOST
     - ca.crt
   defaultCompositionRef:
     name: vshnnextcloud.vshn.appcat.vshn.io
@@ -5387,6 +5388,11 @@ spec:
                               description: FQDN contains the FQDN of the Collabora
                                 server. This is used to configure the Collabora server
                                 URL in Your Nextcloud instance.
+                              type: string
+                            version:
+                              default: {}
+                              description: Version defines the Collabora version to
+                                use.
                               type: string
                           required:
                             - enabled

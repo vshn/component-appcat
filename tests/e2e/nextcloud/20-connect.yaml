@@ -28,7 +28,14 @@ spec:
               while ! curl -ivv --max-time 10 http://$NEXTCLOUD_HOST:8080/
               do
                 sleep 1
-                echo "not ready"
+                echo "Nextcloud not ready"
+              done
+
+              echo "Testing Collabora connection..."
+              while ! curl -k --max-time 10 https://$COLLABORA_HOST:9980
+              do
+                sleep 1
+                echo "Collabora not ready"
               done
           envFrom:
             - secretRef:

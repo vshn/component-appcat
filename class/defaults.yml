@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.148.0
+        tag: fix/collabora_image_version
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -94,7 +94,7 @@ parameters:
       collabora:
         registry: docker.io
         image: collabora/code
-        tag: "24.04.9.2.1"
+        tag: "latest"
       nextcloud:
         registry: docker.io
         image: library/nextcloud
@@ -976,13 +976,15 @@ parameters:
             - NEXTCLOUD_PASSWORD
             - NEXTCLOUD_URL
             - NEXTCLOUD_USERNAME
+            - COLLABORA_HOST
             - ca.crt
           mode: standalone
           offered: true
           restoreSA: nextcloudserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
-            collabora_image: ${appcat:images:collabora:registry}/${appcat:images:collabora:image}:${appcat:images:collabora:tag}
+            collabora_image: ${appcat:images:collabora:registry}/${appcat:images:collabora:image}
+            collabora_image_tag: ${appcat:images:collabora:tag}
             collaboraCPULimit: "1"
             collaboraCPURequests: 250m
             collaboraMemoryLimit: 1Gi
