@@ -202,6 +202,14 @@ local filterOutGuaraanteed(bestEffortCluster) = {
   },
 };
 
+local withServiceID(name) = {
+  metadata+: {
+    labels+: {
+      'metadata.appcat.vshn.io/serviceID': common.VSHNServiceID(name),
+    },
+  },
+};
+
 {
   CompositeClusterRoles(composite):
     compositeClusterRoles(composite),
@@ -213,4 +221,6 @@ local filterOutGuaraanteed(bestEffortCluster) = {
     withPlanDefaults(plans, defaultPlan),
   FilterOutGuaraanteed(bestEffortCluster):
     filterOutGuaraanteed(bestEffortCluster),
+  WithServiceID(name):
+    withServiceID(name),
 }

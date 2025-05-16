@@ -119,11 +119,14 @@ local connectionSecretKeys = [
 ];
 
 local xrd = xrds.XRDFromCRD(
-  'xvshnpostgresqls.vshn.appcat.vshn.io',
-  xrds.LoadCRD('vshn.appcat.vshn.io_vshnpostgresqls.yaml', params.images.appcat.tag),
-  defaultComposition='vshnpostgres.vshn.appcat.vshn.io',
-  connectionSecretKeys=connectionSecretKeys,
-) + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
+              'xvshnpostgresqls.vshn.appcat.vshn.io',
+              xrds.LoadCRD('vshn.appcat.vshn.io_vshnpostgresqls.yaml', params.images.appcat.tag),
+              defaultComposition='vshnpostgres.vshn.appcat.vshn.io',
+              connectionSecretKeys=connectionSecretKeys,
+            )
+            + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan)
+            + xrds.FilterOutGuaraanteed(isBestEffort)
+            + xrds.WithServiceID(serviceName);
 
 local promRulePostgresSLA = prom.PromRecordingRuleSLA(params.services.vshn.postgres.sla, 'VSHNPostgreSQL');
 

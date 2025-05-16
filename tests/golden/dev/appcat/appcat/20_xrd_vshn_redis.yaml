@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-70'
   labels:
+    metadata.appcat.vshn.io/serviceID: vshn-redis
     name: xvshnredis.vshn.appcat.vshn.io
   name: xvshnredis.vshn.appcat.vshn.io
 spec:

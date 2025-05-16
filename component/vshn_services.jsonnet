@@ -47,11 +47,20 @@ local maintenanceClusterRoleBinding = kube.ClusterRoleBinding('crossplane:appcat
   subjects_: [ maintenanceServiceAccount ],
 };
 
+local crossplaneEditMaintenanceBinding = kube.ClusterRoleBinding('crossplane:appcat:job:helm:crossplane:edit') + {
+  roleRef: {
+    apiGroup: 'rbac.authorization.k8s.io',
+    kind: 'ClusterRole',
+    name: 'crossplane-edit',
+  },
+  subjects_: [ maintenanceServiceAccount ],
+};
 
 (if params.services.vshn.enabled && vars.isSingleOrServiceCluster then {
    '10_rbac_helm_service_maintenance_sa': maintenanceServiceAccount,
    '10_rbac_helm_service_maintenance_cluster_role': maintenanceRole,
    '10_rbac_helm_service_maintenance_cluster_role_binding': maintenanceClusterRoleBinding,
+   '10_rbac_helm_service_maintenance_crossplane_edit_rolebinding': crossplaneEditMaintenanceBinding,
  } else {})
 + {
   '10_namespace_vshn_control': controlNamespace,

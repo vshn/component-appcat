@@ -39,7 +39,7 @@ local xrd = xrds.XRDFromCRD(
   xrds.LoadCRD('codey.io_codeyinstances.yaml', params.images.appcat.tag),
   defaultComposition='codey.io',
   connectionSecretKeys=connectionSecretKeys,
-);
+) + xrds.WithServiceID(serviceName);
 
 local composition =
   local vshnforgejo = {

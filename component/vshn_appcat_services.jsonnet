@@ -59,11 +59,13 @@ local vshn_appcat_service(name, serviceParams) =
   };
 
   local xrd = xrds.XRDFromCRD(
-    'x' + serviceNamePlural + '.vshn.appcat.vshn.io',
-    xrds.LoadCRD('vshn.appcat.vshn.io_' + serviceNamePlural + '.yaml', params.images.appcat.tag),
-    defaultComposition=std.asciiLower(serviceParams.serviceName) + '.vshn.appcat.vshn.io',
-    connectionSecretKeys=connectionSecretKeys,
-  ) + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort);
+                'x' + serviceNamePlural + '.vshn.appcat.vshn.io',
+                xrds.LoadCRD('vshn.appcat.vshn.io_' + serviceNamePlural + '.yaml', params.images.appcat.tag),
+                defaultComposition=std.asciiLower(serviceParams.serviceName) + '.vshn.appcat.vshn.io',
+                connectionSecretKeys=connectionSecretKeys,
+              )
+              + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort)
+              + xrds.WithServiceID(name);
 
   local additonalInputs = if std.objectHas(serviceParams, 'additionalInputs') then {
     [k]: std.toString(serviceParams.additionalInputs[k])

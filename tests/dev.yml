@@ -33,6 +33,8 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
 
+    # hotfix: true
+
     grpcEndpoint: 172.19.0.1:9443
     proxyFunction: true
 
@@ -131,7 +133,7 @@ parameters:
           sgNamespace: stackgres
           additionalInputs:
             loadbalancerAnnotations: |
-                foo: bar
+              foo: bar
           plans:
             standard-8:
               enabled: false
