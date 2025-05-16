@@ -8,7 +8,7 @@ data:
     "standard-2": {"size": {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory":
     "1936Mi"}}, "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled":
     true, "memory": "3984Mi"}}}'
-  sideCars: '{"clusterController": {"limits": {"cpu": "250m", "memory": "256Mi"},
+  sideCars: '{"clusterController": {"limits": {"cpu": "500m", "memory": "512Mi"},
     "requests": {"cpu": "32m", "memory": "128Mi"}}, "createBackup": {"limits": {"cpu":
     "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}, "envoy":
     {"limits": {"cpu": "500m", "memory": "512Mi"}, "requests": {"cpu": "32m", "memory":
