@@ -13,7 +13,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local pgParams = params.services.exoscale.postgres;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local connectionSecretKeys = [
   'POSTGRESQL_URL',
   'POSTGRESQL_DB',
@@ -162,5 +161,5 @@ if params.services.exoscale.enabled && pgParams.enabled && vars.isSingleOrContro
   '20_xrd_exoscale_postgres': xrd,
   '20_rbac_exoscale_postgres': xrds.CompositeClusterRoles(xrd),
   '21_composition_exoscale_postgres': composition,
-  [if isOpenshift then '21_openshift_template_postgresql_exoscale']: osTemplate,
+  [if vars.isOpenshift then '21_openshift_template_postgresql_exoscale']: osTemplate,
 } else {}

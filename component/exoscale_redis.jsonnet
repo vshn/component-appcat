@@ -13,7 +13,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local redisParams = params.services.exoscale.redis;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local connectionSecretKeys = [
   'REDIS_HOST',
   'REDIS_PORT',
@@ -149,5 +148,5 @@ if params.services.exoscale.enabled && redisParams.enabled && vars.isSingleOrCon
   '20_xrd_exoscale_redis': xrd,
   '20_rbac_exoscale_redis': xrds.CompositeClusterRoles(xrd),
   '21_composition_exoscale_redis': composition,
-  [if isOpenshift then '21_openshift_template_redis_exoscale']: osTemplate,
+  [if vars.isOpenshift then '21_openshift_template_redis_exoscale']: osTemplate,
 } else {}

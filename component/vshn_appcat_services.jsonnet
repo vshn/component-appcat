@@ -30,7 +30,6 @@ local getServiceNamePlural(serviceName) =
     serviceNameLower + 's';
 
 local vshn_appcat_service(name, serviceParams) =
-  local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
   local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
 
   local connectionSecretKeys = serviceParams.connectionSecretKeys;
@@ -110,7 +109,7 @@ local vshn_appcat_service(name, serviceParams) =
                         plans: std.toString(plans),
                         defaultPlan: serviceParams.defaultPlan,
                         quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
-                        isOpenshift: std.toString(isOpenshift),
+                        isOpenshift: std.toString(vars.isServiceClusterOpenShift),
                         sliNamespace: params.slos.namespace,
                         ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
                         ownerKind: xrd.spec.names.kind,
@@ -193,7 +192,7 @@ local vshn_appcat_service(name, serviceParams) =
      ['21_composition_vshn_%s' % name]: composition,
      [if std.objectHas(serviceParams, 'restoreSA') then '20_role_vshn_%s_restore' % name]: [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
      ['20_plans_vshn_%s' % name]: plansCM,
-     [if isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
+     [if vars.isOpenshift && std.objectHas(serviceParams, 'openshiftTemplate') then '21_openshift_template_%s_vshn' % name]: osTemplate,
 
    } else {})
   + if vars.isSingleOrServiceCluster then

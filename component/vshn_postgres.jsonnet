@@ -24,7 +24,6 @@ local defaultPort = '5432';
 
 local certificateSecretName = 'tls-certificate';
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
 
 local operatorlib = import 'lib/openshift4-operators.libsonnet';
@@ -247,7 +246,7 @@ local composition =
                       ownerGroup: xrd.spec.group,
                       ownerVersion: xrd.spec.versions[0].name,
                       bucketRegion: common.GetBucketRegion(),
-                      isOpenshift: std.toString(isOpenshift),
+                      isOpenshift: std.toString(vars.isServiceClusterOpenShift),
                       sliNamespace: params.slos.namespace,
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       crossplaneNamespace: params.crossplane.namespace,
@@ -361,15 +360,17 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
      '20_plans_vshn_postgresql': plansCM,
      '21_composition_vshn_postgres': composition,
 
-     [if isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
-     [if isOpenshift then '10_stackgres_openshift_operator_ns']: stackgresOperatorNs,
-     [if isOpenshift then '11_stackgres_openshift_operator']: std.prune(stackgresOperator),
-     [if isOpenshift then '12_stackgres_openshift_operator_netpol']: stackgresNetworkPolicy,
+     [if vars.isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
    } else {})
 + (if vars.isSingleOrServiceCluster then {
      '22_appcat_func_role': appcatFuncRole,
      '22_appcat_func_role_binding': appcatFuncRoleBinding,
      '22_appcat_postgres_maintenance_cluster_role': maintenanceClusterRole,
+   } else {})
++ (if vars.isSingleOrServiceCluster && vars.isOpenshift then {
+     '10_stackgres_openshift_operator_ns': stackgresOperatorNs,
+     '11_stackgres_openshift_operator': std.prune(stackgresOperator),
+     '12_stackgres_openshift_operator_netpol': stackgresNetworkPolicy,
    } else {})
 + if vars.isSingleOrServiceCluster then
   if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then {

@@ -40,10 +40,9 @@ local connectionSecretKeys = [
   'REDIS_URL',
 ];
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
 
-local securityContext = if isOpenshift then false else true;
+local securityContext = if vars.isServiceClusterOpenShift then false else true;
 
 local redisPlans = common.FilterDisabledParams(redisParams.plans);
 
@@ -491,7 +490,7 @@ local composition =
                       ownerKind: xrd.spec.names.kind,
                       ownerGroup: xrd.spec.group,
                       ownerVersion: xrd.spec.versions[0].name,
-                      isOpenshift: std.toString(isOpenshift),
+                      isOpenshift: std.toString(vars.isServiceClusterOpenShift),
                       sliNamespace: params.slos.namespace,
                       salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
                       crossplaneNamespace: params.crossplane.namespace,
@@ -573,7 +572,7 @@ local plansCM = kube.ConfigMap('vshnredisplans') + {
    '20_role_vshn_redisrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
    '20_plans_vshn_redis': plansCM,
    '21_composition_vshn_redis': composition,
-   [if isOpenshift then '21_openshift_template_redis_vshn']: osTemplate,
+   [if vars.isOpenshift then '21_openshift_template_redis_vshn']: osTemplate,
  } else {})
 + if vars.isSingleOrServiceCluster then
   if params.services.vshn.enabled && params.services.vshn.redis.enabled then {

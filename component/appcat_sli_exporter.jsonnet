@@ -9,7 +9,6 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local sli_exporter_params = params.slos.sli_exporter;
 
-local isOpenshift = std.startsWith(inv.parameters.facts.distribution, 'openshift') || inv.parameters.facts.distribution == 'oke';
 local deployment_patch = kube._Object('apps/v1', 'Deployment', 'controller-manager') {
   metadata+: {
     namespace: 'system',
@@ -60,7 +59,7 @@ local deployment_patch = kube._Object('apps/v1', 'Deployment', 'controller-manag
 local namespace_patch = kube.Namespace('system') {
   metadata+: {
     labels: {
-      [if isOpenshift then 'openshift.io/cluster-monitoring']: 'true',  // Enable cluster-monitoring on APPUiO Managed OpenShift
+      [if vars.isOpenshift then 'openshift.io/cluster-monitoring']: 'true',  // Enable cluster-monitoring on APPUiO Managed OpenShift
     } + params.slos.namespaceLabels,
     annotations+: params.slos.namespaceAnnotations,
   },
