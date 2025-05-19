@@ -41,7 +41,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.150.0
+          imageTag: fix_apiserver_error
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
