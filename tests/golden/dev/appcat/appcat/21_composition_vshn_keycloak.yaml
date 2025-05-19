@@ -30,7 +30,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 7.0.1
+          chartVersion: 2.4.3
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2
@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: v4.152.2
+          imageTag: add_forgejo-mail
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging

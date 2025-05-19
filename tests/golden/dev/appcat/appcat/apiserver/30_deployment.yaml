@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    metadata.appcat.vshn.io/enabled-services-hash: 3d50aeee31a67654c31bb6df8f0b8981
+    metadata.appcat.vshn.io/enabled-service-hash: 8a6cfdc57f269d21c682bd01b40c649e
   labels:
     api: appcat
     apiserver: 'true'
@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:v4.152.2
+          image: ghcr.io/vshn/appcat:add_forgejo-mail
           livenessProbe:
             failureThreshold: 3
             httpGet:

@@ -8,17 +8,17 @@ parameters:
         source: https://charts.crossplane.io/stable
         version: 1.19.1
       redis:
-        source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.0.3
+        source: https://charts.bitnami.com/bitnami
+        version: 17.7.1
       mariadb:
-        source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 14.2.4
+        source: https://charts.bitnami.com/bitnami
+        version: 14.0.10
       minio:
         source: https://charts.min.io
-        version: 5.4.0
+        version: 5.0.13
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.0.1
+        version: 2.4.3
       nextcloud:
         source: https://nextcloud.github.io/helm/
         version: 6.2.4
@@ -33,7 +33,7 @@ parameters:
       provider-helm:
         registry: xpkg.upbound.io
         repository: upbound/provider-helm
-        tag: v0.21.0
+        tag: v0.20.4
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.152.2
+        tag: add/forgejo-mail
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -161,8 +161,6 @@ parameters:
           prometheus: platform
         instance: null
       helmValues:
-        customAnnotations:
-          function-revision: ${appcat:images:appcat:tag}
         xfn:
           enabled: true
         args:
@@ -565,7 +563,6 @@ parameters:
       vshn:
         ocpDefaultAppsDomain: ""
         enabled: false
-        isServiceClusterOpenshift: false
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
