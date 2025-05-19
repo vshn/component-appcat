@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.150.0
+          image: ghcr.io/vshn/appcat:add_forgejo-mail
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

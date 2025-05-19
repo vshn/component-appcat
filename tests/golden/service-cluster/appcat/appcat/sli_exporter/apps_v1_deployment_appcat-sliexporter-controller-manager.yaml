@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.150.0
+          image: ghcr.io/vshn/appcat:add_forgejo-mail
           livenessProbe:
             httpGet:
               path: /healthz
