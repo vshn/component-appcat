@@ -608,13 +608,12 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.152.0
+          imageTag: add_forgejo-resize
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNRedis
           ownerVersion: v1
-          proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
           salesOrder: ''
