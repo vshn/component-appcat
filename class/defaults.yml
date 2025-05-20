@@ -1046,8 +1046,8 @@ parameters:
           restoreSA: codeyserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
-            smtp_username: "?{vaultkv:__shared__/__shared__/appcat/codey_smtp_username}"
-            smtp_password: "?{vaultkv:__shared__/__shared__/appcat/codey_stmp_password}"
+            smtpUsername: "?{vaultkv:__shared__/__shared__/appcat/codey_smtp_username}"
+            smtpPassword: "?{vaultkv:__shared__/__shared__/appcat/codey_stmp_password}"
           openshiftTemplate:
             serviceName: codey
             description: "Codey is a secure, fast and reliable code collaboration platform made and hosted in Europe, with 100% free software."
