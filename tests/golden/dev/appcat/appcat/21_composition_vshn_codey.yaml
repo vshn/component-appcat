@@ -43,7 +43,7 @@ spec:
                         mailer:
                           ENABLED: 'true'
                           FROM: noreply@app.codey.ch
-                          PASS: __shared__/__shared__/appcat/codey_stmp_password
+                          PASSWD: __shared__/__shared__/appcat/codey_stmp_password
                           PROTOCOL: smtp+starttls
                           SMTP_ADDR: smtp.eu.mailgun.org
                           SMTP_PORT: '587'
