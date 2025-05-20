@@ -58,9 +58,9 @@ local composition =
                 "PROTOCOL": "smtps",
                 "SMTP_ADDR": "smtp.eu.mailgun.org",
                 "SMTP_PORT": "465",
-                "FROM": "${SMTP_FROM}",
-                "USER": "${SMTP_USER}",
-                "PASS": "${SMTP_PASS}",
+                "FROM": "noreply@app.codey.ch",
+                "USER": params.services.vshn.codey.additionalInputs.smtpUsername,
+                "PASS": params.services.vshn.codey.additionalInputs.smtpPassword,
               }
             }
           }
