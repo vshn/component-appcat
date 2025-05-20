@@ -60,7 +60,7 @@ local composition =
                 "SMTP_PORT": "587",
                 "FROM": "noreply@app.codey.ch",
                 "USER": params.services.vshn.codey.additionalInputs.smtpUsername,
-                "PASS": params.services.vshn.codey.additionalInputs.smtpPassword,
+                "PASSWD": params.services.vshn.codey.additionalInputs.smtpPassword,
               }
             }
           }
