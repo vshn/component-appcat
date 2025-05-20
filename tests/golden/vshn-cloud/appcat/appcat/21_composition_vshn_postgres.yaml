@@ -84,7 +84,7 @@ spec:
           serviceID: vshn-postgresql
           serviceName: postgresql
           sgNamespace: stackgres
-          sideCars: '{"clusterController": {"limits": {"cpu": "250m", "memory": "256Mi"},
+          sideCars: '{"clusterController": {"limits": {"cpu": "500m", "memory": "512Mi"},
             "requests": {"cpu": "32m", "memory": "128Mi"}}, "createBackup": {"limits":
             {"cpu": "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory":
             "64Mi"}}, "envoy": {"limits": {"cpu": "500m", "memory": "512Mi"}, "requests":
