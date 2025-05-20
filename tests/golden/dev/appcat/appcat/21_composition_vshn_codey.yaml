@@ -44,9 +44,9 @@ spec:
                           ENABLED: 'true'
                           FROM: noreply@app.codey.ch
                           PASS: __shared__/__shared__/appcat/codey_stmp_password
-                          PROTOCOL: smtps
+                          PROTOCOL: smtp+starttls
                           SMTP_ADDR: smtp.eu.mailgun.org
-                          SMTP_PORT: '465'
+                          SMTP_PORT: '587'
                           USER: __shared__/__shared__/appcat/codey_smtp_username
                     fqdn:
                       - myforgejo.127.0.0.1.nip.io
