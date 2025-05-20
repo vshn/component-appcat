@@ -55,9 +55,9 @@ local composition =
             config: {
               mailer: {
                 "ENABLED": "true",
-                "PROTOCOL": "smtps",
+                "PROTOCOL": "smtp+starttls",
                 "SMTP_ADDR": "smtp.eu.mailgun.org",
-                "SMTP_PORT": "465",
+                "SMTP_PORT": "587",
                 "FROM": "noreply@app.codey.ch",
                 "USER": params.services.vshn.codey.additionalInputs.smtpUsername,
                 "PASS": params.services.vshn.codey.additionalInputs.smtpPassword,
