@@ -18,6 +18,7 @@ spec:
     - CODEY_URL
   defaultCompositionRef:
     name: codey.io
+  defaultCompositionUpdatePolicy: Manual
   group: codey.io
   names:
     kind: XCodeyInstance

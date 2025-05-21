@@ -25,6 +25,7 @@ spec:
     - LOADBALANCER_IP
   defaultCompositionRef:
     name: vshnpostgres.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNPostgreSQL
