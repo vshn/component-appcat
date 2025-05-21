@@ -56,6 +56,7 @@ local vshnMetaVshn(servicename, flavor, offered, plans) = {
     labels+: {
       'metadata.appcat.vshn.io/offered': offered,
       'metadata.appcat.vshn.io/serviceID': vshnServiceID(servicename),
+      'metadata.appcat.vshn.io/revision': params.images.appcat.tag,
     },
   },
 };
@@ -238,6 +239,7 @@ local getBucketRegion() =
     local nonLocalRegions = std.filter(function(x) x != facts.region, regions);
 
     nonLocalRegions[0];
+local getCurrentFunctionName() = std.strReplace('function-appcat' + '-' + getAppCatImageTag(), '.', '-');
 
 {
   SyncOptions: syncOptions,
@@ -290,4 +292,6 @@ local getBucketRegion() =
     objectBucketServiceID(name),
   GetBucketRegion():
     getBucketRegion(),
+  GetCurrentFunctionName():
+    getCurrentFunctionName(),
 }

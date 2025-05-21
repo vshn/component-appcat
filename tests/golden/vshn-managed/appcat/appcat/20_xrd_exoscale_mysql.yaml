@@ -21,6 +21,7 @@ spec:
     - ca.crt
   defaultCompositionRef:
     name: exoscalemysql.exoscale.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: exoscale.appcat.vshn.io
   names:
     kind: XExoscaleMySQL

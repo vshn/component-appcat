@@ -70,7 +70,7 @@ local compositionCloudscale =
           {
             step: 'cloudscalebucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {
@@ -112,7 +112,7 @@ local compositionExoscale =
           {
             step: 'exoscalebucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {
@@ -153,7 +153,7 @@ local minioComp(name) =
           {
             step: 'miniobucket-func',
             functionRef: {
-              name: 'function-appcat',
+              name: common.GetCurrentFunctionName(),
             },
             input: kube.ConfigMap('xfn-config') + {
               metadata: {

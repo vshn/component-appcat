@@ -17,6 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: add/func-revisions
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -593,7 +594,7 @@ spec:
                 type: FromCompositeFieldPath
       step: patch-and-transform
     - functionRef:
-        name: function-appcat
+        name: function-appcat-add_func-revisions
       input:
         apiVersion: v1
         data:
@@ -608,7 +609,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.152.1
+          imageTag: add_func-revisions
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           ownerGroup: vshn.appcat.vshn.io

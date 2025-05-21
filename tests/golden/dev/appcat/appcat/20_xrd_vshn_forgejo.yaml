@@ -20,6 +20,7 @@ spec:
     - ca.crt
   defaultCompositionRef:
     name: vshnforgejo.vshn.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNForgejo

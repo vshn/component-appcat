@@ -57,6 +57,7 @@ local loadCRD(crd, tag) = std.parseJson(kap.yaml_load(inv.parameters._base_direc
 local xrdFromCRD(name, crd, defaultComposition='', connectionSecretKeys=[]) =
   kube._Object('apiextensions.crossplane.io/v1', 'CompositeResourceDefinition', name) + common.SyncOptions + {
     spec: {
+      [if name != 'xobjectbuckets.appcat.vshn.io' then 'defaultCompositionUpdatePolicy']: 'Manual',
       claimNames: {
         kind: crd.spec.names.kind,
         plural: crd.spec.names.plural,

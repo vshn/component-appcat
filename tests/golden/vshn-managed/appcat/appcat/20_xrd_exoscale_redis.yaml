@@ -19,6 +19,7 @@ spec:
     - REDIS_URL
   defaultCompositionRef:
     name: exoscaleredis.exoscale.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: exoscale.appcat.vshn.io
   names:
     kind: XExoscaleRedis

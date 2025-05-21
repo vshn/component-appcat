@@ -89,7 +89,7 @@ local vshn_appcat_service(name, serviceParams) =
             {
               step: name + '-func',
               functionRef: {
-                name: 'function-appcat',
+                name: common.GetCurrentFunctionName(),
               },
               input: kube.ConfigMap('xfn-config') + {
                 metadata: {

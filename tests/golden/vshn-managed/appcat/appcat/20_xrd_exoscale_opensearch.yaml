@@ -20,6 +20,7 @@ spec:
     - OPENSEARCH_PORT
   defaultCompositionRef:
     name: exoscaleopensearch.exoscale.appcat.vshn.io
+  defaultCompositionUpdatePolicy: Manual
   group: exoscale.appcat.vshn.io
   names:
     kind: XExoscaleOpenSearch
