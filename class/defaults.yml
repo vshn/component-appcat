@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.19.1
+        version: 1.20.0
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
         version: 21.0.3
@@ -18,10 +18,10 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.0.1
+        version: 7.7.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 6.2.4
+        version: 6.6.10
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 11.0.1
