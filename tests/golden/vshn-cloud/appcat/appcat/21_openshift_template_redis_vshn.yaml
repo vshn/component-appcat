@@ -7,7 +7,7 @@ metadata:
     description: The open source, in-memory data store used by millions of developers
       as a database, cache, streaming engine, and message broker.
     iconClass: icon-redis
-    openshift.io/display-name: Redis
+    openshift.io/display-name: VSHNRedis
     openshift.io/documentation-url: https://vs.hn/vshn-redis
     openshift.io/provider-display-name: VSHN
     openshift.io/support-url: https://www.vshn.ch/en/contact/
@@ -39,4 +39,4 @@ parameters:
     value: redis-credentials
   - name: INSTANCE_NAME
   - name: VERSION
-    value: '7.0'
+    value: '7.2'

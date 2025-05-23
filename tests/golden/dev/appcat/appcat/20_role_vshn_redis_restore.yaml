@@ -10,7 +10,7 @@ rules:
   - apiGroups:
       - vshn.appcat.vshn.io
     resources:
-      - vshnredis
+      - '*'
     verbs:
       - get
   - apiGroups:

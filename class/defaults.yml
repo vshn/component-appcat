@@ -775,6 +775,29 @@ parameters:
         redis:
           enabled: true
           billing: true
+          serviceName: VSHNRedis
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - ca.crt
+            - tls.crt
+            - tls.key
+            - REDIS_HOST
+            - REDIS_PORT
+            - REDIS_USERNAME
+            - REDIS_PASSWORD
+            - REDIS_URL
+          mode: standalone
+          offered: true
+          restoreSA: redisrestoreserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          openshiftTemplate:
+            serviceName: redisbyvshn
+            description: "The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker."
+            message: 'Your Redis by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-redis
+            tags: "database,nosql"
+            icon: "icon-redis"
+            defaultVersion: "7.2"
           enableNetworkPolicy: true
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:redis:version}

@@ -36,6 +36,7 @@ spec:
           chartVersion: 21.0.3
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
+          defaultPlan: standard-1
           emailAlertingEnabled: 'false'
           emailAlertingSecretName: mailgun-smtp-credentials
           emailAlertingSecretNamespace: syn-appcat
@@ -47,6 +48,8 @@ spec:
           imageTag: change_move_redis
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
+          mode: standalone
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNRedis
           ownerVersion: v1
