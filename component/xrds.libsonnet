@@ -6,7 +6,7 @@ local kube = import 'lib/kube.libjsonnet';
 local inv = kap.inventory();
 
 local common = import 'common.libsonnet';
-
+local params = inv.parameters.appcat;
 
 local compositeClusterRoles(composite) =
   if std.get(composite, 'createDefaultRBACRoles', true) then
@@ -57,7 +57,7 @@ local loadCRD(crd, tag) = std.parseJson(kap.yaml_load(inv.parameters._base_direc
 local xrdFromCRD(name, crd, defaultComposition='', connectionSecretKeys=[]) =
   kube._Object('apiextensions.crossplane.io/v1', 'CompositeResourceDefinition', name) + common.SyncOptions + {
     spec: {
-      [if name != 'xobjectbuckets.appcat.vshn.io' then 'defaultCompositionUpdatePolicy']: 'Manual',
+      defaultCompositionUpdatePolicy: if name == 'xobjectbuckets.appcat.vshn.io' then 'Automatic' else if params.deploymentManagementSystem.enabled then 'Manual' else 'Automatic',
       claimNames: {
         kind: crd.spec.names.kind,
         plural: crd.spec.names.plural,

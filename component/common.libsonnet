@@ -16,6 +16,8 @@ local cloudscaleZones = params.cloudRegionMap.cloudscale;
 local strExoscaleZones = std.join(', ', exoscaleZones);
 local strCloudscaleZones = std.join(', ', cloudscaleZones);
 
+local vars = import 'config/vars.jsonnet';
+
 local vshnServiceID(name) = 'vshn-' + std.asciiLower(name);
 local objectBucketServiceID(name) = std.asciiLower(std.rstripChars(name, '.ch')) + '-objectbucket';
 
@@ -43,6 +45,8 @@ local vshnMetaDBaaSExoscale(dbname) = {
   },
 };
 
+local getAppCatImageTag() = std.strReplace(params.images.appcat.tag, '/', '_');
+
 local vshnMetaVshn(servicename, flavor, offered, plans) = {
   metadata+: {
     annotations+: {
@@ -56,7 +60,7 @@ local vshnMetaVshn(servicename, flavor, offered, plans) = {
     labels+: {
       'metadata.appcat.vshn.io/offered': offered,
       'metadata.appcat.vshn.io/serviceID': vshnServiceID(servicename),
-      'metadata.appcat.vshn.io/revision': params.images.appcat.tag,
+      'metadata.appcat.vshn.io/revision': getAppCatImageTag(),
     },
   },
 };
@@ -136,8 +140,6 @@ local emailAlerting(alertingSettings) = {
   emailAlertingSmtpUsername: alertingSettings.smtpUsername,
   emailAlertingSmtpHost: alertingSettings.smtpHost,
 };
-
-local getAppCatImageTag() = std.strReplace(params.images.appcat.tag, '/', '_');
 
 local getApiserverImageTag() = std.strReplace(params.images.apiserver.tag, '/', '_');
 
@@ -239,7 +241,35 @@ local getBucketRegion() =
     local nonLocalRegions = std.filter(function(x) x != facts.region, regions);
 
     nonLocalRegions[0];
-local getCurrentFunctionName() = std.strReplace('function-appcat' + '-' + getAppCatImageTag(), '.', '-');
+
+local getCurrentFunctionName() = std.strReplace('function-appcat' + '-' + std.strReplace(getAppCatImageTag(), '_', '-'), '.', '-');
+
+local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
+  serviceName: name,
+  serviceID: vshnServiceID(name),
+  [if std.objectHas(serviceParams, 'mode') then 'mode']: serviceParams.mode,
+  imageTag: getAppCatImageTag(),
+  bucketRegion: getBucketRegion(),
+  maintenanceSA: 'helm-based-service-maintenance',
+  controlNamespace: params.services.controlNamespace,
+  plans: std.toString(plans),
+  defaultPlan: serviceParams.defaultPlan,
+  quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
+  isOpenshift: std.toString(vars.isServiceClusterOpenShift),
+  sliNamespace: params.slos.namespace,
+  ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
+  ownerKind: xrd.spec.names.kind,
+  ownerGroup: xrd.spec.group,
+  ownerVersion: xrd.spec.versions[0].name,
+  salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
+  crossplaneNamespace: params.crossplane.namespace,
+  ignoreNamespaceForBilling: params.billing.ignoreNamespace,
+  [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
+  releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
+} + (if std.objectHas(params.charts, name) then {
+       chartRepository: params.charts[name].source,
+       chartVersion: params.charts[name].version,
+     } else {}) + emailAlerting(params.services.emailAlerting);
 
 {
   SyncOptions: syncOptions,
@@ -294,4 +324,6 @@ local getCurrentFunctionName() = std.strReplace('function-appcat' + '-' + getApp
     getBucketRegion(),
   GetCurrentFunctionName():
     getCurrentFunctionName(),
+  GetDefaultInputs(name, serviceParams, plans, xrd, appuioManaged):
+    getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged),
 }

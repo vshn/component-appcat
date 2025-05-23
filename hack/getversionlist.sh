@@ -30,7 +30,7 @@ while read -r version rest
 do
   hash=$(git rev-list -n 1 "$version")
   eval $(git show "$hash":class/defaults.yml | parse_yaml )
-  echo "$parameters_appcat_images_appcat_tag" >> "$version_list"
+  echo "${version}-${parameters_appcat_images_appcat_tag}" >> "$version_list"
 done <<< "$git_list"
 
 # Now we get the last 5 appcat version, as the component can change without appcat changes

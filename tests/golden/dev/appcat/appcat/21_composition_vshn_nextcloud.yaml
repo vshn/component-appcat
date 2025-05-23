@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: add/func-revisions
+    metadata.appcat.vshn.io/revision: add_func-revisions
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-add_func-revisions
+        name: function-appcat-add-func-revisions
       input:
         apiVersion: v1
         data:
@@ -67,6 +67,7 @@ spec:
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
           proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
           restoreSA: nextcloudserviceaccount
           salesOrder: ''
           serviceID: vshn-nextcloud

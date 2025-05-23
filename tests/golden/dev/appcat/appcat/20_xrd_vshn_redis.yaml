@@ -23,7 +23,7 @@ spec:
     - REDIS_URL
   defaultCompositionRef:
     name: vshnredis.vshn.appcat.vshn.io
-  defaultCompositionUpdatePolicy: Manual
+  defaultCompositionUpdatePolicy: Automatic
   group: vshn.appcat.vshn.io
   names:
     kind: XVSHNRedis

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: add/func-revisions
+    metadata.appcat.vshn.io/revision: add_func-revisions
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-add_func-revisions
+        name: function-appcat-add-func-revisions
       input:
         apiVersion: v1
         data:
@@ -64,6 +64,7 @@ spec:
           proxysqlMemoryLimit: 256Mi
           proxysqlMemoryRequests: 64Mi
           quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
           salesOrder: ''
           serviceID: vshn-mariadb

@@ -150,6 +150,11 @@ parameters:
       controlPlaneKubeconfig: ""
       serviceClusterKubeconfigs: []
 
+    # controls how comp revisions are handled
+    deploymentManagementSystem:
+      enabled: true
+      additionalFunctionBranches: []
+
     crossplane:
       namespace: syn-crossplane
       namespaceLabels: {}

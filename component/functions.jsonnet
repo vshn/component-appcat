@@ -16,7 +16,7 @@ local getFunction(name, package, runtimeConfigName) = {
   apiVersion: 'pkg.crossplane.io/v1beta1',
   kind: 'Function',
   metadata: {
-    name: name,
+    name: std.strReplace(name, '/', '-'),
   },
   spec: {
     package: package,
@@ -97,10 +97,13 @@ local appcat = std.foldl(
   function(out, v)
     out + [
       if v != '' then
-        getFunction('function-appcat-' + std.strReplace(v, '.', '-'), appcatFunctionImage + v + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy'),
+        local splitv = std.split(v, '-');
+        getFunction('function-appcat-' + std.strReplace(v, '.', '-'), appcatFunctionImage + splitv[1] + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy'),
     ],
   versions,
-  [ getFunction('function-appcat-' + std.strReplace(params.images.appcat.tag, '.', '-'), appcatFunctionImage + params.images.appcat.tag + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy') ]
+  std.foldl(function(out, v) out + [ getFunction('function-appcat-' + std.strReplace(v, '.', '-'), appcatFunctionImage + std.strReplace(v, '/', '_') + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy') ],
+            params.deploymentManagementSystem.additionalFunctionBranches,
+            [ getFunction('function-appcat-' + std.strReplace(params.images.appcat.tag, '.', '-'), appcatFunctionImage + std.strReplace(params.images.appcat.tag, '/', '_') + '-func', if !params.proxyFunction then 'function-appcat' else 'enable-proxy') ])
 );
 
 local saAppCat = kube.ServiceAccount('function-appcat') {

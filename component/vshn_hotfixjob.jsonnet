@@ -86,7 +86,7 @@ local appcatJobPrometheusRule = {
   },
 };
 
-(if vars.isSingleOrControlPlaneCluster && params.hotfix then {
+(if vars.isSingleOrControlPlaneCluster && params.hotfix && params.deploymentManagementSystem.enabled then {
    'hotfixer/10_job': hotfixerJob,
    'hotfixer/10_sa': hotfixerSA,
    'hotfixer/10_clusterrolebinding': hotfixClusterRolebinding,

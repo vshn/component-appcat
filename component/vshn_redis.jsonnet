@@ -516,6 +516,7 @@ local composition =
                       crossplaneNamespace: params.crossplane.namespace,
                       ignoreNamespaceForBilling: params.billing.ignoreNamespace,
                       imageRegistry: redisParams.imageRegistry,
+                      releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
                     } + common.EmailAlerting(params.services.emailAlerting)
                     + if redisParams.proxyFunction then {
                       proxyEndpoint: redisParams.grpcEndpoint,

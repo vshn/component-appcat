@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: add/func-revisions
+    metadata.appcat.vshn.io/revision: add_func-revisions
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-add_func-revisions
+        name: function-appcat-add-func-revisions
       input:
         apiVersion: v1
         data:
@@ -34,6 +34,7 @@ spec:
           bucketRegion: rma
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
+          defaultPlan: standard-2
           emailAlertingEnabled: 'true'
           emailAlertingSecretName: mailgun-smtp-credentials
           emailAlertingSecretNamespace: syn-appcat
@@ -68,6 +69,8 @@ spec:
             "pgbouncer_show_stats_totals_bytes_received", "pgbouncer_show_stats_totals_bytes_sent"]'
           loadbalancerAnnotations: |
             foo: bar
+          maintenanceSA: helm-based-service-maintenance
+          ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNPostgreSQL
           ownerVersion: v1
@@ -82,6 +85,7 @@ spec:
             "memory": "3984Mi"}}}'
           proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
           salesOrder: ''
           serviceID: vshn-postgresql
           serviceName: postgresql

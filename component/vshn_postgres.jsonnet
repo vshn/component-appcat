@@ -234,28 +234,14 @@ local composition =
                 name: 'xfn-config',
               },
               data: {
-                      serviceName: serviceName,
-                      serviceID: common.VSHNServiceID(serviceName),
-                      imageTag: common.GetAppCatImageTag(),
-                      sgNamespace: pgParams.sgNamespace,
                       externalDatabaseConnectionsEnabled: std.toString(params.services.vshn.externalDatabaseConnectionsEnabled),
-                      quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
-                      plans: std.toString(pgPlans),
                       sideCars: std.toString(pgParams.sideCars),
                       initContainers: std.toString(pgParams.initContainers),
                       keepMetrics: std.toString(keepMetrics),
-                      controlNamespace: params.services.controlNamespace,
-                      ownerKind: xrd.spec.names.kind,
-                      ownerGroup: xrd.spec.group,
-                      ownerVersion: xrd.spec.versions[0].name,
-                      bucketRegion: common.GetBucketRegion(),
-                      isOpenshift: std.toString(vars.isServiceClusterOpenShift),
-                      sliNamespace: params.slos.namespace,
-                      salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
-                      crossplaneNamespace: params.crossplane.namespace,
-                      ignoreNamespaceForBilling: params.billing.ignoreNamespace,
+                      sgNamespace: pgParams.sgNamespace,
                       additionalMaintenanceClusterRole: additionalMaintenanceClusterRoleName,
-                    } + std.get(pgParams, 'additionalInputs', default={}, inc_hidden=true)
+                    } + common.GetDefaultInputs(serviceName, pgParams, pgPlans, xrd, appuioManaged)
+                    + std.get(pgParams, 'additionalInputs', default={}, inc_hidden=true)
                     + common.EmailAlerting(params.services.emailAlerting)
                     + if pgParams.proxyFunction then {
                       proxyEndpoint: pgParams.grpcEndpoint,

@@ -25,6 +25,9 @@ parameters:
 
   appcat:
 
+    deploymentManagementSystem:
+      enabled: false
+
     # bucketRegionOverride: minio
 
     images:

@@ -98,30 +98,7 @@ local vshn_appcat_service(name, serviceParams) =
                   },
                   name: 'xfn-config',
                 },
-                data: {
-                        serviceName: name,
-                        serviceID: common.VSHNServiceID(name),
-                        mode: serviceParams.mode,
-                        imageTag: common.GetAppCatImageTag(),
-                        chartRepository: params.charts[name].source,
-                        chartVersion: params.charts[name].version,
-                        bucketRegion: common.GetBucketRegion(),
-                        maintenanceSA: 'helm-based-service-maintenance',
-                        controlNamespace: params.services.controlNamespace,
-                        plans: std.toString(plans),
-                        defaultPlan: serviceParams.defaultPlan,
-                        quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
-                        isOpenshift: std.toString(vars.isServiceClusterOpenShift),
-                        sliNamespace: params.slos.namespace,
-                        ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
-                        ownerKind: xrd.spec.names.kind,
-                        ownerGroup: xrd.spec.group,
-                        ownerVersion: xrd.spec.versions[0].name,
-                        salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
-                        crossplaneNamespace: params.crossplane.namespace,
-                        ignoreNamespaceForBilling: params.billing.ignoreNamespace,
-                        imageRegistry: serviceParams.imageRegistry,
-                      } + common.EmailAlerting(params.services.emailAlerting)
+                data: common.GetDefaultInputs(name, serviceParams, plans, xrd, appuioManaged)
                       + restoreSA
                       + additonalInputs
                       + proxyFunction,

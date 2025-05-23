@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: add/func-revisions
+    metadata.appcat.vshn.io/revision: add_func-revisions
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-add_func-revisions
+        name: function-appcat-add-func-revisions
       input:
         apiVersion: v1
         data:
@@ -63,6 +63,7 @@ spec:
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''
+          releaseManagementEnabled: 'false'
           restoreSA: forgejoserviceaccount
           salesOrder: ''
           serviceID: vshn-forgejo
