@@ -1,8 +1,0 @@
-#!/bin/bash
-for file in component/app.jsonnet component/appcat_apiserver.jsonnet component/appcat_sla_reporter.jsonnet component/appcat_sli_exporter.jsonnet component/billing.jsonnet component/billing_alerts.libsonnet component/billing_cronjob.libsonnet component/billing_netpol.libsonnet component/cloud_billing.jsonnet component/common.libsonnet component/config/vars.jsonnet component/crossplane.jsonnet component/exoscale_kafka.jsonnet component/exoscale_mysql.jsonnet component/exoscale_opensearch.jsonnet component/exoscale_postgres.jsonnet component/exoscale_redis.jsonnet component/prometheus.libsonnet component/rbac_testing.jsonnet component/slos.libsonnet component/sloth-input.jsonnet component/statefuleset-resize-controller.jsonnet component/vshn_minio.jsonnet component/vshn_nextcloud.jsonnet component/vshn_postgres.jsonnet component/vshn_redis.jsonnet component/vshn_services.jsonnet component/xrds.libsonnet component/appcat_controller.jsonnet component/functions.jsonnet component/main.jsonnet component/objectstorage.jsonnet component/provider.jsonnet component/vshn_alerting.jsonnet component/vshn_appcat_services.jsonnet component/vshn_codey.jsonnet lib/appcat-compositions.libsonnet lib/appcat-crossplane.libsonnet postprocess/add_argo_annotations.jsonnet postprocess/add_argo_wave_crossplane.jsonnet postprocess/crossplane.jsonnet postprocess/patch_operator_deployment.jsonnet; do
-  echo "$file"
-  /usr/bin/docker run --rm -u "$(id -u):$(id -g)" --userns="" -w /appcat -e HOME="/appcat" -v "${PWD}/:/appcat" --entrypoint=jsonnetfmt docker.io/bitnami/jsonnet:latest --in-place --pad-arrays --test -- "$file"
-  if [ $? -ne 0 ]; then
-    echo "> FAILED TO FORMAT"
-  fi
-done
