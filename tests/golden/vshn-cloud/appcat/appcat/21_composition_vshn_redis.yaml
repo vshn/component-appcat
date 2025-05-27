@@ -388,14 +388,17 @@ spec:
                 forProvider:
                   chart:
                     name: redis
-                    repository: https://charts.bitnami.com/bitnami
-                    version: 17.7.1
+                    repository: oci://registry-1.docker.io/bitnamicharts/redis
+                    url: oci://registry-1.docker.io/bitnamicharts/redis:21.0.3
+                    version: 21.0.3
                   values:
                     architecture: standalone
                     commonConfiguration: ''
                     fullnameOverride: redis
                     global:
                       imageRegistry: dockerhub.vshn.net
+                      security:
+                        allowInsecureImages: true
                     image:
                       repository: bitnami/redis
                     master:
@@ -421,6 +424,13 @@ spec:
                           value: 'true'
                         - name: REDIS_EXPORTER_INCL_SYSTEM_METRICS
                           value: 'true'
+                      resources:
+                        limits:
+                          cpu: 150m
+                          memory: 196Mi
+                        requests:
+                          cpu: 100m
+                          memory: 128Mi
                       serviceMonitor:
                         enabled: true
                         namespace: ''

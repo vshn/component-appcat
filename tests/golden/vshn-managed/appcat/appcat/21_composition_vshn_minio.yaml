@@ -29,7 +29,7 @@ spec:
         data:
           bucketRegion: lpg
           chartRepository: https://charts.min.io
-          chartVersion: 5.0.13
+          chartVersion: 5.4.0
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
@@ -45,7 +45,7 @@ spec:
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           minioChartRepository: https://charts.min.io
-          minioChartVersion: 5.0.13
+          minioChartVersion: 5.4.0
           mode: distributed
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

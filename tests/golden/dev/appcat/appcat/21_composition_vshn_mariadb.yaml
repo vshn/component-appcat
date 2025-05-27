@@ -28,8 +28,8 @@ spec:
         apiVersion: v1
         data:
           bucketRegion: rma
-          chartRepository: https://charts.bitnami.com/bitnami
-          chartVersion: 14.0.10
+          chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
+          chartVersion: 14.2.4
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
