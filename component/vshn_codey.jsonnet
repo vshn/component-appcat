@@ -51,6 +51,19 @@ local composition =
         service: {
           majorVersion: '11.0.0',
           fqdn: [ 'myforgejo.127.0.0.1.nip.io' ],
+          forgejoSettings: {
+            config: {
+              mailer: {
+                ENABLED: 'true',
+                PROTOCOL: 'smtp+starttls',
+                SMTP_ADDR: 'smtp.eu.mailgun.org',
+                SMTP_PORT: '587',
+                FROM: 'noreply@app.codey.ch',
+                USER: params.services.vshn.codey.additionalInputs.smtpUsername,
+                PASSWD: params.services.vshn.codey.additionalInputs.smtpPassword,
+              },
+            },
+          },
         },
         size: {
           plan: 'mini',

@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.152.2
+        tag: v4.153.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -1048,6 +1048,9 @@ parameters:
           offered: true
           restoreSA: codeyserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs:
+            smtpUsername: "?{vaultkv:__shared__/__shared__/appcat/codey_smtp_username}"
+            smtpPassword: "?{vaultkv:__shared__/__shared__/appcat/codey_stmp_password}"
           openshiftTemplate:
             serviceName: codey
             description: "Codey is a secure, fast and reliable code collaboration platform made and hosted in Europe, with 100% free software."
