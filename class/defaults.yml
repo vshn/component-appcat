@@ -81,7 +81,7 @@ parameters:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.19.1
+        tag: v1.20.0
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -172,6 +172,8 @@ parameters:
         args:
           - --enable-usages
           - --poll-interval=1h
+          - --enable-realtime-composition=false
+          - --registry=xpkg.upbound.io
         image:
           repository: ${appcat:images:crossplane:registry}/${appcat:images:crossplane:image}
           tag: ${appcat:images:crossplane:tag}
