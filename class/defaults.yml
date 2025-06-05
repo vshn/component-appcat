@@ -29,7 +29,7 @@ parameters:
       provider-kubernetes:
         registry: xpkg.upbound.io
         repository: upbound/provider-kubernetes
-        tag: v0.17.1
+        tag: v0.18.0
       provider-helm:
         registry: xpkg.upbound.io
         repository: upbound/provider-helm
