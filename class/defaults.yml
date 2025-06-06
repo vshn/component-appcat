@@ -517,9 +517,10 @@ parameters:
           package: ${appcat:images:provider-kubernetes:registry}/${appcat:images:provider-kubernetes:repository}:${appcat:images:provider-kubernetes:tag}
         runtimeConfig:
           serviceAccountName: provider-kubernetes
-        defaultProviderConfig: {}
+        defaultProviderConfig: {} # having this parameter will still create a ProviderConfig object with default values
         additionalProviderConfigs: []
         additionalRuntimeConfig: {}
+
       helm:
         enabled: false
         apiVersion: helm.crossplane.io/v1beta1
@@ -528,7 +529,7 @@ parameters:
           package: ${appcat:images:provider-helm:registry}/${appcat:images:provider-helm:repository}:${appcat:images:provider-helm:tag}
         runtimeConfig:
           serviceAccountName: provider-helm
-        defaultProviderConfig: {}
+        defaultProviderConfig: {} # having this parameter will still create a ProviderConfig object with default values
         additionalProviderConfigs: []
 
       minio:
@@ -539,7 +540,6 @@ parameters:
           package: ${appcat:images:provider-minio:registry}/${appcat:images:provider-minio:repository}:${appcat:images:provider-minio:tag}
         runtimeConfig:
           serviceAccountName: provider-minio
-        defaultProviderConfig: {}
         providerConfigRefs: []
         additionalProviderConfigs: []
 
