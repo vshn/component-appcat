@@ -19,3 +19,74 @@ jobs:
         with:
           one_of: enhancement,feature,minor,change,breaking,major,bug,fix,patch,documentation,dependency
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+  create-release:
+    if: github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for patch label
+        if: contains(github.event.pull_request.labels.*.name, 'patch') || contains(github.event.pull_request.labels.*.name, 'dependency') || contains(github.event.pull_request.labels.*.name, 'documentation')
+        id: patch
+        run: |
+          echo "set=true" >> $GITHUB_OUTPUT
+      - name: Check for minor label
+        if: contains(github.event.pull_request.labels.*.name, 'minor')
+        id: minor
+        run: |
+          echo "set=true" >> $GITHUB_OUTPUT
+      - name: Check for major label
+        if: contains(github.event.pull_request.labels.*.name, 'major')
+        id: major
+        run: |
+          echo "set=true" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+        with:
+          # Make sure we use the right commit to tag
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          # We also need to use the personal access token here. As subsequent
+          # actions will not trigger by tags/pushes that use `GITHUB_TOKEN`
+          # https://github.com/orgs/community/discussions/25702#discussioncomment-3248819
+          token: ${{ secrets.COMPONENT_ACCESS_TOKEN }}
+          # This is broken in checkout@v4...
+          # https://github.com/actions/checkout/issues/1781
+          fetch-tags: true
+
+      - name: fetch tags
+        run: |
+          git fetch --tags
+          echo "latest tag: $(git describe --tags "$(git rev-list --tags --max-count=1)")"
+          echo "TAG_VERSION=$(git describe --tags "$(git rev-list --tags --max-count=1)")" >>  $GITHUB_ENV
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      # We only run this if any of the release tags is set.
+      # For docs and deps we don't do automagic releases
+      - name: Increase Tag
+        id: tag
+        run: |
+          patch=${{ steps.patch.outputs.set }}
+          minor=${{ steps.minor.outputs.set }}
+          major=${{ steps.major.outputs.set }}
+          major_ver=$(echo '${{ env.TAG_VERSION }}' | cut -d "." -f1)
+          minor_ver=$(echo '${{ env.TAG_VERSION }}' | cut -d "." -f2)
+          patch_ver=$(echo '${{ env.TAG_VERSION }}' | cut -d "." -f3)
+          major_ver="${major_ver:1}"
+          # Check for patch label
+          [ ! -z "$patch" ] && [ -z "$minor" ] && [ -z "$major" ] && ((patch_ver++)) || true
+          # check for minor label
+          if [ ! -z "$minor" ] && [ -z "$major" ]; then
+            ((minor_ver++))
+            patch_ver=0
+          fi
+          # Check for major label
+          if [ ! -z "$major" ]; then
+            ((major_ver++))
+            minor_ver=0
+            patch_ver=0
+          fi
+          tag="v$major_ver.$minor_ver.$patch_ver"
+          echo "new tag $tag"
+          git tag $tag
+          git push --tags
+          echo tag=$tag >> $GITHUB_OUTPUT
