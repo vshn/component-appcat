@@ -16,6 +16,7 @@ spec:
     backup:
       retention:
         keepDaily: 6
+      schedule: '*/5 * * * *'
     security:
       deletionProtection: true
     service:
