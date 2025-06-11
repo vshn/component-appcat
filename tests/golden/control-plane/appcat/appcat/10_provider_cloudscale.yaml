@@ -8,7 +8,7 @@ metadata:
     name: provider-cloudscale
   name: provider-cloudscale
 spec:
-  package: ghcr.io/vshn/provider-cloudscale:v0.5.7
+  package: ghcr.io/vshn/provider-cloudscale:cruft_update
   runtimeConfigRef:
     name: provider-cloudscale
 ---
