@@ -8,7 +8,7 @@ metadata:
     name: provider-helm
   name: provider-helm
 spec:
-  package: xpkg.upbound.io/upbound/provider-helm:v0.21.0
+  package: ghcr.io/vshn/provider-helm:v0.21.0-vshn
   runtimeConfigRef:
     name: provider-helm
 ---

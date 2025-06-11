@@ -8,7 +8,7 @@ metadata:
     name: provider-kubernetes
   name: provider-kubernetes
 spec:
-  package: xpkg.upbound.io/upbound/provider-kubernetes:v0.17.1
+  package: ghcr.io/vshn/provider-kubernetes:v0.18.0-vshn
   runtimeConfigRef:
     name: provider-kubernetes
 ---

@@ -27,13 +27,13 @@ parameters:
         version: 11.0.1
     images:
       provider-kubernetes:
-        registry: xpkg.upbound.io
-        repository: upbound/provider-kubernetes
-        tag: v0.17.1
+        registry: ghcr.io
+        repository: vshn/provider-kubernetes
+        tag: v0.18.0-vshn
       provider-helm:
-        registry: xpkg.upbound.io
-        repository: upbound/provider-helm
-        tag: v0.21.0
+        registry: ghcr.io
+        repository: vshn/provider-helm
+        tag: v0.21.0-vshn
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
