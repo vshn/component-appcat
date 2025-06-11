@@ -116,6 +116,13 @@ rules:
       - get
       - list
       - create
+  - apiGroups:
+      - api.appcat.vshn.io
+    resources:
+      - vshnkeycloakbackups
+    verbs:
+      - get
+      - list
 ---
 apiVersion: v1
 data: {}
