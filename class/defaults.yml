@@ -45,7 +45,7 @@ parameters:
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio
-        tag: v0.4.4
+        tag: cruft/update
       provider-sql:
         registry: xpkg.upbound.io
         repository: crossplane-contrib/provider-sql
