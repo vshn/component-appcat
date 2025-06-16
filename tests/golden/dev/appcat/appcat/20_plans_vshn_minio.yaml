@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  plans: '{"standard-1": {"size": {"cpu": "1", "disk": "50Gi", "enabled": true, "memory":
+    "1Gi"}}}'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: vshnminioplans
+  name: vshnminioplans
+  namespace: syn-appcat
