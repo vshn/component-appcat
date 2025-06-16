@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-v4-160-0
+  name: function-appcat-master-feature-keycloak-custom-files
 spec:
-  package: ghcr.io/vshn/appcat:v4.160.0-func
+  package: ghcr.io/vshn/appcat:feature_keycloak-custom-files-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
