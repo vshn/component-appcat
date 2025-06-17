@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-keycloak-restore
+  name: function-appcat-debug-develop
 spec:
-  package: ghcr.io/vshn/appcat:keycloak_restore-func
+  package: ghcr.io/vshn/appcat:develop-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy

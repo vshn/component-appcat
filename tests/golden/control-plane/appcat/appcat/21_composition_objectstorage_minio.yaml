@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-keycloak-restore
+        name: function-appcat-master-develop
       input:
         apiVersion: v1
         data:

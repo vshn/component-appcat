@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-keycloak-restore
+  name: function-appcat-master-develop
 spec:
-  package: ghcr.io/vshn/appcat:keycloak_restore-func
+  package: ghcr.io/vshn/appcat:develop-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
