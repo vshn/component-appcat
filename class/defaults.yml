@@ -57,7 +57,7 @@ parameters:
       statefulset-resize-controller:
         registry: ghcr.io
         repository: vshn/statefulset-resize-controller
-        tag: v0.3.1
+        tag: cruft/update
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
