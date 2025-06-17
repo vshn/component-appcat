@@ -9,16 +9,37 @@ on:
       - master
 
 jobs:
+  check-allow-merge:
+    runs-on: ubuntu-latest
+    steps:
+      # Labels in the context don't get updated so they are stuck at what's set during creation
+      # We need this action to get current labels
+      - name: Get current labels
+        uses: snnaplab/get-labels-action@v1
+      - name: Check if merge is allowed
+        if: github.base_ref == 'master' && github.head_ref != 'develop'
+        run: |
+          ${{ contains(fromJSON(env.LABELS), 'hotfix') }} && exit 0
+          echo "ERROR: You can only merge to master from develop or hotfixes."
+          exit 1
+
   check-labels:
     # Act doesn't set a pull request number by default, so we skip if it's 0
     if: github.event.pull_request.number != 0
     name: Check labels
     runs-on: ubuntu-latest
     steps:
+      - name: Ignore from Changelog if merge to master
+        uses: actions-ecosystem/action-add-labels@v1
+        if: github.base_ref == 'master'
+        with:
+          labels: ignoreChangelog
+
       - uses: docker://agilepathway/pull-request-label-checker:v1.6.51
         with:
           one_of: enhancement,feature,minor,change,breaking,major,bug,fix,patch,documentation,dependency
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+
   create-release:
     if: github.event.pull_request.merged && github.base_ref == 'master'
     runs-on: ubuntu-latest
