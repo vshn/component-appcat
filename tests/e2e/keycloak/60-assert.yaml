@@ -5,7 +5,7 @@ timeout: 600
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:
-  name: keycloak-e2e
+  name: keycloak-e2e-restore
   finalizers:
   - finalizer.apiextensions.crossplane.io
 spec:
@@ -13,24 +13,19 @@ spec:
   compositionRef:
     name: vshnkeycloak.vshn.appcat.vshn.io
   parameters:
-    backup:
-      retention:
-        keepDaily: 6
-      schedule: '*/5 * * * *'
+    restore:
+      claimName: keycloak-e2e
     security:
-      deletionProtection: true
+      deletionProtection: false
+    backup:
+      schedule: '0 22 * * *'
     service:
-      postgreSQLParameters:
-        instances: 1
-      relativePath: /
-      serviceLevel: besteffort
+      version: "26"
+      fqdn: keycloak-e2e-restore.example.com
     size:
       plan: standard-2
-    tls:
-      authClients: true
-      enabled: true
   writeConnectionSecretToRef:
-    name: keycloak-e2e
+    name: keycloak-e2e-restore
 status:
   conditions:
     - status: "True"

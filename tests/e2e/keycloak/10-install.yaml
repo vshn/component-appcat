@@ -12,5 +12,7 @@ spec:
           type: secret
         - name: test-cm
           type: configMap
+    backup:
+      schedule: '*/5 * * * *'
   writeConnectionSecretToRef:
     name: keycloak-e2e

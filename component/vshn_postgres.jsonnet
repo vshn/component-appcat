@@ -153,6 +153,11 @@ local restoreRole = kube.ClusterRole(restoreRoleName) {
       resources: [ 'secrets' ],
       verbs: [ 'get', 'create', 'patch' ],
     },
+    {
+      apiGroups: [ 'vshn.appcat.vshn.io' ],
+      resources: [ 'vshnkeycloaks', 'xvshnkeycloaks', 'xvshnpostgresqls' ],
+      verbs: [ 'get' ],
+    },
   ],
 };
 
