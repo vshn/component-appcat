@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.164.0
+    metadata.appcat.vshn.io/revision: master-change_kc-customenvvarref
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,13 +28,13 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-164-0
+        name: function-appcat-master-change-kc-customenvvarref
       input:
         apiVersion: v1
         data:
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
-          chartVersion: 21.2.5
+          chartVersion: 21.0.3
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.164.0
+          imageTag: change_kc-customenvvarref
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone

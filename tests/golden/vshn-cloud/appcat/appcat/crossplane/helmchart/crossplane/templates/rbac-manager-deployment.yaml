@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: v4.164.0
+        function-revision: change/kc-customenvvarref
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -58,7 +58,7 @@ spec:
                   resource: limits.memory
             - name: LEADER_ELECTION
               value: 'true'
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
+          image: docker.io/crossplane/crossplane:v1.19.1
           imagePullPolicy: IfNotPresent
           name: crossplane
           resources:
@@ -90,7 +90,7 @@ spec:
                   containerName: crossplane-init
                   divisor: '1'
                   resource: limits.memory
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
+          image: docker.io/crossplane/crossplane:v1.19.1
           imagePullPolicy: IfNotPresent
           name: crossplane-init
           resources:

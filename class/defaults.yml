@@ -9,10 +9,10 @@ parameters:
         version: 1.19.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.2.5
+        version: 21.0.3
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 14.2.9
+        version: 14.2.4
       minio:
         source: https://charts.min.io
         version: 5.4.0
@@ -21,10 +21,10 @@ parameters:
         version: 7.0.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 6.6.10
+        version: 6.2.4
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 12.5.2
+        version: 11.0.1
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -47,9 +47,9 @@ parameters:
         repository: vshn/provider-minio
         tag: v0.4.4
       provider-sql:
-        registry: ghcr.io
-        repository: vshn/provider-sql
-        tag: v0.11.0-vshn
+        registry: xpkg.upbound.io
+        repository: crossplane-contrib/provider-sql
+        tag: v0.11.0
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.164.0
+        tag: change/kc-customenvvarref
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -79,6 +79,9 @@ parameters:
         repository: vshn/billing-collector-cloudservices
         tag: v3.6.0
       crossplane:
+        registry: docker.io
+        image: crossplane/crossplane
+        tag: v1.19.1
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -169,8 +172,6 @@ parameters:
         args:
           - --enable-usages
           - --poll-interval=1h
-          - --enable-realtime-compositions=false
-          - --registry=xpkg.upbound.io
         image:
           pullPolicy: ${appcat:images:crossplane:pullPolicy}
         alpha:
@@ -309,7 +310,6 @@ parameters:
           - secrets
         verbs:
           - get
-          - list
           - create
           - delete
       - apiGroups:
