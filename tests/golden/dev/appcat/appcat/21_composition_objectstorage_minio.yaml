@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-develop
+        name: function-appcat-debug-bugfix-copy-objects
       input:
         apiVersion: v1
         data:

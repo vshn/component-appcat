@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-develop
+    metadata.appcat.vshn.io/revision: master-bugfix_copy-objects
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-develop
+        name: function-appcat-master-bugfix-copy-objects
       input:
         apiVersion: v1
         data:
@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: develop
+          imageTag: bugfix_copy-objects
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-develop
+  name: function-appcat-master-bugfix-copy-objects
 spec:
-  package: ghcr.io/vshn/appcat:develop-func
+  package: ghcr.io/vshn/appcat:bugfix_copy-objects-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
