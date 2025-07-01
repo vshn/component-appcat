@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feature-keycloak-custom-files
+        name: function-appcat-master-fix-kc-custom-files
       input:
         apiVersion: v1
         data:

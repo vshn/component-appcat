@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:feature_keycloak-custom-files
+              image: ghcr.io/vshn/appcat:fix_kc-custom-files
               name: sla-reporter
               resources:
                 limits:

@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:feature_keycloak-custom-files
+          image: ghcr.io/vshn/appcat:fix_kc-custom-files
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

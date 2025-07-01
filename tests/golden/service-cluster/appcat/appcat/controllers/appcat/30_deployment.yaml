@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:feature_keycloak-custom-files
+          image: ghcr.io/vshn/appcat:fix_kc-custom-files
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feature/keycloak-custom-files
+        function-revision: fix/kc-custom-files
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
