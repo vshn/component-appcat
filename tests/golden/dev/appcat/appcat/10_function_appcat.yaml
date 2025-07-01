@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-feature-keycloak-custom-files
+  name: function-appcat-debug-fix-pg-restore-to-dev
 spec:
-  package: ghcr.io/vshn/appcat:feature_keycloak-custom-files-func
+  package: ghcr.io/vshn/appcat:fix_pg_restore_to_dev-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy

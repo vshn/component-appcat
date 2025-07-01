@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feature_keycloak-custom-files
+    metadata.appcat.vshn.io/revision: master-fix_pg_restore_to_dev
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feature-keycloak-custom-files
+        name: function-appcat-master-fix-pg-restore-to-dev
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: feature_keycloak-custom-files
+          imageTag: fix_pg_restore_to_dev
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone

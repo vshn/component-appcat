@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feature_keycloak-custom-files
+          image: ghcr.io/vshn/appcat:fix_pg_restore_to_dev
           livenessProbe:
             httpGet:
               path: /healthz
