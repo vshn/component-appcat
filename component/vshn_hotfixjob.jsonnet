@@ -95,7 +95,9 @@ local appcatJobPrometheusRule = {
   },
 };
 
-(if vars.isSingleOrControlPlaneCluster && params.deploymentManagementSystem.hotfix then {
+local currentVersion = inv.parameters.components.appcat.version + '-' + params.images.appcat.tag;
+
+(if vars.isSingleOrControlPlaneCluster && (params.deploymentManagementSystem.hotfix == currentVersion) then {
    'hotfixer/10_job': hotfixerJob,
    'hotfixer/10_sa': hotfixerSA,
    'hotfixer/10_clusterrolebinding': hotfixClusterRolebinding,

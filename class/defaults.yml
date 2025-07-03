@@ -150,7 +150,7 @@ parameters:
 
     # controls how comp revisions are handled
     deploymentManagementSystem:
-      hotfix: false
+      hotfix: ""
       enabled: true
       additionalFunctionBranches: []
 

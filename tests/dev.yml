@@ -30,7 +30,7 @@ parameters:
   appcat:
 
     deploymentManagementSystem:
-      hotfix: false
+      # hotfix: debug-v4.163.2
       enabled: false
 
     # bucketRegionOverride: minio
