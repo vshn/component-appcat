@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-163-2
+        name: function-appcat-master-fix-ignore-label
       input:
         apiVersion: v1
         data:
