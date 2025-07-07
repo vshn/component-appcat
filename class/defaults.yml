@@ -6,13 +6,13 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.19.1
+        version: 1.20.0
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.0.3
+        version: 21.2.5
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 14.2.4
+        version: 14.2.9
       minio:
         source: https://charts.min.io
         version: 5.4.0
@@ -21,10 +21,10 @@ parameters:
         version: 7.0.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 6.2.4
+        version: 6.6.10
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 11.0.1
+        version: 12.5.2
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -47,9 +47,9 @@ parameters:
         repository: vshn/provider-minio
         tag: v0.4.4
       provider-sql:
-        registry: xpkg.upbound.io
-        repository: crossplane-contrib/provider-sql
-        tag: v0.11.0
+        registry: ghcr.io
+        repository: vshn/provider-sql
+        tag: v0.11.0-vshn
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -81,7 +81,7 @@ parameters:
       crossplane:
         registry: docker.io
         image: crossplane/crossplane
-        tag: v1.19.1
+        tag: v1.20.0
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -172,6 +172,8 @@ parameters:
         args:
           - --enable-usages
           - --poll-interval=1h
+          - --enable-realtime-compositions=false
+          - --registry=xpkg.upbound.io
         image:
           pullPolicy: ${appcat:images:crossplane:pullPolicy}
         alpha:
@@ -310,6 +312,7 @@ parameters:
           - secrets
         verbs:
           - get
+          - list
           - create
           - delete
       - apiGroups:

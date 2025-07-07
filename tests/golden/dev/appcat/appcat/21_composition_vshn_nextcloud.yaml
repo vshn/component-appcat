@@ -31,7 +31,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 6.2.4
+          chartVersion: 6.6.10
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
