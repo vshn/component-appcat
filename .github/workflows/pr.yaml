@@ -63,10 +63,6 @@ jobs:
         with:
           # Make sure we use the right commit to tag
           ref: ${{ github.event.pull_request.merge_commit_sha }}
-          # We also need to use the personal access token here. As subsequent
-          # actions will not trigger by tags/pushes that use `GITHUB_TOKEN`
-          # https://github.com/orgs/community/discussions/25702#discussioncomment-3248819
-          token: ${{ secrets.COMPONENT_ACCESS_TOKEN }}
           # This is broken in checkout@v4...
           # https://github.com/actions/checkout/issues/1781
           fetch-tags: true
