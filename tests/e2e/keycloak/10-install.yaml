@@ -12,6 +12,12 @@ spec:
           type: secret
         - name: test-cm
           type: configMap
+      customEnvVariablesRef: env-from-secret-deprecated
+      envFrom:
+        - configMapRef:
+            name: env-from-cm
+        - secretRef:
+            name: env-from-secret
     backup:
       schedule: '*/5 * * * *'
   writeConnectionSecretToRef:
