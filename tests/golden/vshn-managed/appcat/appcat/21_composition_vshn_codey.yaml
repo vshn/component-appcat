@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-hotfix_deletion_protection
+    metadata.appcat.vshn.io/revision: master-v4.163.4
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

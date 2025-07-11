@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-hotfix-deletion-protection
+        name: function-appcat-master-v4-163-4
       input:
         apiVersion: v1
         data:
