@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.20.0
-    helm.sh/chart: crossplane-1.20.0
+    app.kubernetes.io/version: 1.19.1
+    helm.sh/chart: crossplane-1.19.1
     release: appcat
   name: crossplane
   namespace: syn-crossplane
@@ -34,8 +34,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: crossplane
         app.kubernetes.io/part-of: crossplane
-        app.kubernetes.io/version: 1.20.0
-        helm.sh/chart: crossplane-1.20.0
+        app.kubernetes.io/version: 1.19.1
+        helm.sh/chart: crossplane-1.19.1
         release: appcat
     spec:
       containers:
@@ -103,10 +103,8 @@ spec:
             tcpSocket:
               port: readyz
           volumeMounts:
-            - mountPath: /cache/xpkg
+            - mountPath: /cache
               name: package-cache
-            - mountPath: /cache/xfn
-              name: function-cache
             - mountPath: /tls/server
               name: tls-server-certs
             - mountPath: /tls/client
@@ -172,10 +170,6 @@ spec:
             medium: null
             sizeLimit: 20Mi
           name: package-cache
-        - emptyDir:
-            medium: null
-            sizeLimit: 512Mi
-          name: function-cache
         - name: tls-server-certs
           secret:
             secretName: crossplane-tls-server
