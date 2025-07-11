@@ -49,7 +49,7 @@ spec:
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
-          oc_image: quay.io/appuio/oc:v4.13
+          oc_image: quay.io/appuio/oc:v4.18
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNForgejo
