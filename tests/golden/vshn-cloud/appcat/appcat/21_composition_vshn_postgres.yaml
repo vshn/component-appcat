@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.163.4
+    metadata.appcat.vshn.io/revision: master-hotfix_kc-obj
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-163-4
+        name: function-appcat-master-hotfix-kc-obj
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.163.4
+          imageTag: hotfix_kc-obj
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
