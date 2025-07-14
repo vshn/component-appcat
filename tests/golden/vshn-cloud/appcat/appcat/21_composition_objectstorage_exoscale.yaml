@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-163-4
+        name: function-appcat-master-redis-ha-remove-migration
       input:
         apiVersion: v1
         data:
