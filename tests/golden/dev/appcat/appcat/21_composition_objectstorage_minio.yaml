@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-redis-ha
+        name: function-appcat-debug-revert-406-redis-ha
       input:
         apiVersion: v1
         data:
