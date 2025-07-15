@@ -29,6 +29,8 @@ parameters:
 
   appcat:
 
+    pullPolicy: Always
+
     deploymentManagementSystem:
       # hotfix: debug-v4.163.2
       enabled: false

@@ -103,7 +103,6 @@ local controller = loadManifest('deployment.yaml') {
           if c.name == 'manager' then
             c {
               image: common.GetAppCatImageString(),
-              imagePullPolicy: 'IfNotPresent',
               args+: mergedArgs,
               env+: mergedEnv,
               resources: controllersParams.resources,

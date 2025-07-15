@@ -20,7 +20,7 @@ local getFunction(name, package, runtimeConfigName) = {
   },
   spec: {
     package: package,
-    packagePullPolicy: 'IfNotPresent',
+    packagePullPolicy: params.pullPolicy,
     runtimeConfigRef: {
       name: runtimeConfigName,
     },

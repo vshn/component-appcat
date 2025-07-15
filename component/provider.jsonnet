@@ -288,7 +288,9 @@ local provider(name, provider) =
                                        provider.additionalRuntimeConfig else {});
 
   local providerManifest = crossplane.Provider('provider-' + name) {
-    spec+: escapePackage(provider.spec) + runtimeConfigRef(sa.metadata.name),
+    spec+: escapePackage(provider.spec) + runtimeConfigRef(sa.metadata.name) + {
+      packagePullPolicy: params.pullPolicy,
+    },
   };
 
   local defaultConfig = crossplane.ProviderConfig(name) {

@@ -7,7 +7,7 @@ metadata:
   name: function-appcat-debug-change-kc-customenvvarref
 spec:
   package: ghcr.io/vshn/appcat:change_kc-customenvvarref-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
@@ -21,7 +21,7 @@ metadata:
   name: function-appcat-v3-50-4-v4-163-3
 spec:
   package: ghcr.io/vshn/appcat:v4.163.3-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
@@ -35,7 +35,7 @@ metadata:
   name: function-appcat-v3-50-5-v4-163-3
 spec:
   package: ghcr.io/vshn/appcat:v4.163.3-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
@@ -49,7 +49,7 @@ metadata:
   name: function-appcat-v3-50-6-v4-163-4
 spec:
   package: ghcr.io/vshn/appcat:v4.163.4-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
@@ -63,7 +63,7 @@ metadata:
   name: function-appcat-v3-50-7-v4-163-4
 spec:
   package: ghcr.io/vshn/appcat:v4.163.4-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
@@ -77,7 +77,7 @@ metadata:
   name: function-appcat-v3-50-8-v4-164-0
 spec:
   package: ghcr.io/vshn/appcat:v4.164.0-func
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true

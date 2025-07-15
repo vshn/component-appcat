@@ -7,7 +7,7 @@ metadata:
   name: function-patch-and-transform
 spec:
   package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.1.4
-  packagePullPolicy: IfNotPresent
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: function-patch-and-transform
   skipDependencyResolution: true
