@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-redis-ha
+  name: function-appcat-master-fix-redis-ha-migration
 spec:
-  package: ghcr.io/vshn/appcat:redis_ha-func
+  package: ghcr.io/vshn/appcat:fix_redis_ha_migration-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
