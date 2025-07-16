@@ -28,7 +28,7 @@ spec:
             - name: PLANS_NAMESPACE
               value: syn-appcat
           image: ghcr.io/vshn/appcat:change_kc-customenvvarref
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /healthz

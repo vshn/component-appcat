@@ -59,7 +59,7 @@ spec:
             - name: LEADER_ELECTION
               value: 'true'
           image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: crossplane
           resources:
             limits:
@@ -91,7 +91,7 @@ spec:
                   divisor: '1'
                   resource: limits.memory
           image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: crossplane-init
           resources:
             limits:

@@ -9,6 +9,7 @@ metadata:
   name: provider-minio
 spec:
   package: ghcr.io/vshn/provider-minio:v0.4.4
+  packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-minio
 ---

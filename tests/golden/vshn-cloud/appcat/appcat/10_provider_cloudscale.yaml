@@ -9,6 +9,7 @@ metadata:
   name: provider-cloudscale
 spec:
   package: ghcr.io/vshn/provider-cloudscale:v0.5.7
+  packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-cloudscale
 ---

@@ -124,7 +124,6 @@ local deployment(name, args, config) =
           serviceAccount: name,
           containers_:: {
             exporter: kube.Container('exporter') {
-              imagePullPolicy: 'IfNotPresent',
               image: collectorImage,
               args: args,
               // add resource limits
