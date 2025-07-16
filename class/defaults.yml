@@ -79,9 +79,6 @@ parameters:
         repository: vshn/billing-collector-cloudservices
         tag: v3.6.0
       crossplane:
-        registry: docker.io
-        image: crossplane/crossplane
-        tag: v1.19.1
         pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
@@ -175,8 +172,6 @@ parameters:
           - --enable-realtime-compositions=false
           - --registry=xpkg.upbound.io
         image:
-          repository: ${appcat:images:crossplane:registry}/${appcat:images:crossplane:image}
-          tag: ${appcat:images:crossplane:tag}
           pullPolicy: ${appcat:images:crossplane:pullPolicy}
         alpha:
           oam:
