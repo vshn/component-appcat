@@ -77,6 +77,11 @@ spec:
           salesOrder: ''
           serviceID: vshn-redis
           serviceName: redis
+          sideCars: '{"kubectl": {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests":
+            {"cpu": "10m", "memory": "50Mi"}}, "metrics": {"limits": {"cpu": "150m",
+            "memory": "192Mi"}, "requests": {"cpu": "100m", "memory": "128Mi"}}, "sentinel":
+            {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests": {"cpu": "10m",
+            "memory": "50Mi"}}}'
           sliNamespace: syn-appcat-slos
         kind: ConfigMap
         metadata:
