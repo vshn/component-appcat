@@ -787,6 +787,7 @@ parameters:
             - REDIS_USERNAME
             - REDIS_PASSWORD
             - REDIS_URL
+            - SENTINEL_HOSTS
           mode: standalone
           offered: true
           restoreSA: redisrestoreserviceaccount
