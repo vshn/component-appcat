@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: redis/ha
+        tag: v4.164.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -788,7 +788,6 @@ parameters:
             - REDIS_USERNAME
             - REDIS_PASSWORD
             - REDIS_URL
-            - SENTINEL_HOSTS
           mode: standalone
           offered: true
           restoreSA: redisrestoreserviceaccount
