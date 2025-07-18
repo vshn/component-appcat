@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: change/kc-customenvvarref
+        tag: v4.165.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -78,6 +78,11 @@ parameters:
         registry: ghcr.io
         repository: vshn/billing-collector-cloudservices
         tag: v3.6.0
+      crossplane:
+        registry: docker.io
+        image: crossplane/crossplane
+        tag: v1.19.1
+        pullPolicy: IfNotPresent
       kubectl:
         registry: docker.io
         image: bitnami/kubectl
@@ -111,7 +116,6 @@ parameters:
         image: keycloak-competence-center/keycloak-managed
     =_crd_version: ${appcat:images:appcat:tag}
 
-    pullPolicy: IfNotPresent
     namespace: syn-appcat
     namespaceLabels: {}
     namespaceAnnotations:
@@ -171,7 +175,9 @@ parameters:
           - --enable-realtime-compositions=false
           - --registry=xpkg.upbound.io
         image:
-          pullPolicy: ${appcat:pullPolicy}
+          repository: ${appcat:images:crossplane:registry}/${appcat:images:crossplane:image}
+          tag: ${appcat:images:crossplane:tag}
+          pullPolicy: ${appcat:images:crossplane:pullPolicy}
         alpha:
           oam:
             enabled: false

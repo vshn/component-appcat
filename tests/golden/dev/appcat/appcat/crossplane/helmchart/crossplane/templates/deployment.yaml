@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: change/kc-customenvvarref
+        function-revision: v4.165.0
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -77,8 +77,8 @@ spec:
               value: crossplane-tls-client
             - name: TLS_CLIENT_CERTS_DIR
               value: /tls/client
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
-          imagePullPolicy: Always
+          image: docker.io/crossplane/crossplane:v1.19.1
+          imagePullPolicy: IfNotPresent
           name: crossplane
           ports:
             - containerPort: 8081
@@ -149,8 +149,8 @@ spec:
               value: crossplane-tls-server
             - name: TLS_CLIENT_SECRET_NAME
               value: crossplane-tls-client
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
-          imagePullPolicy: Always
+          image: docker.io/crossplane/crossplane:v1.19.1
+          imagePullPolicy: IfNotPresent
           name: crossplane-init
           resources:
             limits:
