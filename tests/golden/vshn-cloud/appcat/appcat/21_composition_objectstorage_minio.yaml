@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-hotfix-kc
+        name: function-appcat-master-v4-165-0
       input:
         apiVersion: v1
         data:
