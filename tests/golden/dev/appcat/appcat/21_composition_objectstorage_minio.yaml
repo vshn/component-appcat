@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-change-kc-customenvvarref
+        name: function-appcat-debug-cruft-update
       input:
         apiVersion: v1
         data:
