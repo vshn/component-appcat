@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:change_kc-customenvvarref
+          image: ghcr.io/vshn/appcat:cruft_update
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
