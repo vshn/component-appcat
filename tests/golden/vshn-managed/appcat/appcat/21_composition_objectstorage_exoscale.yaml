@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-change-kc-customenvvarref
+        name: function-appcat-master-cruft-reject
       input:
         apiVersion: v1
         data:

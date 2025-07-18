@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-change_kc-customenvvarref
+    metadata.appcat.vshn.io/revision: master-cruft_reject
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
