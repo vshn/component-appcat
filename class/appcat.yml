@@ -49,9 +49,9 @@ parameters:
 
       - input_type: external
         input_paths:
-          - /bin/bash
+          - /usr/local/bin/python3
         args:
-          - ${_base_directory}/hack/getversionlist.sh
+          - ${_base_directory}/hack/getversionlist.py
           - ${_base_directory}/hack/versionlist
           - ${_base_directory}
         output_path: .

@@ -30,3 +30,4 @@ component/vendor/
 # Additional entries
 kubeconfig
 hack/versionlist
+.venv/*
