@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:change_kc-customenvvarref
+              image: ghcr.io/vshn/appcat:cruft_reject
               name: sla-reporter
               resources:
                 limits:
