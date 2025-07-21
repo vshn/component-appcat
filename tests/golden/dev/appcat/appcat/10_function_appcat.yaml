@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-v4-165-1
+  name: function-appcat-debug-fix-helm-maintenance-non-converged
 spec:
-  package: ghcr.io/vshn/appcat:v4.165.1-func
+  package: ghcr.io/vshn/appcat:fix_helm_maintenance_non_converged-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
