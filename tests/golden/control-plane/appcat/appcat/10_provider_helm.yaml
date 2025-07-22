@@ -93,6 +93,13 @@ rules:
       - update
       - delete
   - apiGroups:
+      - ''
+    resources:
+      - pods
+    verbs:
+      - list
+      - patch
+  - apiGroups:
       - apps
     resources:
       - statefulsets
@@ -156,6 +163,19 @@ rules:
       - policy
     resources:
       - poddisruptionbudgets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - rolebindings
     verbs:
       - get
       - list

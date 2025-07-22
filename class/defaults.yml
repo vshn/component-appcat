@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.165.0
+        tag: redis/ha
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -787,6 +787,7 @@ parameters:
             - REDIS_USERNAME
             - REDIS_PASSWORD
             - REDIS_URL
+            - SENTINEL_HOSTS
           mode: standalone
           offered: true
           restoreSA: redisrestoreserviceaccount
@@ -838,6 +839,28 @@ parameters:
                 cpu: "2"
                 memory: "8Gi"
                 disk: 16Gi
+          sideCars:
+            sentinel:
+              requests:
+                cpu: "10m"
+                memory: "50Mi"
+              limits:
+                cpu: "100m"
+                memory: "100Mi"
+            metrics:
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
+              limits:
+                cpu: "150m"
+                memory: "192Mi"
+            kubectl:
+              requests:
+                cpu: "10m"
+                memory: "50Mi"
+              limits:
+                cpu: "100m"
+                memory: "100Mi"
         minio:
           enabled: false
           billing: true

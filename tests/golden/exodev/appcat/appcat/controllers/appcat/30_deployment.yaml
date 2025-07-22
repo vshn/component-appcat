@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.165.0
+          image: ghcr.io/vshn/appcat:redis_ha
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

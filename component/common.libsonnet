@@ -272,6 +272,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
   ownerGroup: xrd.spec.group,
   ownerVersion: xrd.spec.versions[0].name,
   salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
+  [if std.objectHas(serviceParams, 'sideCars') then 'sideCars']: std.toString(serviceParams.sideCars),
   crossplaneNamespace: params.crossplane.namespace,
   ignoreNamespaceForBilling: params.billing.ignoreNamespace,
   [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
