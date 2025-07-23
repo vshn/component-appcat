@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:redis_ha
+          image: ghcr.io/vshn/appcat:master
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-redis-ha
+  name: function-appcat-debug-master
 spec:
-  package: ghcr.io/vshn/appcat:redis_ha-func
+  package: ghcr.io/vshn/appcat:master-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
