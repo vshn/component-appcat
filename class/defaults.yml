@@ -99,7 +99,7 @@ parameters:
       oc:
         registry: quay.io
         image: appuio/oc
-        tag: v4.13
+        tag: v4.18
       forgejo:
         registry: code.forgejo.org
       redis:
