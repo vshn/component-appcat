@@ -26,6 +26,7 @@ spec:
             - --metrics-bind-address=127.0.0.1:8080
           env: []
           image: ghcr.io/vshn/appcat:v4.165.1
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /healthz

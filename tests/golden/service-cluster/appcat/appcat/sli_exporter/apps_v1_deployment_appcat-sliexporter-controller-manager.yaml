@@ -28,6 +28,7 @@ spec:
             - name: KUBECONFIG
               value: /.kube/config
           image: ghcr.io/vshn/appcat:v4.165.1
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
               path: /healthz
