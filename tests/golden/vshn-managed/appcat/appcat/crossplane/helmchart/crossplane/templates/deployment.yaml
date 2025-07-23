@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: redis/ha
+        function-revision: v4.165.1
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

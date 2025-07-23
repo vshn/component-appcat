@@ -27,8 +27,8 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:redis_ha
-          imagePullPolicy: Always
+          image: ghcr.io/vshn/appcat:v4.165.1
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
               path: /healthz
