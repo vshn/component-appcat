@@ -53,10 +53,10 @@ spec:
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
+          kubectl_image: docker.io/bitnami/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
           nextcloud_image: dockerhub.vshn.net/library/nextcloud
-          oc_image: quay.io/appuio/oc:v4.13
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud

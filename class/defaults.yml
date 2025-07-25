@@ -96,10 +96,6 @@ parameters:
       busybox:
         registry: docker.io
         image: library/busybox
-      oc:
-        registry: quay.io
-        image: appuio/oc
-        tag: v4.13
       forgejo:
         registry: code.forgejo.org
       redis:
@@ -588,7 +584,6 @@ parameters:
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
-            oc_image: ${appcat:images:oc:registry}/${appcat:images:oc:image}:${appcat:images:oc:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_password}"
             ingress_annotations: |
@@ -1045,7 +1040,7 @@ parameters:
               cert-manager.io/cluster-issuer: letsencrypt-production
             nextcloud_image: ${appcat:images:nextcloud:registry}/${appcat:images:nextcloud:image}
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
-            oc_image: ${appcat:images:oc:registry}/${appcat:images:oc:image}:${appcat:images:oc:tag}
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."

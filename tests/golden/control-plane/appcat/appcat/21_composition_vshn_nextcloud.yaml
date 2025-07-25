@@ -55,10 +55,10 @@ spec:
             nginx.ingress.kubernetes.io/enable-cors: "true"
             nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
           isOpenshift: 'false'
+          kubectl_image: docker.io/bitnami/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
           nextcloud_image: docker.io/library/nextcloud
-          oc_image: quay.io/appuio/oc:v4.13
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud

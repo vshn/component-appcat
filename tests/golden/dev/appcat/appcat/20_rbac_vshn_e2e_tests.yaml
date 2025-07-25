@@ -124,6 +124,14 @@ rules:
     verbs:
       - get
       - list
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sgbackups
+    verbs:
+      - create
+      - get
+      - list
 ---
 apiVersion: v1
 data: {}

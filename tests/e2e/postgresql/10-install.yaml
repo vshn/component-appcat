@@ -4,8 +4,6 @@ metadata:
   name: postgresql-e2e-test
 spec:
   parameters:
-    backup:
-      schedule: '*/2 * * * *'
     service:
       vacuumEnabled: true
       repackEnabled: true
