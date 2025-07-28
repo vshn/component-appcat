@@ -53,7 +53,7 @@ spec:
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
-          kubectl_image: docker.io/bitnami/kubectl:1.25.15
+          kubectl_image: docker.io/bitnami/kubectl:1.33.3
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
           nextcloud_image: docker.io/library/nextcloud
