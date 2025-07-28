@@ -16,8 +16,7 @@ spec:
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNMariaDB",
-            ha="false", maintenance="false"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
-            service="VSHNMariaDB", ha="false", maintenance="false"}[1m]) > 0.75
+            ha="false", maintenance="false"}[5m]) > 0.4
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
@@ -32,8 +31,7 @@ spec:
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNMariaDB",
-            ha="true"}[5m]) > 0.2 and rate(appcat_probes_seconds_count{reason!="success",
-            service="VSHNMariaDB", ha="true"}[1m]) > 0.75
+            ha="true"}[5m]) > 0.4
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
