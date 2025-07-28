@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.165.1
+    metadata.appcat.vshn.io/revision: debug-30a237e98e92945098e9da186585199b082523a8
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-165-1
+        name: function-appcat-debug-30a237e98e92945098e9da186585199b082523a8
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.165.1
+          imageTag: 30a237e98e92945098e9da186585199b082523a8
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
