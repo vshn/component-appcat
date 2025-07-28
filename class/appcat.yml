@@ -49,7 +49,7 @@ parameters:
 
       - input_type: external
         input_paths:
-          - /usr/local/bin/python3
+          - ${_python3}
         args:
           - ${_base_directory}/hack/getversionlist.py
           - ${_base_directory}/hack/versionlist
