@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-30a237e98e92945098e9da186585199b082523a8
+  name: function-appcat-debug-cruft-update
 spec:
-  package: ghcr.io/vshn/appcat:30a237e98e92945098e9da186585199b082523a8-func
+  package: ghcr.io/vshn/appcat:cruft_update-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
