@@ -7,7 +7,7 @@ kind: VSHNPostgreSQL
 metadata:
   finalizers:
     - finalizer.apiextensions.crossplane.io
-  name: postgresql-e2e-test
+  name: postgresql-e2e-test-nextcloud
 spec:
   compositeDeletePolicy: Background
   compositionRef:
@@ -36,15 +36,15 @@ spec:
     apiVersion: vshn.appcat.vshn.io/v1
     kind: XVSHNPostgreSQL
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-creds
+    name: postgresql-e2e-test-nextcloud-creds
 
 ---
 apiVersion: v1
 kind: Secret
 type: connection.crossplane.io/v1alpha1
 metadata:
-  name: postgresql-e2e-test-creds
+  name: postgresql-e2e-test-nextcloud-creds
   ownerReferences:
     - apiVersion: vshn.appcat.vshn.io/v1
       kind: VSHNPostgreSQL
-      name: postgresql-e2e-test
+      name: postgresql-e2e-test-nextcloud

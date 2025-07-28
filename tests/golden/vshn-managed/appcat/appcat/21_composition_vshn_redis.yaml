@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-30a237e98e92945098e9da186585199b082523a8
+    metadata.appcat.vshn.io/revision: master-3bb2d475ce2021689cd6971fdca33a3b0369c5bc
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-30a237e98e92945098e9da186585199b082523a8
+        name: function-appcat-master-3bb2d475ce2021689cd6971fdca33a3b0369c5bc
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 30a237e98e92945098e9da186585199b082523a8
+          imageTag: 3bb2d475ce2021689cd6971fdca33a3b0369c5bc
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone

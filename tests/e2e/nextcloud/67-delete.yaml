@@ -1,13 +1,10 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
 delete:
-  - apiVersion: batch/v1
-    kind: Job
-    name: connect-postgresql
   - apiVersion: v1
     kind: Pod
     labels:
       e2e-test: postgresql
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNPostgreSQL
-    name: postgresql-e2e-test
+    name: postgresql-e2e-test-nextcloud
