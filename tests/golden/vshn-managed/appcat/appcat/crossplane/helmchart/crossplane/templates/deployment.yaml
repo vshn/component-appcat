@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 30a237e98e92945098e9da186585199b082523a8
+        function-revision: cruft/update
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-30a237e98e92945098e9da186585199b082523a8
+        name: function-appcat-master-cruft-update
       input:
         apiVersion: v1
         data:
