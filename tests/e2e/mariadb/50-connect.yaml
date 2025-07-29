@@ -13,7 +13,7 @@ spec:
       activeDeadlineSeconds: 180
       containers:
         - name: connect
-          image: dockerhub.vshn.net/bitnami/mariadb:latest
+          image: dockerhub.vshn.net/bitnamilegacy/mariadb:latest
           imagePullPolicy: IfNotPresent
           command:
             - bash

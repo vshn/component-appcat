@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.166.0
+    metadata.appcat.vshn.io/revision: master-bitnamireg
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-166-0
+        name: function-appcat-master-bitnamireg
       input:
         apiVersion: v1
         data:
@@ -49,14 +49,15 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.166.0
+          imageTag: bitnamireg
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
             nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
           isOpenshift: 'false'
-          kubectl_image: docker.io/bitnami/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
+          maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
           mode: standalone
           nextcloud_image: docker.io/library/nextcloud
           ocpDefaultAppsDomain: ''
