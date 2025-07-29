@@ -49,9 +49,9 @@ parameters:
 
       - input_type: external
         input_paths:
-          - /bin/bash
+          - ${_python3}
         args:
-          - ${_base_directory}/hack/getversionlist.sh
+          - ${_base_directory}/hack/getversionlist.py
           - ${_base_directory}/hack/versionlist
           - ${_base_directory}
         output_path: .
@@ -166,3 +166,31 @@ parameters:
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}/controllers/sts-resizer
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/controllers/sts-resizer
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/cloud_billing
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/controllers/appcat
+          enabled: ${appcat:controller:enabled}
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/apiserver
+          enabled: ${appcat:apiserver:enabled}
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/sla_reporter
+          enabled: ${appcat:slos:sla_reporter:enabled}
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/sli_exporter
+          enabled: ${appcat:slos:enabled}
+        - type: jsonnet
+          filter: postprocess/patch_pull_policy.jsonnet
+          path: ${_instance}/crossplane/helmchart/crossplane/templates

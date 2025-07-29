@@ -10,7 +10,7 @@ spec:
         e2e-test: keycloak-e2e
     spec:
       restartPolicy: Never
-      activeDeadlineSeconds: 180
+      activeDeadlineSeconds: 720
       volumes:
         - name: certs
           secret:

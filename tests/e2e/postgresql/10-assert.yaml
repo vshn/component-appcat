@@ -16,7 +16,6 @@ spec:
     backup:
       deletionRetention: 7
       retention: 6
-      schedule: '*/2 * * * *'
     instances: 1
     security:
       deletionProtection: true

@@ -9,6 +9,7 @@ metadata:
   name: provider-sql
 spec:
   package: ghcr.io/vshn/provider-sql:v0.11.0-vshn
+  packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-sql
 ---

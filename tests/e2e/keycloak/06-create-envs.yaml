@@ -1,0 +1,31 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+commands:
+  - script: |
+      cat <<EOF | kubectl apply -f -
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: env-from-secret
+        namespace: $NAMESPACE
+      type: Opaque
+      stringData:
+        KC_MY_ENV_FROM_SECRET: "123"
+      ---
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: env-from-secret-deprecated
+        namespace: $NAMESPACE
+      type: Opaque
+      stringData:
+        KC_MY_ENV_FROM_SECRET_DEPRECATED: "987"
+      ---
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: env-from-cm
+        namespace: $NAMESPACE
+      data:
+        KC_MY_ENV_FROM_CM: "ABC"
+      EOF

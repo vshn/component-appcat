@@ -66,6 +66,11 @@ local e2eClusterRole = kube.ClusterRole('appcat:e2e') + {
       resources: [ 'vshnkeycloakbackups', 'vshnpostgresbackups' ],
       verbs: [ 'get', 'list' ],
     },
+    {
+      apiGroups: [ 'stackgres.io' ],
+      resources: [ 'sgbackups' ],
+      verbs: [ 'create', 'get', 'list' ],
+    },
   ],
 };
 

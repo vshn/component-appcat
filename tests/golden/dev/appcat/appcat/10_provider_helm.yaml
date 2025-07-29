@@ -9,6 +9,7 @@ metadata:
   name: provider-helm
 spec:
   package: ghcr.io/vshn/provider-helm:v0.21.0-vshn
+  packagePullPolicy: Always
   runtimeConfigRef:
     name: provider-helm
 ---
@@ -92,6 +93,13 @@ rules:
       - update
       - delete
   - apiGroups:
+      - ''
+    resources:
+      - pods
+    verbs:
+      - list
+      - patch
+  - apiGroups:
       - apps
     resources:
       - statefulsets
@@ -155,6 +163,19 @@ rules:
       - policy
     resources:
       - poddisruptionbudgets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - rolebindings
     verbs:
       - get
       - list

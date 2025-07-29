@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.165.1
+    metadata.appcat.vshn.io/revision: master-v4.166.0
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-165-1
+        name: function-appcat-master-v4-166-0
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.165.1
+          imageTag: v4.166.0
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           mode: standalone
@@ -76,6 +76,11 @@ spec:
           salesOrder: ''
           serviceID: vshn-redis
           serviceName: redis
+          sideCars: '{"kubectl": {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests":
+            {"cpu": "10m", "memory": "50Mi"}}, "metrics": {"limits": {"cpu": "150m",
+            "memory": "192Mi"}, "requests": {"cpu": "100m", "memory": "128Mi"}}, "sentinel":
+            {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests": {"cpu": "10m",
+            "memory": "50Mi"}}}'
           sliNamespace: syn-appcat-slos
         kind: ConfigMap
         metadata:

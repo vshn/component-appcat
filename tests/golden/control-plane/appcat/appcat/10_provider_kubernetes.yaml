@@ -9,6 +9,7 @@ metadata:
   name: provider-kubernetes
 spec:
   package: ghcr.io/vshn/provider-kubernetes:v0.18.0-vshn
+  packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-kubernetes
 ---

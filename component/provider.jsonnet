@@ -209,6 +209,11 @@ local providerRBAC = {
         verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
       },
       {
+        apiGroups: [ '' ],
+        resources: [ 'pods' ],
+        verbs: [ 'list', 'patch' ],
+      },
+      {
         apiGroups: [ 'apps' ],
         resources: [ 'statefulsets', 'deployments' ],
         verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
@@ -236,6 +241,11 @@ local providerRBAC = {
       {
         apiGroups: [ 'policy' ],
         resources: [ 'poddisruptionbudgets' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'rbac.authorization.k8s.io' ],
+        resources: [ 'roles', 'rolebindings' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
     ],
@@ -288,7 +298,9 @@ local provider(name, provider) =
                                        provider.additionalRuntimeConfig else {});
 
   local providerManifest = crossplane.Provider('provider-' + name) {
-    spec+: escapePackage(provider.spec) + runtimeConfigRef(sa.metadata.name),
+    spec+: escapePackage(provider.spec) + runtimeConfigRef(sa.metadata.name) + {
+      packagePullPolicy: params.pullPolicy,
+    },
   };
 
   local defaultConfig = crossplane.ProviderConfig(name) {

@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-e2e-test
+  name: postgresql-e2e-test-nextcloud
 spec:
   parameters:
     security:
@@ -19,4 +19,4 @@ spec:
     size:
       plan: standard-2
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-creds
+    name: postgresql-e2e-test-nextcloud-creds

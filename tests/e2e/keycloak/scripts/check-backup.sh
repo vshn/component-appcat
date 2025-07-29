@@ -5,7 +5,7 @@ set -e
 for ((i = 0 ; i < 10 ; i++ ));
 do
     echo "Waiting for backup to be created"
-    backup=$(kubectl -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io -o json | jq -r '.items[] | .metadata.name')
+    backup=$(kubectl -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io -o json | jq -r '.items[] | .metadata.name' | tail -n 1)
     if [ "$backup" != "" ]; then
         break
     fi

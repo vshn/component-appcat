@@ -12,3 +12,7 @@ spec:
   parameters:
     security:
       deletionProtection: false
+status:
+  conditions:
+    - status: "True"
+    - status: "True"
