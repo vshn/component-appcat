@@ -39,7 +39,7 @@ parameters:
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio/provider
-        tag: renovate/docker.io-library-alpine-3.x
+        tag: v0.4.5
       provider-sql:
         registry: xpkg.upbound.io
         repository: crossplane-contrib/provider-sql

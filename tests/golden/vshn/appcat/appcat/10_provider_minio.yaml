@@ -8,7 +8,7 @@ metadata:
     name: provider-minio
   name: provider-minio
 spec:
-  package: ghcr.io/vshn/provider-minio/provider:renovate_docker.io-library-alpine-3.x
+  package: ghcr.io/vshn/provider-minio/provider:v0.4.5
   runtimeConfigRef:
     name: provider-minio
 ---
