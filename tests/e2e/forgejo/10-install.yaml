@@ -4,6 +4,8 @@ metadata:
   name: forgejo-e2e
 spec:
   parameters:
+    security:
+      deletionProtection: false
     service:
       adminEmail: "example@vshn.vshn"
       fqdn:

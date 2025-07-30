@@ -17,7 +17,7 @@ spec:
       retention:
         keepDaily: 6
     security:
-      deletionProtection: true
+      deletionProtection: false
     service:
       postgreSQLParameters:
         instances: 1

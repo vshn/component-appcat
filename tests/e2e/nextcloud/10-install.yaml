@@ -4,6 +4,8 @@ metadata:
   name: nextcloud-e2e
 spec:
   parameters:
+    security:
+      deletionProtection: false
     service:
       fqdn:
         - nextcloud-e2e.example.com

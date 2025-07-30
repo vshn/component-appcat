@@ -8,6 +8,8 @@ metadata:
   name: connect-keycloak-e2e
 status:
   conditions:
+    - type: SuccessCriteriaMet
+      status: 'True'
     - type: Complete
       status: 'True'
   succeeded: 1

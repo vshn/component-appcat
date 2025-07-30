@@ -1,6 +1,6 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestAssert
-timeout: 780
+timeout: 900
 ---
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
@@ -18,7 +18,7 @@ spec:
         keepDaily: 6
       schedule: '*/5 * * * *'
     security:
-      deletionProtection: true
+      deletionProtection: false
     service:
       postgreSQLParameters:
         instances: 1

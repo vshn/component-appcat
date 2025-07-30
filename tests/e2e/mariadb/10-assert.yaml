@@ -15,7 +15,7 @@ spec:
   parameters:
     backup: {}
     security:
-      deletionProtection: true
+      deletionProtection: false
     service:
       serviceLevel: besteffort
       version: "11.5"
