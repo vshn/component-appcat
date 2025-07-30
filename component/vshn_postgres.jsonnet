@@ -89,16 +89,22 @@ local stackgresOperator = [
     'redhat-marketplace',
     installPlanApproval=params.stackgres.operator.installPlanApproval,
   )
-  +
-  if std.length(params.stackgres.operator.resources) > 0 then
-    {
-      spec+: {
-        config+: {
-          resources: params.stackgres.operator.resources,
-        },
+  + {
+    spec+: {
+      config+: {
+        [if std.length(params.stackgres.operator.resources) > 0 then 'resources']: params.stackgres.operator.resources,
+        env: [
+          { name: 'APP_OPTS', value: '-Dquarkus.vertx.max-worker-execute-time=5000' },
+          { name: 'JAVA_OPTS', value: '-Dquarkus.vertx.max-worker-execute-time=5000' },
+          { name: 'RECONCILIATION_PERIOD', value: '3600' },
+          { name: 'RECONCILIATION_PRIORITY_TIMEOUT', value: '50' },
+          { name: 'RECONCILIATION_CACHE_EXPIRATION', value: '30' },
+          { name: 'RECONCILIATION_CACHE_SIZE', value: '5000' },
+          { name: 'PATRONI_CTL_TIMEOUT', value: '10' },
+        ],
       },
-    }
-  else {},
+    },
+  },
 ];
 
 // Filter out disabled plans
