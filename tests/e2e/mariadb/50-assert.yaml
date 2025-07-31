@@ -36,6 +36,8 @@ metadata:
   name: connect-mariadb-scaled
 status:
   conditions:
+    - type: SuccessCriteriaMet
+      status: 'True'
     - type: Complete
       status: 'True'
   succeeded: 1

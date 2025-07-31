@@ -5,6 +5,8 @@ metadata:
   name: keycloak-e2e
 spec:
   parameters:
+    security:
+      deletionProtection: false
     service:
       fqdn: keycloak-e2e.example.com
       customMounts:

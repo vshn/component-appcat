@@ -18,7 +18,7 @@ spec:
       retention: 6
     instances: 1
     security:
-      deletionProtection: true
+      deletionProtection: false
     service:
       vacuumEnabled: true
       repackEnabled: true
