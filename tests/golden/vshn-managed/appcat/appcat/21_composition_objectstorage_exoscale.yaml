@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-166-1
+        name: function-appcat-master-fix-redis
       input:
         apiVersion: v1
         data:
