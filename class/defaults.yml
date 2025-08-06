@@ -41,7 +41,7 @@ parameters:
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale
-        tag: v0.5.7
+        tag: v0.5.9
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio
