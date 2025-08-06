@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.166.0
+        tag: fix-release-after-merge
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

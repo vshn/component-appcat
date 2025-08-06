@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.166.0
+          image: ghcr.io/vshn/appcat:fix-release-after-merge
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
