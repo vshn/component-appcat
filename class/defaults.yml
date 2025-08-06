@@ -61,7 +61,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.166.0
+        tag: v4.166.2
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -80,7 +80,7 @@ parameters:
         tag: v3.6.0
       kubectl:
         registry: docker.io
-        image: bitnami/kubectl
+        image: bitnamilegacy/kubectl
         tag: '1.25.15'
       proxysql:
         registry: docker.io
@@ -93,18 +93,27 @@ parameters:
       nextcloud:
         registry: docker.io
         image: library/nextcloud
+        maintenanceURL: "https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100"
+      minio:
+        maintenanceURL: "https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100"
       busybox:
         registry: docker.io
         image: library/busybox
       forgejo:
         registry: code.forgejo.org
+        maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list"
       redis:
         registry: docker.io
+        repositoryPrefix: bitnamilegacy
+        maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100"
       mariadb:
         registry: docker.io
+        repositoryPrefix: bitnamilegacy
+        maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100"
       keycloak:
         registry: docker-registry.inventage.com:10121
         image: keycloak-competence-center/keycloak-managed
+        maintenanceURL: "https://docker-registry.inventage.com:10121/v2/keycloak-competence-center/keycloak-managed/tags/list"
     =_crd_version: ${appcat:images:appcat:tag}
 
     pullPolicy: IfNotPresent
@@ -600,6 +609,7 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:forgejo:version}
           imageRegistry: "${appcat:images:forgejo:registry}"
+          maintenanceURL: "${appcat:images:forgejo:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: small
@@ -633,6 +643,7 @@ parameters:
           enabled: true
           billing: true
           additionalInputs:
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             # Depending on the cluster, this needs to be set
             loadbalancerAnnotations: ""
           grpcEndpoint: ${appcat:grpcEndpoint}
@@ -771,6 +782,8 @@ parameters:
         redis:
           enabled: true
           billing: true
+          additionalInputs:
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
           serviceName: VSHNRedis
           compFunctionsOnly: true
           connectionSecretKeys:
@@ -799,6 +812,8 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:redis:version}
           imageRegistry: ${appcat:images:redis:registry}
+          imageRepositoryPrefix: ${appcat:images:redis:repositoryPrefix}
+          maintenanceURL: "${appcat:images:redis:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -874,6 +889,7 @@ parameters:
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
           imageRegistry: ""
+          maintenanceURL: "${appcat:images:minio:maintenanceURL}"
           sla: 99.25
           plans:
             standard-1:
@@ -922,6 +938,8 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:mariadb:version}
           imageRegistry: ${appcat:images:mariadb:registry}
+          imageRepositoryPrefix: ${appcat:images:mariadb:repositoryPrefix}
+          maintenanceURL: "${appcat:images:mariadb:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -974,6 +992,7 @@ parameters:
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
@@ -990,6 +1009,7 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:keycloak:version}
           imageRegistry: ${appcat:images:keycloak:registry}/${appcat:images:keycloak:image}
+          maintenanceURL: "${appcat:images:keycloak:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
@@ -1053,6 +1073,7 @@ parameters:
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           helmChartVersion: ${appcat:charts:nextcloud:version}
           imageRegistry: ${appcat:images:nextcloud:registry}
+          maintenanceURL: "${appcat:images:nextcloud:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2

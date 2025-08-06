@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.166.0
+    metadata.appcat.vshn.io/revision: debug-v4.166.2
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-166-0
+        name: function-appcat-debug-v4-166-2
       input:
         apiVersion: v1
         data:
@@ -49,12 +49,13 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.166.0
+          imageTag: v4.166.2
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
-          kubectl_image: docker.io/bitnami/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
+          maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
           mode: standalone
           nextcloud_image: dockerhub.vshn.net/library/nextcloud
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud

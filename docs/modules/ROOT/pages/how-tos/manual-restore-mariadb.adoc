@@ -55,7 +55,7 @@ spec:
               restic restore latest --target /data/data
       containers:
       - name: mariabackup
-        image: docker.io/bitnami/mariadb-galera
+        image: docker.io/bitnamilegacy/mariadb-galera
         securityContext:
           capabilities:
             drop:
