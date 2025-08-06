@@ -8,6 +8,8 @@ metadata:
   name: ingress-forgejo-e2e
 status:
   conditions:
+    - type: SuccessCriteriaMet
+      status: 'True'
     - type: Complete
       status: 'True'
   succeeded: 1
@@ -19,6 +21,8 @@ metadata:
   name: config-forgejo-e2e
 status:
   conditions:
+    - type: SuccessCriteriaMet
+      status: 'True'
     - type: Complete
       status: 'True'
   succeeded: 1

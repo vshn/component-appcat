@@ -4,6 +4,8 @@ metadata:
   name: mariadb-e2e
 spec:
   parameters:
+    security:
+      deletionProtection: false
     service:
     size:
       plan: standard-2

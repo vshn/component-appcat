@@ -4,6 +4,8 @@ metadata:
   name: postgresql-e2e-test
 spec:
   parameters:
+    security:
+      deletionProtection: false
     service:
       vacuumEnabled: true
       repackEnabled: true

@@ -4,6 +4,8 @@ metadata:
   name: redis-e2e-test
 spec:
   parameters:
+    security:
+      deletionProtection: false
     size:
       plan: standard-2
   writeConnectionSecretToRef:
