@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-bitnamireg
+  name: function-appcat-debug-v4-166-1
 spec:
-  package: ghcr.io/vshn/appcat:bitnamireg-func
+  package: ghcr.io/vshn/appcat:v4.166.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
