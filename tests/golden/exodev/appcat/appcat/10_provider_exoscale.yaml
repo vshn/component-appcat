@@ -8,7 +8,7 @@ metadata:
     name: provider-exoscale
   name: provider-exoscale
 spec:
-  package: ghcr.io/vshn/provider-exoscale:v1.0.0
+  package: ghcr.io/vshn/provider-exoscale:v1.0.1
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-exoscale
