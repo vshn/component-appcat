@@ -30,7 +30,7 @@ spec:
         data:
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-          chartVersion: 14.2.9
+          chartVersion: 15.0.3
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1

@@ -31,7 +31,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 12.5.2
+          chartVersion: 13.0.1
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: small
