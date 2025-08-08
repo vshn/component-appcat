@@ -277,6 +277,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
   ignoreNamespaceForBilling: params.billing.ignoreNamespace,
   [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
   [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
+  [if std.objectHas(serviceParams, 'metricsTag') then 'metricsTag']: serviceParams.metricsTag,
   [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
   releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
 } + (if std.objectHas(params.charts, name) then {
