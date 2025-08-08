@@ -109,7 +109,6 @@ parameters:
       mariadb:
         registry: docker.io
         repositoryPrefix: bitnamilegacy
-        metricsTag: 0.17.2-debian-12-r14
         maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100"
       keycloak:
         registry: docker-registry.inventage.com:10121
@@ -940,7 +939,6 @@ parameters:
           helmChartVersion: ${appcat:charts:mariadb:version}
           imageRegistry: ${appcat:images:mariadb:registry}
           imageRepositoryPrefix: ${appcat:images:mariadb:repositoryPrefix}
-          metricsTag: ${appcat:images:mariadb:metricsTag}
           maintenanceURL: "${appcat:images:mariadb:maintenanceURL}"
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
