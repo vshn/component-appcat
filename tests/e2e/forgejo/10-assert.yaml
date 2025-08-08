@@ -19,7 +19,7 @@ spec:
       - forgejo-e2e.apps.lab-cloudscale-rma-0.appuio.cloud
       - sub1.forgejo-e2e.apps.lab-cloudscale-rma-0.appuio.cloud
       serviceLevel: besteffort
-      majorVersion: 11.0.0
+      majorVersion: 12.0.0
     size:
       plan: small
   resourceRef:
