@@ -6,10 +6,10 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.19.1
+        version: 1.19.3
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.2.5
+        version: 21.2.14
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
         version: 14.2.9
@@ -24,7 +24,7 @@ parameters:
         version: 6.6.10
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 12.5.2
+        version: 12.5.4
     images:
       provider-kubernetes:
         registry: ghcr.io
