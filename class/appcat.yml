@@ -14,6 +14,11 @@ parameters:
         chart_name: crossplane
         version: ${appcat:charts:crossplane:version}
         output_path: ${_base_directory}/dependencies/crossplane/helmchart/crossplane-${appcat:charts:crossplane:version}
+      - type: helm
+        source: ${appcat:charts:cnpg:source}
+        chart_name: cloudnative-pg
+        version: ${appcat:charts:cnpg:version}
+        output_path: ${_base_directory}/dependencies/cnpg/helmchart/cnpg-${appcat:charts:cnpg:version}
     compile:
       - input_paths:
           - ${_base_directory}/component/app.jsonnet
@@ -129,6 +134,21 @@ parameters:
           - ${_base_directory}/component/crossplane.jsonnet
         input_type: jsonnet
         output_path: appcat/crossplane/
+
+      - input_type: helm
+        input_paths:
+          - ${_base_directory}/dependencies/cnpg/helmchart/cnpg-${appcat:charts:cnpg:version}
+        helm_values: ${appcat:cnpg:helmValues}
+        helm_params:
+          name: ${_instance}
+          namespace: ${appcat:cnpg:namespace}
+        output_path: appcat/cnpg/helmchart
+
+      - input_paths:
+          - ${_base_directory}/component/cnpg.jsonnet
+        input_type: jsonnet
+        output_path: appcat/cnpg/
+
   commodore:
     postprocess:
       filters:
@@ -138,6 +158,9 @@ parameters:
         - type: jsonnet
           filter: postprocess/patch_operator_deployment.jsonnet
           path: ${_instance}/crossplane/helmchart/crossplane/templates
+        - type: jsonnet
+          filter: postprocess/patch_operator_deployment.jsonnet
+          path: ${_instance}/crossplane/helmchart/cnpg/templates
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}
