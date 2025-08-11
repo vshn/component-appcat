@@ -25,6 +25,9 @@ parameters:
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 13.0.1
+      cnpg:
+        source: https://cloudnative-pg.io/charts/
+        version: 0.25.0
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -196,6 +199,22 @@ parameters:
           enabled: true
         rbacManager:
           managementPolicy: Basic
+
+    cnpg:
+      namespace: cnpg-system
+      namespaceLabels: {}
+      namespaceAnnotations:
+        openshift.io/node-selector: node-role.kubernetes.io/infra=
+      monitoring:
+        enabled: false
+        prometheus_rule_labels:
+          prometheus: platform
+      helmValues:
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
 
     billing:
       namespace: ${appcat:namespace}
