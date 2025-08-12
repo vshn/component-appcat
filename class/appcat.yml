@@ -159,8 +159,11 @@ parameters:
           filter: postprocess/patch_operator_deployment.jsonnet
           path: ${_instance}/crossplane/helmchart/crossplane/templates
         - type: jsonnet
+          filter: postprocess/add_argo_annotations.jsonnet
+          path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
+        - type: jsonnet
           filter: postprocess/patch_operator_deployment.jsonnet
-          path: ${_instance}/crossplane/helmchart/cnpg/templates
+          path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}
