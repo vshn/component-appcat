@@ -76,7 +76,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -163,7 +163,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -249,7 +249,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -335,7 +335,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -422,7 +422,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -509,7 +509,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -595,7 +595,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -681,7 +681,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -768,7 +768,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -855,7 +855,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -941,7 +941,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1027,7 +1027,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1114,7 +1114,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1201,7 +1201,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1287,7 +1287,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1373,7 +1373,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1460,7 +1460,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1547,7 +1547,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1633,7 +1633,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1719,7 +1719,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1806,7 +1806,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1893,7 +1893,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -1979,7 +1979,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -2065,7 +2065,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -2152,7 +2152,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -2239,7 +2239,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -2325,7 +2325,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
@@ -2411,7 +2411,7 @@ spec:
                     % labels
                 - name: AR_UNIT_ID
                   value: uom_uom_45_1e112771
-              image: ghcr.io/appuio/appuio-reporting:v0.2.1
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
               name: backfill
               resources: {}
           initContainers: []
