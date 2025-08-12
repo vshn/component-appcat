@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.166.2
+    metadata.appcat.vshn.io/revision: master-f149d6a180c679c00b80688487722334215ee887
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,14 +24,14 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-166-2
+        name: function-appcat-master-f149d6a180c679c00b80688487722334215ee887
       input:
         apiVersion: v1
         data:
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 6.6.10
+          chartVersion: 7.0.0
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
@@ -49,7 +49,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.166.2
+          imageTag: f149d6a180c679c00b80688487722334215ee887
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
