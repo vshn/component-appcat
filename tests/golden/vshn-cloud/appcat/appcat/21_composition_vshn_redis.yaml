@@ -49,7 +49,7 @@ spec:
           imageRepositoryPrefix: bitnamilegacy
           imageTag: af9c9f1d10223b58a8479bc30fe57292ee66f038
           isOpenshift: 'true'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.33.3
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
           mode: standalone
