@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-db-role-ref
+        name: function-appcat-master-af9c9f1d10223b58a8479bc30fe57292ee66f038
       input:
         apiVersion: v1
         data:
