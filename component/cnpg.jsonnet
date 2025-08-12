@@ -29,5 +29,5 @@ local labels = {
       labels+: params.namespaceLabels,
       annotations+: params.namespaceAnnotations,
     },
-  }
+  },
 }
