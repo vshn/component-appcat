@@ -20,7 +20,7 @@ spec:
       deletionProtection: false
     service:
       serviceLevel: besteffort
-      version: "11.5"
+      version: "11.8"
     size:
       plan: standard-2
     tls:
