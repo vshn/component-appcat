@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.167.0
+          image: ghcr.io/vshn/appcat:fix_pg-encryption
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
