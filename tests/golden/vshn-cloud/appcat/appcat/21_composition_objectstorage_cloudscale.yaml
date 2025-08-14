@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-167-0
+        name: function-appcat-master-fix-pg-encryption
       input:
         apiVersion: v1
         data:
