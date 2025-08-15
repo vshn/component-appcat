@@ -20,11 +20,36 @@ spec:
           args:
             - -c
             - |
-              until redis-cli -u rediss://$REDIS_USERNAME:$REDIS_PASSWORD@$REDIS_HOST:$REDIS_PORT --tls --cert /etc/redis-tls/tls.crt --key /etc/redis-tls/tls.key --cacert /etc/redis-tls/ca.crt PING
-              do
+              set -Eeuo pipefail
+
+              REDIS_URI="rediss://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}"
+              CLI=(redis-cli -u "$REDIS_URI" --tls --cert /etc/redis-tls/tls.crt --key /etc/redis-tls/tls.key --cacert /etc/redis-tls/ca.crt)
+
+              echo "Waiting for Redis to be ready..."
+              until "${CLI[@]}" PING >/dev/null 2>&1; do
                 sleep 1
                 echo "not ready"
               done
+              echo "PING successful"
+
+              KEY="e2e-$(date +%s%N)"
+              VALUE="$(hostname)-$(date +%s)"
+
+              echo "SET $KEY"
+              SET_OUT="$("${CLI[@]}" SET "$KEY" "$VALUE" 2>/dev/null)"
+              if [ "$SET_OUT" != "OK" ]; then
+                echo "ERROR: SET failed: $SET_OUT"
+                exit 1
+              fi
+
+              echo "GET $KEY"
+              GET_OUT="$("${CLI[@]}" GET "$KEY" 2>/dev/null)"
+              if [ "$GET_OUT" != "$VALUE" ]; then
+                echo "ERROR: GET mismatch. expected='$VALUE' got='$GET_OUT'"
+                exit 1
+              fi
+
+              echo "SET/GET round-trip successful"
           envFrom:
             - secretRef:
                 name: redis-e2e-test-creds
