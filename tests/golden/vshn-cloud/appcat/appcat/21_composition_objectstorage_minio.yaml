@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-3db4aa79d3e2493df40cb27b76118289b9c4e514
+        name: function-appcat-master-fix-pg-api-types
       input:
         apiVersion: v1
         data:
