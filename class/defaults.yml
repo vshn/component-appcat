@@ -27,7 +27,7 @@ parameters:
         version: 13.0.1
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.25.0
+        version: 0.26.0
     images:
       provider-kubernetes:
         registry: ghcr.io
