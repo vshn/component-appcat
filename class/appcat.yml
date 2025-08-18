@@ -165,9 +165,6 @@ parameters:
           filter: postprocess/patch_operator_deployment.jsonnet
           path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
         - type: jsonnet
-          filter: postprocess/cnpg.jsonnet
-          path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
-        - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}
         - type: jsonnet
