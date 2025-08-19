@@ -67,7 +67,7 @@ spec:
             "pg_stat_database_deadlocks", "pg_stat_database_temp_bytes", "pg_stat_database_xact_commit",
             "pg_stat_database_xact_rollback", "pg_static", "pg_up", "pgbouncer_show_stats_total_xact_count",
             "pgbouncer_show_stats_totals_bytes_received", "pgbouncer_show_stats_totals_bytes_sent"]'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: registry.k8s.io/kubectl:v1.33.4
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance

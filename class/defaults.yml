@@ -79,9 +79,9 @@ parameters:
         repository: vshn/billing-collector-cloudservices
         tag: v3.6.0
       kubectl:
-        registry: docker.io
-        image: bitnamilegacy/kubectl
-        tag: '1.25.15'
+        registry: registry.k8s.io
+        image: kubectl
+        tag: 'v1.33.4'
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
