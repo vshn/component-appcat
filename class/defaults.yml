@@ -83,7 +83,7 @@ parameters:
       collector:
         registry: ghcr.io
         repository: vshn/billing-collector-cloudservices
-        tag: v3.6.0
+        tag: v3.10.0
       kubectl:
         registry: docker.io
         image: bitnamilegacy/kubectl
