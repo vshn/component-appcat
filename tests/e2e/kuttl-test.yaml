@@ -3,5 +3,5 @@ kind: TestSuite
 testDirs:
   - ./test/e2e/
 namespace: appcat-e2e
-parallel: 2
+parallel: 1
 timeout: 60
