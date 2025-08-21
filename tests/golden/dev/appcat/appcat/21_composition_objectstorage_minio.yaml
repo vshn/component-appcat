@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-6ec063349ae347d300385c5426d3873c26a3b344
+        name: function-appcat-debug-fix-pg-deprovisioning
       input:
         apiVersion: v1
         data:
