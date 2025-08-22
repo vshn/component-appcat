@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:fix_pg-deprovisioning
+          image: ghcr.io/vshn/appcat:3db4aa79d3e2493df40cb27b76118289b9c4e514
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
