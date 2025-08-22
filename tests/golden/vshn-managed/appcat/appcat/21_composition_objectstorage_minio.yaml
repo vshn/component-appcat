@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-f2a231a1d44d35d1ff9ba5c5b1657f6f151fc7da
+        name: function-appcat-master-spks-redis-update
       input:
         apiVersion: v1
         data:
