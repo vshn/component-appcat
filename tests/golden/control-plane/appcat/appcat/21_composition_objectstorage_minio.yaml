@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-323cc834fc357967a986d3dd5a11596083ccaf75
+        name: function-appcat-master-fix-pg-usermgmt-sequencing
       input:
         apiVersion: v1
         data:

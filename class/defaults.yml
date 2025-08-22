@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 323cc834fc357967a986d3dd5a11596083ccaf75
+        tag: fix/pg-usermgmt-sequencing
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
