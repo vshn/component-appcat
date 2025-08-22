@@ -1,0 +1,50 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 600
+---
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  finalizers:
+    - finalizer.apiextensions.crossplane.io
+  name: postgresql-e2e-test-nextcloud
+spec:
+  compositeDeletePolicy: Background
+  compositionRef:
+    name: vshnpostgres.vshn.appcat.vshn.io
+  parameters:
+    backup:
+      deletionRetention: 7
+      retention: 6
+      schedule: '*/2 * * * *'
+    instances: 1
+    security:
+      deletionProtection: false
+    service:
+      access:
+        - user: nextcloud
+          writeConnectionSecretToRef:
+            name: nextcloud
+            namespace: appcat-e2e
+      vacuumEnabled: true
+      repackEnabled: true
+      majorVersion: "15"
+      serviceLevel: besteffort
+    size:
+      plan: standard-2
+  resourceRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNPostgreSQL
+  writeConnectionSecretToRef:
+    name: postgresql-e2e-test-nextcloud-creds
+
+---
+apiVersion: v1
+kind: Secret
+type: connection.crossplane.io/v1alpha1
+metadata:
+  name: postgresql-e2e-test-nextcloud-creds
+  ownerReferences:
+    - apiVersion: vshn.appcat.vshn.io/v1
+      kind: VSHNPostgreSQL
+      name: postgresql-e2e-test-nextcloud
