@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+          image: ghcr.io/vshn/appcat:fix_missing_passwords_mariadb
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

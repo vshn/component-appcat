@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+    metadata.appcat.vshn.io/revision: debug-fix_missing_passwords_mariadb
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+        name: function-appcat-debug-fix-missing-passwords-mariadb
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+          imageTag: fix_missing_passwords_mariadb
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100

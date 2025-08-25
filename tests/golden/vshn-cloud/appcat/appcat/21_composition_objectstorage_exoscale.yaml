@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+        name: function-appcat-master-fix-missing-passwords-mariadb
       input:
         apiVersion: v1
         data:
