@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-3db4aa79d3e2493df40cb27b76118289b9c4e514
+    metadata.appcat.vshn.io/revision: debug-323cc834fc357967a986d3dd5a11596083ccaf75
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-3db4aa79d3e2493df40cb27b76118289b9c4e514
+        name: function-appcat-debug-323cc834fc357967a986d3dd5a11596083ccaf75
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: 3db4aa79d3e2493df40cb27b76118289b9c4e514
+          imageTag: 323cc834fc357967a986d3dd5a11596083ccaf75
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
