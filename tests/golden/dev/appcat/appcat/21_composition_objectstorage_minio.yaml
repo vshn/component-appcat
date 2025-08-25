@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-pg-usermgmt-sequencing
+        name: function-appcat-debug-d4c9e5f0cd01793c110fe4d383c8f67bfdb4269e
       input:
         apiVersion: v1
         data:
