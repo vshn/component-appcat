@@ -6,13 +6,13 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.19.1
+        version: 1.19.3
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.2.13
+        version: 21.2.14
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 15.0.3
+        version: 15.0.6
       minio:
         source: https://charts.min.io
         version: 5.4.0
@@ -21,7 +21,7 @@ parameters:
         version: 7.0.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 7.0.0
+        version: 7.0.2
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 13.0.1
