@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-99341b1c66693d516dd7fb5650258dab41cfa191
+  name: function-appcat-debug-fix-nextcloud-startup-times
 spec:
-  package: ghcr.io/vshn/appcat:99341b1c66693d516dd7fb5650258dab41cfa191-func
+  package: ghcr.io/vshn/appcat:fix_nextcloud-startup-times-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

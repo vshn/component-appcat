@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-99341b1c66693d516dd7fb5650258dab41cfa191
+    metadata.appcat.vshn.io/revision: debug-fix_nextcloud-startup-times
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

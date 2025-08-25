@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-99341b1c66693d516dd7fb5650258dab41cfa191
+        name: function-appcat-master-fix-nextcloud-startup-times
       input:
         apiVersion: v1
         data:
