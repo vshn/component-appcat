@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fix/missing_passwords_mariadb
+        tag: ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

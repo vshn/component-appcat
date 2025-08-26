@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_missing_passwords_mariadb
+    metadata.appcat.vshn.io/revision: debug-ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-missing-passwords-mariadb
+        name: function-appcat-debug-ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: fix_missing_passwords_mariadb
+          imageTag: ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",

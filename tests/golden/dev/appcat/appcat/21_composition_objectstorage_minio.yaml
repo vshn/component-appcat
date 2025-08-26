@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-missing-passwords-mariadb
+        name: function-appcat-debug-ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
       input:
         apiVersion: v1
         data:

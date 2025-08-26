@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_missing_passwords_mariadb
+          image: ghcr.io/vshn/appcat:ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

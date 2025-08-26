@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:fix_missing_passwords_mariadb
+              image: ghcr.io/vshn/appcat:ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
               name: sla-reporter
               resources:
                 limits:
