@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:fix_copy
+          image: ghcr.io/vshn/appcat:99341b1c66693d516dd7fb5650258dab41cfa191
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
