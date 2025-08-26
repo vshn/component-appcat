@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/nextcloud-startup-times
+        function-revision: 7a717423f36798f733521531e764740f8fee3dd8
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
