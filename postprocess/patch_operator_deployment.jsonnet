@@ -18,12 +18,14 @@ local fixup(obj) =
               }
               for c in obj.spec.template.spec.containers
             ],
-            initContainers: [
+            initContainers: if std.objectHas(obj.spec.template.spec, 'initContainers')
+            then [
               c {
                 securityContext+: run_as_user,
               }
               for c in obj.spec.template.spec.initContainers
-            ],
+            ]
+            else null,
           },
         },
       },
