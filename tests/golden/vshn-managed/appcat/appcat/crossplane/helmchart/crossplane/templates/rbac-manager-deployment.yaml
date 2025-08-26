@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 1a9787d331e4cc3c7b055a70ff2b35d43ac54867
+        function-revision: ca3c91b8193e46c55c4bdac8a2a26a49dc369d8f
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
