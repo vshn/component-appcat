@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-expand-maintenance-window
+    metadata.appcat.vshn.io/revision: master-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-expand-maintenance-window
+        name: function-appcat-master-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
       input:
         apiVersion: v1
         data:
@@ -49,7 +49,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/library/nextcloud
-          imageTag: expand-maintenance-window
+          imageTag: 1a9787d331e4cc3c7b055a70ff2b35d43ac54867
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-expand-maintenance-window
+  name: function-appcat-debug-1a9787d331e4cc3c7b055a70ff2b35d43ac54867
 spec:
-  package: ghcr.io/vshn/appcat:expand-maintenance-window-func
+  package: ghcr.io/vshn/appcat:1a9787d331e4cc3c7b055a70ff2b35d43ac54867-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
