@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-168-1
+        name: function-appcat-master-revert-pg-sequencing
       input:
         apiVersion: v1
         data:

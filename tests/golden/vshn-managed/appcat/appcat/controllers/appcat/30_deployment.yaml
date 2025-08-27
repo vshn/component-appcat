@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:v4.168.1
+          image: ghcr.io/vshn/appcat:revert_pg-sequencing
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
