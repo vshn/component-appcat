@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:revert_pg-sequencing
+              image: ghcr.io/vshn/appcat:v4.168.2
               name: sla-reporter
               resources:
                 limits:
