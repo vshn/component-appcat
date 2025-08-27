@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-more-secret-races
+        name: function-appcat-master-v4-168-1
       input:
         apiVersion: v1
         data:
