@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-v4-168-2
+  name: function-appcat-master-fix-nextcloud-backup
 spec:
-  package: ghcr.io/vshn/appcat:v4.168.2-func
+  package: ghcr.io/vshn/appcat:fix_nextcloud-backup-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
