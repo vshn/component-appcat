@@ -1,0 +1,15 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNMariaDB
+metadata:
+  name: mariadb-e2e
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    service:
+      access:
+        - user: e2euser
+    size:
+      plan: standard-2
+  writeConnectionSecretToRef:
+    name: mariadb-creds
