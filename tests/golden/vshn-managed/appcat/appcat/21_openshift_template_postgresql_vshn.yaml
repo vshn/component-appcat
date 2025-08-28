@@ -10,7 +10,7 @@ metadata:
       date back to 1986 as part of the POSTGRES project at the University of California
       at Berkeley and has more than 30 years of active development on the core platform.
     iconClass: icon-postgresql
-    openshift.io/display-name: PostgreSQL
+    openshift.io/display-name: VSHNPostgreSQL
     openshift.io/documentation-url: https://vs.hn/vshn-postgresql
     openshift.io/provider-display-name: VSHN
     openshift.io/support-url: https://www.vshn.ch/en/contact/
