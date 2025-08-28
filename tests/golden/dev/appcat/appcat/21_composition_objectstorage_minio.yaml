@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-c042c42b2fbede4e099ffcd6a4e3f945f7b214d2
+        name: function-appcat-debug-disable-backup
       input:
         apiVersion: v1
         data:

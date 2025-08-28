@@ -27,7 +27,7 @@ spec:
     plural: xobjectbuckets
   versions:
     - additionalPrinterColumns:
-        - jsonPath: .status.bucketName
+        - jsonPath: .spec.parameters.bucketName
           name: Bucket Name
           type: string
         - jsonPath: .spec.parameters.region
@@ -56,7 +56,6 @@ spec:
                     bucketName:
                       description: |-
                         BucketName is the name of the bucket to create.
-                        If not set, the composite name will be used.
                         Cannot be changed after bucket is created.
                         Name must be acceptable by the S3 protocol, which follows RFC 1123.
                         Be aware that S3 providers may require a unique name across the platform or region.
@@ -101,6 +100,8 @@ spec:
                             instance if it is enabled (enabled by default)
                           type: boolean
                       type: object
+                  required:
+                    - bucketName
                   type: object
               type: object
             status:
@@ -192,10 +193,6 @@ spec:
                         type: string
                     type: object
                   type: array
-                bucketName:
-                  description: BucketName contains the effective bucket name being
-                    used.
-                  type: string
                 conditions:
                   description: Conditions of the resource.
                   items:
