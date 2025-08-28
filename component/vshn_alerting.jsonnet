@@ -4,6 +4,66 @@ local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local vars = import 'config/vars.jsonnet';
 
+local getRedisHARules(serviceName) = [
+  {
+    alert: 'VSHNRedisNotMaster',
+    annotations: {
+      description: 'Service {{ $labels.service }} is not connected to a master for 5m.',
+      summary: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})',
+    },
+    expr: 'appcat_probes_redis_ha_master_up{ha="true"} == 0',
+    'for': '5m',
+    labels: {
+      OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
+      service: serviceName,
+      severity: 'critical',
+      syn: 'true',
+      syn_team: 'schedar',
+      syn_component: 'appcat',
+    },
+  },
+  {
+    alert: 'VSHNRedisQuorumNotOk',
+    annotations: {
+      description: 'Quorum failing for 5m.',
+      summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace }})',
+    },
+    expr: |||
+      appcat_probes_redis_ha_master_up{ha="true"} == 1
+      and on(service,namespace,name,organization,ha,sla)
+      appcat_probes_redis_ha_quorum_ok{ha="true"} == 0
+    |||,
+    'for': '5m',
+    labels: {
+      OnCall: false,
+      service: serviceName,
+      severity: 'warning',
+      syn: 'true',
+      syn_team: 'schedar',
+      syn_component: 'appcat',
+    },
+  },
+  {
+    alert: 'VSHNRedisQuorumFlapping',
+    annotations: {
+      description: 'Quorum state flipped {{ $value }} times in 10m.',
+      summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace }})',
+    },
+    expr: |||
+      appcat_probes_redis_ha_master_up{ha="true"} == 1
+      and on(service,namespace,name,organization,ha,sla)
+      changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
+    |||,
+    labels: {
+      OnCall: false,
+      service: serviceName,
+      severity: 'warning',
+      syn: 'true',
+      syn_team: 'schedar',
+      syn_component: 'appcat',
+    },
+  },
+];
 
 local genGenericAlertingRule(serviceName, recordingRule=null) = {
   apiVersion: 'monitoring.coreos.com/v1',
@@ -60,7 +120,8 @@ local genGenericAlertingRule(serviceName, recordingRule=null) = {
               syn_component: 'appcat',
             },
           },
-        ] + (if recordingRule != null then [ recordingRule ] else []),
+        ] + (if recordingRule != null then [ recordingRule ] else []) +
+          (if serviceName == 'VSHNRedis' then getRedisHARules(serviceName) else []),
       },
     ],
   },
