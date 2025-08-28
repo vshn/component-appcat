@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:fix_nextcloud-backup
+          image: ghcr.io/vshn/appcat:8d117accce60b25f69e51e5cf98745df4451cbf8
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
