@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.170.0
+        tag: feature/vshnpostgres-cnpg
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -204,7 +204,7 @@ parameters:
           managementPolicy: Basic
 
     cnpg:
-      namespace: syn-cnpg-system
+      namespace: cnpg-system
       namespaceLabels: {}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
       monitoring:

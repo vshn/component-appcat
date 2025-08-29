@@ -4,9 +4,23 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-v4-170-0
+  name: function-appcat-debug-feature-vshnpostgres-cnpg
 spec:
-  package: ghcr.io/vshn/appcat:v4.170.0-func
+  package: ghcr.io/vshn/appcat:feature_vshnpostgres-cnpg-func
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: enable-proxy
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v3-53-0-v4-167-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.167.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
@@ -63,20 +77,6 @@ metadata:
   name: function-appcat-v3-54-2-v4-168-2
 spec:
   package: ghcr.io/vshn/appcat:v4.168.2-func
-  packagePullPolicy: Always
-  runtimeConfigRef:
-    name: enable-proxy
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-55-0-v4-169-0
-spec:
-  package: ghcr.io/vshn/appcat:v4.169.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
