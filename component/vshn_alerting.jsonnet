@@ -35,7 +35,7 @@ local getRedisHARules(serviceName) = [
     |||,
     'for': '5m',
     labels: {
-      OnCall: false,
+      OnCall: 'false',
       service: serviceName,
       severity: 'warning',
       syn: 'true',
@@ -55,7 +55,7 @@ local getRedisHARules(serviceName) = [
       changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
     |||,
     labels: {
-      OnCall: false,
+      OnCall: 'false',
       service: serviceName,
       severity: 'warning',
       syn: 'true',
