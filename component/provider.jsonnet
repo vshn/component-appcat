@@ -254,6 +254,11 @@ local providerRBAC = {
         resources: [ 'roles', 'rolebindings', 'serviceaccounts' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'postgresql.cnpg.io' ],
+        resources: [ 'clusters' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {
