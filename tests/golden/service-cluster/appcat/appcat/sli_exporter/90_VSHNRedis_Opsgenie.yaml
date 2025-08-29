@@ -71,7 +71,7 @@ spec:
             appcat_probes_redis_ha_quorum_ok{ha="true"} == 0
           for: 5m
           labels:
-            OnCall: false
+            OnCall: 'false'
             service: VSHNRedis
             severity: warning
             syn: 'true'
@@ -87,7 +87,7 @@ spec:
             and on(service,namespace,name,organization,ha,sla)
             changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
           labels:
-            OnCall: false
+            OnCall: 'false'
             service: VSHNRedis
             severity: warning
             syn: 'true'
