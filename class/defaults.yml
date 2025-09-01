@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: cfc12834e3a26c1de50cf1e2f662741837283023
+        tag: feat/provider-config-webhook
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
