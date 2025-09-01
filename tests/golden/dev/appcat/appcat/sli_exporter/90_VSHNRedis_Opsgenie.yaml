@@ -55,6 +55,7 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: critical
             syn: 'true'
@@ -72,6 +73,7 @@ spec:
           for: 5m
           labels:
             OnCall: 'false'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: warning
             syn: 'true'
@@ -88,6 +90,7 @@ spec:
             changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
           labels:
             OnCall: 'false'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: warning
             syn: 'true'

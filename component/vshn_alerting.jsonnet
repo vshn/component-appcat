@@ -15,6 +15,7 @@ local getRedisHARules(serviceName) = [
     'for': '5m',
     labels: {
       OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
+      runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html',
       service: serviceName,
       severity: 'critical',
       syn: 'true',
@@ -36,6 +37,7 @@ local getRedisHARules(serviceName) = [
     'for': '5m',
     labels: {
       OnCall: 'false',
+      runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html',
       service: serviceName,
       severity: 'warning',
       syn: 'true',
@@ -56,6 +58,7 @@ local getRedisHARules(serviceName) = [
     |||,
     labels: {
       OnCall: 'false',
+      runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html',
       service: serviceName,
       severity: 'warning',
       syn: 'true',
