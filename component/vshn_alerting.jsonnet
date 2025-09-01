@@ -10,6 +10,7 @@ local getRedisHARules(serviceName) = [
     annotations: {
       description: 'Service {{ $labels.service }} is not connected to a master for 5m.',
       summary: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})',
+      title: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})',
     },
     expr: 'appcat_probes_redis_ha_master_up{ha="true"} == 0',
     'for': '5m',
@@ -28,12 +29,9 @@ local getRedisHARules(serviceName) = [
     annotations: {
       description: 'Quorum failing for 5m.',
       summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace }})',
+      title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace }})',
     },
-    expr: |||
-      appcat_probes_redis_ha_master_up{ha="true"} == 1
-      and on(service,namespace,name,organization,ha,sla)
-      appcat_probes_redis_ha_quorum_ok{ha="true"} == 0
-    |||,
+    expr: 'appcat_probes_redis_ha_quorum_ok{ha="true"} == 0',
     'for': '5m',
     labels: {
       OnCall: 'false',
@@ -50,12 +48,9 @@ local getRedisHARules(serviceName) = [
     annotations: {
       description: 'Quorum state flipped {{ $value }} times in 10m.',
       summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace }})',
+      title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace }})',
     },
-    expr: |||
-      appcat_probes_redis_ha_master_up{ha="true"} == 1
-      and on(service,namespace,name,organization,ha,sla)
-      changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
-    |||,
+    expr: 'changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4',
     labels: {
       OnCall: 'false',
       runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html',
