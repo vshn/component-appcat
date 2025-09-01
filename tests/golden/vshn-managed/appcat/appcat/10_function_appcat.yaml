@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-cb502117d2559f14ed91429474bec446bb08dd21
+  name: function-appcat-master-fix-pgbouncer-queries
 spec:
-  package: ghcr.io/vshn/appcat:cb502117d2559f14ed91429474bec446bb08dd21-func
+  package: ghcr.io/vshn/appcat:fix_pgbouncer_queries-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
