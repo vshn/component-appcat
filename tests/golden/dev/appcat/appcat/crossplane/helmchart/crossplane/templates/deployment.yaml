@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: add/generalize_hotfixer
+        function-revision: cfc12834e3a26c1de50cf1e2f662741837283023
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
