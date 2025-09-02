@@ -9,10 +9,10 @@ local getRedisHARules(serviceName) = [
     alert: 'VSHNRedisNotMaster',
     annotations: {
       description: 'Service {{ $labels.service }} is not connected to a master for 5m.',
-      summary: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})',
-      title: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})',
+      summary: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace }})',
+      title: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace }})',
     },
-    expr: 'appcat_probes_redis_ha_master_up{ha="true"} == 0',
+    expr: 'appcat_probes_redis_ha_master_up{ha="true", maintenance="false"} == 0',
     'for': '5m',
     labels: {
       OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
@@ -28,10 +28,10 @@ local getRedisHARules(serviceName) = [
     alert: 'VSHNRedisQuorumNotOk',
     annotations: {
       description: 'Quorum failing for 5m.',
-      summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace }})',
-      title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace }})',
+      summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace }})',
+      title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace }})',
     },
-    expr: 'appcat_probes_redis_ha_quorum_ok{ha="true"} == 0',
+    expr: 'appcat_probes_redis_ha_quorum_ok{ha="true", maintenance="false"} == 0',
     'for': '5m',
     labels: {
       OnCall: 'false',
@@ -47,10 +47,10 @@ local getRedisHARules(serviceName) = [
     alert: 'VSHNRedisQuorumFlapping',
     annotations: {
       description: 'Quorum state flipped {{ $value }} times in 10m.',
-      summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace }})',
-      title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace }})',
+      summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace }})',
+      title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace }})',
     },
-    expr: 'changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4',
+    expr: 'changes(appcat_probes_redis_ha_quorum_ok{ha="true", maintenance="false"}[10m]) >= 4',
     labels: {
       OnCall: 'false',
       runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html',
@@ -86,8 +86,8 @@ local genGenericAlertingRule(serviceName, recordingRule=null) = {
                    // rate works on per second basis, so 0.4 means 40% of the probes are failing, which for 5 minutes is 2 minutes
                    expr: 'rate(appcat_probes_seconds_count{reason!="success", service="' + serviceName + '", ha="false", maintenance="false"}[5m]) > 0.4',
                    annotations: {
-                     summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}',
-                     title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}',
+                     summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}',
+                     title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}',
                    },
                    labels: {
                      OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
@@ -105,8 +105,8 @@ local genGenericAlertingRule(serviceName, recordingRule=null) = {
                    // rate works on per second basis, so 0.4 means 40% of the probes are failing, which for 5 minutes is 2 minute
                    expr: 'rate(appcat_probes_seconds_count{reason!="success", service="' + serviceName + '", ha="true"}[5m]) > 0.4',
                    annotations: {
-                     summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}',
-                     title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}',
+                     summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}',
+                     title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}',
                    },
                    labels: {
                      OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',

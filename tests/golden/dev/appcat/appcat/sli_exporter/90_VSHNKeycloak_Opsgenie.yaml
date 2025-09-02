@@ -13,8 +13,8 @@ spec:
       rules:
         - alert: VSHNKeycloakSla
           annotations:
-            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
-            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNKeycloak",
             ha="false", maintenance="false"}[5m]) > 0.4
           labels:
@@ -28,8 +28,8 @@ spec:
             syn_team: schedar
         - alert: VSHNKeycloakSlaHA
           annotations:
-            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
-            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNKeycloak",
             ha="true"}[5m]) > 0.4
           labels:

@@ -13,8 +13,8 @@ spec:
       rules:
         - alert: VSHNRedisSla
           annotations:
-            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
-            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
             ha="false", maintenance="false"}[5m]) > 0.4
           labels:
@@ -28,8 +28,8 @@ spec:
             syn_team: schedar
         - alert: VSHNRedisSlaHA
           annotations:
-            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
-            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.namespace}}'
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
             ha="true"}[5m]) > 0.4
           labels:
@@ -49,9 +49,12 @@ spec:
           annotations:
             description: Service {{ $labels.service }} is not connected to a master
               for 5m.
-            summary: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})'
-            title: 'Redis not master: {{ $labels.name }} ({{ $labels.namespace }})'
-          expr: appcat_probes_redis_ha_master_up{ha="true"} == 0
+            summary: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace
+              }})'
+            title: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace
+              }})'
+          expr: appcat_probes_redis_ha_master_up{ha="true", maintenance="false"} ==
+            0
           for: 5m
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
@@ -65,11 +68,12 @@ spec:
         - alert: VSHNRedisQuorumNotOk
           annotations:
             description: Quorum failing for 5m.
-            summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace
+            summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
-            title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.namespace
+            title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
-          expr: appcat_probes_redis_ha_quorum_ok{ha="true"} == 0
+          expr: appcat_probes_redis_ha_quorum_ok{ha="true", maintenance="false"} ==
+            0
           for: 5m
           labels:
             OnCall: 'false'
@@ -82,11 +86,12 @@ spec:
         - alert: VSHNRedisQuorumFlapping
           annotations:
             description: Quorum state flipped {{ $value }} times in 10m.
-            summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace
+            summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
-            title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.namespace
+            title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
-          expr: changes(appcat_probes_redis_ha_quorum_ok{ha="true"}[10m]) >= 4
+          expr: changes(appcat_probes_redis_ha_quorum_ok{ha="true", maintenance="false"}[10m])
+            >= 4
           labels:
             OnCall: 'false'
             runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
