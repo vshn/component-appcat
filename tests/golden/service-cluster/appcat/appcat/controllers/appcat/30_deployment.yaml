@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:8d117accce60b25f69e51e5cf98745df4451cbf8
+          image: ghcr.io/vshn/appcat:merge-workflow-title
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
