@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:feat_provider-config-webhook
+          image: ghcr.io/vshn/appcat:fc077cdde20904c819450665c74b116dd55073da
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

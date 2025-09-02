@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-feat-provider-config-webhook
+  name: function-appcat-master-fc077cdde20904c819450665c74b116dd55073da
 spec:
-  package: ghcr.io/vshn/appcat:feat_provider-config-webhook-func
+  package: ghcr.io/vshn/appcat:fc077cdde20904c819450665c74b116dd55073da-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

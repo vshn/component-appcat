@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/provider-config-webhook
+        function-revision: fc077cdde20904c819450665c74b116dd55073da
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
