@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/redis-alert
+        function-revision: cb502117d2559f14ed91429474bec446bb08dd21
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

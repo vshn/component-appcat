@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-feat-redis-alert
+  name: function-appcat-master-cb502117d2559f14ed91429474bec446bb08dd21
 spec:
-  package: ghcr.io/vshn/appcat:feat_redis-alert-func
+  package: ghcr.io/vshn/appcat:cb502117d2559f14ed91429474bec446bb08dd21-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

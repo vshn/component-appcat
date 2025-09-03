@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-redis-alert
+        name: function-appcat-master-cb502117d2559f14ed91429474bec446bb08dd21
       input:
         apiVersion: v1
         data:
