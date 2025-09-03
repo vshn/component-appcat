@@ -9,4 +9,4 @@ metadata:
     app.kubernetes.io/version: 1.27.0
     helm.sh/chart: cloudnative-pg-0.26.0
   name: cnpg-controller-manager-config
-  namespace: cnpg-system
+  namespace: syn-cnpg-system
