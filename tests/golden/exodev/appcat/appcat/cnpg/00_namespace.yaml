@@ -4,5 +4,5 @@ metadata:
   annotations:
     openshift.io/node-selector: node-role.kubernetes.io/infra=
   labels:
-    name: cnpg-system
-  name: cnpg-system
+    name: syn-cnpg-system
+  name: syn-cnpg-system
