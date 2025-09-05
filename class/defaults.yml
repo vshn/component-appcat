@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+        tag: add-nextcloud-scc
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
