@@ -199,6 +199,12 @@ local providerRBAC = {
   helm: {
     rules: [
       {
+        apiGroups: [ 'extensions' ],
+        resources: [ 'podsecuritypolicies' ],
+        resourceNames: [ 'privileged' ],
+        verbs: [ 'use' ],
+      },
+      {
         apiGroups: [ 'helm.crossplane.io' ],
         resources: [ '*' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
@@ -245,7 +251,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'rbac.authorization.k8s.io' ],
-        resources: [ 'roles', 'rolebindings' ],
+        resources: [ 'roles', 'rolebindings', 'serviceaccounts' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
     ],

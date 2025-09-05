@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-scc
+  name: appcat-scc
+rules:
+  - apiGroups:
+      - security.openshift.io
+    resourceNames:
+      - appcat-scc
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
