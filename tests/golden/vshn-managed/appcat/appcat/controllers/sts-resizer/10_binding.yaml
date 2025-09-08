@@ -3,12 +3,12 @@ kind: ClusterRoleBinding
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
-  name: appcat:contoller:sts-resizer
+  name: appcat:controller:sts-resizer
   namespace: syn-appcat
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: appcat:contoller:sts-resizer
+  name: appcat:controller:sts-resizer
 subjects:
   - kind: ServiceAccount
     name: sts-resizer
