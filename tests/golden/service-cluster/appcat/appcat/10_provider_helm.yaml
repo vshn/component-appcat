@@ -8,6 +8,14 @@ metadata:
   name: crossplane:provider:provider-helm:system:custom
 rules:
   - apiGroups:
+      - extensions
+    resourceNames:
+      - privileged
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+  - apiGroups:
       - helm.crossplane.io
     resources:
       - '*'
@@ -119,6 +127,7 @@ rules:
     resources:
       - roles
       - rolebindings
+      - serviceaccounts
     verbs:
       - get
       - list

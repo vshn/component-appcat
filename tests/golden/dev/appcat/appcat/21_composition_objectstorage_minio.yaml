@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+        name: function-appcat-debug-add-nextcloud-scc
       input:
         apiVersion: v1
         data:

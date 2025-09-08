@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+    metadata.appcat.vshn.io/revision: debug-add-nextcloud-scc
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+        name: function-appcat-debug-add-nextcloud-scc
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: 6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+          imageTag: add-nextcloud-scc
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'

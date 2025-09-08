@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+        function-revision: add-nextcloud-scc
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

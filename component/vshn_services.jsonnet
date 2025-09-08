@@ -56,11 +56,73 @@ local crossplaneEditMaintenanceBinding = kube.ClusterRoleBinding('crossplane:app
   subjects_: [ maintenanceServiceAccount ],
 };
 
+// SecurityContextConstraints for AppCat services
+local scc = {
+  apiVersion: 'security.openshift.io/v1',
+  kind: 'SecurityContextConstraints',
+  metadata: {
+    name: 'appcat-scc',
+  },
+  allowHostDirVolumePlugin: false,
+  allowHostIPC: false,
+  allowHostNetwork: false,
+  allowHostPID: false,
+  allowHostPorts: false,
+  allowPrivilegeEscalation: true,
+  allowPrivilegedContainer: false,
+  allowedCapabilities: null,
+  defaultAddCapabilities: null,
+  requiredDropCapabilities: [
+    'KILL',
+    'MKNOD',
+    'SETUID',
+    'SETGID',
+  ],
+  fsGroup: {
+    type: 'MustRunAs',
+  },
+  runAsUser: {
+    type: 'MustRunAsRange',
+  },
+  supplementalGroups: {
+    type: 'RunAsAny',
+  },
+  seLinuxContext: {
+    type: 'RunAsAny',
+  },
+  readOnlyRootFilesystem: false,
+  volumes: [
+    'configMap',
+    'downwardAPI',
+    'emptyDir',
+    'persistentVolumeClaim',
+    'projected',
+    'secret',
+  ],
+
+  // By default no groups or users are assigned
+  groups: [],
+  users: [],
+};
+
+local clusterRoleScc = kube.ClusterRole('appcat-scc') {
+  rules: [
+    {
+      apiGroups: [ 'security.openshift.io' ],
+      resources: [ 'securitycontextconstraints' ],
+      resourceNames: [ 'appcat-scc' ],
+      verbs: [ 'use' ],
+    },
+  ],
+};
+
 (if params.services.vshn.enabled && vars.isSingleOrServiceCluster then {
    '10_rbac_helm_service_maintenance_sa': maintenanceServiceAccount,
    '10_rbac_helm_service_maintenance_cluster_role': maintenanceRole,
    '10_rbac_helm_service_maintenance_cluster_role_binding': maintenanceClusterRoleBinding,
    '10_rbac_helm_service_maintenance_crossplane_edit_rolebinding': crossplaneEditMaintenanceBinding,
+   '10_rbac_helm_service_scc_cluster_role': clusterRoleScc,
+   '10_rbac_helm_service_scc': scc,
  } else {})
 + {
   '10_namespace_vshn_control': controlNamespace,

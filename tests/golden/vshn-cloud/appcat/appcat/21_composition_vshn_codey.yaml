@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+    metadata.appcat.vshn.io/revision: master-add-nextcloud-scc
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

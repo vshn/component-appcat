@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+    metadata.appcat.vshn.io/revision: master-add-nextcloud-scc
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+        name: function-appcat-master-add-nextcloud-scc
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 6a6a2d2e3456167bd9e143fd7ee009c661ba9736
+          imageTag: add-nextcloud-scc
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
