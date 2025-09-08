@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-fix-mariadb-extra-conf
+    metadata.appcat.vshn.io/revision: master-90d533602c24e6f11a8c8ad9b4223f4990098763
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-mariadb-extra-conf
+        name: function-appcat-master-90d533602c24e6f11a8c8ad9b4223f4990098763
       input:
         apiVersion: v1
         data:
@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/
-          imageTag: fix-mariadb-extra-conf
+          imageTag: 90d533602c24e6f11a8c8ad9b4223f4990098763
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100

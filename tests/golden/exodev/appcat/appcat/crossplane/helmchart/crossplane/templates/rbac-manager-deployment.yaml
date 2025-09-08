@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix-mariadb-extra-conf
+        function-revision: 90d533602c24e6f11a8c8ad9b4223f4990098763
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-mariadb-extra-conf
+        name: function-appcat-debug-90d533602c24e6f11a8c8ad9b4223f4990098763
       input:
         apiVersion: v1
         data:

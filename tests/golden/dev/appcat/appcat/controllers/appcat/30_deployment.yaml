@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:fix-mariadb-extra-conf
+          image: ghcr.io/vshn/appcat:90d533602c24e6f11a8c8ad9b4223f4990098763
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
