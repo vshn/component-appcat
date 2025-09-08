@@ -209,7 +209,7 @@ parameters:
           managementPolicy: Basic
 
     cnpg:
-      namespace: cnpg-system
+      namespace: syn-cnpg-system
       namespaceLabels: {}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
       monitoring:
