@@ -121,8 +121,8 @@ local clusterRoleScc = kube.ClusterRole('appcat-scc') {
    '10_rbac_helm_service_maintenance_cluster_role': maintenanceRole,
    '10_rbac_helm_service_maintenance_cluster_role_binding': maintenanceClusterRoleBinding,
    '10_rbac_helm_service_maintenance_crossplane_edit_rolebinding': crossplaneEditMaintenanceBinding,
-   '10_rbac_helm_service_scc_cluster_role': clusterRoleScc,
-   '10_rbac_helm_service_scc': scc,
+   [if vars.isOpenshift then '10_rbac_helm_service_scc_cluster_role']: clusterRoleScc,
+   [if vars.isOpenshift then '10_rbac_helm_service_scc']: scc,
  } else {})
 + {
   '10_namespace_vshn_control': controlNamespace,
