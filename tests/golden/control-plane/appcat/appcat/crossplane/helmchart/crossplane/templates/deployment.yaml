@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: add-nextcloud-scc
+        function-revision: 90d533602c24e6f11a8c8ad9b4223f4990098763
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-nextcloud-scc
+  name: function-appcat-master-90d533602c24e6f11a8c8ad9b4223f4990098763
 spec:
-  package: ghcr.io/vshn/appcat:add-nextcloud-scc-func
+  package: ghcr.io/vshn/appcat:90d533602c24e6f11a8c8ad9b4223f4990098763-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
