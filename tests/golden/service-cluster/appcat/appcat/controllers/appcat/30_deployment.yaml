@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:add-nextcloud-scc
+          image: ghcr.io/vshn/appcat:fix-mariadb-extra-conf
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

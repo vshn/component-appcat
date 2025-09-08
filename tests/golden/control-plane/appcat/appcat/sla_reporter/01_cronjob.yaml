@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:add-nextcloud-scc
+              image: ghcr.io/vshn/appcat:fix-mariadb-extra-conf
               name: sla-reporter
               resources:
                 limits:

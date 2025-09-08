@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:add-nextcloud-scc
+          image: ghcr.io/vshn/appcat:fix-mariadb-extra-conf
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

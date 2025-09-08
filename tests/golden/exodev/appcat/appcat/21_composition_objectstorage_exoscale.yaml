@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-nextcloud-scc
+        name: function-appcat-master-fix-mariadb-extra-conf
       input:
         apiVersion: v1
         data:
