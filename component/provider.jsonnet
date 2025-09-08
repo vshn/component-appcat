@@ -259,6 +259,11 @@ local providerRBAC = {
         resources: [ 'clusters' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'postgresql.cnpg.io' ],
+        resources: [ 'imagecatalogs' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {

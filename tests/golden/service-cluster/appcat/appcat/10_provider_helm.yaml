@@ -149,6 +149,18 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - postgresql.cnpg.io
+    resources:
+      - imagecatalogs
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
