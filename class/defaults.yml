@@ -206,8 +206,7 @@ parameters:
     cnpg:
       namespace: syn-cnpg-system
       namespaceLabels: {}
-      namespaceAnnotations:
-        openshift.io/node-selector: node-role.kubernetes.io/infra=
+      namespaceAnnotations: {}
       monitoring:
         enabled: false
         prometheus_rule_labels:

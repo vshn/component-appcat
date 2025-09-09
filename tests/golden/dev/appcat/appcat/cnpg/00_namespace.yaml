@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  annotations:
-    openshift.io/node-selector: node-role.kubernetes.io/infra=
+  annotations: {}
   labels:
     name: syn-cnpg-system
   name: syn-cnpg-system

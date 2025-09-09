@@ -23,12 +23,11 @@ local labels = {
   'app.kubernetes.io/managed-by': 'commodore',
 };
 
-if vars.isSingleOrControlPlaneCluster then
-  {
-    '00_namespace': namespace {
-      metadata+: {
-        labels+: params.namespaceLabels,
-        annotations+: params.namespaceAnnotations,
-      },
+{
+  '00_namespace': namespace {
+    metadata+: {
+      labels+: params.namespaceLabels,
+      annotations+: params.namespaceAnnotations,
     },
-  } else {}
+  },
+}
