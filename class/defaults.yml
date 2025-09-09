@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.168.2
+        tag: v4.169.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -204,7 +204,7 @@ parameters:
           managementPolicy: Basic
 
     cnpg:
-      namespace: cnpg-system
+      namespace: syn-cnpg-system
       namespaceLabels: {}
       namespaceAnnotations:
         openshift.io/node-selector: node-role.kubernetes.io/infra=
