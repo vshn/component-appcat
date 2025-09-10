@@ -206,7 +206,7 @@ parameters:
     cnpg:
       namespace: syn-cnpg-system
       namespaceLabels: {}
-      namespaceAnnotations: {}
+      namespaceAnnotations: ${appcat:namespaceAnnotations}
       monitoring:
         enabled: false
         prometheus_rule_labels:
