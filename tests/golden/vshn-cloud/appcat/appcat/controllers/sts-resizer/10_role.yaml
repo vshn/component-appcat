@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
-  name: appcat:contoller:sts-resizer
+  name: appcat:controller:sts-resizer
   namespace: syn-appcat
 rules:
   - apiGroups:

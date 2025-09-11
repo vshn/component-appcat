@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-cp-patch-helm-releases
+  name: appcat:cp:patch-helm-releases
+rules:
+  - apiGroups:
+      - helm.crossplane.io
+    resources:
+      - releases
+    verbs:
+      - get
+      - patch
+      - update
