@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:04eac8b2fe27c2f2a6f18720794e1b2c30099752
+          image: ghcr.io/vshn/appcat:fix-nextcloud-cron
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
