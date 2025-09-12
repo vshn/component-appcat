@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:04eac8b2fe27c2f2a6f18720794e1b2c30099752
+          image: ghcr.io/vshn/appcat:fix_nextcloud-scc
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
