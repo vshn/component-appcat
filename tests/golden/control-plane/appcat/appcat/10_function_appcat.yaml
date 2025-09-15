@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-5c4bb17d3fe54d0adea7664b16ff7bef05ce093d
+  name: function-appcat-master-fix-nextcloud-cron
 spec:
-  package: ghcr.io/vshn/appcat:5c4bb17d3fe54d0adea7664b16ff7bef05ce093d-func
+  package: ghcr.io/vshn/appcat:fix_nextcloud_cron-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

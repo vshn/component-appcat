@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-5c4bb17d3fe54d0adea7664b16ff7bef05ce093d
+        name: function-appcat-master-fix-nextcloud-cron
       input:
         apiVersion: v1
         data:
