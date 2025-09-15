@@ -21,7 +21,7 @@ parameters:
         version: 7.0.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 7.0.0
+        version: 8.0.1
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 13.0.1
