@@ -6,12 +6,12 @@ metadata:
     argocd.argoproj.io/sync-wave: '-70'
   labels:
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
-    name: xvshnpostgresqls.vshn.appcat.vshn.io
-  name: xvshnpostgresqls.vshn.appcat.vshn.io
+    name: xvshnpostgresqlcnpgs.vshn.appcat.vshn.io
+  name: xvshnpostgresqlcnpgs.vshn.appcat.vshn.io
 spec:
   claimNames:
-    kind: VSHNPostgreSQL
-    plural: vshnpostgresqls
+    kind: VSHNPostgreSQLCNPG
+    plural: vshnpostgresqlcnpgs
   connectionSecretKeys:
     - ca.crt
     - tls.crt
@@ -24,25 +24,25 @@ spec:
     - POSTGRESQL_PASSWORD
     - LOADBALANCER_IP
   defaultCompositionRef:
-    name: vshnpostgres.vshn.appcat.vshn.io
+    name: vshnpostgrescnpg.vshn.appcat.vshn.io
   defaultCompositionUpdatePolicy: Automatic
   group: vshn.appcat.vshn.io
   names:
-    kind: XVSHNPostgreSQL
-    plural: xvshnpostgresqls
+    kind: XVSHNPostgreSQLCNPG
+    plural: xvshnpostgresqlcnpgs
   versions:
     - name: v1
       referenceable: true
       schema:
         openAPIV3Schema:
-          description: VSHNPostgreSQL is the API for creating Postgresql clusters.
+          description: VSHNPostgreSQLCNPG is the API for creating Postgresql clusters.
           properties:
             spec:
-              description: Spec defines the desired state of a VSHNPostgreSQL.
+              description: Spec defines the desired state of a VSHNPostgreSQLCNPG.
               properties:
                 parameters:
                   default: {}
-                  description: Parameters are the configurable fields of a VSHNPostgreSQL.
+                  description: Parameters are the configurable fields of a VSHNPostgreSQLCNPG.
                   properties:
                     backup:
                       default: {}
@@ -61,13 +61,6 @@ spec:
                             DeletionRetention specifies in days how long the instance should be kept after deletion.
                             The default is keeping it one week.
                           type: integer
-                        enabled:
-                          default: true
-                          description: |-
-                            Enabled specifies if automatic backups are enabled for the instance.
-                            If disabled, no backup bucket, repository password, or K8up schedule will be deployed.
-                            This also disables WAL (Write-Ahead Logging) archiving to reduce costs.
-                          type: boolean
                         retention:
                           default: 6
                           pattern: ^[1-9][0-9]*$
@@ -5349,44 +5342,6 @@ spec:
                             - LoadBalancer
                           type: string
                       type: object
-                    replication:
-                      description: |-
-                        This section allows to configure Postgres replication mode and HA roles groups.
-
-                        The main replication group is implicit and contains the total number of instances less the sum of all instances in other replication groups.
-                      properties:
-                        mode:
-                          description: "Mode defines the replication mode applied\
-                            \ to the whole cluster. Possible values are: \"async\"\
-                            (default), \"sync\", and \"strict-sync\"\n\n\"async\"\
-                            : When in asynchronous mode the cluster is allowed to\
-                            \ lose some committed transactions.\nWhen the primary\
-                            \ server fails or becomes unavailable for any other reason\
-                            \ a sufficiently healthy standby will automatically be\
-                            \ promoted to primary.\nAny transactions that have not\
-                            \ been replicated to that standby remain in a \u201Cforked\
-                            \ timeline\u201D on the primary, and are effectively unrecoverable\n\
-                            \n\"sync\": When in synchronous mode a standby will not\
-                            \ be promoted unless it is certain that the standby contains\
-                            \ all transactions that may have returned a successful\
-                            \ commit status to client.\n This means that the system\
-                            \ may be unavailable for writes even though some servers\
-                            \ are available.\n\n\"strict-sync\": When it is absolutely\
-                            \ necessary to guarantee that each write is stored durably\
-                            \ on at least two nodes, use the strict synchronous mode.\n\
-                            This mode prevents synchronous replication to be switched\
-                            \ off on the primary when no synchronous standby candidates\
-                            \ are available.\nAs a downside, the primary will not\
-                            \ be available for writes, blocking all client write requests\
-                            \ until at least one synchronous replica comes up.\n\n\
-                            NOTE: We recommend to always use three intances when setting\
-                            \ the mode to \"strict-sync\"."
-                          enum:
-                            - async
-                            - sync
-                            - strict-sync
-                          type: string
-                      type: object
                     restore:
                       description: Restore contains settings to control the restore
                         of an instance.
@@ -5461,74 +5416,11 @@ spec:
                       default: {}
                       description: Service contains PostgreSQL DBaaS specific properties
                       properties:
-                        access:
-                          description: Access defines additional users and databases
-                            for this instance.
-                          items:
-                            properties:
-                              database:
-                                description: Database is the name of the database
-                                  to create, defaults to user.
-                                type: string
-                              privileges:
-                                description: |-
-                                  Privileges specifies the privileges to grant the user. Please check
-                                  the database's docs for available privileges.
-                                items:
-                                  type: string
-                                type: array
-                              user:
-                                description: |-
-                                  User specifies the username. If all other fields are left empty
-                                  then a new database with the same name and all permissions will be created.
-                                type: string
-                              writeConnectionSecretToRef:
-                                description: |-
-                                  WriteConnectionSecretToReference specifies the namespace and name of a
-                                  Secret to which any connection details for this user should
-                                  be written.
-                                  If not specified, a secret with the name $claimname-$username will be
-                                  created in the namespace where the claim is located.
-                                properties:
-                                  name:
-                                    description: Name of the secret.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the secret.
-                                    type: string
-                                required:
-                                  - name
-                                  - namespace
-                                type: object
-                            required:
-                              - user
-                            type: object
-                          type: array
-                        disablePgBouncer:
-                          default: false
-                          description: Disable connection pooling service PgBouncer.
-                            All connections will go straight to PostgreSQL instance.
-                          type: boolean
-                        extensions:
-                          description: Extensions allow to enable/disable any of the
-                            supported
-                          items:
-                            description: VSHNDBaaSPostgresExtension contains the name
-                              of a single extension.
-                            properties:
-                              name:
-                                description: |-
-                                  Name is the name of the extension to enable.
-                                  For an extensive list, please consult https://stackgres.io/doc/latest/intro/extensions/
-                                type: string
-                            type: object
-                          type: array
                         majorVersion:
                           default: '15'
                           description: |-
                             MajorVersion contains supported version of PostgreSQL.
                             Multiple versions are supported. The latest version "15" is the default version.
-                            Currently it's impossible to change the version of an existing instance - we're working on it.
                           enum:
                             - '12'
                             - '13'
@@ -5537,41 +5429,10 @@ spec:
                             - '16'
                             - '17'
                           type: string
-                        pgBouncerSettings:
-                          description: PgBouncerSettings passes additional configuration
-                            to the pgBouncer instance.
-                          properties:
-                            databases:
-                              description: |-
-                                The `pgbouncer.ini` (Section [databases]) parameters the configuration contains, represented as an object where the keys are valid names for the `pgbouncer.ini` configuration file parameters.
-
-                                Check [pgbouncer configuration](https://www.pgbouncer.org/config.html#section-databases) for more information about supported parameters.
-                              type: object
-                              x-kubernetes-preserve-unknown-fields: true
-                            pgbouncer:
-                              description: |-
-                                The `pgbouncer.ini` (Section [pgbouncer]) parameters the configuration contains, represented as an object where the keys are valid names for the `pgbouncer.ini` configuration file parameters.
-
-                                Check [pgbouncer configuration](https://www.pgbouncer.org/config.html#generic-settings) for more information about supported parameters
-                              type: object
-                              x-kubernetes-preserve-unknown-fields: true
-                            users:
-                              description: |-
-                                The `pgbouncer.ini` (Section [users]) parameters the configuration contains, represented as an object where the keys are valid names for the `pgbouncer.ini` configuration file parameters.
-
-                                Check [pgbouncer configuration](https://www.pgbouncer.org/config.html#section-users) for more information about supported parameters.
-                              type: object
-                              x-kubernetes-preserve-unknown-fields: true
-                          type: object
                         pgSettings:
                           description: PGSettings contains additional PostgreSQL settings.
                           type: object
                           x-kubernetes-preserve-unknown-fields: true
-                        repackEnabled:
-                          default: true
-                          description: This is default option if neither repack or
-                            vacuum are selected
-                          type: boolean
                         serviceLevel:
                           default: besteffort
                           description: ServiceLevel defines the service level of this
@@ -5581,18 +5442,6 @@ spec:
                           type: string
                         tls:
                           default: {}
-                          description: TLS settings for the instance.
-                          properties:
-                            enabled:
-                              default: true
-                              description: |-
-                                Enabled specifies if the instance should use TLS for the instance.
-                                This change takes effect immediately and does not require a restart of the database.
-                              type: boolean
-                          type: object
-                        vacuumEnabled:
-                          default: false
-                          type: boolean
                       type: object
                     size:
                       default: {}
@@ -5664,7 +5513,7 @@ spec:
                   type: object
               type: object
             status:
-              description: Status reflects the observed state of a VSHNPostgreSQL.
+              description: Status reflects the observed state of a VSHNPostgreSQLCNPG.
               properties:
                 certificateConditions:
                   items:
