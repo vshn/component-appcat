@@ -34,12 +34,12 @@ parameters:
     images:
       provider-kubernetes:
         registry: ghcr.io
-        repository: vshn/provider-kubernetes
-        tag: v0.18.0-vshn
+        repository: crossplane-contrib/provider-kubernetes
+        tag: v1.0.0
       provider-helm:
         registry: ghcr.io
-        repository: vshn/provider-helm
-        tag: v0.21.0-vshn
+        repository: crossplane-contrib/provider-helm
+        tag: v1.0.0
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
