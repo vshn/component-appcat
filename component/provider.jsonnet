@@ -231,7 +231,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'batch' ],
-        resources: [ 'jobs' ],
+        resources: [ 'jobs', 'cronjobs' ],
         verbs: [ 'get', 'list', 'watch', 'create', 'delete' ],
       },
       {

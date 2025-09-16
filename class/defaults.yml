@@ -21,7 +21,7 @@ parameters:
         version: 7.0.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 7.0.0
+        version: 8.0.1
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 13.0.1
@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 5c4bb17d3fe54d0adea7664b16ff7bef05ce093d
+        tag: b1f57b4b28f6852c7ce97763f2fc861088ad7ab0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
