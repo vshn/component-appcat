@@ -24,7 +24,7 @@ parameters:
         version: 8.0.1
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 13.0.1
+        version: 14.0.2
       cnpg:
         source: https://cloudnative-pg.io/charts/
         version: 0.26.0

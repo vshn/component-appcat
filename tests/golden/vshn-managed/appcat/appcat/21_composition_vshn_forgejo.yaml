@@ -31,7 +31,7 @@ spec:
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 13.0.1
+          chartVersion: 14.0.2
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: small
