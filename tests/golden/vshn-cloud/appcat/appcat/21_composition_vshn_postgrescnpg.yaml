@@ -12,10 +12,10 @@ metadata:
       Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"400m","disk":"20Gi","enabled":true,"memory":"1936Mi"}},"plus-4":{"note":"Will
       be scheduled on APPUiO Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"900m","disk":"40Gi","enabled":true,"memory":"3984Mi"}},"standard-2":{"size":{"cpu":"400m","disk":"20Gi","enabled":true,"memory":"1936Mi"}},"standard-4":{"size":{"cpu":"900m","disk":"40Gi","enabled":true,"memory":"3984Mi"}}}'
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/postgresql.html
-    metadata.appcat.vshn.io/zone: lpg
+    metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-feature_vshnpostgres-cnpg
+    metadata.appcat.vshn.io/revision: master-feature_vshnpostgres-cnpg
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,12 +26,12 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-feature-vshnpostgres-cnpg
+        name: function-appcat-master-feature-vshnpostgres-cnpg
       input:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
-          bucketRegion: rma
+          bucketRegion: lpg
           cnpgClusterChartName: cluster
           cnpgClusterChartSource: https://cloudnative-pg.io/charts/
           cnpgClusterChartVersion: 0.3.1
@@ -47,12 +47,12 @@ spec:
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
           imageTag: feature_vshnpostgres-cnpg
-          isOpenshift: 'false'
+          isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance
-          ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
+          ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNPostgreSQL
           ownerVersion: v1
@@ -65,9 +65,8 @@ spec:
             {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
-          releaseManagementEnabled: 'false'
+          releaseManagementEnabled: 'true'
           salesOrder: ''
           serviceID: vshn-postgresqlcnpg
           serviceName: postgresqlcnpg
