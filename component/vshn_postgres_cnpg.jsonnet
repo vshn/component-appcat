@@ -52,9 +52,9 @@ local composition =
   {
     spec: {
       compositeTypeRef: {
-        apiVersion: "vshn.appcat.vshn.io/v1",
-        kind: "XVSHNPostgreSQL",
-      },/*comp.CompositeRef(xrd),*/
+        apiVersion: 'vshn.appcat.vshn.io/v1',
+        kind: 'XVSHNPostgreSQL',
+      },
       writeConnectionSecretsToNamespace: pgParams.secretNamespace,
       mode: 'Pipeline',
       pipeline:
