@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/nextcloud_cron
+        function-revision: b1f57b4b28f6852c7ce97763f2fc861088ad7ab0
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
