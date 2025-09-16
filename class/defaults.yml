@@ -12,7 +12,7 @@ parameters:
         version: 21.2.13
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 15.0.3
+        version: 16.0.1
       minio:
         source: https://charts.min.io
         version: 5.4.0
