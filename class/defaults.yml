@@ -9,7 +9,7 @@ parameters:
         version: 1.20.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.2.13
+        version: 22.0.7
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
         version: 16.0.1
