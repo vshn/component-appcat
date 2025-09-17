@@ -59,7 +59,7 @@ spec:
             true, "memory": "8Gi"}}, "mini": {"size": {"cpu": "500m", "disk": "10Gi",
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''

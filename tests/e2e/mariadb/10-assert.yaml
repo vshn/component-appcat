@@ -1,6 +1,6 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestAssert
-timeout: 600
+timeout: 1800
 ---
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNMariaDB

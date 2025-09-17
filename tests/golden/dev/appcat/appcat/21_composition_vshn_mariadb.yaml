@@ -59,7 +59,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
           proxysqlImage: docker.io/proxysql/proxysql:2.7.1
