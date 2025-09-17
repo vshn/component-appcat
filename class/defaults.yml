@@ -91,7 +91,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: '2.7.1'
+        version: '3.0.2'
       collabora:
         registry: docker.io
         image: collabora/code
