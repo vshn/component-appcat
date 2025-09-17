@@ -3,3 +3,4 @@ kind: TestStep
 timeout: 400
 commands:
   - script: scripts/check-backup.sh
+    timeout: 600
