@@ -21,7 +21,7 @@ echo "checking backup status"
 
 backup_status=$(kubectl -n "$NAMESPACE" get vshnpostgresbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.process.status')
 
-while [ "$backup_status" == "Running" ] || [ "$backup_status" == "Pending" ]; do
+while [ "$backup_status" == "Running" ] || [ "$backup_status" == "Pending" ] || [ "$backup_status" == "null" ]; do
     backup_status=$(kubectl -n "$NAMESPACE" get vshnpostgresbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.process.status')
     sleep 1
 done

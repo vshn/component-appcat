@@ -20,7 +20,5 @@ spec:
             name: env-from-cm
         - secretRef:
             name: env-from-secret
-    backup:
-      schedule: '*/5 * * * *'
   writeConnectionSecretToRef:
     name: keycloak-e2e
