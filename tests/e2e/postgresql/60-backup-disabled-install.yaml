@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-backup-disabled-test
+  name: pg-backup-disabled-test
 spec:
   parameters:
     security:
@@ -11,4 +11,4 @@ spec:
     backup:
       enabled: false
   writeConnectionSecretToRef:
-    name: postgresql-backup-disabled-test-creds
+    name: pg-backup-disabled-test-creds
