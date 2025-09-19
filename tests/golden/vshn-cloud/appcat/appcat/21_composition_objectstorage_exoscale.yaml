@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-disable-backup
+        name: function-appcat-master-8841f3cb241f5d90c0adad2d5a7fbb6043b5e66a
       input:
         apiVersion: v1
         data:
