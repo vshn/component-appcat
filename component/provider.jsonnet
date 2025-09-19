@@ -264,6 +264,11 @@ local providerRBAC = {
         resources: [ 'imagecatalogs' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'monitoring.coreos.com' ],
+        resources: [ 'prometheusrules', 'podmonitors', 'servicemonitors' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {

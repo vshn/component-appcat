@@ -218,6 +218,20 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - prometheusrules
+      - podmonitors
+      - servicemonitors
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: v1
 kind: Service
