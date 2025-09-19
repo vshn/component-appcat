@@ -102,7 +102,6 @@ webhooks:
           - v1
         operations:
           - DELETE
-          - UPDATE
         resources:
           - objectbuckets
     sideEffects: None

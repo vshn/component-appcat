@@ -1,0 +1,14 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNRedis
+metadata:
+  name: redis-backup-disabled-test
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    size:
+      plan: standard-2
+    backup:
+      enabled: false
+  writeConnectionSecretToRef:
+    name: redis-backup-disabled-test-creds
