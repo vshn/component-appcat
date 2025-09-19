@@ -16,3 +16,14 @@ status:
   conditions:
     - status: "True"
     - status: "True"
+---
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  finalizers:
+  - finalizer.apiextensions.crossplane.io
+  name: pg-backup-disabled-test
+status:
+  conditions:
+    - status: "True"
+    - status: "True"

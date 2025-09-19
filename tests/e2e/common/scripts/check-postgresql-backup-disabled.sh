@@ -4,7 +4,7 @@ set -e
 
 # PostgreSQL-specific backup disabled checks
 SERVICE_TYPE="vshnpostgresql"
-INSTANCE_NAME="postgresql-backup-disabled-test"
+INSTANCE_NAME="pg-backup-disabled-test"
 
 instancens=$(kubectl -n "$NAMESPACE" get "$SERVICE_TYPE" "$INSTANCE_NAME" -o yaml | yq -r '.status.instanceNamespace')
 comp=$(kubectl -n "$NAMESPACE" get "$SERVICE_TYPE" "$INSTANCE_NAME" -o yaml | yq -r '.spec.resourceRef.name')
