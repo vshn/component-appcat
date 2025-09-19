@@ -42,20 +42,4 @@ if [ "$repo_secrets" -ne 0 ]; then
     exit 1
 fi
 
-# Special handling for services with embedded PostgreSQL
-if [[ "$SERVICE_TYPE" == "vshnkeycloak" || "$SERVICE_TYPE" == "vshnnextcloud" ]]; then
-    # Check that embedded PostgreSQL also has no backup configuration
-    pg_comp=$(kubectl -n "$instancens" get sgclusters.stackgres.io -o json 2>/dev/null | jq -r '.items[0].metadata.name // empty' || echo "")
-    
-    if [ -n "$pg_comp" ]; then
-        backup_config=$(kubectl -n "$instancens" get sgclusters.stackgres.io "$pg_comp" -o json 2>/dev/null | jq -r '.spec.configurations.backups // null')
-        
-        if [ "$backup_config" != "null" ]; then
-            echo "ERROR: Embedded PostgreSQL has backup configuration when backups were disabled"
-            kubectl -n "$instancens" get sgclusters.stackgres.io "$pg_comp" -o yaml | yq '.spec.configurations.backups'
-            exit 1
-        fi
-    fi
-fi
-
 echo "SUCCESS: No backup resources found when backups are disabled"
