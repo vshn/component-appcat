@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-7e29f445cb9b23a496ebd51960ba35bd67ba882d
+        name: function-appcat-debug-feature-cnpg-backup
       input:
         apiVersion: v1
         data:

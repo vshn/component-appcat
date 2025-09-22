@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 7e29f445cb9b23a496ebd51960ba35bd67ba882d
+        function-revision: feature/cnpg-backup
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
