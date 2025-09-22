@@ -30,7 +30,7 @@ spec:
         data:
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-          chartVersion: 15.0.3
+          chartVersion: 16.0.1
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
@@ -62,7 +62,7 @@ spec:
           proxyEndpoint: 172.19.0.1:9443
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
-          proxysqlImage: docker.io/proxysql/proxysql:2.7.1
+          proxysqlImage: docker.io/proxysql/proxysql:3.0.2
           proxysqlMemoryLimit: 256Mi
           proxysqlMemoryRequests: 64Mi
           quotasEnabled: 'false'
