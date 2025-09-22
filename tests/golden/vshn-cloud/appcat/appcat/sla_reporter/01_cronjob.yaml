@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:ea72507334b0a892351838b1361a0fb9942b3317
+              image: ghcr.io/vshn/appcat:block-downsize-pvc
               name: sla-reporter
               resources:
                 limits:
