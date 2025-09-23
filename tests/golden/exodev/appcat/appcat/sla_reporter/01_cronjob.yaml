@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:fix_nextcloud-metrics
+              image: ghcr.io/vshn/appcat:f2a231a1d44d35d1ff9ba5c5b1657f6f151fc7da
               name: sla-reporter
               resources:
                 limits:
