@@ -6,25 +6,25 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.19.1
+        version: 1.20.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 21.2.13
+        version: 22.0.7
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 15.0.3
+        version: 16.0.1
       minio:
         source: https://charts.min.io
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.0.1
+        version: 7.1.3
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 7.0.0
+        version: 8.0.1
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 13.0.1
+        version: 14.0.2
       cnpg:
         source: https://cloudnative-pg.io/charts/
         version: 0.26.0
@@ -34,12 +34,12 @@ parameters:
     images:
       provider-kubernetes:
         registry: ghcr.io
-        repository: vshn/provider-kubernetes
-        tag: v0.18.0-vshn
+        repository: crossplane-contrib/provider-kubernetes
+        tag: v1.0.0
       provider-helm:
         registry: ghcr.io
-        repository: vshn/provider-helm
-        tag: v0.21.0-vshn
+        repository: crossplane-contrib/provider-helm
+        tag: v1.0.0
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
@@ -67,7 +67,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.169.0
+        tag: v4.170.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -91,7 +91,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: '2.7.1'
+        version: '3.0.2'
       collabora:
         registry: docker.io
         image: collabora/code
@@ -206,8 +206,7 @@ parameters:
     cnpg:
       namespace: syn-cnpg-system
       namespaceLabels: {}
-      namespaceAnnotations:
-        openshift.io/node-selector: node-role.kubernetes.io/infra=
+      namespaceAnnotations: ${appcat:namespaceAnnotations}
       monitoring:
         enabled: false
         prometheus_rule_labels:

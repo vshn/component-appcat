@@ -1,0 +1,5 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+timeout: 400
+commands:
+  - script: ../common/scripts/check-backup-disabled.sh vshnpostgresql pg-backup-disabled-test

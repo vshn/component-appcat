@@ -24,7 +24,7 @@ local args = [
 ];
 
 local saName = 'sts-resizer';
-local roleName = 'appcat:contoller:sts-resizer';
+local roleName = 'appcat:controller:sts-resizer';
 local role = loadManifest('config/rbac/role.yaml') + {
   metadata+: metadata(roleName),
 };
@@ -104,11 +104,60 @@ local resizeClusterRoleBinding = kube.ClusterRoleBinding('appcat:job:resizejob')
   subjects_: [ resizeServiceAccount ],
 };
 
-// Curently we only need this for redis or mariadb.
-if (params.services.vshn.enabled && (params.services.vshn.redis.enabled || params.services.vshn.mariadb.enabled)) && vars.isSingleOrServiceCluster then {
-  'controllers/sts-resizer/10_role': role,
-  'controllers/sts-resizer/10_sa': sa,
-  'controllers/sts-resizer/10_binding': binding,
-  'controllers/sts-resizer/10_deployment': deployment,
-  'controllers/sts-resizer/20_rbac_resize_job': [ resizeServiceAccount, resizeClusterRole, resizeClusterRoleBinding ],
-}
+
+local secretReadRole = kube.Role('appcat:job:read-controlclustercredentials') {
+  metadata+: { namespace: params.namespace },
+  rules: [
+    {
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      resourceNames: [ 'controlclustercredentials' ],
+      verbs: [ 'get' ],
+    },
+  ],
+};
+
+local secretReadBinding = kube.RoleBinding('appcat:job:read-controlclustercredentials') + {
+  metadata+: { namespace: params.namespace },
+  roleRef_: secretReadRole,
+  subjects_: [ resizeServiceAccount ],
+};
+
+local cpPatchReleasesCR = kube.ClusterRole('appcat:cp:patch-helm-releases') {
+  rules: [
+    {
+      apiGroups: [ 'helm.crossplane.io' ],
+      resources: [ 'releases' ],
+      verbs: [ 'get', 'patch', 'update' ],
+    },
+  ],
+};
+
+local cpPatchReleasesCRB = kube.ClusterRoleBinding('appcat:cp:patch-helm-releases') + {
+  roleRef_: cpPatchReleasesCR,
+  subjects_: [
+    kube.ServiceAccount('appcat-service-cluster') + { metadata+: { namespace: params.namespace } },
+  ],
+};
+
+(if params.services.vshn.enabled &&
+    (params.services.vshn.redis.enabled || params.services.vshn.mariadb.enabled) &&
+    vars.isSingleOrServiceCluster then {
+   'controllers/sts-resizer/10_role': role,
+   'controllers/sts-resizer/10_sa': sa,
+   'controllers/sts-resizer/10_binding': binding,
+   'controllers/sts-resizer/10_deployment': deployment,
+   'controllers/sts-resizer/20_rbac_resize_job': [
+     resizeServiceAccount,
+     resizeClusterRole,
+     resizeClusterRoleBinding,
+   ],
+ } else {})
++ (if vars.isServiceCluster then {
+     'controllers/sts-resizer/21_secret_read_role': secretReadRole,
+     'controllers/sts-resizer/21_secret_read_binding': secretReadBinding,
+   } else {})
++ (if vars.isControlPlane then {
+     'controllers/sts-resizer/30_cp_patch_releases_clusterrole': cpPatchReleasesCR,
+     'controllers/sts-resizer/30_cp_patch_releases_clusterrolebinding': cpPatchReleasesCRB,
+   } else {})

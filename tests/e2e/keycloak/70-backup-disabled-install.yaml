@@ -1,0 +1,14 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNKeycloak
+metadata:
+  name: keycloak-backup-disabled-test
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    size:
+      plan: standard-2
+    backup:
+      enabled: false
+  writeConnectionSecretToRef:
+    name: keycloak-backup-disabled-test-creds

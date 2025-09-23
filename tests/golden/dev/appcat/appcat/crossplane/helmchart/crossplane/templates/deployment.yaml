@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 1.19.1
-    helm.sh/chart: crossplane-1.19.1
+    app.kubernetes.io/version: 1.20.1
+    helm.sh/chart: crossplane-1.20.1
     release: appcat
   name: crossplane
   namespace: syn-crossplane
@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: v4.169.0
+        function-revision: v4.170.0
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -34,8 +34,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: crossplane
         app.kubernetes.io/part-of: crossplane
-        app.kubernetes.io/version: 1.19.1
-        helm.sh/chart: crossplane-1.19.1
+        app.kubernetes.io/version: 1.20.1
+        helm.sh/chart: crossplane-1.20.1
         release: appcat
     spec:
       containers:
@@ -77,7 +77,7 @@ spec:
               value: crossplane-tls-client
             - name: TLS_CLIENT_CERTS_DIR
               value: /tls/client
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
+          image: xpkg.crossplane.io/crossplane/crossplane:v1.20.1
           imagePullPolicy: Always
           name: crossplane
           ports:
@@ -103,8 +103,10 @@ spec:
             tcpSocket:
               port: readyz
           volumeMounts:
-            - mountPath: /cache
+            - mountPath: /cache/xpkg
               name: package-cache
+            - mountPath: /cache/xfn
+              name: function-cache
             - mountPath: /tls/server
               name: tls-server-certs
             - mountPath: /tls/client
@@ -149,7 +151,7 @@ spec:
               value: crossplane-tls-server
             - name: TLS_CLIENT_SECRET_NAME
               value: crossplane-tls-client
-          image: xpkg.upbound.io/crossplane/crossplane:v1.19.1
+          image: xpkg.crossplane.io/crossplane/crossplane:v1.20.1
           imagePullPolicy: Always
           name: crossplane-init
           resources:
@@ -170,6 +172,10 @@ spec:
             medium: null
             sizeLimit: 20Mi
           name: package-cache
+        - emptyDir:
+            medium: null
+            sizeLimit: 512Mi
+          name: function-cache
         - name: tls-server-certs
           secret:
             secretName: crossplane-tls-server

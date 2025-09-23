@@ -8,7 +8,7 @@ metadata:
     name: provider-helm
   name: provider-helm
 spec:
-  package: ghcr.io/vshn/provider-helm:v0.21.0-vshn
+  package: ghcr.io/crossplane-contrib/provider-helm:v1.0.0
   packagePullPolicy: Always
   runtimeConfigRef:
     name: provider-helm
@@ -137,6 +137,7 @@ rules:
       - batch
     resources:
       - jobs
+      - cronjobs
     verbs:
       - get
       - list

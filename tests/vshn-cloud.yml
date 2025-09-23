@@ -204,7 +204,7 @@ parameters:
               nginx.ingress.kubernetes.io/backend-protocol: HTTPS
               cert-manager.io/cluster-issuer: letsencrypt-staging
         nextcloud:
-          imageRegistry: dockerhub.vshn.net/library/nextcloud
+          imageRegistry: dockerhub.vshn.net
           enabled: true
           additionalInputs:
             collaboraCPULimit: "1"
