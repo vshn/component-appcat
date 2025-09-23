@@ -48,7 +48,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: dockerhub.vshn.net/library/nextcloud
+          imageRegistry: dockerhub.vshn.net
           imageTag: feature_vshnpostgres-cnpg
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
