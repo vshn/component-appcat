@@ -254,6 +254,16 @@ local providerRBAC = {
         resources: [ 'roles', 'rolebindings', 'serviceaccounts' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'postgresql.cnpg.io' ],
+        resources: [ 'clusters', 'imagecatalogs' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'monitoring.coreos.com' ],
+        resources: [ 'prometheusrules', 'podmonitors', 'servicemonitors' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {
