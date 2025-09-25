@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feature-vshnpostgres-cnpg
+        name: function-appcat-master-ea72507334b0a892351838b1361a0fb9942b3317
       input:
         apiVersion: v1
         data:

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feature/vshnpostgres-cnpg
+        function-revision: ea72507334b0a892351838b1361a0fb9942b3317
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

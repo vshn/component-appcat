@@ -27,7 +27,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:feature_vshnpostgres-cnpg
+          image: ghcr.io/vshn/appcat:ea72507334b0a892351838b1361a0fb9942b3317
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

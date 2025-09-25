@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-feature_vshnpostgres-cnpg
+    metadata.appcat.vshn.io/revision: master-ea72507334b0a892351838b1361a0fb9942b3317
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feature-vshnpostgres-cnpg
+        name: function-appcat-master-ea72507334b0a892351838b1361a0fb9942b3317
       input:
         apiVersion: v1
         data:
@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/
-          imageTag: feature_vshnpostgres-cnpg
+          imageTag: ea72507334b0a892351838b1361a0fb9942b3317
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100
