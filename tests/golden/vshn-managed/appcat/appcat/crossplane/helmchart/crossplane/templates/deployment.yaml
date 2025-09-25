@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+        function-revision: fix-merge-ref-job
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
