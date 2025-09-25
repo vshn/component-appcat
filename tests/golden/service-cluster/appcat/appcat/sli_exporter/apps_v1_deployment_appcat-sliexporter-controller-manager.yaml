@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:block-downsize-pvc
+          image: ghcr.io/vshn/appcat:56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

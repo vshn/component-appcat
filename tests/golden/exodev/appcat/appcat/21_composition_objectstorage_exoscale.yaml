@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-block-downsize-pvc
+        name: function-appcat-master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
       input:
         apiVersion: v1
         data:
