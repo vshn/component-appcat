@@ -32,7 +32,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+          image: ghcr.io/vshn/appcat:fix_pgsql-luks-secret
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

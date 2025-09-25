@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+    metadata.appcat.vshn.io/revision: master-fix_pgsql-luks-secret
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+        name: function-appcat-master-fix-pgsql-luks-secret
       input:
         apiVersion: v1
         data:
@@ -42,7 +42,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+          imageTag: fix_pgsql-luks-secret
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100

@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+        name: function-appcat-master-fix-pgsql-luks-secret
       input:
         apiVersion: v1
         data:
