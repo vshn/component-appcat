@@ -2,6 +2,7 @@ local common = import 'common.libsonnet';
 local vars = import 'config/vars.jsonnet';
 local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
+local xrds = import 'xrds.libsonnet';
 local inv = kap.inventory();
 local com = import 'lib/commodore.libjsonnet';
 local params = inv.parameters.appcat;
@@ -9,6 +10,9 @@ local controllersParams = params.controller;
 
 local image = params.images.appcat;
 local loadManifest(manifest) = std.parseJson(kap.yaml_load(inv.parameters._base_directory + '/dependencies/appcat/manifests/' + image.tag + '/config/controller/' + manifest));
+
+// Load the BillingService CRD for the new billing controller
+local billingServiceCRD = xrds.LoadCRD('vshn.appcat.vshn.io_billingservices.yaml', image.tag);
 
 local serviceAccount = loadManifest('service-account.yaml') {
   metadata+: {
@@ -220,6 +224,7 @@ if controllersParams.enabled then {
   'controllers/appcat/10_webhook_service': webhookService,
   'controllers/appcat/10_webhook_issuer': webhookIssuer,
   'controllers/appcat/10_webhook_certificate': webhookCertificate,
+  'controllers/appcat/10_billingservice_crd': billingServiceCRD,
   'controllers/appcat/20_service_account': serviceAccount,
   'controllers/appcat/30_deployment': controller,
   [if controllersParams.controlPlaneKubeconfig != '' then 'controllers/appcat/10_controlplane_credentials']: controlKubeConfig,
