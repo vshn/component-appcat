@@ -26,7 +26,7 @@ DOCKER_ARGS ?= run --rm -u "$$(id -u):$$(id -g)" --userns=$(DOCKER_USERNS) -w /$
 
 JSONNET_FILES   ?= $(shell find . -type f -not -path './vendor/*' \( -name '*.*jsonnet' -or -name '*.libsonnet' \))
 JSONNETFMT_ARGS ?= --in-place --pad-arrays
-JSONNET_IMAGE   ?= docker.io/bitnami/jsonnet:latest
+JSONNET_IMAGE   ?= docker.io/bitnamilegacy/jsonnet:latest
 JSONNET_DOCKER  ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) --entrypoint=jsonnetfmt $(JSONNET_IMAGE)
 
 VALE_CMD  ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) --volume "$${PWD}"/docs/modules:/pages ghcr.io/vshn/vale:2.15.5
