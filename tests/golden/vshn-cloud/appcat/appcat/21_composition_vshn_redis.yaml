@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+    metadata.appcat.vshn.io/revision: master-de6e4e7dc8a407226bdbd3e668394905d9254105
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+        name: function-appcat-master-de6e4e7dc8a407226bdbd3e668394905d9254105
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 56a380c3dbae1750ae14a783f27c7ef4ff5fddf3
+          imageTag: de6e4e7dc8a407226bdbd3e668394905d9254105
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
