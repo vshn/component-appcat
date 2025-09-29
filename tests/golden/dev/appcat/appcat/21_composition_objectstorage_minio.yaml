@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-pgsql-luks-secret
+        name: function-appcat-debug-de6e4e7dc8a407226bdbd3e668394905d9254105
       input:
         apiVersion: v1
         data:

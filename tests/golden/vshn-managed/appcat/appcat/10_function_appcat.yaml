@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-pgsql-luks-secret
+  name: function-appcat-master-de6e4e7dc8a407226bdbd3e668394905d9254105
 spec:
-  package: ghcr.io/vshn/appcat:fix_pgsql-luks-secret-func
+  package: ghcr.io/vshn/appcat:de6e4e7dc8a407226bdbd3e668394905d9254105-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

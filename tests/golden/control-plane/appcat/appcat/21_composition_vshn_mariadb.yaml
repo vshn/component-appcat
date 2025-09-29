@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_pgsql-luks-secret
+    metadata.appcat.vshn.io/revision: master-de6e4e7dc8a407226bdbd3e668394905d9254105
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-pgsql-luks-secret
+        name: function-appcat-master-de6e4e7dc8a407226bdbd3e668394905d9254105
       input:
         apiVersion: v1
         data:
@@ -43,7 +43,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fix_pgsql-luks-secret
+          imageTag: de6e4e7dc8a407226bdbd3e668394905d9254105
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
