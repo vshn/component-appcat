@@ -135,6 +135,7 @@ parameters:
 
     appuioManaged: true
     quotasEnabled: false
+    billingEnabled: false
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
@@ -312,6 +313,7 @@ parameters:
         managed_org_id: appuio-managed-openshift-billing
       odoo:
         url: "https://test.central.vshn.ch/api/v2/product_usage_report_POST"
+        db: "?{vaultkv:${cluster:tenant}/${cluster:name}/billing-collector-cloudservices/odoo-db}"
         oauth:
           url: "https://test.central.vshn.ch/api/v2/authentication/oauth2/token"
           clientID: "?{vaultkv:${cluster:tenant}/${cluster:name}/billing-collector-cloudservices/odoo-oauth-client-id}"
@@ -375,9 +377,16 @@ parameters:
       namespaceLabels: ${appcat:namespaceLabels}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
       quotasEnabled: ${appcat:quotasEnabled}
+      billingEnabled: ${appcat:billingEnabled}
       extraArgs: []
       extraEnv: {}
       controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
+      billing:
+        odooBaseURL: ${appcat:billing:odoo:url}
+        odooDb: ${appcat:billing:odoo:db}
+        odooClientID: ${appcat:billing:odoo:oauth:clientID}
+        odooClientSecret: ${appcat:billing:odoo:oauth:clientSecret}
+        odooTokenURL: ${appcat:billing:odoo:oauth:url}
       tls:
         certSecretName: webhook-cert
       resources:

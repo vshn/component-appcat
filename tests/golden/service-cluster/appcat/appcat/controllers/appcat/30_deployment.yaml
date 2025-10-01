@@ -27,6 +27,7 @@ spec:
             - --provider-webhooks=false
             - --event-forwarding=false
             - --quotas=false
+            - --billing=false
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat

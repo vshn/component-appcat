@@ -48,7 +48,8 @@ local clusterRoleBinding = loadManifest('cluster-role-binding.yaml') {
 };
 
 local mergedArgs = controllersParams.extraArgs + [
-  '--quotas=' + std.toString(params.quotasEnabled),
+  '--quotas=' + std.toString(controllersParams.quotasEnabled),
+  '--billing=' + std.toString(controllersParams.billingEnabled),
 ];
 
 local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
@@ -60,7 +61,28 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
     name: 'CONTROL_PLANE_KUBECONFIG',
     value: '/config/config',
   } else null,
-]);
+] + if controllersParams.billingEnabled then [
+  {
+    name: 'ODOO_BASE_URL',
+    value: controllersParams.billing.odooBaseURL,
+  },
+  {
+    name: 'ODOO_DB',
+    value: controllersParams.billing.odooDb,
+  },
+  {
+    name: 'ODOO_CLIENT_ID',
+    value: controllersParams.billing.odooClientID,
+  },
+  {
+    name: 'ODOO_CLIENT_SECRET',
+    value: controllersParams.billing.odooClientSecret,
+  },
+  {
+    name: 'ODOO_TOKEN_URL',
+    value: controllersParams.billing.odooTokenURL,
+  },
+] else []);
 
 local controlKubeConfig = kube.Secret('controlclustercredentials') + {
   metadata+: {
