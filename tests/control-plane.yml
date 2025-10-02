@@ -70,26 +70,8 @@ parameters:
         enabled: true
       kubernetes:
         enabled: true
-        additionalProviderConfigs:
-          - name: kind
-            spec:
-              credentials:
-                source: Secret
-                secretRef:
-                  key: kubeconfig
-                  name: kubeconfig-kind
-                  namespace: syn-crossplane
       helm:
         enabled: true
-        additionalProviderConfigs:
-          - name: kind
-            spec:
-              credentials:
-                source: Secret
-                secretRef:
-                  key: kubeconfig
-                  name: kubeconfig-kind
-                  namespace: syn-crossplane
       minio:
         enabled: true
         defaultProviderConfig:

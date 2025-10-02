@@ -309,6 +309,52 @@ local controlPlaneRoleBindingCustom = kube.ClusterRoleBinding('appcat:controlpla
   subjects_: [ common.ControlPlaneSa ],
 };
 
+local servalaServiceAccount = kube.ServiceAccount('servala-portal') + {
+  metadata+: {
+    namespace: params.namespace,
+  },
+};
+
+local servalaClusterRole = kube.ClusterRole('servala:portal:custom') + {
+  rules: [
+    {
+      apiGroups: [ 'apiextensions.k8s.io' ],
+      resources: [ 'customresourcedefinitions' ],
+      verbs: [ 'get', 'list', 'watch' ],
+    },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'namespaces' ],
+      verbs: [ 'create', 'get', 'list', 'watch', 'update', 'patch', 'delete' ],
+    },
+    {
+      apiGroups: [ 'vshn.appcat.vshn.io' ],
+      resources: [ '*' ],
+      verbs: [ 'create', 'get', 'list', 'watch', 'update', 'patch', 'delete' ],
+    },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'secrets' ],
+      verbs: [ 'get' ],
+    },
+  ],
+};
+
+local servalaClusterBinding = kube.ClusterRoleBinding('servala:portal') {
+  roleRef_: servalaClusterRole,
+  subjects_: [ servalaServiceAccount ],
+};
+
+local servalaSATokenSecret = kube.Secret('servala-portal') + {
+  metadata+: {
+    namespace: params.namespace,
+    annotations: {
+      'kubernetes.io/service-account.name': servalaServiceAccount.metadata.name,
+    },
+  },
+  type: 'kubernetes.io/service-account-token',
+};
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if vars.isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -330,10 +376,16 @@ local controlPlaneRoleBindingCustom = kube.ClusterRoleBinding('appcat:controlpla
        '11_control_plane_custom_role': controlPlaneRole,
        '11_control_plan_role_binding_custom': controlPlaneRoleBindingCustom,
      } else {})
-+ if vars.isSingleOrControlPlaneCluster then {
-  '11_service_cluster_sa': serviceClusterSA,
-  '11_service_cluster_sa_token_secret': serviceClusterSATokenSecret,
-  '11_service_cluster_sa_custom_role': serviceClusterRole,
-  '11_service_cluster_role_binding_crossplane': serviceClusterRoleBindingCrossplane,
-  '11_service_cluster_role_binding_custom': serviceClusterRoleBindingCustom,
++ (if vars.isSingleOrControlPlaneCluster then {
+     '11_service_cluster_sa': serviceClusterSA,
+     '11_service_cluster_sa_token_secret': serviceClusterSATokenSecret,
+     '11_service_cluster_sa_custom_role': serviceClusterRole,
+     '11_service_cluster_role_binding_crossplane': serviceClusterRoleBindingCrossplane,
+     '11_service_cluster_role_binding_custom': serviceClusterRoleBindingCustom,
+   } else {})
++ if vars.isControlPlane then {
+  '12_servala_service_account': servalaServiceAccount,
+  '12_servala_cluster_role_binding': servalaClusterBinding,
+  '12_servala_sa_token_secret': servalaSATokenSecret,
+  '12_servala_cluster_role': servalaClusterRole,
 } else {}
