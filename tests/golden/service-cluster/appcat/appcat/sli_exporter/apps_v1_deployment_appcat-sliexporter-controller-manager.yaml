@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_codey-webhook
+          image: ghcr.io/vshn/appcat:2fe1ad156bf942747d5318ead70dc34a725d4351
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

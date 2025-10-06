@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-codey-webhook
+  name: function-appcat-debug-2fe1ad156bf942747d5318ead70dc34a725d4351
 spec:
-  package: ghcr.io/vshn/appcat:fix_codey-webhook-func
+  package: ghcr.io/vshn/appcat:2fe1ad156bf942747d5318ead70dc34a725d4351-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
