@@ -28,7 +28,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:eddf0e2292eacda12e4e88e1a801c6020882d9d0
+          image: ghcr.io/vshn/appcat:change_vshnpostgresbackups
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
