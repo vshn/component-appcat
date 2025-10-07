@@ -28,7 +28,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:35eed3f54ff45652ec17eb6633ced13c8494be1c
+          image: ghcr.io/vshn/appcat:feature_cnpg-scaling
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

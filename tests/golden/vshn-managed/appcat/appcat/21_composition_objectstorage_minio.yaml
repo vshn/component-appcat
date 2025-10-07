@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-35eed3f54ff45652ec17eb6633ced13c8494be1c
+        name: function-appcat-master-feature-cnpg-scaling
       input:
         apiVersion: v1
         data:
