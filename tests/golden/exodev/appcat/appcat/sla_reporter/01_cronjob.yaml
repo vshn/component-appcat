@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:fix_proxysql-version
+              image: ghcr.io/vshn/appcat:2322f616642bd3cb580f150efd0e2bbc3c56eb38
               name: sla-reporter
               resources:
                 limits:

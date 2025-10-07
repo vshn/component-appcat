@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-proxysql-version
+        name: function-appcat-debug-2322f616642bd3cb580f150efd0e2bbc3c56eb38
       input:
         apiVersion: v1
         data:

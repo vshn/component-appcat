@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_proxysql-version
+    metadata.appcat.vshn.io/revision: master-2322f616642bd3cb580f150efd0e2bbc3c56eb38
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:fix_proxysql-version
+          image: ghcr.io/vshn/appcat:2322f616642bd3cb580f150efd0e2bbc3c56eb38
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
