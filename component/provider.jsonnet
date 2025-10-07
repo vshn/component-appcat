@@ -256,7 +256,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'postgresql.cnpg.io' ],
-        resources: [ 'clusters', 'imagecatalogs' ],
+        resources: [ 'clusters', 'imagecatalogs', 'scheduledbackups' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {

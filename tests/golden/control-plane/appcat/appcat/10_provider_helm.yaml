@@ -199,6 +199,7 @@ rules:
     resources:
       - clusters
       - imagecatalogs
+      - scheduledbackups
     verbs:
       - get
       - list
