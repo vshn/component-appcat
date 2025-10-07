@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '-40'
   name: function-patch-and-transform
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.1.4
+  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.9.1
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-patch-and-transform
