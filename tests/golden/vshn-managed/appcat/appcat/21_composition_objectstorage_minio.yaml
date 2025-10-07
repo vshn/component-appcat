@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feature-cnpg-backup
+        name: function-appcat-master-dd54184019697e2ab0f0833c92725a4adf29a600
       input:
         apiVersion: v1
         data:
