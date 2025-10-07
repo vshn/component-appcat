@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-dd54184019697e2ab0f0833c92725a4adf29a600
+        name: function-appcat-debug-v4-171-0
       input:
         apiVersion: v1
         data:
