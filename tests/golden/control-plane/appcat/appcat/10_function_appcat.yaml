@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-feature-billing
+  name: function-appcat-master-50e6051d5fe7d20f94b3e1ceb514772079438003
 spec:
-  package: ghcr.io/vshn/appcat:feature_billing-func
+  package: ghcr.io/vshn/appcat:50e6051d5fe7d20f94b3e1ceb514772079438003-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

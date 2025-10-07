@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feature_billing
+          image: ghcr.io/vshn/appcat:50e6051d5fe7d20f94b3e1ceb514772079438003
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
