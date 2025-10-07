@@ -254,6 +254,16 @@ local providerRBAC = {
         resources: [ 'roles', 'rolebindings', 'serviceaccounts' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'postgresql.cnpg.io' ],
+        resources: [ 'clusters', 'imagecatalogs', 'scheduledbackups' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'monitoring.coreos.com' ],
+        resources: [ 'prometheusrules', 'podmonitors', 'servicemonitors' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {
@@ -289,6 +299,26 @@ local additionalProviderConfigs(provider) =
         spec+: config.spec,
       },
     provider.additionalProviderConfigs,
+    {}
+  );
+
+local generateProviderConfigs(provider) =
+  std.foldl(
+    function(agg, config)
+      agg + crossplane.ProviderConfig(config.name) {
+        apiVersion: provider.apiVersion,
+        spec+: {
+          credentials: {
+            secretRef: {
+              key: 'kubeconfig',
+              name: 'kubeconfig-' + config.name,
+              namespace: params.crossplane.namespace,
+            },
+            source: 'Secret',
+          },
+        },
+      },
+    params.clusterManagementSystem.serviceClusterKubeconfigs,
     {}
   );
 
@@ -388,6 +418,7 @@ local provider(name, provider) =
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'credentials') then providerSecret(provider.credentials),
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'connectionSecretNamespace') then kube.Namespace(provider.connectionSecretNamespace),
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'additionalProviderConfigs') && std.length(provider.additionalProviderConfigs) > 0 then additionalProviderConfigs(provider),
+          if vars.isSingleOrControlPlaneCluster && std.length(params.clusterManagementSystem.serviceClusterKubeconfigs) > 0 && (name == 'kubernetes' || name == 'helm') then generateProviderConfigs(provider),
         ]
       ),
   };

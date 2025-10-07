@@ -29,8 +29,13 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.26.0
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
-        # The UBI version might increase with newer version, so check with skopeo first:
+        # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
+      cnpgCluster:
+        # https://artifacthub.io/packages/helm/cloudnative-pg/cluster
+        source: https://cloudnative-pg.io/charts/
+        version: 0.3.1
+        chartName: cluster
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -67,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.170.0
+        tag: v4.171.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -130,6 +135,7 @@ parameters:
 
     appuioManaged: true
     quotasEnabled: false
+    billingEnabled: false
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
@@ -307,6 +313,7 @@ parameters:
         managed_org_id: appuio-managed-openshift-billing
       odoo:
         url: "https://test.central.vshn.ch/api/v2/product_usage_report_POST"
+        db: "?{vaultkv:${cluster:tenant}/${cluster:name}/billing-collector-cloudservices/odoo-db}"
         oauth:
           url: "https://test.central.vshn.ch/api/v2/authentication/oauth2/token"
           clientID: "?{vaultkv:${cluster:tenant}/${cluster:name}/billing-collector-cloudservices/odoo-oauth-client-id}"
@@ -370,9 +377,16 @@ parameters:
       namespaceLabels: ${appcat:namespaceLabels}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
       quotasEnabled: ${appcat:quotasEnabled}
+      billingEnabled: ${appcat:billingEnabled}
       extraArgs: []
       extraEnv: {}
       controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
+      billing:
+        odooBaseURL: ${appcat:billing:odoo:url}
+        odooDb: ${appcat:billing:odoo:db}
+        odooClientID: ${appcat:billing:odoo:oauth:clientID}
+        odooClientSecret: ${appcat:billing:odoo:oauth:clientSecret}
+        odooTokenURL: ${appcat:billing:odoo:oauth:url}
       tls:
         certSecretName: webhook-cert
       resources:
@@ -667,6 +681,9 @@ parameters:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             # Depending on the cluster, this needs to be set
             loadbalancerAnnotations: ""
+            cnpgClusterChartSource: ${appcat:charts:cnpgCluster:source}
+            cnpgClusterChartVersion: ${appcat:charts:cnpgCluster:version}
+            cnpgClusterChartName: ${appcat:charts:cnpgCluster:chartName}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           enableNetworkPolicy: true

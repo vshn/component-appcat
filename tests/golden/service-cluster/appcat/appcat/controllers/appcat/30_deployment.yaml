@@ -27,12 +27,13 @@ spec:
             - --provider-webhooks=false
             - --event-forwarding=false
             - --quotas=false
+            - --billing=false
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:v4.170.0
+          image: ghcr.io/vshn/appcat:v4.171.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

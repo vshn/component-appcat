@@ -1,0 +1,92 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: PostgreSQL instances by VSHN
+    metadata.appcat.vshn.io/displayname: PostgreSQL by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-postgresql
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"plus-2":{"note":"Will be scheduled on APPUiO
+      Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"400m","disk":"20Gi","enabled":true,"memory":"1936Mi"}},"plus-4":{"note":"Will
+      be scheduled on APPUiO Cloud plus nodes","scheduling":{"nodeSelector":{"appuio.io/node-class":"plus"}},"size":{"cpu":"900m","disk":"40Gi","enabled":true,"memory":"3984Mi"}},"standard-2":{"size":{"cpu":"400m","disk":"20Gi","enabled":true,"memory":"1936Mi"}},"standard-4":{"size":{"cpu":"900m","disk":"40Gi","enabled":true,"memory":"3984Mi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/postgresql.html
+    metadata.appcat.vshn.io/zone: rma1
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: master-v4.171.0
+    metadata.appcat.vshn.io/serviceID: vshn-postgresql
+    name: vshnpostgrescnpg.vshn.appcat.vshn.io
+  name: vshnpostgrescnpg.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNPostgreSQL
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-master-v4-171-0
+      input:
+        apiVersion: v1
+        data:
+          additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
+          bucketRegion: lpg
+          cnpgClusterChartName: cluster
+          cnpgClusterChartSource: https://cloudnative-pg.io/charts/
+          cnpgClusterChartVersion: 0.3.1
+          controlNamespace: syn-appcat-control
+          crossplaneNamespace: syn-crossplane
+          defaultPlan: standard-2
+          emailAlertingEnabled: 'false'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: appcat@appuio.cloud
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: appcat@appuio.cloud
+          externalDatabaseConnectionsEnabled: 'true'
+          ignoreNamespaceForBilling: vshn-test
+          imageTag: v4.171.0
+          isOpenshift: 'false'
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          loadbalancerAnnotations: |
+            foo: bar
+          maintenanceSA: helm-based-service-maintenance
+          ocpDefaultAppsDomain: ''
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNPostgreSQL
+          ownerVersion: v1
+          plans: '{"plus-2": {"note": "Will be scheduled on APPUiO Cloud plus nodes",
+            "scheduling": {"nodeSelector": {"appuio.io/node-class": "plus"}}, "size":
+            {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
+            "plus-4": {"note": "Will be scheduled on APPUiO Cloud plus nodes", "scheduling":
+            {"nodeSelector": {"appuio.io/node-class": "plus"}}, "size": {"cpu": "900m",
+            "disk": "40Gi", "enabled": true, "memory": "3984Mi"}}, "standard-2": {"size":
+            {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
+            "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
+            "memory": "3984Mi"}}}'
+          quotasEnabled: 'false'
+          releaseManagementEnabled: 'true'
+          salesOrder: ''
+          serviceID: vshn-postgresqlcnpg
+          serviceName: postgresqlcnpg
+          sideCars: '{"clusterController": {"limits": {"cpu": "500m", "memory": "512Mi"},
+            "requests": {"cpu": "32m", "memory": "128Mi"}}, "createBackup": {"limits":
+            {"cpu": "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory":
+            "64Mi"}}, "envoy": {"limits": {"cpu": "500m", "memory": "512Mi"}, "requests":
+            {"cpu": "32m", "memory": "64Mi"}}, "pgbouncer": {"limits": {"cpu": "500m",
+            "memory": "128Mi"}, "requests": {"cpu": "16m", "memory": "4Mi"}}, "postgresUtil":
+            {"limits": {"cpu": "20m", "memory": "20Mi"}, "requests": {"cpu": "10m",
+            "memory": "4Mi"}}, "prometheusPostgresExporter": {"limits": {"cpu": "150m",
+            "memory": "256Mi"}, "requests": {"cpu": "10m", "memory": "16Mi"}}, "runDbops":
+            {"limits": {"cpu": "500m", "memory": "1Gi"}, "requests": {"cpu": "100m",
+            "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m", "memory":
+            "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
+          sliNamespace: syn-appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: pgsql-func
+  writeConnectionSecretsToNamespace: syn-crossplane

@@ -76,7 +76,7 @@ parameters:
           - ${_base_directory}/component/exoscale_postgres.jsonnet
           - ${_base_directory}/component/exoscale_opensearch.jsonnet
           - ${_base_directory}/component/vshn_postgres.jsonnet
-          - ${_base_directory}/component/vshn_postgres.jsonnet
+          - ${_base_directory}/component/vshn_postgres_cnpg.jsonnet
           - ${_base_directory}/component/vshn_minio.jsonnet
           - ${_base_directory}/component/vshn_services.jsonnet
           - ${_base_directory}/component/statefuleset-resize-controller.jsonnet
