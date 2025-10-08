@@ -7,26 +7,20 @@ parameters:
       - type: https
         source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/v1.4.0/lib/openshift4-operators.libsonnet
         output_path: vendor/lib/openshift4-operators.libsonnet
-
   facts:
     cloud: cloudscale
     sales_order: "10431"
     service_level: "premium"
-
-
   global:
     appuio_metered_billing_zone_label_map:
       c-green-test-1234: 'Kind - Local Test 0'
-
   appcat:
     clusterManagementSystem:
       controlPlaneCluster: false
       serviceCluster: true
       controlPlaneKubeconfig: "dummy" # `make vcluster-in-cluster-kubeconfig` in kindev
-
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
-
     quotasEnabled: false
     appuioManaged: false
     billing:
@@ -42,7 +36,6 @@ parameters:
       prometheus:
         url: http://prometheus-operated.prometheus-system:9090/prometheus
       cloudZone: ${global:appuio_metered_billing_zone_label_map:${cluster:name}}
-
     slos:
       enabled: true
       alertsEnabled: true
@@ -73,19 +66,18 @@ parameters:
         enabled: false
       sql:
         enabled: false
-
     apiserver:
       enabled: false
       env:
         APPCAT_HANDLER_ENABLED: "true"
         VSHN_POSTGRES_BACKUP_HANDLER_ENABLED: "true"
         VSHN_REDIS_BACKUP_HANDLER_ENABLED: "true"
-
     services:
       emailAlerting:
         enabled: true
         smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
       vshn:
+        e2eTests: true
         enabled: true
         externalDatabaseConnectionsEnabled: true
         mariadb:
@@ -101,11 +93,9 @@ parameters:
           enabled: true
         minio:
           enabled: false
-
       generic:
         objectstorage:
           enabled: false
-
           defaultComposition: minio
           compositions:
             exoscale:

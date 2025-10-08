@@ -2,6 +2,8 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
   name: postgresql-e2e-test
+  labels:
+    appcat.vshn.io/provider-config: kind
 spec:
   parameters:
     security:
@@ -18,6 +20,8 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
   name: postgresql-e2e-test-restore
+  labels:
+    appcat.vshn.io/provider-config: kind
 spec:
   parameters:
     security:

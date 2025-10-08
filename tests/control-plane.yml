@@ -7,33 +7,25 @@ parameters:
       - type: https
         source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/v1.4.0/lib/openshift4-operators.libsonnet
         output_path: vendor/lib/openshift4-operators.libsonnet
-
   facts:
     cloud: cloudscale
     sales_order: "10431"
     appcat_dev: true
     service_level: "premium"
-
-
   global:
     appuio_metered_billing_zone_label_map:
       c-green-test-1234: 'Kind - Local Test 0'
-
   crossplane:
     namespace: syn-crossplane
-
   appcat:
-
     clusterManagementSystem:
       controlPlaneCluster: true
       serviceCluster: false
       serviceClusterKubeconfigs:
         - name: kind
           config: "dummy" # `make vcluster-host-kubeconfig` in kindev
-
-    grpcEndpoint: 172.17.0.1:9443
+    grpcEndpoint: 172.19.0.1:9443
     proxyFunction: false
-
     quotasEnabled: false
     appuioManaged: false
     billing:
@@ -49,7 +41,6 @@ parameters:
       prometheus:
         url: http://prometheus-operated.prometheus-system:9090/prometheus
       cloudZone: ${global:appuio_metered_billing_zone_label_map:${cluster:name}}
-
     slos:
       enabled: true
       alertsEnabled: false
@@ -80,18 +71,17 @@ parameters:
             apiSecretRef:
               name: minio-secret
               namespace: syn-crossplane
-
     apiserver:
       enabled: true
       env:
         APPCAT_HANDLER_ENABLED: "true"
         VSHN_POSTGRES_BACKUP_HANDLER_ENABLED: "true"
         VSHN_REDIS_BACKUP_HANDLER_ENABLED: "true"
-
     services:
       emailAlerting:
         enabled: false
       vshn:
+        e2eTests: true
         enabled: true
         externalDatabaseConnectionsEnabled: true
         mariadb:
@@ -112,19 +102,17 @@ parameters:
               cert-manager.io/cluster-issuer: letsencrypt-staging
               nginx.ingress.kubernetes.io/enable-cors: "true"
               nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
-
         forgejo:
           enabled: true
           # https://vault-prod.syn.vshn.net/ui/vault/secrets/clusters%2Fkv/kv/__shared__%2F__shared__%2Fappcat/details?version=2
           additionalInputs:
             registry_username: ""
             registry_password: ""
-
         postgres:
           sgNamespace: stackgres
           additionalInputs:
             loadbalancerAnnotations: |
-                foo: bar
+              foo: bar
           plans:
             standard-8:
               enabled: false
@@ -182,11 +170,9 @@ parameters:
                     disk: 20Gi
                 writeConnectionSecretToRef:
                   name: minio-cluster-credentials
-
       generic:
         objectstorage:
           enabled: true
-
           defaultComposition: minio
           compositions:
             exoscale:
