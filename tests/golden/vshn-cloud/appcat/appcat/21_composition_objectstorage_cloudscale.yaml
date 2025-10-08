@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-171-0
+        name: function-appcat-master-revert-503-fix-billing-disable
       input:
         apiVersion: v1
         data:

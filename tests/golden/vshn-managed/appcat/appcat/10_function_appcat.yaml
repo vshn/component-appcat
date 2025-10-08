@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-v4-171-0
+  name: function-appcat-master-revert-503-fix-billing-disable
 spec:
-  package: ghcr.io/vshn/appcat:v4.171.0-func
+  package: ghcr.io/vshn/appcat:revert-503-fix_billing-disable-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
