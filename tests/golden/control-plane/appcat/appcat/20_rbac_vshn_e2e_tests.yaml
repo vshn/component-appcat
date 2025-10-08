@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    appuio.io/organization: vshn
+    name: appcat-e2e
+  name: appcat-e2e
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    appuio.io/organization: vshn
+  name: github-ci
+  namespace: appcat-e2e
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-e2e
+  name: appcat-e2e
+  namespace: appcat-e2e
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+  - kind: ServiceAccount
+    name: github-ci
+    namespace: appcat-e2e
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-e2e
+  name: appcat:e2e
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: appcat:e2e
+subjects:
+  - kind: ServiceAccount
+    name: github-ci
+    namespace: appcat-e2e
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-e2e
+  name: appcat:e2e
+rules:
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - ''
+    resources:
+      - namespaces
+    verbs:
+      - delete
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+      - jobs/finalizers
+      - cronjobs/finalizers
+    verbs:
+      - get
+      - list
+      - create
+      - delete
+      - update
+      - watch
+  - apiGroups:
+      - ''
+    resources:
+      - secrets
+      - services
+    verbs:
+      - list
+      - get
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - ''
+    resources:
+      - pods
+      - pods/portforward
+      - pods/exec
+    verbs:
+      - get
+      - list
+      - create
+  - apiGroups:
+      - api.appcat.vshn.io
+    resources:
+      - vshnkeycloakbackups
+      - vshnpostgresbackups
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sgbackups
+    verbs:
+      - create
+      - get
+      - list
+---
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    kubernetes.io/service-account.name: github-ci
+  labels:
+    name: github-ci-secret
+  name: github-ci-secret
+  namespace: appcat-e2e
+type: kubernetes.io/service-account-token

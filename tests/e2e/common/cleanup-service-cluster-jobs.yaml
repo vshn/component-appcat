@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cleanup-service-cluster
+  namespace: appcat-e2e
+spec:
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cleanup
+          image: alpine/k8s:1.31.7
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              export KUBECONFIG=/configs/service-cluster/config
+              echo "=== Cleaning up inner jobs in service cluster ==="
+
+              # Delete all connectivity test jobs
+              kubectl delete jobs -n appcat-e2e -l app=postgresql-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=postgresql-user-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=mariadb-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=mariadb-user-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=mariadb-scaled-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=redis-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=forgejo-connectivity-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=forgejo-config-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=forgejo-ingress-test --ignore-not-found=true
+              kubectl delete jobs -n appcat-e2e -l app=keycloak-connectivity-test --ignore-not-found=true
+
+              echo "✓ Cleanup completed"
+          volumeMounts:
+            - name: service-cluster-config
+              mountPath: /configs/service-cluster
+      volumes:
+        - name: service-cluster-config
+          secret:
+            secretName: service-cluster-kubeconfig

@@ -33,7 +33,7 @@ timeout: 600
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: connect-mariadb-scaled
+  name: connect-mariadb-scaled-e2e
 status:
   conditions:
     - type: SuccessCriteriaMet

@@ -3,6 +3,8 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:
   name: keycloak-e2e
+  labels:
+    appcat.vshn.io/provider-config: kind
 spec:
   parameters:
     service:
@@ -15,6 +17,8 @@ spec:
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:
+  labels:
+    appcat.vshn.io/provider-config: kind
   name: keycloak-e2e-restore
 spec:
   parameters:

@@ -6,6 +6,8 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNNextcloud
 metadata:
   name: nextcloud-e2e
+  labels:
+    appcat.vshn.io/provider-config: kind
   finalizers:
   - finalizer.apiextensions.crossplane.io
 spec:

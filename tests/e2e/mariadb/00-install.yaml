@@ -1,7 +1,9 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNMariaDB
 metadata:
-  name: mariadb-e2e
+  labels:
+    appcat.vshn.io/provider-config: kind
+  name: mariadb-e2e-to-delete
 spec:
   parameters:
     instances: 3

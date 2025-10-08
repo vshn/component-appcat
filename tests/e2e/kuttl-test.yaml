@@ -1,7 +1,56 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestSuite
+metadata:
+  name: adaptive-cluster-test
+commands:
+  # This script handles various kube-configs for kuttle tests in OpenShift/kind with converged/non-converged mode.
+  # Due to kuttle limitations some kube-config require content instead of the path as value.
+  # CONTROL_PLANE_KUBECONFIG_CONTENT base64 value is required and used as the primary kubeconfig
+  # SERVICE_CLUSTER_KUBECONFIG_CONTENT base64 value is required and should have the same value as CONTROL_PLANE_KUBECONFIG_CONTENT in single mode
+  # IN_CLUSTER_CONTROL_PLANE_KUBECONFIG - path to config, if provided, used for in-cluster operations; otherwise falls back to CONTROL_PLANE_KUBECONFIG
+  # IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG - path to config, if provided, used for in-cluster service operations; otherwise falls back to SERVICE_CLUSTER_KUBECONFIG, then to IN_CLUSTER_CONTROL_PLANE_KUBECONFIG
+  - script: |
+      echo "=== Kuttl Test Setup ==="
+
+      if [ -z "${CONTROL_PLANE_KUBECONFIG_CONTENT}" ] && [ -z "${SERVICE_CLUSTER_KUBECONFIG_CONTENT}" ]; then
+        echo "ERROR: CONTROL_PLANE_KUBECONFIG_CONTENT and SERVICE_CLUSTER_KUBECONFIG_CONTENT must be provided"
+        exit 1
+      fi
+
+      echo "${CONTROL_PLANE_KUBECONFIG_CONTENT}" | base64 -d > /tmp/control-plane-config
+      echo "${SERVICE_CLUSTER_KUBECONFIG_CONTENT}" | base64 -d > /tmp/service-cluster-config
+
+      CONTROL_PLANE_KUBECONFIG='/tmp/control-plane-config'
+      SERVICE_CLUSTER_KUBECONFIG='/tmp/service-cluster-config'
+
+      # Set defaults for optional variables first
+      IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG="${IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG:-${IN_CLUSTER_CONTROL_PLANE_KUBECONFIG:-${SERVICE_CLUSTER_KUBECONFIG}}}"
+      IN_CLUSTER_CONTROL_PLANE_KUBECONFIG="${IN_CLUSTER_CONTROL_PLANE_KUBECONFIG:-${CONTROL_PLANE_KUBECONFIG}}"
+      NAMESPACE="appcat-e2e"
+
+       # Create appcat-e2e namespace in control plane
+      echo "Creating ${NAMESPACE} namespace in control plane..."
+      kubectl --kubeconfig="${CONTROL_PLANE_KUBECONFIG}" create namespace "${NAMESPACE}" || true
+
+      echo "Creating/updating control plane kubeconfig secret..."
+      kubectl --kubeconfig="${CONTROL_PLANE_KUBECONFIG}" create secret generic control-plane-kubeconfig \
+      --namespace ${NAMESPACE} \
+      --from-file=config="${IN_CLUSTER_CONTROL_PLANE_KUBECONFIG}" \
+      --dry-run=client -o yaml | kubectl --kubeconfig="${CONTROL_PLANE_KUBECONFIG}" apply -f -
+
+      echo "Creating ${NAMESPACE} namespace in service cluster if it's multi mode..."
+      kubectl --kubeconfig="${SERVICE_CLUSTER_KUBECONFIG}" create namespace "${NAMESPACE}" || true
+
+      # Create service cluster kubeconfig secret
+      echo "Creating/updating service cluster kubeconfig secret in main cluster..."
+      kubectl --kubeconfig="${CONTROL_PLANE_KUBECONFIG}" create secret generic service-cluster-kubeconfig \
+      --namespace ${NAMESPACE} \
+      --from-file=config="${IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG}" \
+      --dry-run=client -o yaml | kubectl --kubeconfig="${CONTROL_PLANE_KUBECONFIG}" apply -f -
+
+      echo "=== Setup completed ==="
 testDirs:
   - ./test/e2e/
 namespace: appcat-e2e
+timeout: 600
 parallel: 1
-timeout: 60

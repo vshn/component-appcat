@@ -1,0 +1,26 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  name: postgresql-e2e-test-nextcloud
+  labels:
+    appcat.vshn.io/provider-config: kind
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    network:
+      serviceType: LoadBalancer
+    backup:
+      schedule: '*/2 * * * *'
+    service:
+      vacuumEnabled: true
+      repackEnabled: true
+      access:
+        - user: nextcloud
+          writeConnectionSecretToRef:
+            name: nextcloud
+            namespace: appcat-e2e
+    size:
+      plan: standard-2
+  writeConnectionSecretToRef:
+    name: postgresql-e2e-test-nextcloud-creds

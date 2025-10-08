@@ -6,10 +6,6 @@ delete:
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNForgejo
     name: forgejo-e2e
-  - apiVersion: batch/v1
-    kind: Job
-    labels:
-      e2e-test: forgejo-e2e
   - apiVersion: v1
     kind: Pod
     labels:
