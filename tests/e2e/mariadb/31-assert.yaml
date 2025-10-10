@@ -2,15 +2,23 @@ apiVersion: kuttl.dev/v1beta1
 kind: TestAssert
 timeout: 600
 ---
-apiVersion: batch/v1
-kind: Job
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNMariaDB
 metadata:
-  name: connect-mariadb-user
-status:
-  conditions:
-    - type: SuccessCriteriaMet
-      status: 'True'
-    - type: Complete
-      status: 'True'
-  succeeded: 1
-  ready: 0
+  labels:
+    appcat.vshn.io/provider-config: kind
+  name: mariadb-e2e
+  namespace: appcat-e2e
+spec:
+  parameters:
+    network:
+      serviceType: LoadBalancer
+    security:
+      deletionProtection: false
+    service:
+      access:
+        - user: e2euser
+    size:
+      plan: standard-2
+  writeConnectionSecretToRef:
+    name: mariadb-creds

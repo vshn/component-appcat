@@ -82,8 +82,18 @@ parameters:
         enabled: false
       kubernetes:
         enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: InjectedIdentity
       helm:
         enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: InjectedIdentity
       minio:
         enabled: true
         defaultProviderConfig:

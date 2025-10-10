@@ -2,6 +2,8 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:
+  labels:
+    appcat.vshn.io/provider-config: kind
   name: keycloak-e2e
 spec:
   parameters:

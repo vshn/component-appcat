@@ -1,5 +1,20 @@
 spec:
   ignoreDifferences:
+    - group: ''
+      jsonPointers:
+        - /data
+      kind: Secret
+      name: github-ci-secret
+      namespace: appcat-e2e
+    - group: ''
+      jsonPointers:
+        - /metadata/annotations
+      kind: Namespace
+    - group: rbac.authorization.k8s.io
+      jsonPointers:
+        - /rules
+      kind: ClusterRole
+      name: crossplane
     - group: admissionregistration.k8s.io
       jqPathExpressions:
         - .webhooks[]?.clientConfig.caBundle

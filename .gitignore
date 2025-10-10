@@ -8,6 +8,7 @@
 .kind
 .idea
 .vscode
+.env
 
 # sloth artifacts
 sloth-*-*-*
