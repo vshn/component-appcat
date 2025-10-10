@@ -31,7 +31,7 @@ spec:
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.0.1
+          chartVersion: 8.4.1
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
