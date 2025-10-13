@@ -94,7 +94,8 @@ apiVersion: v1
 data: {}
 kind: Secret
 metadata:
-  annotations: {}
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
   labels:
     name: exoscale-api-access
   name: exoscale-api-access

@@ -23,6 +23,9 @@ local annotationMap = {
   ClusterRoleBinding: {
     'argocd.argoproj.io/sync-wave': '-100',
   },
+  Secret: {
+    'argocd.argoproj.io/sync-wave': '-100',
+  },
   ObjectBucket: {
     'argocd.argoproj.io/sync-options': 'Prune=false,SkipDryRunOnMissingResource=true',
   },
