@@ -60,6 +60,7 @@ rules:
     verbs:
       - get
       - list
+      - watch
   - apiGroups:
       - syn.tools
     resources:
@@ -83,6 +84,32 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices/status
+    verbs:
+      - get
+      - patch
+      - update
   - apiGroups:
       - vshn.appcat.vshn.io
     resources:

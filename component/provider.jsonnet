@@ -232,7 +232,7 @@ local providerRBAC = {
       {
         apiGroups: [ 'batch' ],
         resources: [ 'jobs', 'cronjobs' ],
-        verbs: [ 'get', 'list', 'watch', 'create', 'delete' ],
+        verbs: [ 'get', 'list', 'watch', 'create', 'delete', 'update', 'patch' ],
       },
       {
         apiGroups: [ 'monitoring.coreos.com' ],
@@ -256,7 +256,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'postgresql.cnpg.io' ],
-        resources: [ 'clusters', 'imagecatalogs' ],
+        resources: [ 'clusters', 'imagecatalogs', 'scheduledbackups' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {
