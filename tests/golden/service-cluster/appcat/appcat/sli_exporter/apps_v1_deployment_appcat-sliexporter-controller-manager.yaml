@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_nextcloud-cronjob-indentation
+          image: ghcr.io/vshn/appcat:v4.171.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
