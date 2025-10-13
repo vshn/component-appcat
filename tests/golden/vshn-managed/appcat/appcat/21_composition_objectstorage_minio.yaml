@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-nextcloud-cronjob
+        name: function-appcat-master-v4-171-1
       input:
         apiVersion: v1
         data:
