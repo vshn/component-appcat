@@ -232,7 +232,7 @@ local providerRBAC = {
       {
         apiGroups: [ 'batch' ],
         resources: [ 'jobs', 'cronjobs' ],
-        verbs: [ 'get', 'list', 'watch', 'create', 'delete' ],
+        verbs: [ 'get', 'list', 'watch', 'create', 'delete', 'update', 'patch' ],
       },
       {
         apiGroups: [ 'monitoring.coreos.com' ],
