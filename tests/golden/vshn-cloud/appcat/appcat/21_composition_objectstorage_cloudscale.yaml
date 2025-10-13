@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-171-1
+        name: function-appcat-master-hotfix-fix-release
       input:
         apiVersion: v1
         data:

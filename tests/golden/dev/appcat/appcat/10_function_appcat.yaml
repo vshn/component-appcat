@@ -4,23 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-v4-171-1
+  name: function-appcat-debug-hotfix-fix-release
 spec:
-  package: ghcr.io/vshn/appcat:v4.171.1-func
-  packagePullPolicy: Always
-  runtimeConfigRef:
-    name: enable-proxy
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-54-2-v4-168-2
-spec:
-  package: ghcr.io/vshn/appcat:v4.168.2-func
+  package: ghcr.io/vshn/appcat:hotfix-fix-release-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
@@ -77,6 +63,20 @@ metadata:
   name: function-appcat-v3-57-1-fix_nextcloud-cronjob
 spec:
   package: ghcr.io/vshn/appcat:fix_nextcloud-func
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: enable-proxy
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v3-57-2-v4-171-1
+spec:
+  package: ghcr.io/vshn/appcat:v4.171.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
