@@ -34,7 +34,7 @@ spec:
         data:
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
-          chartVersion: 22.0.7
+          chartVersion: 23.0.2
           controlNamespace: syn-appcat-control
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
