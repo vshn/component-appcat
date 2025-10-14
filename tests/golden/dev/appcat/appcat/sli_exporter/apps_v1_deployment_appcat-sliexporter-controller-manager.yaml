@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:change_vshnpostgresbackups
+          image: ghcr.io/vshn/appcat:e1ffd58b86ce4beb2f30a3443b9f055c750e6b96
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

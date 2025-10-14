@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-change-vshnpostgresbackups
+  name: function-appcat-debug-e1ffd58b86ce4beb2f30a3443b9f055c750e6b96
 spec:
-  package: ghcr.io/vshn/appcat:change_vshnpostgresbackups-func
+  package: ghcr.io/vshn/appcat:e1ffd58b86ce4beb2f30a3443b9f055c750e6b96-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

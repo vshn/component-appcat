@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-change-vshnpostgresbackups
+        name: function-appcat-master-e1ffd58b86ce4beb2f30a3443b9f055c750e6b96
       input:
         apiVersion: v1
         data:
