@@ -1,10 +1,18 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
+apply:
+  - ../common/cleanup-service-cluster-jobs.yaml
 delete:
   # This will wait until resources are really gone
   - apiVersion: batch/v1
     kind: Job
-    name: connect-mariadb
+    name: connect-mariadb-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: connect-mariadb-scaled-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: connect-mariadb-user-e2e
   - apiVersion: v1
     kind: Pod
     labels:

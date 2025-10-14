@@ -1,13 +1,20 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
+apply:
+  - ../common/cleanup-service-cluster-jobs.yaml
 delete:
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNForgejo
     name: forgejo-e2e
   - apiVersion: batch/v1
     kind: Job
-    labels:
-      e2e-test: forgejo-e2e
+    name: connect-forgejo-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: config-forgejo-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: ingress-forgejo-e2e
   - apiVersion: v1
     kind: Pod
     labels:

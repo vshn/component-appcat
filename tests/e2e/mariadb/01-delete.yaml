@@ -11,4 +11,4 @@ delete:
       e2e-test: mariadb
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNMariaDB
-    name: mariadb-e2e
+    name: mariadb-e2e-to-delete
