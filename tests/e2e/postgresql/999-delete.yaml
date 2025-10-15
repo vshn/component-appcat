@@ -15,3 +15,9 @@ delete:
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNPostgreSQL
     name: postgresql-e2e-test-restore
+  - apiVersion: batch/v1
+    kind: Job
+    name: connect-postgresql-multiple-users
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNPostgreSQL
+    name: postgresql-e2e-multiple-dbs

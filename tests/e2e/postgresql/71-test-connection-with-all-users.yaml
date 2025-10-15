@@ -1,0 +1,235 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: connect-postgresql-multiple-users
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 500
+  template:
+    metadata:
+      labels:
+        e2e-test: postgresql
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: connect
+          image: dockerhub.vshn.net/library/postgres:15
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              #!/bin/bash
+
+              set -x
+
+              USERS=()
+              for i in $(seq 1 20); do
+                USERS+=("user$i")
+              done
+
+              SUCCESSFUL_USERS=()
+              FAILED_USERS=()
+              ALL_SUCCESS=true
+
+              # Basic connection check to ensure the service is ready
+              echo "Waiting for PostgreSQL service to be available at $POSTGRESQL_HOST:$POSTGRESQL_PORT..."
+              while true; do
+                for user in "${USERS[@]}"; do
+                  echo "Attempting to connect as user: $user"
+
+                  # Dynamically get the password for the current user
+                  # The environment variable names are USER1_PASSWORD, USER2_PASSWORD, etc.
+                  PGPASSWORD_VAR_NAME="${user^^}_PASSWORD" # e.g., USER1_PASSWORD
+                  PGPASSWORD="${!PGPASSWORD_VAR_NAME}"
+
+                  if [ -z "$PGPASSWORD" ]; then
+                    echo "Error: Missing password for user $user (environment variable $PGPASSWORD_VAR_NAME). Skipping."
+                    continue
+                  fi
+
+                  # Use the common host, port, but user-specific password and user
+                  if PGPASSWORD=$PGPASSWORD psql "host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$user" -U "$user" -c "select 1;" &>/dev/null; then
+                    echo "Successfully connected as user: $user"
+                    break;
+                  else
+                    echo "Failed to connect as user: $user"
+                  fi
+                  echo "" # Add a newline for better readability
+                done
+
+                sleep 1
+                echo "PostgreSQL not ready yet..."
+              done
+              echo "PostgreSQL service is ready."
+              echo ""
+
+              for user in "${USERS[@]}"; do
+                echo "Attempting to connect as user: $user"
+
+                # Dynamically get the password for the current user
+                # The environment variable names are USER1_PASSWORD, USER2_PASSWORD, etc.
+                PGPASSWORD_VAR_NAME="${user^^}_PASSWORD" # e.g., USER1_PASSWORD
+                PGPASSWORD="${!PGPASSWORD_VAR_NAME}"
+
+                if [ -z "$PGPASSWORD" ]; then
+                  echo "Error: Missing password for user $user (environment variable $PGPASSWORD_VAR_NAME). Skipping."
+                  FAILED_USERS+=("$user")
+                  ALL_SUCCESS=false
+                  continue
+                fi
+
+                # Use the common host, port, but user-specific password and user
+                if PGPASSWORD=$PGPASSWORD psql "host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$user" -U "$user" -c "select 1;" &>/dev/null; then
+                  echo "Successfully connected as user: $user"
+                  SUCCESSFUL_USERS+=("$user")
+                else
+                  echo "Failed to connect as user: $user"
+                  FAILED_USERS+=("$user")
+                  ALL_SUCCESS=false
+                fi
+                echo ""
+              done
+
+              echo "--- Connection Report ---"
+              if [ ${#SUCCESSFUL_USERS[@]} -gt 0 ]; then
+                echo "Successful users: ${SUCCESSFUL_USERS[@]}"
+              fi
+              if [ ${#FAILED_USERS[@]} -gt 0 ]; then
+                echo "Failed users: ${FAILED_USERS[@]}"
+              fi
+
+              if [ "$ALL_SUCCESS" = true ]; then
+                echo "All users connected successfully!"
+                exit 0
+              else
+                echo "Error: Not all users could connect successfully."
+                exit 1
+              fi
+          env:
+            # Common connection details from the main secret (postgresql-e2e-multiple-dbs-user1)
+            - name: POSTGRESQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user1
+                  key: POSTGRESQL_HOST
+            - name: POSTGRESQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user1
+                  key: POSTGRESQL_PORT
+            - name: POSTGRESQL_USER # Main user for readiness check
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user1
+                  key: POSTGRESQL_USER
+            - name: POSTGRESQL_PASSWORD # Main password for readiness check
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user1
+                  key: POSTGRESQL_PASSWORD
+
+            # Passwords for individual users (from their respective secrets)
+            # Assuming secrets are named 'postgresql-e2e-multiple-dbs-userX'
+            # and contain their individual password under the key 'POSTGRESQL_PASSWORD'.
+            - name: USER1_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user1
+                  key: POSTGRESQL_PASSWORD
+            - name: USER2_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user2
+                  key: POSTGRESQL_PASSWORD
+            - name: USER3_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user3
+                  key: POSTGRESQL_PASSWORD
+            - name: USER4_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user4
+                  key: POSTGRESQL_PASSWORD
+            - name: USER5_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user5
+                  key: POSTGRESQL_PASSWORD
+            - name: USER6_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user6
+                  key: POSTGRESQL_PASSWORD
+            - name: USER7_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user7
+                  key: POSTGRESQL_PASSWORD
+            - name: USER8_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user8
+                  key: POSTGRESQL_PASSWORD
+            - name: USER9_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user9
+                  key: POSTGRESQL_PASSWORD
+            - name: USER10_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user10
+                  key: POSTGRESQL_PASSWORD
+            - name: USER11_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user11
+                  key: POSTGRESQL_PASSWORD
+            - name: USER12_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user12
+                  key: POSTGRESQL_PASSWORD
+            - name: USER13_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user13
+                  key: POSTGRESQL_PASSWORD
+            - name: USER14_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user14
+                  key: POSTGRESQL_PASSWORD
+            - name: USER15_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user15
+                  key: POSTGRESQL_PASSWORD
+            - name: USER16_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user16
+                  key: POSTGRESQL_PASSWORD
+            - name: USER17_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user17
+                  key: POSTGRESQL_PASSWORD
+            - name: USER18_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user18
+                  key: POSTGRESQL_PASSWORD
+            - name: USER19_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user19
+                  key: POSTGRESQL_PASSWORD
+            - name: USER20_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-e2e-multiple-dbs-user20
+                  key: POSTGRESQL_PASSWORD
