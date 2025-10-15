@@ -1,0 +1,37 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  name: postgresql-e2e-multiple-dbs
+  labels:
+    appcat.vshn.io/provider-config: kind
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    service:
+      access:
+        - user: user1
+        - user: user2
+        - user: user3
+        - user: user4
+        - user: user5
+        - user: user6
+        - user: user7
+        - user: user8
+        - user: user9
+        - user: user10
+        - user: user11
+        - user: user12
+        - user: user13
+        - user: user14
+        - user: user15
+        - user: user16
+        - user: user17
+        - user: user18
+        - user: user19
+        - user: user20
+    size:
+      plan: standard-2
+      disk: 1Gi
+  writeConnectionSecretToRef:
+    name: postgresql-e2e-test-creds
