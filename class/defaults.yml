@@ -114,8 +114,8 @@ parameters:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list"
       redis:
-        registry: docker.io
-        repositoryPrefix: bitnamilegacy
+        registry: ghcr.io
+        repositoryPrefix: vshn
         maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100"
       mariadb:
         registry: docker.io

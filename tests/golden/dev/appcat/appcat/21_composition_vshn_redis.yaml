@@ -48,9 +48,9 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: docker.io
-          imageRepositoryPrefix: bitnamilegacy
-          imageTag: 671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
+          imageRegistry: ghcr.io
+          imageRepositoryPrefix: vshn
+          imageTag: d287ff9968945029daaf08cd7309caab4ae26976
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
