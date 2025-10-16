@@ -139,6 +139,7 @@ kind: Secret
 metadata:
   annotations:
     argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: '-100'
     kubernetes.io/service-account.name: github-ci
   labels:
     name: github-ci-secret
