@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:automatic-release-label
+          image: ghcr.io/vshn/appcat:d287ff9968945029daaf08cd7309caab4ae26976
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

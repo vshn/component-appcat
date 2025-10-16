@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-automatic-release-label
+        name: function-appcat-master-d287ff9968945029daaf08cd7309caab4ae26976
       input:
         apiVersion: v1
         data:
