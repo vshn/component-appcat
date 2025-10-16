@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
+        function-revision: defer-release
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
