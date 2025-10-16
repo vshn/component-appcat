@@ -9,10 +9,10 @@ parameters:
         version: 1.20.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 23.0.2
+        version: 22.0.7
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 16.0.2
+        version: 16.0.1
       minio:
         source: https://charts.min.io
         version: 5.4.0
