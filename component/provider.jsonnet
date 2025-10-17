@@ -194,6 +194,11 @@ local providerRBAC = {
         resources: [ 'compositionrevisions' ],
         verbs: [ 'get', 'list' ],
       },
+      {
+        apiGroups: [ 'vshn.appcat.vshn.io' ],
+        resources: [ 'billingservices' ],
+        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
+      },
     ],
   },
   helm: {
