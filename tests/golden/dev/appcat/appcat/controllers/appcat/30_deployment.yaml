@@ -24,10 +24,20 @@ spec:
             - controller
             - --leader-elect
             - --quotas=false
-            - --billing=false
+            - --billing=true
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
+            - name: ODOO_BASE_URL
+              value: https://test.central.vshn.ch/api/v2/product_usage_report_POST
+            - name: ODOO_DB
+              value: t-silent-test-1234/c-green-test-1234/billing-collector-cloudservices/odoo-db
+            - name: ODOO_CLIENT_ID
+              value: t-silent-test-1234/c-green-test-1234/billing-collector-cloudservices/odoo-oauth-client-id
+            - name: ODOO_CLIENT_SECRET
+              value: t-silent-test-1234/c-green-test-1234/billing-collector-cloudservices/odoo-oauth-client-secret
+            - name: ODOO_TOKEN_URL
+              value: https://test.central.vshn.ch/api/v2/authentication/oauth2/token
           image: ghcr.io/vshn/appcat:event-billing
           imagePullPolicy: Always
           livenessProbe:

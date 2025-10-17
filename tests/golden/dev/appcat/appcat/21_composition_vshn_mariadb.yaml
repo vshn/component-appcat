@@ -28,7 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          billingEnabled: 'false'
+          billingEnabled: 'true'
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
