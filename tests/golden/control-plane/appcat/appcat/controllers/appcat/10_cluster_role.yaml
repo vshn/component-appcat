@@ -32,7 +32,6 @@ rules:
       - watch
   - apiGroups:
       - cloudscale.crossplane.io
-      - exoscale.crossplane.io
       - helm.crossplane.io
       - kubernetes.crossplane.io
       - minio.crossplane.io
