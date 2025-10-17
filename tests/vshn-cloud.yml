@@ -243,7 +243,6 @@ parameters:
                   appuio.io/node-class: "plus"
               note: "Will be scheduled on APPUiO Cloud plus nodes"
         redis:
-          imageRegistry: dockerhub.vshn.net
           enabled: true
           plans:
             standard-8:
