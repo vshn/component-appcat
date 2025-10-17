@@ -240,6 +240,7 @@ parameters:
         # Deploy metering prometheus rules
         meteringRules: true
       cloud:
+        appuioControlKubeConfig: "?{vaultkv:__shared__/__shared__/appcat/appuio-control-kubeconfig}"
         secrets:
           exoscale:
             credentials:

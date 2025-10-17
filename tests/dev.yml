@@ -51,9 +51,9 @@ parameters:
 
     quotasEnabled: false
     appuioManaged: false
-    billingEnabled: false
+    #billingEnabled: true
     billing:
-      salesOrder: ST10120
+      salesOrder: ""
       vshn:
         enableCronjobs: false
         meteringRules: true

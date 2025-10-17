@@ -35,6 +35,16 @@ local odooSecret = kube.Secret('odoo-credentials') {
   },
 };
 
+local appuioControlSecret = kube.Secret('appuio-control-sa') {
+  metadata+: {
+    namespace: paramsBilling.namespace,
+    labels+: cronjob.Labels,
+  },
+  stringData: {
+    kubeconfig: paramsBilling.cloud.appuioControlKubeConfig,
+  },
+};
+
 local commonEnv = std.prune([
   {
     name: 'AR_ODOO_OAUTH_TOKEN_URL',
@@ -225,7 +235,9 @@ local vshnServices = common.FilterServiceByBoolean('billing');
 local billingCronjobs = std.flattenArrays(std.flatMap(function(r) [ generateCloudAndManaged(r.name, false) ], vshnServices));
 local billingAddOnsCronjobs = std.flattenArrays(std.flatMap(function(addOn) [ generateCloudAndManaged(addOn, true) ], addOns));
 
-if paramsBilling.vshn.enableCronjobs then
+{
+  [if params.billingEnabled then 'billing/10_appuio_control_secret']: appuioControlSecret,
+} + if paramsBilling.vshn.enableCronjobs then
   {
     [if std.length(std.filter(function(name) paramsBilling.network_policies.target_namespaces[name] == true, std.objectFields(paramsBilling.network_policies.target_namespaces))) > 0 then 'billing/01_netpol']: netPol.Policies,
     'billing/10_odoo_secret': odooSecret,
