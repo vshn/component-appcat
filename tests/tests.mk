@@ -15,7 +15,7 @@ $(kuttl_bin): | $(go_bin)
 # Common environment setup
 E2E_SETUP = set -e; \
     . .env 2>/dev/null || true; \
-    export KUBECONFIG="$$HOME/.kube/config"; \
+    export KUBECONFIG="$${KUBECONFIG:-$$HOME/.kube/config}"; \
     export NAMESPACE=appcat-e2e; \
     [ -z "$${IN_CLUSTER_CONTROL_PLANE_KUBECONFIG:-}" ] && export IN_CLUSTER_CONTROL_PLANE_KUBECONFIG=$${KUBECONFIG} || true; \
     [ -z "$${IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG:-}" ] && export IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG=$${KUBECONFIG} || true; \
