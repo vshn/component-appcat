@@ -78,6 +78,7 @@ spec:
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance
+          minimumRevisionAge: 168h
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNPostgreSQL

@@ -56,6 +56,7 @@ spec:
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

@@ -50,6 +50,7 @@ spec:
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100
+          minimumRevisionAge: 168h
           minioChartRepository: https://charts.min.io
           minioChartVersion: 5.4.0
           mode: distributed

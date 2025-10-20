@@ -53,6 +53,7 @@ spec:
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://codeberg.org/v2/forgejo/forgejo/tags/list
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

@@ -51,6 +51,7 @@ spec:
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

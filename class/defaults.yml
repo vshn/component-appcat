@@ -166,6 +166,7 @@ parameters:
       hotfix: ""
       enabled: true
       additionalFunctionBranches: []
+      minimumRevisionAge: 168h # 7 days
 
     crossplane:
       namespace: syn-crossplane

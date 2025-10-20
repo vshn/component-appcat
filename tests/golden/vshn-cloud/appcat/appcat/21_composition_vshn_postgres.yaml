@@ -78,6 +78,7 @@ spec:
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance
+          minimumRevisionAge: 168h
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNPostgreSQL
