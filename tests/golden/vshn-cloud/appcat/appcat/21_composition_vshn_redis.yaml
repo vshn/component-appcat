@@ -36,8 +36,7 @@ spec:
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
-          chartVersion: 22.0.7
-          clusterName: c-green-test-1234
+          chartVersion: 23.0.2
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
