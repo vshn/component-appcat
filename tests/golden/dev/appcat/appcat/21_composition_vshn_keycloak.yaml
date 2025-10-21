@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
+    metadata.appcat.vshn.io/revision: debug-78c13f36c43d757e6dce495f19cd4bb3721cace1
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
+        name: function-appcat-debug-78c13f36c43d757e6dce495f19cd4bb3721cace1
       input:
         apiVersion: v1
         data:
@@ -38,6 +38,7 @@ spec:
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
+          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'
           emailAlertingSecretName: mailgun-smtp-credentials
@@ -47,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: 3d7a47b0282a71a882dc9eaa9739acda64f06285
+          imageTag: 78c13f36c43d757e6dce495f19cd4bb3721cace1
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
@@ -65,7 +66,7 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''

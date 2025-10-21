@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 3d7a47b0282a71a882dc9eaa9739acda64f06285
+        tag: 78c13f36c43d757e6dce495f19cd4bb3721cace1
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -92,11 +92,11 @@ parameters:
       kubectl:
         registry: docker.io
         image: bitnamilegacy/kubectl
-        tag: '1.25.15'
+        tag: "1.25.15"
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: '3.0.2'
+        version: "3.0.2"
       collabora:
         registry: docker.io
         image: collabora/code
@@ -188,6 +188,7 @@ parameters:
           - --poll-interval=1h
           - --enable-realtime-compositions=false
           - --registry=xpkg.upbound.io
+          - --debug
         image:
           pullPolicy: ${appcat:pullPolicy}
         alpha:
@@ -232,7 +233,7 @@ parameters:
       clusterID: ${cluster:name}
       cloudZone: ""
       instanceUOM: uom_uom_45_1e112771
-      customResourceDeletionAfter: '180'
+      customResourceDeletionAfter: "180"
       enableMockOrgInfo: false
       salesOrder: ${facts:sales_order}
       vshn:
@@ -1038,6 +1039,7 @@ parameters:
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+            defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: keycloakbyvshn
             description: "Keycloak is an open source identity and access management solution."
@@ -1102,6 +1104,7 @@ parameters:
             nextcloud_image: ${appcat:images:nextcloud:registry}/${appcat:images:nextcloud:image}
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+            defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."

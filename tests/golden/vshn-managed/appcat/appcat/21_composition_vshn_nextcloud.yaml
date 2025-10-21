@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-3d7a47b0282a71a882dc9eaa9739acda64f06285
+    metadata.appcat.vshn.io/revision: master-78c13f36c43d757e6dce495f19cd4bb3721cace1
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-3d7a47b0282a71a882dc9eaa9739acda64f06285
+        name: function-appcat-master-78c13f36c43d757e6dce495f19cd4bb3721cace1
       input:
         apiVersion: v1
         data:
@@ -44,6 +44,7 @@ spec:
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
+          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'
           emailAlertingSecretName: mailgun-smtp-credentials
@@ -53,7 +54,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 3d7a47b0282a71a882dc9eaa9739acda64f06285
+          imageTag: 78c13f36c43d757e6dce495f19cd4bb3721cace1
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
