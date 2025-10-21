@@ -5664,8 +5664,6 @@ spec:
                           type: string
                       type: object
                   type: object
-              required:
-                - compositionRef
               type: object
             status:
               description: Status reflects the observed state of a VSHNPostgreSQL.

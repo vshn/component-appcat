@@ -38,6 +38,7 @@ spec:
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
+          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           defaultPlan: standard-2
           emailAlertingEnabled: 'false'
           emailAlertingSecretName: mailgun-smtp-credentials
