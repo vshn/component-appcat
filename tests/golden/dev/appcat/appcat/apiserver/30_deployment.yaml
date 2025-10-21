@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
+          image: ghcr.io/vshn/appcat:3d7a47b0282a71a882dc9eaa9739acda64f06285
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

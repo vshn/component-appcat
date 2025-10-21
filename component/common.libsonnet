@@ -283,6 +283,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
   [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
   [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
   releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
+  minimumRevisionAge: params.deploymentManagementSystem.minimumRevisionAge,
 } + (if std.objectHas(params.charts, name) then {
        chartRepository: params.charts[name].source,
        chartVersion: params.charts[name].version,

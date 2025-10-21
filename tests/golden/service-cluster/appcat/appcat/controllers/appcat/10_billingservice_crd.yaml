@@ -69,9 +69,6 @@ spec:
                       description: ItemGroupDescription describes the billing item
                         group
                       type: string
-                    organization:
-                      description: Organization used to identify sales order
-                      type: string
                     productID:
                       description: ProductID identifies the product in the billing
                         system

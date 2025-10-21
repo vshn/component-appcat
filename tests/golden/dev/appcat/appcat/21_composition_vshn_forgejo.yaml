@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
+    metadata.appcat.vshn.io/revision: debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
+        name: function-appcat-debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
       input:
         apiVersion: v1
         data:
@@ -47,12 +47,13 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: 250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
+          imageTag: 3d7a47b0282a71a882dc9eaa9739acda64f06285
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://codeberg.org/v2/forgejo/forgejo/tags/list
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
