@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: d287ff9968945029daaf08cd7309caab4ae26976
+        tag: 250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -231,6 +231,7 @@ parameters:
       clusterID: ${cluster:name}
       cloudZone: ""
       instanceUOM: uom_uom_45_1e112771
+      customResourceDeletionAfter: '180'
       enableMockOrgInfo: false
       salesOrder: ${facts:sales_order}
       vshn:
@@ -239,6 +240,7 @@ parameters:
         # Deploy metering prometheus rules
         meteringRules: true
       cloud:
+        appuioControlKubeConfig: "?{vaultkv:__shared__/__shared__/appcat/appuio-control-kubeconfig}"
         secrets:
           exoscale:
             credentials:

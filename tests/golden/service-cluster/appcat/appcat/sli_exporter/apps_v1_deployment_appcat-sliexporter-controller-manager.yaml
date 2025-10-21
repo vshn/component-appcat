@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:d287ff9968945029daaf08cd7309caab4ae26976
+          image: ghcr.io/vshn/appcat:250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

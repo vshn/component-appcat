@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-d287ff9968945029daaf08cd7309caab4ae26976
+    metadata.appcat.vshn.io/revision: master-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,14 +24,17 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-d287ff9968945029daaf08cd7309caab4ae26976
+        name: function-appcat-master-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
       input:
         apiVersion: v1
         data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.4.1
+          clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
@@ -39,6 +42,7 @@ spec:
           collabora_image: docker.io/collabora/code
           collabora_image_tag: latest
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'
@@ -49,7 +53,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: d287ff9968945029daaf08cd7309caab4ae26976
+          imageTag: 250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'

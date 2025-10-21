@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-d287ff9968945029daaf08cd7309caab4ae26976
+    metadata.appcat.vshn.io/revision: debug-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,16 +26,20 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-d287ff9968945029daaf08cd7309caab4ae26976
+        name: function-appcat-debug-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
       input:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
+          clusterName: c-green-test-1234
           cnpgClusterChartName: cluster
           cnpgClusterChartSource: https://cloudnative-pg.io/charts/
           cnpgClusterChartVersion: 0.3.1
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'
@@ -46,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: d287ff9968945029daaf08cd7309caab4ae26976
+          imageTag: 250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",

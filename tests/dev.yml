@@ -12,6 +12,9 @@ parameters:
     appcat:
       version: debug
 
+  cluster:
+    name: c-green-test-1234
+
   facts:
     cloud: cloudscale
     region: lpg
@@ -48,8 +51,9 @@ parameters:
 
     quotasEnabled: false
     appuioManaged: false
+    #billingEnabled: true
     billing:
-      salesOrder: ST10120
+      salesOrder: ""
       vshn:
         enableCronjobs: false
         meteringRules: true
