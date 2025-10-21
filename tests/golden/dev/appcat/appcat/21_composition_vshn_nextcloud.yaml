@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-defer-release
+    metadata.appcat.vshn.io/revision: debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-defer-release
+        name: function-appcat-debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: defer-release
+          imageTag: 3d7a47b0282a71a882dc9eaa9739acda64f06285
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'

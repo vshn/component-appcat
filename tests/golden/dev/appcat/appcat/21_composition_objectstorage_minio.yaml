@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-defer-release
+        name: function-appcat-debug-3d7a47b0282a71a882dc9eaa9739acda64f06285
       input:
         apiVersion: v1
         data:
