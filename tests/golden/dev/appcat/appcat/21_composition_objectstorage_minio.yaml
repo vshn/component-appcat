@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-event-billing
+        name: function-appcat-debug-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
       input:
         apiVersion: v1
         data:

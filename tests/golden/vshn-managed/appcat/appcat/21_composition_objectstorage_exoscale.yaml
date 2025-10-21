@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-event-billing
+        name: function-appcat-master-250ca9d7dc5ca7bb4633a1edc2c90735fbda4806
       input:
         apiVersion: v1
         data:
