@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:fix_broken_nested_pg
+          image: ghcr.io/vshn/appcat:78c13f36c43d757e6dce495f19cd4bb3721cace1
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

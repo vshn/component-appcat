@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/broken_nested_pg
+        function-revision: 78c13f36c43d757e6dce495f19cd4bb3721cace1
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
