@@ -28,7 +28,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:3d7a47b0282a71a882dc9eaa9739acda64f06285
+          image: ghcr.io/vshn/appcat:fix_broken_nested_pg
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
