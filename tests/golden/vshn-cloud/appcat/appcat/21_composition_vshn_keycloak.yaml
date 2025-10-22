@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_broken_apiserver
+    metadata.appcat.vshn.io/revision: master-6e04f7b3725111f5cb646bdf4912059e12acd1bf
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-broken-apiserver
+        name: function-appcat-master-6e04f7b3725111f5cb646bdf4912059e12acd1bf
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: fix_broken_apiserver
+          imageTag: 6e04f7b3725111f5cb646bdf4912059e12acd1bf
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging

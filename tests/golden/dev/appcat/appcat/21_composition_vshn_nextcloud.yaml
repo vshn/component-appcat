@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_broken_apiserver
+    metadata.appcat.vshn.io/revision: debug-6e04f7b3725111f5cb646bdf4912059e12acd1bf
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-broken-apiserver
+        name: function-appcat-debug-6e04f7b3725111f5cb646bdf4912059e12acd1bf
       input:
         apiVersion: v1
         data:
@@ -54,7 +54,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: fix_broken_apiserver
+          imageTag: 6e04f7b3725111f5cb646bdf4912059e12acd1bf
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
