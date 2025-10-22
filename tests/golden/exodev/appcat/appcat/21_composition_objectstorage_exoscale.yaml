@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-6e04f7b3725111f5cb646bdf4912059e12acd1bf
+        name: function-appcat-master-fix-custom-resource-allocation
       input:
         apiVersion: v1
         data:
