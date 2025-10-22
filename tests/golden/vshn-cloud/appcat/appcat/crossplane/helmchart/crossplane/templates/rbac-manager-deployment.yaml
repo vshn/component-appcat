@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/custom-resource-allocation
+        function-revision: b028c109d4a8f10d81ec89c435b707e7cf7973b3
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

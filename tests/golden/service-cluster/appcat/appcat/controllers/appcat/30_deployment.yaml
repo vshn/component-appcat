@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:fix_custom-resource-allocation
+          image: ghcr.io/vshn/appcat:b028c109d4a8f10d81ec89c435b707e7cf7973b3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-custom-resource-allocation
+  name: function-appcat-master-b028c109d4a8f10d81ec89c435b707e7cf7973b3
 spec:
-  package: ghcr.io/vshn/appcat:fix_custom-resource-allocation-func
+  package: ghcr.io/vshn/appcat:b028c109d4a8f10d81ec89c435b707e7cf7973b3-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
