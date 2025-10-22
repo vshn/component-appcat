@@ -46,7 +46,6 @@ spec:
             - --poll-interval=1h
             - --enable-realtime-compositions=false
             - --registry=xpkg.upbound.io
-            - --debug
           env:
             - name: GOMAXPROCS
               valueFrom:
