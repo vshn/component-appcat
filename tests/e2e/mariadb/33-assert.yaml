@@ -1,0 +1,16 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 600
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: connect-mariadb-user-e2e
+status:
+  conditions:
+    - type: SuccessCriteriaMet
+      status: 'True'
+    - type: Complete
+      status: 'True'
+  succeeded: 1
+  ready: 0

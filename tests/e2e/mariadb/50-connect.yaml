@@ -1,39 +1,103 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: connect-mariadb-scaled
+  name: connect-mariadb-scaled-e2e
+  namespace: appcat-e2e
 spec:
   backoffLimit: 1
+  activeDeadlineSeconds: 600
   template:
     metadata:
       labels:
-        e2e-test: mariadb
+        e2e-test: mariadb-scaled-e2e
     spec:
-      restartPolicy: Never
-      activeDeadlineSeconds: 180
       containers:
-        - name: connect
-          image: dockerhub.vshn.net/bitnamilegacy/mariadb:latest
-          imagePullPolicy: IfNotPresent
-          command:
-            - bash
-          args:
-            - -c
-            - |
-              echo "Testing Select..."
-              until mariadb -h $MARIADB_HOST -u $MARIADB_USERNAME --password="$MARIADB_PASSWORD" -P $MARIADB_PORT --ssl-verify-server-cert --ssl-ca=/etc/mariadb-tls/ca.crt --ssl-verify-server-cert -e "select 1;"
-              do
-                sleep 1
-                echo "not ready"
-              done
+        - name: test-container
+          image: alpine/k8s:1.31.7
           envFrom:
             - secretRef:
                 name: mariadb-creds
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              export KUBECONFIG=/configs/service-cluster/config
+              echo "=== Creating MariaDB scaled connectivity test job in service cluster ==="
+
+              # Read CA cert from mounted secret
+              CA_CERT_CONTENT=$(cat /certs/ca.crt | base64 -w 0)
+
+              JOB_NAME="mariadb-scaled-connectivity-test-$(date +%s)"
+              cat <<EOF | kubectl apply -f -
+              apiVersion: batch/v1
+              kind: Job
+              metadata:
+                name: ${JOB_NAME}
+                namespace: appcat-e2e
+                labels:
+                  app: mariadb-scaled-connectivity-test
+              spec:
+                ttlSecondsAfterFinished: 300
+                backoffLimit: 3
+                template:
+                  metadata:
+                    labels:
+                      app: mariadb-scaled-connectivity-test
+                  spec:
+                    restartPolicy: Never
+                    containers:
+                    - name: mariadb-scaled-connectivity-test
+                      image: dockerhub.vshn.net/bitnamilegacy/mariadb:latest
+                      env:
+                      - name: MARIADB_USERNAME
+                        value: "${MARIADB_USERNAME}"
+                      - name: MARIADB_PASSWORD
+                        value: "${MARIADB_PASSWORD}"
+                      - name: MARIADB_HOST
+                        value: "${MARIADB_HOST}"
+                      - name: MARIADB_PORT
+                        value: "${MARIADB_PORT}"
+                      - name: CA_CERT
+                        value: "${CA_CERT_CONTENT}"
+                      command: ["/bin/bash"]
+                      args:
+                      - -c
+                      - |
+                        set -e
+                        mkdir -p /tmp/mariadb-tls && echo "\$CA_CERT" | base64 -d > /tmp/mariadb-tls/ca.crt
+                        echo 'Waiting for MariaDB (scaled) to be ready...'
+                        until mariadb -h \$MARIADB_HOST -u \$MARIADB_USERNAME --password="\$MARIADB_PASSWORD" -P \$MARIADB_PORT --ssl-verify-server-cert --ssl-ca=/tmp/mariadb-tls/ca.crt -e "select 1;" >/dev/null 2>&1
+                        do
+                          sleep 1
+                          echo "not ready"
+                        done
+                        echo 'MariaDB scaled connection successful'
+                        echo '=== All MariaDB scaled connectivity tests passed! ==='
+              EOF
+
+              kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
+              echo "=== MariaDB Scaled Connectivity Job finished ==="
+
+              # Check job status and show logs
+              kubectl logs job/${JOB_NAME} -n appcat-e2e
+
+              if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
+                echo "=== MariaDB scaled connectivity tests completed successfully ==="
+              else
+                echo "=== MariaDB scaled connectivity tests failed ==="
+                kubectl describe job ${JOB_NAME} -n appcat-e2e
+                exit 1
+              fi
           volumeMounts:
+            - name: service-cluster-config
+              mountPath: /configs/service-cluster
             - name: mariadb-tls-secrets
-              mountPath: /etc/mariadb-tls
+              mountPath: /certs
               readOnly: true
+      restartPolicy: Never
       volumes:
+        - name: service-cluster-config
+          secret:
+            secretName: service-cluster-kubeconfig
         - name: mariadb-tls-secrets
           secret:
             secretName: mariadb-creds

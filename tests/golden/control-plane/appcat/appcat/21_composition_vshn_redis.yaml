@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.171.3
+    metadata.appcat.vshn.io/revision: master-v4.172.0
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,14 +28,18 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-171-3
+        name: function-appcat-master-v4-172-0
       input:
         apiVersion: v1
         data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
           chartVersion: 22.0.7
+          clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
           emailAlertingEnabled: 'false'
@@ -47,11 +51,12 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: v4.171.3
+          imageTag: v4.172.0
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

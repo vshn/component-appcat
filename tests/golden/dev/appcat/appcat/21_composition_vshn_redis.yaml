@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.171.3
+    metadata.appcat.vshn.io/revision: debug-v4.172.0
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,14 +28,18 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-171-3
+        name: function-appcat-debug-v4-172-0
       input:
         apiVersion: v1
         data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
           chartVersion: 22.0.7
+          clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
           defaultPlan: standard-1
           emailAlertingEnabled: 'true'
@@ -47,11 +51,12 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: v4.171.3
+          imageTag: v4.172.0
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
@@ -73,7 +78,7 @@ spec:
             "16Gi", "enabled": true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu":
             "1", "disk": "16Gi", "enabled": true, "memory": "4Gi"}}, "standard-512m":
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: redisrestoreserviceaccount

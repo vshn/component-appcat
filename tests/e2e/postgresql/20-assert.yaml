@@ -5,7 +5,7 @@ timeout: 240
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: connect-postgresql
+  name: connect-postgresql-e2e
 status:
   conditions:
     - type: SuccessCriteriaMet

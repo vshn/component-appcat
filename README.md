@@ -80,6 +80,38 @@ Linux oneliner: echo `ip -4 addr show dev docker0 | grep inet | awk -F' ' '{prin
 
 Also make sure that `facts.appcat_dev` is set on the target you want to proxy. This is a safeguard so we don't accidentally enable it on prod clusters.
 
+## Kubeconfig Environment Variables in Kuttl E2E Tests
+
+Our Kuttl E2E tests use a job-within-a-job pattern where tests run in two separate clusters:
+- **control plane cluster** (where AppCat CRDs live)
+- **service cluster** (where actual workloads run).
+
+This requires careful handling of kubeconfig files to enable cross-cluster operations.
+
+### Environment Variables
+
+We use four environment variables to manage kubeconfigs:
+
+### 1. `CONTROL_PLANE_KUBECONFIG_CONTENT` **mandatory** (base64-encoded)
+- **Purpose**: Contains the entire control plane kubeconfig as a base64-encoded string
+- **Why needed**: Can be injected as an environment variable into containers and scripts
+- **Usage**: Scripts decode this to create `/tmp/control-plane-config`
+
+### 2. `SERVICE_CLUSTER_KUBECONFIG_CONTENT` **mandatory** (base64-encoded)
+- **Purpose**: Contains the entire service cluster kubeconfig as a base64-encoded string, equals to `CONTROL_PLANE_KUBECONFIG_CONTENT` in converged mode
+- **Why needed**: Can be injected as an environment variable into containers and scripts
+- **Usage**: Scripts decode this to create `/tmp/service-cluster-config`
+
+### 3. `IN_CLUSTER_CONTROL_PLANE_KUBECONFIG` **optional** (file path)
+- **Purpose**: Path to the kubeconfig file **as seen from within the control plane cluster**
+- **Why needed**: Used to create Kubernetes secrets that mount the kubeconfig into pods
+- **Example**: `/tmp/control-plane-config` or the original `~/.kube/config`
+
+### 4. `IN_CLUSTER_SERVICE_CLUSTER_KUBECONFIG` **optional**  (file path)
+- **Purpose**: Path to the kubeconfig file **as seen from within the service cluster**
+- **Why needed**: Used to create Kubernetes secrets that mount the kubeconfig into pods
+- **Example**: `/tmp/service-cluster-config` or the original `~/.kube/config`
+
 ## Documentation
 
 The rendered documentation for this component is available on the [Commodore Components Hub](https://hub.syn.tools/appcat).

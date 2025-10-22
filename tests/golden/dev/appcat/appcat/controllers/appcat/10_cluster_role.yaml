@@ -32,6 +32,7 @@ rules:
       - watch
   - apiGroups:
       - cloudscale.crossplane.io
+      - exoscale.crossplane.io
       - helm.crossplane.io
       - kubernetes.crossplane.io
       - minio.crossplane.io
@@ -60,7 +61,6 @@ rules:
     verbs:
       - get
       - list
-      - watch
   - apiGroups:
       - syn.tools
     resources:

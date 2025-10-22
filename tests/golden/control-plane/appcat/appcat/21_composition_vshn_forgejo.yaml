@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.171.3
+    metadata.appcat.vshn.io/revision: master-v4.172.0
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,15 +24,19 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-171-3
+        name: function-appcat-master-v4-172-0
       input:
         apiVersion: v1
         data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 14.0.2
+          chartVersion: 14.0.4
+          clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
           defaultPlan: small
           emailAlertingEnabled: 'false'
@@ -43,12 +47,13 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.171.3
+          imageTag: v4.172.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://codeberg.org/v2/forgejo/forgejo/tags/list
+          minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
           ownerGroup: vshn.appcat.vshn.io

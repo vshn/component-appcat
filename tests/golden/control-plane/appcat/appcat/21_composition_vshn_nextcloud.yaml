@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.171.3
+    metadata.appcat.vshn.io/revision: master-v4.172.0
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,14 +24,17 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-171-3
+        name: function-appcat-master-v4-172-0
       input:
         apiVersion: v1
         data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.0.1
+          chartVersion: 8.4.1
+          clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
           collaboraMemoryLimit: 1Gi
@@ -39,7 +42,9 @@ spec:
           collabora_image: docker.io/collabora/code
           collabora_image_tag: latest
           controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
+          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
           defaultPlan: standard-2
           emailAlertingEnabled: 'false'
           emailAlertingSecretName: mailgun-smtp-credentials
@@ -49,7 +54,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: v4.171.3
+          imageTag: v4.172.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
@@ -58,6 +63,7 @@ spec:
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
+          minimumRevisionAge: 168h
           mode: standalone
           nextcloud_image: docker.io/library/nextcloud
           ocpDefaultAppsDomain: ''

@@ -103,6 +103,8 @@ cluster=https://kubernetes.default.svc
 push-golden: commodore_args += -f tests/$(instance).yml
 push-golden: clean gen-golden ## Push the target instance to the local forgejo instance, so it can be applied by argocd
 	cd tests/golden/$(instance)/appcat/appcat && \
+	git config user.email "devcontainer@local.dev" && \
+	git config user.name "DevContainer User" && \
 	git init --initial-branch=master && \
 	git add . && \
 	git commit -m "update" && \
