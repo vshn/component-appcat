@@ -64,7 +64,7 @@ spec:
                       - |
                         set -e
                         mkdir -p /tmp/postgresql-tls && echo "\$CA_CERT" | base64 -d > /tmp/postgresql-tls/ca.crt
-                        until PGPASSWORD=\$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/tmp/postgresql-tls/ca.crt host=\$POSTGRESQL_HOST port=\$POSTGRESQL_PORT dbname=\$POSTGRESQL_DB" -U \$POSTGRESQL_USER -c "select 1;"
+                        until PGPASSWORD=\$POSTGRESQL_PASSWORD timeout 5 psql "sslmode=verify-full sslrootcert=/tmp/postgresql-tls/ca.crt host=\$POSTGRESQL_HOST port=\$POSTGRESQL_PORT dbname=\$POSTGRESQL_DB" -U \$POSTGRESQL_USER -c "select 1;"
                         do
                           sleep 1
                           echo "not ready"
