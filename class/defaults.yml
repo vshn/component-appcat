@@ -188,7 +188,6 @@ parameters:
           - --poll-interval=1h
           - --enable-realtime-compositions=false
           - --registry=xpkg.upbound.io
-          - --debug
         image:
           pullPolicy: ${appcat:pullPolicy}
         alpha:
