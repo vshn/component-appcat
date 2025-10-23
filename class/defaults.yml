@@ -9,10 +9,10 @@ parameters:
         version: 1.20.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 22.0.7
+        version: 23.2.1
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
-        version: 16.0.1
+        version: 16.0.2
       minio:
         source: https://charts.min.io
         version: 5.4.0
@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: b028c109d4a8f10d81ec89c435b707e7cf7973b3
+        tag: fix/ghcr_maintenance
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -114,9 +114,9 @@ parameters:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list"
       redis:
-        registry: docker.io
-        repositoryPrefix: bitnamilegacy
-        maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100"
+        registry: ghcr.io
+        repositoryPrefix: vshn
+        maintenanceURL: "https://ghcr.io/v2/vshn/redis/tags/list?page_size=100"
       mariadb:
         registry: docker.io
         repositoryPrefix: bitnamilegacy

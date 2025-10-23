@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-b028c109d4a8f10d81ec89c435b707e7cf7973b3
+    metadata.appcat.vshn.io/revision: debug-fix_ghcr_maintenance
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-b028c109d4a8f10d81ec89c435b707e7cf7973b3
+        name: function-appcat-debug-fix-ghcr-maintenance
       input:
         apiVersion: v1
         data:
@@ -36,7 +36,7 @@ spec:
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
-          chartVersion: 22.0.7
+          chartVersion: 23.2.1
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
@@ -49,13 +49,13 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: docker.io
-          imageRepositoryPrefix: bitnamilegacy
-          imageTag: b028c109d4a8f10d81ec89c435b707e7cf7973b3
+          imageRegistry: ghcr.io
+          imageRepositoryPrefix: vshn
+          imageTag: fix_ghcr_maintenance
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
-          maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
+          maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
           minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
