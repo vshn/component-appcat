@@ -65,7 +65,7 @@ spec:
                         set -e
                         mkdir -p /tmp/mariadb-tls && echo "\$CA_CERT" | base64 -d > /tmp/mariadb-tls/ca.crt
                         echo 'Waiting for MariaDB to be ready...'
-                        until mariadb -h \$MARIADB_HOST -u \$MARIADB_USERNAME --password="\$MARIADB_PASSWORD" -P \$MARIADB_PORT --ssl-verify-server-cert --ssl-ca=/tmp/mariadb-tls/ca.crt -e "select 1;" >/dev/null 2>&1
+                        until timeout 5 mariadb -h \$MARIADB_HOST -u \$MARIADB_USERNAME --password="\$MARIADB_PASSWORD" -P \$MARIADB_PORT --ssl-verify-server-cert --ssl-ca=/tmp/mariadb-tls/ca.crt -e "select 1;"
                         do
                           sleep 1
                           echo "not ready"
