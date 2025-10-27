@@ -49,7 +49,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: ghcr.io
+          imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: vshn
           imageTag: fix_ghcr_maintenance
           isOpenshift: 'true'
