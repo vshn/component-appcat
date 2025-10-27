@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-16aa2759fc927ebdf09f048dd57e797091c3c338
+        name: function-appcat-master-option-disable-envoy
       input:
         apiVersion: v1
         data:
