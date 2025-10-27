@@ -81,7 +81,7 @@ spec:
                         CLI=(redis-cli -u "\$REDIS_URI" --tls --cert /etc/redis-tls/tls.crt --key /etc/redis-tls/tls.key --cacert /etc/redis-tls/ca.crt)
 
                         echo 'Waiting for Redis to be ready...'
-                        until "\${CLI[@]}" PING >/dev/null 2>&1; do
+                        until timeout 5 "\${CLI[@]}" PING >/dev/null 2>&1; do
                           sleep 1
                           echo 'not ready'
                         done
