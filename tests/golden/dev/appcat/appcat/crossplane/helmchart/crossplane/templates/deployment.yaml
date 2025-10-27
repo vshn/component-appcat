@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: mariadb-collation
+        function-revision: 671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-mariadb-collation
+  name: function-appcat-debug-671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
 spec:
-  package: ghcr.io/vshn/appcat:mariadb-collation-func
+  package: ghcr.io/vshn/appcat:671bf9a12ca0c1f2c71aab2aab6dd9a72499810f-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

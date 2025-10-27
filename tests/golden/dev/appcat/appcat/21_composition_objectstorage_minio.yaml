@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-mariadb-collation
+        name: function-appcat-debug-671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
       input:
         apiVersion: v1
         data:
