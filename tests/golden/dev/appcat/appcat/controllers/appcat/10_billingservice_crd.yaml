@@ -8,7 +8,7 @@ spec:
   group: vshn.appcat.vshn.io
   names:
     categories:
-      - appcatbilling
+      - appcat
     kind: BillingService
     listKind: BillingServiceList
     plural: billingservices
