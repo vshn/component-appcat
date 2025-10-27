@@ -27,7 +27,7 @@ spec:
         data:
           crossplaneNamespace: syn-crossplane
           providerConfig: minio
-          proxyEndpoint: 172.18.0.1:9443
+          proxyEndpoint: 172.19.0.1:9443
           serviceID: minio-minio-objectbucket
           serviceName: miniobucket
         kind: ConfigMap
