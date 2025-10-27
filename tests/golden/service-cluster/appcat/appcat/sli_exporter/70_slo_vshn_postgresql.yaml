@@ -10,9 +10,9 @@ spec:
     - name: sloth-slo-sli-recordings-appcat-vshn-postgresql-uptime
       rules:
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[5m]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[5m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[5m]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[5m])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[5m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[5m])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -20,9 +20,9 @@ spec:
             sloth_window: 5m
           record: slo:sli_error:ratio_rate5m
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[30m]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[30m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[30m]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[30m])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[30m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[30m])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -30,9 +30,9 @@ spec:
             sloth_window: 30m
           record: slo:sli_error:ratio_rate30m
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[1h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[1h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[1h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[1h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[1h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[1h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -40,9 +40,9 @@ spec:
             sloth_window: 1h
           record: slo:sli_error:ratio_rate1h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[2h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[2h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[2h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[2h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[2h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[2h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -50,9 +50,9 @@ spec:
             sloth_window: 2h
           record: slo:sli_error:ratio_rate2h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[6h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[6h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[6h]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[6h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[6h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[6h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -60,9 +60,9 @@ spec:
             sloth_window: 6h
           record: slo:sli_error:ratio_rate6h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[1d]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[1d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[1d]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[1d])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[1d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[1d])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql
@@ -70,9 +70,9 @@ spec:
             sloth_window: 1d
           record: slo:sli_error:ratio_rate1d
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[3d]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[3d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNPostgreSQL", ha="false", maintenance="false"}[3d]) or 0*rate(appcat_probes_seconds_count{service="VSHNPostgreSQL"}[3d])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[3d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNPostgreSQL", ha="false"}[3d])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-postgresql-uptime
             sloth_service: appcat-vshn-postgresql

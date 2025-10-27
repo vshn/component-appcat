@@ -10,9 +10,9 @@ spec:
     - name: sloth-slo-sli-recordings-appcat-vshn-minio-ha-uptime
       rules:
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[5m]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[5m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[5m]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[5m])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[5m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[5m])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -20,9 +20,9 @@ spec:
             sloth_window: 5m
           record: slo:sli_error:ratio_rate5m
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[30m]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[30m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[30m]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[30m])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[30m])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[30m])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -30,9 +30,9 @@ spec:
             sloth_window: 30m
           record: slo:sli_error:ratio_rate30m
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[1h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[1h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[1h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[1h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[1h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[1h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -40,9 +40,9 @@ spec:
             sloth_window: 1h
           record: slo:sli_error:ratio_rate1h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[2h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[2h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[2h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[2h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[2h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[2h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -50,9 +50,9 @@ spec:
             sloth_window: 2h
           record: slo:sli_error:ratio_rate2h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[6h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[6h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[6h]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[6h])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[6h])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[6h])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -60,9 +60,9 @@ spec:
             sloth_window: 6h
           record: slo:sli_error:ratio_rate6h
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[1d]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[1d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[1d]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[1d])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[1d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[1d])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha
@@ -70,9 +70,9 @@ spec:
             sloth_window: 1d
           record: slo:sli_error:ratio_rate1d
         - expr: |
-            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[3d]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[3d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{reason!="success", service="VSHNMinio", ha="true"}[3d]) or 0*rate(appcat_probes_seconds_count{service="VSHNMinio"}[3d])) by (service, claim_namespace, name, organization, sla))
             /
-            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[3d])) by (service, namespace, name, organization, sla))
+            (sum(rate(appcat_probes_seconds_count{service="VSHNMinio", ha="true"}[3d])) by (service, claim_namespace, name, organization, sla))
           labels:
             sloth_id: appcat-vshn-minio-ha-uptime
             sloth_service: appcat-vshn-minio-ha

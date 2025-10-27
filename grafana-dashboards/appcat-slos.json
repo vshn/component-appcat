@@ -179,9 +179,9 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "1 - (min without(prometheus_replica) (slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\", name=~\"[[name]]\"})) > 0",
+          "expr": "1 - (min without(prometheus_replica) (slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\", name=~\"[[name]]\"})) > 0",
           "interval": "",
-          "legendFormat": "{{namespace}}/{{name}}",
+          "legendFormat": "{{claim_namespace}}/{{name}}",
           "queryType": "randomWalk",
           "range": true,
           "refId": "A"
@@ -350,10 +350,10 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": " 1- (sum_over_time(\n    (\n       min without(prometheus_replica,instance,pod) (slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\", name=~\"[[name]]\"})\n       * on() group_left() (\n         month() == bool vector(${__to:date:M})\n       )\n    )[32d:1h]\n  ) / on(sloth_id,cluster_id)  group_left \n        min  without(prometheus_replica,instance,pod) (slo:error_budget:ratio{sloth_service=~\"appcat-.+\"}*on() group_left() (24 * days_in_month()))\n    \n) >0",
+          "expr": " 1- (sum_over_time(\n    (\n       min without(prometheus_replica,instance,pod) (slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\", name=~\"[[name]]\"})\n       * on() group_left() (\n         month() == bool vector(${__to:date:M})\n       )\n    )[32d:1h]\n  ) / on(sloth_id,cluster_id)  group_left \n        min  without(prometheus_replica,instance,pod) (slo:error_budget:ratio{sloth_service=~\"appcat-.+\"}*on() group_left() (24 * days_in_month()))\n    \n) >0",
           "hide": false,
           "interval": "1h",
-          "legendFormat": "{{service}}/{{namespace}}/{{name}}",
+          "legendFormat": "{{service}}/{{claim_namespace}}/{{name}}",
           "queryType": "randomWalk",
           "range": true,
           "refId": "D"
@@ -447,7 +447,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "1-max without (prometheus_replica) (slo:sli_error:ratio_rate30d{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\", name=~\"[[name]]\"}) >= 0",
+          "expr": "1-max without (prometheus_replica) (slo:sli_error:ratio_rate30d{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\", name=~\"[[name]]\"}) >= 0",
           "format": "table",
           "hide": true,
           "instant": true,
@@ -462,7 +462,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "1 - max without(prometheus_replica) (\nsum_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\"}[$__range])\n/ ignoring (sloth_window) count_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\", name=~\"[[name]]\"}[$__range])\n) >= 0",
+          "expr": "1 - max without(prometheus_replica) (\nsum_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\"}[$__range])\n/ ignoring (sloth_window) count_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\", name=~\"[[name]]\"}[$__range])\n) >= 0",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -543,14 +543,14 @@
             "$__all"
           ]
         },
-        "definition": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\"},namespace)",
+        "definition": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\"},claim_namespace)",
         "includeAll": true,
         "label": "Namespace",
         "multi": true,
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\"},namespace)",
+          "query": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\"},claim_namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -564,14 +564,14 @@
             "$__all"
           ]
         },
-        "definition": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\"}, name)",
+        "definition": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\"}, name)",
         "includeAll": true,
         "label": "Name",
         "multi": true,
         "name": "name",
         "options": [],
         "query": {
-          "query": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", namespace=~\"[[namespace]]\"}, name)",
+          "query": "label_values(slo:sli_error:ratio_rate1h{sloth_service=~\"appcat-.+\", service=~\"[[service]]\", claim_namespace=~\"[[namespace]]\"}, name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
