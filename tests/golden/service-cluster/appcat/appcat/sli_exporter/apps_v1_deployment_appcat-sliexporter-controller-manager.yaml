@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_ownerref_nilpointer
+          image: ghcr.io/vshn/appcat:mariadb-collation
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

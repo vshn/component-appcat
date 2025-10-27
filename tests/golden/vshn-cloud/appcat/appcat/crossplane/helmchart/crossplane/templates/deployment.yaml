@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/ownerref_nilpointer
+        function-revision: mariadb-collation
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

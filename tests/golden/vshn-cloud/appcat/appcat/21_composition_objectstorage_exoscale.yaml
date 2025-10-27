@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-ownerref-nilpointer
+        name: function-appcat-master-mariadb-collation
       input:
         apiVersion: v1
         data:
