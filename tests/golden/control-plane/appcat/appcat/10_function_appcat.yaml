@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-spksmariadb-tls
+  name: function-appcat-master-feature-cnpg-maintenance
 spec:
-  package: ghcr.io/vshn/appcat:add_spksmariadb_tls-func
+  package: ghcr.io/vshn/appcat:feature_cnpg-maintenance-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy

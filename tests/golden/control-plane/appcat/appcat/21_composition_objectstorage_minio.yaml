@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-spksmariadb-tls
+        name: function-appcat-master-feature-cnpg-maintenance
       input:
         apiVersion: v1
         data:

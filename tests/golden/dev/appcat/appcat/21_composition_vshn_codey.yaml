@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_spksmariadb_tls
+    metadata.appcat.vshn.io/revision: debug-feature_cnpg-maintenance
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-add_spksmariadb_tls
+    metadata.appcat.vshn.io/revision: master-feature_cnpg-maintenance
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-spksmariadb-tls
+        name: function-appcat-master-feature-cnpg-maintenance
       input:
         apiVersion: v1
         data:
@@ -47,12 +47,12 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: add_spksmariadb_tls
+          imageTag: feature_cnpg-maintenance
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
-          maintenanceURL: https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100
+          maintenanceURL: https://codeberg.org/v2/forgejo/forgejo/tags/list
           minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
