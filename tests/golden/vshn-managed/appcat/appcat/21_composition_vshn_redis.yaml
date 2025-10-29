@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
+    metadata.appcat.vshn.io/revision: master-35eed3f54ff45652ec17eb6633ced13c8494be1c
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
+        name: function-appcat-master-35eed3f54ff45652ec17eb6633ced13c8494be1c
       input:
         apiVersion: v1
         data:
@@ -36,7 +36,7 @@ spec:
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
-          chartVersion: 22.0.7
+          chartVersion: 23.2.1
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
@@ -49,13 +49,13 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
-          imageRegistry: docker.io
-          imageRepositoryPrefix: bitnamilegacy
-          imageTag: 671bf9a12ca0c1f2c71aab2aab6dd9a72499810f
+          imageRegistry: ghcr.io
+          imageRepositoryPrefix: vshn
+          imageTag: 35eed3f54ff45652ec17eb6633ced13c8494be1c
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
-          maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100
+          maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
           minimumRevisionAge: 168h
           mode: standalone
           ocpDefaultAppsDomain: ''
