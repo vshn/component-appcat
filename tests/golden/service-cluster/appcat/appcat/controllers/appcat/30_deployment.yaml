@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:e3dea8a1f754c02a05d735479ef25a90d3b3e548
+          image: ghcr.io/vshn/appcat:16aa2759fc927ebdf09f048dd57e797091c3c338
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
