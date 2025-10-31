@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-patroni-resources
+  name: function-appcat-master-16aa2759fc927ebdf09f048dd57e797091c3c338
 spec:
-  package: ghcr.io/vshn/appcat:fix_patroni-resources-func
+  package: ghcr.io/vshn/appcat:16aa2759fc927ebdf09f048dd57e797091c3c338-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

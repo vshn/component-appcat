@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_patroni-resources
+    metadata.appcat.vshn.io/revision: master-16aa2759fc927ebdf09f048dd57e797091c3c338
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-patroni-resources
+        name: function-appcat-master-16aa2759fc927ebdf09f048dd57e797091c3c338
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: fix_patroni-resources
+          imageTag: 16aa2759fc927ebdf09f048dd57e797091c3c338
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
