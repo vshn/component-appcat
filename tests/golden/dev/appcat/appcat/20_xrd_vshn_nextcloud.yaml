@@ -11307,6 +11307,10 @@ spec:
                                     PgBouncer. All connections will go straight to
                                     PostgreSQL instance.
                                   type: boolean
+                                enableEnvoy:
+                                  default: false
+                                  description: Enable envoy sidecar proxy
+                                  type: boolean
                                 extensions:
                                   description: Extensions allow to enable/disable
                                     any of the supported
