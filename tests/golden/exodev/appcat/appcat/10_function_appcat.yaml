@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-option-disable-envoy
+  name: function-appcat-master-b9f1a55fd6d4c48aab32215cd9156aea24859b60
 spec:
-  package: ghcr.io/vshn/appcat:option_disable-envoy-func
+  package: ghcr.io/vshn/appcat:b9f1a55fd6d4c48aab32215cd9156aea24859b60-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
