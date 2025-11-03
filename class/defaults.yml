@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: b9f1a55fd6d4c48aab32215cd9156aea24859b60
+        tag: fix/collabora-fqdn-required
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

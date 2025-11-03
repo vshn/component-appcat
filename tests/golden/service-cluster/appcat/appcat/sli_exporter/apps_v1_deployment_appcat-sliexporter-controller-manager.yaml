@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:b9f1a55fd6d4c48aab32215cd9156aea24859b60
+          image: ghcr.io/vshn/appcat:fix_collabora-fqdn-required
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
