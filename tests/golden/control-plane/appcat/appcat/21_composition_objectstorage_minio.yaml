@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-cnpg-version
+        name: function-appcat-master-0caf2a812281d2cc26081145bd46ba478d80ab57
       input:
         apiVersion: v1
         data:

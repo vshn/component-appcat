@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/cnpg-version
+        function-revision: 0caf2a812281d2cc26081145bd46ba478d80ab57
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

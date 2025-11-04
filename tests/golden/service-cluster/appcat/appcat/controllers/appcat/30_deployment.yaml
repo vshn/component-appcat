@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:fix_cnpg-version
+          image: ghcr.io/vshn/appcat:0caf2a812281d2cc26081145bd46ba478d80ab57
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
