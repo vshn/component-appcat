@@ -21,13 +21,13 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-172-0
+        name: function-appcat-debug-v4-173-0
       input:
         apiVersion: v1
         data:
           crossplaneNamespace: syn-crossplane
           providerConfig: minio
-          proxyEndpoint: 172.18.0.1:9443
+          proxyEndpoint: 172.19.0.1:9443
           serviceID: minio-minio-objectbucket
           serviceName: miniobucket
         kind: ConfigMap

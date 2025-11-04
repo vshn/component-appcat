@@ -25,13 +25,12 @@ parameters:
 
   global:
     appuio_metered_billing_zone_label_map:
-      c-green-test-1234: 'Kind - Local Test 0'
+      c-green-test-1234: "Kind - Local Test 0"
 
   crossplane:
     namespace: syn-crossplane
 
   appcat:
-
     pullPolicy: Always
 
     deploymentManagementSystem:
@@ -45,7 +44,8 @@ parameters:
         registry: dockerhub.vshn.net
       busybox:
         registry: dockerhub.vshn.net
-    grpcEndpoint: 172.18.0.1:9443
+
+    grpcEndpoint: 172.19.0.1:9443
     proxyFunction: true
 
     quotasEnabled: false

@@ -9,7 +9,7 @@ parameters:
         version: 1.20.1
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
-        version: 22.0.7
+        version: 23.2.1
       mariadb:
         source: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
         version: 16.0.1
@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.172.0
+        tag: v4.173.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -112,11 +112,11 @@ parameters:
         image: library/busybox
       forgejo:
         registry: code.forgejo.org
-        maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list"
+        maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
       redis:
-        registry: docker.io
-        repositoryPrefix: bitnamilegacy
-        maintenanceURL: "https://hub.docker.com/v2/repositories/bitnamilegacy/redis/tags/?page_size=100"
+        registry: ghcr.io
+        repositoryPrefix: vshn
+        maintenanceURL: "https://ghcr.io/v2/vshn/redis/tags/list?page_size=100"
       mariadb:
         registry: docker.io
         repositoryPrefix: bitnamilegacy
@@ -631,8 +631,6 @@ parameters:
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
-            registry_username: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_username}"
-            registry_password: "?{vaultkv:__shared__/__shared__/appcat/codeberg_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
           openshiftTemplate:

@@ -1,0 +1,16 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 240
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: connect-envoy-disabled
+status:
+  conditions:
+    - type: SuccessCriteriaMet
+      status: "True"
+    - type: Complete
+      status: "True"
+  succeeded: 1
+  ready: 0

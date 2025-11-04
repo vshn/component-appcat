@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: connect-mariadb-e2e
+  name: connect-envoy-disabled
   namespace: appcat-e2e
 spec:
   backoffLimit: 1
@@ -9,24 +9,22 @@ spec:
   template:
     metadata:
       labels:
-        e2e-test: mariadb-e2e
+        e2e-test: postgresql-e2e
     spec:
       containers:
         - name: test-container
           image: alpine/k8s:1.31.7
           envFrom:
             - secretRef:
-                name: mariadb-creds
+                name: postgresql-e2e-test-creds
           command: ["/bin/sh", "-c"]
           args:
             - |
               export KUBECONFIG=/configs/service-cluster/config
-              echo "=== Creating MariaDB connectivity test job in service cluster ==="
+              echo "=== Creating PostgreSQL connectivity test job in service cluster ==="
 
-              # Read CA cert from mounted secret
               CA_CERT_CONTENT=$(cat /certs/ca.crt | base64 -w 0)
-
-              JOB_NAME="mariadb-connectivity-test-$(date +%s)"
+              JOB_NAME="postgresql-connectivity-test-$(date +%s)"
               cat <<EOF | kubectl apply -f -
               apiVersion: batch/v1
               kind: Job
@@ -34,28 +32,30 @@ spec:
                 name: ${JOB_NAME}
                 namespace: appcat-e2e
                 labels:
-                  app: mariadb-connectivity-test
+                  app: postgresql-connectivity-test
               spec:
                 ttlSecondsAfterFinished: 300
                 backoffLimit: 3
                 template:
                   metadata:
                     labels:
-                      app: mariadb-connectivity-test
+                      app: postgresql-connectivity-test
                   spec:
                     restartPolicy: Never
                     containers:
-                    - name: mariadb-connectivity-test
-                      image: dockerhub.vshn.net/bitnamilegacy/mariadb:latest
+                    - name: postgresql-connectivity-test
+                      image: dockerhub.vshn.net/library/postgres:15
                       env:
-                      - name: MARIADB_USERNAME
-                        value: "${MARIADB_USERNAME}"
-                      - name: MARIADB_PASSWORD
-                        value: "${MARIADB_PASSWORD}"
-                      - name: MARIADB_HOST
-                        value: "${MARIADB_HOST}"
-                      - name: MARIADB_PORT
-                        value: "${MARIADB_PORT}"
+                      - name: POSTGRESQL_USER
+                        value: "${POSTGRESQL_USER}"
+                      - name: POSTGRESQL_PASSWORD
+                        value: "${POSTGRESQL_PASSWORD}"
+                      - name: POSTGRESQL_HOST
+                        value: "${POSTGRESQL_HOST}"
+                      - name: POSTGRESQL_PORT
+                        value: "${POSTGRESQL_PORT}"
+                      - name: POSTGRESQL_DB
+                        value: "${POSTGRESQL_DB}"
                       - name: CA_CERT
                         value: "${CA_CERT_CONTENT}"
                       command: ["/bin/bash"]
@@ -63,34 +63,32 @@ spec:
                       - -c
                       - |
                         set -e
-                        mkdir -p /tmp/mariadb-tls && echo "\$CA_CERT" | base64 -d > /tmp/mariadb-tls/ca.crt
-                        echo 'Waiting for MariaDB to be ready...'
-                        until timeout 5 mariadb -h \$MARIADB_HOST -u \$MARIADB_USERNAME --password="\$MARIADB_PASSWORD" -P \$MARIADB_PORT --ssl-verify-server-cert --ssl-ca=/tmp/mariadb-tls/ca.crt -e "select 1;"
+                        mkdir -p /tmp/postgresql-tls && echo "\$CA_CERT" | base64 -d > /tmp/postgresql-tls/ca.crt
+                        until PGPASSWORD=\$POSTGRESQL_PASSWORD timeout 5 psql "sslmode=verify-full sslrootcert=/tmp/postgresql-tls/ca.crt host=\$POSTGRESQL_HOST port=\$POSTGRESQL_PORT dbname=\$POSTGRESQL_DB" -U \$POSTGRESQL_USER -c "select 1;"
                         do
                           sleep 1
                           echo "not ready"
                         done
-                        echo 'MariaDB connection successful'
-                        echo '=== All MariaDB connectivity tests passed! ==='
+                        echo '=== All PostgreSQL connectivity tests passed! ==='
               EOF
 
               kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
-              echo "=== MariaDB Connectivity Job finished ==="
+              echo "=== PostgreSQL Connectivity Job finished ==="
 
               # Check job status and show logs
               kubectl logs job/${JOB_NAME} -n appcat-e2e
 
               if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
-                echo "=== MariaDB connectivity tests completed successfully ==="
+                echo "=== PostgreSQL connectivity tests completed successfully ==="
               else
-                echo "=== MariaDB connectivity tests failed ==="
+                echo "=== PostgreSQL connectivity tests failed ==="
                 kubectl describe job ${JOB_NAME} -n appcat-e2e
                 exit 1
               fi
           volumeMounts:
             - name: service-cluster-config
               mountPath: /configs/service-cluster
-            - name: mariadb-tls-secrets
+            - name: postgresql-tls-secrets
               mountPath: /certs
               readOnly: true
       restartPolicy: Never
@@ -98,9 +96,9 @@ spec:
         - name: service-cluster-config
           secret:
             secretName: service-cluster-kubeconfig
-        - name: mariadb-tls-secrets
+        - name: postgresql-tls-secrets
           secret:
-            secretName: mariadb-creds
+            secretName: postgresql-e2e-test-creds
             items:
               - key: ca.crt
                 path: ca.crt
