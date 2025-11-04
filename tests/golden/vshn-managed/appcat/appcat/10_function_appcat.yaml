@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-collabora-fqdn-required
+  name: function-appcat-master-63326049d2a0da85f7a5e0d0f621c1c66c84efc0
 spec:
-  package: ghcr.io/vshn/appcat:fix_collabora-fqdn-required-func
+  package: ghcr.io/vshn/appcat:63326049d2a0da85f7a5e0d0f621c1c66c84efc0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
