@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-193c3d7fe3e7c59fdcd540479e396c577677022b
+    metadata.appcat.vshn.io/revision: master-feat_cnpg-barman-cloud
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-193c3d7fe3e7c59fdcd540479e396c577677022b
+        name: function-appcat-master-feat-cnpg-barman-cloud
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 193c3d7fe3e7c59fdcd540479e396c577677022b
+          imageTag: feat_cnpg-barman-cloud
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"

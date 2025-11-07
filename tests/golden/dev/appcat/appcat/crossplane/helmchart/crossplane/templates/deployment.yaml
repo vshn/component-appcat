@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 193c3d7fe3e7c59fdcd540479e396c577677022b
+        function-revision: feat/cnpg-barman-cloud
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

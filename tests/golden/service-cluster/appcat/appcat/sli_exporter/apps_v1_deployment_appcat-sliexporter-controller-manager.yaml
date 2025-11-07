@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:193c3d7fe3e7c59fdcd540479e396c577677022b
+          image: ghcr.io/vshn/appcat:feat_cnpg-barman-cloud
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

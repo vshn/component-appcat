@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:193c3d7fe3e7c59fdcd540479e396c577677022b
+          image: ghcr.io/vshn/appcat:feat_cnpg-barman-cloud
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

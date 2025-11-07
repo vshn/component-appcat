@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-193c3d7fe3e7c59fdcd540479e396c577677022b
+        name: function-appcat-master-feat-cnpg-barman-cloud
       input:
         apiVersion: v1
         data:
