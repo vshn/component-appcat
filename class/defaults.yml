@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.173.1
+        tag: a322909b7999f4716931eeeba1e5ebedc8fcfb54
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -815,6 +815,13 @@ parameters:
               requests:
                 cpu: "250m"
                 memory: "256Mi"
+              limits:
+                cpu: "500m"
+                memory: "512Mi"
+            setupFilesystem:
+              requests:
+                cpu: "100m"
+                memory: "100Mi"
               limits:
                 cpu: "500m"
                 memory: "512Mi"
