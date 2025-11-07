@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: v4.173.1
+        function-revision: allow-ingress-deletion-keycloak
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
