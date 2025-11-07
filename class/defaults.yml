@@ -36,6 +36,11 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.3.1
         chartName: cluster
+      cnpgBarmanPlugin:
+        # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
+        source: https://cloudnative-pg.io/charts/
+        version: 0.2.0
+        chartName: plugin-barman-cloud
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -224,6 +229,14 @@ parameters:
             cpu: 1000m
           requests:
             cpu: 100m
+      barmanPluginHelmValues:
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
 
     billing:
       namespace: ${appcat:namespace}
