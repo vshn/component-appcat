@@ -60,8 +60,10 @@ spec:
             "memory": "256Mi"}}, "setMajorVersionUpgrade": {"limits": {"cpu": "500m",
             "memory": "512Mi"}, "requests": {"cpu": "250m", "memory": "256Mi"}}, "setupArbitraryUser":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
-            "memory": "500Mi"}}, "setupScripts": {"limits": {"cpu": "300m", "memory":
-            "500Mi"}, "requests": {"cpu": "100m", "memory": "500Mi"}}}'
+            "memory": "500Mi"}}, "setupFilesystem": {"limits": {"cpu": "500m", "memory":
+            "512Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "setupScripts":
+            {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
+            "memory": "500Mi"}}}'
           isOpenshift: 'false'
           keepMetrics: '["pg_locks_count", "pg_postmaster_start_time_seconds", "pg_replication_lag",
             "pg_settings_effective_cache_size_bytes", "pg_settings_maintenance_work_mem_bytes",
@@ -92,7 +94,7 @@ spec:
             {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           salesOrder: ''
