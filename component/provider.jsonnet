@@ -199,6 +199,11 @@ local providerRBAC = {
         resources: [ 'billingservices' ],
         verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
       },
+      {
+        apiGroups: [ 'barmancloud.cnpg.io' ],
+        resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   helm: {
