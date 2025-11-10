@@ -39,7 +39,7 @@ parameters:
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
-        version: 0.2.0
+        version: 0.3.0
         chartName: plugin-barman-cloud
     images:
       provider-kubernetes:
