@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-a322909b7999f4716931eeeba1e5ebedc8fcfb54
+        name: function-appcat-master-disallow-rollback-main
       input:
         apiVersion: v1
         data:
