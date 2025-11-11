@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-disallow-rollback-main
+    metadata.appcat.vshn.io/revision: debug-v4.173.2
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-disallow-rollback-main
+        name: function-appcat-debug-v4-173-2
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: disallow-rollback-main
+          imageTag: v4.173.2
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |

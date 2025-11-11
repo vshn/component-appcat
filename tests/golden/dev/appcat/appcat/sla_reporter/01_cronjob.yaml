@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:disallow-rollback-main
+              image: ghcr.io/vshn/appcat:v4.173.2
               name: sla-reporter
               resources:
                 limits:

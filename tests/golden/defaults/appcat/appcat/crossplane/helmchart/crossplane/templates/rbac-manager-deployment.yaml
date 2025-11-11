@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: disallow-rollback-main
+        function-revision: v4.173.2
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
