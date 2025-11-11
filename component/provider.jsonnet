@@ -274,6 +274,11 @@ local providerRBAC = {
         resources: [ 'prometheusrules', 'podmonitors', 'servicemonitors' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'barmancloud.cnpg.io' ],
+        resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {
