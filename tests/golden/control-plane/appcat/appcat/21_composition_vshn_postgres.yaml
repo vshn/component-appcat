@@ -60,8 +60,10 @@ spec:
             "memory": "256Mi"}}, "setMajorVersionUpgrade": {"limits": {"cpu": "500m",
             "memory": "512Mi"}, "requests": {"cpu": "250m", "memory": "256Mi"}}, "setupArbitraryUser":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
-            "memory": "500Mi"}}, "setupScripts": {"limits": {"cpu": "300m", "memory":
-            "500Mi"}, "requests": {"cpu": "100m", "memory": "500Mi"}}}'
+            "memory": "500Mi"}}, "setupFilesystem": {"limits": {"cpu": "500m", "memory":
+            "512Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "setupScripts":
+            {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
+            "memory": "500Mi"}}}'
           isOpenshift: 'false'
           keepMetrics: '["pg_locks_count", "pg_postmaster_start_time_seconds", "pg_replication_lag",
             "pg_settings_effective_cache_size_bytes", "pg_settings_maintenance_work_mem_bytes",
