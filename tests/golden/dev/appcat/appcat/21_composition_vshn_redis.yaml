@@ -78,7 +78,7 @@ spec:
             "16Gi", "enabled": true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu":
             "1", "disk": "16Gi", "enabled": true, "memory": "4Gi"}}, "standard-512m":
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
