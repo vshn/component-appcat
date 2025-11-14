@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_various-nextcloud-bugs
+          image: ghcr.io/vshn/appcat:a692799d63d7658d97dc15fd2227045aa26543cd
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
