@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_nextcloud-ssl
+    metadata.appcat.vshn.io/revision: debug-7eba9028d72af6fd2f8caa8d36b17833df910e63
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
