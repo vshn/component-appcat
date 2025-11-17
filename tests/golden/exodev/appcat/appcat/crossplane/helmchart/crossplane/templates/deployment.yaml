@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: a692799d63d7658d97dc15fd2227045aa26543cd
+        function-revision: fix/nextcloud-ssl
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
