@@ -33,9 +33,14 @@ parameters:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
         # https://artifacthub.io/packages/helm/cloudnative-pg/cluster
-        source: https://cloudnative-pg.io/charts/
+        source: oci://ghcr.io/vshn
         version: 0.3.1
         chartName: cluster
+      cnpgBarmanPlugin:
+        # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
+        source: https://cloudnative-pg.io/charts/
+        version: 0.3.1
+        chartName: plugin-barman-cloud
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -72,7 +77,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: a692799d63d7658d97dc15fd2227045aa26543cd
+        tag: feat/cnpg-barman-cloud
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -224,6 +229,14 @@ parameters:
             cpu: 1000m
           requests:
             cpu: 100m
+      barmanPluginHelmValues:
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
 
     billing:
       namespace: ${appcat:namespace}
