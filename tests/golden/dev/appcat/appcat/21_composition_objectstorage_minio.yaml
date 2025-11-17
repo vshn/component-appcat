@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-7eba9028d72af6fd2f8caa8d36b17833df910e63
+        name: function-appcat-debug-update-redis
       input:
         apiVersion: v1
         data:
