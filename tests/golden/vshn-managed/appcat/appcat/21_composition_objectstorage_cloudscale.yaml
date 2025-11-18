@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-user-management-sequence
+        name: function-appcat-master-6e141ea4beda218d685ed12fa199143296ab0d68
       input:
         apiVersion: v1
         data:
