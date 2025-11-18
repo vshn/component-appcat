@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:expose-comp-type-metrics
+          image: ghcr.io/vshn/appcat:4bf4ddddfef6a70017ecf6d728e58129ab012095
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

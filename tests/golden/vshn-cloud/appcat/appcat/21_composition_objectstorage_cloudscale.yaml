@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-expose-comp-type-metrics
+        name: function-appcat-master-4bf4ddddfef6a70017ecf6d728e58129ab012095
       input:
         apiVersion: v1
         data:

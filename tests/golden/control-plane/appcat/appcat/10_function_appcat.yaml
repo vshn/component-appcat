@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-expose-comp-type-metrics
+  name: function-appcat-master-4bf4ddddfef6a70017ecf6d728e58129ab012095
 spec:
-  package: ghcr.io/vshn/appcat:expose-comp-type-metrics-func
+  package: ghcr.io/vshn/appcat:4bf4ddddfef6a70017ecf6d728e58129ab012095-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
