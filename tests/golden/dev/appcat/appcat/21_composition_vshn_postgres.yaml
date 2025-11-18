@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-7eba9028d72af6fd2f8caa8d36b17833df910e63
+    metadata.appcat.vshn.io/revision: debug-7b80e384514d038e0075930c7235f1ac00484ba0
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-7eba9028d72af6fd2f8caa8d36b17833df910e63
+        name: function-appcat-debug-7b80e384514d038e0075930c7235f1ac00484ba0
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: 7eba9028d72af6fd2f8caa8d36b17833df910e63
+          imageTag: 7b80e384514d038e0075930c7235f1ac00484ba0
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
