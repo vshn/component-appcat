@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-174-0
+        name: function-appcat-master-feat-spks-redis-haproxy-metrics
       input:
         apiVersion: v1
         data:
