@@ -21,12 +21,13 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-174-0
+        name: function-appcat-master-add-spksmariadb-tls
       input:
         apiVersion: v1
         data:
           crossplaneNamespace: syn-crossplane
           providerConfig: minio
+          proxyEndpoint: 172.19.0.1:9443
           serviceID: minio-minio-objectbucket
           serviceName: miniobucket
         kind: ConfigMap

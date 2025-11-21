@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubeconfighash: 275876e34cf609db118f3d84b799a790
+        kubeconfighash: 09799320dd1a60ccb2d57013084fde35
         kubectl.kubernetes.io/default-container: manager
       labels:
         control-plane: controller-manager
@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.174.0
+          image: ghcr.io/vshn/appcat:add_spksmariadb_tls
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
