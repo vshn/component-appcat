@@ -9,21 +9,7 @@ spec:
   package: ghcr.io/vshn/appcat:add_spksmariadb_tls-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-58-0-v4-171-3
-spec:
-  package: ghcr.io/vshn/appcat:v4.171.3-func
-  packagePullPolicy: IfNotPresent
-  runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -37,7 +23,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.172.0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -51,7 +37,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.173.0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -65,7 +51,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.173.1-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -79,5 +65,19 @@ spec:
   package: ghcr.io/vshn/appcat:v4.173.2-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v3-61-0-v4-174-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.174.0-func
+  packagePullPolicy: IfNotPresent
+  runtimeConfigRef:
+    name: enable-proxy
   skipDependencyResolution: true
