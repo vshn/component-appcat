@@ -36,6 +36,9 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.3.1
         chartName: cluster
+      openbao:
+        source: https://openbao.github.io/openbao-helm
+        version: 0.19.3
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -501,6 +504,8 @@ parameters:
         Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
         Forgejo:
+          uptime: ${appcat:slos:uptimeDefaults}
+        OpenBao:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
