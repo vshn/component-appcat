@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  plans: '{"small": {"size": {"cpu": "125m", "disk": "1Gi", "enabled": true, "memory":
+    "512Mi"}}}'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: vshnopenbaoplans
+  name: vshnopenbaoplans
+  namespace: syn-appcat

@@ -1,0 +1,67 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: Openbao instances by VSHN
+    metadata.appcat.vshn.io/displayname: Openbao by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-openbao
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"small":{"size":{"cpu":"125m","disk":"1Gi","enabled":true,"memory":"512Mi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/openbao.html
+    metadata.appcat.vshn.io/zone: lpg
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: debug-feat_openbao_poc
+    metadata.appcat.vshn.io/serviceID: vshn-openbao
+    name: vshnopenbao.vshn.appcat.vshn.io
+  name: vshnopenbao.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNOpenBao
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-debug-feat-openbao-poc
+      input:
+        apiVersion: v1
+        data:
+          bucketRegion: rma
+          chartRepository: https://openbao.github.io/openbao-helm
+          chartVersion: 0.19.3
+          controlNamespace: syn-appcat-control
+          crossplaneNamespace: syn-crossplane
+          defaultPlan: small
+          emailAlertingEnabled: 'true'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: appcat@appuio.cloud
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: appcat@appuio.cloud
+          ignoreNamespaceForBilling: vshn-test
+          imageTag: feat_openbao_poc
+          isOpenshift: 'false'
+          maintenanceSA: helm-based-service-maintenance
+          mode: standalone
+          ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNOpenBao
+          ownerVersion: v1
+          plans: '{"small": {"size": {"cpu": "125m", "disk": "1Gi", "enabled": true,
+            "memory": "512Mi"}}}'
+          proxyEndpoint: 172.19.0.1:9443
+          quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
+          salesOrder: ''
+          serviceID: vshn-openbao
+          serviceName: openbao
+          sliNamespace: syn-appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: openbao-func
+  writeConnectionSecretsToNamespace: syn-crossplane

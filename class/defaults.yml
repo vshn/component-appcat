@@ -36,6 +36,9 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.3.1
         chartName: cluster
+      openbao:
+        source: https://openbao.github.io/openbao-helm
+        version: 0.19.3
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -490,6 +493,8 @@ parameters:
           uptime: ${appcat:slos:uptimeDefaults}
         Forgejo:
           uptime: ${appcat:slos:uptimeDefaults}
+        OpenBao:
+          uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
       cloudscale:
@@ -808,6 +813,28 @@ parameters:
               limits:
                 cpu: "500m"
                 memory: "512Mi"
+        openbao:
+          enabled: true
+          serviceName: VSHNOpenBao
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          offered: true
+          alertsEnabled: false
+          compFunctionsOnly: true
+          mode: standalone
+          sla: 99.25
+          connectionSecretKeys: [] # TODO: specify connection keys
+          chartVersion: ${appcat:charts:openbao:version}
+          chartRepository: ${appcat:charts:openbao:source}
+          plans:
+            small:
+              size:
+                enabled: true
+                cpu: "125m"
+                memory: "512Mi"
+                disk: 1Gi
+          defaultPlan: small
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
         redis:
           enabled: true
           billing: true
