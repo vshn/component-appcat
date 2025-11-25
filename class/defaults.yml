@@ -678,6 +678,7 @@ parameters:
         postgres:
           enabled: true
           billing: true
+          maintenanceURL: https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/main/Debian/ClusterImageCatalog-bookworm.yaml
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             # Depending on the cluster, this needs to be set
