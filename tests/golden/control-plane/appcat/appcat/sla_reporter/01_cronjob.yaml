@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:add_spksmariadb_tls
+              image: ghcr.io/vshn/appcat:fix_keycloak-config
               name: sla-reporter
               resources:
                 limits:
