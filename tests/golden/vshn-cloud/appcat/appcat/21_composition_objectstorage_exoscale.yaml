@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-174-1
+        name: function-appcat-master-fix-keycloak-config
       input:
         apiVersion: v1
         data:
