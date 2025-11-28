@@ -67,7 +67,7 @@ spec:
           proxyEndpoint: 172.18.0.1:9443
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
-          proxysqlImage: docker.io/proxysql/proxysql:3.0.2
+          proxysqlImage: docker.io/proxysql/proxysql:3.0.3
           proxysqlMemoryLimit: 256Mi
           proxysqlMemoryRequests: 64Mi
           quotasEnabled: 'false'
