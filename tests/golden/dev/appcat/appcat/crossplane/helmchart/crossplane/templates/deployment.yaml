@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: add/spksmariadb_tls
+        function-revision: 6b604b8a6bfb4e9cb8d7bdb0b3280daa8face164
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

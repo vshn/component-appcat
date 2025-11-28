@@ -1,0 +1,6 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+timeout: 400
+commands:
+  - script: scripts/check-maintenance.sh
+    timeout: 600

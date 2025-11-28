@@ -100,6 +100,11 @@ local providerRBAC = {
         verbs: [ 'get', 'update' ],
       },
       {
+        apiGroups: [ 'postgresql.cnpg.io' ],
+        resources: [ 'clusters', 'imagecatalogs' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
         apiGroups: [ 'cert-manager.io' ],
         resources: [ 'issuers', 'certificates' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
