@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-6b604b8a6bfb4e9cb8d7bdb0b3280daa8face164
+        name: function-appcat-debug-feat-kc-metrics
       input:
         apiVersion: v1
         data:
