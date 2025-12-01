@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 08f40689c78197d7fadc7357676ff90d650c8a6a
+        function-revision: feat/instance-suspend
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
