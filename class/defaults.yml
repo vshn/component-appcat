@@ -219,6 +219,9 @@ parameters:
         prometheus_rule_labels:
           prometheus: platform
       helmValues:
+        additionalEnv:
+          - name: EXPIRING_CHECK_THRESHOLD
+            value: "15"
         resources:
           limits:
             cpu: 1000m
