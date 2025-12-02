@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-69ffa2869e6d8f907f7e7924308eae15dba16497
+        name: function-appcat-master-v4-175-0
       input:
         apiVersion: v1
         data:
