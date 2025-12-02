@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_codey_webhook
+    metadata.appcat.vshn.io/revision: debug-71a43f9f8136627599b2e88ab53aa621d79c9436
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-codey-webhook
+        name: function-appcat-debug-71a43f9f8136627599b2e88ab53aa621d79c9436
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fix_codey_webhook
+          imageTag: 71a43f9f8136627599b2e88ab53aa621d79c9436
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
