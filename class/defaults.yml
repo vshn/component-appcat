@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.174.1
+        tag: eef51cdd488c48c57d31be9b2f3735539926225a
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
