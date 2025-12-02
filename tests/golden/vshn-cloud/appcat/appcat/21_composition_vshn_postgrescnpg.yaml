@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-eef51cdd488c48c57d31be9b2f3735539926225a
+    metadata.appcat.vshn.io/revision: master-69ffa2869e6d8f907f7e7924308eae15dba16497
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-eef51cdd488c48c57d31be9b2f3735539926225a
+        name: function-appcat-master-69ffa2869e6d8f907f7e7924308eae15dba16497
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: eef51cdd488c48c57d31be9b2f3735539926225a
+          imageTag: 69ffa2869e6d8f907f7e7924308eae15dba16497
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
