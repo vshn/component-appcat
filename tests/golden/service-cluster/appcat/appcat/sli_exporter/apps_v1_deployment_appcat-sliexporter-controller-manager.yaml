@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:allow-ingress-deletion-keycloak
+          image: ghcr.io/vshn/appcat:69ffa2869e6d8f907f7e7924308eae15dba16497
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

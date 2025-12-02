@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:allow-ingress-deletion-keycloak
+              image: ghcr.io/vshn/appcat:69ffa2869e6d8f907f7e7924308eae15dba16497
               name: sla-reporter
               resources:
                 limits:

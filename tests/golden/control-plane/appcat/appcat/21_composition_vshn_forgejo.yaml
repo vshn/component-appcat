@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-allow-ingress-deletion-keycloak
+    metadata.appcat.vshn.io/revision: master-69ffa2869e6d8f907f7e7924308eae15dba16497
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-allow-ingress-deletion-keycloak
+        name: function-appcat-master-69ffa2869e6d8f907f7e7924308eae15dba16497
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: allow-ingress-deletion-keycloak
+          imageTag: 69ffa2869e6d8f907f7e7924308eae15dba16497
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'

@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: allow-ingress-deletion-keycloak
+        tag: 69ffa2869e6d8f907f7e7924308eae15dba16497
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

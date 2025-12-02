@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:allow-ingress-deletion-keycloak
+          image: ghcr.io/vshn/appcat:69ffa2869e6d8f907f7e7924308eae15dba16497
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

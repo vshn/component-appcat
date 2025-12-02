@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-allow-ingress-deletion-keycloak
+        name: function-appcat-master-69ffa2869e6d8f907f7e7924308eae15dba16497
       input:
         apiVersion: v1
         data:

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-allow-ingress-deletion-keycloak
+  name: function-appcat-master-69ffa2869e6d8f907f7e7924308eae15dba16497
 spec:
-  package: ghcr.io/vshn/appcat:allow-ingress-deletion-keycloak-func
+  package: ghcr.io/vshn/appcat:69ffa2869e6d8f907f7e7924308eae15dba16497-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy
