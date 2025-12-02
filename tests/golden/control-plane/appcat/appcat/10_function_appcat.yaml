@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-keycloak-config
+  name: function-appcat-master-eef51cdd488c48c57d31be9b2f3735539926225a
 spec:
-  package: ghcr.io/vshn/appcat:fix_keycloak-config-func
+  package: ghcr.io/vshn/appcat:eef51cdd488c48c57d31be9b2f3735539926225a-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: enable-proxy
