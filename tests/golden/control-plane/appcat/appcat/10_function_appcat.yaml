@@ -9,20 +9,6 @@ spec:
   package: ghcr.io/vshn/appcat:fix_keycloak-config-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-59-0-v4-172-0
-spec:
-  package: ghcr.io/vshn/appcat:v4.172.0-func
-  packagePullPolicy: IfNotPresent
-  runtimeConfigRef:
     name: enable-proxy
   skipDependencyResolution: true
 ---
@@ -88,10 +74,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-61-0-v4-174-0
+  name: function-appcat-v3-61-1-v4-174-1
 spec:
-  package: ghcr.io/vshn/appcat:v4.174.0-func
+  package: ghcr.io/vshn/appcat:v4.174.1-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
