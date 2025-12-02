@@ -64,7 +64,7 @@ parameters:
       sloth:
         registry: ghcr.io
         image: slok/sloth
-        tag: v0.11.0
+        tag: v0.15.0
       statefulset-resize-controller:
         registry: ghcr.io
         repository: vshn/statefulset-resize-controller
