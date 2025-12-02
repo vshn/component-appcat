@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.174.1
+        tag: v4.175.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -219,6 +219,9 @@ parameters:
         prometheus_rule_labels:
           prometheus: platform
       helmValues:
+        additionalEnv:
+          - name: EXPIRING_CHECK_THRESHOLD
+            value: "15"
         resources:
           limits:
             cpu: 1000m
@@ -678,6 +681,7 @@ parameters:
         postgres:
           enabled: true
           billing: true
+          maintenanceURL: https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/main/Debian/ClusterImageCatalog-bookworm.yaml
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             # Depending on the cluster, this needs to be set
