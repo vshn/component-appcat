@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-176-0
+        name: function-appcat-master-fix-user-management-name-escaping
       input:
         apiVersion: v1
         data:
