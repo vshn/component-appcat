@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.0
-    helm.sh/chart: cloudnative-pg-0.26.0
+    app.kubernetes.io/version: 1.27.1
+    helm.sh/chart: cloudnative-pg-0.26.1
   name: appcat-cloudnative-pg
   namespace: syn-cnpg-system
 spec:
@@ -18,9 +18,9 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 697cdf230a8ef95290262b28934e406aceaf88746315ecd9fcb28b7a48798203
-        checksum/monitoring-config: f45624a846850d792540d17e41395f92ff9582a997859d99583d7c168b36d21c
-        checksum/rbac: cea93e6a2d7d81c8b533e454c09efd1ca892abcfd2ce13da21d21920ca226a8c
+        checksum/config: 837dfa6a863d294ac724cef6a7ede92c25d1a26ccd74d998f0bd175f08719c09
+        checksum/monitoring-config: 83b99344a29ce319c93642fd4fb48d8b6ce7d0d5da975d9ef8efb237a2721517
+        checksum/rbac: 293015e6c647403f464019195ccf41b5b510f6ff4f05aa79f05a6f7b4c678471
       labels:
         app.kubernetes.io/instance: appcat
         app.kubernetes.io/name: cloudnative-pg
@@ -36,7 +36,7 @@ spec:
             - /manager
           env:
             - name: OPERATOR_IMAGE_NAME
-              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.0
+              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.1
             - name: OPERATOR_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -45,7 +45,7 @@ spec:
               value: cnpg-default-monitoring
             - name: EXPIRING_CHECK_THRESHOLD
               value: '15'
-          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.0
+          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -27,7 +27,7 @@ parameters:
         version: 15.0.3
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.26.0
+        version: 0.26.1
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
