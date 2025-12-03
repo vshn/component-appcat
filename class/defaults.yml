@@ -18,7 +18,7 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.1.4
+        version: 7.1.5
       nextcloud:
         source: https://nextcloud.github.io/helm/
         version: 8.4.1
