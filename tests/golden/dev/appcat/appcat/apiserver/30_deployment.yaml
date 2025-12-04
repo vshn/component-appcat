@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:4d62ae4054a7b54ce60254e446add3d31cee1c6b
+          image: ghcr.io/vshn/appcat:update_nextcloud-helmchart
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

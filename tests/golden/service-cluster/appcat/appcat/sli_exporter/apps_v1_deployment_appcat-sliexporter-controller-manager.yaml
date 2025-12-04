@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:4d62ae4054a7b54ce60254e446add3d31cee1c6b
+          image: ghcr.io/vshn/appcat:update_nextcloud-helmchart
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

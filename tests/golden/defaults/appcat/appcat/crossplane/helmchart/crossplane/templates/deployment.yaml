@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 4d62ae4054a7b54ce60254e446add3d31cee1c6b
+        function-revision: update/nextcloud-helmchart
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

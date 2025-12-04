@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-4d62ae4054a7b54ce60254e446add3d31cee1c6b
+  name: function-appcat-debug-update-nextcloud-helmchart
 spec:
-  package: ghcr.io/vshn/appcat:4d62ae4054a7b54ce60254e446add3d31cee1c6b-func
+  package: ghcr.io/vshn/appcat:update_nextcloud-helmchart-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

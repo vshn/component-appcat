@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-4d62ae4054a7b54ce60254e446add3d31cee1c6b
+        name: function-appcat-debug-update-nextcloud-helmchart
       input:
         apiVersion: v1
         data:
