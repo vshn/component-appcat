@@ -33,7 +33,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.4.1
+          chartVersion: 8.6.0
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
@@ -63,7 +63,7 @@ spec:
           maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
           minimumRevisionAge: 168h
           mode: standalone
-          nextcloud_image: dockerhub.vshn.net/library/nextcloud
+          nextcloud_image_repository: library/nextcloud
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud
