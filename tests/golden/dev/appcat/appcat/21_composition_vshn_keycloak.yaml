@@ -53,7 +53,7 @@ spec:
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.33.4
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://docker-registry.inventage.com:10121/v2/keycloak-competence-center/keycloak-managed/tags/list
           minimumRevisionAge: 168h

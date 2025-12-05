@@ -52,7 +52,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageTag: v4.176.0
           isOpenshift: 'true'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.33.4
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance
