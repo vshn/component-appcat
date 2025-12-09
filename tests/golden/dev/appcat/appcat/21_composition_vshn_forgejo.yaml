@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.176.0
+    metadata.appcat.vshn.io/revision: debug-exoscale-storage-quotas
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-176-0
+        name: function-appcat-debug-exoscale-storage-quotas
       input:
         apiVersion: v1
         data:
@@ -34,6 +34,7 @@ spec:
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
           chartVersion: 14.0.4
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
@@ -47,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.176.0
+          imageTag: exoscale-storage-quotas
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
