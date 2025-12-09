@@ -34,6 +34,7 @@ spec:
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.6.0
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m

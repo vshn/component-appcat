@@ -37,6 +37,7 @@ spec:
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
           chartVersion: 23.2.1
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'

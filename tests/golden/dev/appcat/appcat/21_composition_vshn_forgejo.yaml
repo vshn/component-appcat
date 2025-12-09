@@ -34,6 +34,7 @@ spec:
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
           chartVersion: 15.0.3
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
