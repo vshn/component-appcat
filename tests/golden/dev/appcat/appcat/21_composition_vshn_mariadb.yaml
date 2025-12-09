@@ -33,6 +33,7 @@ spec:
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera
           chartVersion: 16.0.1
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'

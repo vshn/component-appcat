@@ -33,6 +33,7 @@ spec:
           bucketRegion: lpg
           chartRepository: https://charts.min.io
           chartVersion: 5.4.0
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
