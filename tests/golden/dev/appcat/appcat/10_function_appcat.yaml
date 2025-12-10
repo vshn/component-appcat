@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-user-management-name-escaping
+  name: function-appcat-debug-08f40689c78197d7fadc7357676ff90d650c8a6a
 spec:
-  package: ghcr.io/vshn/appcat:fix_user_management_name_escaping-func
+  package: ghcr.io/vshn/appcat:08f40689c78197d7fadc7357676ff90d650c8a6a-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

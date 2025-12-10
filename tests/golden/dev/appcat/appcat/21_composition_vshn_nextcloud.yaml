@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_user_management_name_escaping
+    metadata.appcat.vshn.io/revision: debug-08f40689c78197d7fadc7357676ff90d650c8a6a
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-user-management-name-escaping
+        name: function-appcat-debug-08f40689c78197d7fadc7357676ff90d650c8a6a
       input:
         apiVersion: v1
         data:
@@ -54,7 +54,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: fix_user_management_name_escaping
+          imageTag: 08f40689c78197d7fadc7357676ff90d650c8a6a
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'

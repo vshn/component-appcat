@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/user_management_name_escaping
+        function-revision: 08f40689c78197d7fadc7357676ff90d650c8a6a
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-user-management-name-escaping
+        name: function-appcat-master-08f40689c78197d7fadc7357676ff90d650c8a6a
       input:
         apiVersion: v1
         data:
