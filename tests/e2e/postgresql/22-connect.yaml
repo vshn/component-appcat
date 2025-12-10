@@ -16,7 +16,7 @@ spec:
           image: alpine/k8s:1.31.7
           envFrom:
             - secretRef:
-                name: postgresql-e2e-test-e2euser
+                name: postgresql-e2e-test-e2e-user
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -102,7 +102,7 @@ spec:
             secretName: service-cluster-kubeconfig
         - name: postgresql-tls-secrets
           secret:
-            secretName: postgresql-e2e-test-e2euser
+            secretName: postgresql-e2e-test-e2e-user
             items:
               - key: ca.crt
                 path: ca.crt
