@@ -33,7 +33,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 7.1.4
+          chartVersion: 7.1.5
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
