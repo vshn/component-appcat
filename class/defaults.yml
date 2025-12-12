@@ -21,7 +21,7 @@ parameters:
         version: 7.1.5
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 8.4.1
+        version: 8.6.0
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 15.0.3
@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 4d62ae4054a7b54ce60254e446add3d31cee1c6b
+        tag: 9d4fac3ada64275134e912cd3eb9c3a678cbe403
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -1109,7 +1109,7 @@ parameters:
             collaboraMemoryRequests: 256Mi
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            nextcloud_image: ${appcat:images:nextcloud:registry}/${appcat:images:nextcloud:image}
+            nextcloud_image_repository: ${appcat:images:nextcloud:image}
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
