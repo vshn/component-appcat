@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-update-nextcloud-helmchart
+        name: function-appcat-master-9d4fac3ada64275134e912cd3eb9c3a678cbe403
       input:
         apiVersion: v1
         data:
