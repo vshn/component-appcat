@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:feat_instance-suspend
+          image: ghcr.io/vshn/appcat:4d62ae4054a7b54ce60254e446add3d31cee1c6b
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

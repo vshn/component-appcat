@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_instance-suspend
+    metadata.appcat.vshn.io/revision: master-4d62ae4054a7b54ce60254e446add3d31cee1c6b
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

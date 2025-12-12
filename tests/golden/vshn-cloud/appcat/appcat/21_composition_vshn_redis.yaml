@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_instance-suspend
+    metadata.appcat.vshn.io/revision: master-4d62ae4054a7b54ce60254e446add3d31cee1c6b
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-instance-suspend
+        name: function-appcat-master-4d62ae4054a7b54ce60254e446add3d31cee1c6b
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: vshn
-          imageTag: feat_instance-suspend
+          imageTag: 4d62ae4054a7b54ce60254e446add3d31cee1c6b
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
