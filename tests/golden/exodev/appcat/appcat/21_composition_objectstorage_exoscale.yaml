@@ -22,7 +22,11 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
+<<<<<<< HEAD
         name: function-appcat-master-3b8ef77aded45f8a0344182dbc7a2b590edaa373
+=======
+        name: function-appcat-master-fix-spks-deletion-protection
+>>>>>>> 0d4891bed ([create-pull-request] automated change)
       input:
         apiVersion: v1
         data:

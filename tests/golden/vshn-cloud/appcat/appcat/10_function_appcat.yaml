@@ -4,9 +4,29 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
+<<<<<<< HEAD
   name: function-appcat-master-3b8ef77aded45f8a0344182dbc7a2b590edaa373
 spec:
   package: ghcr.io/vshn/appcat:3b8ef77aded45f8a0344182dbc7a2b590edaa373-func
+=======
+  name: function-appcat-master-fix-spks-deletion-protection
+spec:
+  package: ghcr.io/vshn/appcat:fix_spks_deletion_protection-func
+  packagePullPolicy: IfNotPresent
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v3-60-2-v4-173-2
+spec:
+  package: ghcr.io/vshn/appcat:v4.173.2-func
+>>>>>>> 0d4891bed ([create-pull-request] automated change)
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

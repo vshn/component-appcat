@@ -29,6 +29,7 @@ spec:
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
+<<<<<<< HEAD
             - name: CROSSPLANE_LABEL_MAPPING
               value: |
                 {
@@ -39,6 +40,9 @@ spec:
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
           image: ghcr.io/vshn/appcat:3b8ef77aded45f8a0344182dbc7a2b590edaa373
+=======
+          image: ghcr.io/vshn/appcat:fix_spks_deletion_protection
+>>>>>>> 0d4891bed ([create-pull-request] automated change)
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
