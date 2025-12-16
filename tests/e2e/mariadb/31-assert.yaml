@@ -17,7 +17,7 @@ spec:
       deletionProtection: false
     service:
       access:
-        - user: e2euser
+        - user: e2e_user
     size:
       plan: standard-2
   writeConnectionSecretToRef:

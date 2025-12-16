@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.176.0
+    metadata.appcat.vshn.io/revision: debug-v4.177.0
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-176-0
+        name: function-appcat-debug-v4-177-0
       input:
         apiVersion: v1
         data:
@@ -33,7 +33,8 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.4.1
+          chartVersion: 8.6.0
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
@@ -54,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.176.0
+          imageTag: v4.177.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
@@ -63,7 +64,7 @@ spec:
           maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
           minimumRevisionAge: 168h
           mode: standalone
-          nextcloud_image: dockerhub.vshn.net/library/nextcloud
+          nextcloud_image_repository: library/nextcloud
           ocpDefaultAppsDomain: apps.lab-cloudscale-rma-0.appuio.cloud
           ownerGroup: vshn.appcat.vshn.io
           ownerKind: XVSHNNextcloud

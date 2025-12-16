@@ -18,16 +18,16 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.1.4
+        version: 7.1.5
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 8.4.1
+        version: 8.6.0
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 14.0.4
+        version: 15.0.3
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.26.0
+        version: 0.26.1
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
@@ -40,11 +40,11 @@ parameters:
       provider-kubernetes:
         registry: ghcr.io
         repository: crossplane-contrib/provider-kubernetes
-        tag: v1.0.0
+        tag: v1.1.0
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
-        tag: v1.0.2
+        tag: v1.0.4
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.176.0
+        tag: v4.177.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -96,7 +96,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: "3.0.2"
+        version: "3.0.3"
       collabora:
         registry: docker.io
         image: collabora/code
@@ -1109,7 +1109,7 @@ parameters:
             collaboraMemoryRequests: 256Mi
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            nextcloud_image: ${appcat:images:nextcloud:registry}/${appcat:images:nextcloud:image}
+            nextcloud_image_repository: ${appcat:images:nextcloud:image}
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io

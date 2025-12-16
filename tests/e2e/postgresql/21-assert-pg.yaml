@@ -16,7 +16,7 @@ spec:
       deletionProtection: false
     service:
       access:
-        - user: e2euser
+        - user: e2e_user
       vacuumEnabled: true
       repackEnabled: true
     size:
