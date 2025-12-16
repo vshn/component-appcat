@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-9d4fac3ada64275134e912cd3eb9c3a678cbe403
+    metadata.appcat.vshn.io/revision: master-e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-9d4fac3ada64275134e912cd3eb9c3a678cbe403
+        name: function-appcat-master-e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
       input:
         apiVersion: v1
         data:
@@ -34,6 +34,7 @@ spec:
           busybox_image: docker.io/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.6.0
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
           collaboraCPURequests: 250m
@@ -54,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: 9d4fac3ada64275134e912cd3eb9c3a678cbe403
+          imageTag: e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'

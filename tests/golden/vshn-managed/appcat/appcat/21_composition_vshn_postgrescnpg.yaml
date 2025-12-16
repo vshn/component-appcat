@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-9d4fac3ada64275134e912cd3eb9c3a678cbe403
+    metadata.appcat.vshn.io/revision: master-e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-9d4fac3ada64275134e912cd3eb9c3a678cbe403
+        name: function-appcat-master-e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
       input:
         apiVersion: v1
         data:
@@ -34,6 +34,7 @@ spec:
           billingEnabled: 'false'
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
+          cloudProvider: cloudscale
           clusterName: c-green-test-1234
           cnpgClusterChartName: cluster
           cnpgClusterChartSource: https://cloudnative-pg.io/charts/
@@ -50,7 +51,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: 9d4fac3ada64275134e912cd3eb9c3a678cbe403
+          imageTag: e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
