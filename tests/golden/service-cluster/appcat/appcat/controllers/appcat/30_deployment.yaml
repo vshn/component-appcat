@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:exoscale-storage-quotas
+          image: ghcr.io/vshn/appcat:e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

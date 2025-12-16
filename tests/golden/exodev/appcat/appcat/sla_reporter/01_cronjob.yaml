@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:exoscale-storage-quotas
+              image: ghcr.io/vshn/appcat:e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
               name: sla-reporter
               resources:
                 limits:

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-exoscale-storage-quotas
+  name: function-appcat-debug-e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
 spec:
-  package: ghcr.io/vshn/appcat:exoscale-storage-quotas-func
+  package: ghcr.io/vshn/appcat:e6c8ee79c62af0bd1bfe05cf36287fe9624a7604-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

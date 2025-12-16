@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:exoscale-storage-quotas
+          image: ghcr.io/vshn/appcat:e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: exoscale-storage-quotas
+        function-revision: e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

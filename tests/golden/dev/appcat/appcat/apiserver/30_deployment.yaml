@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:exoscale-storage-quotas
+          image: ghcr.io/vshn/appcat:e6c8ee79c62af0bd1bfe05cf36287fe9624a7604
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
