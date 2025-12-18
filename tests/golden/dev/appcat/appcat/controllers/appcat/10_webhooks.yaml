@@ -152,29 +152,6 @@ webhooks:
       service:
         name: webhook-service
         namespace: syn-appcat
-        path: /validate--v1-persistentvolumeclaim
-    failurePolicy: Fail
-    name: pvc.vshn.appcat.vshn.io
-    namespaceSelector:
-      matchExpressions:
-        - key: appcat.vshn.io/ownerkind
-          operator: Exists
-    rules:
-      - apiGroups:
-          - ''
-        apiVersions:
-          - v1
-        operations:
-          - DELETE
-        resources:
-          - persistentvolumeclaims
-    sideEffects: None
-  - admissionReviewVersions:
-      - v1
-    clientConfig:
-      service:
-        name: webhook-service
-        namespace: syn-appcat
         path: /validate-helm-crossplane-io-v1beta1-release
     failurePolicy: Fail
     name: releases.vshn.appcat.vshn.io
@@ -355,4 +332,27 @@ webhooks:
           - DELETE
         resources:
           - xobjectbuckets
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: webhook-service
+        namespace: syn-appcat
+        path: /unmanaged-deletion-protection
+    failurePolicy: Fail
+    name: persistentvolumeclaims.vshn.appcat.vshn.io
+    namespaceSelector:
+      matchExpressions:
+        - key: appcat.vshn.io/ownerkind
+          operator: Exists
+    rules:
+      - apiGroups:
+          - ''
+        apiVersions:
+          - v1
+        operations:
+          - DELETE
+        resources:
+          - persistentvolumeclaims
     sideEffects: None

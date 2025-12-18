@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-177-0
+        name: function-appcat-master-fix-spks-deletion-protection
       input:
         apiVersion: v1
         data:
