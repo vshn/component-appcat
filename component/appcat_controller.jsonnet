@@ -243,6 +243,39 @@ local selector = {
   ],
 };
 
+local additionalUnmanagedProtection(group, version, resource) = {
+  admissionReviewVersions: [
+    'v1',
+  ],
+  clientConfig: {
+    service: {
+      name: 'webhook-service',
+      namespace: controllersParams.namespace,
+      path: '/unmanaged-deletion-protection',
+    },
+  },
+  namespaceSelector: selector,
+  failurePolicy: 'Fail',
+  name: resource + '.vshn.appcat.vshn.io',
+  rules: [
+    {
+      apiGroups: [
+        group,
+      ],
+      apiVersions: [
+        version,
+      ],
+      operations: [
+        'DELETE',
+      ],
+      resources: [
+        resource,
+      ],
+    },
+  ],
+  sideEffects: 'None',
+};
+
 local webhook = loadManifest('webhooks.yaml') {
   metadata+: {
     name: 'appcat-validation',
@@ -256,6 +289,9 @@ local webhook = loadManifest('webhooks.yaml') {
         if w.name == 'xobjectbuckets.vshn.appcat.vshn.io' then w { objectSelector: selector } + clientConfig
         else w + clientConfig
     for w in super.webhooks
+  ] + [
+    additionalUnmanagedProtection(h.group, h.version, h.resource)
+    for h in controllersParams.additionalUnmanagedProtection
   ],
 };
 

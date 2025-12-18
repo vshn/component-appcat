@@ -13,11 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-<<<<<<< HEAD
-    metadata.appcat.vshn.io/revision: master-3b8ef77aded45f8a0344182dbc7a2b590edaa373
-=======
     metadata.appcat.vshn.io/revision: master-fix_spks_deletion_protection
->>>>>>> 0d4891bed ([create-pull-request] automated change)
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -28,11 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-<<<<<<< HEAD
-        name: function-appcat-master-3b8ef77aded45f8a0344182dbc7a2b590edaa373
-=======
         name: function-appcat-master-fix-spks-deletion-protection
->>>>>>> 0d4891bed ([create-pull-request] automated change)
       input:
         apiVersion: v1
         data:
@@ -63,11 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-<<<<<<< HEAD
-          imageTag: 3b8ef77aded45f8a0344182dbc7a2b590edaa373
-=======
           imageTag: fix_spks_deletion_protection
->>>>>>> 0d4891bed ([create-pull-request] automated change)
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"

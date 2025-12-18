@@ -380,6 +380,10 @@ parameters:
           - patch
     controller:
       enabled: false
+      additionalUnmanagedProtection:
+        - group: ""
+          version: v1
+          resource: persistentvolumeclaims
       namespace: ${appcat:namespace}
       namespaceLabels: ${appcat:namespaceLabels}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
