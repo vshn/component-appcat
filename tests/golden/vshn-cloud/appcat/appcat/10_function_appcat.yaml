@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-postgresql-qos-guaranteed
+  name: function-appcat-master-c2ebb58b76710498d0fced940dd7938f563b8cf0
 spec:
-  package: ghcr.io/vshn/appcat:postgresql_qos-guaranteed-func
+  package: ghcr.io/vshn/appcat:c2ebb58b76710498d0fced940dd7938f563b8cf0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
