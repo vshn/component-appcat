@@ -27,6 +27,9 @@ spec:
     metadata:
       annotations:
         function-revision: c2ebb58b76710498d0fced940dd7938f563b8cf0
+        prometheus.io/path: /metrics
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -83,6 +86,8 @@ spec:
           ports:
             - containerPort: 8081
               name: readyz
+            - containerPort: 8080
+              name: metrics
             - containerPort: 9443
               name: webhooks
           resources:
