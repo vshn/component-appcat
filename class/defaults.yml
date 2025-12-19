@@ -80,7 +80,7 @@ parameters:
       functionpnt:
         registry: xpkg.upbound.io
         repository: crossplane-contrib/function-patch-and-transform
-        tag: v0.9.1
+        tag: v0.9.3
       reporting:
         registry: ghcr.io
         repository: appuio/appuio-reporting
