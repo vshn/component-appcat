@@ -27,6 +27,9 @@ spec:
     metadata:
       annotations:
         function-revision: c2ebb58b76710498d0fced940dd7938f563b8cf0
+        prometheus.io/path: /metrics
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
@@ -61,6 +64,9 @@ spec:
           image: xpkg.crossplane.io/crossplane/crossplane:v1.20.1
           imagePullPolicy: Always
           name: crossplane
+          ports:
+            - containerPort: 8080
+              name: metrics
           resources:
             limits:
               cpu: 1000m

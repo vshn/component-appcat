@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: crossplane
+    name: crossplane-metrics
+  name: crossplane-metrics
+  namespace: syn-crossplane
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+  selector:
+    release: crossplane
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations: {}
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: crossplane
+    name: crossplane
+  name: crossplane
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: commodore
+      app.kubernetes.io/name: crossplane
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations: {}
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: crossplane
+    name: crossplane
+    prometheus: platform
+    role: alert-rules
+  name: crossplane
+  namespace: syn-crossplane
+spec:
+  groups:
+    - name: crossplane.rules
+      rules:
+        - alert: CrossplaneDown
+          annotations:
+            description: Crossplane pod {{ $labels.pod }} in namespace {{ $labels.namespace
+              }} is down
+            summary: Crossplane controller is down
+          expr: up{namespace="syn-crossplane", job=~"^crossplane-.+$"} != 1
+          for: 10m
+          labels:
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - alert: CrossplaneManagedResourceNotSynced
+          annotations:
+            description: 'Managed resource {{ $labels.gvk }} in namespace {{ $labels.namespace
+              }} (pod: {{ $labels.pod }}) has not been synced for 15 minutes'
+            summary: Crossplane Managed resource not synced
+          expr: crossplane_managed_resource_synced{namespace="syn-crossplane"} < crossplane_managed_resource_exists{namespace="syn-crossplane"}
+          for: 15m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - alert: CrossplaneManagedResourceNotReady
+          annotations:
+            description: 'Managed resource {{ $labels.gvk }} in namespace {{ $labels.namespace
+              }} (pod: {{ $labels.pod }}) has not been ready for 15 minutes'
+            summary: Crossplane Managed resource not ready
+          expr: crossplane_managed_resource_ready{namespace="syn-crossplane"} < crossplane_managed_resource_exists{namespace="syn-crossplane"}
+          for: 15m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar

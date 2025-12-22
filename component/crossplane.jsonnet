@@ -100,10 +100,42 @@ local monitoring =
                 labels: {
                   severity: 'critical',
                   syn: 'true',
+                  syn_component: 'appcat',
+                  syn_team: 'schedar',
                 },
                 annotations: {
                   summary: 'Crossplane controller is down',
                   description: 'Crossplane pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is down',
+                },
+              },
+              {
+                alert: 'CrossplaneManagedResourceNotSynced',
+                expr: 'crossplane_managed_resource_synced{namespace="' + params.namespace + '"} < crossplane_managed_resource_exists{namespace="' + params.namespace + '"}',
+                'for': '15m',
+                labels: {
+                  severity: 'warning',
+                  syn: 'true',
+                  syn_component: 'appcat',
+                  syn_team: 'schedar',
+                },
+                annotations: {
+                  summary: 'Crossplane Managed resource not synced',
+                  description: 'Managed resource {{ $labels.gvk }} in namespace {{ $labels.namespace }} (pod: {{ $labels.pod }}) has not been synced for 15 minutes',
+                },
+              },
+              {
+                alert: 'CrossplaneManagedResourceNotReady',
+                expr: 'crossplane_managed_resource_ready{namespace="' + params.namespace + '"} < crossplane_managed_resource_exists{namespace="' + params.namespace + '"}',
+                'for': '15m',
+                labels: {
+                  severity: 'warning',
+                  syn: 'true',
+                  syn_component: 'appcat',
+                  syn_team: 'schedar',
+                },
+                annotations: {
+                  summary: 'Crossplane Managed resource not ready',
+                  description: 'Managed resource {{ $labels.gvk }} in namespace {{ $labels.namespace }} (pod: {{ $labels.pod }}) has not been ready for 15 minutes',
                 },
               },
             ],
