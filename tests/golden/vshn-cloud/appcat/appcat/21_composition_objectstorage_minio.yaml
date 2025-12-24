@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-a20f34732bf684ea4f8c70fe9911eee38f017b2c
+        name: function-appcat-master-feat-use-merge-commit
       input:
         apiVersion: v1
         data:
