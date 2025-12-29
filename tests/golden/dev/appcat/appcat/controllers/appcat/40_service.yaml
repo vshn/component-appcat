@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    appcat-controller: appcat-controller
+  name: appcat-controller
+  namespace: syn-appcat
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    appcat-controller: appcat-controller
