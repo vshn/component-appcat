@@ -28,6 +28,7 @@ spec:
             - --event-forwarding=false
             - --quotas=false
             - --billing=false
+            - --crossplane-metrics=false
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
