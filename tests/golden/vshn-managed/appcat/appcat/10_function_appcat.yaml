@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-c2ebb58b76710498d0fced940dd7938f563b8cf0
+  name: function-appcat-master-poc-rclone-backups
 spec:
-  package: ghcr.io/vshn/appcat:c2ebb58b76710498d0fced940dd7938f563b8cf0-func
+  package: ghcr.io/vshn/appcat:poc_rclone-backups-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

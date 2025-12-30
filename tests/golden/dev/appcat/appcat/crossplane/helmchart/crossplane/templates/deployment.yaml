@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: c2ebb58b76710498d0fced940dd7938f563b8cf0
+        function-revision: poc/rclone-backups
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

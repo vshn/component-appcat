@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-c2ebb58b76710498d0fced940dd7938f563b8cf0
+        name: function-appcat-master-poc-rclone-backups
       input:
         apiVersion: v1
         data:
