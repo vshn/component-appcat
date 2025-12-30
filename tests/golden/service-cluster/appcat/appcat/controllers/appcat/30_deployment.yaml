@@ -33,7 +33,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:c2ebb58b76710498d0fced940dd7938f563b8cf0
+          image: ghcr.io/vshn/appcat:poc_rclone-backups
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
