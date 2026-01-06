@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix-load-balancer
+          image: ghcr.io/vshn/appcat:a20f34732bf684ea4f8c70fe9911eee38f017b2c
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
