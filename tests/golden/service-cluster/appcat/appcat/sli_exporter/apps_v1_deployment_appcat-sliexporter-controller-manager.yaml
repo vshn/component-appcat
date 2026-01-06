@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feat_use-merge-commit
+          image: ghcr.io/vshn/appcat:9ef70b754d2dc6a2ef4143a9adb55bc8d311fe61
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
