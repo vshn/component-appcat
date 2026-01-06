@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-8af486767f62151ab7290018fb289f92d4d5e95a
+        name: function-appcat-master-feat-backup-before-maintenance
       input:
         apiVersion: v1
         data:

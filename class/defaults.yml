@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 8af486767f62151ab7290018fb289f92d4d5e95a
+        tag: feat/backup-before-maintenance
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
