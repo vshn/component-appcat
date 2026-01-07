@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-crossplane-metrics
+        name: function-appcat-master-3b8ef77aded45f8a0344182dbc7a2b590edaa373
       input:
         apiVersion: v1
         data:

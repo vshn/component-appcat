@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:feat_crossplane-metrics
+          image: ghcr.io/vshn/appcat:3b8ef77aded45f8a0344182dbc7a2b590edaa373
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
