@@ -50,6 +50,7 @@ local clusterRoleBinding = loadManifest('cluster-role-binding.yaml') {
 local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
+  '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
 ];
 
 local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
@@ -81,6 +82,15 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
   {
     name: 'ODOO_TOKEN_URL',
     value: controllersParams.billing.odooTokenURL,
+  },
+] else [] + if controllersParams.monitoringEnabled then [
+  {
+    name: 'CROSSPLANE_LABEL_MAPPING',
+    value: controllersParams.monitoring.crossplane_label_mapping,
+  },
+  {
+    name: 'CROSSPLANE_EXTRA_RESOURCES',
+    value: controllersParams.monitoring.crossplane_extra_resources,
   },
 ] else []);
 
@@ -150,6 +160,18 @@ local controller = loadManifest('deployment.yaml') {
         ],
       },
     },
+  },
+};
+
+local service = loadManifest('service.yaml') {
+  metadata+: {
+    namespace: controllersParams.namespace,
+  },
+};
+
+local servicemonitor = loadManifest('servicemonitor.yaml') {
+  metadata+: {
+    namespace: controllersParams.namespace,
   },
 };
 
@@ -250,4 +272,6 @@ if controllersParams.enabled then {
   'controllers/appcat/20_service_account': serviceAccount,
   'controllers/appcat/30_deployment': controller,
   [if controllersParams.controlPlaneKubeconfig != '' then 'controllers/appcat/10_controlplane_credentials']: controlKubeConfig,
+  [if controllersParams.monitoringEnabled then 'controllers/appcat/40_service']: service,
+  [if controllersParams.monitoringEnabled then 'controllers/appcat/40_servicemonitor']: servicemonitor,
 } else {}

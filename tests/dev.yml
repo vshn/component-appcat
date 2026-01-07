@@ -50,6 +50,7 @@ parameters:
     quotasEnabled: false
     appuioManaged: false
     #billingEnabled: true
+    monitoringEnabled: true
     billing:
       salesOrder: ""
       vshn:

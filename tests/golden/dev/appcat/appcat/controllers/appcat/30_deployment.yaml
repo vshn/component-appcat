@@ -25,10 +25,20 @@ spec:
             - --leader-elect
             - --quotas=false
             - --billing=false
+            - --crossplane-metrics=true
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
-          image: ghcr.io/vshn/appcat:9ef70b754d2dc6a2ef4143a9adb55bc8d311fe61
+            - name: CROSSPLANE_LABEL_MAPPING
+              value: |
+                {
+                  "crossplane.io/claim-name": "claim_name",
+                  "crossplane.io/claim-namespace": "claim_namespace",
+                  "crossplane.io/composite": "instance_name"
+                }
+            - name: CROSSPLANE_EXTRA_RESOURCES
+              value: ''
+          image: ghcr.io/vshn/appcat:3b8ef77aded45f8a0344182dbc7a2b590edaa373
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
