@@ -136,7 +136,7 @@ parameters:
     appuioManaged: true
     quotasEnabled: false
     billingEnabled: false
-    monitoringEnabled: false
+    monitoringEnabled: true
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
