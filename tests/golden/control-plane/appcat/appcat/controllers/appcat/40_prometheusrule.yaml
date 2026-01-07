@@ -1,0 +1,43 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations: {}
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: appcat
+  name: appcat-crossplane-resources
+  namespace: syn-appcat
+spec:
+  groups:
+    - name: crossplane-resources.rules
+      rules:
+        - alert: CrossplaneResourceUnsynced
+          annotations:
+            description: Crossplane resource {{ $labels.name }} ({{ $labels.kind }})
+              in namespace {{ $labels.claim_namespace }} has status_synced={{ $labels.status_synced
+              }} for more than 20 minutes
+            summary: Crossplane resource {{ $labels.kind }} is not synced
+          expr: max by (api_version, kind, name, claim_name, claim_namespace, instance_name,
+            status_synced, status_ready) (crossplane_resource_info{status_synced!="ReconcileSuccess"})
+            == 1
+          for: 20m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - alert: CrossplaneResourceNotReady
+          annotations:
+            description: Crossplane resource {{ $labels.name }} ({{ $labels.kind }})
+              in namespace {{ $labels.claim_namespace }} has status_ready={{ $labels.status_ready
+              }} for more than 15 minutes
+            summary: Crossplane resource {{ $labels.kind }} is not ready
+          expr: max by (api_version, kind, name, claim_name, claim_namespace, instance_name,
+            status_synced, status_ready) (crossplane_resource_info{status_ready!="Available"})
+            == 1
+          for: 15m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
