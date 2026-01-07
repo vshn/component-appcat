@@ -71,7 +71,7 @@ local providerRBAC = {
       {
         apiGroups: [ 'rbac.authorization.k8s.io' ],
         resources: [ 'clusterroles' ],
-        resourceNames: [ 'appcat:services:read' ],
+        resourceNames: [ 'appcat:services:read', 'crossplane:appcat:job:postgres:maintenance' ],
         verbs: [ 'bind' ],
       },
       {
@@ -101,7 +101,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'postgresql.cnpg.io' ],
-        resources: [ 'clusters', 'imagecatalogs' ],
+        resources: [ 'clusters', 'imagecatalogs', 'backups' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {
@@ -113,6 +113,11 @@ local providerRBAC = {
         apiGroups: [ 'batch' ],
         resources: [ 'jobs', 'cronjobs' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'batch' ],
+        resources: [ 'jobs/status' ],
+        verbs: [ 'get', 'list', 'watch' ],
       },
       {
         apiGroups: [ 'rbac.authorization.k8s.io' ],
