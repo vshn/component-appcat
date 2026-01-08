@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_spks_deletion_protection
+    metadata.appcat.vshn.io/revision: master-8af486767f62151ab7290018fb289f92d4d5e95a
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-spks-deletion-protection
+        name: function-appcat-master-8af486767f62151ab7290018fb289f92d4d5e95a
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: vshn
-          imageTag: fix_spks_deletion_protection
+          imageTag: 8af486767f62151ab7290018fb289f92d4d5e95a
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance

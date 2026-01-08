@@ -34,7 +34,7 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
-          image: ghcr.io/vshn/appcat:fix_spks_deletion_protection
+          image: ghcr.io/vshn/appcat:8af486767f62151ab7290018fb289f92d4d5e95a
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

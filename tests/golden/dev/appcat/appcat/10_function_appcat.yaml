@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-spks-deletion-protection
+  name: function-appcat-debug-8af486767f62151ab7290018fb289f92d4d5e95a
 spec:
-  package: ghcr.io/vshn/appcat:fix_spks_deletion_protection-func
+  package: ghcr.io/vshn/appcat:8af486767f62151ab7290018fb289f92d4d5e95a-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

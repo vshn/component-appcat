@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/spks_deletion_protection
+        function-revision: 8af486767f62151ab7290018fb289f92d4d5e95a
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
