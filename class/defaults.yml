@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 3b8ef77aded45f8a0344182dbc7a2b590edaa373
+        tag: 8af486767f62151ab7290018fb289f92d4d5e95a
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -380,6 +380,10 @@ parameters:
           - patch
     controller:
       enabled: false
+      additionalUnmanagedProtection:
+        - group: ""
+          version: v1
+          resource: persistentvolumeclaims
       namespace: ${appcat:namespace}
       namespaceLabels: ${appcat:namespaceLabels}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
