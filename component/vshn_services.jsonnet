@@ -24,19 +24,29 @@ local maintenanceRoleName = 'crossplane:appcat:job:helm:maintenance';
 local maintenanceRole = kube.ClusterRole(maintenanceRoleName) {
   rules: [
     {
-      apiGroups: [ 'helm.crossplane.io' ],
-      resources: [ 'releases' ],
-      verbs: [ 'patch', 'get', 'list', 'watch', 'update' ],
+      apiGroups: ['helm.crossplane.io'],
+      resources: ['releases'],
+      verbs: ['patch', 'get', 'list', 'watch', 'update'],
     },
     {
-      apiGroups: [ 'apiextensions.crossplane.io' ],
-      resources: [ 'compositionrevisions' ],
-      verbs: [ 'get', 'list' ],
+      apiGroups: ['apiextensions.crossplane.io'],
+      resources: ['compositionrevisions'],
+      verbs: ['get', 'list'],
     },
     {
-      apiGroups: [ 'vshn.appcat.vshn.io' ],
-      resources: [ 'xvshnforgejoes', 'xvshnredis', 'xvshnkeycloaks', 'xvshnmariadbs', 'xvshnnextclouds', 'xvshnminios' ],
-      verbs: [ 'get', 'update' ],
+      apiGroups: ['vshn.appcat.vshn.io'],
+      resources: ['xvshnforgejoes', 'xvshnredis', 'xvshnkeycloaks', 'xvshnmariadbs', 'xvshnnextclouds', 'xvshnminios'],
+      verbs: ['get', 'update'],
+    },
+    {
+      apiGroups: ['k8up.io'],
+      resources: ['schedules'],
+      verbs: ['get', 'list', 'watch', 'create', 'update'],
+    },
+    {
+      apiGroups: ['k8up.io'],
+      resources: ['backups'],
+      verbs: ['get','watch', 'create'],
     },
   ],
 };
@@ -44,7 +54,7 @@ local maintenanceRole = kube.ClusterRole(maintenanceRoleName) {
 
 local maintenanceClusterRoleBinding = kube.ClusterRoleBinding('crossplane:appcat:job:helm:maintenance') + {
   roleRef_: maintenanceRole,
-  subjects_: [ maintenanceServiceAccount ],
+  subjects_: [maintenanceServiceAccount],
 };
 
 local crossplaneEditMaintenanceBinding = kube.ClusterRoleBinding('crossplane:appcat:job:helm:crossplane:edit') + {
@@ -53,7 +63,7 @@ local crossplaneEditMaintenanceBinding = kube.ClusterRoleBinding('crossplane:app
     kind: 'ClusterRole',
     name: 'crossplane-edit',
   },
-  subjects_: [ maintenanceServiceAccount ],
+  subjects_: [maintenanceServiceAccount],
 };
 
 // SecurityContextConstraints for AppCat services
@@ -108,10 +118,10 @@ local scc = {
 local clusterRoleScc = kube.ClusterRole('appcat-scc') {
   rules: [
     {
-      apiGroups: [ 'security.openshift.io' ],
-      resources: [ 'securitycontextconstraints' ],
-      resourceNames: [ 'appcat-scc' ],
-      verbs: [ 'use' ],
+      apiGroups: ['security.openshift.io'],
+      resources: ['securitycontextconstraints'],
+      resourceNames: ['appcat-scc'],
+      verbs: ['use'],
     },
   ],
 };

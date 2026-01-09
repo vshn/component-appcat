@@ -215,6 +215,7 @@ rules:
     resources:
       - clusters
       - imagecatalogs
+      - backups
     verbs:
       - get
       - list
