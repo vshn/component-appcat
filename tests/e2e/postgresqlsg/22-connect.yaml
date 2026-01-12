@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: connect-postgresql-user-e2e
+  namespace: appcat-e2e
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  template:
+    metadata:
+      labels:
+        e2e-test: postgresql-user-e2e
+    spec:
+      containers:
+        - name: connect
+          image: dockerhub.vshn.net/library/postgres:15
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              until PGPASSWORD=$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "select 1;"
+              do
+                sleep 1
+                echo "not ready"
+              done
+          envFrom:
+            - secretRef:
+                name: postgresql-e2e-test-e2e-user
+          volumeMounts:
+            - name: postgresql-tls-secrets
+              mountPath: /etc/postgresql-tls
+              readOnly: true
+      restartPolicy: Never
+      volumes:
+        - name: postgresql-tls-secrets
+          secret:
+            secretName: postgresql-e2e-test-e2e-user
+            items:
+              - key: ca.crt
+                path: ca.crt

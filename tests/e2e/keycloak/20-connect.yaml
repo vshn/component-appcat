@@ -2,96 +2,37 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: connect-keycloak-e2e
-  namespace: appcat-e2e
 spec:
   backoffLimit: 1
-  activeDeadlineSeconds: 600
   template:
     metadata:
       labels:
         e2e-test: keycloak-e2e
     spec:
-      containers:
-        - name: test-container
-          image: alpine/k8s:1.31.7
-          envFrom:
-            - secretRef:
-                name: keycloak-e2e
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              export KUBECONFIG=/configs/service-cluster/config
-              echo "=== Creating Keycloak connectivity test job in service cluster ==="
-
-              # Read CA cert from mounted secret
-              CA_CERT_CONTENT=$(cat /certs/ca.crt | base64 -w 0)
-
-              JOB_NAME="keycloak-connectivity-test-$(date +%s)"
-              cat <<EOF | kubectl apply -f -
-              apiVersion: batch/v1
-              kind: Job
-              metadata:
-                name: ${JOB_NAME}
-                namespace: appcat-e2e
-                labels:
-                  app: keycloak-connectivity-test
-              spec:
-                ttlSecondsAfterFinished: 300
-                backoffLimit: 3
-                template:
-                  metadata:
-                    labels:
-                      app: keycloak-connectivity-test
-                  spec:
-                    restartPolicy: Never
-                    containers:
-                    - name: keycloak-connectivity-test
-                      image: curlimages/curl:8.6.0
-                      env:
-                      - name: KEYCLOAK_HOST
-                        value: "${KEYCLOAK_HOST}"
-                      - name: CA_CERT
-                        value: "${CA_CERT_CONTENT}"
-                      command: ["/bin/sh"]
-                      args:
-                      - -c
-                      - |
-                        set -e
-                        mkdir -p /tmp/certs && echo "\$CA_CERT" | base64 -d > /tmp/certs/ca.crt
-                        echo 'Waiting for Keycloak to be ready...'
-                        until curl --cacert /tmp/certs/ca.crt -s --max-time 10 https://\$KEYCLOAK_HOST:8443/health > /dev/null 2>&1
-                        do
-                          sleep 1
-                          echo "not ready"
-                        done
-                        echo 'Keycloak connection successful'
-                        echo '=== All Keycloak connectivity tests passed! ==='
-              EOF
-
-              kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
-              echo "=== Keycloak Connectivity Job finished ==="
-
-              # Check job status and show logs
-              kubectl logs job/${JOB_NAME} -n appcat-e2e
-
-              if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
-                echo "=== Keycloak connectivity tests completed successfully ==="
-              else
-                echo "=== Keycloak connectivity tests failed ==="
-                kubectl describe job ${JOB_NAME} -n appcat-e2e
-                exit 1
-              fi
-          volumeMounts:
-            - name: service-cluster-config
-              mountPath: /configs/service-cluster
-            - name: certs
-              mountPath: /certs
-              readOnly: true
       restartPolicy: Never
+      activeDeadlineSeconds: 720
       volumes:
-        - name: service-cluster-config
-          secret:
-            secretName: service-cluster-kubeconfig
         - name: certs
           secret:
             secretName: keycloak-e2e
+      containers:
+        - name: connect
+          image: curlimages/curl:8.6.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - |
+              echo "Testing health..."
+              while ! curl --cacert /certs/ca.crt -ivv https://$KEYCLOAK_HOST:8443/health
+              do
+                sleep 1
+                echo "not ready"
+              done
+          envFrom:
+            - secretRef:
+                name: keycloak-e2e
+          volumeMounts:
+            - name: certs
+              mountPath: /certs

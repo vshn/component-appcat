@@ -5,8 +5,6 @@ timeout: 600
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  labels:
-    appcat.vshn.io/provider-config: kind
   finalizers:
     - finalizer.apiextensions.crossplane.io
   name: postgresql-e2e-test-nextcloud
@@ -18,7 +16,7 @@ spec:
     backup:
       deletionRetention: 7
       retention: 6
-      schedule: '*/2 * * * *'
+      schedule: "*/2 * * * *"
     instances: 1
     network:
       serviceType: LoadBalancer

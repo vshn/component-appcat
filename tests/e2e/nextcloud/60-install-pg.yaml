@@ -2,8 +2,6 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
   name: postgresql-e2e-test-nextcloud
-  labels:
-    appcat.vshn.io/provider-config: kind
 spec:
   parameters:
     security:
@@ -11,7 +9,7 @@ spec:
     network:
       serviceType: LoadBalancer
     backup:
-      schedule: '*/2 * * * *'
+      schedule: "*/2 * * * *"
     service:
       vacuumEnabled: true
       repackEnabled: true

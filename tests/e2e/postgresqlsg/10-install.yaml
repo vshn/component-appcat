@@ -1,15 +1,12 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  labels:
-    appcat.vshn.io/provider-config: kind
   name: postgresql-e2e-test
 spec:
   parameters:
     security:
       deletionProtection: false
     service:
-      enableEnvoy: true
       vacuumEnabled: true
       repackEnabled: true
     size:

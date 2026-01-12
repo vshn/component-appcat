@@ -1,12 +1,12 @@
 apiVersion: vshn.appcat.vshn.io/v1
-kind: VSHNKeycloak
+kind: VSHNPostgreSQL
 metadata:
-  name: keycloak-e2e
+  name: postgresql-e2e-test
 spec:
   parameters:
-    service:
-      fqdn: keycloak-e2e.example.com
+    size:
+      plan: standard-2
     security:
       deletionProtection: false
   writeConnectionSecretToRef:
-    name: keycloak-e2e
+    name: postgresql-e2e-test-creds
