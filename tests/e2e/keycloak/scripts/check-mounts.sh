@@ -7,14 +7,6 @@ NAMESPACE="${NAMESPACE:-appcat-e2e}"
 echo "=== Starting Keycloak custom volumes test ==="
 echo "Namespace: $NAMESPACE"
 
-# Decode and setup kubeconfigs
-echo "$CONTROL_PLANE_KUBECONFIG_CONTENT" | base64 -d > /tmp/control-plane-config
-echo "$SERVICE_CLUSTER_KUBECONFIG_CONTENT" | base64 -d > /tmp/service-cluster-config
-
-# Use control plane kubeconfig to get instance information
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for instance operations"
-
 echo "Getting instance details..."
 name=$(kubectl -n $NAMESPACE get vshnkeycloak keycloak-e2e -o jsonpath='{.spec.resourceRef.name}')
 ns=$(kubectl -n "$NAMESPACE" get vshnkeycloak keycloak-e2e -o jsonpath='{.status.instanceNamespace}')
@@ -28,10 +20,6 @@ echo "Instance name: $name"
 echo "Instance namespace: $ns"
 
 sts="${name}-keycloakx"
-
-# Switch to service cluster kubeconfig for statefulset operations
-export KUBECONFIG=/tmp/service-cluster-config
-echo "Using service cluster kubeconfig for statefulset operations"
 
 echo "Checking if test-cm ConfigMap is mounted..."
 kubectl get statefulset $sts -n "$ns" \

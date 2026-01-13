@@ -1,7 +1,5 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
-apply:
-  - ../common/cleanup-service-cluster-jobs.yaml
 delete:
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNNextcloud

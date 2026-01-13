@@ -6,7 +6,7 @@ apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNMariaDB
 metadata:
   finalizers:
-  - finalizer.apiextensions.crossplane.io
+    - finalizer.apiextensions.crossplane.io
   name: mariadb-e2e
 spec:
   compositeDeletePolicy: Background

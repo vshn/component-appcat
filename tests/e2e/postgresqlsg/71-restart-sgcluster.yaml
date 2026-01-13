@@ -1,0 +1,6 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+timeout: 400
+commands:
+  - script: scripts/restart-sgcluster.sh postgresql-e2e-test
+    timeout: 400

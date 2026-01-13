@@ -19,14 +19,6 @@ echo "Name: $name"
 echo "Kind: $kind"
 echo "Namespace: $NAMESPACE"
 
-# Decode and setup kubeconfigs
-echo "$CONTROL_PLANE_KUBECONFIG_CONTENT" | base64 -d > /tmp/control-plane-config
-echo "$SERVICE_CLUSTER_KUBECONFIG_CONTENT" | base64 -d > /tmp/service-cluster-config
-
-# Use control plane kubeconfig for all operations
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for webhook validation test"
-
 echo "Testing provider config validation webhook for $type ($kind)"
 
 # Try to create instance with invalid provider config - this should fail

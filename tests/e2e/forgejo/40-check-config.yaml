@@ -4,131 +4,71 @@ metadata:
   name: config-forgejo-e2e
 spec:
   backoffLimit: 1
-  activeDeadlineSeconds: 600
   template:
     metadata:
       labels:
         e2e-test: forgejo-e2e
     spec:
+      restartPolicy: Never
+      activeDeadlineSeconds: 180
       serviceAccountName: github-ci
       containers:
-        - name: test-container
+        - name: connect
           image: alpine/k8s:1.31.7
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+          args:
+            - -c
+            - |
+              #!/bin/bash
+
+              set -exf
+
+              ns=$(kubectl -n "$NAMESPACE" get vshnforgejo forgejo-e2e -oyaml | yq -r '.status.instanceNamespace')
+
+              inline_secret=$(kubectl -n "$ns" get secret -l app=forgejo -o name | grep inline)
+              credentials_secret=$(kubectl -n "$ns" get secret -o name | grep credentials-secret | head -n 1)
+              username=$(kubectl -n "$ns" get $credentials_secret -o yaml | yq .data.username | base64 -d)
+              password=$(kubectl -n "$ns" get $credentials_secret -o yaml | yq .data.password | base64 -d)
+
+              # ---------------------
+              # Check APP_NAME in inline secret
+              app_name=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data."_generals_"' | base64 -d | grep APP_NAME | cut -d "=" -f 2)
+              [[ $app_name == "forgejo-e2e" ]]
+
+              # ---------------------
+              # Ensure mailer.PROTOCOL cannot be set to a bad value, should fail
+              kubectl -n "$NAMESPACE" patch vshnforgejo forgejo-e2e --type merge -p '{"spec":{"parameters":{"service":{"forgejoSettings":{"config":{"mailer":{"PROTOCOL":"sendmail"}}}}}}}' && false || true
+
+              # ---------------------
+              url="http://$FORGEJO_HOST:3000"
+              base_url="$url/api/v1"
+
+              # 1. Check if config even has actions disabled
+              actions_enabled=$(kubectl -n "$ns" get $inline_secret -o yaml | yq '.data.actions' | base64 -d | grep ENABLED | cut -d "=" -f 2 | tr '[:upper:]' '[:lower:]')
+              [[ $actions_enabled == "false" ]]
+
+              # 2. Create repo using API
+
+              # Endpoint might not be immediately available, so we'll wait for a bit
+              payload='{"name": "my-repo"}'
+              end_time=$((SECONDS + 30))
+              while [ $SECONDS -lt $end_time ]; do
+                  status_code=$(curl  -w "%{http_code}" -X GET "$url/api/healthz")
+                  if [[ "$status_code" -ne 200 ]]; then
+                      sleep 1
+                  else
+                      break
+                  fi
+              done
+
+              curl -X POST -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/user/repos"
+
+              # 3. Check if actions are enabled for repo (must be false)
+              actions_state=$(curl -s -X GET -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/repos/$username/my-repo" | jq .has_actions)
+              [[ $actions_state == "false" ]]
+
           envFrom:
             - secretRef:
                 name: forgejo-e2e
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              echo "=== Getting instance namespace from control plane ==="
-
-              INSTANCE_NAMESPACE=$(kubectl -n appcat-e2e get vshnforgejo forgejo-e2e -o jsonpath='{.status.instanceNamespace}')
-
-              if [ -z "$INSTANCE_NAMESPACE" ]; then
-                echo "ERROR: Could not retrieve instance namespace"
-                exit 1
-              fi
-
-              echo "Instance namespace: $INSTANCE_NAMESPACE"
-
-              # Test mailer.PROTOCOL validation on control plane
-              echo "=== Testing mailer.PROTOCOL validation ==="
-              kubectl -n appcat-e2e patch vshnforgejo forgejo-e2e --type merge -p '{"spec":{"parameters":{"service":{"forgejoSettings":{"config":{"mailer":{"PROTOCOL":"sendmail"}}}}}}}' && false || true
-
-              # Switch to service cluster to create the test job
-              export KUBECONFIG=/configs/service-cluster/config
-              echo "=== Creating Forgejo configuration test job in service cluster ==="
-
-              JOB_NAME="forgejo-config-test-$(date +%s)"
-              cat <<EOF | kubectl apply -f -
-              apiVersion: batch/v1
-              kind: Job
-              metadata:
-                name: ${JOB_NAME}
-                namespace: appcat-e2e
-                labels:
-                  app: forgejo-config-test
-              spec:
-                ttlSecondsAfterFinished: 300
-                backoffLimit: 3
-                template:
-                  metadata:
-                    labels:
-                      app: forgejo-config-test
-                  spec:
-                    restartPolicy: Never
-                    serviceAccountName: github-ci
-                    containers:
-                    - name: forgejo-config-test
-                      image: alpine/k8s:1.31.7
-                      env:
-                      - name: FORGEJO_HOST
-                        value: "${FORGEJO_HOST}"
-                      - name: INSTANCE_NAMESPACE
-                        value: "${INSTANCE_NAMESPACE}"
-                      command: ["/bin/bash"]
-                      args:
-                      - -c
-                      - |
-                        set -exf
-
-                        ns="\$INSTANCE_NAMESPACE"
-
-                        inline_secret=\$(kubectl -n "\$ns" get secret -l app=forgejo -o name | grep inline)
-                        credentials_secret=\$(kubectl -n "\$ns" get secret -o name | grep credentials-secret | head -n 1)
-                        username=\$(kubectl -n "\$ns" get \$credentials_secret -o yaml | yq .data.username | base64 -d)
-                        password=\$(kubectl -n "\$ns" get \$credentials_secret -o yaml | yq .data.password | base64 -d)
-
-                        # Check APP_NAME in inline secret
-                        app_name=\$(kubectl -n "\$ns" get \$inline_secret -o yaml | yq '.data."_generals_"' | base64 -d | grep APP_NAME | cut -d "=" -f 2)
-                        [[ \$app_name == "forgejo-e2e" ]]
-
-                        url="http://\$FORGEJO_HOST:3000"
-                        base_url="\$url/api/v1"
-
-                        # Check if config has actions disabled
-                        actions_enabled=\$(kubectl -n "\$ns" get \$inline_secret -o yaml | yq '.data.actions' | base64 -d | grep ENABLED | cut -d "=" -f 2 | tr '[:upper:]' '[:lower:]')
-                        [[ \$actions_enabled == "false" ]]
-
-                        # Create repo using API
-                        payload='{"name": "my-repo"}'
-                        end_time=\$((SECONDS + 30))
-                        while [ \$SECONDS -lt \$end_time ]; do
-                          status_code=\$(curl -w "%{http_code}" -o /dev/null -s -X GET "\$url/api/healthz")
-                          if [[ "\$status_code" -ne 200 ]]; then
-                            sleep 1
-                          else
-                            break
-                          fi
-                        done
-
-                        curl -X POST -H "Content-Type: application/json" -u "\$username:\$password" -d "\$payload" "\$base_url/user/repos"
-
-                        # Check if actions are enabled for repo (must be false)
-                        actions_state=\$(curl -s -X GET -H "Content-Type: application/json" -u "\$username:\$password" "\$base_url/repos/\$username/my-repo" | jq .has_actions)
-                        [[ \$actions_state == "false" ]]
-
-                        echo '=== All Forgejo configuration tests passed! ==='
-              EOF
-
-              kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
-              echo "=== Forgejo Configuration Job finished ==="
-
-              # Check job status and show logs
-              kubectl logs job/${JOB_NAME} -n appcat-e2e
-
-              if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
-                echo "=== Forgejo configuration tests completed successfully ==="
-              else
-                echo "=== Forgejo configuration tests failed ==="
-                kubectl describe job ${JOB_NAME} -n appcat-e2e
-                exit 1
-              fi
-          volumeMounts:
-            - name: service-cluster-config
-              mountPath: /configs/service-cluster
-      restartPolicy: Never
-      volumes:
-        - name: service-cluster-config
-          secret:
-            secretName: service-cluster-kubeconfig
