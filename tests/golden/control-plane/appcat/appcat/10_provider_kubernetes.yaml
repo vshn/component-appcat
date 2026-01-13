@@ -8,7 +8,7 @@ metadata:
     name: provider-kubernetes
   name: provider-kubernetes
 spec:
-  package: ghcr.io/crossplane-contrib/provider-kubernetes:v1.1.0
+  package: ghcr.io/crossplane-contrib/provider-kubernetes:v1.2.0
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: provider-kubernetes
