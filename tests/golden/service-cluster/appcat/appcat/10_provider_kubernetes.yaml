@@ -87,6 +87,7 @@ rules:
       - rbac.authorization.k8s.io
     resourceNames:
       - appcat:services:read
+      - crossplane:appcat:job:postgres:maintenance
     resources:
       - clusterroles
     verbs:
@@ -158,6 +159,7 @@ rules:
     resources:
       - clusters
       - imagecatalogs
+      - backups
     verbs:
       - get
       - list
@@ -192,6 +194,14 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - batch
+    resources:
+      - jobs/status
+    verbs:
+      - get
+      - list
+      - watch
   - apiGroups:
       - rbac.authorization.k8s.io
     resources:

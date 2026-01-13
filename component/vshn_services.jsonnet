@@ -38,6 +38,16 @@ local maintenanceRole = kube.ClusterRole(maintenanceRoleName) {
       resources: [ 'xvshnforgejoes', 'xvshnredis', 'xvshnkeycloaks', 'xvshnmariadbs', 'xvshnnextclouds', 'xvshnminios' ],
       verbs: [ 'get', 'update' ],
     },
+    {
+      apiGroups: [ 'k8up.io' ],
+      resources: [ 'schedules' ],
+      verbs: [ 'get', 'list', 'watch', 'create', 'update' ],
+    },
+    {
+      apiGroups: [ 'k8up.io' ],
+      resources: [ 'backups' ],
+      verbs: [ 'get', 'watch', 'create' ],
+    },
   ],
 };
 

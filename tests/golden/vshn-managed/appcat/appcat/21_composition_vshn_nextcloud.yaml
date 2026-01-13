@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-8af486767f62151ab7290018fb289f92d4d5e95a
+    metadata.appcat.vshn.io/revision: master-5d3a69dc39841560ad58f5214bfa9425661fb452
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-8af486767f62151ab7290018fb289f92d4d5e95a
+        name: function-appcat-master-5d3a69dc39841560ad58f5214bfa9425661fb452
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 8af486767f62151ab7290018fb289f92d4d5e95a
+          imageTag: 5d3a69dc39841560ad58f5214bfa9425661fb452
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'

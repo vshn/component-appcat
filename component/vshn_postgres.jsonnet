@@ -174,6 +174,31 @@ local maintenanceClusterRole = kube.ClusterRole(additionalMaintenanceClusterRole
       resources: [ 'xvshnpostgresqls', 'vshnpostgresqls' ],
       verbs: [ 'get', 'update' ],
     },
+    {
+      apiGroups: [ 'batch' ],
+      resources: [ 'cronjobs' ],
+      verbs: [ 'get', 'list' ],
+    },
+    {
+      apiGroups: [ 'batch' ],
+      resources: [ 'jobs' ],
+      verbs: [ 'create', 'get', 'list', 'watch' ],
+    },
+    {
+      apiGroups: [ 'batch' ],
+      resources: [ 'jobs/status' ],
+      verbs: [ 'get', 'list', 'watch' ],
+    },
+    {
+      apiGroups: [ 'stackgres.io' ],
+      resources: [ 'sgclusters' ],
+      verbs: [ 'get', 'list' ],
+    },
+    {
+      apiGroups: [ 'stackgres.io' ],
+      resources: [ 'sgdbops' ],
+      verbs: [ 'create', 'delete', 'get', 'list', 'watch' ],
+    },
   ],
 };
 
