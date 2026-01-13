@@ -1,7 +1,5 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
-apply:
-  - ../common/cleanup-service-cluster-jobs.yaml
 delete:
   # This will wait until resources are really gone
   - apiVersion: batch/v1

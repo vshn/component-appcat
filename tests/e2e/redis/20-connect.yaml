@@ -5,140 +5,59 @@ metadata:
   namespace: appcat-e2e
 spec:
   backoffLimit: 1
-  activeDeadlineSeconds: 600
   template:
     metadata:
       labels:
         e2e-test: redis-e2e
     spec:
+      restartPolicy: Never
+      activeDeadlineSeconds: 180
       containers:
-        - name: test-container
-          image: alpine/k8s:1.31.7
+        - name: connect
+          image: dockerhub.vshn.net/library/redis:7
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              set -Eeuo pipefail
+
+              REDIS_URI="rediss://${REDIS_USERNAME}:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}"
+              CLI=(redis-cli -u "$REDIS_URI" --tls --cert /etc/redis-tls/tls.crt --key /etc/redis-tls/tls.key --cacert /etc/redis-tls/ca.crt)
+
+              echo "Waiting for Redis to be ready..."
+              until "${CLI[@]}" PING >/dev/null 2>&1; do
+                sleep 1
+                echo "not ready"
+              done
+              echo "PING successful"
+
+              KEY="e2e-$(date +%s%N)"
+              VALUE="$(hostname)-$(date +%s)"
+
+              echo "SET $KEY"
+              SET_OUT="$("${CLI[@]}" SET "$KEY" "$VALUE" 2>/dev/null)"
+              if [ "$SET_OUT" != "OK" ]; then
+                echo "ERROR: SET failed: $SET_OUT"
+                exit 1
+              fi
+
+              echo "GET $KEY"
+              GET_OUT="$("${CLI[@]}" GET "$KEY" 2>/dev/null)"
+              if [ "$GET_OUT" != "$VALUE" ]; then
+                echo "ERROR: GET mismatch. expected='$VALUE' got='$GET_OUT'"
+                exit 1
+              fi
+
+              echo "SET/GET round-trip successful"
           envFrom:
             - secretRef:
                 name: redis-e2e-test-creds
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              export KUBECONFIG=/configs/service-cluster/config
-              echo "=== Creating Redis connectivity test job in service cluster ==="
-
-              CA_CERT=$(cat /certs/ca.crt | base64 -w 0)
-              TLS_CRT=$(cat /certs/tls.crt | base64 -w 0)
-              TLS_KEY=$(cat /certs/tls.key | base64 -w 0)
-
-              # Create combined secret
-              cat <<SECRET_EOF | kubectl apply -f -
-              apiVersion: v1
-              kind: Secret
-              metadata:
-                name: tls-certs
-                namespace: appcat-e2e
-              type: Opaque
-              data:
-                ca.crt: ${CA_CERT}
-                tls.crt: ${TLS_CRT}
-                tls.key: ${TLS_KEY}
-              SECRET_EOF
-
-              JOB_NAME="redis-connectivity-test-$(date +%s)"
-              cat <<EOF | kubectl apply -f -
-              apiVersion: batch/v1
-              kind: Job
-              metadata:
-                name: ${JOB_NAME}
-                namespace: appcat-e2e
-                labels:
-                  app: redis-connectivity-test
-              spec:
-                ttlSecondsAfterFinished: 300
-                backoffLimit: 3
-                template:
-                  metadata:
-                    labels:
-                      app: redis-connectivity-test
-                  spec:
-                    restartPolicy: Never
-                    containers:
-                    - name: redis-connectivity-test
-                      image: dockerhub.vshn.net/library/redis:7
-                      env:
-                      - name: REDIS_USERNAME
-                        value: "${REDIS_USERNAME}"
-                      - name: REDIS_PASSWORD
-                        value: "${REDIS_PASSWORD}"
-                      - name: REDIS_HOST
-                        value: "${REDIS_HOST}"
-                      - name: REDIS_PORT
-                        value: "${REDIS_PORT}"
-                      command: ["/bin/bash"]
-                      args:
-                      - -c
-                      - |
-                        set -Eeuo pipefail
-
-                        REDIS_URI="rediss://\${REDIS_USERNAME}:\${REDIS_PASSWORD}@\${REDIS_HOST}:\${REDIS_PORT}"
-                        CLI=(redis-cli -u "\$REDIS_URI" --tls --cert /etc/redis-tls/tls.crt --key /etc/redis-tls/tls.key --cacert /etc/redis-tls/ca.crt)
-
-                        echo 'Waiting for Redis to be ready...'
-                        until timeout 5 "\${CLI[@]}" PING >/dev/null 2>&1; do
-                          sleep 1
-                          echo 'not ready'
-                        done
-                        echo 'PING successful'
-
-                        KEY="e2e-\$(date +%s%N)"
-                        VALUE="\$(hostname)-\$(date +%s)"
-
-                        echo "SET \$KEY"
-                        SET_OUT="\$("\${CLI[@]}" SET "\$KEY" "\$VALUE" 2>/dev/null)"
-                        if [ "\$SET_OUT" != "OK" ]; then
-                          echo "ERROR: SET failed: \$SET_OUT"
-                          exit 1
-                        fi
-
-                        echo "GET \$KEY"
-                        GET_OUT="\$("\${CLI[@]}" GET "\$KEY" 2>/dev/null)"
-                        if [ "\$GET_OUT" != "\$VALUE" ]; then
-                          echo "ERROR: GET mismatch. expected='\$VALUE' got='\$GET_OUT'"
-                          exit 1
-                        fi
-
-                        echo '=== SET/GET round-trip successful ==='
-                        echo '=== All Redis connectivity tests passed! ==='
-                      volumeMounts:
-                      - name: redis-tls-secrets
-                        mountPath: /etc/redis-tls
-                        readOnly: true
-                    volumes:
-                    - name: redis-tls-secrets
-                      secret:
-                        secretName: tls-certs
-              EOF
-
-              kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
-              echo "=== Redis Connectivity Job finished ==="
-
-              # Check job status and show logs
-              kubectl logs job/${JOB_NAME} -n appcat-e2e
-
-              if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
-                echo "=== Redis connectivity tests completed successfully ==="
-              else
-                echo "=== Redis connectivity tests failed ==="
-                kubectl describe job ${JOB_NAME} -n appcat-e2e
-                exit 1
-              fi
           volumeMounts:
-            - name: service-cluster-config
-              mountPath: /configs/service-cluster
             - name: redis-tls-secrets
-              mountPath: /certs
-      restartPolicy: Never
+              mountPath: /etc/redis-tls
       volumes:
         - name: redis-tls-secrets
           secret:
             secretName: redis-e2e-test-creds
-        - name: service-cluster-config
-          secret:
-            secretName: service-cluster-kubeconfig

@@ -2,119 +2,44 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: connect-nextcloud-e2e
-  namespace: appcat-e2e
 spec:
   backoffLimit: 1
-  activeDeadlineSeconds: 600
   template:
     metadata:
       labels:
         e2e-test: nextcloud-e2e
     spec:
-      containers:
-        - name: test-container
-          image: alpine/k8s:1.31.7
-          envFrom:
-            - secretRef:
-                name: nextcloud-e2e
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              export KUBECONFIG=/configs/service-cluster/config
-              echo "=== Creating connectivity test job in service cluster ==="
-
-              JOB_NAME="connectivity-test-$(date +%s)"
-              cat <<EOF | kubectl apply -f -
-              apiVersion: batch/v1
-              kind: Job
-              metadata:
-                name: ${JOB_NAME}
-                namespace: appcat-e2e
-                labels:
-                  app: connectivity-test
-              spec:
-                ttlSecondsAfterFinished: 300
-                backoffLimit: 3
-                template:
-                  metadata:
-                    labels:
-                      app: connectivity-test
-                  spec:
-                    restartPolicy: Never
-                    containers:
-                    - name: connectivity-test
-                      image: curlimages/curl:8.6.0
-                      env:
-                      - name: NEXTCLOUD_HOST
-                        value: "${NEXTCLOUD_HOST}"
-                      - name: COLLABORA_HOST
-                        value: "${COLLABORA_HOST}"
-                      command: ["/bin/sh"]
-                      args:
-                      - -c
-                      - |
-                        echo 'Testing DNS resolution first...'
-                        nslookup \$NEXTCLOUD_HOST || echo 'DNS resolution failed for Nextcloud'
-                        nslookup \$COLLABORA_HOST || echo 'DNS resolution failed for Collabora'
-
-                        echo 'Testing Nextcloud health...'
-                        NEXTCLOUD_READY=false
-                        for i in \$(seq 1 60); do
-                          if curl -s --max-time 10 http://\$NEXTCLOUD_HOST:8080/ > /dev/null 2>&1; then
-                            echo 'Nextcloud is ready!'
-                            NEXTCLOUD_READY=true
-                            break
-                          else
-                            echo 'Nextcloud not ready'
-                            sleep 3
-                          fi
-                        done
-                        if [ "\$NEXTCLOUD_READY" = "false" ]; then
-                          echo 'ERROR: Nextcloud failed to become ready'
-                          exit 1
-                        fi
-                        echo 'Testing Collabora connection...'
-                        COLLABORA_READY=false
-                        for i in \$(seq 1 60); do
-                          if curl -sk --max-time 10 https://\$COLLABORA_HOST:9980 > /dev/null 2>&1; then
-                            echo 'Collabora is ready!'
-                            COLLABORA_READY=true
-                            break
-                          else
-                            echo 'Collabora not ready'
-                            sleep 3
-                          fi
-                        done
-                        if [ "\$COLLABORA_READY" = "false" ]; then
-                          echo 'ERROR: Collabora failed to become ready'
-                          exit 1
-                        fi
-                        echo '=== All connectivity tests passed! ==='
-              EOF
-
-              kubectl wait --for=condition=complete --timeout=300s job/${JOB_NAME} -n appcat-e2e
-              echo "=== Connectivity Job finished ==="
-
-              # Check job status and show logs
-              kubectl logs job/${JOB_NAME} -n appcat-e2e
-
-              if kubectl get job ${JOB_NAME} -n appcat-e2e -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' | grep -q "True"; then
-                echo "=== Connectivity tests completed successfully ==="
-              else
-                echo "=== Connectivity tests failed ==="
-                kubectl describe job ${JOB_NAME} -n appcat-e2e
-                exit 1
-              fi
-          volumeMounts:
-            - name: service-cluster-config
-              mountPath: /configs/service-cluster
-            - name: certs
-              mountPath: /certs
       restartPolicy: Never
+      activeDeadlineSeconds: 180
       volumes:
         - name: certs
           secret:
             secretName: nextcloud-e2e
-        - name: service-cluster-config
-          secret:
-            secretName: service-cluster-kubeconfig
+      containers:
+        - name: connect
+          image: curlimages/curl:8.6.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - |
+              echo "Testing health..."
+              while ! curl -ivv --max-time 10 http://$NEXTCLOUD_HOST:8080/
+              do
+                sleep 1
+                echo "Nextcloud not ready"
+              done
+
+              echo "Testing Collabora connection..."
+              while ! curl -k --max-time 10 https://$COLLABORA_HOST:9980
+              do
+                sleep 1
+                echo "Collabora not ready"
+              done
+          envFrom:
+            - secretRef:
+                name: nextcloud-e2e
+          volumeMounts:
+            - name: certs
+              mountPath: /certs

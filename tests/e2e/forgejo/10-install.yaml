@@ -1,8 +1,6 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNForgejo
 metadata:
-  labels:
-    appcat.vshn.io/provider-config: kind
   name: forgejo-e2e
 spec:
   parameters:

@@ -14,14 +14,6 @@ echo "=== Starting Keycloak restore test ==="
 echo "Instance name: $name"
 echo "Namespace: $NAMESPACE"
 
-# Decode and setup kubeconfigs
-echo "$CONTROL_PLANE_KUBECONFIG_CONTENT" | base64 -d > /tmp/control-plane-config
-echo "$SERVICE_CLUSTER_KUBECONFIG_CONTENT" | base64 -d > /tmp/service-cluster-config
-
-# Use control plane kubeconfig for all operations
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for restore operations"
-
 KUBECTL_ARGS=""
 if kubectl api-resources | grep -q "openshift.io"; then
     echo "OpenShift detected, using --as=cluster-admin"
@@ -46,8 +38,6 @@ kubectl apply ${KUBECTL_ARGS} -f - <<EOF
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:
-  labels:
-    appcat.vshn.io/provider-config: kind
   name: ${name}-restore
   namespace: ${NAMESPACE}
 spec:

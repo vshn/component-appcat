@@ -7,14 +7,6 @@ NAMESPACE="${NAMESPACE:-appcat-e2e}"
 echo "=== Starting Keycloak backup test ==="
 echo "Namespace: $NAMESPACE"
 
-# Decode and setup kubeconfigs
-echo "$CONTROL_PLANE_KUBECONFIG_CONTENT" | base64 -d > /tmp/control-plane-config
-echo "$SERVICE_CLUSTER_KUBECONFIG_CONTENT" | base64 -d > /tmp/service-cluster-config
-
-# Use control plane kubeconfig to get composite name
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for instance operations"
-
 echo "Getting composite name..."
 comp=$(kubectl -n "$NAMESPACE" get vshnkeycloak keycloak-e2e -o jsonpath='{.spec.resourceRef.name}')
 
@@ -27,10 +19,6 @@ echo "Composite name: $comp"
 
 instancens="vshn-postgresql-$comp-pg"
 echo "Instance namespace: $instancens"
-
-# Switch to service cluster kubeconfig to create SGBackup
-export KUBECONFIG=/tmp/service-cluster-config
-echo "Using service cluster kubeconfig for SGBackup creation"
 
 # Detect if running in OpenShift
 KUBECTL_ARGS=""
@@ -51,10 +39,6 @@ spec:
   reconciliationTimeout: 300
   sgCluster: $comp-pg
 EOF
-
-# Switch back to control plane kubeconfig to check backup status
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for backup status check"
 
 echo "Checking backup status..."
 

@@ -1,0 +1,12 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  name: postgresql-e2e-test
+spec:
+  parameters:
+    size:
+      plan: standard-2
+    security:
+      deletionProtection: false
+  writeConnectionSecretToRef:
+    name: postgresql-e2e-test-creds

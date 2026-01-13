@@ -50,6 +50,7 @@ local clusterRoleBinding = loadManifest('cluster-role-binding.yaml') {
 local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
+  '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
 ];
 
 local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
@@ -81,6 +82,15 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
   {
     name: 'ODOO_TOKEN_URL',
     value: controllersParams.billing.odooTokenURL,
+  },
+] else [] + if controllersParams.monitoringEnabled then [
+  {
+    name: 'CROSSPLANE_LABEL_MAPPING',
+    value: controllersParams.monitoring.crossplane_label_mapping,
+  },
+  {
+    name: 'CROSSPLANE_EXTRA_RESOURCES',
+    value: controllersParams.monitoring.crossplane_extra_resources,
   },
 ] else []);
 
@@ -153,6 +163,67 @@ local controller = loadManifest('deployment.yaml') {
   },
 };
 
+local service = loadManifest('service.yaml') {
+  metadata+: {
+    namespace: controllersParams.namespace,
+  },
+};
+
+local servicemonitor = loadManifest('servicemonitor.yaml') {
+  metadata+: {
+    namespace: controllersParams.namespace,
+  },
+};
+
+local prometheusrule = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'appcat-crossplane-resources') {
+  metadata+: {
+    namespace: controllersParams.namespace,
+    labels: {
+      'app.kubernetes.io/name': 'appcat',
+      'app.kubernetes.io/managed-by': 'commodore',
+    },
+  },
+  spec: {
+    groups: [
+      {
+        name: 'crossplane-resources.rules',
+        rules: [
+          {
+            alert: 'CrossplaneResourceUnsynced',
+            expr: 'max by (api_version, kind, name, claim_name, claim_namespace, instance_name, status_synced, status_ready) (crossplane_resource_info{status_synced!="ReconcileSuccess"}) == 1',
+            'for': '20m',
+            labels: {
+              severity: 'warning',
+              syn: 'true',
+              syn_team: 'schedar',
+              syn_component: 'appcat',
+            },
+            annotations: {
+              summary: 'Crossplane resource {{ $labels.kind }} is not synced',
+              description: 'Crossplane resource {{ $labels.name }} ({{ $labels.kind }}) in namespace {{ $labels.claim_namespace }} has status_synced={{ $labels.status_synced }} for more than 20 minutes',
+            },
+          },
+          {
+            alert: 'CrossplaneResourceNotReady',
+            expr: 'max by (api_version, kind, name, claim_name, claim_namespace, instance_name, status_synced, status_ready) (crossplane_resource_info{status_ready!="Available"}) == 1',
+            'for': '15m',
+            labels: {
+              severity: 'warning',
+              syn: 'true',
+              syn_team: 'schedar',
+              syn_component: 'appcat',
+            },
+            annotations: {
+              summary: 'Crossplane resource {{ $labels.kind }} is not ready',
+              description: 'Crossplane resource {{ $labels.name }} ({{ $labels.kind }}) in namespace {{ $labels.claim_namespace }} has status_ready={{ $labels.status_ready }} for more than 15 minutes',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
 local webhookService = loadManifest('webhook-service.yaml') {
   metadata+: {
     name: 'webhook-service',
@@ -221,6 +292,39 @@ local selector = {
   ],
 };
 
+local additionalUnmanagedProtection(group, version, resource) = {
+  admissionReviewVersions: [
+    'v1',
+  ],
+  clientConfig: {
+    service: {
+      name: 'webhook-service',
+      namespace: controllersParams.namespace,
+      path: '/unmanaged-deletion-protection',
+    },
+  },
+  namespaceSelector: selector,
+  failurePolicy: 'Fail',
+  name: resource + '.vshn.appcat.vshn.io',
+  rules: [
+    {
+      apiGroups: [
+        group,
+      ],
+      apiVersions: [
+        version,
+      ],
+      operations: [
+        'DELETE',
+      ],
+      resources: [
+        resource,
+      ],
+    },
+  ],
+  sideEffects: 'None',
+};
+
 local webhook = loadManifest('webhooks.yaml') {
   metadata+: {
     name: 'appcat-validation',
@@ -234,6 +338,9 @@ local webhook = loadManifest('webhooks.yaml') {
         if w.name == 'xobjectbuckets.vshn.appcat.vshn.io' then w { objectSelector: selector } + clientConfig
         else w + clientConfig
     for w in super.webhooks
+  ] + [
+    additionalUnmanagedProtection(h.group, h.version, h.resource)
+    for h in controllersParams.additionalUnmanagedProtection
   ],
 };
 
@@ -250,4 +357,7 @@ if controllersParams.enabled then {
   'controllers/appcat/20_service_account': serviceAccount,
   'controllers/appcat/30_deployment': controller,
   [if controllersParams.controlPlaneKubeconfig != '' then 'controllers/appcat/10_controlplane_credentials']: controlKubeConfig,
+  [if controllersParams.monitoringEnabled then 'controllers/appcat/40_service']: service,
+  [if controllersParams.monitoringEnabled then 'controllers/appcat/40_servicemonitor']: servicemonitor,
+  [if controllersParams.monitoringEnabled then 'controllers/appcat/40_prometheusrule']: prometheusrule,
 } else {}

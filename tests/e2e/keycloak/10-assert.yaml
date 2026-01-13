@@ -7,7 +7,7 @@ kind: VSHNKeycloak
 metadata:
   name: keycloak-e2e
   finalizers:
-  - finalizer.apiextensions.crossplane.io
+    - finalizer.apiextensions.crossplane.io
 spec:
   compositeDeletePolicy: Background
   compositionRef:

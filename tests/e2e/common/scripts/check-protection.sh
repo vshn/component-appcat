@@ -13,7 +13,6 @@ cleanup() {
 
   if [ -n "$TYPE" ] && [ -n "$NAME" ] && [ -n "$NAMESPACE" ]; then
     echo "Attempting to disable deletion protection..."
-    export KUBECONFIG=/tmp/control-plane-config
     kubectl -n "$NAMESPACE" patch "$TYPE" "$NAME" -p '{"spec":{"parameters":{"security":{"deletionProtection": false}}}}' --type merge 2>/dev/null || true
   fi
 
@@ -26,12 +25,6 @@ echo "=== Starting deletion protection test ==="
 echo "Type: $TYPE"
 echo "Name: $NAME"
 echo "Namespace: $NAMESPACE"
-
-echo "$CONTROL_PLANE_KUBECONFIG_CONTENT" | base64 -d > /tmp/control-plane-config
-echo "$SERVICE_CLUSTER_KUBECONFIG_CONTENT" | base64 -d > /tmp/service-cluster-config
-
-export KUBECONFIG=/tmp/control-plane-config
-echo "Using control plane kubeconfig for main operations"
 
 # Get the instance namespace
 echo "Getting instance namespace..."
@@ -50,10 +43,6 @@ else
   echo "✗ Instance got deleted! Deletion protection failed!"
   exit 1
 fi
-
-# Switch to service cluster kubeconfig for namespace deletion test
-export KUBECONFIG=/tmp/service-cluster-config
-echo "Using service cluster kubeconfig for namespace operations"
 
 # Try to delete the namespace (should fail due to protection)
 echo "Attempting to delete namespace in service cluster..."
