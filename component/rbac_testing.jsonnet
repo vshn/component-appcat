@@ -71,6 +71,11 @@ local e2eClusterRole = kube.ClusterRole('appcat:e2e') + {
       resources: [ 'sgbackups', 'sgclusters' ],
       verbs: [ 'create', 'get', 'list' ],
     },
+    {
+      apiGroups: [ 'postgresql.cnpg.io' ],
+      resources: [ 'clusters' ],
+      verbs: [ 'get', 'list' ],
+    },
   ],
 };
 
