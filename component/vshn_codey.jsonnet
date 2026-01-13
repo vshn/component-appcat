@@ -49,7 +49,7 @@ local composition =
     spec: {
       parameters: {
         service: {
-          majorVersion: '11.0.0',
+          majorVersion: '13.0.4',
           fqdn: [ 'myforgejo.127.0.0.1.nip.io' ],
           forgejoSettings: {
             config: {

@@ -51,7 +51,7 @@ spec:
                           USER: __shared__/__shared__/appcat/codey_smtp_username
                     fqdn:
                       - myforgejo.127.0.0.1.nip.io
-                    majorVersion: 11.0.0
+                    majorVersion: 13.0.4
                   size:
                     plan: mini
             connectionDetails:
