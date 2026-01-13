@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_backup-before-maintenance
+    metadata.appcat.vshn.io/revision: master-5d3a69dc39841560ad58f5214bfa9425661fb452
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-backup-before-maintenance
+        name: function-appcat-master-5d3a69dc39841560ad58f5214bfa9425661fb452
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: feat_backup-before-maintenance
+          imageTag: 5d3a69dc39841560ad58f5214bfa9425661fb452
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100

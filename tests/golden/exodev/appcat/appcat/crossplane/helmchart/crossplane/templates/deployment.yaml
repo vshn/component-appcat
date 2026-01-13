@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/backup-before-maintenance
+        function-revision: 5d3a69dc39841560ad58f5214bfa9425661fb452
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
