@@ -175,7 +175,7 @@ local servicemonitor = loadManifest('servicemonitor.yaml') {
   },
 };
 
-local prometheusrule = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'appcat-crossplane-resources') {
+local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'appcat-crossplane-resources') {
   metadata+: {
     namespace: controllersParams.namespace,
     labels: {
@@ -222,7 +222,7 @@ local prometheusrule = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule'
       },
     ],
   },
-};
+});
 
 local webhookService = loadManifest('webhook-service.yaml') {
   metadata+: {
