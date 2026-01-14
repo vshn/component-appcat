@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check for patch label
-        if: contains(github.event.pull_request.labels.*.name, 'patch') || contains(github.event.pull_request.labels.*.name, 'dependency') || contains(github.event.pull_request.labels.*.name, 'documentation')
+        if: contains(github.event.pull_request.labels.*.name, 'patch') || contains(github.event.pull_request.labels.*.name, 'bug') || contains(github.event.pull_request.labels.*.name, 'dependency') || contains(github.event.pull_request.labels.*.name, 'documentation')
         id: patch
         run: |
           echo "set=true" >> $GITHUB_OUTPUT
