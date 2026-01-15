@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-178-0
+        name: function-appcat-master-add-vpa-poc
       input:
         apiVersion: v1
         data:
