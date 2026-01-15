@@ -209,6 +209,16 @@ local providerRBAC = {
         resources: [ 'billingservices' ],
         verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
       },
+      {
+        apiGroups: ['autoscaling.k8s.io'],
+        resources: ['verticalpodautoscalers'],
+        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete'],
+      },
+      {
+        apiGroups: ['appcat.vshn.io'],
+        resources: ['vpas'],
+        verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete'],
+      },
     ],
   },
   helm: {

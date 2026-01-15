@@ -44,9 +44,8 @@ parameters:
         registry: dockerhub.vshn.net
       busybox:
         registry: dockerhub.vshn.net
-    grpcEndpoint: 172.19.0.1:9443
+    grpcEndpoint: 172.18.0.1:9443
     proxyFunction: true
-
     quotasEnabled: false
     appuioManaged: false
     #billingEnabled: true
