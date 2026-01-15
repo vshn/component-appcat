@@ -32,10 +32,14 @@ parameters:
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
-        # https://artifacthub.io/packages/helm/cloudnative-pg/cluster
+        source: https://charts.appcat.ch/
+        version: 0.6.0
+        chartName: vshnpostgresql
+      cnpgBarmanPlugin:
+        # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
-        version: 0.3.1
-        chartName: cluster
+        version: 0.4.0
+        chartName: plugin-barman-cloud
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -228,6 +232,14 @@ parameters:
             cpu: 1000m
           requests:
             cpu: 100m
+      barmanPluginHelmValues:
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
 
     billing:
       namespace: ${appcat:namespace}

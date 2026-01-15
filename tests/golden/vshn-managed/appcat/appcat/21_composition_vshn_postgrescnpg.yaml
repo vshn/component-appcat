@@ -36,9 +36,9 @@ spec:
           bucketRegion: lpg
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
-          cnpgClusterChartName: cluster
-          cnpgClusterChartSource: https://cloudnative-pg.io/charts/
-          cnpgClusterChartVersion: 0.3.1
+          cnpgClusterChartName: vshnpostgresql
+          cnpgClusterChartSource: https://charts.appcat.ch/
+          cnpgClusterChartVersion: 0.6.0
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
