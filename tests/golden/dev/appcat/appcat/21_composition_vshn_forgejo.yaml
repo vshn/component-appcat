@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.178.0
+    metadata.appcat.vshn.io/revision: debug-add_vpa_poc
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-178-0
+        name: function-appcat-debug-add-vpa-poc
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.178.0
+          imageTag: add_vpa_poc
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
@@ -65,7 +65,7 @@ spec:
             true, "memory": "8Gi"}}, "mini": {"size": {"cpu": "500m", "disk": "10Gi",
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''

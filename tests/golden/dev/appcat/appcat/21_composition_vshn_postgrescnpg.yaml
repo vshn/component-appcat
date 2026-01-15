@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.178.0
+    metadata.appcat.vshn.io/revision: debug-add_vpa_poc
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-178-0
+        name: function-appcat-debug-add-vpa-poc
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.178.0
+          imageTag: add_vpa_poc
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
@@ -72,7 +72,7 @@ spec:
             {"cpu": "400m", "disk": "20Gi", "enabled": true, "memory": "1936Mi"}},
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
-          proxyEndpoint: 172.19.0.1:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           salesOrder: ''
