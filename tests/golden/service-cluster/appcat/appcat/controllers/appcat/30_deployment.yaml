@@ -34,6 +34,15 @@ spec:
               value: syn-appcat
             - name: CONTROL_PLANE_KUBECONFIG
               value: /config/config
+            - name: CROSSPLANE_LABEL_MAPPING
+              value: |
+                {
+                  "crossplane.io/claim-name": "claim_name",
+                  "crossplane.io/claim-namespace": "claim_namespace",
+                  "crossplane.io/composite": "instance_name"
+                }
+            - name: CROSSPLANE_EXTRA_RESOURCES
+              value: ''
           image: ghcr.io/vshn/appcat:feat_cnpg-barman-cloud
           imagePullPolicy: IfNotPresent
           livenessProbe:
