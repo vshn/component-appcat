@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/invalid_grants
+        function-revision: ce6041db91eba275621df93fdac40313c94394f6
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
