@@ -20,15 +20,8 @@ echo "Composite name: $comp"
 instancens="vshn-postgresql-$comp-pg"
 echo "Instance namespace: $instancens"
 
-# Detect if running in OpenShift
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
-fi
-
 echo "Creating SGBackup..."
-cat <<EOF | kubectl apply ${KUBECTL_ARGS} -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGBackup
 metadata:
@@ -42,11 +35,11 @@ EOF
 
 echo "Checking backup status..."
 
-backup_status=$(kubectl ${KUBECTL_ARGS} -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.databaseBackupStatus.process.status')
+backup_status=$(kubectl -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.databaseBackupStatus.process.status')
 
 while [ "$backup_status" == "Running" ] || [ "$backup_status" == "Pending" ] || [ "$backup_status" == "null" ]; do
     echo "Backup status: $backup_status"
-    backup_status=$(kubectl ${KUBECTL_ARGS} -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.databaseBackupStatus.process.status')
+    backup_status=$(kubectl -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io e2e-backup -o json | jq -r '.status.databaseBackupStatus.process.status')
     sleep 1
 done
 

@@ -14,15 +14,8 @@ comp=$(kubectl -n "$NAMESPACE" get vshnpostgresql postgresql-e2e-test -oyaml | y
 echo "Instance namespace: $instancens"
 echo "Cluster name: $comp"
 
-# Detect if running in OpenShift
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
-fi
-
 echo "Creating SGBackup..."
-cat <<EOF | kubectl apply ${KUBECTL_ARGS} -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGBackup
 metadata:
