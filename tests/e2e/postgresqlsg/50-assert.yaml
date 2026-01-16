@@ -5,7 +5,7 @@ timeout: 600
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-e2e-test-restore
+  name: pg-sg-e2e-restore
   finalizers:
   - finalizer.apiextensions.crossplane.io
 spec:
@@ -14,7 +14,7 @@ spec:
     name: vshnpostgres.vshn.appcat.vshn.io
   parameters:
     restore:
-      claimName: postgresql-e2e-test
+      claimName: pg-sg-e2e
     security:
       deletionProtection: false
     backup:
@@ -24,7 +24,7 @@ spec:
     size:
       plan: standard-2
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-restore-creds
+    name: pg-sg-e2e-restore-creds
 status:
   conditions:
     - status: "True"
@@ -35,8 +35,8 @@ apiVersion: v1
 kind: Secret
 type: connection.crossplane.io/v1alpha1
 metadata:
-  name: postgresql-e2e-test-restore-creds
+  name: pg-sg-e2e-restore-creds
   ownerReferences:
     - apiVersion: vshn.appcat.vshn.io/v1
       kind: VSHNPostgreSQL
-      name: postgresql-e2e-test-restore
+      name: pg-sg-e2e-restore

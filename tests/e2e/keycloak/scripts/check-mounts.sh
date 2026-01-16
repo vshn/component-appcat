@@ -38,15 +38,13 @@ kubectl get statefulset $sts -n "$ns" \
   -o jsonpath='{.spec.template.spec.containers[0].volumeMounts[*].mountPath}' | grep /custom/secrets/test-secret
 
 pod="${sts}-0"
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
-fi
+
+echo "Wait for pod to be ready"
+kubectl -n "$ns" wait --for=condition=ready pod "$pod" --timeout=300s
 
 echo "Verifying directories exist in pod $pod..."
-kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- test -d /custom/configs/test-cm
-kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- test -d /custom/secrets/test-secret
+kubectl -n "$ns" exec "$pod" -- test -d /custom/configs/test-cm
+kubectl -n "$ns" exec "$pod" -- test -d /custom/secrets/test-secret
 
 echo "✓ All custom volumes tests passed"
 echo "=== Keycloak custom volumes test completed successfully ==="

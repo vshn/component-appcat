@@ -114,8 +114,17 @@ rules:
       - pods/exec
     verbs:
       - get
+      - watch
       - list
       - create
+      - delete
+  - apiGroups:
+      - ''
+    resources:
+      - pods/log
+    verbs:
+      - get
+      - watch
   - apiGroups:
       - api.appcat.vshn.io
     resources:

@@ -59,7 +59,12 @@ local e2eClusterRole = kube.ClusterRole('appcat:e2e') + {
     {
       apiGroups: [ '' ],
       resources: [ 'pods', 'pods/portforward', 'pods/exec' ],
-      verbs: [ 'get', 'list', 'create' ],
+      verbs: [ 'get', 'watch', 'list', 'create', 'delete' ],
+    },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'pods/log' ],
+      verbs: [ 'get', 'watch' ],
     },
     {
       apiGroups: [ 'api.appcat.vshn.io' ],

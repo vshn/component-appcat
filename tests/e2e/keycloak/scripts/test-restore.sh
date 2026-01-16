@@ -14,15 +14,9 @@ echo "=== Starting Keycloak restore test ==="
 echo "Instance name: $name"
 echo "Namespace: $NAMESPACE"
 
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
-fi
-
 # Get the backup name
 echo "Getting backup name..."
-backup=$(kubectl ${KUBECTL_ARGS} -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io -o json | jq -r '.items[0] | .metadata.name')
+backup=$(kubectl -n "$NAMESPACE" get vshnkeycloakbackups.api.appcat.vshn.io -o json | jq -r '.items[0] | .metadata.name')
 
 if [ -z "$backup" ] || [ "$backup" == "null" ]; then
   echo "✗ ERROR: No backup found in namespace $NAMESPACE"
@@ -34,7 +28,7 @@ echo "Backup name: $backup"
 # Create new instance with restore
 echo "Creating new Keycloak instance from backup..."
 
-kubectl apply ${KUBECTL_ARGS} -f - <<EOF
+kubectl apply -f - <<EOF
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNKeycloak
 metadata:

@@ -3,7 +3,7 @@
 set -ex
 
 NAMESPACE="${NAMESPACE:-appcat-e2e}"
-ns=$(kubectl -n "$NAMESPACE" get vshnpostgresql postgresql-e2e-test  -oyaml | yq -r '.status.instanceNamespace')
+ns=$(kubectl -n "$NAMESPACE" get vshnpostgresql pg-cnpg-e2e  -oyaml | yq -r '.status.instanceNamespace')
 
 # Initial maintenance should be completed
 job=$(kubectl -n "$ns" get job -o name | grep "initial-maintenance")

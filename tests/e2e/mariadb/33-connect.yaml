@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: connect-mariadb-user
+  name: connect-mariadb-user-e2e
 spec:
   backoffLimit: 1
   template:
@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: mariadb-tls-secrets
           secret:
-            secretName: mariadb-e2e-e2euser
+            secretName: mariadb-e2e-e2e-user
             items:
               - key: ca.crt
                 path: ca.crt

@@ -30,15 +30,10 @@ echo "Checking if env-from-secret Secret is referenced..."
 kubectl get statefulset "$sts" -n "$ns" \
   -o jsonpath='{.spec.template.spec.containers[0].envFrom[*].secretRef.name}' | grep env-from-secret
 
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
-fi
 echo "Verifying environment variables in pod $pod..."
-kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_CM
-kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_SECRET
-kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_SECRET_DEPRECATED
+kubectl -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_CM
+kubectl -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_SECRET
+kubectl -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_SECRET_DEPRECATED
 
 echo "✓ All environment variable tests passed"
 echo "=== Keycloak environment variables test completed successfully ==="

@@ -27,7 +27,7 @@ spec:
               done
           envFrom:
             - secretRef:
-                name: postgresql-e2e-test-creds
+                name: pg-sg-e2e-creds
           volumeMounts:
             - name: postgresql-tls-secrets
               mountPath: /etc/postgresql-tls
@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: postgresql-tls-secrets
           secret:
-            secretName: postgresql-e2e-test-creds
+            secretName: pg-sg-e2e-creds
             items:
               - key: ca.crt
                 path: ca.crt
