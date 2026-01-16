@@ -8,14 +8,7 @@ backup=$(kubectl -n "$NAMESPACE" get vshnpostgresbackups.api.appcat.vshn.io -o j
 
 echo "Create new instance"
 
-# Detect if running in OpenShift
-KUBECTL_ARGS=""
-if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=system:admin"
-    KUBECTL_ARGS="--as=system:admin"
-fi
-
-kubectl apply ${KUBECTL_ARGS} -f - <<EOF
+kubectl apply -f - <<EOF
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
