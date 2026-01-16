@@ -40,8 +40,8 @@ kubectl get statefulset $sts -n "$ns" \
 pod="${sts}-0"
 KUBECTL_ARGS=""
 if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
+    echo "OpenShift detected, using --as=system:admin"
+    KUBECTL_ARGS="--as=system:admin"
 fi
 
 echo "Verifying directories exist in pod $pod..."

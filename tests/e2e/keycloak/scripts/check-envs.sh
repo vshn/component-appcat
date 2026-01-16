@@ -32,8 +32,8 @@ kubectl get statefulset "$sts" -n "$ns" \
 
 KUBECTL_ARGS=""
 if kubectl api-resources | grep -q "openshift.io"; then
-    echo "OpenShift detected, using --as=cluster-admin"
-    KUBECTL_ARGS="--as=cluster-admin"
+    echo "OpenShift detected, using --as=system:admin"
+    KUBECTL_ARGS="--as=system:admin"
 fi
 echo "Verifying environment variables in pod $pod..."
 kubectl ${KUBECTL_ARGS} -n "$ns" exec "$pod" -- /bin/env | grep KC_MY_ENV_FROM_CM
