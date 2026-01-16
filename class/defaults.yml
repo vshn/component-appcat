@@ -399,6 +399,7 @@ parameters:
         odooClientID: ${appcat:billing:odoo:oauth:clientID}
         odooClientSecret: ${appcat:billing:odoo:oauth:clientSecret}
         odooTokenURL: ${appcat:billing:odoo:oauth:url}
+        maxEventsPerProduct: 100
       monitoring:
         crossplane_label_mapping: ${appcat:monitoring:crossplane:label_mapping}
         crossplane_extra_resources: ${appcat:monitoring:crossplane:extra_resources}
