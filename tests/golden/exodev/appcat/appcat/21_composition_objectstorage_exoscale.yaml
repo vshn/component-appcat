@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-086af85edfa514931fa4201ee0a71ead29409cf9
+        name: function-appcat-master-fix-delete-copyjob
       input:
         apiVersion: v1
         data:

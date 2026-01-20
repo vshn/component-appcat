@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-086af85edfa514931fa4201ee0a71ead29409cf9
+  name: function-appcat-debug-fix-delete-copyjob
 spec:
-  package: ghcr.io/vshn/appcat:086af85edfa514931fa4201ee0a71ead29409cf9-func
+  package: ghcr.io/vshn/appcat:fix_delete-copyjob-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
