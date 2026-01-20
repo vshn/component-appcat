@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-ce6041db91eba275621df93fdac40313c94394f6
+        name: function-appcat-master-fix-controller-cluster-role
       input:
         apiVersion: v1
         data:
