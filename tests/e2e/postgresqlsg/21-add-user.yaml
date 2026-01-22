@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-e2e-test
+  name: pg-sg-e2e
 spec:
   parameters:
     network:
@@ -16,4 +16,4 @@ spec:
     size:
       plan: standard-2
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-creds
+    name: pg-sg-e2e-creds

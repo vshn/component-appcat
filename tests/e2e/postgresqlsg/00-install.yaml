@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-e2e-test
+  name: pg-sg-e2e
 spec:
   parameters:
     security:
@@ -12,12 +12,12 @@ spec:
     size:
       plan: standard-2
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-creds
+    name: pg-sg-e2e-creds
 ---
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNPostgreSQL
 metadata:
-  name: postgresql-e2e-test-restore
+  name: pg-sg-e2e-restore
 spec:
   parameters:
     security:
@@ -28,4 +28,4 @@ spec:
     size:
       plan: standard-2
   writeConnectionSecretToRef:
-    name: postgresql-e2e-test-restore-creds
+    name: pg-sg-e2e-restore-creds

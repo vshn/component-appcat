@@ -7,7 +7,7 @@ kind: VSHNPostgreSQL
 metadata:
   finalizers:
     - finalizer.apiextensions.crossplane.io
-  name: postgresql-e2e-test
+  name: pg-sg-e2e
 spec:
   parameters:
     security:
