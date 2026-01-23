@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNForgejo
 metadata:
-  name: forgejo-backup-disabled-test
+  name: forgejo-backup-disabled
 spec:
   parameters:
     security:
@@ -11,4 +11,4 @@ spec:
     backup:
       enabled: false
   writeConnectionSecretToRef:
-    name: forgejo-backup-disabled-test-creds
+    name: forgejo-backup-disabled-creds
