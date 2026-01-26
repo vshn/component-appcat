@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/delete-copyjob
+        function-revision: 09d7307a43f5d82f1c3cde4937316f249ce64bab
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

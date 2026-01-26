@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_delete-copyjob
+    metadata.appcat.vshn.io/revision: master-09d7307a43f5d82f1c3cde4937316f249ce64bab
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-delete-copyjob
+        name: function-appcat-master-09d7307a43f5d82f1c3cde4937316f249ce64bab
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: fix_delete-copyjob
+          imageTag: 09d7307a43f5d82f1c3cde4937316f249ce64bab
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
