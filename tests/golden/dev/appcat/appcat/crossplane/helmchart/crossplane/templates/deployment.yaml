@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/long_instance_names
+        function-revision: 0da3083bdb371e6019fc441538fd807fcc49e6c4
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

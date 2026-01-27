@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-long-instance-names
+        name: function-appcat-master-0da3083bdb371e6019fc441538fd807fcc49e6c4
       input:
         apiVersion: v1
         data:
