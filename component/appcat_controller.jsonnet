@@ -83,6 +83,10 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
     name: 'ODOO_TOKEN_URL',
     value: controllersParams.billing.odooTokenURL,
   },
+  {
+    name: 'BILLING_MAX_EVENTS_PRODUCT',
+    value: std.toString(controllersParams.billing.maxEventsPerProduct),
+  },
 ] else [] + if controllersParams.monitoringEnabled then [
   {
     name: 'CROSSPLANE_LABEL_MAPPING',

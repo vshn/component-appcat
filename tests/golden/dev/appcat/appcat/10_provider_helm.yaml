@@ -27,10 +27,19 @@ spec:
       template:
         spec:
           containers:
-            - name: package-runtime
-              securityContext: {}
+            - env:
+                - name: SSL_CERT_FILE
+                  value: /certs/tls-combined.pem
+              name: package-runtime
+              volumeMounts:
+                - mountPath: /certs
+                  name: ca-certs
           securityContext: {}
           serviceAccountName: provider-helm
+          volumes:
+            - name: ca-certs
+              secret:
+                secretName: tls-server-certificate
 ---
 apiVersion: helm.crossplane.io/v1beta1
 kind: ProviderConfig
@@ -216,6 +225,20 @@ rules:
       - prometheusrules
       - podmonitors
       - servicemonitors
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - barmancloud.cnpg.io
+    resources:
+      - objectstores
+      - objectstores/finalizers
+      - objectstores/status
     verbs:
       - get
       - list

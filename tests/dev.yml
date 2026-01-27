@@ -52,7 +52,15 @@ parameters:
     #billingEnabled: true
     monitoringEnabled: true
     billing:
-      salesOrder: ""
+      salesOrder: "SC0000"
+      odoo:
+        url: "https://preprod.central.vshn.ch"
+        db: "VSHNPreProd"
+        oauth:
+          url: "https://preprod.central.vshn.ch/api/v2/authentication/oauth2/token"
+          #clientID: "" # get from vault
+          #clientSecret: "" # get from vault
+
       vshn:
         enableCronjobs: false
         meteringRules: true
@@ -97,6 +105,24 @@ parameters:
             spec:
               credentials:
                 source: InjectedIdentity
+        additionalRuntimeConfig:
+          spec:
+            deploymentTemplate:
+              spec:
+                template:
+                  spec:
+                    containers:
+                      - name: package-runtime
+                        env:
+                          - name: SSL_CERT_FILE
+                            value: /certs/tls-combined.pem
+                        volumeMounts:
+                          - mountPath: /certs
+                            name: ca-certs
+                    volumes:
+                      - name: ca-certs
+                        secret:
+                          secretName: tls-server-certificate
       minio:
         enabled: true
         defaultProviderConfig:

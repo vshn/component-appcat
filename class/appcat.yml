@@ -19,6 +19,11 @@ parameters:
         chart_name: cloudnative-pg
         version: ${appcat:charts:cnpg:version}
         output_path: ${_base_directory}/dependencies/cnpg/helmchart/cnpg-${appcat:charts:cnpg:version}
+      - type: helm
+        source: ${appcat:charts:cnpgBarmanPlugin:source}
+        chart_name: ${appcat:charts:cnpgBarmanPlugin:chartName}
+        version: ${appcat:charts:cnpgBarmanPlugin:version}
+        output_path: ${_base_directory}/dependencies/cnpg/helmchart/plugin-barman-cloud-${appcat:charts:cnpgBarmanPlugin:version}
     compile:
       - input_paths:
           - ${_base_directory}/component/app.jsonnet
@@ -144,6 +149,15 @@ parameters:
           namespace: ${appcat:cnpg:namespace}
         output_path: appcat/cnpg/helmchart
 
+      - input_type: helm
+        input_paths:
+          - ${_base_directory}/dependencies/cnpg/helmchart/plugin-barman-cloud-${appcat:charts:cnpgBarmanPlugin:version}
+        helm_values: ${appcat:cnpg:barmanPluginHelmValues}
+        helm_params:
+          name: plugin-barman-cloud
+          namespace: ${appcat:cnpg:namespace}
+        output_path: appcat/cnpg/helmchart
+
       - input_paths:
           - ${_base_directory}/component/cnpg.jsonnet
         input_type: jsonnet
@@ -167,6 +181,9 @@ parameters:
         - type: jsonnet
           filter: postprocess/cnpg.jsonnet
           path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
+        - type: jsonnet
+          filter: postprocess/cnpg-barman-plugin.jsonnet
+          path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}
@@ -195,6 +212,12 @@ parameters:
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}/controllers/sts-resizer
+        - type: jsonnet
+          filter: postprocess/add_argo_annotations.jsonnet
+          path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates
+        - type: jsonnet
+          filter: postprocess/add_argo_annotations.jsonnet
+          path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates/additional-rbac
         - type: jsonnet
           filter: postprocess/patch_pull_policy.jsonnet
           path: ${_instance}

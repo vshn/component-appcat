@@ -1,4 +1,4 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
 commands:
-  - script: scripts/check-protection.sh vshnpostgresql postgresql-e2e-test
+  - script: scripts/check-protection.sh vshnpostgresql pg-sg-e2e

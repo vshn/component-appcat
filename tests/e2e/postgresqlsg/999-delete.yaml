@@ -11,7 +11,7 @@ delete:
       e2e-test: postgresql
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNPostgreSQL
-    name: postgresql-e2e-test
+    name: pg-sg-e2e
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNPostgreSQL
-    name: postgresql-e2e-test-restore
+    name: pg-sg-e2e-restore
