@@ -455,6 +455,20 @@ rules:
       - patch
       - update
       - delete
+  - apiGroups:
+      - barmancloud.cnpg.io
+    resources:
+      - objectstores
+      - objectstores/finalizers
+      - objectstores/status
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: v1
 kind: Service

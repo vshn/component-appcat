@@ -209,6 +209,11 @@ local providerRBAC = {
         resources: [ 'billingservices' ],
         verbs: [ 'get', 'list', 'watch', 'create', 'watch', 'patch', 'update', 'delete' ],
       },
+      {
+        apiGroups: [ 'barmancloud.cnpg.io' ],
+        resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   helm: {
@@ -277,6 +282,11 @@ local providerRBAC = {
       {
         apiGroups: [ 'monitoring.coreos.com' ],
         resources: [ 'prometheusrules', 'podmonitors', 'servicemonitors' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'barmancloud.cnpg.io' ],
+        resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
     ],
