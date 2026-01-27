@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: extended-billing
+        tag: 193c3d7fe3e7c59fdcd540479e396c577677022b
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
