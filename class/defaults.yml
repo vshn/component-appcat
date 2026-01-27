@@ -72,7 +72,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 0da3083bdb371e6019fc441538fd807fcc49e6c4
+        tag: 193c3d7fe3e7c59fdcd540479e396c577677022b
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -399,6 +399,7 @@ parameters:
         odooClientID: ${appcat:billing:odoo:oauth:clientID}
         odooClientSecret: ${appcat:billing:odoo:oauth:clientSecret}
         odooTokenURL: ${appcat:billing:odoo:oauth:url}
+        maxEventsPerProduct: 100
       monitoring:
         crossplane_label_mapping: ${appcat:monitoring:crossplane:label_mapping}
         crossplane_extra_resources: ${appcat:monitoring:crossplane:extra_resources}

@@ -52,7 +52,15 @@ parameters:
     #billingEnabled: true
     monitoringEnabled: true
     billing:
-      salesOrder: ""
+      salesOrder: "SC0000"
+      odoo:
+        url: "https://preprod.central.vshn.ch"
+        db: "VSHNPreProd"
+        oauth:
+          url: "https://preprod.central.vshn.ch/api/v2/authentication/oauth2/token"
+          #clientID: "" # get from vault
+          #clientSecret: "" # get from vault
+
       vshn:
         enableCronjobs: false
         meteringRules: true
