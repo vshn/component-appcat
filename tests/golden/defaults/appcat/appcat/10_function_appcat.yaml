@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-feat-cnpg-barman-cloud
+  name: function-appcat-master-a2ebd37959af90b9d54ddb4693c60fd585004398
 spec:
-  package: ghcr.io/vshn/appcat:feat_cnpg-barman-cloud-func
+  package: ghcr.io/vshn/appcat:a2ebd37959af90b9d54ddb4693c60fd585004398-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

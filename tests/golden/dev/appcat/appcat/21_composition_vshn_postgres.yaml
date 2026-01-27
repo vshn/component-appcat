@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-feat_cnpg-barman-cloud
+    metadata.appcat.vshn.io/revision: debug-a2ebd37959af90b9d54ddb4693c60fd585004398
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-feat-cnpg-barman-cloud
+        name: function-appcat-debug-a2ebd37959af90b9d54ddb4693c60fd585004398
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: feat_cnpg-barman-cloud
+          imageTag: a2ebd37959af90b9d54ddb4693c60fd585004398
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",

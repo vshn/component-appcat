@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_cnpg-barman-cloud
+    metadata.appcat.vshn.io/revision: master-a2ebd37959af90b9d54ddb4693c60fd585004398
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-cnpg-barman-cloud
+        name: function-appcat-master-a2ebd37959af90b9d54ddb4693c60fd585004398
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: feat_cnpg-barman-cloud
+          imageTag: a2ebd37959af90b9d54ddb4693c60fd585004398
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance

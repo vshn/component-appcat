@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_cnpg-barman-cloud
+    metadata.appcat.vshn.io/revision: master-a2ebd37959af90b9d54ddb4693c60fd585004398
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
