@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-shorten-premaint
+        name: function-appcat-master-v4-179-1
       input:
         apiVersion: v1
         data:
