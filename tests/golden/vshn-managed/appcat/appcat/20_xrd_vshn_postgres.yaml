@@ -115,6 +115,26 @@ spec:
                             - saturday
                             - sunday
                           type: string
+                        disableAppcatRelease:
+                          default: false
+                          description: |-
+                            DisableAppcatRelease disables automatic AppCat composition revision rollouts during maintenance windows.
+                            When enabled, the instance will not automatically receive new AppCat composition revisions
+                            which may contain bug fixes, security patches, and new features.
+                            WARNING: Strongly discouraged - may leave instance without security patches and bug fixes.
+                          type: boolean
+                        disableServiceMaintenance:
+                          default: false
+                          description: |-
+                            DisableServiceMaintenance disables automatic service version updates during maintenance windows.
+                            When enabled, the version specified in spec.parameters.service.version is used as the target version.
+                            Important behavior:
+                            - Downgrades are prevented: if the currently deployed version is higher than the specified version,
+                              the current version is kept to avoid service disruption.
+                            - The service will not be upgraded beyond the specified version.
+                            - You can upgrade by increasing the version in the claim.
+                            WARNING: User takes full responsibility for version management and security updates.
+                          type: boolean
                         timeOfDay:
                           description: |-
                             TimeOfDay for installing updates in UTC.
@@ -6245,6 +6265,26 @@ spec:
                             - saturday
                             - sunday
                           type: string
+                        disableAppcatRelease:
+                          default: false
+                          description: |-
+                            DisableAppcatRelease disables automatic AppCat composition revision rollouts during maintenance windows.
+                            When enabled, the instance will not automatically receive new AppCat composition revisions
+                            which may contain bug fixes, security patches, and new features.
+                            WARNING: Strongly discouraged - may leave instance without security patches and bug fixes.
+                          type: boolean
+                        disableServiceMaintenance:
+                          default: false
+                          description: |-
+                            DisableServiceMaintenance disables automatic service version updates during maintenance windows.
+                            When enabled, the version specified in spec.parameters.service.version is used as the target version.
+                            Important behavior:
+                            - Downgrades are prevented: if the currently deployed version is higher than the specified version,
+                              the current version is kept to avoid service disruption.
+                            - The service will not be upgraded beyond the specified version.
+                            - You can upgrade by increasing the version in the claim.
+                            WARNING: User takes full responsibility for version management and security updates.
+                          type: boolean
                         timeOfDay:
                           description: |-
                             TimeOfDay for installing updates in UTC.
