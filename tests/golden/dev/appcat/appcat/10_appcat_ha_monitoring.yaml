@@ -13,9 +13,9 @@ spec:
               }} has less replicas than expected.
             runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/vshn/AppCatHighAvailableDeploymentWarning.html
             summary: AppCat service instance has unavailable pods.
-          expr: kube_deployment_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
-            > 1 AND kube_deployment_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
-            - kube_deployment_status_replicas_ready{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
+          expr: kube_deployment_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
+            > 1 AND kube_deployment_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
+            - kube_deployment_status_replicas_ready{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
             > 0
           for: 1m
           labels:
@@ -27,9 +27,9 @@ spec:
               $labels.namespace }} has less replicas than expected.
             runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/vshn/AppCatHighAvailableStatefulsetWarning.html
             summary: AppCat service instance has unavailable pods.
-          expr: kube_statefulset_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
-            > 1 AND kube_statefulset_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
-            - kube_statefulset_status_replicas_ready{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
+          expr: kube_statefulset_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
+            > 1 AND kube_statefulset_status_replicas{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
+            - kube_statefulset_status_replicas_ready{namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
             > 0
           for: 1m
           labels:

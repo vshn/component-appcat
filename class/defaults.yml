@@ -1194,6 +1194,76 @@ parameters:
                 cpu: "1"
                 memory: "4Gi"
                 disk: 50Gi
+        openbao:
+          enabled: true
+          billing: true
+          additionalInputs:
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+          serviceName: VSHNOpenBao
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - ca.crt
+            - tls.crt
+            - tls.key
+            - REDIS_HOST
+            - REDIS_PORT
+            - REDIS_USERNAME
+            - REDIS_PASSWORD
+            - REDIS_URL
+            - SENTINEL_HOSTS
+          mode: standalone
+          offered: true
+          restoreSA: openbaorestoreaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          openshiftTemplate:
+            serviceName: redisbyvshn
+            description: "The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker."
+            message: 'Your Redis by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-redis
+            tags: "database,nosql"
+            icon: "icon-redis"
+            defaultVersion: "7.2"
+          enableNetworkPolicy: true
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:redis:version}
+          imageRegistry: ${appcat:images:redis:registry}
+          imageRepositoryPrefix: ${appcat:images:redis:repositoryPrefix}
+          maintenanceURL: "${appcat:images:redis:maintenanceURL}"
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-1
+          sla: 99.25
+          plans:
+            standard-512m:
+              size:
+                enabled: true
+                cpu: "125m"
+                memory: "512Mi"
+                disk: 16Gi
+            standard-1:
+              size:
+                enabled: true
+                cpu: "250m"
+                memory: "1Gi"
+                disk: 16Gi
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 16Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 16Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 16Gi
       # Config for exoscale composites
       exoscale:
         enabled: false

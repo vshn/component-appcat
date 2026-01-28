@@ -13,7 +13,7 @@ spec:
               }} has failed.
             runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatBackupJobError.html
             summary: AppCat service backup failed.
-          expr: kube_job_failed{job_name=~".*backup.*", namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|postgresql|redis)-.*"}
+          expr: kube_job_failed{job_name=~".*backup.*", namespace=~"vshn-(codey|forgejo|keycloak|mariadb|nextcloud|openbao|postgresql|redis)-.*"}
             > 0
           for: 1m
           labels:
