@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:a1d20ecc711bb18951e646636c4aa120ae787a4b
+          image: ghcr.io/vshn/appcat:cnpg_rcloneproxy
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
