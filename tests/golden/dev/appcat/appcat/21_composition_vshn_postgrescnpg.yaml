@@ -74,6 +74,9 @@ spec:
             "memory": "3984Mi"}}}'
           proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
+          rcloneproxyChartName: rcloneproxy
+          rcloneproxyChartSource: registry.kube-system.svc.cluster.local:5000/rcloneproxy
+          rcloneproxyChartVersion: 0.0.0
           releaseManagementEnabled: 'false'
           salesOrder: ''
           serviceID: vshn-postgresqlcnpg

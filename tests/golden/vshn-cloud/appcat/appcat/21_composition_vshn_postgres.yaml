@@ -97,6 +97,9 @@ spec:
             "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled": true,
             "memory": "3984Mi"}}}'
           quotasEnabled: 'false'
+          rcloneproxyChartName: rcloneproxy
+          rcloneproxyChartSource: registry.kube-system.svc.cluster.local:5000/rcloneproxy
+          rcloneproxyChartVersion: 0.0.0
           releaseManagementEnabled: 'true'
           salesOrder: ''
           serviceID: vshn-postgresql
