@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-179-1
+        name: function-appcat-debug-feature-just-file-support
       input:
         apiVersion: v1
         data:
