@@ -40,6 +40,12 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.4.0
         chartName: plugin-barman-cloud
+      rcloneproxy:
+        # source: https://charts.appcat.ch/
+        source: registry.kube-system.svc.cluster.local:5000/rcloneproxy
+        # version: 0.6.0
+        version: 0.0.0
+        chartName: rcloneproxy
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -76,7 +82,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.179.1
+        tag: cnpg/rcloneproxy
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -648,6 +654,9 @@ parameters:
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
         secretNamespace: ${appcat:crossplane:namespace}
+        rcloneproxyChartSource: ${appcat:charts:rcloneproxy:source}
+        rcloneproxyChartVersion: ${appcat:charts:rcloneproxy:version}
+        rcloneproxyChartName: ${appcat:charts:rcloneproxy:chartName}
         forgejo:
           enabled: true
           billing: true
@@ -720,6 +729,9 @@ parameters:
             cnpgClusterChartSource: ${appcat:charts:cnpgCluster:source}
             cnpgClusterChartVersion: ${appcat:charts:cnpgCluster:version}
             cnpgClusterChartName: ${appcat:charts:cnpgCluster:chartName}
+            rcloneproxyChartSource: ${appcat:services:vshn:rcloneproxyChartSource}
+            rcloneproxyChartVersion: ${appcat:services:vshn:rcloneproxyChartVersion}
+            rcloneproxyChartName: ${appcat:services:vshn:rcloneproxyChartName}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           enableNetworkPolicy: true

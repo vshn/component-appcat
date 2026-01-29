@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.179.1
+    metadata.appcat.vshn.io/revision: debug-cnpg_rcloneproxy
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-179-1
+        name: function-appcat-debug-cnpg-rcloneproxy
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.179.1
+          imageTag: cnpg_rcloneproxy
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
@@ -74,6 +74,9 @@ spec:
             "memory": "3984Mi"}}}'
           proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
+          rcloneproxyChartName: rcloneproxy
+          rcloneproxyChartSource: registry.kube-system.svc.cluster.local:5000/rcloneproxy
+          rcloneproxyChartVersion: 0.0.0
           releaseManagementEnabled: 'false'
           salesOrder: ''
           serviceID: vshn-postgresqlcnpg
