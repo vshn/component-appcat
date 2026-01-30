@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-dd2f9d5583c0630db56267221791f023102e036e
+        name: function-appcat-debug-customize-alertmanager-user
       input:
         apiVersion: v1
         data:
