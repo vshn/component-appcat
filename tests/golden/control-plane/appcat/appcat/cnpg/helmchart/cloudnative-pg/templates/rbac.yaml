@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: appcat-cloudnative-pg
   namespace: syn-cnpg-system
 ---
@@ -21,8 +21,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: appcat-cloudnative-pg
 rules:
   - apiGroups:
@@ -261,8 +261,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: appcat-cloudnative-pg-view
 rules:
   - apiGroups:
@@ -293,8 +293,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: appcat-cloudnative-pg-edit
 rules:
   - apiGroups:
@@ -327,8 +327,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: appcat-cloudnative-pg
 roleRef:
   apiGroup: rbac.authorization.k8s.io

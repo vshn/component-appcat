@@ -33,7 +33,7 @@ spec:
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.6.0
+          chartVersion: 8.8.2
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'

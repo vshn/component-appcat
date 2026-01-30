@@ -27,10 +27,16 @@ parameters:
     appuio_metered_billing_zone_label_map:
       c-green-test-1234: "Kind - Local Test 0"
 
-  crossplane:
-    namespace: syn-crossplane
-
   appcat:
+    charts:
+      crossplane:
+        version: 2.1.3
+    crossplane:
+      helmValues:
+        ~args:
+          - --enable-usages
+          - --poll-interval=1h
+          - --enable-realtime-compositions=false
     pullPolicy: Always
 
     deploymentManagementSystem:

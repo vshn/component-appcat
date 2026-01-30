@@ -33,7 +33,7 @@ spec:
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 7.1.5
+          chartVersion: 7.1.6
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
