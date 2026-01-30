@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-disabled-maintenance
+        name: function-appcat-master-dd2f9d5583c0630db56267221791f023102e036e
       input:
         apiVersion: v1
         data:
