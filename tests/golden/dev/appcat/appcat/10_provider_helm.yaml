@@ -8,7 +8,7 @@ metadata:
     name: provider-helm
   name: provider-helm
 spec:
-  package: ghcr.io/crossplane-contrib/provider-helm:v1.0.4
+  package: ghcr.io/crossplane-contrib/provider-helm:v1.1.0
   packagePullPolicy: Always
   runtimeConfigRef:
     name: provider-helm
