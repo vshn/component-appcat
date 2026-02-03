@@ -57,7 +57,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-forgejo-besteffort
                 - name: AR_QUERY
@@ -144,7 +144,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-forgejo-guaranteed
                 - name: AR_QUERY
@@ -403,7 +403,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-keycloak-besteffort
                 - name: AR_QUERY
@@ -490,7 +490,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-keycloak-guaranteed
                 - name: AR_QUERY
@@ -749,7 +749,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-mariadb-besteffort
                 - name: AR_QUERY
@@ -836,7 +836,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-mariadb-guaranteed
                 - name: AR_QUERY
@@ -1095,7 +1095,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-minio-besteffort
                 - name: AR_QUERY
@@ -1182,7 +1182,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-minio-guaranteed
                 - name: AR_QUERY
@@ -1441,7 +1441,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-nextcloud-besteffort
                 - name: AR_QUERY
@@ -1528,7 +1528,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-nextcloud-guaranteed
                 - name: AR_QUERY
@@ -1787,7 +1787,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-postgres-besteffort
                 - name: AR_QUERY
@@ -1874,7 +1874,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-postgres-guaranteed
                 - name: AR_QUERY
@@ -2133,7 +2133,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-redis-besteffort
                 - name: AR_QUERY
@@ -2220,7 +2220,7 @@ spec:
                 - name: AR_PROM_URL
                   value: http://prometheus-operated.prometheus-system:9090/prometheus
                 - name: AR_ORG_ID
-                  value: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+                  value: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
                 - name: AR_PRODUCT_ID
                   value: appcat-vshn-redis-guaranteed
                 - name: AR_QUERY
