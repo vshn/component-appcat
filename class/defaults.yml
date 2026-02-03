@@ -328,7 +328,7 @@ parameters:
           vshn-appuio-mimir: true
       prometheus:
         url: http://vshn-appuio-mimir-query-frontend.vshn-appuio-mimir.svc:8080/prometheus
-        cloud_org_id: appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
+        cloud_org_id: appuio-managed-openshift-billing|appuio-cloud-openshift-billing|appuio-cloud-metering-c-appuio-cloudscale-lpg-2|appuio-cloud-metering-c-appuio-exoscale-ch-gva-2-0
         managed_org_id: appuio-managed-openshift-billing
       odoo:
         url: "https://test.central.vshn.ch/api/v2/product_usage_report_POST"
