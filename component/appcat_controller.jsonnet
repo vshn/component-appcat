@@ -47,6 +47,21 @@ local clusterRoleBinding = loadManifest('cluster-role-binding.yaml') {
   ],
 };
 
+local clusterRoleBindingCrossplaneView = kube.ClusterRoleBinding('appcat-controller-crossplane-view') {
+  roleRef: {
+    kind: 'ClusterRole',
+    apiGroup: 'rbac.authorization.k8s.io',
+    name: 'crossplane-view',
+  },
+  subjects: [
+    {
+      name: 'appcat-controller',
+      kind: 'ServiceAccount',
+      namespace: controllersParams.namespace,
+    },
+  ],
+};
+
 local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
@@ -353,6 +368,7 @@ if controllersParams.enabled then {
   'controllers/appcat/10_cluster_role': clusterRole,
   'controllers/appcat/10_role_binding_leader_election': roleBindingLeaderElection,
   'controllers/appcat/10_cluster_role_binding': clusterRoleBinding,
+  'controllers/appcat/10_cluster_role_binding_crossplane_view': clusterRoleBindingCrossplaneView,
   'controllers/appcat/10_webhooks': webhook,
   'controllers/appcat/10_webhook_service': webhookService,
   'controllers/appcat/10_webhook_issuer': webhookIssuer,
