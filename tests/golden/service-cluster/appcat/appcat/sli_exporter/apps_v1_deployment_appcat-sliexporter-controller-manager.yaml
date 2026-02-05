@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:add-pinimagetag
+          image: ghcr.io/vshn/appcat:a1d20ecc711bb18951e646636c4aa120ae787a4b
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
