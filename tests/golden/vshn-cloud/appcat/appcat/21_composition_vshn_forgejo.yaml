@@ -33,7 +33,7 @@ spec:
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
           chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 15.0.3
+          chartVersion: 16.0.1
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
