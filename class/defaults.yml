@@ -42,7 +42,7 @@ parameters:
         chartName: plugin-barman-cloud
       rcloneproxy:
         source: https://charts.appcat.ch/
-        version: 0.0.1
+        version: 0.0.2
         chartName: rcloneproxy
     images:
       provider-kubernetes:

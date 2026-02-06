@@ -75,7 +75,7 @@ spec:
           quotasEnabled: 'false'
           rcloneproxyChartName: rcloneproxy
           rcloneproxyChartSource: https://charts.appcat.ch/
-          rcloneproxyChartVersion: 0.0.1
+          rcloneproxyChartVersion: 0.0.2
           releaseManagementEnabled: 'true'
           salesOrder: ST10120
           serviceID: vshn-postgresqlcnpg
