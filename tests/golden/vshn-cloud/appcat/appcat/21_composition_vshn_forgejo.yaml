@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_api_clarifications
+    metadata.appcat.vshn.io/revision: master-b230ebd08a00cb5ce2fb82e45957bd46e3aca4d5
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-api-clarifications
+        name: function-appcat-master-b230ebd08a00cb5ce2fb82e45957bd46e3aca4d5
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: fix_api_clarifications
+          imageTag: b230ebd08a00cb5ce2fb82e45957bd46e3aca4d5
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'true'
