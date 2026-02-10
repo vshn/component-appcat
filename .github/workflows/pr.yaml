@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check for patch label
-        if: contains(github.event.pull_request.labels.*.name, 'patch') || contains(github.event.pull_request.labels.*.name, 'dependency') || contains(github.event.pull_request.labels.*.name, 'documentation')
+        if: contains(github.event.pull_request.labels.*.name, 'patch') || contains(github.event.pull_request.labels.*.name, 'bug') || contains(github.event.pull_request.labels.*.name, 'dependency') || contains(github.event.pull_request.labels.*.name, 'documentation')
         id: patch
         run: |
           echo "set=true" >> $GITHUB_OUTPUT
@@ -66,7 +66,7 @@ jobs:
           # We also need to use the personal access token here. As subsequent
           # actions will not trigger by tags/pushes that use `GITHUB_TOKEN`
           # https://github.com/orgs/community/discussions/25702#discussioncomment-3248819
-          token: ${{ secrets.COMPONENT_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           # This is broken in checkout@v4...
           # https://github.com/actions/checkout/issues/1781
           fetch-tags: true
