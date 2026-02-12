@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-hotfix-stackgres-netpol
+  name: function-appcat-debug-v4-180-1
 spec:
-  package: ghcr.io/vshn/appcat:hotfix_stackgres_netpol-func
+  package: ghcr.io/vshn/appcat:v4.180.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
