@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.180.0
+          image: ghcr.io/vshn/appcat:hotfix_stackgres_netpol
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
