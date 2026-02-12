@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-e560efe96b209f8ff104b39e30f4e9bce3f5421d
+        name: function-appcat-master-fix-user-alerting
       input:
         apiVersion: v1
         data:

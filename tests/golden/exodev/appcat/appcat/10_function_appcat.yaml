@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-e560efe96b209f8ff104b39e30f4e9bce3f5421d
+  name: function-appcat-master-fix-user-alerting
 spec:
-  package: ghcr.io/vshn/appcat:e560efe96b209f8ff104b39e30f4e9bce3f5421d-func
+  package: ghcr.io/vshn/appcat:fix_user-alerting-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
