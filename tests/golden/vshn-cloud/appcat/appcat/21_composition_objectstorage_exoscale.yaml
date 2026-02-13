@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-f37185e0b44a99a3b989774e20a833b67a45de5c
+        name: function-appcat-master-fix-maintenance-schedules
       input:
         apiVersion: v1
         data:
