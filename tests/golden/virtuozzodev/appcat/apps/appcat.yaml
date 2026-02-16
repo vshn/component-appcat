@@ -1,0 +1,12 @@
+spec:
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      jqPathExpressions:
+        - .webhooks[]?.clientConfig.caBundle
+      kind: ValidatingWebhookConfiguration
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true

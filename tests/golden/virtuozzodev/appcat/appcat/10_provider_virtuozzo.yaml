@@ -1,0 +1,116 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-80'
+  labels:
+    name: provider-virtuozzo
+  name: provider-virtuozzo
+spec:
+  package: ghcr.io/vshn/provider-virtuozzo:poc
+  packagePullPolicy: IfNotPresent
+  runtimeConfigRef:
+    name: provider-virtuozzo
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-90'
+  name: provider-virtuozzo
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              securityContext: {}
+          securityContext: {}
+          serviceAccountName: provider-virtuozzo
+---
+apiVersion: virtuozzo.crossplane.io/v1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-50'
+  labels:
+    name: virtuozzo
+  name: virtuozzo
+spec:
+  credentials:
+    credentialsSecretRef:
+      name: virtuozzo-api-access
+      namespace: syn-crossplane
+    source: InjectedIdentity
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: provider-virtuozzo
+  name: provider-virtuozzo
+  namespace: syn-crossplane
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-virtuozzo
+    name: provider-virtuozzo-metrics
+  name: provider-virtuozzo-metrics
+  namespace: syn-crossplane
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+  selector:
+    pkg.crossplane.io/provider: provider-virtuozzo
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-virtuozzo
+    name: provider-virtuozzo
+  name: provider-virtuozzo
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: provider-virtuozzo
+---
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: virtuozzo-api-access
+  name: virtuozzo-api-access
+  namespace: syn-crossplane
+stringData:
+  AWS_ACCESS_KEY_ID: changeme
+  AWS_SECRET_ACCESS_KEY: changeme
+  S3_ENDPOINT_URL: changeme
+type: Opaque
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: syn-provider-virtuozzo-secrets
+  name: syn-provider-virtuozzo-secrets
