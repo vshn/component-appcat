@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    metadata.appcat.vshn.io/enabled-services-hash: b93a25d691352553157ddfb29880b694
+  labels:
+    appcat-controller: appcat-controller
+  name: appcat-controller
+  namespace: syn-appcat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      appcat-controller: appcat-controller
+  template:
+    metadata:
+      annotations:
+        kubeconfighash: d41d8cd98f00b204e9800998ecf8427e
+      labels:
+        appcat-controller: appcat-controller
+    spec:
+      containers:
+        - args:
+            - controller
+            - --leader-elect
+            - --quotas=false
+            - --billing=false
+            - --crossplane-metrics=true
+          env:
+            - name: PLANS_NAMESPACE
+              value: syn-appcat
+            - name: CROSSPLANE_LABEL_MAPPING
+              value: |
+                {
+                  "crossplane.io/claim-name": "claim_name",
+                  "crossplane.io/claim-namespace": "claim_namespace",
+                  "crossplane.io/composite": "instance_name"
+                }
+            - name: CROSSPLANE_EXTRA_RESOURCES
+              value: ''
+          image: ghcr.io/vshn/appcat:v4.180.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: manager
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          volumeMounts:
+            - mountPath: /etc/webhook/certs
+              name: webhook-certs
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: appcat-controller
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: webhook-cert

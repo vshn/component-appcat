@@ -61,6 +61,10 @@ parameters:
         registry: ghcr.io
         repository: vshn/provider-minio
         tag: v0.4.5
+      provider-virtuozzo:
+        registry: ghcr.io
+        repository: vshn/provider-virtuozzo
+        tag: poc
       provider-sql:
         registry: ghcr.io
         repository: vshn/provider-sql
@@ -158,6 +162,8 @@ parameters:
         - at-vie-1
         - at-vie-2
         - bg-sof-1
+      virtuozzo:
+        - us-west-1
 
     # Single or multiple cluster setup
     clusterManagementSystem:
@@ -581,6 +587,23 @@ parameters:
             apiSecretRef:
               name: ${appcat:providers:exoscale:credentials:name}
               namespace: ${appcat:crossplane:namespace}
+        additionalProviderConfigs: []
+
+      virtuozzo:
+        enabled: false
+        connectionSecretNamespace: syn-provider-virtuozzo-secrets
+        namespace: ${appcat:crossplane:namespace}
+        credentials:
+          name: virtuozzo-api-access
+          namespace: ${appcat:crossplane:namespace}
+          data:
+            AWS_ACCESS_KEY_ID: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-virtuozzo/access-key}"
+            AWS_SECRET_ACCESS_KEY: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-virtuozzo/secret-key}"
+            S3_ENDPOINT_URL: "?{vaultkv:${cluster:tenant}/${cluster:name}/appcat/provider-virtuozzo/s3-endpoint-url}"
+        spec:
+          package: ${appcat:images:provider-virtuozzo:registry}/${appcat:images:provider-virtuozzo:repository}:${appcat:images:provider-virtuozzo:tag}
+        runtimeConfig:
+          serviceAccountName: provider-virtuozzo
         additionalProviderConfigs: []
 
       kubernetes:

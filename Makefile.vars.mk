@@ -46,7 +46,7 @@ KUBENT_IMAGE    ?= ghcr.io/doitintl/kube-no-trouble:latest
 KUBENT_DOCKER   ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) --entrypoint=/app/kubent $(KUBENT_IMAGE)
 
 instance ?= defaults
-test_instances = tests/defaults.yml tests/vshn-cloud.yml tests/vshn-managed.yml tests/control-plane.yml tests/service-cluster.yml tests/dev.yml tests/exodev.yaml
+test_instances = tests/defaults.yml tests/vshn-cloud.yml tests/vshn-managed.yml tests/control-plane.yml tests/service-cluster.yml tests/dev.yml tests/exodev.yaml tests/virtuozzodev.yaml
 
 YAMLLINT_ARGS   ?= --no-warnings
 YAMLLINT_CONFIG ?= .yamllint.yml

@@ -1,0 +1,14 @@
+apiVersion: appcat.vshn.io/v1
+kind: ObjectBucket
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false,SkipDryRunOnMissingResource=true
+  name: appcat-sla-reports
+  namespace: syn-appcat-slos
+spec:
+  parameters:
+    bucketName: appcat-sla-reports
+    region: lpg
+  writeConnectionSecretToRef:
+    name: appcat-sla-reports-creds

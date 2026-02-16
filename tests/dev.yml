@@ -97,6 +97,13 @@ parameters:
         enabled: false
       cloudscale:
         enabled: false
+      virtuozzo:
+        enabled: true
+        credentials:
+          data:
+            AWS_ACCESS_KEY_ID: "changeme"
+            AWS_SECRET_ACCESS_KEY: "changeme"
+            S3_ENDPOINT_URL: "changeme"
       kubernetes:
         enabled: true
         additionalProviderConfigs:
@@ -231,6 +238,7 @@ parameters:
                 nodeSelector:
                   appuio.io/node-class: "plus"
               note: "Will be scheduled on APPUiO Cloud plus nodes"
+
         minio:
           enabled: false
           instances:
@@ -249,11 +257,13 @@ parameters:
         objectstorage:
           enabled: true
 
-          defaultComposition: minio
+          defaultComposition: virtuozzo
           compositions:
             exoscale:
               enabled: false
             cloudscale:
               enabled: false
             minio:
+              enabled: false
+            virtuozzo:
               enabled: true
