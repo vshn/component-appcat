@@ -76,7 +76,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fix/nextcloud-cron
+        tag: 64e968f839dcab16ad48d83c39e64f274c1ce44c
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
