@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-4c4e289b83b76696e2919ce16e603b1d5baf5367
+  name: function-appcat-debug-feat-keycloak-nested-cnpg
 spec:
-  package: ghcr.io/vshn/appcat:4c4e289b83b76696e2919ce16e603b1d5baf5367-func
+  package: ghcr.io/vshn/appcat:feat_keycloak-nested-cnpg-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

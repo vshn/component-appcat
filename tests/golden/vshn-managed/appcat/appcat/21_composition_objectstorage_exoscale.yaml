@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-4c4e289b83b76696e2919ce16e603b1d5baf5367
+        name: function-appcat-master-feat-keycloak-nested-cnpg
       input:
         apiVersion: v1
         data:

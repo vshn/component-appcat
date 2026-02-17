@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 4c4e289b83b76696e2919ce16e603b1d5baf5367
+        function-revision: feat/keycloak-nested-cnpg
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
