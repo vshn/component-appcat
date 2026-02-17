@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-f73d7f320e6e75d3265a18379a1bb09b62219d0f
+  name: function-appcat-master-fix-pg-usermanagement
 spec:
-  package: ghcr.io/vshn/appcat:f73d7f320e6e75d3265a18379a1bb09b62219d0f-func
+  package: ghcr.io/vshn/appcat:fix_pg-usermanagement-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
