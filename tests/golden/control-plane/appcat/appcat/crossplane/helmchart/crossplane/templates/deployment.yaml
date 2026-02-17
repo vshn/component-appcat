@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 64e968f839dcab16ad48d83c39e64f274c1ce44c
+        function-revision: virtuozzo_poc
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
