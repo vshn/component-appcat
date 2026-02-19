@@ -18,7 +18,7 @@ jobs:
           - lint_yaml
           - lint_adoc
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Run ${{ matrix.command }}
         run: make ${{ matrix.command }}
 
@@ -37,7 +37,7 @@ jobs:
       run:
         working-directory: ${{ env.COMPONENT_NAME }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: ${{ env.COMPONENT_NAME }}
           fetch-depth: 0

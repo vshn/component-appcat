@@ -1,0 +1,40 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: S3 compatible object storage hosted by Virtuozzo
+    metadata.appcat.vshn.io/displayname: Virtuozzo Object Storage
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/objstor
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/objectstorage.html
+    metadata.appcat.vshn.io/zone: default
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/serviceID: virtuozzo-objectbucket
+    name: virtuozzo.objectbuckets.appcat.vshn.io
+  name: virtuozzo.objectbuckets.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: appcat.vshn.io/v1
+    kind: XObjectBucket
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-debug-virtuozzo-poc
+      input:
+        apiVersion: v1
+        data:
+          crossplaneNamespace: syn-crossplane
+          providerConfig: virtuozzo
+          providerSecretNamespace: syn-provider-virtuozzo-secrets
+          proxyEndpoint: 172.19.0.1:9443
+          serviceID: virtuozzo-objectbucket
+          serviceName: virtuozzobucket
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: virtuozzobucket-func
+  writeConnectionSecretsToNamespace: syn-crossplane

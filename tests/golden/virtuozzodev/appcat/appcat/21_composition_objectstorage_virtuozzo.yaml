@@ -4,16 +4,16 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-60'
-    metadata.appcat.vshn.io/description: S3 compatible object storage hosted by Minio-minio
-    metadata.appcat.vshn.io/displayname: Minio-minio Object Storage
+    metadata.appcat.vshn.io/description: S3 compatible object storage hosted by Virtuozzo
+    metadata.appcat.vshn.io/displayname: Virtuozzo Object Storage
     metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/objstor
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/objectstorage.html
     metadata.appcat.vshn.io/zone: default
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/serviceID: minio-minio-objectbucket
-    name: minio.objectbuckets.appcat.vshn.io
-  name: minio.objectbuckets.appcat.vshn.io
+    metadata.appcat.vshn.io/serviceID: virtuozzo-objectbucket
+    name: virtuozzo.objectbuckets.appcat.vshn.io
+  name: virtuozzo.objectbuckets.appcat.vshn.io
 spec:
   compositeTypeRef:
     apiVersion: appcat.vshn.io/v1
@@ -21,19 +21,19 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-64e968f839dcab16ad48d83c39e64f274c1ce44c
+        name: function-appcat-master-virtuozzo-poc
       input:
         apiVersion: v1
         data:
           crossplaneNamespace: syn-crossplane
-          providerConfig: minio
-          proxyEndpoint: 172.19.0.1:9443
-          serviceID: minio-minio-objectbucket
-          serviceName: miniobucket
+          providerConfig: virtuozzo
+          providerSecretNamespace: syn-provider-virtuozzo-secrets
+          serviceID: virtuozzo-objectbucket
+          serviceName: virtuozzobucket
         kind: ConfigMap
         metadata:
           labels:
             name: xfn-config
           name: xfn-config
-      step: miniobucket-func
+      step: virtuozzobucket-func
   writeConnectionSecretsToNamespace: syn-crossplane

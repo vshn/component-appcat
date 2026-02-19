@@ -15,6 +15,7 @@ local objStoParams = params.services.generic.objectstorage;
 local cloudscaleServiceName = 'cloudscalebucket';
 local exoscaleServiceName = 'exoscalebucket';
 local minioServiceName = 'miniobucket';
+local virtuozzoServiceName = 'virtuozzobucket';
 
 local xrd = xrds.XRDFromCRD(
   'xobjectbuckets.appcat.vshn.io',
@@ -190,6 +191,46 @@ local compositionMinio =
     for instance in params.services.vshn.minio.instances
   ];
 
+local compositionVirtuozzo =
+  local provider = 'Virtuozzo';
+  local compParams = objStoParams.compositions.virtuozzo;
+
+  kube._Object('apiextensions.crossplane.io/v1', 'Composition', 'virtuozzo.objectbuckets.appcat.vshn.io') +
+  common.SyncOptions +
+  common.VshnMetaObjectStorage(provider) +
+  {
+    spec: {
+      compositeTypeRef: comp.CompositeRef(xrd),
+      writeConnectionSecretsToNamespace: compParams.secretNamespace,
+      mode: 'Pipeline',
+      pipeline:
+        [
+          {
+            step: 'virtuozzobucket-func',
+            functionRef: {
+              name: common.GetCurrentFunctionName(),
+            },
+            input: kube.ConfigMap('xfn-config') + {
+              metadata: {
+                labels: {
+                  name: 'xfn-config',
+                },
+                name: 'xfn-config',
+              },
+              data: {
+                providerConfig: 'virtuozzo',
+                serviceName: virtuozzoServiceName,
+                serviceID: common.ObjectBucketServiceID(provider),
+                providerSecretNamespace: compParams.providerSecretNamespace,
+                crossplaneNamespace: params.crossplane.namespace,
+              } + if compParams.proxyFunction then {
+                proxyEndpoint: compParams.grpcEndpoint,
+              } else {},
+            },
+          },
+        ],
+    },
+  };
 
 if objStoParams.enabled && vars.isSingleOrControlPlaneCluster then {
   '20_xrd_objectstorage': xrd,
@@ -197,4 +238,5 @@ if objStoParams.enabled && vars.isSingleOrControlPlaneCluster then {
   [if objStoParams.compositions.cloudscale.enabled then '21_composition_objectstorage_cloudscale']: compositionCloudscale,
   [if objStoParams.compositions.exoscale.enabled then '21_composition_objectstorage_exoscale']: compositionExoscale,
   [if objStoParams.compositions.minio.enabled then '21_composition_objectstorage_minio']: compositionMinio,
+  [if objStoParams.compositions.virtuozzo.enabled then '21_composition_objectstorage_virtuozzo']: compositionVirtuozzo,
 } else {}

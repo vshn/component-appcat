@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-64e968f839dcab16ad48d83c39e64f274c1ce44c
+  name: function-appcat-master-virtuozzo-poc
 spec:
-  package: ghcr.io/vshn/appcat:64e968f839dcab16ad48d83c39e64f274c1ce44c-func
+  package: ghcr.io/vshn/appcat:virtuozzo_poc-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

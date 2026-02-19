@@ -1,13 +1,13 @@
 {
   "template": "https://github.com/projectsyn/commodore-component-template.git",
-  "commit": "f12cbb49f928cf689cf39b98d8d7c9e88fb289f6",
+  "commit": "7e46facc758385bc32eeecab92b4639c66fd4e4f",
   "checkout": "main",
   "context": {
     "cookiecutter": {
       "name": "AppCat",
       "slug": "appcat",
       "parameter_key": "appcat",
-      "test_cases": "defaults exoscale cloudscale openshift vshn apiserver controllers minio cloudscale-metrics-collector-cloud cloudscale-metrics-collector-managed exoscale-metrics-collector-cloud exoscale-metrics-collector-managed control-plane service-cluster",
+      "test_cases": "defaults exoscale cloudscale openshift vshn apiserver controllers minio cloudscale-metrics-collector-cloud cloudscale-metrics-collector-managed exoscale-metrics-collector-cloud exoscale-metrics-collector-managed control-plane service-cluster virtuozzodev",
       "add_lib": "n",
       "add_pp": "n",
       "add_golden": "y",
@@ -24,7 +24,8 @@
       "github_owner": "vshn",
       "github_name": "component-appcat",
       "github_url": "https://github.com/vshn/component-appcat",
-      "_template": "https://github.com/projectsyn/commodore-component-template.git"
+      "_template": "https://github.com/projectsyn/commodore-component-template.git",
+      "_commit": "7e46facc758385bc32eeecab92b4639c66fd4e4f"
     }
   },
   "directory": null

@@ -1,0 +1,144 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  name: appcat-controller
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - namespaces
+      - secrets
+    verbs:
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ''
+    resources:
+      - events
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - apiextensions.crossplane.io
+    resources:
+      - compositeresourcedefinitions
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - cloudscale.crossplane.io
+      - exoscale.crossplane.io
+      - helm.crossplane.io
+      - kubernetes.crossplane.io
+      - minio.crossplane.io
+      - postgresql.sql.crossplane.io
+    resources:
+      - providerconfigs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - codey.io
+    resources:
+      - codeyinstances
+      - codeyinstances/status
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - syn.tools
+    resources:
+      - compositemariadbdatabaseinstances
+      - compositemariadbinstances
+      - compositemariadbinstances/status
+      - compositemariadbuserinstances
+      - compositeredisinstances
+      - compositeredisinstances/status
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - billingservices/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - xobjectbuckets
+      - xvshnforgejoes
+      - xvshnforgejoes/status
+      - xvshnkeycloaks
+      - xvshnkeycloaks/status
+      - xvshnmariadbs
+      - xvshnmariadbs/status
+      - xvshnminios
+      - xvshnminios/status
+      - xvshnnextclouds
+      - xvshnnextclouds/status
+      - xvshnpostgresqls
+      - xvshnpostgresqls/status
+      - xvshnredis
+      - xvshnredis/status
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch

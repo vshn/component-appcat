@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: appcat-hotfix
+  namespace: syn-appcat
+spec:
+  groups:
+    - name: appcat-jobs
+      rules:
+        - alert: AppCatHotfixJobError
+          annotations:
+            description: The hotfixjob job {{ $labels.job_name }} in namespace {{
+              $labels.namespace }} has failed.
+            summary: AppCat Hotfix job has failed. Hotfixes might not be rolled out.
+          expr: kube_job_failed{job_name="appcat-hotfixer", namespace="syn-appcat"}
+            > 0
+          for: 1m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
