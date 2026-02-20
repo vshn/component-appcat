@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-user-alerting
+  name: function-appcat-debug-f37185e0b44a99a3b989774e20a833b67a45de5c
 spec:
-  package: ghcr.io/vshn/appcat:fix_user-alerting-func
+  package: ghcr.io/vshn/appcat:f37185e0b44a99a3b989774e20a833b67a45de5c-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

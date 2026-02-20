@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-user-alerting
+        name: function-appcat-debug-f37185e0b44a99a3b989774e20a833b67a45de5c
       input:
         apiVersion: v1
         data:
