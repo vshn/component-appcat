@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-f73d7f320e6e75d3265a18379a1bb09b62219d0f
+    metadata.appcat.vshn.io/revision: master-e560efe96b209f8ff104b39e30f4e9bce3f5421d
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-f73d7f320e6e75d3265a18379a1bb09b62219d0f
+        name: function-appcat-master-e560efe96b209f8ff104b39e30f4e9bce3f5421d
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: f73d7f320e6e75d3265a18379a1bb09b62219d0f
+          imageTag: e560efe96b209f8ff104b39e30f4e9bce3f5421d
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100
