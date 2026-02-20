@@ -38,7 +38,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:forgejo-update
+          image: ghcr.io/vshn/appcat:f73d7f320e6e75d3265a18379a1bb09b62219d0f
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
