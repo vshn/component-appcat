@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/pg-usermanagement
+        function-revision: e560efe96b209f8ff104b39e30f4e9bce3f5421d
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
