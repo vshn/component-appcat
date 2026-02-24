@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.181.0
+          image: ghcr.io/vshn/appcat:bump_dbchecker-image
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
