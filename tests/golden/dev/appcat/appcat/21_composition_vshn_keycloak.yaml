@@ -32,7 +32,6 @@ spec:
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
-          busybox_image_tag: '1.37'
           chartRepository: https://codecentric.github.io/helm-charts
           chartVersion: 7.1.8
           cloudProvider: cloudscale

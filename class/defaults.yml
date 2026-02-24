@@ -114,7 +114,6 @@ parameters:
       busybox:
         registry: docker.io
         image: library/busybox
-        tag: "1.37"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
@@ -1074,7 +1073,6 @@ parameters:
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
-            busybox_image_tag: ${appcat:images:busybox:tag}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
