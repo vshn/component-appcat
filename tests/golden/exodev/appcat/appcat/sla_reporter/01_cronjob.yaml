@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:feat_keycloak-nested-cnpg
+              image: ghcr.io/vshn/appcat:90b2c37e764a27642fe41f34c481cc419d15c77e
               name: sla-reporter
               resources:
                 limits:
