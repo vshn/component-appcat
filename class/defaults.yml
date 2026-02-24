@@ -24,7 +24,7 @@ parameters:
         version: 8.8.2
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 16.0.1
+        version: 16.2.0
       cnpg:
         source: https://cloudnative-pg.io/charts/
         version: 0.27.0
@@ -76,7 +76,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.180.1
+        tag: v4.181.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
