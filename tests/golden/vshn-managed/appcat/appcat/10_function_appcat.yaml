@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-0fbfc908e9cdb2c74814c9e0e412577210c0996c
+  name: function-appcat-master-feat-forgejo-ssh
 spec:
-  package: ghcr.io/vshn/appcat:0fbfc908e9cdb2c74814c9e0e412577210c0996c-func
+  package: ghcr.io/vshn/appcat:feat_forgejo-ssh-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

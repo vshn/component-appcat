@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 0fbfc908e9cdb2c74814c9e0e412577210c0996c
+        function-revision: feat/forgejo-ssh
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
