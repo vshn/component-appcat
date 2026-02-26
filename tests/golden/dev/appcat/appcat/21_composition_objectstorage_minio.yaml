@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-bump-dbchecker-image
+        name: function-appcat-debug-2a3f772108c97a97c93ce03722494720f5293f25
       input:
         apiVersion: v1
         data:

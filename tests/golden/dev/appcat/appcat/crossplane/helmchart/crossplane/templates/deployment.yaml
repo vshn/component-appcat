@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: bump/dbchecker-image
+        function-revision: 2a3f772108c97a97c93ce03722494720f5293f25
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-bump-dbchecker-image
+  name: function-appcat-debug-2a3f772108c97a97c93ce03722494720f5293f25
 spec:
-  package: ghcr.io/vshn/appcat:bump_dbchecker-image-func
+  package: ghcr.io/vshn/appcat:2a3f772108c97a97c93ce03722494720f5293f25-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
