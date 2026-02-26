@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: appcat-maintenance
+  namespace: syn-appcat
+spec:
+  groups:
+    - name: appcat-maintenance
+      rules:
+        - alert: AppCatMaintenanceJobFailed
+          annotations:
+            description: The maintenance job {{ $labels.job_name }} in namespace {{
+              $labels.namespace }} has failed.
+            runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatMaintenanceJobFailed.html
+            summary: AppCat service maintenance failed.
+          expr: kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-(postgresql)-.*|syn-appcat-control"}
+            > 0
+          for: 30m
+          labels:
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar

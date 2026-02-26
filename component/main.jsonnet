@@ -172,6 +172,42 @@ local backupPrometheusRule = {
   },
 };
 
+local maintenancePrometheusRule = {
+  apiVersion: 'monitoring.coreos.com/v1',
+  kind: 'PrometheusRule',
+  metadata: {
+    name: 'appcat-maintenance',
+    namespace: params.namespace,
+  },
+  spec: {
+    groups: [
+      {
+        name: 'appcat-maintenance',
+        rules: [
+          {
+            alert: 'AppCatMaintenanceJobFailed',
+            annotations: {
+              description: 'The maintenance job {{ $labels.job_name }} in namespace {{ $labels.namespace }} has failed.',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatMaintenanceJobFailed.html',
+              summary: 'AppCat service maintenance failed.',
+            },
+            // Matches maintenance jobs in instance namespaces (PostgreSQL StackGres/CNPG: 'maintenancejob-{timestamp}')
+            // and in the control namespace (helm-based services: '{composite-name}-maintenancejob-{timestamp}').
+            expr: 'kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-(postgresql)-.*|' + params.services.controlNamespace + '"} > 0',
+            'for': '30m',
+            labels: {
+              severity: 'warning',
+              syn_team: 'schedar',
+              syn: 'true',
+              syn_component: 'appcat',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
 local haPrometheusRule = {
   apiVersion: 'monitoring.coreos.com/v1',
   kind: 'PrometheusRule',
@@ -362,6 +398,7 @@ local servalaSATokenSecret = kube.Secret('servala-portal') + {
   '10_appcat_namespace': ns,
   '10_appcat_backup_monitoring': backupPrometheusRule,
   '10_appcat_ha_monitoring': haPrometheusRule,
+  '10_appcat_maintenance_monitoring': maintenancePrometheusRule,
   [if params.services.vshn.enabled && params.services.emailAlerting.enabled then '10_mailgun_secret']: emailSecret,
   [if params.billing.enableMockOrgInfo then '10_mock_org_info']: mockOrgInfo,
   [if params.slos.enabled && vars.isServiceCluster && params.slos.sli_exporter.controlPlaneKubeconfig != '' then 'sli_exporter/10_service_cluster_kubeconfig']: controlKubeConfig,
