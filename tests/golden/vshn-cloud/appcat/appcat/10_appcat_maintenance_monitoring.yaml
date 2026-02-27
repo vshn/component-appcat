@@ -13,7 +13,7 @@ spec:
               $labels.namespace }} has failed.
             runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatMaintenanceJobFailed.html
             summary: AppCat service maintenance failed.
-          expr: kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-(postgresql)-.*|syn-appcat-control"}
+          expr: kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-.*|syn-appcat-control"}
             > 0
           for: 30m
           labels:
