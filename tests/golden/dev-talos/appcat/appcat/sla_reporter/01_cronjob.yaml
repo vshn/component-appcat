@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations: {}
+  labels:
+    name: appcat-sla-reporter
+  name: appcat-sla-reporter
+  namespace: syn-appcat-slos
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      completions: 1
+      parallelism: 1
+      template:
+        metadata:
+          labels:
+            name: appcat-sla-reporter
+        spec:
+          containers:
+            - args:
+                - slareport
+                - --previousmonth
+                - --mimirorg
+                - appuio-managed-openshift-metrics
+              env:
+                - name: PROM_URL
+                  value: http://kube-prometheus-kube-prome-prometheus.prometheus-system.svc.cluster.local:8080/prometheus
+              envFrom:
+                - secretRef:
+                    name: appcat-sla-reports-creds
+              image: ghcr.io/vshn/appcat:feat_forgejo-ssh
+              name: sla-reporter
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 300Mi
+                requests:
+                  cpu: 10m
+                  memory: 200Mi
+          imagePullSecrets: []
+          initContainers: []
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 30
+          volumes: []
+  schedule: 0 9 1 * *
+  successfulJobsHistoryLimit: 0

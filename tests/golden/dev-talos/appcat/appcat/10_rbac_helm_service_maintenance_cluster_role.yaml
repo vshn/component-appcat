@@ -1,0 +1,56 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-appcat-job-helm-maintenance
+  name: crossplane:appcat:job:helm:maintenance
+rules:
+  - apiGroups:
+      - helm.crossplane.io
+    resources:
+      - releases
+    verbs:
+      - patch
+      - get
+      - list
+      - watch
+      - update
+  - apiGroups:
+      - apiextensions.crossplane.io
+    resources:
+      - compositionrevisions
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - xvshnforgejoes
+      - xvshnredis
+      - xvshnkeycloaks
+      - xvshnmariadbs
+      - xvshnnextclouds
+      - xvshnminios
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - k8up.io
+    resources:
+      - schedules
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+  - apiGroups:
+      - k8up.io
+    resources:
+      - backups
+    verbs:
+      - get
+      - watch
+      - create

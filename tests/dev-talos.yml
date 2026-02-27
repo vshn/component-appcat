@@ -1,0 +1,201 @@
+parameters:
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/projectsyn/component-crossplane/v2.3.0/lib/crossplane.libsonnet
+        output_path: vendor/lib/crossplane.libsonnet
+      - type: https
+        source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/v1.4.0/lib/openshift4-operators.libsonnet
+        output_path: vendor/lib/openshift4-operators.libsonnet
+
+  components:
+    appcat:
+      version: debug
+
+  cluster:
+    name: c-green-test-1234
+
+  facts:
+    cloud: cloudscale
+    region: lpg
+    sales_order: "10431"
+    appcat_dev: true
+    service_level: "zero"
+
+  appcat:
+    charts:
+      crossplane:
+        version: 2.1.3
+    crossplane:
+      helmValues:
+        ~args:
+          - --enable-usages
+          - --poll-interval=1h
+          - --enable-realtime-compositions=false
+    pullPolicy: Always
+
+    deploymentManagementSystem:
+      enabled: false
+
+    images:
+      nextcloud:
+        registry: dockerhub.vshn.net
+      busybox:
+        registry: dockerhub.vshn.net
+    grpcEndpoint: 10.5.0.1:9443
+    proxyFunction: true
+
+    quotasEnabled: false
+    monitoringEnabled: true
+    billing:
+      salesOrder: "SC0000"
+      vshn:
+        enableCronjobs: false
+        meteringRules: true
+      enableMockOrgInfo: true
+      instanceUOM: uom_uom_45_1e112771
+      network_policies:
+        target_namespaces:
+          vshn-appuio-mimir: false
+      prometheus:
+        url: http://prometheus-operated.prometheus-system:9090/prometheus
+
+    slos:
+      enabled: true
+      alertsEnabled: true
+      sli_exporter:
+        enableMaintenceObserver: false
+      sla_reporter:
+        enabled: true
+        slo_mimir_svc: kube-prometheus-kube-prome-prometheus
+        slo_mimir_namespace: prometheus-system
+    controller:
+      enabled: true
+      portAllocator:
+        enabled: true
+        portRangeStart: 10000
+        portRangeEnd: 10019
+      postgres:
+        enabled: true
+    providers:
+      exoscale:
+        enabled: false
+      cloudscale:
+        enabled: false
+      kubernetes:
+        enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: InjectedIdentity
+      helm:
+        enabled: true
+        additionalProviderConfigs:
+          - name: kind
+            spec:
+              credentials:
+                source: InjectedIdentity
+        additionalRuntimeConfig:
+          spec:
+            deploymentTemplate:
+              spec:
+                template:
+                  spec:
+                    containers:
+                      - name: package-runtime
+                        env:
+                          - name: SSL_CERT_FILE
+                            value: /certs/tls-combined.pem
+                        volumeMounts:
+                          - mountPath: /certs
+                            name: ca-certs
+                    volumes:
+                      - name: ca-certs
+                        secret:
+                          secretName: tls-server-certificate
+      minio:
+        enabled: true
+        defaultProviderConfig:
+          minioURL: http://minio-server.minio.svc:9000/
+          credentials:
+            apiSecretRef:
+              name: minio-secret
+              namespace: syn-crossplane
+
+    apiserver:
+      enabled: true
+      env:
+        APPCAT_HANDLER_ENABLED: "true"
+        VSHN_POSTGRES_BACKUP_HANDLER_ENABLED: "true"
+        VSHN_REDIS_BACKUP_HANDLER_ENABLED: "true"
+
+    services:
+      emailAlerting:
+        enabled: true
+        smtpPassword: "?{vaultkv:__shared__/__shared__/mailgun/smtp_password}"
+      vshn:
+        e2eTests: true
+        enabled: true
+        externalDatabaseConnectionsEnabled: true
+        mariadb:
+          enabled: true
+        keycloak:
+          enabled: true
+          additionalInputs:
+            registry_username: "dummy"
+            registry_password: "dummy"
+            ingress_annotations: |
+              nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+              cert-manager.io/cluster-issuer: letsencrypt-staging
+        nextcloud:
+          enabled: true
+          additionalInputs:
+            collaboraCPULimit: "1"
+            collaboraCPURequests: 250m
+            collaboraMemoryLimit: 1Gi
+            collaboraMemoryRequests: 256Mi
+            ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-staging
+
+        forgejo:
+          enabled: true
+          additionalInputs:
+            registry_username: ""
+            registry_password: ""
+            sshGatewayEnabled: "true"
+            sshDomainMapping: '{"ssh-gateway":"ssh.127.0.0.1.nip.io"}'
+
+        postgres:
+          sgNamespace: stackgres
+          additionalInputs:
+            loadbalancerAnnotations: |
+              foo: bar
+        redis:
+          enabled: true
+        minio:
+          enabled: false
+          instances:
+            - name: minio
+              namespace: syn-appcat
+              spec:
+                parameters:
+                  service:
+                    mode: standalone
+                  size:
+                    disk: 20Gi
+                writeConnectionSecretToRef:
+                  name: minio-cluster-credentials
+
+      generic:
+        objectstorage:
+          enabled: true
+
+          defaultComposition: minio
+          compositions:
+            exoscale:
+              enabled: false
+            cloudscale:
+              enabled: false
+            minio:
+              enabled: true

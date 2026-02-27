@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-function
+  name: appcat-function
+  namespace: stackgres
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: appcat-function:stackgres-restapi-admin
+subjects:
+  - kind: ServiceAccount
+    name: function-appcat
+    namespace: syn-crossplane
