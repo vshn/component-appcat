@@ -432,6 +432,11 @@ parameters:
       monitoringEnabled: ${appcat:monitoringEnabled}
       extraArgs: []
       extraEnv: {}
+      portAllocator:
+        enabled: false
+        portRangeStart: 10000
+        portRangeEnd: 10999
+        gatewayCapacity: 0
       controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
       billing:
         odooBaseURL: ${appcat:billing:odoo:url}
@@ -688,6 +693,8 @@ parameters:
             - FORGEJO_PASSWORD
             - FORGEJO_URL
             - FORGEJO_USERNAME
+            - FORGEJO_SSH_HOST
+            - FORGEJO_SSH_PORT
             - ca.crt
           mode: standalone
           offered: true
@@ -697,6 +704,10 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+            sshGatewayEnabled: "false"
+            sshGatewayName: "ssh-gateway"
+            sshGatewayNamespace: "kgateway-system"
+            sshDomainMapping: ""
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."

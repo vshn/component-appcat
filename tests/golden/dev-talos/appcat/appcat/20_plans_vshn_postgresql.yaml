@@ -1,0 +1,24 @@
+apiVersion: v1
+data:
+  plans: '{"standard-2": {"size": {"cpu": "400m", "disk": "20Gi", "enabled": true,
+    "memory": "1936Mi"}}, "standard-4": {"size": {"cpu": "900m", "disk": "40Gi", "enabled":
+    true, "memory": "3984Mi"}}, "standard-8": {"size": {"cpu": "1900m", "disk": "80Gi",
+    "enabled": true, "memory": "8080Mi"}}}'
+  sideCars: '{"clusterController": {"limits": {"cpu": "500m", "memory": "512Mi"},
+    "requests": {"cpu": "32m", "memory": "128Mi"}}, "createBackup": {"limits": {"cpu":
+    "400m", "memory": "500Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}, "envoy":
+    {"limits": {"cpu": "500m", "memory": "512Mi"}, "requests": {"cpu": "32m", "memory":
+    "64Mi"}}, "pgbouncer": {"limits": {"cpu": "500m", "memory": "128Mi"}, "requests":
+    {"cpu": "16m", "memory": "4Mi"}}, "postgresUtil": {"limits": {"cpu": "20m", "memory":
+    "20Mi"}, "requests": {"cpu": "10m", "memory": "4Mi"}}, "prometheusPostgresExporter":
+    {"limits": {"cpu": "150m", "memory": "256Mi"}, "requests": {"cpu": "10m", "memory":
+    "16Mi"}}, "runDbops": {"limits": {"cpu": "500m", "memory": "1Gi"}, "requests":
+    {"cpu": "100m", "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m",
+    "memory": "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: vshnpostgresqlplans
+  name: vshnpostgresqlplans
+  namespace: syn-appcat

@@ -1,0 +1,88 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: Redis instances by VSHN
+    metadata.appcat.vshn.io/displayname: Redis by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-redis
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"standard-1":{"size":{"cpu":"250m","disk":"16Gi","enabled":true,"memory":"1Gi"}},"standard-2":{"size":{"cpu":"500m","disk":"16Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"standard-512m":{"size":{"cpu":"125m","disk":"16Gi","enabled":true,"memory":"512Mi"}},"standard-8":{"size":{"cpu":"2","disk":"16Gi","enabled":true,"memory":"8Gi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/redis.html
+    metadata.appcat.vshn.io/zone: lpg
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: debug-feat_forgejo-ssh
+    metadata.appcat.vshn.io/serviceID: vshn-redis
+    name: vshnredis.vshn.appcat.vshn.io
+  name: vshnredis.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNRedis
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-debug-feat-forgejo-ssh
+      input:
+        apiVersion: v1
+        data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
+          bucketRegion: rma
+          chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
+          chartVersion: 23.2.1
+          cloudProvider: cloudscale
+          clusterName: c-green-test-1234
+          controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
+          crossplaneNamespace: syn-crossplane
+          defaultPlan: standard-1
+          emailAlertingEnabled: 'true'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: appcat@appuio.cloud
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: appcat@appuio.cloud
+          ignoreNamespaceForBilling: vshn-test
+          imageRegistry: ghcr.io
+          imageRepositoryPrefix: vshn
+          imageTag: feat_forgejo-ssh
+          isOpenshift: 'false'
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          maintenanceSA: helm-based-service-maintenance
+          maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
+          minimumRevisionAge: 168h
+          mode: standalone
+          ocpDefaultAppsDomain: ''
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNRedis
+          ownerVersion: v1
+          plans: '{"standard-1": {"size": {"cpu": "250m", "disk": "16Gi", "enabled":
+            true, "memory": "1Gi"}}, "standard-2": {"size": {"cpu": "500m", "disk":
+            "16Gi", "enabled": true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu":
+            "1", "disk": "16Gi", "enabled": true, "memory": "4Gi"}}, "standard-512m":
+            {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
+            "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
+            "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
+          quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
+          restoreSA: redisrestoreserviceaccount
+          salesOrder: SC0000
+          serviceID: vshn-redis
+          serviceName: redis
+          sideCars: '{"kubectl": {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests":
+            {"cpu": "10m", "memory": "50Mi"}}, "metrics": {"limits": {"cpu": "150m",
+            "memory": "192Mi"}, "requests": {"cpu": "100m", "memory": "128Mi"}}, "sentinel":
+            {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests": {"cpu": "10m",
+            "memory": "50Mi"}}}'
+          sliNamespace: syn-appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: redis-func
+  writeConnectionSecretsToNamespace: syn-crossplane
