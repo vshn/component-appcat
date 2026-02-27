@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-2a3f772108c97a97c93ce03722494720f5293f25
+    metadata.appcat.vshn.io/revision: debug-89020c834ee6d62941c0e1df189d230f3c6cb65b
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-2a3f772108c97a97c93ce03722494720f5293f25
+        name: function-appcat-debug-89020c834ee6d62941c0e1df189d230f3c6cb65b
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: 2a3f772108c97a97c93ce03722494720f5293f25
+          imageTag: 89020c834ee6d62941c0e1df189d230f3c6cb65b
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
