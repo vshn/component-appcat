@@ -193,7 +193,7 @@ local maintenancePrometheusRule = {
             },
             // Matches maintenance jobs in instance namespaces (PostgreSQL StackGres/CNPG: 'maintenancejob-{timestamp}')
             // and in the control namespace (helm-based services: '{composite-name}-maintenancejob-{timestamp}').
-            expr: 'kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-(postgresql)-.*|' + params.services.controlNamespace + '"} > 0',
+            expr: 'kube_job_failed{job_name=~".*maintenancejob.*", namespace=~"vshn-.*|' + params.services.controlNamespace + '"} > 0',
             'for': '30m',
             labels: {
               severity: 'warning',
