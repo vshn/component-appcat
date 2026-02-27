@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-89020c834ee6d62941c0e1df189d230f3c6cb65b
+    metadata.appcat.vshn.io/revision: debug-fix_keycloak-image-pullsecret
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
