@@ -40,6 +40,9 @@ parameters:
         source: https://cloudnative-pg.io/charts/
         version: 0.4.0
         chartName: plugin-barman-cloud
+      garageOperator:
+        source: oci://ghcr.io/rajsinghtech/charts/garage-operator
+        version: 0.0.41
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -173,6 +176,11 @@ parameters:
       enabled: true
       additionalFunctionBranches: []
       minimumRevisionAge: 168h # 7 days
+
+    garageOperator:
+      enabled: false
+      namespace: syn-garage-operator
+      helmValues: {}
 
     crossplane:
       namespace: syn-crossplane
