@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 97057612be446287eaeedfd1a99ca38c9b8f7bf7
+        function-revision: add/garage_service
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
