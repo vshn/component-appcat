@@ -35,6 +35,10 @@ parameters:
         source: https://charts.appcat.ch/
         version: 0.7.1
         chartName: vshnpostgresql
+      garageCluster:
+        source: https://charts.appcat.ch/
+        version: 0.0.1
+        chartName: vshngaragecluster
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
@@ -1233,6 +1237,62 @@ parameters:
                 cpu: "1"
                 memory: "4Gi"
                 disk: 50Gi
+        garage:
+          enabled: true
+          billing: true
+          serviceName: VSHNGarage
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - GARAGE_HOST
+            - GARAGE_PASSWORD
+            - GARAGE_URL
+            - GARAGE_USERNAME
+          offered: true
+          restoreSA: garageserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs: {}
+          openshiftTemplate:
+            serviceName: garagebyvshn
+            description: "Garage is a selfhosted S3 Object Storage"
+            message: 'Your Garage by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-garage
+            tags: "codehosting,garage"
+            icon: "icon-garage"
+            defaultVersion: "2"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:garageCluster:version}
+          # imageRegistry: "${appcat:images:garageCluster:registry}"
+          # maintenanceURL: "${appcat:images:garageCluster:maintenanceURL}"
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: small
+          sla: 99.25
+          plans:
+            mini:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 10Gi
+            small:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 50Gi
+            medium:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 200Gi
+            large:
+              size:
+                enabled: true
+                cpu: "4"
+                memory: "16Gi"
+                disk: 500Gi
       # Config for exoscale composites
       exoscale:
         enabled: false
