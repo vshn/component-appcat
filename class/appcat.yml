@@ -44,7 +44,7 @@ parameters:
         source: ${appcat:charts:garageOperator:source}
         chart_name: garage-operator
         version: ${appcat:charts:garageOperator:version}
-        output_path: ${_base_directory}/dependencies/cnpg/helmchart/garage-operator-${appcat:charts:garageOperator:version}
+        output_path: ${_base_directory}/dependencies/garage/helmchart/garage-operator-${appcat:charts:garageOperator:version}
 
     compile:
       - input_paths:
