@@ -32,7 +32,7 @@ parameters:
       crossplane:
         version: 2.1.3
 
-      garageCluster:
+      garage:
         source: oci://registry.kube-system.svc.cluster.local:5000/vshngaragecluster/vshngaragecluster
         version: 0.0.0
 

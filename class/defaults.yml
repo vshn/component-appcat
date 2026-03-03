@@ -35,7 +35,7 @@ parameters:
         source: https://charts.appcat.ch/
         version: 0.7.1
         chartName: vshnpostgresql
-      garageCluster:
+      garage:
         source: https://charts.appcat.ch/
         version: 0.0.1
         chartName: vshngaragecluster
@@ -184,7 +184,11 @@ parameters:
     garageOperator:
       enabled: false
       namespace: syn-garage-operator
-      helmValues: {}
+      helmValues:
+        resources:
+          limits:
+            # The default is a bit low for OpenShift deployments...
+            memory: 512Mi
 
     crossplane:
       namespace: syn-crossplane
@@ -548,6 +552,8 @@ parameters:
         Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
         Forgejo:
+          uptime: ${appcat:slos:uptimeDefaults}
+        Garage:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
@@ -1240,13 +1246,11 @@ parameters:
         garage:
           enabled: true
           billing: true
+          mode: standalone
           serviceName: VSHNGarage
           compFunctionsOnly: true
           connectionSecretKeys:
-            - GARAGE_HOST
-            - GARAGE_PASSWORD
             - GARAGE_URL
-            - GARAGE_USERNAME
           offered: true
           restoreSA: garageserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
@@ -1256,43 +1260,37 @@ parameters:
             description: "Garage is a selfhosted S3 Object Storage"
             message: 'Your Garage by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
             url: https://vs.hn/vshn-garage
-            tags: "codehosting,garage"
+            tags: "objectstorage,garage"
             icon: "icon-garage"
             defaultVersion: "2"
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
-          helmChartVersion: ${appcat:charts:garageCluster:version}
-          # imageRegistry: "${appcat:images:garageCluster:registry}"
-          # maintenanceURL: "${appcat:images:garageCluster:maintenanceURL}"
+          helmChartVersion: ${appcat:charts:garage:version}
+          imageRegistry: ""
+          maintenanceURL: ""
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
-          defaultPlan: small
+          defaultPlan: standard-2
           sla: 99.25
           plans:
-            mini:
+            standard-2:
               size:
                 enabled: true
                 cpu: "500m"
                 memory: "2Gi"
-                disk: 10Gi
-            small:
+                disk: 50Gi
+            standard-4:
               size:
                 enabled: true
                 cpu: "1"
                 memory: "4Gi"
-                disk: 50Gi
-            medium:
+                disk: 100Gi
+            standard-8:
               size:
                 enabled: true
                 cpu: "2"
                 memory: "8Gi"
                 disk: 200Gi
-            large:
-              size:
-                enabled: true
-                cpu: "4"
-                memory: "16Gi"
-                disk: 500Gi
       # Config for exoscale composites
       exoscale:
         enabled: false
