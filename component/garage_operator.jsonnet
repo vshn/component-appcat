@@ -8,7 +8,7 @@ local params = inv.parameters.appcat.garageOperator;
 
 local namespace = kube.Namespace(params.namespace);
 
-if vars.isSingleOrControlPlaneCluster && params.enabled then
+if params.enabled then
   {
     '00_namespace': namespace,
   } else {}
