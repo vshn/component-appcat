@@ -4,7 +4,7 @@ parameters:
       "True":
         input_type: helm
         input_paths:
-          - ${_base_directory}/dependencies/cnpg/helmchart/garage-operator-${appcat:charts:garageOperator:version}
+          - ${_base_directory}/dependencies/garage/helmchart/garage-operator-${appcat:charts:garageOperator:version}
         helm_values: ${appcat:garageOperator:helmValues}
         helm_params:
           name: ${_instance}
