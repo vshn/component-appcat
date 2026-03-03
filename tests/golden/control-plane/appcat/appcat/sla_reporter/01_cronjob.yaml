@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:ce4eea6a9d13ca54a900fa8180463835dde784c1
+              image: ghcr.io/vshn/appcat:feat_cnpg-extensions
               name: sla-reporter
               resources:
                 limits:
