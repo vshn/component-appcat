@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+  name: function-appcat-master-add-garage-bucket
 spec:
-  package: ghcr.io/vshn/appcat:3e62f6a48d22434fa833a176fbd31ca52bd5d40a-func
+  package: ghcr.io/vshn/appcat:add_garage_bucket-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
