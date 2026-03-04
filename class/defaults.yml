@@ -422,7 +422,6 @@ parameters:
       extraArgs: []
       extraEnv: {}
       portAllocator:
-        enabled: false
         portRangeStart: 10000
         portRangeEnd: 10999
         gatewayCapacity: 0
@@ -694,9 +693,8 @@ parameters:
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
             sshGatewayEnabled: "false"
-            sshGatewayName: "ssh-gateway"
             sshGatewayNamespace: "kgateway-system"
-            sshDomainMapping: ""
+            sshGateways: ""
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."

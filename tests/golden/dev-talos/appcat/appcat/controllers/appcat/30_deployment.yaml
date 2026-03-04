@@ -26,9 +26,10 @@ spec:
             - --quotas=false
             - --billing=false
             - --crossplane-metrics=true
-            - --port-allocator=true
-            - --port-range-start=10000
-            - --port-range-end=10019
+            - --ssh-gateways=kgateway-system/ssh-gateway,kgateway-system/ssh-gateway-2
+            - --ssh-port-range-start=10000
+            - --ssh-port-range-end=10019
+            - --ssh-gateway-capacity=5
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat

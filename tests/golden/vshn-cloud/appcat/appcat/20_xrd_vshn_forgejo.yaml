@@ -17,7 +17,8 @@ spec:
     - FORGEJO_PASSWORD
     - FORGEJO_URL
     - FORGEJO_USERNAME
-    - FORGEJO_SSH_URL
+    - FORGEJO_SSH_HOST
+    - FORGEJO_SSH_PORT
     - ca.crt
   defaultCompositionRef:
     name: vshnforgejo.vshn.appcat.vshn.io

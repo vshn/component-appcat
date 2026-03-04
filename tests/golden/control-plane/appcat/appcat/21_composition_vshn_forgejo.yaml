@@ -74,10 +74,9 @@ spec:
           serviceID: vshn-forgejo
           serviceName: forgejo
           sliNamespace: syn-appcat-slos
-          sshDomainMapping: ''
           sshGatewayEnabled: 'false'
-          sshGatewayName: ssh-gateway
           sshGatewayNamespace: kgateway-system
+          sshGateways: ''
         kind: ConfigMap
         metadata:
           labels:
