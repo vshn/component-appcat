@@ -1,4 +1,20 @@
 parameters:
+  =_config:
+    garage_operator:
+      "True":
+        input_type: helm
+        input_paths:
+          - ${_base_directory}/dependencies/garage/helmchart/garage-operator-${appcat:charts:garageOperator:version}
+        helm_values: ${appcat:garageOperator:helmValues}
+        helm_params:
+          name: ${_instance}
+          namespace: ${appcat:garageOperator:namespace}
+        output_path: appcat/garage_operator/
+      "False":
+        input_paths: []
+        input_type: jsonnet
+        output_path: ""
+
   kapitan:
     dependencies:
       - type: git
@@ -24,6 +40,12 @@ parameters:
         chart_name: ${appcat:charts:cnpgBarmanPlugin:chartName}
         version: ${appcat:charts:cnpgBarmanPlugin:version}
         output_path: ${_base_directory}/dependencies/cnpg/helmchart/plugin-barman-cloud-${appcat:charts:cnpgBarmanPlugin:version}
+      - type: helm
+        source: ${appcat:charts:garageOperator:source}
+        chart_name: garage-operator
+        version: ${appcat:charts:garageOperator:version}
+        output_path: ${_base_directory}/dependencies/garage/helmchart/garage-operator-${appcat:charts:garageOperator:version}
+
     compile:
       - input_paths:
           - ${_base_directory}/component/app.jsonnet
@@ -139,6 +161,13 @@ parameters:
           - ${_base_directory}/component/crossplane.jsonnet
         input_type: jsonnet
         output_path: appcat/crossplane/
+
+      - ${_config:garage_operator:${appcat:garageOperator:enabled}}
+
+      - input_paths:
+          - ${_base_directory}/component/garage_operator.jsonnet
+        input_type: jsonnet
+        output_path: appcat/garage_operator/
 
       - input_type: helm
         input_paths:
