@@ -72,9 +72,9 @@ parameters:
     controller:
       enabled: true
       portAllocator:
-        enabled: true
         portRangeStart: 10000
         portRangeEnd: 10019
+        gatewayCapacity: 5
       postgres:
         enabled: true
     providers:
@@ -164,7 +164,8 @@ parameters:
             registry_username: ""
             registry_password: ""
             sshGatewayEnabled: "true"
-            sshDomainMapping: '{"ssh-gateway":"ssh.127.0.0.1.nip.io"}'
+            sshGatewayNamespace: "kgateway-system"
+            sshGateways: '{"ssh-gateway":"ssh.127.0.0.1.nip.io","ssh-gateway-2":"ssh2.127.0.0.1.nip.io"}'
 
         postgres:
           sgNamespace: stackgres

@@ -4,13 +4,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
   labels:
-    name: function-appcat-port-allocator
-  name: function-appcat:port-allocator
+    name: appcat-controller-ssh-gateway
+  name: appcat-controller:ssh-gateway
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: function-appcat:port-allocator
+  name: appcat-controller:ssh-gateway
 subjects:
   - kind: ServiceAccount
-    name: function-appcat
-    namespace: syn-crossplane
+    name: appcat-controller
+    namespace: syn-appcat

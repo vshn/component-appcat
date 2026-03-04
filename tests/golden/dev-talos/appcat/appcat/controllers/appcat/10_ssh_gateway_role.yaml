@@ -4,20 +4,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
   labels:
-    name: function-appcat-port-allocator
-  name: function-appcat:port-allocator
+    name: appcat-controller-ssh-gateway
+  name: appcat-controller:ssh-gateway
 rules:
-  - apiGroups:
-      - ''
-    resources:
-      - configmaps
-    verbs:
-      - get
-      - create
-      - update
   - apiGroups:
       - gateway.networking.x-k8s.io
     resources:
       - xlistenersets
     verbs:
-      - get
+      - list
+      - watch

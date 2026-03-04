@@ -3,7 +3,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: syn-appcat/webhook-certificate
-  name: appcat-portalloc
+  name: appcat-sshgateway
 webhooks:
   - admissionReviewVersions:
       - v1

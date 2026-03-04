@@ -67,10 +67,10 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
-          proxyEndpoint: 172.20.0.1:9443
+          proxyEndpoint: :9443
           quotasEnabled: 'false'
-          registry_password: dummy
-          registry_username: dummy
+          registry_password: ''
+          registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: keycloakserviceaccount
           salesOrder: ''
