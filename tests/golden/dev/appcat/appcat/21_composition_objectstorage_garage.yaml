@@ -4,16 +4,16 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-60'
-    metadata.appcat.vshn.io/description: S3 compatible object storage hosted by Minio-minio
-    metadata.appcat.vshn.io/displayname: Minio-minio Object Storage
+    metadata.appcat.vshn.io/description: S3 compatible object storage hosted by Garage-garage
+    metadata.appcat.vshn.io/displayname: Garage-garage Object Storage
     metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/objstor
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/objectstorage.html
-    metadata.appcat.vshn.io/zone: default
+    metadata.appcat.vshn.io/zone: us-east-1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/serviceID: minio-minio-objectbucket
-    name: minio.objectbuckets.appcat.vshn.io
-  name: minio.objectbuckets.appcat.vshn.io
+    metadata.appcat.vshn.io/serviceID: garage-garage-objectbucket
+    name: garage.objectbuckets.appcat.vshn.io
+  name: garage.objectbuckets.appcat.vshn.io
 spec:
   compositeTypeRef:
     apiVersion: appcat.vshn.io/v1
@@ -25,15 +25,22 @@ spec:
       input:
         apiVersion: v1
         data:
+          chartName: vshngaragebucket
+          chartRepository: https://charts.appcat.ch/
+          chartVersion: 0.0.1
           crossplaneNamespace: syn-crossplane
-          providerConfig: minio
+          garageClaim: garage
+          garageClaimNamespace: syn-appcat
+          ownerGroup: appcat.vshn.io
+          ownerKind: XObjectBucket
+          ownerVersion: v1
           proxyEndpoint: 172.18.0.1:9443
-          serviceID: minio-minio-objectbucket
-          serviceName: miniobucket
+          serviceID: garage-garage-objectbucket
+          serviceName: garagebucket
         kind: ConfigMap
         metadata:
           labels:
             name: xfn-config
           name: xfn-config
-      step: miniobucket-func
+      step: garagebucket-func
   writeConnectionSecretsToNamespace: syn-crossplane

@@ -294,6 +294,11 @@ local providerRBAC = {
         resources: [ 'garageclusters', 'garagebuckets', 'garageadmintokens', 'garagekeys', 'garagenodes' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'vshn.appcat.vshn.io' ],
+        resources: [ 'vshngarages' ],
+        verbs: [ 'get' ],
+      },
     ],
   },
   minio: {

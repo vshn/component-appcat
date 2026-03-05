@@ -263,6 +263,12 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshngarages
+    verbs:
+      - get
 ---
 apiVersion: v1
 kind: Service

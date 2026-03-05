@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+    metadata.appcat.vshn.io/revision: debug-add_garage_bucket
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,15 +24,15 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+        name: function-appcat-debug-add-garage-bucket
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
-          chartRepository: oci://registry.kube-system.svc.cluster.local:5000/vshngaragecluster/vshngaragecluster
-          chartVersion: 0.0.0
+          chartRepository: https://charts.appcat.ch/
+          chartVersion: 0.0.1
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+          imageTag: add_garage_bucket
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

@@ -197,6 +197,12 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshngarages
+    verbs:
+      - get
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

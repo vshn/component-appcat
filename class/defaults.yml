@@ -39,6 +39,10 @@ parameters:
         source: https://charts.appcat.ch/
         version: 0.0.1
         chartName: vshngaragecluster
+      garageBucket:
+        source: https://charts.appcat.ch/
+        version: 0.0.1
+        chartName: vshngaragebucket
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
@@ -1272,6 +1276,7 @@ parameters:
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
           sla: 99.25
+          instances: []
           plans:
             standard-2:
               size:
@@ -1291,6 +1296,7 @@ parameters:
                 cpu: "2"
                 memory: "8Gi"
                 disk: 200Gi
+
       # Config for exoscale composites
       exoscale:
         enabled: false
@@ -1344,6 +1350,19 @@ parameters:
               grpcEndpoint: ${appcat:grpcEndpoint}
               proxyFunction: ${appcat:proxyFunction}
               providerConfig: minio
+            garage:
+              enabled: false
+              secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}
+              grpcEndpoint: ${appcat:grpcEndpoint}
+              proxyFunction: ${appcat:proxyFunction}
+              chartRepository: ${appcat:charts:garageBucket:source}
+              chartVersion: ${appcat:charts:garageBucket:version}
+              chartName: ${appcat:charts:garageBucket:chartName}
+              instances: []
+              # - name: garage-cluster
+              #   namespace: syn-appcat
+              #   spec:
+              #     parameters: {}
 
           # Generic config for objecstorage composite
           secretNamespace: ${appcat:crossplane:namespace}

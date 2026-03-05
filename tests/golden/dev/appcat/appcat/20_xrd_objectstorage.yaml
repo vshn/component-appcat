@@ -19,7 +19,7 @@ spec:
     - ENDPOINT_URL
     - BUCKET_NAME
   defaultCompositionRef:
-    name: minio.objectbuckets.appcat.vshn.io
+    name: garage.objectbuckets.appcat.vshn.io
   defaultCompositionUpdatePolicy: Automatic
   group: appcat.vshn.io
   names:
