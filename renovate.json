@@ -23,5 +23,8 @@
   "suppressNotifications": [
     "artifactErrors"
   ],
-  "packageRules": []
+  "packageRules": [],
+  "registryAliases": {
+    "dockerhub.vshn.net": "docker.io"
+  }
 }
