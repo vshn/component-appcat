@@ -33,7 +33,7 @@ parameters:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
         source: https://charts.appcat.ch/
-        version: 0.7.0
+        version: 0.7.1
         chartName: vshnpostgresql
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
