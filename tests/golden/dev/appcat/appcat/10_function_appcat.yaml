@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-feat-cnpg-extensions
+  name: function-appcat-debug-97057612be446287eaeedfd1a99ca38c9b8f7bf7
 spec:
-  package: ghcr.io/vshn/appcat:feat_cnpg-extensions-func
+  package: ghcr.io/vshn/appcat:97057612be446287eaeedfd1a99ca38c9b8f7bf7-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

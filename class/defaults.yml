@@ -79,7 +79,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: feat/cnpg-extensions
+        tag: 97057612be446287eaeedfd1a99ca38c9b8f7bf7
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
