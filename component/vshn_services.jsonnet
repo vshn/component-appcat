@@ -101,10 +101,14 @@ local scc = {
     type: 'RunAsAny',
   },
   readOnlyRootFilesystem: false,
+  seccompProfiles: [
+    'runtime/default',
+  ],
   volumes: [
     'configMap',
     'downwardAPI',
     'emptyDir',
+    'image',
     'persistentVolumeClaim',
     'projected',
     'secret',
