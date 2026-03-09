@@ -73,7 +73,7 @@ local mergedArgs = controllersParams.extraArgs + [
   '--billing=' + std.toString(controllersParams.billingEnabled),
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
 ] + if sshEnabled then [
-  '--ssh-gateways=' + std.join(',', [sshGatewayNamespace + '/' + name for name in sshGatewayNames]),
+  '--ssh-gateways=' + std.join(',', [ sshGatewayNamespace + '/' + name for name in sshGatewayNames ]),
   '--ssh-port-range-start=' + std.toString(controllersParams.portAllocator.portRangeStart),
   '--ssh-port-range-end=' + std.toString(controllersParams.portAllocator.portRangeEnd),
 ] + if controllersParams.portAllocator.gatewayCapacity > 0 then [
@@ -396,20 +396,20 @@ local mutatingWebhook = loadManifest('mutating-webhooks.yaml') {
 local sshGatewayRole = kube.ClusterRole('appcat-controller:ssh-gateway') {
   rules: [
     {
-      apiGroups: ['gateway.networking.x-k8s.io'],
-      resources: ['xlistenersets'],
-      verbs: ['list', 'watch'],
+      apiGroups: [ 'gateway.networking.x-k8s.io' ],
+      resources: [ 'xlistenersets' ],
+      verbs: [ 'list', 'watch' ],
     },
   ],
 };
 
 local sshGatewayBinding = kube.ClusterRoleBinding('appcat-controller:ssh-gateway') {
   roleRef_: sshGatewayRole,
-  subjects: [{
+  subjects: [ {
     kind: 'ServiceAccount',
     name: 'appcat-controller',
     namespace: controllersParams.namespace,
-  }],
+  } ],
 };
 
 if controllersParams.enabled then {
