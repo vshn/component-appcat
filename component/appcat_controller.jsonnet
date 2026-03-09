@@ -73,7 +73,8 @@ local mergedArgs = controllersParams.extraArgs + [
   '--billing=' + std.toString(controllersParams.billingEnabled),
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
 ] + if sshEnabled then [
-  '--ssh-gateways=' + std.join(',', [ sshGatewayNamespace + '/' + name for name in sshGatewayNames ]),
+  '--ssh-gateway-namespace=' + sshGatewayNamespace,
+  '--ssh-gateways=' + std.join(',', sshGatewayNames),
   '--ssh-port-range-start=' + std.toString(controllersParams.portAllocator.portRangeStart),
   '--ssh-port-range-end=' + std.toString(controllersParams.portAllocator.portRangeEnd),
 ] + if controllersParams.portAllocator.gatewayCapacity > 0 then [
