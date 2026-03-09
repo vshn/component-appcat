@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:add_garage_service
+          image: ghcr.io/vshn/appcat:4a6508cbbf55b66c255c262b564737c57cfd2ee6
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

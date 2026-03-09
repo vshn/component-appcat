@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-garage-service
+        name: function-appcat-debug-4a6508cbbf55b66c255c262b564737c57cfd2ee6
       input:
         apiVersion: v1
         data:
