@@ -31,8 +31,14 @@ parameters:
     charts:
       crossplane:
         version: 2.1.3
+
+      garage:
+        source: oci://registry.kube-system.svc.cluster.local:5000/vshngaragecluster/vshngaragecluster
+        version: 0.0.0
+
     garageOperator:
       enabled: true
+
     crossplane:
       helmValues:
         ~args:

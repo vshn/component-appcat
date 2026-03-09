@@ -35,6 +35,10 @@ parameters:
         source: https://charts.appcat.ch/
         version: 0.7.1
         chartName: vshnpostgresql
+      garage:
+        source: https://charts.appcat.ch/
+        version: 0.0.1
+        chartName: vshngaragecluster
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
@@ -79,7 +83,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 97057612be446287eaeedfd1a99ca38c9b8f7bf7
+        tag: 4a6508cbbf55b66c255c262b564737c57cfd2ee6
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -180,7 +184,11 @@ parameters:
     garageOperator:
       enabled: false
       namespace: syn-garage-operator
-      helmValues: {}
+      helmValues:
+        resources:
+          limits:
+            # The default is a bit low for OpenShift deployments...
+            memory: 512Mi
 
     crossplane:
       namespace: syn-crossplane
@@ -544,6 +552,8 @@ parameters:
         Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
         Forgejo:
+          uptime: ${appcat:slos:uptimeDefaults}
+        Garage:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
@@ -1233,6 +1243,54 @@ parameters:
                 cpu: "1"
                 memory: "4Gi"
                 disk: 50Gi
+        garage:
+          enabled: true
+          billing: true
+          mode: standalone
+          serviceName: VSHNGarage
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - GARAGE_URL
+          offered: true
+          restoreSA: garageserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs: {}
+          openshiftTemplate:
+            serviceName: garagebyvshn
+            description: "Garage is a selfhosted S3 Object Storage"
+            message: 'Your Garage by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-garage
+            tags: "objectstorage,garage"
+            icon: "icon-garage"
+            defaultVersion: "2"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:garage:version}
+          imageRegistry: ""
+          maintenanceURL: ""
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-2
+          sla: 99.25
+          plans:
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 50Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 100Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 200Gi
       # Config for exoscale composites
       exoscale:
         enabled: false

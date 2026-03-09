@@ -1,0 +1,41 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+message: Your Garage by VSHN instance is being provisioned, please see ${SECRET_NAME}
+  for access.
+metadata:
+  annotations:
+    description: Garage is a selfhosted S3 Object Storage
+    iconClass: icon-garage
+    openshift.io/display-name: VSHNGarage
+    openshift.io/documentation-url: https://vs.hn/vshn-garage
+    openshift.io/provider-display-name: VSHN
+    openshift.io/support-url: https://www.vshn.ch/en/contact/
+    tags: objectstorage,garage
+  labels:
+    name: garagebyvshn
+  name: garagebyvshn
+  namespace: openshift
+objects:
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNGarage
+    metadata:
+      annotations: {}
+      labels:
+        name: ${INSTANCE_NAME}
+      name: ${INSTANCE_NAME}
+    spec:
+      parameters:
+        service:
+          version: ${VERSION}
+        size:
+          plan: ${PLAN}
+      writeConnectionSecretToRef:
+        name: ${SECRET_NAME}
+parameters:
+  - name: PLAN
+    value: standard-4
+  - name: SECRET_NAME
+    value: garage-credentials
+  - name: INSTANCE_NAME
+  - name: VERSION
+    value: '2'

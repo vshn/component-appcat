@@ -289,6 +289,11 @@ local providerRBAC = {
         resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'garage.rajsingh.info' ],
+        resources: [ 'garageclusters', 'garagebuckets', 'garageadmintokens', 'garagekeys', 'garagenodes' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   minio: {
