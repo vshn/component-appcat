@@ -1,0 +1,89 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: Nextcloud instances by VSHN
+    metadata.appcat.vshn.io/displayname: Nextcloud by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-nextcloud
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"standard-2":{"size":{"cpu":"500m","disk":"16Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"standard-8":{"size":{"cpu":"2","disk":"16Gi","enabled":true,"memory":"8Gi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/nextcloud.html
+    metadata.appcat.vshn.io/zone: lpg
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: debug-feat_forgejo-ssh
+    metadata.appcat.vshn.io/serviceID: vshn-nextcloud
+    name: vshnnextcloud.vshn.appcat.vshn.io
+  name: vshnnextcloud.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNNextcloud
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-debug-feat-forgejo-ssh
+      input:
+        apiVersion: v1
+        data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
+          bucketRegion: rma
+          busybox_image: dockerhub.vshn.net/library/busybox
+          chartRepository: https://nextcloud.github.io/helm/
+          chartVersion: 8.8.2
+          cloudProvider: cloudscale
+          clusterName: c-green-test-1234
+          collaboraCPULimit: '1'
+          collaboraCPURequests: 250m
+          collaboraMemoryLimit: 1Gi
+          collaboraMemoryRequests: 256Mi
+          collabora_image: docker.io/collabora/code
+          collabora_image_tag: latest
+          controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
+          crossplaneNamespace: syn-crossplane
+          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+          defaultPlan: standard-2
+          emailAlertingEnabled: 'true'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: appcat@appuio.cloud
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: appcat@appuio.cloud
+          ignoreNamespaceForBilling: vshn-test
+          imageRegistry: dockerhub.vshn.net
+          imageTag: feat_forgejo-ssh
+          ingress_annotations: |
+            cert-manager.io/cluster-issuer: letsencrypt-staging
+          isOpenshift: 'false'
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          maintenanceSA: helm-based-service-maintenance
+          maintenanceURL: https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100
+          minimumRevisionAge: 168h
+          mode: standalone
+          nextcloud_image_repository: library/nextcloud
+          ocpDefaultAppsDomain: ''
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNNextcloud
+          ownerVersion: v1
+          plans: '{"standard-2": {"size": {"cpu": "500m", "disk": "16Gi", "enabled":
+            true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
+            "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
+            "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
+          quotasEnabled: 'false'
+          releaseManagementEnabled: 'false'
+          restoreSA: nextcloudserviceaccount
+          salesOrder: SC0000
+          serviceID: vshn-nextcloud
+          serviceName: nextcloud
+          sliNamespace: syn-appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: nextcloud-func
+  writeConnectionSecretsToNamespace: syn-crossplane

@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:4a6508cbbf55b66c255c262b564737c57cfd2ee6
+              image: ghcr.io/vshn/appcat:feat_forgejo-ssh
               name: sla-reporter
               resources:
                 limits:

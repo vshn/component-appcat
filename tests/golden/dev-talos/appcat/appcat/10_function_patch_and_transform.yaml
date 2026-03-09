@@ -1,0 +1,13 @@
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-patch-and-transform
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.9.1
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: function-patch-and-transform
+  skipDependencyResolution: true

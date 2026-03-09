@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:4a6508cbbf55b66c255c262b564737c57cfd2ee6
+          image: ghcr.io/vshn/appcat:feat_forgejo-ssh
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -62,11 +62,24 @@ local clusterRoleBindingCrossplaneView = kube.ClusterRoleBinding('appcat-control
   ],
 };
 
+local forgejoInputs = std.get(std.get(std.get(std.get(params, 'services', {}), 'vshn', {}), 'forgejo', {}), 'additionalInputs', {});
+local sshGatewaysJSON = std.get(forgejoInputs, 'sshGateways', '');
+local sshGatewayNames = if sshGatewaysJSON != '' then std.objectFields(std.parseJson(sshGatewaysJSON)) else [];
+local sshGatewayNamespace = std.get(forgejoInputs, 'sshGatewayNamespace', '');
+local sshEnabled = std.length(sshGatewayNames) > 0 && sshGatewayNamespace != '';
+
 local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
-];
+] + if sshEnabled then [
+  '--ssh-gateway-namespace=' + sshGatewayNamespace,
+  '--ssh-gateways=' + std.join(',', sshGatewayNames),
+  '--ssh-port-range-start=' + std.toString(controllersParams.portAllocator.portRangeStart),
+  '--ssh-port-range-end=' + std.toString(controllersParams.portAllocator.portRangeEnd),
+] + if controllersParams.portAllocator.gatewayCapacity > 0 then [
+  '--ssh-gateway-capacity=' + std.toString(controllersParams.portAllocator.gatewayCapacity),
+] else [] else [];
 
 local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
   {
@@ -363,6 +376,38 @@ local webhook = loadManifest('webhooks.yaml') {
   ],
 };
 
+local mutatingWebhook = loadManifest('mutating-webhooks.yaml') {
+  metadata+: {
+    name: 'appcat-sshgateway',
+    annotations+: {
+      'cert-manager.io/inject-ca-from': params.namespace + '/' + webhookCertificate.metadata.name,
+    },
+  },
+  webhooks: [
+    w + clientConfig
+    for w in super.webhooks
+  ],
+};
+
+local sshGatewayRole = kube.ClusterRole('appcat-controller:ssh-gateway') {
+  rules: [
+    {
+      apiGroups: [ 'gateway.networking.x-k8s.io' ],
+      resources: [ 'xlistenersets' ],
+      verbs: [ 'list', 'watch' ],
+    },
+  ],
+};
+
+local sshGatewayBinding = kube.ClusterRoleBinding('appcat-controller:ssh-gateway') {
+  roleRef_: sshGatewayRole,
+  subjects: [ {
+    kind: 'ServiceAccount',
+    name: 'appcat-controller',
+    namespace: controllersParams.namespace,
+  } ],
+};
+
 if controllersParams.enabled then {
   'controllers/appcat/10_role_leader_election': roleLeaderElection,
   'controllers/appcat/10_cluster_role': clusterRole,
@@ -380,4 +425,7 @@ if controllersParams.enabled then {
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_service']: service,
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_servicemonitor']: servicemonitor,
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_prometheusrule']: prometheusrule,
+  [if sshEnabled then 'controllers/appcat/10_mutating_webhooks']: mutatingWebhook,
+  [if sshEnabled then 'controllers/appcat/10_ssh_gateway_role']: sshGatewayRole,
+  [if sshEnabled then 'controllers/appcat/10_ssh_gateway_binding']: sshGatewayBinding,
 } else {}
