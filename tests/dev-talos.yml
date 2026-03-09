@@ -43,8 +43,7 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
     grpcEndpoint: 10.5.0.1:9443
-    proxyFunction: true
-
+    proxyFunction: false
     quotasEnabled: false
     monitoringEnabled: true
     billing:

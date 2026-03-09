@@ -36,7 +36,7 @@ spec:
           clusterName: c-green-test-1234
           cnpgClusterChartName: vshnpostgresql
           cnpgClusterChartSource: https://charts.appcat.ch/
-          cnpgClusterChartVersion: 0.6.0
+          cnpgClusterChartVersion: 0.7.1
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
@@ -65,7 +65,6 @@ spec:
             true, "memory": "1936Mi"}}, "standard-4": {"size": {"cpu": "900m", "disk":
             "40Gi", "enabled": true, "memory": "3984Mi"}}, "standard-8": {"size":
             {"cpu": "1900m", "disk": "80Gi", "enabled": true, "memory": "8080Mi"}}}'
-          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           salesOrder: SC0000
