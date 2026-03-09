@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-4a6508cbbf55b66c255c262b564737c57cfd2ee6
+        name: function-appcat-master-refactor-cnpg-image-catalog
       input:
         apiVersion: v1
         data:
