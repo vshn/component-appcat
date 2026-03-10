@@ -1,0 +1,77 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-60'
+    metadata.appcat.vshn.io/description: Garage instances by VSHN
+    metadata.appcat.vshn.io/displayname: Garage by VSHN
+    metadata.appcat.vshn.io/end-user-docs-url: https://vs.hn/vshn-garage
+    metadata.appcat.vshn.io/flavor: standalone
+    metadata.appcat.vshn.io/plans: '{"standard-2":{"size":{"cpu":"500m","disk":"50Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"100Gi","enabled":true,"memory":"4Gi"}},"standard-8":{"size":{"cpu":"2","disk":"200Gi","enabled":true,"memory":"8Gi"}}}'
+    metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/garage.html
+    metadata.appcat.vshn.io/zone: rma1
+  labels:
+    metadata.appcat.vshn.io/offered: 'true'
+    metadata.appcat.vshn.io/revision: master-v4.182.0
+    metadata.appcat.vshn.io/serviceID: vshn-garage
+    name: vshngarage.vshn.appcat.vshn.io
+  name: vshngarage.vshn.appcat.vshn.io
+spec:
+  compositeTypeRef:
+    apiVersion: vshn.appcat.vshn.io/v1
+    kind: XVSHNGarage
+  mode: Pipeline
+  pipeline:
+    - functionRef:
+        name: function-appcat-master-v4-182-0
+      input:
+        apiVersion: v1
+        data:
+          billingEnabled: 'false'
+          billingUnitID: uom_uom_45_1e112771
+          bucketRegion: lpg
+          chartRepository: https://charts.appcat.ch/
+          chartVersion: 0.0.1
+          cloudProvider: cloudscale
+          clusterName: c-green-test-1234
+          controlNamespace: syn-appcat-control
+          crDeletionAfter: '180'
+          crossplaneNamespace: syn-crossplane
+          defaultPlan: standard-2
+          emailAlertingEnabled: 'false'
+          emailAlertingSecretName: mailgun-smtp-credentials
+          emailAlertingSecretNamespace: syn-appcat
+          emailAlertingSmtpFromAddress: appcat@appuio.cloud
+          emailAlertingSmtpHost: smtp.eu.mailgun.org:465
+          emailAlertingSmtpUsername: appcat@appuio.cloud
+          ignoreNamespaceForBilling: vshn-test
+          imageRegistry: ''
+          imageTag: v4.182.0
+          isOpenshift: 'false'
+          maintenanceSA: helm-based-service-maintenance
+          maintenanceURL: ''
+          minimumRevisionAge: 168h
+          mode: standalone
+          ocpDefaultAppsDomain: ''
+          ownerGroup: vshn.appcat.vshn.io
+          ownerKind: XVSHNGarage
+          ownerVersion: v1
+          plans: '{"standard-2": {"size": {"cpu": "500m", "disk": "50Gi", "enabled":
+            true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "100Gi",
+            "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
+            "disk": "200Gi", "enabled": true, "memory": "8Gi"}}}'
+          quotasEnabled: 'false'
+          releaseManagementEnabled: 'true'
+          restoreSA: garageserviceaccount
+          salesOrder: ''
+          serviceID: vshn-garage
+          serviceName: garage
+          sliNamespace: syn-appcat-slos
+        kind: ConfigMap
+        metadata:
+          labels:
+            name: xfn-config
+          name: xfn-config
+      step: garage-func
+  writeConnectionSecretsToNamespace: syn-crossplane

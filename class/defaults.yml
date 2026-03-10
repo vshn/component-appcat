@@ -33,13 +33,24 @@ parameters:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
         source: https://charts.appcat.ch/
-        version: 0.6.0
+        version: 0.7.1
         chartName: vshnpostgresql
+      garage:
+        source: https://charts.appcat.ch/
+        version: 0.0.1
+        chartName: vshngaragecluster
+      garageBucket:
+        source: https://charts.appcat.ch/
+        version: 0.0.1
+        chartName: vshngaragebucket
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
         version: 0.4.0
         chartName: plugin-barman-cloud
+      garageOperator:
+        source: oci://ghcr.io/rajsinghtech/charts/garage-operator
+        version: 0.0.41
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -76,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.181.0
+        tag: v4.182.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -114,6 +125,7 @@ parameters:
       busybox:
         registry: docker.io
         image: library/busybox
+        tag: "1.37"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
@@ -172,6 +184,15 @@ parameters:
       enabled: true
       additionalFunctionBranches: []
       minimumRevisionAge: 168h # 7 days
+
+    garageOperator:
+      enabled: false
+      namespace: syn-garage-operator
+      helmValues:
+        resources:
+          limits:
+            # The default is a bit low for OpenShift deployments...
+            memory: 512Mi
 
     crossplane:
       namespace: syn-crossplane
@@ -240,6 +261,9 @@ parameters:
           requests:
             cpu: 100m
             memory: 100Mi
+      postgres:
+        disabledAlerts:
+          - CNPGClusterZoneSpreadWarning
 
     billing:
       namespace: ${appcat:namespace}
@@ -535,6 +559,8 @@ parameters:
         Nextcloud:
           uptime: ${appcat:slos:uptimeDefaults}
         Forgejo:
+          uptime: ${appcat:slos:uptimeDefaults}
+        Garage:
           uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
@@ -1073,12 +1099,13 @@ parameters:
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           additionalInputs:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
+            busybox_image_tag: ${appcat:images:busybox:tag}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+            defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: keycloakbyvshn
             description: "Keycloak is an open source identity and access management solution."
@@ -1223,6 +1250,56 @@ parameters:
                 cpu: "1"
                 memory: "4Gi"
                 disk: 50Gi
+        garage:
+          enabled: true
+          billing: true
+          mode: standalone
+          serviceName: VSHNGarage
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - GARAGE_URL
+          offered: true
+          restoreSA: garageserviceaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          additionalInputs: {}
+          openshiftTemplate:
+            serviceName: garagebyvshn
+            description: "Garage is a selfhosted S3 Object Storage"
+            message: 'Your Garage by VSHN instance is being provisioned, please see \${SECRET_NAME} for access.'
+            url: https://vs.hn/vshn-garage
+            tags: "objectstorage,garage"
+            icon: "icon-garage"
+            defaultVersion: "2"
+          enableNetworkPolicy: false
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          helmChartVersion: ${appcat:charts:garage:version}
+          imageRegistry: ""
+          maintenanceURL: ""
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-2
+          sla: 99.25
+          instances: []
+          plans:
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 50Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 100Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 200Gi
+
       # Config for exoscale composites
       exoscale:
         enabled: false
@@ -1276,6 +1353,19 @@ parameters:
               grpcEndpoint: ${appcat:grpcEndpoint}
               proxyFunction: ${appcat:proxyFunction}
               providerConfig: minio
+            garage:
+              enabled: false
+              secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}
+              grpcEndpoint: ${appcat:grpcEndpoint}
+              proxyFunction: ${appcat:proxyFunction}
+              chartRepository: ${appcat:charts:garageBucket:source}
+              chartVersion: ${appcat:charts:garageBucket:version}
+              chartName: ${appcat:charts:garageBucket:chartName}
+              instances: []
+              # - name: garage-cluster
+              #   namespace: syn-appcat
+              #   spec:
+              #     parameters: {}
 
           # Generic config for objecstorage composite
           secretNamespace: ${appcat:crossplane:namespace}

@@ -15,6 +15,7 @@ local objStoParams = params.services.generic.objectstorage;
 local cloudscaleServiceName = 'cloudscalebucket';
 local exoscaleServiceName = 'exoscalebucket';
 local minioServiceName = 'miniobucket';
+local garageServiceName = 'garagebucket';
 
 local xrd = xrds.XRDFromCRD(
   'xobjectbuckets.appcat.vshn.io',
@@ -190,6 +191,62 @@ local compositionMinio =
     for instance in params.services.vshn.minio.instances
   ];
 
+local garageComp(name, namespace, spec) =
+  local provider = 'Garage-' + name;
+  local compParams = objStoParams.compositions.garage;
+
+  kube._Object('apiextensions.crossplane.io/v1', 'Composition', name + '.objectbuckets.appcat.vshn.io') +
+  common.SyncOptions +
+  common.VshnMetaObjectStorage(provider) +
+  {
+    metadata+: {
+      annotations+: {
+        'metadata.appcat.vshn.io/zone': common.GetAtPath(spec, 'parameters.service.zone', 'us-east-1'),
+      },
+    },
+    spec: {
+      compositeTypeRef: comp.CompositeRef(xrd),
+      writeConnectionSecretsToNamespace: compParams.secretNamespace,
+      mode: 'Pipeline',
+      pipeline:
+        [
+          {
+            step: 'garagebucket-func',
+            functionRef: {
+              name: common.GetCurrentFunctionName(),
+            },
+            input: kube.ConfigMap('xfn-config') + {
+              metadata: {
+                labels: {
+                  name: 'xfn-config',
+                },
+                name: 'xfn-config',
+              },
+              data: {
+                      chartRepository: compParams.chartRepository,
+                      chartVersion: compParams.chartVersion,
+                      chartName: compParams.chartName,
+                      garageClaim: name,
+                      garageClaimNamespace: namespace,
+                      serviceName: garageServiceName,
+                      serviceID: common.ObjectBucketServiceID(provider),
+                      crossplaneNamespace: params.crossplane.namespace,
+                    } + (if compParams.proxyFunction then {
+                           proxyEndpoint: compParams.grpcEndpoint,
+                         } else {})
+                    + common.GetOwnerLabels(xrd),
+            },
+          },
+        ],
+    },
+  };
+
+local compositionGarage =
+  local comp = objStoParams.compositions.garage;
+  [
+    garageComp(config.name, config.namespace, config.spec)
+    for config in comp.instances
+  ];
 
 if objStoParams.enabled && vars.isSingleOrControlPlaneCluster then {
   '20_xrd_objectstorage': xrd,
@@ -197,4 +254,5 @@ if objStoParams.enabled && vars.isSingleOrControlPlaneCluster then {
   [if objStoParams.compositions.cloudscale.enabled then '21_composition_objectstorage_cloudscale']: compositionCloudscale,
   [if objStoParams.compositions.exoscale.enabled then '21_composition_objectstorage_exoscale']: compositionExoscale,
   [if objStoParams.compositions.minio.enabled then '21_composition_objectstorage_minio']: compositionMinio,
+  [if objStoParams.compositions.garage.enabled then '21_composition_objectstorage_garage']: compositionGarage,
 } else {}

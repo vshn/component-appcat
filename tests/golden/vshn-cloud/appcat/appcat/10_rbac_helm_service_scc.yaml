@@ -24,6 +24,8 @@ runAsUser:
   type: MustRunAsRange
 seLinuxContext:
   type: RunAsAny
+seccompProfiles:
+  - runtime/default
 supplementalGroups:
   type: RunAsAny
 users: []
@@ -31,6 +33,7 @@ volumes:
   - configMap
   - downwardAPI
   - emptyDir
+  - image
   - persistentVolumeClaim
   - projected
   - secret

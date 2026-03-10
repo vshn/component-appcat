@@ -247,6 +247,28 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - garage.rajsingh.info
+    resources:
+      - garageclusters
+      - garagebuckets
+      - garageadmintokens
+      - garagekeys
+      - garagenodes
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshngarages
+    verbs:
+      - get
 ---
 apiVersion: v1
 kind: Service
