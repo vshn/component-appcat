@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-garage-bucket
+        name: function-appcat-master-c5245f53a453cfe8f301deafa4d48d1871f3b99f
       input:
         apiVersion: v1
         data:
