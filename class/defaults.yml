@@ -83,7 +83,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: refactor/cnpg-image-catalog
+        tag: 3e62f6a48d22434fa833a176fbd31ca52bd5d40a
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

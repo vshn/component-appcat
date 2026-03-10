@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: refactor/cnpg-image-catalog
+        function-revision: 3e62f6a48d22434fa833a176fbd31ca52bd5d40a
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

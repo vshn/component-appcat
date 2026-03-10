@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-refactor-cnpg-image-catalog
+  name: function-appcat-master-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
 spec:
-  package: ghcr.io/vshn/appcat:refactor_cnpg-image-catalog-func
+  package: ghcr.io/vshn/appcat:3e62f6a48d22434fa833a176fbd31ca52bd5d40a-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
