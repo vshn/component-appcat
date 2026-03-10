@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-cnpg-ha-alerting
+    metadata.appcat.vshn.io/revision: master-6d8bdca15dda82cb2b75348b62844e1993472d7e
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io
