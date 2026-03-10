@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:c5245f53a453cfe8f301deafa4d48d1871f3b99f
+          image: ghcr.io/vshn/appcat:cnpg-ha-alerting
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

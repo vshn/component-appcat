@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: c5245f53a453cfe8f301deafa4d48d1871f3b99f
+        tag: cnpg-ha-alerting
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -261,6 +261,9 @@ parameters:
           requests:
             cpu: 100m
             memory: 100Mi
+      postgres:
+        disabledAlerts:
+          - CNPGClusterZoneSpreadWarning
 
     billing:
       namespace: ${appcat:namespace}
@@ -1102,7 +1105,7 @@ parameters:
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+            defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: keycloakbyvshn
             description: "Keycloak is an open source identity and access management solution."

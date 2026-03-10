@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: c5245f53a453cfe8f301deafa4d48d1871f3b99f
+        function-revision: cnpg-ha-alerting
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
