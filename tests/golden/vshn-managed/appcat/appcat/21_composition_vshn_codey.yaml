@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+    metadata.appcat.vshn.io/revision: master-c5245f53a453cfe8f301deafa4d48d1871f3b99f
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

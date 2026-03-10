@@ -254,41 +254,59 @@ local getCurrentFunctionName() =
     std.strReplace('function-appcat-' + std.strReplace(getAppCatVersion(), '_', '-') + '-' + std.strReplace(getAppCatImageTag(), '_', '-'), '.', '-')
   );
 
-local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
-  serviceName: name,
-  serviceID: vshnServiceID(name),
-  [if std.objectHas(serviceParams, 'mode') then 'mode']: serviceParams.mode,
-  imageTag: getAppCatImageTag(),
-  bucketRegion: getBucketRegion(),
-  maintenanceSA: 'helm-based-service-maintenance',
-  controlNamespace: params.services.controlNamespace,
-  plans: std.toString(plans),
-  defaultPlan: serviceParams.defaultPlan,
-  quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
-  cloudProvider: inv.parameters.facts.cloud,
-  isOpenshift: std.toString(vars.isServiceClusterOpenShift),
-  sliNamespace: params.slos.namespace,
-  ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
+local getOwnerLabels(xrd) = {
   ownerKind: xrd.spec.names.kind,
   ownerGroup: xrd.spec.group,
   ownerVersion: xrd.spec.versions[0].name,
-  salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
-  [if std.objectHas(serviceParams, 'sideCars') then 'sideCars']: std.toString(serviceParams.sideCars),
-  crossplaneNamespace: params.crossplane.namespace,
-  ignoreNamespaceForBilling: params.billing.ignoreNamespace,
-  billingUnitID: params.billing.instanceUOM,
-  crDeletionAfter: params.billing.customResourceDeletionAfter,
-  billingEnabled: std.toString(params.billingEnabled),
-  clusterName: inv.parameters.cluster.name,
-  [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
-  [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
-  [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
-  releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
-  minimumRevisionAge: params.deploymentManagementSystem.minimumRevisionAge,
-} + (if std.objectHas(params.charts, name) then {
-       chartRepository: params.charts[name].source,
-       chartVersion: params.charts[name].version,
-     } else {}) + emailAlerting(params.services.emailAlerting);
+};
+
+local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
+  {
+    serviceName: name,
+    serviceID: vshnServiceID(name),
+    [if std.objectHas(serviceParams, 'mode') then 'mode']: serviceParams.mode,
+    imageTag: getAppCatImageTag(),
+    bucketRegion: getBucketRegion(),
+    maintenanceSA: 'helm-based-service-maintenance',
+    controlNamespace: params.services.controlNamespace,
+    plans: std.toString(plans),
+    defaultPlan: serviceParams.defaultPlan,
+    quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
+    cloudProvider: inv.parameters.facts.cloud,
+    isOpenshift: std.toString(vars.isServiceClusterOpenShift),
+    sliNamespace: params.slos.namespace,
+    ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
+  } +
+  getOwnerLabels(xrd)
+  + {
+    salesOrder: if appuioManaged then std.toString(params.billing.salesOrder) else '',
+    [if std.objectHas(serviceParams, 'sideCars') then 'sideCars']: std.toString(serviceParams.sideCars),
+    crossplaneNamespace: params.crossplane.namespace,
+    ignoreNamespaceForBilling: params.billing.ignoreNamespace,
+    billingUnitID: params.billing.instanceUOM,
+    crDeletionAfter: params.billing.customResourceDeletionAfter,
+    billingEnabled: std.toString(params.billingEnabled),
+    clusterName: inv.parameters.cluster.name,
+    [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
+    [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
+    [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
+    releaseManagementEnabled: std.toString(params.deploymentManagementSystem.enabled),
+    minimumRevisionAge: params.deploymentManagementSystem.minimumRevisionAge,
+  } + (if std.objectHas(params.charts, name) then {
+         chartRepository: params.charts[name].source,
+         chartVersion: params.charts[name].version,
+       } else {}) + emailAlerting(params.services.emailAlerting);
+
+// Get value from specified object path as "field1.field2[...], or a default"
+local getAtPath(obj, path, default) = (
+  local nestedFieldFromArray(obj, arr) = (
+    if std.length(arr) > 0 && std.objectHas(obj, arr[0]) then
+      if std.length(arr) == 1 then obj[arr[0]]
+      else nestedFieldFromArray(obj[arr[0]], arr[1:])
+    else default
+  );
+  nestedFieldFromArray(obj, std.split(path, '.'))
+);
 
 {
   SyncOptions: syncOptions,
@@ -347,4 +365,8 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) = {
     getCurrentFunctionName(),
   GetDefaultInputs(name, serviceParams, plans, xrd, appuioManaged):
     getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged),
+  GetAtPath(obj, path, default):
+    getAtPath(obj, path, default),
+  GetOwnerLabels(xrd):
+    getOwnerLabels(xrd),
 }

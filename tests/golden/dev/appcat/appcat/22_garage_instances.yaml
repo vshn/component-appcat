@@ -1,0 +1,18 @@
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNGarage
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false,SkipDryRunOnMissingResource=true
+  labels:
+    name: garage
+  name: garage
+  namespace: syn-appcat
+spec:
+  parameters:
+    security:
+      deletionProtection: false
+    size:
+      disk: 1Gi
+  writeConnectionSecretToRef:
+    name: garage-creds

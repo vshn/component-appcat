@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+    metadata.appcat.vshn.io/revision: master-c5245f53a453cfe8f301deafa4d48d1871f3b99f
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+        name: function-appcat-master-c5245f53a453cfe8f301deafa4d48d1871f3b99f
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 3e62f6a48d22434fa833a176fbd31ca52bd5d40a
+          imageTag: c5245f53a453cfe8f301deafa4d48d1871f3b99f
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
