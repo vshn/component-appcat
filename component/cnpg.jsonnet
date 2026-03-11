@@ -24,7 +24,7 @@ local labels = {
   'app.kubernetes.io/managed-by': 'commodore',
 };
 
-local prometheusrule = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'cnpg-alerts') {
+local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'PrometheusRule', 'cnpg-alerts') {
   metadata+: {
     namespace: inv.parameters.appcat.namespace,
     labels: labels,
@@ -237,7 +237,7 @@ local prometheusrule = kube._Object('monitoring.coreos.com/v1', 'PrometheusRule'
       ),
     } ],
   },
-};
+});
 
 {
   '00_namespace': namespace {
