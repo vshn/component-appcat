@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-f33c10dada9306757e6c1a77e2b694993246ab39
+        name: function-appcat-debug-cnpg-vacuum
       input:
         apiVersion: v1
         data:
