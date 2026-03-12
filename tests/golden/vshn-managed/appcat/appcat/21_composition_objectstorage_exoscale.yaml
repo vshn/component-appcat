@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-forgejo-oauth2
+        name: function-appcat-master-d1e6a2ee054552e97142f3227f5d5a356b6395e9
       input:
         apiVersion: v1
         data:
