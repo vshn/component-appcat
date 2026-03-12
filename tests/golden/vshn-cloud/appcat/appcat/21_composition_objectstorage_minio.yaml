@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-182-1
+        name: function-appcat-master-remove-unit-id
       input:
         apiVersion: v1
         data:

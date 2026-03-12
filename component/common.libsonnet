@@ -283,7 +283,6 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     [if std.objectHas(serviceParams, 'sideCars') then 'sideCars']: std.toString(serviceParams.sideCars),
     crossplaneNamespace: params.crossplane.namespace,
     ignoreNamespaceForBilling: params.billing.ignoreNamespace,
-    billingUnitID: params.billing.instanceUOM,
     crDeletionAfter: params.billing.customResourceDeletionAfter,
     billingEnabled: std.toString(params.billingEnabled),
     clusterName: inv.parameters.cluster.name,
