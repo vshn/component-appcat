@@ -199,7 +199,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
           },
           {
             alert: 'CNPGClusterInstancesOnSameNode',
-            expr: 'count by (namespace, node) (kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"}) > 1',
+            expr: 'count by (namespace, node) (kube_pod_info{namespace=~"vshn-postgresql-.*",pod=~"postgresql-.*"} * on(pod,namespace) group_right(node) kube_pod_labels{label_cnpg_io_cluster=~".+"}) > 1',
             'for': '5m',
             labels: {
               severity: 'warning',
