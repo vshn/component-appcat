@@ -32,7 +32,6 @@ spec:
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           cloudProvider: cloudscale
           clusterName: c-green-test-1234

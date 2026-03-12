@@ -33,7 +33,6 @@ spec:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
           chartVersion: 23.2.1
