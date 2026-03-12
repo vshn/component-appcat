@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-f33c10dada9306757e6c1a77e2b694993246ab39
+  name: function-appcat-debug-fix-forgejo-oauth2
 spec:
-  package: ghcr.io/vshn/appcat:f33c10dada9306757e6c1a77e2b694993246ab39-func
+  package: ghcr.io/vshn/appcat:fix_forgejo-oauth2-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
