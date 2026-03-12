@@ -275,6 +275,7 @@ parameters:
       instanceUOM: uom_uom_45_1e112771
       customResourceDeletionAfter: "180"
       enableMockOrgInfo: false
+      servalaBillingAnnotationPrefix: billing.servala.com
       salesOrder: ${facts:sales_order}
       vshn:
         enableCronjobs: false
