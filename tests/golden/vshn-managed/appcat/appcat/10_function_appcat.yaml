@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-nextcloud-major-upgrades
+  name: function-appcat-master-f33c10dada9306757e6c1a77e2b694993246ab39
 spec:
-  package: ghcr.io/vshn/appcat:nextcloud-major-upgrades-func
+  package: ghcr.io/vshn/appcat:f33c10dada9306757e6c1a77e2b694993246ab39-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
