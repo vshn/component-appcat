@@ -8,6 +8,7 @@ local rbac = import 'rbac.libsonnet';
 
 local inv = kap.inventory();
 local facts = inv.parameters.facts;
+local cluster = inv.parameters.cluster;
 local params = inv.parameters.appcat;
 
 local exoscaleZones = params.cloudRegionMap.exoscale;
@@ -286,6 +287,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     crDeletionAfter: params.billing.customResourceDeletionAfter,
     billingEnabled: std.toString(params.billingEnabled),
     clusterName: inv.parameters.cluster.name,
+    [if std.objectHas(cluster, 'tenant') && cluster.tenant == 'c-servala' && std.objectHas(facts, 'distribution') && facts.distribution == 'talos' then 'claimAnnotationBillingPrefix']: 'billing.servala.com',
     [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
     [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
     [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
