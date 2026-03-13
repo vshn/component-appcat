@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-2db8de5a8a14d3352b4a592ad35a45f9ecb2918a
+        name: function-appcat-master-proxysql-resources
       input:
         apiVersion: v1
         data:
