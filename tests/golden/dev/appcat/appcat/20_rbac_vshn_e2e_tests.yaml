@@ -149,6 +149,15 @@ rules:
     verbs:
       - get
       - list
+  - apiGroups:
+      - postgresql.cnpg.io
+    resources:
+      - backups
+    verbs:
+      - get
+      - list
+      - create
+      - delete
 ---
 apiVersion: v1
 data: {}
