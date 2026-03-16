@@ -19,7 +19,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 565,
   "links": [],
   "panels": [
     {
@@ -43,7 +42,7 @@
         "content": "# IMPORTANT\n\n<b>After each change please export this dashboard as JSON and update it in component-appcat repository</b>",
         "mode": "markdown"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "title": "Panel Title",
       "type": "text"
     },
@@ -65,7 +64,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -107,7 +106,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -115,7 +114,7 @@
             "uid": "0ExxOllVz"
           },
           "editorMode": "code",
-          "expr": "1 - max without(prometheus_replica, organization) (\nsum_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\"}[$__range])\n/ ignoring (sloth_window) count_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=\"VSHNRedis\", namespace=~\"$namespace\", name=~\"$name\"}[$__range])\n) >= 0",
+          "expr": "max(1 - avg_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=\"VSHNRedis\", name=~\"$name\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -160,6 +159,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -175,7 +175,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -218,11 +218,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -243,7 +244,6 @@
           },
           "editorMode": "code",
           "expr": "min without(prometheus_replica, cluster_id) (slo:objective:ratio{sloth_service=~\"appcat-.+\", cluster_id=\"$cluster\"})",
-          "hide": false,
           "legendFormat": "Objective",
           "range": true,
           "refId": "B"
@@ -280,7 +280,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -317,7 +317,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -368,7 +368,7 @@
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -408,7 +408,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -466,6 +466,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -482,7 +483,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -509,11 +510,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -570,6 +572,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -587,7 +590,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -614,11 +617,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -628,7 +632,6 @@
           "editorMode": "code",
           "expr": "irate(redis_keyspace_hits_total{namespace=~\"$instance_namespace\"}[5m])",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "hits",
@@ -646,7 +649,6 @@
           "editorMode": "code",
           "expr": "irate(redis_keyspace_misses_total{namespace=~\"$instance_namespace\"}[5m])",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "misses",
@@ -694,6 +696,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -711,7 +714,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -754,11 +757,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -784,7 +788,6 @@
           "editorMode": "code",
           "expr": "min by (pod) (redis_memory_max_bytes{namespace=~\"$instance_namespace\"})",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "max",
           "range": true,
@@ -798,8 +801,7 @@
           },
           "editorMode": "code",
           "expr": "max by (pod) (redis_memory_used_rss_bytes{namespace=\"$instance_namespace\"})",
-          "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "rss",
           "range": true,
           "refId": "C"
         }
@@ -841,6 +843,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -856,7 +859,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -896,11 +899,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -920,7 +924,6 @@
           },
           "editorMode": "code",
           "expr": "min by (pod) (kube_pod_container_resource_limits_memory_bytes{namespace=\"$instance_namespace\",container=\"redis\"})",
-          "hide": false,
           "legendFormat": "Limit {{pod}}",
           "range": true,
           "refId": "B"
@@ -932,7 +935,6 @@
           },
           "editorMode": "code",
           "expr": "max by(pod) (container_memory_rss{namespace=\"$instance_namespace\",container=\"redis\"})",
-          "hide": false,
           "legendFormat": "RSS {{pod}}",
           "range": true,
           "refId": "C"
@@ -975,6 +977,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -990,7 +993,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1016,11 +1019,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1040,7 +1044,6 @@
           },
           "editorMode": "code",
           "expr": "kube_pod_container_resource_limits_cpu_cores{namespace=\"$instance_namespace\",container=\"redis\"}",
-          "hide": false,
           "legendFormat": "Limit {{pod}}",
           "range": true,
           "refId": "B"
@@ -1098,7 +1101,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1124,11 +1127,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1195,7 +1199,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1222,11 +1226,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1618,7 +1623,6 @@
           "editorMode": "code",
           "expr": "sum(rate(redis_expired_keys_total{namespace=~\"$instance_namespace\"}[5m])) by (namespaec)",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "expired",
@@ -1974,7 +1978,6 @@
           },
           "editorMode": "code",
           "expr": "max by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"$instance_namespace\"})",
-          "hide": false,
           "legendFormat": "Limit {{{{persistenvolumeclaim}}}}",
           "range": true,
           "refId": "B"
@@ -1986,7 +1989,7 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [
     "prometheus",
     "redis",
@@ -1996,8 +1999,8 @@
     "list": [
       {
         "current": {
-          "text": "c-appuio-lab-cloudscale-rma-0",
-          "value": "c-appuio-lab-cloudscale-rma-0"
+          "text": "c-appuio-cloudscale-lpg-2",
+          "value": "c-appuio-cloudscale-lpg-2"
         },
         "datasource": {
           "type": "prometheus",
@@ -2013,54 +2016,59 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "vshn-test",
-          "value": "vshn-test"
+          "text": "mupo-sqq",
+          "value": "mupo-sqq"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "uaI0iF84z"
         },
-        "definition": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", service=\"VSHNRedis\"},namespace)",
+        "definition": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", service=\"VSHNRedis\"},claim_namespace)",
         "includeAll": false,
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", service=\"VSHNRedis\"},namespace)",
+          "qryType": 1,
+          "query": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", service=\"VSHNRedis\"},claim_namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "gsarat-redis-xztp8",
-          "value": "gsarat-redis-xztp8"
+          "text": "sqq-redis-cjm72",
+          "value": "sqq-redis-cjm72"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "uaI0iF84z"
         },
-        "definition": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", namespace=\"$namespace\", service=\"VSHNRedis\"},name)",
+        "definition": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", claim_namespace=\"$namespace\", service=\"VSHNRedis\"},name)",
         "includeAll": false,
         "name": "name",
         "options": [],
         "query": {
-          "query": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", namespace=\"$namespace\", service=\"VSHNRedis\"},name)",
+          "qryType": 1,
+          "query": "label_values(appcat_probes_seconds_count{cluster_id=\"$cluster\", claim_namespace=\"$namespace\", service=\"VSHNRedis\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "vshn-redis-gsarat-redis-xztp8",
-          "value": "vshn-redis-gsarat-redis-xztp8"
+          "text": "vshn-redis-sqq-redis-cjm72",
+          "value": "vshn-redis-sqq-redis-cjm72"
         },
         "datasource": {
           "type": "prometheus",
@@ -2077,6 +2085,7 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "sort": 1,
         "type": "query"
       }
@@ -2090,6 +2099,6 @@
   "timezone": "browser",
   "title": "VSHN Redis",
   "uid": "xDLNRKUWz",
-  "version": 8,
+  "version": 12,
   "weekStart": ""
 }
