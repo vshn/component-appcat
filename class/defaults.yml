@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: cnpg-vacuum
+        tag: eb065df0ae7088724adf6b08e29133ce75531e97
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
