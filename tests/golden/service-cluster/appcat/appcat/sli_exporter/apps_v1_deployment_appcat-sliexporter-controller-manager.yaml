@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:proxysql-resources
+          image: ghcr.io/vshn/appcat:ec7a466a8788c546f022569f9db103505c999107
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
