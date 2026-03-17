@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: appcat-garage-operator-metrics
   namespace: syn-garage-operator
 spec:

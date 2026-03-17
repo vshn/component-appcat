@@ -8,9 +8,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: garageadmintokens.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -283,9 +283,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: garagebuckets.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -693,9 +693,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: garageclusters.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -2354,7 +2354,9 @@ spec:
                     Ignored if image is set.
                   type: string
                 k2vApi:
-                  description: K2VAPI configures the K2V (key-value) API endpoint
+                  description: |-
+                    K2VAPI configures the K2V (key-value) API endpoint.
+                    Omit to disable K2V.
                   properties:
                     bindAddress:
                       description: |-
@@ -2369,9 +2371,6 @@ spec:
                       maximum: 65535
                       minimum: 1
                       type: integer
-                    enabled:
-                      description: Enabled enables the K2V API
-                      type: boolean
                   type: object
                 layoutManagement:
                   description: LayoutManagement controls how the cluster layout is
@@ -3191,6 +3190,18 @@ spec:
                     data:
                       description: Data configures data block storage
                       properties:
+                        annotations:
+                          additionalProperties:
+                            type: string
+                          description: Annotations to set on the data PVC. Only valid
+                            when Type=PersistentVolumeClaim.
+                          type: object
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: Labels to set on the data PVC. Only valid when
+                            Type=PersistentVolumeClaim.
+                          type: object
                         paths:
                           description: |-
                             Paths specifies multiple data directories with capacities
@@ -3223,6 +3234,18 @@ spec:
                                     items:
                                       type: string
                                     type: array
+                                  annotations:
+                                    additionalProperties:
+                                      type: string
+                                    description: Annotations to set on the PVC. Only
+                                      valid when Type=PersistentVolumeClaim.
+                                    type: object
+                                  labels:
+                                    additionalProperties:
+                                      type: string
+                                    description: Labels to set on the PVC. Only valid
+                                      when Type=PersistentVolumeClaim.
+                                    type: object
                                   selector:
                                     description: Selector to select PVs. Only valid
                                       when Type=PersistentVolumeClaim.
@@ -3534,6 +3557,17 @@ spec:
                           items:
                             type: string
                           type: array
+                        annotations:
+                          additionalProperties:
+                            type: string
+                          description: Annotations to set on the PVC. Only valid when
+                            Type=PersistentVolumeClaim.
+                          type: object
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: Labels to set on the PVC. Only valid when Type=PersistentVolumeClaim.
+                          type: object
                         selector:
                           description: Selector to select PVs. Only valid when Type=PersistentVolumeClaim.
                           properties:
@@ -4059,7 +4093,10 @@ spec:
                     type: object
                   type: array
                 webApi:
-                  description: WebAPI configures the static website hosting endpoint
+                  description: |-
+                    WebAPI configures the static website hosting endpoint.
+                    Enabled by default with rootDomain ".<name>.<namespace>.svc".
+                    Set webApi.disabled: true to turn off.
                   properties:
                     addHostToMetrics:
                       description: AddHostToMetrics adds the domain name to metrics
@@ -4078,13 +4115,14 @@ spec:
                       maximum: 65535
                       minimum: 1
                       type: integer
-                    enabled:
-                      description: Enabled enables static website hosting
+                    disabled:
+                      description: Disabled disables the web endpoint entirely.
                       type: boolean
                     rootDomain:
                       description: |-
                         RootDomain is the root domain suffix for bucket website access.
-                        When set, bucket websites are accessible via <bucket-name>.<root-domain>.
+                        Bucket websites are accessible via <bucket-name>.<root-domain>.
+                        Defaults to ".<cluster-name>.<namespace>.svc" if not specified.
 
                         Examples:
                         - ".web.garage.tld" -> Access bucket "site" website at "site.web.garage.tld"
@@ -4717,9 +4755,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: garagekeys.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -4893,13 +4931,24 @@ spec:
                     accessKeyId:
                       description: AccessKeyID is the existing access key ID
                       type: string
+                    accessKeyIdKey:
+                      description: |-
+                        AccessKeyIDKey is the key in the secret that contains the access key ID
+                        Only used with SecretRef. Defaults to "access-key-id"
+                      type: string
                     secretAccessKey:
                       description: SecretAccessKey is the existing secret access key
+                      type: string
+                    secretAccessKeyKey:
+                      description: |-
+                        SecretAccessKeyKey is the key in the secret that contains the secret access key
+                        Only used with SecretRef. Defaults to "secret-access-key"
                       type: string
                     secretRef:
                       description: |-
                         SecretRef references a secret containing the credentials
-                        Secret should have keys: access-key-id, secret-access-key
+                        By default the secret should have keys: access-key-id, secret-access-key
+                        Use AccessKeyIDKey and SecretAccessKeyKey to override the key names
                       properties:
                         name:
                           description: name is unique within a namespace to reference
@@ -5195,9 +5244,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: garagenodes.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info

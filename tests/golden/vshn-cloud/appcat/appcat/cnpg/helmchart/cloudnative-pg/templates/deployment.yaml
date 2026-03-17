@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.28.0
-    helm.sh/chart: cloudnative-pg-0.27.0
+    app.kubernetes.io/version: 1.28.1
+    helm.sh/chart: cloudnative-pg-0.27.1
   name: appcat-cloudnative-pg
   namespace: syn-cnpg-system
 spec:
@@ -18,9 +18,9 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: c56a2a9b38d7ee9fbafdd45b08e199312c1e4b29069fb84bb1722d7d3649ec22
-        checksum/monitoring-config: dafcabf6c42dd87953d965912dc0db1e25871e8165f553d0b9903c7c37b17e53
-        checksum/rbac: 60995ba44db1c9a2663923419a191d463a9f50a88994a1279d13dcbc643e1686
+        checksum/config: 3bb18efd43492f64393e0b3a822d6112ac962d8075fddb3a3ad8893925b37752
+        checksum/monitoring-config: bc0322bcf7fedd5cc42cf396b5dacbb80696b4916865cf174119c71cca641e26
+        checksum/rbac: b6788fd81bfaea5bd26c64f1c94e4815e8d46f4cc66fcf6932b61327e430511a
       labels:
         app.kubernetes.io/instance: appcat
         app.kubernetes.io/name: cloudnative-pg
@@ -36,7 +36,7 @@ spec:
             - /manager
           env:
             - name: OPERATOR_IMAGE_NAME
-              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.0-ubi9
+              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.1-ubi9
             - name: OPERATOR_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -45,12 +45,12 @@ spec:
               value: cnpg-default-monitoring
             - name: EXPIRING_CHECK_THRESHOLD
               value: '15'
-          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.0-ubi9
+          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.1-ubi9
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
               path: /readyz
-              port: 9443
+              port: webhook-server
               scheme: HTTPS
             initialDelaySeconds: 3
           name: manager
@@ -64,7 +64,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /readyz
-              port: 9443
+              port: webhook-server
               scheme: HTTPS
             initialDelaySeconds: 3
           resources:
@@ -86,7 +86,7 @@ spec:
             failureThreshold: 6
             httpGet:
               path: /readyz
-              port: 9443
+              port: webhook-server
               scheme: HTTPS
             periodSeconds: 5
           volumeMounts:
