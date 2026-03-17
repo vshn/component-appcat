@@ -287,7 +287,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     crDeletionAfter: params.billing.customResourceDeletionAfter,
     billingEnabled: std.toString(params.billingEnabled),
     clusterName: inv.parameters.cluster.name,
-    [if std.objectHas(cluster, 'tenant') && cluster.tenant == 'c-servala' && std.objectHas(facts, 'distribution') && facts.distribution == 'talos' then 'claimAnnotationBillingPrefix']: 'billing.servala.com',
+    [if inv.parameters.cluster.tenant == 't-servala' && inv.parameters.facts.distribution == 'talos' then 'servalaBillingAnnotationPrefix']: params.billing.servalaBillingAnnotationPrefix,
     [if std.objectHas(serviceParams, 'imageRegistry') then 'imageRegistry']: serviceParams.imageRegistry,
     [if std.objectHas(serviceParams, 'imageRepositoryPrefix') then 'imageRepositoryPrefix']: serviceParams.imageRepositoryPrefix,
     [if std.objectHas(serviceParams, 'maintenanceURL') then 'maintenanceURL']: serviceParams.maintenanceURL,
