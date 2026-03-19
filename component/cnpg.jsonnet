@@ -239,6 +239,33 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
   },
 });
 
+local netpol = std.prune(kube._Object('networking.k8s.io/v1', 'NetworkPolicy', 'allow-webhook-all-namespaces') {
+  metadata+: {
+    namespace: params.namespace,
+    labels: labels,
+  },
+  spec+: {
+    policyTypes: [
+      'Ingress',
+    ],
+    ingress: [
+      {
+        ports: [
+          {
+            port: 9443,
+            protocol: 'TCP',
+          },
+        ],
+      },
+    ],
+    podSelector: {
+      matchLabels: {
+        'app.kubernetes.io/name': 'cloudnative-pg',
+      },
+    },
+  },
+});
+
 {
   '00_namespace': namespace {
     metadata+: {
@@ -247,4 +274,5 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
     },
   },
   '10_cnpg_prometheusrule': prometheusrule,
+  '11_networkpolicy': netpol,
 }
