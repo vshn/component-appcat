@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 3e3f2495b96bb09dfc0e78766443a73ca261a9de
+        tag: add/custom_bucket
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
