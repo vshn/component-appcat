@@ -38,7 +38,7 @@ spec:
           clusterName: c-green-test-1234
           cnpgClusterChartName: vshnpostgresql
           cnpgClusterChartSource: https://charts.appcat.ch/
-          cnpgClusterChartVersion: 0.7.1
+          cnpgClusterChartVersion: 0.7.2
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
