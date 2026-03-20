@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-f17ade7914225bd5368fe7c06593f1c3ba082606
+  name: function-appcat-debug-add-custom-bucket
 spec:
-  package: ghcr.io/vshn/appcat:f17ade7914225bd5368fe7c06593f1c3ba082606-func
+  package: ghcr.io/vshn/appcat:add_custom_bucket-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

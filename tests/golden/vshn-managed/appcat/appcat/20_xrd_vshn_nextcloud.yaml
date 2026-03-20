@@ -82,6 +82,63 @@ spec:
                             Warning: If this is set to true, the maintenance mode will not be enabled during the backup. This might
                             lead to inconsistent backups.
                           type: boolean
+                        unmanagedBucket:
+                          description: |-
+                            UnmanagedBucket specifies a bucket not managed by AppCat to be used for the backup.
+                            The user is responsible for the correctness of these values.
+                          properties:
+                            accessKey:
+                              description: AccessKey is the AWS_ACCESS_KEY_ID
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                                - key
+                                - name
+                                - namespace
+                              type: object
+                            bucket:
+                              description: Bucket is the name of the bucket to be
+                                used
+                              type: string
+                            endpoint:
+                              description: Endpoint is the unmanaged buckets endpoint
+                                without the bucket name
+                              type: string
+                            region:
+                              description: Region is the region of the bucket
+                              type: string
+                            secretKey:
+                              description: SecretKey is the AWS_SECRET_ACCESS_KEY
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                                - key
+                                - name
+                                - namespace
+                              type: object
+                          required:
+                            - accessKey
+                            - bucket
+                            - endpoint
+                            - region
+                            - secretKey
+                          type: object
                       type: object
                     instances:
                       default: 1
@@ -11350,24 +11407,6 @@ spec:
                                     description: VSHNDBaaSPostgresExtension contains
                                       the name of a single extension.
                                     properties:
-                                      dynamic_library_path:
-                                        description: |-
-                                          The list of directories inside the image which should be added to
-                                          dynamic_library_path.
-                                          This is only available for CloudNativePG
-                                          If not defined, defaults to "/lib".
-                                        items:
-                                          type: string
-                                        type: array
-                                      extension_control_path:
-                                        description: |-
-                                          The list of directories inside the image which should be added to
-                                          extension_control_path.
-                                          This is only available for CloudNativePG
-                                          If not defined, defaults to "/share".
-                                        items:
-                                          type: string
-                                        type: array
                                       image:
                                         description: |-
                                           Image containing the PostgreSQL extension.
@@ -11378,14 +11417,6 @@ spec:
                                         description: Optional image pull policy for
                                           the extension image
                                         type: string
-                                      ld_library_path:
-                                        description: |-
-                                          The list of directories inside the image which should be added to
-                                          ld_library_path.
-                                          This is only available for CloudNativePG
-                                        items:
-                                          type: string
-                                        type: array
                                       name:
                                         description: |-
                                           Name is the name of the extension to enable.
