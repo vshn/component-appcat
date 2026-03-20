@@ -16,7 +16,7 @@ metadata:
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/revision: debug-f17ade7914225bd5368fe7c06593f1c3ba082606
-    metadata.appcat.vshn.io/serviceID: vshn-postgresql
+    metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
 spec:

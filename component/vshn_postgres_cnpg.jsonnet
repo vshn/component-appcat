@@ -50,6 +50,11 @@ local composition =
   common.SyncOptions +
   common.vshnMetaVshnDBaas('PostgreSQL', 'standalone', 'true', pgPlans) +
   {
+    metadata+: {
+      labels+: {
+        'metadata.appcat.vshn.io/serviceID': common.VSHNServiceID(serviceName),
+      },
+    },
     spec: {
       compositeTypeRef: {
         apiVersion: 'vshn.appcat.vshn.io/v1',
