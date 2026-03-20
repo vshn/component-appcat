@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-db-alerting
+  name: function-appcat-master-f17ade7914225bd5368fe7c06593f1c3ba082606
 spec:
-  package: ghcr.io/vshn/appcat:fix_db_alerting-func
+  package: ghcr.io/vshn/appcat:f17ade7914225bd5368fe7c06593f1c3ba082606-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

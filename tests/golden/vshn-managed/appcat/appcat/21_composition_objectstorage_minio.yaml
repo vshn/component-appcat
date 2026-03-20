@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-db-alerting
+        name: function-appcat-master-f17ade7914225bd5368fe7c06593f1c3ba082606
       input:
         apiVersion: v1
         data:
