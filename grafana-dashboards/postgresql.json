@@ -19,7 +19,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1711,
   "links": [],
   "panels": [
     {
@@ -43,7 +42,7 @@
         "content": "# IMPORTANT\n\n<b>After each change please export this dashboard as JSON and update it in component-appcat repository</b>",
         "mode": "markdown"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "title": "Important note",
       "type": "text"
     },
@@ -65,7 +64,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -78,7 +77,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 10,
         "w": 24,
         "x": 0,
         "y": 4
@@ -99,11 +98,11 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "1 - max without(prometheus_replica, organization) (\nsum_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\"}[$__range])\n/ ignoring (sloth_window) count_over_time(slo:sli_error:ratio_rate5m{sloth_service=~\"appcat-.+\", service=\"VSHNPostgreSQL\", namespace=~\"$namespace\"}[$__range])\n) >= 0",
+          "expr": "avg without(sloth_id, sloth_service) (\n  1 - avg_over_time(\n    slo:sli_error:ratio_rate5m{\n      sloth_service=~\"appcat-.+\", \n      service=\"VSHNPostgreSQL\", \n      name=~\"$instance_name\"\n    }[$__range]\n  )\n)",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
@@ -111,19 +110,6 @@
       ],
       "title": "SLO",
       "type": "gauge"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
-      "id": 34,
-      "panels": [],
-      "title": "General Counters, CPU, Memory and File Descriptor Stats",
-      "type": "row"
     },
     {
       "datasource": {
@@ -160,6 +146,131 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 84.9999
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 13,
+        "x": 0,
+        "y": 14
+      },
+      "id": 75,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "uaI0iF84z"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "container_memory_rss{namespace=\"$instance_namespace\",container=\"patroni\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "RSS patroni-{{pod}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "uaI0iF84z"
+          },
+          "editorMode": "code",
+          "expr": "container_memory_working_set_bytes{namespace=\"$instance_namespace\",container=\"patroni\"}",
+          "instant": false,
+          "legendFormat": "patroni-{{pod}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Database(patroni) Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "uaI0iF84z"
+      },
+      "description": "Virtual and Resident memory size in bytes, averages over 5 min interval",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -175,7 +286,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -188,10 +299,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 12
+        "h": 12,
+        "w": 11,
+        "x": 13,
+        "y": 14
       },
       "id": 24,
       "options": {
@@ -208,11 +319,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -220,29 +332,136 @@
             "uid": "uaI0iF84z"
           },
           "editorMode": "code",
-          "expr": "avg(rate(container_memory_rss{namespace=\"$instance_namespace\"}[5m]))",
+          "expr": "container_memory_working_set_bytes{namespace=\"$instance_namespace\", container=~\"cluster-controller|envoy|pgbouncer|postgres-util|prometheus-postgres-exporter\"}",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Resident Mem",
+          "legendFormat": "{{container}}-{{pod}}",
           "range": true,
           "refId": "A"
+        }
+      ],
+      "title": "Secondary Container Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 34,
+      "panels": [],
+      "title": "General Counters, CPU, Memory and File Descriptor Stats",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "uaI0iF84z"
+      },
+      "description": "CPU usage average",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "id": 74,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "uaI0iF84z"
           },
           "editorMode": "code",
-          "expr": "avg(rate(container_memory_working_set_bytes{namespace=\"$instance_namespace\"}[5m]))",
+          "expr": "sum by (pod)(rate(container_cpu_usage_seconds_total{namespace=\"$instance_namespace\",container=\"patroni\"}[$__rate_interval]))",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Virtual Mem",
+          "legendFormat": "{{ pod }}",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "Average Memory Usage",
+      "title": "Average CPU Usage Percentage",
       "type": "timeseries"
     },
     {
@@ -280,6 +499,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -295,7 +515,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -308,9 +528,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
-        "y": 12
+        "w": 12,
+        "x": 12,
+        "y": 27
       },
       "id": 72,
       "options": {
@@ -327,11 +547,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -339,96 +560,16 @@
             "uid": "uaI0iF84z"
           },
           "editorMode": "code",
-          "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$instance_namespace\"}[5m])",
+          "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$instance_namespace\", container!=\"\"}[5m])",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "{{container}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Average CPU Usage",
+      "title": "Average CPU Usage Rate (all containers)",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "uaI0iF84z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 1,
-        "x": 0,
-        "y": 20
-      },
-      "id": 36,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "uaI0iF84z"
-          },
-          "editorMode": "code",
-          "expr": "pg_static{cluster_id=\"$cluster-user-workload\", exported_namespace=\"$instance_namespace\"}",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "{{short_version}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Version",
-      "type": "stat"
     },
     {
       "collapsed": false,
@@ -436,7 +577,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 34
       },
       "id": 32,
       "panels": [],
@@ -466,7 +607,86 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 1,
+        "x": 0,
+        "y": 35
+      },
+      "id": 36,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "uaI0iF84z"
+          },
+          "editorMode": "code",
+          "expr": "pg_static{cluster_id=\"$cluster-user-workload\", exported_namespace=\"$instance_namespace\"}",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "{{short_version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Version",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "uaI0iF84z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -482,7 +702,7 @@
         "h": 3,
         "w": 3,
         "x": 1,
-        "y": 20
+        "y": 35
       },
       "id": 40,
       "maxDataPoints": 100,
@@ -503,7 +723,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -544,7 +764,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -560,7 +780,7 @@
         "h": 3,
         "w": 3,
         "x": 4,
-        "y": 20
+        "y": 35
       },
       "id": 42,
       "maxDataPoints": 100,
@@ -581,7 +801,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -622,7 +842,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -638,7 +858,7 @@
         "h": 3,
         "w": 3,
         "x": 7,
-        "y": 20
+        "y": 35
       },
       "id": 44,
       "maxDataPoints": 100,
@@ -659,7 +879,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -700,7 +920,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -716,7 +936,7 @@
         "h": 3,
         "w": 3,
         "x": 10,
-        "y": 20
+        "y": 35
       },
       "id": 46,
       "maxDataPoints": 100,
@@ -737,7 +957,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -778,7 +998,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -794,7 +1014,7 @@
         "h": 3,
         "w": 3,
         "x": 13,
-        "y": 20
+        "y": 35
       },
       "id": 48,
       "maxDataPoints": 100,
@@ -815,7 +1035,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -854,7 +1074,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -870,7 +1090,7 @@
         "h": 3,
         "w": 2,
         "x": 16,
-        "y": 20
+        "y": 35
       },
       "id": 54,
       "maxDataPoints": 100,
@@ -891,7 +1111,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -932,7 +1152,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -948,7 +1168,7 @@
         "h": 3,
         "w": 2,
         "x": 18,
-        "y": 20
+        "y": 35
       },
       "id": 56,
       "maxDataPoints": 100,
@@ -969,7 +1189,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1008,7 +1228,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1024,7 +1244,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 20
+        "y": 35
       },
       "id": 38,
       "maxDataPoints": 100,
@@ -1045,7 +1265,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1070,7 +1290,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 38
       },
       "id": 30,
       "panels": [],
@@ -1111,6 +1331,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -1127,7 +1348,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1143,7 +1364,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 24
+        "y": 39
       },
       "id": 1,
       "options": {
@@ -1159,11 +1380,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1218,6 +1440,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1233,7 +1456,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1249,7 +1472,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 24
+        "y": 39
       },
       "id": 60,
       "options": {
@@ -1265,11 +1488,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1335,6 +1559,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1352,7 +1577,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1368,7 +1593,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 24
+        "y": 39
       },
       "id": 3,
       "options": {
@@ -1384,11 +1609,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1442,6 +1668,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1458,7 +1685,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1474,7 +1701,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 31
+        "y": 46
       },
       "id": 62,
       "options": {
@@ -1489,11 +1716,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1546,6 +1774,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1562,7 +1791,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1578,7 +1807,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 31
+        "y": 46
       },
       "id": 4,
       "options": {
@@ -1596,11 +1825,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1655,6 +1885,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1671,7 +1902,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1687,7 +1918,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 31
+        "y": 46
       },
       "id": 66,
       "options": {
@@ -1702,11 +1933,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1773,6 +2005,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1789,7 +2022,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1805,7 +2038,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 38
+        "y": 53
       },
       "id": 68,
       "options": {
@@ -1820,11 +2053,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -1877,6 +2111,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1892,7 +2127,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1908,7 +2143,7 @@
         "h": 7,
         "w": 16,
         "x": 8,
-        "y": 38
+        "y": 53
       },
       "id": 64,
       "options": {
@@ -1924,11 +2159,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -2033,6 +2269,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2048,7 +2285,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2064,7 +2301,7 @@
         "h": 7,
         "w": 16,
         "x": 4,
-        "y": 45
+        "y": 60
       },
       "id": 70,
       "options": {
@@ -2080,11 +2317,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.4.0",
       "targets": [
         {
           "datasource": {
@@ -2106,7 +2344,7 @@
   ],
   "preload": false,
   "refresh": "10s",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [
     "schedar",
     "Appcat"
@@ -2115,29 +2353,29 @@
     "list": [
       {
         "current": {
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "uaI0iF84z"
+        },
         "definition": "",
         "includeAll": true,
         "label": "Lock table",
         "multi": true,
         "name": "mode",
         "options": [],
-        "query": "label_values({mode=~\"accessexclusivelock|accesssharelock|exclusivelock|rowexclusivelock|rowsharelock|sharelock|sharerowexclusivelock|shareupdateexclusivelock\"}, mode)",
+        "query": "",
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "c-eberhard-test1",
-          "value": "c-eberhard-test1"
+          "text": "c-hin-prod-lpg1",
+          "value": "c-hin-prod-lpg1"
         },
         "datasource": {
           "type": "prometheus",
@@ -2153,33 +2391,58 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "ebi-analytics-db",
-          "value": "ebi-analytics-db"
+          "text": "pgsql-database-postgresql-s2x75",
+          "value": "pgsql-database-postgresql-s2x75"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "uaI0iF84z"
         },
-        "definition": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", cluster_id=\"$cluster\"},namespace)",
-        "name": "namespace",
+        "definition": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", instance_namespace=\"$instance_namespace\"},name)",
+        "hide": 2,
+        "name": "instance_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", cluster_id=\"$cluster\"},namespace)",
+          "query": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", instance_namespace=\"$instance_namespace\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       },
       {
         "current": {
-          "text": "vshn-postgresql-ebi-analytics-kxxnt",
-          "value": "vshn-postgresql-ebi-analytics-kxxnt"
+          "text": "mail-svdh-prod",
+          "value": "mail-svdh-prod"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "uaI0iF84z"
+        },
+        "definition": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", cluster_id=\"$cluster\"},claim_namespace)",
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(appcat_probes_seconds_count{service=\"VSHNPostgreSQL\", cluster_id=\"$cluster\"},claim_namespace)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "vshn-postgresql-pgsql-database-postgresql-s2x75",
+          "value": "vshn-postgresql-pgsql-database-postgresql-s2x75"
         },
         "datasource": {
           "type": "prometheus",
@@ -2195,6 +2458,7 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       }
     ]
@@ -2207,6 +2471,6 @@
   "timezone": "utc",
   "title": "VSHNPostgreSQL",
   "uid": "postgresql-k8s",
-  "version": 12,
+  "version": 35,
   "weekStart": "monday"
 }
