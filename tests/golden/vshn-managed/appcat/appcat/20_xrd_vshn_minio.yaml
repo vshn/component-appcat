@@ -71,6 +71,63 @@ spec:
                             (\*|([0-9]|1[0-9]|2[0-3])|\*\/([0-9]|1[0-9]|2[0-3])) (\*|([1-9]|1[0-9]|2[0-9]|3[0-1])|\*\/([1-9]|1[0-9]|2[0-9]|3[0-1]))
                             (\*|([1-9]|1[0-2])|\*\/([1-9]|1[0-2])) (\*|([0-6])|\*\/([0-6]))$
                           type: string
+                        unmanagedBucket:
+                          description: |-
+                            UnmanagedBucket specifies a bucket not managed by AppCat to be used for the backup.
+                            The user is responsible for the correctness of these values.
+                          properties:
+                            accessKey:
+                              description: AccessKey is the AWS_ACCESS_KEY_ID
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                                - key
+                                - name
+                                - namespace
+                              type: object
+                            bucket:
+                              description: Bucket is the name of the bucket to be
+                                used
+                              type: string
+                            endpoint:
+                              description: Endpoint is the unmanaged buckets endpoint
+                                without the bucket name
+                              type: string
+                            region:
+                              description: Region is the region of the bucket
+                              type: string
+                            secretKey:
+                              description: SecretKey is the AWS_SECRET_ACCESS_KEY
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                                - key
+                                - name
+                                - namespace
+                              type: object
+                          required:
+                            - accessKey
+                            - bucket
+                            - endpoint
+                            - region
+                            - secretKey
+                          type: object
                       type: object
                     instances:
                       default: 4
