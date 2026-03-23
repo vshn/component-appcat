@@ -26,6 +26,9 @@ local annotationMap = {
   Secret: {
     'argocd.argoproj.io/sync-wave': '-100',
   },
+  CustomResourceDefinition: {
+    'argocd.argoproj.io/sync-options': 'Prune=false',
+  },
   ObjectBucket: {
     'argocd.argoproj.io/sync-options': 'Prune=false,SkipDryRunOnMissingResource=true',
   },

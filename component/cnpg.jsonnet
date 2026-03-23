@@ -266,13 +266,15 @@ local netpol = std.prune(kube._Object('networking.k8s.io/v1', 'NetworkPolicy', '
   },
 });
 
-{
-  '00_namespace': namespace {
-    metadata+: {
-      labels+: params.namespaceLabels,
-      annotations+: params.namespaceAnnotations,
+if params.enabled then
+  {
+    '00_namespace': namespace {
+      metadata+: {
+        labels+: params.namespaceLabels,
+        annotations+: params.namespaceAnnotations,
+      },
     },
-  },
-  '10_cnpg_prometheusrule': prometheusrule,
-  '11_networkpolicy': netpol,
-}
+    '10_cnpg_prometheusrule': prometheusrule,
+    '11_networkpolicy': netpol,
+  }
+else {}
