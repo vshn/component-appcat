@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-1fb0f164ea8b96f320a8d278e2ee85ae37e2343b
+        name: function-appcat-master-fix-keycloak-restore
       input:
         apiVersion: v1
         data:
