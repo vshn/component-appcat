@@ -16,7 +16,7 @@ metadata:
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/revision: master-add_custom_bucket
-    metadata.appcat.vshn.io/serviceID: vshn-postgresql
+    metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
 spec:
