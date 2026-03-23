@@ -33,7 +33,7 @@ parameters:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
         source: https://charts.appcat.ch/
-        version: 0.7.1
+        version: 0.7.2
         chartName: vshnpostgresql
       garage:
         source: https://charts.appcat.ch/
