@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/cnpg_backup_servername
+        function-revision: 1fb0f164ea8b96f320a8d278e2ee85ae37e2343b
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
