@@ -43,7 +43,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:13584bd4ce53c663ca62c4c52bce927b3bb0f7d5
+          image: ghcr.io/vshn/appcat:fix-keycloak-stackres-con
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

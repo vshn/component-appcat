@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 13584bd4ce53c663ca62c4c52bce927b3bb0f7d5
+        tag: fix-keycloak-stackres-con
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
