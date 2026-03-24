@@ -1,5 +1,35 @@
 parameters:
   =_config:
+    cnpg_helmchart:
+      "True":
+        input_type: helm
+        input_paths:
+          - ${_base_directory}/dependencies/cnpg/helmchart/cnpg-${appcat:charts:cnpg:version}
+        helm_values: ${appcat:cnpg:helmValues}
+        helm_params:
+          name: ${_instance}
+          namespace: ${appcat:cnpg:namespace}
+        output_path: appcat/cnpg/helmchart
+      "False":
+        input_paths: []
+        input_type: jsonnet
+        output_path: ""
+
+    cnpg_barman_helmchart:
+      "True":
+        input_type: helm
+        input_paths:
+          - ${_base_directory}/dependencies/cnpg/helmchart/plugin-barman-cloud-${appcat:charts:cnpgBarmanPlugin:version}
+        helm_values: ${appcat:cnpg:barmanPluginHelmValues}
+        helm_params:
+          name: plugin-barman-cloud
+          namespace: ${appcat:cnpg:namespace}
+        output_path: appcat/cnpg/helmchart
+      "False":
+        input_paths: []
+        input_type: jsonnet
+        output_path: ""
+
     garage_operator:
       "True":
         input_type: helm
@@ -170,23 +200,9 @@ parameters:
         input_type: jsonnet
         output_path: appcat/garage_operator/
 
-      - input_type: helm
-        input_paths:
-          - ${_base_directory}/dependencies/cnpg/helmchart/cnpg-${appcat:charts:cnpg:version}
-        helm_values: ${appcat:cnpg:helmValues}
-        helm_params:
-          name: ${_instance}
-          namespace: ${appcat:cnpg:namespace}
-        output_path: appcat/cnpg/helmchart
+      - ${_config:cnpg_helmchart:${appcat:cnpg:enabled}}
 
-      - input_type: helm
-        input_paths:
-          - ${_base_directory}/dependencies/cnpg/helmchart/plugin-barman-cloud-${appcat:charts:cnpgBarmanPlugin:version}
-        helm_values: ${appcat:cnpg:barmanPluginHelmValues}
-        helm_params:
-          name: plugin-barman-cloud
-          namespace: ${appcat:cnpg:namespace}
-        output_path: appcat/cnpg/helmchart
+      - ${_config:cnpg_barman_helmchart:${appcat:cnpg:enabled}}
 
       - input_paths:
           - ${_base_directory}/component/cnpg.jsonnet
@@ -205,15 +221,23 @@ parameters:
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
+          enabled: ${appcat:cnpg:enabled}
+        - type: jsonnet
+          filter: postprocess/add_argo_annotations.jsonnet
+          path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates/crds
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/patch_operator_deployment.jsonnet
           path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/cnpg.jsonnet
           path: ${_instance}/cnpg/helmchart/cloudnative-pg/templates
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/cnpg-barman-plugin.jsonnet
           path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}
@@ -245,9 +269,15 @@ parameters:
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates
+          enabled: ${appcat:cnpg:enabled}
+        - type: jsonnet
+          filter: postprocess/add_argo_annotations.jsonnet
+          path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates/crds
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/add_argo_annotations.jsonnet
           path: ${_instance}/cnpg/helmchart/plugin-barman-cloud/templates/additional-rbac
+          enabled: ${appcat:cnpg:enabled}
         - type: jsonnet
           filter: postprocess/patch_pull_policy.jsonnet
           path: ${_instance}

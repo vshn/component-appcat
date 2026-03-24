@@ -237,6 +237,7 @@ parameters:
           managementPolicy: Basic
 
     cnpg:
+      enabled: true
       namespace: syn-cnpg-system
       namespaceLabels: {}
       namespaceAnnotations: ${appcat:namespaceAnnotations}
