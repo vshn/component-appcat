@@ -199,7 +199,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
           },
           {
             alert: 'CNPGClusterInstancesOnSameNode',
-            expr: 'count by (namespace, node) (kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"}) > 1',
+            expr: 'count by (namespace, node) (kube_pod_info{namespace=~"vshn-postgresql-.*",pod=~"postgresql-.*"} * on(pod,namespace) group_right(node) kube_pod_labels{label_cnpg_io_cluster=~".+"}) > 1',
             'for': '5m',
             labels: {
               severity: 'warning',
@@ -239,12 +239,42 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
   },
 });
 
-{
-  '00_namespace': namespace {
-    metadata+: {
-      labels+: params.namespaceLabels,
-      annotations+: params.namespaceAnnotations,
+local netpol = std.prune(kube._Object('networking.k8s.io/v1', 'NetworkPolicy', 'allow-webhook-all-namespaces') {
+  metadata+: {
+    namespace: params.namespace,
+    labels: labels,
+  },
+  spec+: {
+    policyTypes: [
+      'Ingress',
+    ],
+    ingress: [
+      {
+        ports: [
+          {
+            port: 9443,
+            protocol: 'TCP',
+          },
+        ],
+      },
+    ],
+    podSelector: {
+      matchLabels: {
+        'app.kubernetes.io/name': 'cloudnative-pg',
+      },
     },
   },
-  '10_cnpg_prometheusrule': prometheusrule,
-}
+});
+
+if params.enabled then
+  {
+    '00_namespace': namespace {
+      metadata+: {
+        labels+: params.namespaceLabels,
+        annotations+: params.namespaceAnnotations,
+      },
+    },
+    '10_cnpg_prometheusrule': prometheusrule,
+    '11_networkpolicy': netpol,
+  }
+else {}

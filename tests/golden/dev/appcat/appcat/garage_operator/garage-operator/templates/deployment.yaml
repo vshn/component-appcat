@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.0.41
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.0.41
+    helm.sh/chart: garage-operator-0.1.4
   name: appcat-garage-operator
   namespace: syn-garage-operator
 spec:
@@ -33,7 +33,7 @@ spec:
             - --health-probe-bind-address=:8081
           command:
             - /manager
-          image: ghcr.io/rajsinghtech/garage-operator:v0.0.41
+          image: ghcr.io/rajsinghtech/garage-operator:v0.1.4
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

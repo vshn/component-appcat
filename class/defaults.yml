@@ -21,19 +21,19 @@ parameters:
         version: 7.1.8
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 8.8.2
+        version: 8.9.1
       forgejo:
         source: oci://code.forgejo.org/forgejo-helm/forgejo
         version: 16.2.0
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.27.0
+        version: 0.27.1
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
       cnpgCluster:
         source: https://charts.appcat.ch/
-        version: 0.7.1
+        version: 0.7.2
         chartName: vshnpostgresql
       garage:
         source: https://charts.appcat.ch/
@@ -46,11 +46,11 @@ parameters:
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
-        version: 0.4.0
+        version: 0.5.0
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.0.41
+        version: 0.1.4
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -59,7 +59,7 @@ parameters:
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
-        tag: v1.0.4
+        tag: v1.2.0
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.182.1
+        tag: v4.183.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -237,6 +237,7 @@ parameters:
           managementPolicy: Basic
 
     cnpg:
+      enabled: true
       namespace: syn-cnpg-system
       namespaceLabels: {}
       namespaceAnnotations: ${appcat:namespaceAnnotations}

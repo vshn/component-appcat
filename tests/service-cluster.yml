@@ -23,6 +23,8 @@ parameters:
     proxyFunction: false
     quotasEnabled: false
     appuioManaged: false
+    cnpg:
+      enabled: false
     billing:
       salesOrder: ST10120
       vshn:

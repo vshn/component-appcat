@@ -1,7 +1,7 @@
 apiVersion: vshn.appcat.vshn.io/v1
 kind: VSHNNextcloud
 metadata:
-  name: nextcloud-backup-disabled-test
+  name: nextcloud-backup-disabled
 spec:
   parameters:
     security:
