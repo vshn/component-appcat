@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix-keycloak-stackres-con
+    metadata.appcat.vshn.io/revision: master-51b77815324594d35c0340f76d1b95e5dae16b83
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-keycloak-stackres-con
+        name: function-appcat-master-51b77815324594d35c0340f76d1b95e5dae16b83
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: fix-keycloak-stackres-con
+          imageTag: 51b77815324594d35c0340f76d1b95e5dae16b83
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"

@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-keycloak-stackres-con
+        name: function-appcat-debug-51b77815324594d35c0340f76d1b95e5dae16b83
       input:
         apiVersion: v1
         data:

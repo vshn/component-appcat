@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:fix-keycloak-stackres-con
+          image: ghcr.io/vshn/appcat:51b77815324594d35c0340f76d1b95e5dae16b83
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-keycloak-stackres-con
+  name: function-appcat-debug-51b77815324594d35c0340f76d1b95e5dae16b83
 spec:
-  package: ghcr.io/vshn/appcat:fix-keycloak-stackres-con-func
+  package: ghcr.io/vshn/appcat:51b77815324594d35c0340f76d1b95e5dae16b83-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
