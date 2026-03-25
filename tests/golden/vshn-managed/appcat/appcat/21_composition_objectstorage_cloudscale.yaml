@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-183-0
+        name: function-appcat-master-fix-keycloak-copyjob-timeout
       input:
         apiVersion: v1
         data:
