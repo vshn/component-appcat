@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:eff34cc4d6cdebaa31771aa5b0ec82e726910c23
+          image: ghcr.io/vshn/appcat:fix_keycloak-copyjob-timeout
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

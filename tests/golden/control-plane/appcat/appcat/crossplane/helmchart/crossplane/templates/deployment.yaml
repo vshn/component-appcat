@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: eff34cc4d6cdebaa31771aa5b0ec82e726910c23
+        function-revision: fix/keycloak-copyjob-timeout
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
