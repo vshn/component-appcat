@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+    metadata.appcat.vshn.io/revision: master-change_configurable_init_container
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+        name: function-appcat-master-change-configurable-init-container
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
+          imageTag: change_configurable_init_container
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

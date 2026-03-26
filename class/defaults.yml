@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
+        tag: change/configurable_init_container
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
