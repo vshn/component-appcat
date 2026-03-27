@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.183.0
+    metadata.appcat.vshn.io/revision: master-change_configurable_init_container
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-183-0
+        name: function-appcat-master-change-configurable-init-container
       input:
         apiVersion: v1
         data:
@@ -32,6 +32,7 @@ spec:
           billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
+          busybox_image_tag: '1.37'
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.9.1
           cloudProvider: cloudscale
@@ -55,7 +56,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.183.0
+          imageTag: change_configurable_init_container
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
