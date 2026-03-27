@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-custom-bucket
+        name: function-appcat-master-95f46413f07e155be35ff37242b1a9f83f9506b1
       input:
         apiVersion: v1
         data:

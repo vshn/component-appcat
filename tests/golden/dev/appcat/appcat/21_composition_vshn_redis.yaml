@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_custom_bucket
+    metadata.appcat.vshn.io/revision: debug-95f46413f07e155be35ff37242b1a9f83f9506b1
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-custom-bucket
+        name: function-appcat-debug-95f46413f07e155be35ff37242b1a9f83f9506b1
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: add_custom_bucket
+          imageTag: 95f46413f07e155be35ff37242b1a9f83f9506b1
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
