@@ -31,6 +31,7 @@ spec:
           billingEnabled: 'false'
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
+          busybox_image_tag: '1.37'
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.9.1
           cloudProvider: cloudscale
