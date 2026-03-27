@@ -68,50 +68,55 @@ local mergedArgs = controllersParams.extraArgs + [
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
 ];
 
-local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
-  {
-    name: 'PLANS_NAMESPACE',
-    value: params.namespace,
-  },
-  if controllersParams.controlPlaneKubeconfig != '' then {
-    name: 'CONTROL_PLANE_KUBECONFIG',
-    value: '/config/config',
-  } else null,
-] + (if controllersParams.billingEnabled then [
-  {
-    name: 'ODOO_BASE_URL',
-    value: controllersParams.billing.odooBaseURL,
-  },
-  {
-    name: 'ODOO_DB',
-    value: controllersParams.billing.odooDb,
-  },
-  {
-    name: 'ODOO_CLIENT_ID',
-    value: controllersParams.billing.odooClientID,
-  },
-  {
-    name: 'ODOO_CLIENT_SECRET',
-    value: controllersParams.billing.odooClientSecret,
-  },
-  {
-    name: 'ODOO_TOKEN_URL',
-    value: controllersParams.billing.odooTokenURL,
-  },
-  {
-    name: 'BILLING_MAX_EVENTS_PRODUCT',
-    value: std.toString(controllersParams.billing.maxEventsPerProduct),
-  },
-] else []) + (if controllersParams.monitoringEnabled then [
-  {
-    name: 'CROSSPLANE_LABEL_MAPPING',
-    value: controllersParams.monitoring.crossplane_label_mapping,
-  },
-  {
-    name: 'CROSSPLANE_EXTRA_RESOURCES',
-    value: controllersParams.monitoring.crossplane_extra_resources,
-  },
-] else []));
+local mergedEnv =
+  com.envList(controllersParams.extraEnv) +
+  std.prune(
+    [
+      {
+        name: 'PLANS_NAMESPACE',
+        value: params.namespace,
+      },
+      if controllersParams.controlPlaneKubeconfig != '' then {
+        name: 'CONTROL_PLANE_KUBECONFIG',
+        value: '/config/config',
+      } else null,
+    ] + (if controllersParams.billingEnabled then [
+           {
+             name: 'ODOO_BASE_URL',
+             value: controllersParams.billing.odooBaseURL,
+           },
+           {
+             name: 'ODOO_DB',
+             value: controllersParams.billing.odooDb,
+           },
+           {
+             name: 'ODOO_CLIENT_ID',
+             value: controllersParams.billing.odooClientID,
+           },
+           {
+             name: 'ODOO_CLIENT_SECRET',
+             value: controllersParams.billing.odooClientSecret,
+           },
+           {
+             name: 'ODOO_TOKEN_URL',
+             value: controllersParams.billing.odooTokenURL,
+           },
+           {
+             name: 'BILLING_MAX_EVENTS_PRODUCT',
+             value: std.toString(controllersParams.billing.maxEventsPerProduct),
+           },
+         ] else []) +
+    (if controllersParams.monitoringEnabled then [
+       {
+         name: 'CROSSPLANE_LABEL_MAPPING',
+         value: controllersParams.monitoring.crossplane_label_mapping,
+       },
+       {
+         name: 'CROSSPLANE_EXTRA_RESOURCES',
+         value: controllersParams.monitoring.crossplane_extra_resources,
+       },
+     ] else [])
+  );
 
 local controlKubeConfig = kube.Secret('controlclustercredentials') + {
   metadata+: {
