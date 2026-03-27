@@ -53,7 +53,7 @@ spec:
           imageRepositoryPrefix: vshn
           imageTag: 95f46413f07e155be35ff37242b1a9f83f9506b1
           isOpenshift: 'true'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.33.4
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
           minimumRevisionAge: 168h
