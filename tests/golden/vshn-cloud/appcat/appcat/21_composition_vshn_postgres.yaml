@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.183.0
+    metadata.appcat.vshn.io/revision: master-3e3f2495b96bb09dfc0e78766443a73ca261a9de
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,13 +26,12 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-183-0
+        name: function-appcat-master-3e3f2495b96bb09dfc0e78766443a73ca261a9de
       input:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: lpg
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
@@ -51,7 +50,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.183.0
+          imageTag: 3e3f2495b96bb09dfc0e78766443a73ca261a9de
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",

@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.183.0
+        tag: 3e3f2495b96bb09dfc0e78766443a73ca261a9de
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -275,6 +275,7 @@ parameters:
       instanceUOM: uom_uom_45_1e112771
       customResourceDeletionAfter: "180"
       enableMockOrgInfo: false
+      servalaBillingAnnotationPrefix: billing.servala.com
       salesOrder: ${facts:sales_order}
       vshn:
         enableCronjobs: false

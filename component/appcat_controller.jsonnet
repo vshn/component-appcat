@@ -77,7 +77,7 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
     name: 'CONTROL_PLANE_KUBECONFIG',
     value: '/config/config',
   } else null,
-] + if controllersParams.billingEnabled then [
+] + (if controllersParams.billingEnabled then [
   {
     name: 'ODOO_BASE_URL',
     value: controllersParams.billing.odooBaseURL,
@@ -102,7 +102,7 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
     name: 'BILLING_MAX_EVENTS_PRODUCT',
     value: std.toString(controllersParams.billing.maxEventsPerProduct),
   },
-] else [] + if controllersParams.monitoringEnabled then [
+] else []) + (if controllersParams.monitoringEnabled then [
   {
     name: 'CROSSPLANE_LABEL_MAPPING',
     value: controllersParams.monitoring.crossplane_label_mapping,
@@ -111,7 +111,7 @@ local mergedEnv = com.envList(controllersParams.extraEnv) + std.prune([
     name: 'CROSSPLANE_EXTRA_RESOURCES',
     value: controllersParams.monitoring.crossplane_extra_resources,
   },
-] else []);
+] else []));
 
 local controlKubeConfig = kube.Secret('controlclustercredentials') + {
   metadata+: {
