@@ -29,7 +29,6 @@ spec:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           busybox_image_tag: '1.37'
@@ -40,7 +39,7 @@ spec:
           controlNamespace: syn-appcat-control
           crDeletionAfter: '180'
           crossplaneNamespace: syn-crossplane
-          defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+          defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           defaultPlan: standard-2
           emailAlertingEnabled: 'true'
           emailAlertingSecretName: mailgun-smtp-credentials

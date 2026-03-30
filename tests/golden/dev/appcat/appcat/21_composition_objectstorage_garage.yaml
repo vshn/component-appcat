@@ -29,10 +29,14 @@ spec:
           chartRepository: https://charts.appcat.ch/
           chartVersion: 0.0.1
           crossplaneNamespace: syn-crossplane
-          providerConfig: minio
+          garageClaim: garage
+          garageClaimNamespace: syn-appcat
+          ownerGroup: appcat.vshn.io
+          ownerKind: XObjectBucket
+          ownerVersion: v1
           proxyEndpoint: 172.18.0.1:9443
-          serviceID: minio-minio-objectbucket
-          serviceName: miniobucket
+          serviceID: garage-garage-objectbucket
+          serviceName: garagebucket
         kind: ConfigMap
         metadata:
           labels:

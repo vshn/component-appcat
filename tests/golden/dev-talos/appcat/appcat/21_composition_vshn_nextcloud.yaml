@@ -29,11 +29,10 @@ spec:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.8.2
+          chartVersion: 8.9.1
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
