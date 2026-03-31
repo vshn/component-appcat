@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+    metadata.appcat.vshn.io/revision: master-eff34cc4d6cdebaa31771aa5b0ec82e726910c23
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+        name: function-appcat-master-eff34cc4d6cdebaa31771aa5b0ec82e726910c23
       input:
         apiVersion: v1
         data:
@@ -48,10 +48,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          exporter_tag: 1.76.0-debian-12-r0
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: vshn
-          imageTag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
+          imageTag: eff34cc4d6cdebaa31771aa5b0ec82e726910c23
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance

@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
+        tag: eff34cc4d6cdebaa31771aa5b0ec82e726910c23
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -141,6 +141,8 @@ parameters:
         registry: docker-registry.inventage.com:10121
         image: keycloak-competence-center/keycloak-managed
         maintenanceURL: "https://docker-registry.inventage.com:10121/v2/keycloak-competence-center/keycloak-managed/tags/list"
+      redis-exporter:
+        tag: 1.76.0-debian-12-r0
     =_crd_version: ${appcat:images:appcat:tag}
 
     pullPolicy: IfNotPresent
@@ -893,6 +895,7 @@ parameters:
           billing: true
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+            exporter_tag: ${appcat:images:redis-exporter:tag}
           serviceName: VSHNRedis
           compFunctionsOnly: true
           connectionSecretKeys:
@@ -1173,6 +1176,7 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+            busybox_image_tag: ${appcat:images:busybox:tag}
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+    metadata.appcat.vshn.io/revision: master-eff34cc4d6cdebaa31771aa5b0ec82e726910c23
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,13 +24,14 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
+        name: function-appcat-master-eff34cc4d6cdebaa31771aa5b0ec82e726910c23
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
+          busybox_image_tag: '1.37'
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.9.1
           cloudProvider: cloudscale
@@ -54,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
+          imageTag: eff34cc4d6cdebaa31771aa5b0ec82e726910c23
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
