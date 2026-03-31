@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: cnpg-user-access
+        function-revision: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-cnpg-user-access
+    metadata.appcat.vshn.io/revision: master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-cnpg-user-access
+        name: function-appcat-master-94e713913e2e8ac18fddd5815b7aee37eb9132b5
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: cnpg-user-access
+          imageTag: 94e713913e2e8ac18fddd5815b7aee37eb9132b5
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100

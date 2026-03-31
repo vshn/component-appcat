@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-cnpg-user-access
+        name: function-appcat-debug-94e713913e2e8ac18fddd5815b7aee37eb9132b5
       input:
         apiVersion: v1
         data:
