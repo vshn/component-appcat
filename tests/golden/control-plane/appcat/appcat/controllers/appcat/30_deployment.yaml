@@ -38,7 +38,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:fix_keycloak-copyjob-timeout
+          image: ghcr.io/vshn/appcat:0fbfc908e9cdb2c74814c9e0e412577210c0996c
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:fix_keycloak-copyjob-timeout
+          image: ghcr.io/vshn/appcat:0fbfc908e9cdb2c74814c9e0e412577210c0996c
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
