@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-change-configurable-init-container
+        name: function-appcat-master-eff34cc4d6cdebaa31771aa5b0ec82e726910c23
       input:
         apiVersion: v1
         data:
