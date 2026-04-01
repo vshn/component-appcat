@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-b81c011e2331484a028176ba1c8c698fe74bb365
+        name: function-appcat-master-fix-appuio-quotas
       input:
         apiVersion: v1
         data:
