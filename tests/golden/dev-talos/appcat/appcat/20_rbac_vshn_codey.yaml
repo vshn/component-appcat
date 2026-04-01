@@ -1,0 +1,38 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: 'true'
+  name: appcat:composite:xcodeyinstances.codey.io:claim-view
+rules:
+  - apiGroups:
+      - codey.io
+    resources:
+      - codeyinstances
+      - codeyinstances/status
+      - codeyinstances/finalizers
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: 'true'
+    rbac.authorization.k8s.io/aggregate-to-edit: 'true'
+  name: appcat:composite:xcodeyinstances.codey.io:claim-edit
+rules:
+  - apiGroups:
+      - codey.io
+    resources:
+      - codeyinstances
+      - codeyinstances/status
+      - codeyinstances/finalizers
+    verbs:
+      - '*'

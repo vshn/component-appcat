@@ -1,0 +1,65 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-appcat-job-postgres-maintenance
+  name: crossplane:appcat:job:postgres:maintenance
+rules:
+  - apiGroups:
+      - apiextensions.crossplane.io
+    resources:
+      - compositionrevisions
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - xvshnpostgresqls
+      - vshnpostgresqls
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - create
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs/status
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sgclusters
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - stackgres.io
+    resources:
+      - sgdbops
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - watch

@@ -1,0 +1,54 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  name: appcat-sliexporter-appcat-sli-exporter
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - namespaces
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - managedupgrade.appuio.io
+    resources:
+      - upgradejobs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshnmariadbs
+      - vshnminios
+      - vshnpostgresqls
+      - vshnredis
+      - xvshnkeycloaks
+      - xvshnmariadbs
+      - xvshnminios
+      - xvshnpostgresqls
+      - xvshnredis
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - vshnmariadbs/status
+      - vshnminios/status
+      - vshnpostgresqls/status
+      - vshnredis/status
+      - xvshnkeycloaks/status
+      - xvshnmariadbs/status
+      - xvshnminios/status
+      - xvshnpostgresqls/status
+      - xvshnredis/status
+    verbs:
+      - get
