@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-forgejo-ssh
+        name: function-appcat-master-625528fe89a39f980cadefffb2d09d48b46aa290
       input:
         apiVersion: v1
         data:
