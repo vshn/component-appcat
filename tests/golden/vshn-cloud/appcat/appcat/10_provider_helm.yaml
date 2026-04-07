@@ -202,6 +202,7 @@ rules:
       - clusters
       - imagecatalogs
       - scheduledbackups
+      - databases
     verbs:
       - get
       - list

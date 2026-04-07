@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.183.0
+    metadata.appcat.vshn.io/revision: debug-v4.184.0
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,12 +28,11 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-183-0
+        name: function-appcat-debug-v4-184-0
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis
           chartVersion: 23.2.1
@@ -49,10 +48,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          exporter_tag: 1.76.0-debian-12-r0
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: v4.183.0
+          imageTag: v4.184.0
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance

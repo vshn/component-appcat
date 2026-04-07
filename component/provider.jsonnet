@@ -214,6 +214,16 @@ local providerRBAC = {
         resources: [ 'objectstores', 'objectstores/finalizers', 'objectstores/status' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
+      {
+        apiGroups: [ 'gateway.networking.k8s.io' ],
+        resources: [ 'tcproutes', 'referencegrants' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
+        apiGroups: [ 'gateway.networking.x-k8s.io' ],
+        resources: [ 'xlistenersets' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
     ],
   },
   helm: {
@@ -276,7 +286,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'postgresql.cnpg.io' ],
-        resources: [ 'clusters', 'imagecatalogs', 'scheduledbackups' ],
+        resources: [ 'clusters', 'imagecatalogs', 'scheduledbackups', 'databases' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {

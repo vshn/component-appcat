@@ -1,0 +1,84 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-appcat-job-redis-restorejob
+  name: crossplane:appcat:job:redis:restorejob
+rules:
+  - apiGroups:
+      - vshn.appcat.vshn.io
+    resources:
+      - '*'
+    verbs:
+      - get
+  - apiGroups:
+      - k8up.io
+    resources:
+      - snapshots
+    verbs:
+      - get
+  - apiGroups:
+      - ''
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - create
+      - delete
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets/scale
+    verbs:
+      - update
+      - patch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+    verbs:
+      - get
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - get
+  - apiGroups:
+      - ''
+    resources:
+      - events
+    verbs:
+      - get
+      - create
+      - patch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: redisrestoreserviceaccount
+  name: redisrestoreserviceaccount
+  namespace: syn-appcat-control
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: appcat-job-redis-restorejob
+  name: appcat:job:redis:restorejob
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane:appcat:job:redis:restorejob
+subjects:
+  - kind: ServiceAccount
+    name: redisrestoreserviceaccount
+    namespace: syn-appcat-control

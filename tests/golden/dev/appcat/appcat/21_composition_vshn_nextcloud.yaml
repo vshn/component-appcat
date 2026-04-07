@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.183.0
+    metadata.appcat.vshn.io/revision: debug-v4.184.0
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,14 +24,14 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-183-0
+        name: function-appcat-debug-v4-184-0
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          billingUnitID: uom_uom_45_1e112771
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
+          busybox_image_tag: '1.37'
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 8.9.1
           cloudProvider: cloudscale
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: v4.183.0
+          imageTag: v4.184.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'

@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.183.0
+        tag: v4.184.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -141,6 +141,8 @@ parameters:
         registry: docker-registry.inventage.com:10121
         image: keycloak-competence-center/keycloak-managed
         maintenanceURL: "https://docker-registry.inventage.com:10121/v2/keycloak-competence-center/keycloak-managed/tags/list"
+      redis-exporter:
+        tag: 1.76.0-debian-12-r0
     =_crd_version: ${appcat:images:appcat:tag}
 
     pullPolicy: IfNotPresent
@@ -275,6 +277,7 @@ parameters:
       instanceUOM: uom_uom_45_1e112771
       customResourceDeletionAfter: "180"
       enableMockOrgInfo: false
+      servalaBillingAnnotationPrefix: billing.servala.com
       salesOrder: ${facts:sales_order}
       vshn:
         enableCronjobs: false
@@ -429,6 +432,10 @@ parameters:
       monitoringEnabled: ${appcat:monitoringEnabled}
       extraArgs: []
       extraEnv: {}
+      portAllocator:
+        portRangeStart: 10000
+        portRangeEnd: 10999
+        gatewayCapacity: 0
       controlPlaneKubeconfig: ${appcat:clusterManagementSystem:controlPlaneKubeconfig}
       billing:
         odooBaseURL: ${appcat:billing:odoo:url}
@@ -685,6 +692,8 @@ parameters:
             - FORGEJO_PASSWORD
             - FORGEJO_URL
             - FORGEJO_USERNAME
+            - FORGEJO_SSH_HOST
+            - FORGEJO_SSH_PORT
             - ca.crt
           mode: standalone
           offered: true
@@ -694,6 +703,9 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+            sshGatewayEnabled: "false"
+            sshGatewayNamespace: "kgateway-system"
+            sshGateways: ""
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."
@@ -892,6 +904,7 @@ parameters:
           billing: true
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+            exporter_tag: ${appcat:images:redis-exporter:tag}
           serviceName: VSHNRedis
           compFunctionsOnly: true
           connectionSecretKeys:
@@ -1172,6 +1185,7 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+            busybox_image_tag: ${appcat:images:busybox:tag}
           openshiftTemplate:
             serviceName: nextcloudbyvshn
             description: "Nextcloud is an open source suite of client-server software for creating and using file hosting services."
