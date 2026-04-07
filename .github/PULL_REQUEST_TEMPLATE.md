@@ -9,6 +9,7 @@
       linked in the changelog.
 - [ ] PR contains a single logical change (to build a better changelog).
 - [ ] I run `make e2e-test` against local kindev and all checks passed
+- [ ] If no changes have been made you can self approve but otherwise at least two reviews are required
 - [ ] Link this PR to related issues or PRs.
 
 <!--
