@@ -31,8 +31,8 @@ spec:
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
-          chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 16.2.0
+          chartRepository: https://charts.appcat.ch/
+          chartVersion: 16.2.1-vshn.1
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control

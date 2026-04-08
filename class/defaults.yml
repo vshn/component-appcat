@@ -23,8 +23,8 @@ parameters:
         source: https://nextcloud.github.io/helm/
         version: 8.9.1
       forgejo:
-        source: oci://code.forgejo.org/forgejo-helm/forgejo
-        version: 16.2.0
+        source: https://charts.appcat.ch/
+        version: 16.2.1-vshn.1
       cnpg:
         source: https://cloudnative-pg.io/charts/
         version: 0.27.1
