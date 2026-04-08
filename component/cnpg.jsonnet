@@ -217,7 +217,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
           },
           {
             alert: 'CNPGClusterZoneSpreadWarning',
-            expr: 'count by(namespace)(kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"}) > on(namespace) count by(namespace)(count by(namespace, label_topology_kubernetes_io_zone)(kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"} * on(node) group_left(label_topology_kubernetes_io_zone) kube_node_labels)) unless on(namespace) ALERTS{alertname="CNPGClusterInstancesOnSameNode", alertstate="firing"}',
+            expr: 'count by(namespace)(kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"} * on(pod,namespace) group_right(node) kube_pod_labels{label_cnpg_io_cluster=~".+"}) > on(namespace) count by(namespace)(count by(namespace, label_topology_kubernetes_io_zone)(kube_pod_info{namespace=~"vshn-postgresql-.*", pod=~"postgresql-.*"} * on(node) group_left(label_topology_kubernetes_io_zone) kube_node_labels)) unless on(namespace) ALERTS{alertname="CNPGClusterInstancesOnSameNode", alertstate="firing"}',
             'for': '5m',
             labels: {
               severity: 'warning',
