@@ -5,10 +5,20 @@ delete:
   - apiVersion: batch/v1
     kind: Job
     name: connect-postgresql
+  - apiVersion: batch/v1
+    kind: Job
+    name: insert-data-cnpg-e2e
+  - apiVersion: batch/v1
+    kind: Job
+    name: verify-data-cnpg-e2e
   - apiVersion: v1
     kind: Pod
     labels:
       e2e-test: postgresql
+  - apiVersion: v1
+    kind: Pod
+    labels:
+      e2e-test: postgresql-cnpg-e2e
   - apiVersion: vshn.appcat.vshn.io/v1
     kind: VSHNPostgreSQL
     name: pg-cnpg-e2e
