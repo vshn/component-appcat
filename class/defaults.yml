@@ -1184,7 +1184,7 @@ parameters:
             nextcloud_image_repository: ${appcat:images:nextcloud:image}
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
-            defaultPGComposition: vshnpostgres.vshn.appcat.vshn.io
+            defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
             busybox_image_tag: ${appcat:images:busybox:tag}
           openshiftTemplate:
             serviceName: nextcloudbyvshn
