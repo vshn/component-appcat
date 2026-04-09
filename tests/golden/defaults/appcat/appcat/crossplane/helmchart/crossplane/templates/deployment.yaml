@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: v4.184.0
+        function-revision: sliexporter-leak
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
