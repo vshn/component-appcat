@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-sliexporter-leak
+        name: function-appcat-master-39bbeacca3732799eb9f7daae54bbad1ff1fa85c
       input:
         apiVersion: v1
         data:

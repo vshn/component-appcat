@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:sliexporter-leak
+          image: ghcr.io/vshn/appcat:39bbeacca3732799eb9f7daae54bbad1ff1fa85c
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
