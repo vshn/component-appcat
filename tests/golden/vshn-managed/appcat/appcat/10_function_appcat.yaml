@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-22d54faecf99c93dd3c5b70d39678f0d68411fdc
+  name: function-appcat-master-garage-cleanup-buckets
 spec:
-  package: ghcr.io/vshn/appcat:22d54faecf99c93dd3c5b70d39678f0d68411fdc-func
+  package: ghcr.io/vshn/appcat:garage_cleanup_buckets-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

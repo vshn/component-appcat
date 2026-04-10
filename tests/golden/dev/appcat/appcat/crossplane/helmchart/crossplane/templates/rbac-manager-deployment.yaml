@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 22d54faecf99c93dd3c5b70d39678f0d68411fdc
+        function-revision: garage/cleanup_buckets
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
