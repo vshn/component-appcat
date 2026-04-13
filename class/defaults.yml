@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 649471267aaa1f14b0d6c5602ce4037e14f454bb
+        tag: fix/early_return_unamanged_bucket
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
