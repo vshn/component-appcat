@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: crossplane
     app.kubernetes.io/part-of: crossplane
-    app.kubernetes.io/version: 2.1.3
-    helm.sh/chart: crossplane-2.1.3
+    app.kubernetes.io/version: 2.2.0
+    helm.sh/chart: crossplane-2.2.0
     release: appcat
   name: crossplane
   namespace: syn-crossplane
@@ -34,8 +34,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: crossplane
         app.kubernetes.io/part-of: crossplane
-        app.kubernetes.io/version: 2.1.3
-        helm.sh/chart: crossplane-2.1.3
+        app.kubernetes.io/version: 2.2.0
+        helm.sh/chart: crossplane-2.2.0
         release: appcat
     spec:
       containers:
@@ -76,7 +76,7 @@ spec:
               value: crossplane-tls-client
             - name: TLS_CLIENT_CERTS_DIR
               value: /tls/client
-          image: xpkg.crossplane.io/crossplane/crossplane:v2.1.3
+          image: xpkg.crossplane.io/crossplane/crossplane:v2.2.0
           imagePullPolicy: Always
           name: crossplane
           ports:
@@ -152,7 +152,7 @@ spec:
               value: crossplane-tls-server
             - name: TLS_CLIENT_SECRET_NAME
               value: crossplane-tls-client
-          image: xpkg.crossplane.io/crossplane/crossplane:v2.1.3
+          image: xpkg.crossplane.io/crossplane/crossplane:v2.2.0
           imagePullPolicy: Always
           name: crossplane-init
           resources:
