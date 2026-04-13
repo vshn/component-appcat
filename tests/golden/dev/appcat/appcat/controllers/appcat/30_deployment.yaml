@@ -26,6 +26,7 @@ spec:
             - --quotas=false
             - --billing=false
             - --crossplane-metrics=true
+            - --garage-bucket-cleanup=true
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat

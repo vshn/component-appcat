@@ -26,6 +26,7 @@ spec:
             - --quotas=false
             - --billing=false
             - --crossplane-metrics=true
+            - --garage-bucket-cleanup=false
             - --ssh-gateway-namespace=kgateway-system
             - --ssh-gateways=ssh-gateway,ssh-gateway-2
             - --ssh-port-range-start=10000
