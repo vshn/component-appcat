@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-cnpg-wal-storage
+        name: function-appcat-master-v4-184-1
       input:
         apiVersion: v1
         data:
