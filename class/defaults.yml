@@ -46,7 +46,7 @@ parameters:
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
-        version: 0.5.0
+        version: 0.6.0
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
@@ -249,9 +249,6 @@ parameters:
           prometheus: platform
       helmValues:
         additionalEnv:
-          # Prevents rolling restarts of PostgreSQL instances during operator upgrades.
-          # Instead, the instance manager binary is hot-swapped in-place.
-          # https://cloudnative-pg.io/docs/1.29/installation_upgrade
           - name: ENABLE_INSTANCE_MANAGER_INPLACE_UPDATES
             value: "true"
           - name: EXPIRING_CHECK_THRESHOLD
