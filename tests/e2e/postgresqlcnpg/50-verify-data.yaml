@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: verify-data-cnpg-e2e
+  namespace: appcat-e2e
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  template:
+    metadata:
+      labels:
+        e2e-test: postgresql-cnpg-e2e
+    spec:
+      containers:
+        - name: verify-data
+          image: dockerhub.vshn.net/library/postgres:15
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              until PGPASSWORD=$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "SELECT 1;"
+              do
+                sleep 1
+                echo "not ready"
+              done
+
+              result=$(PGPASSWORD=$POSTGRESQL_PASSWORD psql -t -A "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "SELECT marker FROM e2e_restore_test WHERE marker = 'cnpg-restore-check';")
+
+              if [ "$result" != "cnpg-restore-check" ]; then
+                echo "FAIL: Expected 'cnpg-restore-check' but got '$result'"
+                exit 1
+              fi
+
+              echo "SUCCESS: Data restored correctly"
+          envFrom:
+            - secretRef:
+                name: pg-cnpg-e2e-restore-creds
+          volumeMounts:
+            - name: postgresql-tls-secrets
+              mountPath: /etc/postgresql-tls
+              readOnly: true
+      restartPolicy: Never
+      volumes:
+        - name: postgresql-tls-secrets
+          secret:
+            secretName: pg-cnpg-e2e-restore-creds
+            items:
+              - key: ca.crt
+                path: ca.crt

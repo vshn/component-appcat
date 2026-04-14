@@ -1,0 +1,14 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 600
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: verify-data-cnpg-e2e
+status:
+  conditions:
+    - status: "True"
+      type: SuccessCriteriaMet
+    - status: "True"
+      type: Complete
