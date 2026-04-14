@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/cnpg-selfservice-restore
+        function-revision: 649471267aaa1f14b0d6c5602ce4037e14f454bb
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

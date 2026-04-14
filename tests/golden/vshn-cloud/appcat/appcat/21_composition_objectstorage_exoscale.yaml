@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-cnpg-selfservice-restore
+        name: function-appcat-master-649471267aaa1f14b0d6c5602ce4037e14f454bb
       input:
         apiVersion: v1
         data:

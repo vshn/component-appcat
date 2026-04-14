@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-feat-cnpg-selfservice-restore
+  name: function-appcat-master-649471267aaa1f14b0d6c5602ce4037e14f454bb
 spec:
-  package: ghcr.io/vshn/appcat:feat_cnpg-selfservice-restore-func
+  package: ghcr.io/vshn/appcat:649471267aaa1f14b0d6c5602ce4037e14f454bb-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

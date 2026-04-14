@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feat_cnpg-selfservice-restore
+          image: ghcr.io/vshn/appcat:649471267aaa1f14b0d6c5602ce4037e14f454bb
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
