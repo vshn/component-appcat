@@ -4,9 +4,23 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+  name: function-appcat-debug-add-new-s3-implementation
 spec:
-  package: ghcr.io/vshn/appcat:68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b-func
+  package: ghcr.io/vshn/appcat:add_new_s3_implementation-func
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v3-68-2-v4-182-1
+spec:
+  package: ghcr.io/vshn/appcat:v4.182.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat

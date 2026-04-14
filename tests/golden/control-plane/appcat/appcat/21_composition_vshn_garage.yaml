@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+    metadata.appcat.vshn.io/revision: master-add_new_s3_implementation
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+        name: function-appcat-master-add-new-s3-implementation
       input:
         apiVersion: v1
         data:
@@ -46,7 +46,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+          imageTag: add_new_s3_implementation
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
