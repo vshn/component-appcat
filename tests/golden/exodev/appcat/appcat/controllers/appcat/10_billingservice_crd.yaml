@@ -191,7 +191,7 @@ spec:
                           this event
                         format: date-time
                         type: string
-                      productID:
+                      productId:
                         description: ProductID identifies the product in the billing
                           system
                         type: string
@@ -202,13 +202,12 @@ spec:
                         type: integer
                       state:
                         description: State represents the current state of the event
-                          (sent, pending, failed, superseded, resend)
+                          (sent, pending, failed, superseded)
                         enum:
                           - sent
                           - pending
                           - failed
                           - superseded
-                          - resend
                         type: string
                       timestamp:
                         description: Timestamp when the event occurred
@@ -228,7 +227,7 @@ spec:
                           Generic field supporting replica count, disk size, percentages, etc.
                         type: string
                     required:
-                      - productID
+                      - productId
                       - state
                       - timestamp
                       - type

@@ -76,6 +76,10 @@ parameters:
         registry: ghcr.io
         repository: vshn/provider-sql
         tag: v0.11.0-vshn
+      provider-s3:
+        registry: ghcr.io
+        repository: vshn/provider-s3
+        tag: init
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -660,7 +664,17 @@ parameters:
           package: ${appcat:images:provider-sql:registry}/${appcat:images:provider-sql:repository}:${appcat:images:provider-sql:tag}
         runtimeConfig:
           serviceAccountName: provider-sql
-        providerConfigRefs: []
+        providerConfigs: []
+
+      s3:
+        enabled: false
+        apiVersion: s3.crossplane.io/v1
+        connectionSecretNamespace: syn-provider-s3-secrets
+        namespace: ${appcat:crossplane:namespace}
+        spec:
+          package: ${appcat:images:provider-s3:registry}/${appcat:images:provider-s3:repository}:${appcat:images:provider-s3:tag}
+        runtimeConfig:
+          serviceAccountName: provider-s3
         additionalProviderConfigs: []
 
     services:
@@ -1370,6 +1384,13 @@ parameters:
               grpcEndpoint: ${appcat:grpcEndpoint}
               proxyFunction: ${appcat:proxyFunction}
               providerConfig: minio
+            generic:
+              enabled: false
+              secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}
+              providerSecretNamespace: ${appcat:providers:s3:connectionSecretNamespace}
+              grpcEndpoint: ${appcat:grpcEndpoint}
+              proxyFunction: ${appcat:proxyFunction}
+              providerConfigs: []
             garage:
               enabled: false
               secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}

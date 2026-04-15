@@ -334,6 +334,15 @@ local providerRBAC = {
       },
     ],
   },
+  s3: {
+    rules: [
+      {
+        apiGroups: [ 's3.crossplane.io' ],
+        resources: [ '*' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+    ],
+  },
 };
 
 local additionalProviderConfigs(provider) =
@@ -366,6 +375,35 @@ local generateProviderConfigs(provider) =
     params.clusterManagementSystem.serviceClusterKubeconfigs,
     {}
   );
+
+local s3Credentials(provider) =
+  local genSecret(config, provider) = kube.Secret(config.name) {
+    metadata+: {
+      namespace: provider.namespace,
+    },
+    stringData: config.credentials,
+  };
+
+  local genProviderConfig(config, provider) = crossplane.ProviderConfig(config.name) {
+    apiVersion: provider.apiVersion,
+    spec+: {
+      credentials+: {
+        apiSecretRef: {
+          name: config.name,
+          namespace: provider.namespace,
+        },
+        source: 'InjectedIdentity',
+      },
+    },
+  };
+
+  [
+    genProviderConfig(config, provider)
+    for config in provider.providerConfigs
+  ] + [
+    genSecret(config, provider)
+    for config in provider.providerConfigs
+  ];
 
 local provider(name, provider) =
   local sa = kube.ServiceAccount(provider.runtimeConfig.serviceAccountName) {
@@ -465,7 +503,7 @@ local provider(name, provider) =
           if vars.isSingleOrControlPlaneCluster && std.objectHas(provider, 'additionalProviderConfigs') && std.length(provider.additionalProviderConfigs) > 0 then additionalProviderConfigs(provider),
           if vars.isSingleOrControlPlaneCluster && std.length(params.clusterManagementSystem.serviceClusterKubeconfigs) > 0 && (name == 'kubernetes' || name == 'helm') then generateProviderConfigs(provider),
         ]
-      ),
+      ) + (if name == 's3' then s3Credentials(provider) else []),
   };
 
 std.foldl(function(objOut, newObj) objOut + provider(newObj.name, newObj.value), std.filter(function(r) std.type(r.value) == 'object' && std.objectHas(r.value, 'enabled') && r.value.enabled, common.KeysAndValues(params.providers)), {})
