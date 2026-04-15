@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-early-return-unamanged-bucket
+  name: function-appcat-master-4650487a0b637924690988a1e2d3992e12ca3c1f
 spec:
-  package: ghcr.io/vshn/appcat:fix_early_return_unamanged_bucket-func
+  package: ghcr.io/vshn/appcat:4650487a0b637924690988a1e2d3992e12ca3c1f-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/early_return_unamanged_bucket
+        function-revision: 4650487a0b637924690988a1e2d3992e12ca3c1f
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
