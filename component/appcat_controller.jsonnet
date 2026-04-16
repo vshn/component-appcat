@@ -72,6 +72,7 @@ local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
+  '--garage-bucket-cleanup=' + std.toString(params.services.generic.objectstorage.compositions.garage.enabled),
 ] + if sshEnabled then [
   '--ssh-gateway-namespace=' + sshGatewayNamespace,
   '--ssh-gateways=' + std.join(',', sshGatewayNames),
