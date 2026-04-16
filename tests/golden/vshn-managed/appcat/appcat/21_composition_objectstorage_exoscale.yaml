@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-cnpg-exposed
+        name: function-appcat-master-22d54faecf99c93dd3c5b70d39678f0d68411fdc
       input:
         apiVersion: v1
         data:

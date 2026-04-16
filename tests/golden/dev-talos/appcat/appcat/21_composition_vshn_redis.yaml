@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_cnpg_exposed
+    metadata.appcat.vshn.io/revision: debug-22d54faecf99c93dd3c5b70d39678f0d68411fdc
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-cnpg-exposed
+        name: function-appcat-debug-22d54faecf99c93dd3c5b70d39678f0d68411fdc
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: add_cnpg_exposed
+          imageTag: 22d54faecf99c93dd3c5b70d39678f0d68411fdc
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
