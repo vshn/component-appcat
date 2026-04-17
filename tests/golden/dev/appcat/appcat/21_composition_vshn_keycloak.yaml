@@ -47,6 +47,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
           imageTag: feat_http-gateway
@@ -73,6 +75,7 @@ spec:
           registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: keycloakserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-keycloak
           serviceName: keycloak

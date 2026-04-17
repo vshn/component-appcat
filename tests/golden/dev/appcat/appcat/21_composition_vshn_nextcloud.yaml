@@ -53,6 +53,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageTag: feat_http-gateway
@@ -77,6 +79,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: nextcloudserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-nextcloud
           serviceName: nextcloud

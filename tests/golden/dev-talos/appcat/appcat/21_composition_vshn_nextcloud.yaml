@@ -53,6 +53,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageTag: feat_http-gateway
@@ -73,9 +75,11 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: nextcloudserviceaccount
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-nextcloud
           serviceName: nextcloud

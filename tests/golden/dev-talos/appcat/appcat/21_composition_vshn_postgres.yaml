@@ -47,6 +47,8 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageTag: feat_http-gateway
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
@@ -88,8 +90,10 @@ spec:
             true, "memory": "1936Mi"}}, "standard-4": {"size": {"cpu": "900m", "disk":
             "40Gi", "enabled": true, "memory": "3984Mi"}}, "standard-8": {"size":
             {"cpu": "1900m", "disk": "80Gi", "enabled": true, "memory": "8080Mi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-postgresql
           serviceName: postgresql

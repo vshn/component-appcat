@@ -9,21 +9,7 @@ spec:
   package: ghcr.io/vshn/appcat:feat_http-gateway-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-68-2-v4-182-1
-spec:
-  package: ghcr.io/vshn/appcat:v4.182.1-func
-  packagePullPolicy: Always
-  runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -37,7 +23,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.182.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -51,7 +37,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.183.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -65,7 +51,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.184.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -79,7 +65,7 @@ spec:
   package: ghcr.io/vshn/appcat:v4.184.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true
 ---
 apiVersion: pkg.crossplane.io/v1beta1
@@ -93,5 +79,5 @@ spec:
   package: ghcr.io/vshn/appcat:v4.185.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
-    name: function-appcat
+    name: enable-proxy
   skipDependencyResolution: true

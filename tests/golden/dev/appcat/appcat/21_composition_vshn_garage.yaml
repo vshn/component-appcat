@@ -44,6 +44,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
           imageTag: feat_http-gateway
@@ -64,6 +66,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: garageserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-garage
           serviceName: garage

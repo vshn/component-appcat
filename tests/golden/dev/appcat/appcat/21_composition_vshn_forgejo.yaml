@@ -45,6 +45,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
           imageTag: feat_http-gateway
@@ -70,6 +72,7 @@ spec:
           registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: forgejoserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-forgejo
           serviceName: forgejo

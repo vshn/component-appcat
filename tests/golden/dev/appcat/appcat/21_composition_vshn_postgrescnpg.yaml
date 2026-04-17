@@ -49,6 +49,8 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageTag: feat_http-gateway
           isOpenshift: 'false'
@@ -74,6 +76,7 @@ spec:
           proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-postgresqlcnpg
           serviceName: postgresqlcnpg

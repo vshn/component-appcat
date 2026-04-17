@@ -44,6 +44,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
@@ -64,6 +66,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
           proxysqlImage: docker.io/proxysql/proxysql:3.0.7
@@ -72,6 +75,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: mariadbrestoreserviceaccount
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-mariadb
           serviceName: mariadb

@@ -692,6 +692,9 @@ parameters:
         secretName: mailgun-smtp-credentials
       vshn:
         ocpDefaultAppsDomain: ""
+        routeType: "Ingress"
+        httpGatewayName: ""
+        httpGatewayNamespace: ""
         enabled: false
         isServiceClusterOpenshift: false
         externalDatabaseConnectionsEnabled: "false"

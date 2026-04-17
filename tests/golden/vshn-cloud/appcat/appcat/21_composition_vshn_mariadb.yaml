@@ -44,6 +44,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: bitnamilegacy
@@ -72,6 +74,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'true'
           restoreSA: mariadbrestoreserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-mariadb
           serviceName: mariadb

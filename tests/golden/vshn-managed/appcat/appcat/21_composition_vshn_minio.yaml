@@ -44,6 +44,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
           imageTag: feat_http-gateway
@@ -63,6 +65,7 @@ spec:
           providerEnabled: 'true'
           quotasEnabled: 'false'
           releaseManagementEnabled: 'true'
+          routeType: Ingress
           salesOrder: ST10120
           serviceID: vshn-minio
           serviceName: minio

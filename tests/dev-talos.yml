@@ -43,7 +43,7 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
     grpcEndpoint: 10.5.0.1:9443
-    proxyFunction: false
+    proxyFunction: true
     quotasEnabled: false
     monitoringEnabled: true
     billing:
@@ -137,6 +137,9 @@ parameters:
         e2eTests: true
         enabled: true
         externalDatabaseConnectionsEnabled: true
+        routeType: "HTTPRoute"
+        httpGatewayName: "http-gateway"
+        httpGatewayNamespace: "kgateway-system"
         mariadb:
           enabled: true
         keycloak:
