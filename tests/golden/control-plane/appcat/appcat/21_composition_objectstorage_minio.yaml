@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-master-feat-http-gateway
       input:
         apiVersion: v1
         data:
