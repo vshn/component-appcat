@@ -1,5 +1,13 @@
 = Billing Backfill Jobs
 
+[WARNING]
+====
+*This page is deprecated.*
+
+The authoritative billing documentation is maintained in the Application Catalog knowledge base:
+https://kb.vshn.ch/app-catalog/framework/billing.html[AppCat Billing^]
+====
+
 == AppCatReportingDatabaseBackfillingFailed
 
 === icon:glasses[] Overview

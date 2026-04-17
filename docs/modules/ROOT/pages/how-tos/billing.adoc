@@ -1,5 +1,13 @@
 = Add a new VSHN service to billing
 
+[WARNING]
+====
+*This page is deprecated.*
+
+The authoritative billing documentation is maintained in the Application Catalog knowledge base:
+https://kb.vshn.ch/app-catalog/framework/billing.html[AppCat Billing^]
+====
+
 If you want to add a new service to billing please ensure the following points:
 
 * The instance namespace contains a label of the form `'appuio.io/billing-name': 'appcat-$servicename',`
