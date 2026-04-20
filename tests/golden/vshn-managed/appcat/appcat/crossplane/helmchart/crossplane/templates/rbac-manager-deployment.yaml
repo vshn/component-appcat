@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix-instance-id-billing
+        function-revision: fc9b74a7fcf35ede766df5c602e9e6e10343bedd
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

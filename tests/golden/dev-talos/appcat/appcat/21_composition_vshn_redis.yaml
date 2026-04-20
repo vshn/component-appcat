@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix-instance-id-billing
+    metadata.appcat.vshn.io/revision: debug-fc9b74a7fcf35ede766df5c602e9e6e10343bedd
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-instance-id-billing
+        name: function-appcat-debug-fc9b74a7fcf35ede766df5c602e9e6e10343bedd
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: fix-instance-id-billing
+          imageTag: fc9b74a7fcf35ede766df5c602e9e6e10343bedd
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
