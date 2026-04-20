@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-40f208a5d43d581a3783b5b255d5142aac75ae81
+        name: function-appcat-master-fix-resend-event-bill
       input:
         apiVersion: v1
         data:
