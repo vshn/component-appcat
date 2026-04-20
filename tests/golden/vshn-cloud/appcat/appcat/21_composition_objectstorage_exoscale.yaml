@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-99d56036e93b7efbe558b791792d461eb515d726
+        name: function-appcat-master-fix-instance-id-billing
       input:
         apiVersion: v1
         data:
