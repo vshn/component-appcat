@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-185-0
+        name: function-appcat-master-fix-xls-scope
       input:
         apiVersion: v1
         data:

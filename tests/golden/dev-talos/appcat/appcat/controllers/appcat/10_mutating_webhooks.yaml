@@ -14,6 +14,9 @@ webhooks:
         path: /mutate-gateway-networking-x-k8s-io-v1alpha1-xlistenerset
     failurePolicy: Fail
     name: mxlistenerset.kb.io
+    objectSelector:
+      matchLabels:
+        appcat.vshn.io/sshgateway: 'true'
     rules:
       - apiGroups:
           - gateway.networking.x-k8s.io
