@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix-resend-event-bill
+        function-revision: beb4db2aa1cf7c9e5a9ea86d33941e619ea92da6
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

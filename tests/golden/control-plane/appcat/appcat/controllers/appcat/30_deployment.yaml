@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:fix-resend-event-bill
+          image: ghcr.io/vshn/appcat:beb4db2aa1cf7c9e5a9ea86d33941e619ea92da6
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
