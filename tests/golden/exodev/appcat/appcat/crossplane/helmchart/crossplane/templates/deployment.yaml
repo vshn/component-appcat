@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/schedule-status
+        function-revision: 40f208a5d43d581a3783b5b255d5142aac75ae81
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

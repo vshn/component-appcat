@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-schedule-status
+        name: function-appcat-master-40f208a5d43d581a3783b5b255d5142aac75ae81
       input:
         apiVersion: v1
         data:
