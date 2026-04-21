@@ -73,6 +73,14 @@ rules:
       - list
       - watch
   - apiGroups:
+      - garage.rajsingh.info
+    resources:
+      - garagebuckets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
       - gateway.networking.x-k8s.io
     resources:
       - xlistenersets
@@ -106,6 +114,7 @@ rules:
       - vshn.appcat.vshn.io
     resources:
       - '*'
+      - vshngarages
     verbs:
       - get
       - list

@@ -1,0 +1,17 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+delete:
+  # This will wait until resources are really gone
+  - apiVersion: batch/v1
+    kind: Job
+    name: connect-postgresql-e2e
+  - apiVersion: v1
+    kind: Pod
+    labels:
+      e2e-test: postgresql
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNPostgreSQL
+    name: pg-cnpg-e2e
+  - apiVersion: vshn.appcat.vshn.io/v1
+    kind: VSHNPostgreSQL
+    name: pg-cnpg-e2e-restore

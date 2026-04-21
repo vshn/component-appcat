@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: insert-data-cnpg-e2e
+  namespace: appcat-e2e
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  template:
+    metadata:
+      labels:
+        e2e-test: postgresql-cnpg-e2e
+    spec:
+      containers:
+        - name: insert-data
+          image: dockerhub.vshn.net/library/postgres:15
+          imagePullPolicy: IfNotPresent
+          command:
+            - bash
+          args:
+            - -c
+            - |
+              PSQL="PGPASSWORD=$POSTGRESQL_PASSWORD psql sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB -U $POSTGRESQL_USER"
+
+              until PGPASSWORD=$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "SELECT 1;"
+              do
+                sleep 1
+                echo "not ready"
+              done
+
+              echo "Inserting test data..."
+              PGPASSWORD=$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "
+                CREATE TABLE IF NOT EXISTS e2e_restore_test (id serial, marker text);
+                INSERT INTO e2e_restore_test (marker) VALUES ('cnpg-restore-check');
+              "
+
+              echo "Forcing WAL switch to ensure data is archived..."
+              PGPASSWORD=$POSTGRESQL_PASSWORD psql "sslmode=verify-full sslrootcert=/etc/postgresql-tls/ca.crt host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DB" -U $POSTGRESQL_USER -c "SELECT pg_switch_wal();"
+
+              echo "Waiting for WAL to be archived..."
+              sleep 30
+
+              echo "Data inserted and WAL archived"
+          envFrom:
+            - secretRef:
+                name: pg-cnpg-e2e-creds
+          volumeMounts:
+            - name: postgresql-tls-secrets
+              mountPath: /etc/postgresql-tls
+              readOnly: true
+      restartPolicy: Never
+      volumes:
+        - name: postgresql-tls-secrets
+          secret:
+            secretName: pg-cnpg-e2e-creds
+            items:
+              - key: ca.crt
+                path: ca.crt

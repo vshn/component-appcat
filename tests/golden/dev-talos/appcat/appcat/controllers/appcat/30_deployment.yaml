@@ -26,6 +26,7 @@ spec:
             - --quotas=false
             - --billing=false
             - --crossplane-metrics=true
+            - --garage-bucket-cleanup=false
             - --ssh-gateway-namespace=kgateway-system
             - --ssh-gateways=ssh-gateway,ssh-gateway-2
             - --ssh-port-range-start=10000
@@ -43,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:v4.184.1
+          image: ghcr.io/vshn/appcat:v4.185.0
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

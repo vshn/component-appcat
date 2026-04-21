@@ -1,0 +1,41 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestAssert
+timeout: 1800
+---
+apiVersion: vshn.appcat.vshn.io/v1
+kind: VSHNPostgreSQL
+metadata:
+  name: pg-cnpg-e2e-restore
+  finalizers:
+  - finalizer.apiextensions.crossplane.io
+spec:
+  compositeDeletePolicy: Background
+  compositionRef:
+    name: vshnpostgrescnpg.vshn.appcat.vshn.io
+  parameters:
+    restore:
+      claimName: pg-cnpg-e2e
+    security:
+      deletionProtection: false
+    backup:
+      schedule: '0 22 * * *'
+    service:
+      majorVersion: "15"
+    size:
+      plan: standard-2
+  writeConnectionSecretToRef:
+    name: pg-cnpg-e2e-restore-creds
+status:
+  conditions:
+    - status: "True"
+    - status: "True"
+---
+apiVersion: v1
+kind: Secret
+type: connection.crossplane.io/v1alpha1
+metadata:
+  name: pg-cnpg-e2e-restore-creds
+  ownerReferences:
+    - apiVersion: vshn.appcat.vshn.io/v1
+      kind: VSHNPostgreSQL
+      name: pg-cnpg-e2e-restore

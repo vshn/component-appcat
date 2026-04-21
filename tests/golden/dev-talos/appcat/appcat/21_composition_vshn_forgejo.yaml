@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.184.1
+    metadata.appcat.vshn.io/revision: debug-v4.185.0
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,15 +24,15 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-184-1
+        name: function-appcat-debug-v4-185-0
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
-          chartRepository: oci://code.forgejo.org/forgejo-helm/forgejo
-          chartVersion: 16.2.0
+          chartRepository: https://charts.appcat.ch/
+          chartVersion: 16.2.1-vshn.1
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -47,7 +47,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.184.1
+          imageTag: v4.185.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
