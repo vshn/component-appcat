@@ -18,16 +18,16 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.1.8
+        version: 7.1.9
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 8.9.1
+        version: 9.0.5
       forgejo:
         source: https://charts.appcat.ch/
         version: 16.2.1-vshn.1
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.27.1
+        version: 0.28.0
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
@@ -46,11 +46,11 @@ parameters:
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
         source: https://cloudnative-pg.io/charts/
-        version: 0.5.0
+        version: 0.6.0
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.1.4
+        version: 0.3.3
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -111,7 +111,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: "3.0.5"
+        version: "3.0.7"
       collabora:
         registry: docker.io
         image: collabora/code
@@ -249,6 +249,8 @@ parameters:
           prometheus: platform
       helmValues:
         additionalEnv:
+          - name: ENABLE_INSTANCE_MANAGER_INPLACE_UPDATES
+            value: "true"
           - name: EXPIRING_CHECK_THRESHOLD
             value: "15"
         resources:

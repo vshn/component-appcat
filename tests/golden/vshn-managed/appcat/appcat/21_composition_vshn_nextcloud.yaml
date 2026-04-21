@@ -33,7 +33,7 @@ spec:
           busybox_image: docker.io/library/busybox
           busybox_image_tag: '1.37'
           chartRepository: https://nextcloud.github.io/helm/
-          chartVersion: 8.9.1
+          chartVersion: 9.0.5
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           collaboraCPULimit: '1'
