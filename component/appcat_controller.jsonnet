@@ -390,7 +390,7 @@ local mutatingWebhook = loadManifest('mutating-webhooks.yaml') {
     },
   },
   webhooks: [
-    w + clientConfig
+    w { objectSelector: { matchLabels: { 'appcat.vshn.io/sshgateway': 'true' } } } + clientConfig
     for w in super.webhooks
   ],
 };
