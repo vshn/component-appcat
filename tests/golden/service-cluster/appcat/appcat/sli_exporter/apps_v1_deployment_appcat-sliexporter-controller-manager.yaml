@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+          image: ghcr.io/vshn/appcat:garage_sli_prober
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
