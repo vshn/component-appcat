@@ -451,6 +451,8 @@ parameters:
         crossplane_extra_resources: ${appcat:monitoring:crossplane:extra_resources}
       tls:
         certSecretName: webhook-cert
+      tcpRoute:
+        tcpGatewayNamespace: "kgateway-system"
       resources:
         requests:
           cpu: 100m
@@ -706,7 +708,7 @@ parameters:
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
             tcpGatewayEnabled: "false"
-            tcpGatewayNamespace: "kgateway-system"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
             tcpGateways: {}
           openshiftTemplate:
             serviceName: forgejobyvshn
