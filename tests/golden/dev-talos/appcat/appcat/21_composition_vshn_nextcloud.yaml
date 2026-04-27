@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+    metadata.appcat.vshn.io/revision: debug-add_generic_tcp_route
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+        name: function-appcat-debug-add-generic-tcp-route
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: 68f4aa3cbdd88eb2ffdc6d333e0fa85a3ae24e4b
+          imageTag: add_generic_tcp_route
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
