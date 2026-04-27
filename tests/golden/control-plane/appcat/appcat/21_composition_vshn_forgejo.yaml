@@ -78,7 +78,7 @@ spec:
           sliNamespace: syn-appcat-slos
           tcpGatewayEnabled: 'false'
           tcpGatewayNamespace: kgateway-system
-          tcpGateways: ''
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:

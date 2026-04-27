@@ -62,10 +62,14 @@ local clusterRoleBindingCrossplaneView = kube.ClusterRoleBinding('appcat-control
   ],
 };
 
-local forgejoInputs = std.get(std.get(std.get(std.get(params, 'services', {}), 'vshn', {}), 'forgejo', {}), 'additionalInputs', {});
-local tcpGatewaysRAW = std.get(forgejoInputs, 'tcpGateways', '');
-local tcpGatewayNames = if tcpGatewaysRAW != '' then std.objectFields(tcpGatewaysRAW) else [];
-local tcpGatewayNamespace = std.get(forgejoInputs, 'tcpGatewayNamespace', '');
+local mergedTcpGateways = std.foldl(
+  function(acc, service) acc + std.get(std.get(service.value, 'additionalInputs', {}), 'tcpGateways', {}),
+  common.FilterServiceByBoolean('enabled'),
+  {},
+);
+
+local tcpGatewayNames = if mergedTcpGateways != '' then std.objectFields(mergedTcpGateways) else [];
+local tcpGatewayNamespace = std.get(controllersParams.tcpRoute, 'tcpGatewayNamespace', '');
 local tcpEnabled = std.length(tcpGatewayNames) > 0 && tcpGatewayNamespace != '';
 
 local mergedArgs = controllersParams.extraArgs + [
