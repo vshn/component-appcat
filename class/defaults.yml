@@ -705,9 +705,9 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            sshGatewayEnabled: "false"
-            sshGatewayNamespace: "kgateway-system"
-            sshGateways: ""
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "kgateway-system"
+            tcpGateways: {}
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."
