@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-garage-sli-prober
+  name: function-appcat-debug-5bee80618f73975564bd276a5f36d1028b1aaa9f
 spec:
-  package: ghcr.io/vshn/appcat:garage_sli_prober-func
+  package: ghcr.io/vshn/appcat:5bee80618f73975564bd276a5f36d1028b1aaa9f-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat

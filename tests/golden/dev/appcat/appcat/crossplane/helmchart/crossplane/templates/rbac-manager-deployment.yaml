@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: garage/sli_prober
+        function-revision: 5bee80618f73975564bd276a5f36d1028b1aaa9f
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
