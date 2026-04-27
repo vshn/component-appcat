@@ -67,7 +67,7 @@ local vshn_appcat_service(name, serviceParams) =
               + xrds.WithServiceID(name);
 
   local additonalInputs = if std.objectHas(serviceParams, 'additionalInputs') then {
-    [k]: std.toString(serviceParams.additionalInputs[k])
+    [k]: if std.isObject(serviceParams.additionalInputs[k]) then std.manifestJsonMinified(serviceParams.additionalInputs[k]) else std.toString(serviceParams.additionalInputs[k])
     for k in std.objectFieldsAll(serviceParams.additionalInputs)
   } else {};
 
