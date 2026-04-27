@@ -34,6 +34,26 @@ local rbacFinalizerRoleBinding = kube.ClusterRoleBinding('crossplane-rbac-manage
   ],
 };
 
+local rbacCnpgClustersRole = kube.ClusterRole('crossplane:aggregate-to-crossplane:cnpg-clusters') {
+  metadata+: {
+    labels+: {
+      'rbac.crossplane.io/aggregate-to-crossplane': 'true',
+    },
+  },
+  rules: [
+    {
+      apiGroups: [ 'postgresql.cnpg.io' ],
+      resources: [ 'clusters' ],
+      verbs: [ 'get', 'list', 'watch' ],
+    },
+    {
+      apiGroups: [ 'batch' ],
+      resources: [ 'jobs' ],
+      verbs: [ '*' ],
+    },
+  ],
+};
+
 local namespace =
   if params.monitoring.enabled && std.member(inv.applications, 'prometheus') then
     if params.monitoring.instance != null then
@@ -122,5 +142,6 @@ if vars.isSingleOrControlPlaneCluster then
     },
     '01_rbac_finalizer_clusterrole': rbacFinalizerRole,
     '01_rbac_finalizer_clusterrolebinding': rbacFinalizerRoleBinding,
+    '01_rbac_cnpg_clusters_clusterrole': rbacCnpgClustersRole,
     [if params.monitoring.enabled then '20_monitoring']: monitoring,
   } else {}

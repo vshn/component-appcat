@@ -49,6 +49,7 @@ parameters:
           - --enable-usages
           - --poll-interval=1h
           - --enable-realtime-compositions=false
+          - --enable-operations
     pullPolicy: Always
 
     deploymentManagementSystem:
@@ -63,7 +64,7 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
     grpcEndpoint: 172.18.0.1:9443
-    proxyFunction: true
+    proxyFunction: false
     quotasEnabled: false
     appuioManaged: false
     #billingEnabled: true

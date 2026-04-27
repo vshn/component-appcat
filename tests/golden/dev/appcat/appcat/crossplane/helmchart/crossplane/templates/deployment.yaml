@@ -45,6 +45,7 @@ spec:
             - --enable-usages
             - --poll-interval=1h
             - --enable-realtime-compositions=false
+            - --enable-operations
           env:
             - name: GOMAXPROCS
               valueFrom:
