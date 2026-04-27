@@ -387,6 +387,7 @@ local s3Credentials(provider) =
   local genProviderConfig(config, provider) = crossplane.ProviderConfig(config.name) {
     apiVersion: provider.apiVersion,
     spec+: {
+      endpoint: config.endpoint,
       credentials+: {
         apiSecretRef: {
           name: config.name,
