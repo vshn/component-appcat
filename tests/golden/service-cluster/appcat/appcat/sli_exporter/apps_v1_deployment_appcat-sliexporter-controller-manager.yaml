@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:e91468e771670e6762c044dbf9884fc8a5bd6760
+          image: ghcr.io/vshn/appcat:add_generic_tcp_route
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
