@@ -79,7 +79,7 @@ parameters:
       provider-s3:
         registry: ghcr.io
         repository: vshn/provider-s3
-        tag: init
+        tag: v0.0.1
       sloth:
         registry: ghcr.io
         image: slok/sloth
