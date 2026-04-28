@@ -104,6 +104,15 @@ parameters:
       postgres:
         enabled: true
     providers:
+      s3:
+        enabled: false
+        providerConfigs:
+          - name: switch
+            endpoint: https://zhw-a.s3.cloud.switch.ch
+            credentials:
+              AWS_SECRET_ACCESS_KEY: minioadmin
+              AWS_ACCESS_KEY_ID: minioadmin
+
       exoscale:
         enabled: false
       cloudscale:
@@ -268,6 +277,10 @@ parameters:
               enabled: false
             minio:
               enabled: false
+            generic:
+              enabled: false
+              providerConfigs:
+                - switch
             garage:
               enabled: true
               instances:

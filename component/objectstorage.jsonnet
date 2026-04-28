@@ -241,6 +241,52 @@ local garageComp(name, namespace, spec) =
     },
   };
 
+local compositionGeneric(provider, compParams) =
+  kube._Object('apiextensions.crossplane.io/v1', 'Composition', provider + '.objectbuckets.appcat.vshn.io') +
+  common.SyncOptions +
+  common.VshnMetaObjectStorage(provider) +
+  {
+    spec: {
+      compositeTypeRef: comp.CompositeRef(xrd),
+      writeConnectionSecretsToNamespace: compParams.secretNamespace,
+      mode: 'Pipeline',
+      pipeline:
+        [
+          {
+            step: provider + 'bucket-func',
+            functionRef: {
+              name: common.GetCurrentFunctionName(),
+            },
+            input: kube.ConfigMap('xfn-config') + {
+              metadata: {
+                labels: {
+                  name: 'xfn-config',
+                },
+                name: 'xfn-config',
+              },
+              data: {
+                      providerConfig: provider,
+                      serviceName: 'genericbucket',
+                      serviceID: provider + '-objectbucket',
+                      providerSecretNamespace: compParams.providerSecretNamespace,
+                      crossplaneNamespace: params.crossplane.namespace,
+                    } + (if compParams.proxyFunction then {
+                           proxyEndpoint: compParams.grpcEndpoint,
+                         } else {})
+                    + common.GetOwnerLabels(xrd),
+            },
+          },
+        ],
+    },
+  };
+
+local loopCompositionGeneric() =
+  local params = objStoParams.compositions.generic;
+  [
+    compositionGeneric(config, params)
+    for config in params.providerConfigs
+  ];
+
 local compositionGarage =
   local comp = objStoParams.compositions.garage;
   [
@@ -255,4 +301,5 @@ if objStoParams.enabled && vars.isSingleOrControlPlaneCluster then {
   [if objStoParams.compositions.exoscale.enabled then '21_composition_objectstorage_exoscale']: compositionExoscale,
   [if objStoParams.compositions.minio.enabled then '21_composition_objectstorage_minio']: compositionMinio,
   [if objStoParams.compositions.garage.enabled then '21_composition_objectstorage_garage']: compositionGarage,
+  [if objStoParams.compositions.generic.enabled then '21_composition_objectstorage_generic']: loopCompositionGeneric(),
 } else {}

@@ -20,7 +20,7 @@ local strCloudscaleZones = std.join(', ', cloudscaleZones);
 local vars = import 'config/vars.jsonnet';
 
 local vshnServiceID(name) = 'vshn-' + std.asciiLower(name);
-local objectBucketServiceID(name) = std.asciiLower(std.rstripChars(name, '.ch')) + '-objectbucket';
+local objectBucketServiceID(name) = if std.endsWith(name, '.ch') then std.asciiLower(std.rstripChars(name, '.ch')) + '-objectbucket' else std.asciiLower(name) + '-objectbucket';
 
 local syncOptions = {
   metadata+: {
