@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_generic_tcp_route
+    metadata.appcat.vshn.io/revision: debug-add_cnpg_tcp_gateway
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-generic-tcp-route
+        name: function-appcat-debug-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
-          imageTag: add_generic_tcp_route
+          imageTag: add_cnpg_tcp_gateway
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
@@ -86,6 +86,9 @@ spec:
             "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m", "memory":
             "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'true'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{"tcp-gateway":"tcp.10.5.0.103.nip.io"}'
         kind: ConfigMap
         metadata:
           labels:
