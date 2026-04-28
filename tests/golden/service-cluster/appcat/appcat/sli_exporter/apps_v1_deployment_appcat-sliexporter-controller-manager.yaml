@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_sharding
+          image: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

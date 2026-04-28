@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-sharding
+  name: function-appcat-debug-add-cnpg-tcp-gateway
 spec:
-  package: ghcr.io/vshn/appcat:fix_sharding-func
+  package: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

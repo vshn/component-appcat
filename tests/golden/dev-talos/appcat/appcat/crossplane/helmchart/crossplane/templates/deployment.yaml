@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/sharding
+        function-revision: add/cnpg_tcp_gateway
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

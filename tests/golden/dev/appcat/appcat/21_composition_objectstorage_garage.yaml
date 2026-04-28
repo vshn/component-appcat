@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-sharding
+        name: function-appcat-debug-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:
