@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+    metadata.appcat.vshn.io/revision: debug-e91468e771670e6762c044dbf9884fc8a5bd6760
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-debug-e91468e771670e6762c044dbf9884fc8a5bd6760
       input:
         apiVersion: v1
         data:
@@ -49,10 +49,12 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           exporter_tag: 1.76.0-debian-12-r0
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
@@ -83,6 +85,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: redisrestoreserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-redis
           serviceName: redis

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+    metadata.appcat.vshn.io/revision: debug-e91468e771670e6762c044dbf9884fc8a5bd6760
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-debug-e91468e771670e6762c044dbf9884fc8a5bd6760
       input:
         apiVersion: v1
         data:
@@ -45,9 +45,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
@@ -64,11 +66,13 @@ spec:
             true, "memory": "8Gi"}}, "mini": {"size": {"cpu": "500m", "disk": "10Gi",
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: forgejoserviceaccount
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-forgejo
           serviceName: forgejo

@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+    metadata.appcat.vshn.io/revision: master-e91468e771670e6762c044dbf9884fc8a5bd6760
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-master-e91468e771670e6762c044dbf9884fc8a5bd6760
       input:
         apiVersion: v1
         data:
@@ -49,8 +49,10 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
@@ -73,6 +75,7 @@ spec:
             "memory": "3984Mi"}}}'
           quotasEnabled: 'false'
           releaseManagementEnabled: 'true'
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-postgresqlcnpg
           serviceName: postgresqlcnpg

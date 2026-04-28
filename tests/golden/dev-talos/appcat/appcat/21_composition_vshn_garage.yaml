@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+    metadata.appcat.vshn.io/revision: debug-e91468e771670e6762c044dbf9884fc8a5bd6760
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-debug-e91468e771670e6762c044dbf9884fc8a5bd6760
       input:
         apiVersion: v1
         data:
@@ -44,9 +44,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
@@ -60,9 +62,11 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "100Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "200Gi", "enabled": true, "memory": "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: garageserviceaccount
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-garage
           serviceName: garage

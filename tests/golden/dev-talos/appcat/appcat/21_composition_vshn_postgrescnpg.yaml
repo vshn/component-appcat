@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+    metadata.appcat.vshn.io/revision: debug-e91468e771670e6762c044dbf9884fc8a5bd6760
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+        name: function-appcat-debug-e91468e771670e6762c044dbf9884fc8a5bd6760
       input:
         apiVersion: v1
         data:
@@ -47,8 +47,10 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
-          imageTag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
+          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
@@ -64,8 +66,10 @@ spec:
             true, "memory": "1936Mi"}}, "standard-4": {"size": {"cpu": "900m", "disk":
             "40Gi", "enabled": true, "memory": "3984Mi"}}, "standard-8": {"size":
             {"cpu": "1900m", "disk": "80Gi", "enabled": true, "memory": "8080Mi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
+          routeType: HTTPRoute
           salesOrder: SC0000
           serviceID: vshn-postgresqlcnpg
           serviceName: postgresqlcnpg

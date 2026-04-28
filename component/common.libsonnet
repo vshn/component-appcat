@@ -277,6 +277,9 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     isOpenshift: std.toString(vars.isServiceClusterOpenShift),
     sliNamespace: params.slos.namespace,
     ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
+    routeType: params.services.vshn.routeType,
+    httpGatewayName: params.services.vshn.httpGatewayName,
+    httpGatewayNamespace: params.services.vshn.httpGatewayNamespace,
   } +
   getOwnerLabels(xrd)
   + {
