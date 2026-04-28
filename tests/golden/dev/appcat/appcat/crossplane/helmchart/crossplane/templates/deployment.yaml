@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: add/new_s3_implementation
+        function-revision: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

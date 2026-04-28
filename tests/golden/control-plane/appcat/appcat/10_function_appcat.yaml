@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-new-s3-implementation
+  name: function-appcat-master-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
 spec:
-  package: ghcr.io/vshn/appcat:add_new_s3_implementation-func
+  package: ghcr.io/vshn/appcat:fecc49388f0207197aa3a2e57ddf0c2a811e8b8c-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

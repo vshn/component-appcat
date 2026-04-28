@@ -91,7 +91,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: add/new_s3_implementation
+        tag: fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

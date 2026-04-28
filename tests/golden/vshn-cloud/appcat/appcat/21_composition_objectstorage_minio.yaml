@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-new-s3-implementation
+        name: function-appcat-master-fecc49388f0207197aa3a2e57ddf0c2a811e8b8c
       input:
         apiVersion: v1
         data:
