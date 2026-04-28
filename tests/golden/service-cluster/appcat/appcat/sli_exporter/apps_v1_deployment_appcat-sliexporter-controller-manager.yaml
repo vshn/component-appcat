@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feat_http-gateway
+          image: ghcr.io/vshn/appcat:e91468e771670e6762c044dbf9884fc8a5bd6760
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
