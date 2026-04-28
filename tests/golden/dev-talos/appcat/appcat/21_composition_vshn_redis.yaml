@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_generic_tcp_route
+    metadata.appcat.vshn.io/revision: debug-add_cnpg_tcp_gateway
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-generic-tcp-route
+        name: function-appcat-debug-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: add_generic_tcp_route
+          imageTag: add_cnpg_tcp_gateway
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
@@ -66,6 +66,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: redisrestoreserviceaccount

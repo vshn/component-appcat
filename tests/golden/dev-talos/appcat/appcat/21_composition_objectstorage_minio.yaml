@@ -21,12 +21,13 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-generic-tcp-route
+        name: function-appcat-debug-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:
           crossplaneNamespace: syn-crossplane
           providerConfig: minio
+          proxyEndpoint: 10.5.0.1:9443
           serviceID: minio-minio-objectbucket
           serviceName: miniobucket
         kind: ConfigMap

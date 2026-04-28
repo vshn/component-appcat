@@ -87,7 +87,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: add/generic_tcp_route
+        tag: add/cnpg_tcp_gateway
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -763,6 +763,9 @@ parameters:
             cnpgClusterChartSource: ${appcat:charts:cnpgCluster:source}
             cnpgClusterChartVersion: ${appcat:charts:cnpgCluster:version}
             cnpgClusterChartName: ${appcat:charts:cnpgCluster:chartName}
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           enableNetworkPolicy: true

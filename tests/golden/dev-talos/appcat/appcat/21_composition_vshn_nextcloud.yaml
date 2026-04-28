@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-add_generic_tcp_route
+    metadata.appcat.vshn.io/revision: debug-add_cnpg_tcp_gateway
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-add-generic-tcp-route
+        name: function-appcat-debug-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           emailAlertingSmtpUsername: appcat@appuio.cloud
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: add_generic_tcp_route
+          imageTag: add_cnpg_tcp_gateway
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
@@ -73,6 +73,7 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: nextcloudserviceaccount
