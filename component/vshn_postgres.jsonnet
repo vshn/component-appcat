@@ -120,6 +120,8 @@ local connectionSecretKeys = [
   'POSTGRESQL_USER',
   'POSTGRESQL_PASSWORD',
   'LOADBALANCER_IP',
+  'POSTGRESQL_GATEWAY_HOST',
+  'POSTGRESQL_GATEWAY_PORT',
 ];
 
 local xrd = xrds.XRDFromCRD(
@@ -271,7 +273,7 @@ local composition =
                       sgNamespace: pgParams.sgNamespace,
                       additionalMaintenanceClusterRole: additionalMaintenanceClusterRoleName,
                     } + common.GetDefaultInputs(serviceName, pgParams, pgPlans, xrd, appuioManaged)
-                    + std.get(pgParams, 'additionalInputs', default={}, inc_hidden=true)
+                    + common.ParseAdditionalInputs(pgParams)
                     + common.EmailAlerting(params.services.emailAlerting)
                     + if pgParams.proxyFunction then {
                       proxyEndpoint: pgParams.grpcEndpoint,

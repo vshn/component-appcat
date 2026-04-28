@@ -166,7 +166,6 @@ parameters:
             registry_username: ""
             registry_password: ""
             tcpGatewayEnabled: "true"
-            tcpGatewayNamespace: "kgateway-system"
             tcpGateways:
               ssh-gateway: ssh.10.5.0.101.nip.io
               ssh-gateway-2: ssh2.10.5.0.102.nip.io
@@ -174,6 +173,9 @@ parameters:
         postgres:
           sgNamespace: stackgres
           additionalInputs:
+            tcpGatewayEnabled: "true"
+            tcpGateways:
+              tcp-gateway: tcp.10.5.0.103.nip.io
             loadbalancerAnnotations: |
               foo: bar
         redis:
