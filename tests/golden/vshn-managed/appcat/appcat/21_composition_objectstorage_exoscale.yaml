@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-cnpg-tcp-gateway
+        name: function-appcat-master-fix-sharding
       input:
         apiVersion: v1
         data:

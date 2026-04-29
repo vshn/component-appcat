@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-cnpg-tcp-gateway
+  name: function-appcat-master-fix-sharding
 spec:
-  package: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway-func
+  package: ghcr.io/vshn/appcat:fix_sharding-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
