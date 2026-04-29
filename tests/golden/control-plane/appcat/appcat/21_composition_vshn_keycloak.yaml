@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-e91468e771670e6762c044dbf9884fc8a5bd6760
+    metadata.appcat.vshn.io/revision: master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-e91468e771670e6762c044dbf9884fc8a5bd6760
+        name: function-appcat-master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: e91468e771670e6762c044dbf9884fc8a5bd6760
+          imageTag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging

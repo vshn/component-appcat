@@ -62,24 +62,28 @@ local clusterRoleBindingCrossplaneView = kube.ClusterRoleBinding('appcat-control
   ],
 };
 
-local forgejoInputs = std.get(std.get(std.get(std.get(params, 'services', {}), 'vshn', {}), 'forgejo', {}), 'additionalInputs', {});
-local sshGatewaysJSON = std.get(forgejoInputs, 'sshGateways', '');
-local sshGatewayNames = if sshGatewaysJSON != '' then std.objectFields(std.parseJson(sshGatewaysJSON)) else [];
-local sshGatewayNamespace = std.get(forgejoInputs, 'sshGatewayNamespace', '');
-local sshEnabled = std.length(sshGatewayNames) > 0 && sshGatewayNamespace != '';
+local mergedTcpGateways = std.foldl(
+  function(acc, service) acc + std.get(std.get(service.value, 'additionalInputs', {}), 'tcpGateways', {}),
+  common.FilterServiceByBoolean('enabled'),
+  {},
+);
+
+local tcpGatewayNames = if mergedTcpGateways != '' then std.objectFields(mergedTcpGateways) else [];
+local tcpGatewayNamespace = std.get(controllersParams.tcpRoute, 'tcpGatewayNamespace', '');
+local tcpEnabled = std.length(tcpGatewayNames) > 0 && tcpGatewayNamespace != '';
 
 local mergedArgs = controllersParams.extraArgs + [
   '--quotas=' + std.toString(controllersParams.quotasEnabled),
   '--billing=' + std.toString(controllersParams.billingEnabled),
   '--crossplane-metrics=' + std.toString(controllersParams.monitoringEnabled),
   '--garage-bucket-cleanup=' + std.toString(params.services.generic.objectstorage.compositions.garage.enabled),
-] + if sshEnabled then [
-  '--ssh-gateway-namespace=' + sshGatewayNamespace,
-  '--ssh-gateways=' + std.join(',', sshGatewayNames),
-  '--ssh-port-range-start=' + std.toString(controllersParams.portAllocator.portRangeStart),
-  '--ssh-port-range-end=' + std.toString(controllersParams.portAllocator.portRangeEnd),
+] + if tcpEnabled then [
+  '--tcp-gateway-namespace=' + tcpGatewayNamespace,
+  '--tcp-gateways=' + std.join(',', tcpGatewayNames),
+  '--tcp-port-range-start=' + std.toString(controllersParams.portAllocator.portRangeStart),
+  '--tcp-port-range-end=' + std.toString(controllersParams.portAllocator.portRangeEnd),
 ] + if controllersParams.portAllocator.gatewayCapacity > 0 then [
-  '--ssh-gateway-capacity=' + std.toString(controllersParams.portAllocator.gatewayCapacity),
+  '--tcp-gateway-capacity=' + std.toString(controllersParams.portAllocator.gatewayCapacity),
 ] else [] else [];
 
 local mergedEnv =
@@ -384,18 +388,18 @@ local webhook = loadManifest('webhooks.yaml') {
 
 local mutatingWebhook = loadManifest('mutating-webhooks.yaml') {
   metadata+: {
-    name: 'appcat-sshgateway',
+    name: 'appcat-tcpgateway',
     annotations+: {
       'cert-manager.io/inject-ca-from': params.namespace + '/' + webhookCertificate.metadata.name,
     },
   },
   webhooks: [
-    w { objectSelector: { matchLabels: { 'appcat.vshn.io/sshgateway': 'true' } } } + clientConfig
+    w { objectSelector: { matchLabels: { 'appcat.vshn.io/tcpgateway': 'true' } } } + clientConfig
     for w in super.webhooks
   ],
 };
 
-local sshGatewayRole = kube.ClusterRole('appcat-controller:ssh-gateway') {
+local tcpGatewayRole = kube.ClusterRole('appcat-controller:tcp-gateway') {
   rules: [
     {
       apiGroups: [ 'gateway.networking.x-k8s.io' ],
@@ -405,8 +409,8 @@ local sshGatewayRole = kube.ClusterRole('appcat-controller:ssh-gateway') {
   ],
 };
 
-local sshGatewayBinding = kube.ClusterRoleBinding('appcat-controller:ssh-gateway') {
-  roleRef_: sshGatewayRole,
+local tcpGatewayBinding = kube.ClusterRoleBinding('appcat-controller:tcp-gateway') {
+  roleRef_: tcpGatewayRole,
   subjects: [ {
     kind: 'ServiceAccount',
     name: 'appcat-controller',
@@ -431,7 +435,7 @@ if controllersParams.enabled then {
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_service']: service,
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_servicemonitor']: servicemonitor,
   [if controllersParams.monitoringEnabled then 'controllers/appcat/40_prometheusrule']: prometheusrule,
-  [if sshEnabled then 'controllers/appcat/10_mutating_webhooks']: mutatingWebhook,
-  [if sshEnabled then 'controllers/appcat/10_ssh_gateway_role']: sshGatewayRole,
-  [if sshEnabled then 'controllers/appcat/10_ssh_gateway_binding']: sshGatewayBinding,
+  [if tcpEnabled then 'controllers/appcat/10_mutating_webhooks']: mutatingWebhook,
+  [if tcpEnabled then 'controllers/appcat/10_tcp_gateway_role']: tcpGatewayRole,
+  [if tcpEnabled then 'controllers/appcat/10_tcp_gateway_binding']: tcpGatewayBinding,
 } else {}

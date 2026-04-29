@@ -91,7 +91,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: e91468e771670e6762c044dbf9884fc8a5bd6760
+        tag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -455,6 +455,8 @@ parameters:
         crossplane_extra_resources: ${appcat:monitoring:crossplane:extra_resources}
       tls:
         certSecretName: webhook-cert
+      tcpRoute:
+        tcpGatewayNamespace: "kgateway-system"
       resources:
         requests:
           cpu: 100m
@@ -722,9 +724,9 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            sshGatewayEnabled: "false"
-            sshGatewayNamespace: "kgateway-system"
-            sshGateways: ""
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."
