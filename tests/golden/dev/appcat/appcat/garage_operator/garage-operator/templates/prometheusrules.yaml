@@ -1,0 +1,111 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app.kubernetes.io/instance: appcat
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: garage-operator
+    app.kubernetes.io/version: 0.3.3
+    control-plane: controller-manager
+    helm.sh/chart: garage-operator-0.3.3
+  name: appcat-garage-operator-garage
+  namespace: syn-garage-operator
+spec:
+  groups:
+    - name: garage.availability
+      rules:
+        - alert: GarageNodeDown
+          annotations:
+            description: Garage node {{ $labels.instance }} has been unreachable for
+              more than 5 minutes.
+            summary: Garage node {{ $labels.instance }} is down
+          expr: up{job="garage"} == 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: GarageHighRPCErrorRate
+          annotations:
+            description: More than 10% of RPC requests are failing on {{ $labels.instance
+              }} for 10 minutes.
+            summary: High RPC error rate on {{ $labels.instance }}
+          expr: |
+            sum by (instance) (rate(rpc_netapp_request_counter{job="garage",status="error"}[5m]))
+            /
+            sum by (instance) (rate(rpc_netapp_request_counter{job="garage"}[5m])) > 0.1
+          for: 10m
+          labels:
+            severity: warning
+    - name: garage.storage
+      rules:
+        - alert: GarageBlockResyncErrors
+          annotations:
+            description: '{{ $value }} blocks failed to resync on {{ $labels.instance
+              }}. Data integrity may be affected.'
+            summary: Garage block resync errors on {{ $labels.instance }}
+          expr: block_resync_errored_blocks{job="garage"} > 0
+          for: 15m
+          labels:
+            severity: warning
+        - alert: GarageHighBlockResyncQueue
+          annotations:
+            description: Block resync queue has {{ $value }} items on {{ $labels.instance
+              }} for 30 minutes.
+            summary: Large block resync queue on {{ $labels.instance }}
+          expr: block_resync_queue_length{job="garage"} > 10000
+          for: 30m
+          labels:
+            severity: warning
+        - alert: GarageLowDiskSpace
+          annotations:
+            description: Garage node {{ $labels.instance }} has less than 10% disk
+              space remaining.
+            summary: Low disk space on Garage node {{ $labels.instance }}
+          expr: |
+            (garage_local_disk_avail{job="garage"} / garage_local_disk_total{job="garage"}) < 0.1
+          for: 5m
+          labels:
+            severity: critical
+    - name: garage.cluster
+      rules:
+        - alert: GarageClusterUnhealthy
+          annotations:
+            description: Garage cluster is reporting unhealthy status for 2+ minutes.
+              Data may be unavailable.
+            summary: Garage cluster unhealthy on {{ $labels.instance }}
+          expr: cluster_healthy{job="garage"} == 0
+          for: 2m
+          labels:
+            severity: critical
+        - alert: GarageClusterUnavailable
+          annotations:
+            description: Garage cluster cannot serve requests (quorum lost) for 1+
+              minutes.
+            summary: Garage cluster unavailable on {{ $labels.instance }}
+          expr: cluster_available{job="garage"} == 0
+          for: 1m
+          labels:
+            severity: critical
+        - alert: GarageStorageNodeDown
+          annotations:
+            description: Not all storage nodes are healthy.
+            summary: Garage storage node(s) down on {{ $labels.instance }}
+          expr: cluster_storage_nodes_ok{job="garage"} < cluster_storage_nodes{job="garage"}
+          for: 5m
+          labels:
+            severity: warning
+        - alert: GaragePartitionsDegraded
+          annotations:
+            description: Not all replicas available for some partitions for 10+ minutes.
+            summary: Garage partitions degraded on {{ $labels.instance }}
+          expr: cluster_partitions_all_ok{job="garage"} < cluster_partitions{job="garage"}
+          for: 10m
+          labels:
+            severity: warning
+        - alert: GarageNodeDisconnected
+          annotations:
+            description: Node {{ $labels.id }} has been disconnected for 3+ minutes.
+            summary: Garage layout node disconnected
+          expr: cluster_layout_node_connected{job="garage"} == 0
+          for: 3m
+          labels:
+            severity: warning
