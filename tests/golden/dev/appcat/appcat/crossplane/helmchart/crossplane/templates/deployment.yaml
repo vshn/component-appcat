@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fb75203c19e400379879e7ee3486984a469ca505
+        function-revision: feat/disable-kc-admin
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
