@@ -23,6 +23,8 @@ spec:
     - POSTGRESQL_USER
     - POSTGRESQL_PASSWORD
     - LOADBALANCER_IP
+    - POSTGRESQL_GATEWAY_HOST
+    - POSTGRESQL_GATEWAY_PORT
   defaultCompositionRef:
     name: vshnpostgres.vshn.appcat.vshn.io
   defaultCompositionUpdatePolicy: Manual

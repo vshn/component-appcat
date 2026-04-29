@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: b2801dac952a1c3c1c71f23056e70b88980e8b2c
+        function-revision: add/cnpg_tcp_gateway
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
