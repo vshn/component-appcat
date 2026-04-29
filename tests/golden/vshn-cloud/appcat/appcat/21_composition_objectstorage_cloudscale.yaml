@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-generic-tcp-route
+        name: function-appcat-master-add-cnpg-tcp-gateway
       input:
         apiVersion: v1
         data:

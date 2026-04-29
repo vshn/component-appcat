@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:add_generic_tcp_route
+              image: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway
               name: sla-reporter
               resources:
                 limits:

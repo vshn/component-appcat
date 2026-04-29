@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:add_generic_tcp_route
+          image: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

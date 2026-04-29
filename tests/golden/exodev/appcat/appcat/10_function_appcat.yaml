@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-generic-tcp-route
+  name: function-appcat-master-add-cnpg-tcp-gateway
 spec:
-  package: ghcr.io/vshn/appcat:add_generic_tcp_route-func
+  package: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
