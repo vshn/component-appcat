@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+    metadata.appcat.vshn.io/revision: master-feat_disable-kc-admin
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+        name: function-appcat-master-feat-disable-kc-admin
       input:
         apiVersion: v1
         data:
@@ -49,7 +49,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          imageTag: feat_disable-kc-admin
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
