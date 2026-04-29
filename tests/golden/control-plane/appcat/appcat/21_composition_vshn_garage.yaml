@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-add_generic_tcp_route
+    metadata.appcat.vshn.io/revision: master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-add-generic-tcp-route
+        name: function-appcat-master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: add_generic_tcp_route
+          imageTag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
