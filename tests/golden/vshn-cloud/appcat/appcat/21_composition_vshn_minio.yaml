@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+    metadata.appcat.vshn.io/revision: master-fix_provider_kubernetes_ssa
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+        name: function-appcat-master-fix-provider-kubernetes-ssa
       input:
         apiVersion: v1
         data:
@@ -48,7 +48,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/
-          imageTag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          imageTag: fix_provider_kubernetes_ssa
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100
