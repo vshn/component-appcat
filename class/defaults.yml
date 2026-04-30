@@ -1360,6 +1360,8 @@ parameters:
           restoreSA: openbaorestoreaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
           enableNetworkPolicy: true
+          chartRepository: ${appcat:charts:openbao:source}
+          chartVersion: ${appcat:charts:openbao:version}
           secretNamespace: ${appcat:services:vshn:secretNamespace}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
