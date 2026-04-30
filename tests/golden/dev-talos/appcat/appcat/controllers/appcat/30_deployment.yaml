@@ -28,7 +28,7 @@ spec:
             - --crossplane-metrics=true
             - --garage-bucket-cleanup=false
             - --tcp-gateway-namespace=kgateway-system
-            - --tcp-gateways=ssh-gateway,ssh-gateway-2
+            - --tcp-gateways=ssh-gateway,ssh-gateway-2,tcp-gateway
             - --tcp-port-range-start=10000
             - --tcp-port-range-end=10019
             - --tcp-gateway-capacity=5
@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          image: ghcr.io/vshn/appcat:add_cnpg_tcp_gateway
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
