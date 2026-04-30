@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
+  name: garage-pods
+  namespace: syn-garage-operator
+spec:
+  endpoints:
+    - interval: 30s
+      path: /metrics
+      port: admin
+      relabelings:
+        - replacement: garage
+          targetLabel: job
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: garage-operator
+      app.kubernetes.io/name: garage

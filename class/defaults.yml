@@ -199,6 +199,8 @@ parameters:
           limits:
             # The default is a bit low for OpenShift deployments...
             memory: 512Mi
+        prometheusRules:
+          enabled: true
 
     crossplane:
       namespace: syn-crossplane
