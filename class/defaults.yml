@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 9d6a5978a928baa9ad525957266bb8b379eeafc7
+        tag: fix/provider_kubernetes_ssa
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

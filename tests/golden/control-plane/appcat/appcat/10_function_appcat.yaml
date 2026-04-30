@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-9d6a5978a928baa9ad525957266bb8b379eeafc7
+  name: function-appcat-master-fix-provider-kubernetes-ssa
 spec:
-  package: ghcr.io/vshn/appcat:9d6a5978a928baa9ad525957266bb8b379eeafc7-func
+  package: ghcr.io/vshn/appcat:fix_provider_kubernetes_ssa-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
