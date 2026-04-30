@@ -44,6 +44,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageTag: feat_init-openabo-service
           isOpenshift: 'false'
@@ -65,6 +67,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'true'
           restoreSA: openbaorestoreaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-openbao
           serviceName: openbao

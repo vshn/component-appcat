@@ -10,10 +10,10 @@ metadata:
     metadata.appcat.vshn.io/flavor: standalone
     metadata.appcat.vshn.io/plans: '{"standard-1":{"size":{"cpu":"250m","disk":"16Gi","enabled":true,"memory":"1Gi"}},"standard-2":{"size":{"cpu":"500m","disk":"16Gi","enabled":true,"memory":"2Gi"}},"standard-4":{"size":{"cpu":"1","disk":"16Gi","enabled":true,"memory":"4Gi"}},"standard-512m":{"size":{"cpu":"125m","disk":"16Gi","enabled":true,"memory":"512Mi"}},"standard-8":{"size":{"cpu":"2","disk":"16Gi","enabled":true,"memory":"8Gi"}}}'
     metadata.appcat.vshn.io/product-description: https://products.docs.vshn.ch/products/appcat/openbao.html
-    metadata.appcat.vshn.io/zone: rma1
+    metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_init-openabo-service
+    metadata.appcat.vshn.io/revision: debug-feat_init-openabo-service
     metadata.appcat.vshn.io/serviceID: vshn-openbao
     name: vshnopenbao.vshn.appcat.vshn.io
   name: vshnopenbao.vshn.appcat.vshn.io
@@ -24,12 +24,12 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-init-openabo-service
+        name: function-appcat-debug-feat-init-openabo-service
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
-          bucketRegion: lpg
+          bucketRegion: rma
           chartRepository: https://openbao.github.io/openbao-helm
           chartVersion: 0.19.3
           cloudProvider: cloudscale
@@ -44,11 +44,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
-          httpGatewayName: ''
-          httpGatewayNamespace: ''
+          httpGatewayName: http-gateway
+          httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageTag: feat_init-openabo-service
-          isOpenshift: 'true'
+          isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
           minimumRevisionAge: 168h
@@ -64,11 +64,12 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
+          proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
-          releaseManagementEnabled: 'true'
+          releaseManagementEnabled: 'false'
           restoreSA: openbaorestoreaccount
-          routeType: Ingress
-          salesOrder: ''
+          routeType: HTTPRoute
+          salesOrder: SC0000
           serviceID: vshn-openbao
           serviceName: openbao
           sliNamespace: syn-appcat-slos
