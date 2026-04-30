@@ -8,6 +8,9 @@ metadata:
     app.kubernetes.io/version: 0.3.3
     control-plane: controller-manager
     helm.sh/chart: garage-operator-0.3.3
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
   name: appcat-garage-operator-garage
   namespace: syn-garage-operator
 spec:
@@ -23,6 +26,9 @@ spec:
           for: 5m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageHighRPCErrorRate
           annotations:
             description: More than 10% of RPC requests are failing on {{ $labels.instance
@@ -35,6 +41,9 @@ spec:
           for: 10m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
     - name: garage.storage
       rules:
         - alert: GarageBlockResyncErrors
@@ -46,6 +55,9 @@ spec:
           for: 15m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageHighBlockResyncQueue
           annotations:
             description: Block resync queue has {{ $value }} items on {{ $labels.instance
@@ -55,6 +67,9 @@ spec:
           for: 30m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageLowDiskSpace
           annotations:
             description: Garage node {{ $labels.instance }} has less than 10% disk
@@ -65,6 +80,9 @@ spec:
           for: 5m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
     - name: garage.cluster
       rules:
         - alert: GarageClusterUnhealthy
@@ -76,6 +94,9 @@ spec:
           for: 2m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageClusterUnavailable
           annotations:
             description: Garage cluster cannot serve requests (quorum lost) for 1+
@@ -85,6 +106,9 @@ spec:
           for: 1m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageStorageNodeDown
           annotations:
             description: Not all storage nodes are healthy.
@@ -93,6 +117,9 @@ spec:
           for: 5m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GaragePartitionsDegraded
           annotations:
             description: Not all replicas available for some partitions for 10+ minutes.
@@ -101,6 +128,9 @@ spec:
           for: 10m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
         - alert: GarageNodeDisconnected
           annotations:
             description: Node {{ $labels.id }} has been disconnected for 3+ minutes.
@@ -109,3 +139,6 @@ spec:
           for: 3m
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar

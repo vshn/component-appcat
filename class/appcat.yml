@@ -306,3 +306,7 @@ parameters:
         - type: jsonnet
           filter: postprocess/patch_pull_policy.jsonnet
           path: ${_instance}/crossplane/helmchart/crossplane/templates
+        - type: jsonnet
+          filter: postprocess/patch_garage_prometheusrules.jsonnet
+          path: ${_instance}/garage_operator/garage-operator/templates
+          enabled: ${appcat:garageOperator:enabled}
