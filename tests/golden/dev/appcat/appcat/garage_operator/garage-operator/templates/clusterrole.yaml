@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.3.3
+    app.kubernetes.io/version: 0.1.4
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.3.3
+    helm.sh/chart: garage-operator-0.1.4
   name: appcat-garage-operator-manager-role
 rules:
   - apiGroups:
@@ -109,15 +109,3 @@ rules:
       - get
       - patch
       - update
-  - apiGroups:
-      - monitoring.coreos.com
-    resources:
-      - servicemonitors
-    verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    metadata.appcat.vshn.io/enabled-services-hash: 96e8a68dcd6546b491bf36f11c1c8f39
+    metadata.appcat.vshn.io/enabled-services-hash: e52fb0008485a53a00de737778773277
   labels:
     appcat-controller: appcat-controller
   name: appcat-controller
@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          image: ghcr.io/vshn/appcat:feat_init-openabo-service
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

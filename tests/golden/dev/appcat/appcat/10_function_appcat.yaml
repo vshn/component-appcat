@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+  name: function-appcat-debug-feat-init-openabo-service
 spec:
-  package: ghcr.io/vshn/appcat:12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9-func
+  package: ghcr.io/vshn/appcat:feat_init-openabo-service-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

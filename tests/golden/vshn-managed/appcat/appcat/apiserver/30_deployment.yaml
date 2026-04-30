@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    metadata.appcat.vshn.io/enabled-services-hash: 4851b558d411555f6d5a0df17a2a714e
+    metadata.appcat.vshn.io/enabled-services-hash: b1bf8e6f07eab279732d5762d55acd7b
   labels:
     api: appcat
     apiserver: 'true'
@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          image: ghcr.io/vshn/appcat:feat_init-openabo-service
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

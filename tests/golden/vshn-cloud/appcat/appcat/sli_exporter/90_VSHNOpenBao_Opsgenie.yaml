@@ -1,0 +1,47 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
+  name: vshn-vshnopenbao-sla
+  namespace: syn-appcat-slos
+spec:
+  groups:
+    - name: appcat-vshnopenbao-sla-target
+      rules:
+        - alert: VSHNOpenBaoSla
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+          expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNOpenBao",
+            ha="false", maintenance="false"}[5m]) > 0.4
+          labels:
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
+              }}'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
+            service: VSHNOpenBao
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - alert: VSHNOpenBaoSlaHA
+          annotations:
+            summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+            title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
+          expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNOpenBao",
+            ha="true"}[5m]) > 0.4
+          labels:
+            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
+              }}'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
+            service: VSHNOpenBao
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
+        - expr: vector(99.25)
+          labels:
+            service: VSHNOpenBao
+          record: sla:objective:ratio

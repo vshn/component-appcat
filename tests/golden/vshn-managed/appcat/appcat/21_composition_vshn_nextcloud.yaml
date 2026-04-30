@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+    metadata.appcat.vshn.io/revision: master-feat_init-openabo-service
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+        name: function-appcat-master-feat-init-openabo-service
       input:
         apiVersion: v1
         data:
@@ -57,7 +57,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 12e40003217cb4e5f36d6b5a81c69d8bbba2d6d9
+          imageTag: feat_init-openabo-service
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
