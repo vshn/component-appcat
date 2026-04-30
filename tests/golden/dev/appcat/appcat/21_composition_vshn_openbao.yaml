@@ -62,7 +62,7 @@ spec:
             {"size": {"cpu": "125m", "disk": "16Gi", "enabled": true, "memory": "512Mi"}},
             "standard-8": {"size": {"cpu": "2", "disk": "16Gi", "enabled": true, "memory":
             "8Gi"}}}'
-          proxyEndpoint: host.docker.internal:9443
+          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: openbaorestoreaccount
