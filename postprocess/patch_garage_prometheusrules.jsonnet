@@ -26,6 +26,7 @@ local fixup(obj) =
             rules: [
               r { labels+: synLabels }
               for r in g.rules
+              if std.get(r, 'alert', '') != 'GarageLowDiskSpace'
             ],
           }
           for g in std.get(std.get(obj, 'spec', {}), 'groups', [])

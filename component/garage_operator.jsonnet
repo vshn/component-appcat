@@ -1,5 +1,6 @@
 local kap = import 'lib/kapitan.libjsonnet';
 local kube = import 'lib/kube.libjsonnet';
+local prom = import 'prometheus.libsonnet';
 local inv = kap.inventory();
 
 local params = inv.parameters.appcat.garageOperator;
@@ -49,7 +50,20 @@ local garageServiceMonitor = {
   },
 };
 
+local garagePrometheusRule =
+  prom.GeneratePrometheusNonSLORules('Garage', 'garage', []).base.spec.forProvider.manifest {
+    metadata+: {
+      namespace: params.namespace,
+      labels+: {
+        syn: 'true',
+        syn_component: 'appcat',
+        syn_team: 'schedar',
+      },
+    },
+  };
+
 if params.enabled then {
   '00_namespace': namespace,
   '10_garage_servicemonitor': garageServiceMonitor,
+  '20_garage_prometheusrule': garagePrometheusRule,
 } else {}
