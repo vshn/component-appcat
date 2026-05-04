@@ -29,6 +29,8 @@ spec:
           for: 1m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
             syn_team: schedar
         - alert: GaragePersistentVolumeFillingUp
           annotations:
@@ -50,6 +52,9 @@ spec:
           for: 1h
           labels:
             severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
     - name: garage-memory
       rules:
         - alert: GarageMemoryCritical
@@ -66,4 +71,6 @@ spec:
           for: 120m
           labels:
             severity: critical
+            syn: 'true'
+            syn_component: appcat
             syn_team: schedar

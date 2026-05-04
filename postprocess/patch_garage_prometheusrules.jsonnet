@@ -14,6 +14,12 @@ local isGaragePrometheusRule(obj) =
   && std.get(obj, 'kind', '') == 'PrometheusRule'
   && std.get(std.get(obj, 'metadata', {}), 'name', '') == 'appcat-garage-operator-garage';
 
+local filterRules(rules) = [
+  r { labels+: synLabels }
+  for r in rules
+  if std.get(r, 'alert', '') != 'GarageLowDiskSpace'
+];
+
 local fixup(obj) =
   if isGaragePrometheusRule(obj) then
     obj {
@@ -22,14 +28,9 @@ local fixup(obj) =
       },
       spec+: {
         groups: [
-          g {
-            rules: [
-              r { labels+: synLabels }
-              for r in g.rules
-              if std.get(r, 'alert', '') != 'GarageLowDiskSpace'
-            ],
-          }
+          g { rules: filterRules(g.rules) }
           for g in std.get(std.get(obj, 'spec', {}), 'groups', [])
+          if std.length(filterRules(g.rules)) > 0
         ],
       },
     }
