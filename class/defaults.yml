@@ -1348,7 +1348,7 @@ parameters:
                 memory: "8Gi"
                 disk: 200Gi
         openbao:
-          enabled: true
+          enabled: false
           billing: true
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
