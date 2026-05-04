@@ -28,6 +28,9 @@ spec:
       input:
         apiVersion: v1
         data:
+          admin_ingress_annotations: |
+            nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+            cert-manager.io/cluster-issuer: letsencrypt-staging
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox

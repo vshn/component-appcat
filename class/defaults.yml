@@ -1152,6 +1152,8 @@ parameters:
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+            admin_ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-production
             defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: keycloakbyvshn
