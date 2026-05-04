@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-feat_init-openabo-service
+    metadata.appcat.vshn.io/revision: debug-b2801dac952a1c3c1c71f23056e70b88980e8b2c
     metadata.appcat.vshn.io/serviceID: vshn-openbao
     name: vshnopenbao.vshn.appcat.vshn.io
   name: vshnopenbao.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-feat-init-openabo-service
+        name: function-appcat-debug-b2801dac952a1c3c1c71f23056e70b88980e8b2c
       input:
         apiVersion: v1
         data:
@@ -47,7 +47,7 @@ spec:
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
-          imageTag: feat_init-openabo-service
+          imageTag: b2801dac952a1c3c1c71f23056e70b88980e8b2c
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance

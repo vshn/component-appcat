@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:feat_init-openabo-service
+          image: ghcr.io/vshn/appcat:b2801dac952a1c3c1c71f23056e70b88980e8b2c
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

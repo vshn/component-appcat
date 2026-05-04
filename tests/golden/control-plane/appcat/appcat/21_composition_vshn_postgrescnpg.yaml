@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_init-openabo-service
+    metadata.appcat.vshn.io/revision: master-b2801dac952a1c3c1c71f23056e70b88980e8b2c
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-init-openabo-service
+        name: function-appcat-master-b2801dac952a1c3c1c71f23056e70b88980e8b2c
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: feat_init-openabo-service
+          imageTag: b2801dac952a1c3c1c71f23056e70b88980e8b2c
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
