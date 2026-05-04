@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-b2801dac952a1c3c1c71f23056e70b88980e8b2c
+    metadata.appcat.vshn.io/revision: debug-7a5731ed730c1f2c70144ea4291880704e7443df
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-b2801dac952a1c3c1c71f23056e70b88980e8b2c
+        name: function-appcat-debug-7a5731ed730c1f2c70144ea4291880704e7443df
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
-          imageTag: b2801dac952a1c3c1c71f23056e70b88980e8b2c
+          imageTag: 7a5731ed730c1f2c70144ea4291880704e7443df
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
@@ -111,6 +111,9 @@ spec:
             "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m", "memory":
             "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'true'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{"tcp-gateway":"tcp.10.5.0.103.nip.io"}'
         kind: ConfigMap
         metadata:
           labels:

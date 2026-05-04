@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: b2801dac952a1c3c1c71f23056e70b88980e8b2c
+        tag: 7a5731ed730c1f2c70144ea4291880704e7443df
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -789,6 +789,9 @@ parameters:
             cnpgClusterChartSource: ${appcat:charts:cnpgCluster:source}
             cnpgClusterChartVersion: ${appcat:charts:cnpgCluster:version}
             cnpgClusterChartName: ${appcat:charts:cnpgCluster:chartName}
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           enableNetworkPolicy: true
@@ -1345,7 +1348,7 @@ parameters:
                 memory: "8Gi"
                 disk: 200Gi
         openbao:
-          enabled: true
+          enabled: false
           billing: true
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}

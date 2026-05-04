@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    metadata.appcat.vshn.io/enabled-services-hash: b1bf8e6f07eab279732d5762d55acd7b
+    metadata.appcat.vshn.io/enabled-services-hash: 4851b558d411555f6d5a0df17a2a714e
   labels:
     api: appcat
     apiserver: 'true'
@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:b2801dac952a1c3c1c71f23056e70b88980e8b2c
+          image: ghcr.io/vshn/appcat:7a5731ed730c1f2c70144ea4291880704e7443df
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

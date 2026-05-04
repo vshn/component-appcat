@@ -66,10 +66,7 @@ local vshn_appcat_service(name, serviceParams) =
               + xrds.WithPlanDefaults(plans, serviceParams.defaultPlan) + xrds.FilterOutGuaraanteed(isBestEffort)
               + xrds.WithServiceID(name);
 
-  local additonalInputs = if std.objectHas(serviceParams, 'additionalInputs') then {
-    [k]: if std.isObject(serviceParams.additionalInputs[k]) then std.manifestJsonMinified(serviceParams.additionalInputs[k]) else std.toString(serviceParams.additionalInputs[k])
-    for k in std.objectFieldsAll(serviceParams.additionalInputs)
-  } else {};
+  local additonalInputs = common.ParseAdditionalInputs(serviceParams);
 
   local proxyFunction = if serviceParams.proxyFunction then {
     proxyEndpoint: serviceParams.grpcEndpoint,
