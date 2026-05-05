@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fb75203c19e400379879e7ee3486984a469ca505
+        tag: e74f91a2e843e391315df82326ebea1e81793250
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -1151,6 +1151,8 @@ parameters:
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-production
+            admin_ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
             defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           openshiftTemplate:
