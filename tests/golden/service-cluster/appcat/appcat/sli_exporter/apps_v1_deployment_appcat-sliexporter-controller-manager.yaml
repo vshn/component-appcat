@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:feat_disable-kc-admin
+          image: ghcr.io/vshn/appcat:e74f91a2e843e391315df82326ebea1e81793250
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:feat_disable-kc-admin
+          image: ghcr.io/vshn/appcat:e74f91a2e843e391315df82326ebea1e81793250
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

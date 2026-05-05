@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_disable-kc-admin
+    metadata.appcat.vshn.io/revision: master-e74f91a2e843e391315df82326ebea1e81793250
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-disable-kc-admin
+        name: function-appcat-master-e74f91a2e843e391315df82326ebea1e81793250
       input:
         apiVersion: v1
         data:
@@ -49,7 +49,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: feat_disable-kc-admin
+          imageTag: e74f91a2e843e391315df82326ebea1e81793250
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'true'

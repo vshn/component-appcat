@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-feat-disable-kc-admin
+  name: function-appcat-debug-e74f91a2e843e391315df82326ebea1e81793250
 spec:
-  package: ghcr.io/vshn/appcat:feat_disable-kc-admin-func
+  package: ghcr.io/vshn/appcat:e74f91a2e843e391315df82326ebea1e81793250-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
