@@ -27,7 +27,7 @@ spec:
         data:
           chartName: vshngaragebucket
           chartRepository: https://charts.appcat.ch/
-          chartVersion: 0.0.1
+          chartVersion: 0.0.2
           crossplaneNamespace: syn-crossplane
           garageClaim: garage
           garageClaimNamespace: syn-appcat

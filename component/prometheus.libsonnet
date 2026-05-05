@@ -62,6 +62,8 @@ local generatePrometheusNonSLORules(serviceName, memoryContainerName, additional
                     'for': '1m',
                     labels: {
                       severity: 'critical',
+                      syn: 'true',
+                      syn_component: 'appcat',
                       syn_team: 'schedar',
                     },
                   },
@@ -76,6 +78,9 @@ local generatePrometheusNonSLORules(serviceName, memoryContainerName, additional
                     'for': '1h',
                     labels: {
                       severity: 'warning',
+                      syn: 'true',
+                      syn_component: 'appcat',
+                      syn_team: 'schedar',
                     },
                   },
                 ],
@@ -94,6 +99,8 @@ local generatePrometheusNonSLORules(serviceName, memoryContainerName, additional
                     'for': '120m',
                     labels: {
                       severity: 'critical',
+                      syn: 'true',
+                      syn_component: 'appcat',
                       syn_team: 'schedar',
                     },
                   },
