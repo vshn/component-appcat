@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:fix_provider_kubernetes_ssa
+          image: ghcr.io/vshn/appcat:3039f6d881d5e443e74f530f9703c57e74bb486e
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

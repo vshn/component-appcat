@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_provider_kubernetes_ssa
+    metadata.appcat.vshn.io/revision: debug-3039f6d881d5e443e74f530f9703c57e74bb486e
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-provider-kubernetes-ssa
+        name: function-appcat-debug-3039f6d881d5e443e74f530f9703c57e74bb486e
       input:
         apiVersion: v1
         data:
@@ -54,7 +54,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: fix_provider_kubernetes_ssa
+          imageTag: 3039f6d881d5e443e74f530f9703c57e74bb486e
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           maintenanceSA: helm-based-service-maintenance
