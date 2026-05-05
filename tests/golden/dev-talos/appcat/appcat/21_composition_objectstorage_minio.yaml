@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-service-level-ha
+        name: function-appcat-debug-9d6a5978a928baa9ad525957266bb8b379eeafc7
       input:
         apiVersion: v1
         data:
