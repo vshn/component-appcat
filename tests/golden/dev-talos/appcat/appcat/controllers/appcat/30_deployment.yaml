@@ -27,11 +27,11 @@ spec:
             - --billing=false
             - --crossplane-metrics=true
             - --garage-bucket-cleanup=false
-            - --ssh-gateway-namespace=kgateway-system
-            - --ssh-gateways=ssh-gateway,ssh-gateway-2
-            - --ssh-port-range-start=10000
-            - --ssh-port-range-end=10019
-            - --ssh-gateway-capacity=5
+            - --tcp-gateway-namespace=kgateway-system
+            - --tcp-gateways=ssh-gateway,ssh-gateway-2,tcp-gateway
+            - --tcp-port-range-start=10000
+            - --tcp-port-range-end=10019
+            - --tcp-gateway-capacity=5
           env:
             - name: PLANS_NAMESPACE
               value: syn-appcat
@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:v4.185.0
+          image: ghcr.io/vshn/appcat:v4.186.0
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

@@ -20,7 +20,7 @@ local strCloudscaleZones = std.join(', ', cloudscaleZones);
 local vars = import 'config/vars.jsonnet';
 
 local vshnServiceID(name) = 'vshn-' + std.asciiLower(name);
-local objectBucketServiceID(name) = std.asciiLower(std.rstripChars(name, '.ch')) + '-objectbucket';
+local objectBucketServiceID(name) = if std.endsWith(name, '.ch') then std.asciiLower(std.rstripChars(name, '.ch')) + '-objectbucket' else std.asciiLower(name) + '-objectbucket';
 
 local syncOptions = {
   metadata+: {
@@ -277,6 +277,9 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     isOpenshift: std.toString(vars.isServiceClusterOpenShift),
     sliNamespace: params.slos.namespace,
     ocpDefaultAppsDomain: params.services.vshn.ocpDefaultAppsDomain,
+    routeType: params.services.vshn.routeType,
+    httpGatewayName: params.services.vshn.httpGatewayName,
+    httpGatewayNamespace: params.services.vshn.httpGatewayNamespace,
   } +
   getOwnerLabels(xrd)
   + {
@@ -308,6 +311,11 @@ local getAtPath(obj, path, default) = (
   );
   nestedFieldFromArray(obj, std.split(path, '.'))
 );
+
+local parseAdditionalInputs(params) = if std.objectHas(params, 'additionalInputs') then {
+  [k]: if std.isObject(params.additionalInputs[k]) then std.manifestJsonMinified(params.additionalInputs[k]) else std.toString(params.additionalInputs[k])
+  for k in std.objectFieldsAll(params.additionalInputs)
+} else {};
 
 {
   SyncOptions: syncOptions,
@@ -370,4 +378,6 @@ local getAtPath(obj, path, default) = (
     getAtPath(obj, path, default),
   GetOwnerLabels(xrd):
     getOwnerLabels(xrd),
+  ParseAdditionalInputs(params):
+    parseAdditionalInputs(params),
 }

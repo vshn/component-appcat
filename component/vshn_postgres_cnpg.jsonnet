@@ -29,6 +29,8 @@ local connectionSecretKeys = [
   'POSTGRESQL_USER',
   'POSTGRESQL_PASSWORD',
   'LOADBALANCER_IP',
+  'POSTGRESQL_GATEWAY_HOST',
+  'POSTGRESQL_GATEWAY_PORT',
 ];
 
 local isBestEffort = !std.member([ 'guaranteed_availability', 'premium' ], inv.parameters.facts.service_level);
@@ -80,7 +82,7 @@ local composition =
                       externalDatabaseConnectionsEnabled: std.toString(params.services.vshn.externalDatabaseConnectionsEnabled),
                       additionalMaintenanceClusterRole: additionalMaintenanceClusterRoleName,
                     } + common.GetDefaultInputs(serviceName, pgParams, pgPlans, xrd, appuioManaged)
-                    + std.get(pgParams, 'additionalInputs', default={}, inc_hidden=true)
+                    + common.ParseAdditionalInputs(pgParams)
                     + common.EmailAlerting(params.services.emailAlerting)
                     + if pgParams.proxyFunction then {
                       proxyEndpoint: pgParams.grpcEndpoint,

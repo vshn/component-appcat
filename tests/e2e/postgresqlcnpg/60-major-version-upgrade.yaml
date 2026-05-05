@@ -1,0 +1,6 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+timeout: 1800
+commands:
+  - script: scripts/major-version-upgrade.sh
+    timeout: 1800

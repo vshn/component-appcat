@@ -104,6 +104,15 @@ parameters:
       postgres:
         enabled: true
     providers:
+      s3:
+        enabled: false
+        providerConfigs:
+          - name: switch
+            endpoint: https://zhw-a.s3.cloud.switch.ch
+            credentials:
+              AWS_SECRET_ACCESS_KEY: minioadmin
+              AWS_ACCESS_KEY_ID: minioadmin
+
       exoscale:
         enabled: false
       cloudscale:
@@ -174,6 +183,9 @@ parameters:
             registry_username: ""
             registry_password: ""
             ingress_annotations: |
+              nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+              cert-manager.io/cluster-issuer: letsencrypt-staging
+            admin_ingress_annotations: |
               nginx.ingress.kubernetes.io/backend-protocol: HTTPS
               cert-manager.io/cluster-issuer: letsencrypt-staging
         nextcloud:
@@ -268,6 +280,10 @@ parameters:
               enabled: false
             minio:
               enabled: false
+            generic:
+              enabled: false
+              providerConfigs:
+                - switch
             garage:
               enabled: true
               instances:

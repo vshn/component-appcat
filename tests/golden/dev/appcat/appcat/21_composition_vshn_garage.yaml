@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.185.0
+    metadata.appcat.vshn.io/revision: debug-v4.186.0
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,14 +24,14 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-185-0
+        name: function-appcat-debug-v4-186-0
       input:
         apiVersion: v1
         data:
           billingEnabled: 'false'
           bucketRegion: rma
           chartRepository: https://charts.appcat.ch/
-          chartVersion: 0.0.1
+          chartVersion: 0.0.3
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -44,9 +44,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.185.0
+          imageTag: v4.186.0
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
@@ -64,6 +66,7 @@ spec:
           quotasEnabled: 'false'
           releaseManagementEnabled: 'false'
           restoreSA: garageserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-garage
           serviceName: garage

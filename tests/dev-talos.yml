@@ -43,7 +43,7 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
     grpcEndpoint: 10.5.0.1:9443
-    proxyFunction: false
+    proxyFunction: true
     quotasEnabled: false
     monitoringEnabled: true
     billing:
@@ -137,6 +137,9 @@ parameters:
         e2eTests: true
         enabled: true
         externalDatabaseConnectionsEnabled: true
+        routeType: "HTTPRoute"
+        httpGatewayName: "http-gateway"
+        httpGatewayNamespace: "kgateway-system"
         mariadb:
           enabled: true
         keycloak:
@@ -145,6 +148,9 @@ parameters:
             registry_username: "dummy"
             registry_password: "dummy"
             ingress_annotations: |
+              nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+              cert-manager.io/cluster-issuer: letsencrypt-staging
+            admin_ingress_annotations: |
               nginx.ingress.kubernetes.io/backend-protocol: HTTPS
               cert-manager.io/cluster-issuer: letsencrypt-staging
         nextcloud:
@@ -162,13 +168,17 @@ parameters:
           additionalInputs:
             registry_username: ""
             registry_password: ""
-            sshGatewayEnabled: "true"
-            sshGatewayNamespace: "kgateway-system"
-            sshGateways: '{"ssh-gateway":"ssh.10.5.0.101.nip.io","ssh-gateway-2":"ssh2.10.5.0.102.nip.io"}'
+            tcpGatewayEnabled: "true"
+            tcpGateways:
+              ssh-gateway: ssh.10.5.0.101.nip.io
+              ssh-gateway-2: ssh2.10.5.0.102.nip.io
 
         postgres:
           sgNamespace: stackgres
           additionalInputs:
+            tcpGatewayEnabled: "true"
+            tcpGateways:
+              tcp-gateway: tcp.10.5.0.103.nip.io
             loadbalancerAnnotations: |
               foo: bar
         redis:

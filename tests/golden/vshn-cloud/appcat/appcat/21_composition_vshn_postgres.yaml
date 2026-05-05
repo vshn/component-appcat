@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.185.0
+    metadata.appcat.vshn.io/revision: master-v4.186.0
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-185-0
+        name: function-appcat-master-v4-186-0
       input:
         apiVersion: v1
         data:
@@ -49,8 +49,10 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           externalDatabaseConnectionsEnabled: 'true'
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: v4.185.0
+          imageTag: v4.186.0
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
@@ -97,6 +99,7 @@ spec:
             "memory": "3984Mi"}}}'
           quotasEnabled: 'false'
           releaseManagementEnabled: 'true'
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-postgresql
           serviceName: postgresql
@@ -114,6 +117,9 @@ spec:
             "memory": "64Mi"}}, "setDbopsResult": {"limits": {"cpu": "250m", "memory":
             "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}}'
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'false'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:

@@ -37,11 +37,11 @@ parameters:
         chartName: vshnpostgresql
       garage:
         source: https://charts.appcat.ch/
-        version: 0.0.1
+        version: 0.0.3
         chartName: vshngaragecluster
       garageBucket:
         source: https://charts.appcat.ch/
-        version: 0.0.1
+        version: 0.0.2
         chartName: vshngaragebucket
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
@@ -50,7 +50,10 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.3.3
+        version: 0.4.3
+      openbao:
+        source: https://openbao.github.io/openbao-helm
+        version: 0.19.3
     images:
       provider-kubernetes:
         registry: ghcr.io
@@ -63,11 +66,11 @@ parameters:
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
-        tag: v1.0.1
+        tag: v1.0.2
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale
-        tag: v0.5.10
+        tag: v0.5.11
       provider-minio:
         registry: ghcr.io
         repository: vshn/provider-minio
@@ -76,6 +79,10 @@ parameters:
         registry: ghcr.io
         repository: vshn/provider-sql
         tag: v0.11.0-vshn
+      provider-s3:
+        registry: ghcr.io
+        repository: vshn/provider-s3
+        tag: v0.0.1
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -87,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.185.0
+        tag: v4.186.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -143,6 +150,10 @@ parameters:
         maintenanceURL: "https://docker-registry.inventage.com:10121/v2/keycloak-competence-center/keycloak-managed/tags/list"
       redis-exporter:
         tag: 1.76.0-debian-12-r0
+      openbao:
+        registry: docker.io
+        image: hashicorp/vault-k8s
+        tag: "1.7.2"
     =_crd_version: ${appcat:images:appcat:tag}
 
     pullPolicy: IfNotPresent
@@ -195,6 +206,8 @@ parameters:
           limits:
             # The default is a bit low for OpenShift deployments...
             memory: 512Mi
+        prometheusRules:
+          enabled: true
 
     crossplane:
       namespace: syn-crossplane
@@ -451,6 +464,8 @@ parameters:
         crossplane_extra_resources: ${appcat:monitoring:crossplane:extra_resources}
       tls:
         certSecretName: webhook-cert
+      tcpRoute:
+        tcpGatewayNamespace: "kgateway-system"
       resources:
         requests:
           cpu: 100m
@@ -572,6 +587,8 @@ parameters:
           uptime: ${appcat:slos:uptimeDefaults}
         Garage:
           uptime: ${appcat:slos:uptimeDefaults}
+        OpenBao:
+          uptime: ${appcat:slos:uptimeDefaults}
 
     providers:
       cloudscale:
@@ -660,7 +677,17 @@ parameters:
           package: ${appcat:images:provider-sql:registry}/${appcat:images:provider-sql:repository}:${appcat:images:provider-sql:tag}
         runtimeConfig:
           serviceAccountName: provider-sql
-        providerConfigRefs: []
+        providerConfigs: []
+
+      s3:
+        enabled: false
+        apiVersion: s3.crossplane.io/v1
+        connectionSecretNamespace: syn-provider-s3-secrets
+        namespace: ${appcat:crossplane:namespace}
+        spec:
+          package: ${appcat:images:provider-s3:registry}/${appcat:images:provider-s3:repository}:${appcat:images:provider-s3:tag}
+        runtimeConfig:
+          serviceAccountName: provider-s3
         additionalProviderConfigs: []
 
     services:
@@ -678,6 +705,9 @@ parameters:
         secretName: mailgun-smtp-credentials
       vshn:
         ocpDefaultAppsDomain: ""
+        routeType: "Ingress"
+        httpGatewayName: ""
+        httpGatewayNamespace: ""
         enabled: false
         isServiceClusterOpenshift: false
         externalDatabaseConnectionsEnabled: "false"
@@ -705,9 +735,9 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
-            sshGatewayEnabled: "false"
-            sshGatewayNamespace: "kgateway-system"
-            sshGateways: ""
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."
@@ -761,6 +791,9 @@ parameters:
             cnpgClusterChartSource: ${appcat:charts:cnpgCluster:source}
             cnpgClusterChartVersion: ${appcat:charts:cnpgCluster:version}
             cnpgClusterChartName: ${appcat:charts:cnpgCluster:chartName}
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           enableNetworkPolicy: true
@@ -1121,6 +1154,8 @@ parameters:
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
+            admin_ingress_annotations: |
+              cert-manager.io/cluster-issuer: letsencrypt-production
             defaultPGComposition: vshnpostgrescnpg.vshn.appcat.vshn.io
           openshiftTemplate:
             serviceName: keycloakbyvshn
@@ -1316,6 +1351,60 @@ parameters:
                 cpu: "2"
                 memory: "8Gi"
                 disk: 200Gi
+        openbao:
+          enabled: false
+          billing: true
+          additionalInputs:
+            kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+          serviceName: VSHNOpenBao
+          compFunctionsOnly: true
+          connectionSecretKeys:
+            - ca.crt
+            - tls.crt
+            - tls.key
+          mode: standalone
+          offered: true
+          restoreSA: openbaorestoreaccount
+          restoreRoleRules: ${appcat:defaultRestoreRoleRules}
+          enableNetworkPolicy: true
+          chartRepository: ${appcat:charts:openbao:source}
+          chartVersion: ${appcat:charts:openbao:version}
+          secretNamespace: ${appcat:services:vshn:secretNamespace}
+          grpcEndpoint: ${appcat:grpcEndpoint}
+          proxyFunction: ${appcat:proxyFunction}
+          defaultPlan: standard-1
+          sla: 99.25
+          plans:
+            standard-512m:
+              size:
+                enabled: true
+                cpu: "125m"
+                memory: "512Mi"
+                disk: 16Gi
+            standard-1:
+              size:
+                enabled: true
+                cpu: "250m"
+                memory: "1Gi"
+                disk: 16Gi
+            standard-2:
+              size:
+                enabled: true
+                cpu: "500m"
+                memory: "2Gi"
+                disk: 16Gi
+            standard-4:
+              size:
+                enabled: true
+                cpu: "1"
+                memory: "4Gi"
+                disk: 16Gi
+            standard-8:
+              size:
+                enabled: true
+                cpu: "2"
+                memory: "8Gi"
+                disk: 16Gi
 
       # Config for exoscale composites
       exoscale:
@@ -1370,6 +1459,13 @@ parameters:
               grpcEndpoint: ${appcat:grpcEndpoint}
               proxyFunction: ${appcat:proxyFunction}
               providerConfig: minio
+            generic:
+              enabled: false
+              secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}
+              providerSecretNamespace: ${appcat:providers:s3:connectionSecretNamespace}
+              grpcEndpoint: ${appcat:grpcEndpoint}
+              proxyFunction: ${appcat:proxyFunction}
+              providerConfigs: []
             garage:
               enabled: false
               secretNamespace: ${appcat:services:generic:objectstorage:secretNamespace}

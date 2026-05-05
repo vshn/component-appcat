@@ -4,8 +4,8 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '-100'
   labels:
-    name: appcat-controller-ssh-gateway
-  name: appcat-controller:ssh-gateway
+    name: appcat-controller-tcp-gateway
+  name: appcat-controller:tcp-gateway
 rules:
   - apiGroups:
       - gateway.networking.x-k8s.io

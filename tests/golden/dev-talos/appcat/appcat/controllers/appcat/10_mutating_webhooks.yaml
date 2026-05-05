@@ -3,7 +3,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: syn-appcat/webhook-certificate
-  name: appcat-sshgateway
+  name: appcat-tcpgateway
 webhooks:
   - admissionReviewVersions:
       - v1
@@ -14,6 +14,9 @@ webhooks:
         path: /mutate-gateway-networking-x-k8s-io-v1alpha1-xlistenerset
     failurePolicy: Fail
     name: mxlistenerset.kb.io
+    objectSelector:
+      matchLabels:
+        appcat.vshn.io/tcpgateway: 'true'
     rules:
       - apiGroups:
           - gateway.networking.x-k8s.io

@@ -21,13 +21,13 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-185-0
+        name: function-appcat-debug-v4-186-0
       input:
         apiVersion: v1
         data:
           chartName: vshngaragebucket
           chartRepository: https://charts.appcat.ch/
-          chartVersion: 0.0.1
+          chartVersion: 0.0.2
           crossplaneNamespace: syn-crossplane
           garageClaim: garage
           garageClaimNamespace: syn-appcat

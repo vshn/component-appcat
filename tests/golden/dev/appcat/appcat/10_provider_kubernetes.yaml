@@ -472,8 +472,8 @@ rules:
   - apiGroups:
       - gateway.networking.k8s.io
     resources:
+      - httproutes
       - tcproutes
-      - referencegrants
     verbs:
       - get
       - list
@@ -486,6 +486,18 @@ rules:
       - gateway.networking.x-k8s.io
     resources:
       - xlistenersets
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - gateway.kgateway.dev
+    resources:
+      - backendconfigpolicies
     verbs:
       - get
       - list

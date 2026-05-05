@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.185.0
+    metadata.appcat.vshn.io/revision: debug-v4.186.0
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-185-0
+        name: function-appcat-debug-v4-186-0
       input:
         apiVersion: v1
         data:
@@ -45,9 +45,11 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          httpGatewayName: ''
+          httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.185.0
+          imageTag: v4.186.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
@@ -70,13 +72,14 @@ spec:
           registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: forgejoserviceaccount
+          routeType: Ingress
           salesOrder: ''
           serviceID: vshn-forgejo
           serviceName: forgejo
           sliNamespace: syn-appcat-slos
-          sshGatewayEnabled: 'false'
-          sshGatewayNamespace: kgateway-system
-          sshGateways: ''
+          tcpGatewayEnabled: 'false'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:
