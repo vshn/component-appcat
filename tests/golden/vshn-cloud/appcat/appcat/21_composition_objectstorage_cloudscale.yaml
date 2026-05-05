@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-default-user
+        name: function-appcat-master-fb75203c19e400379879e7ee3486984a469ca505
       input:
         apiVersion: v1
         data:
