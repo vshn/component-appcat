@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: e74f91a2e843e391315df82326ebea1e81793250
+        tag: update-garage-api
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

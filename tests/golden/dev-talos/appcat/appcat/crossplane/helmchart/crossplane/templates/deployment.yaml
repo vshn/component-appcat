@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: e74f91a2e843e391315df82326ebea1e81793250
+        function-revision: update-garage-api
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

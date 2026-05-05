@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-e74f91a2e843e391315df82326ebea1e81793250
+        name: function-appcat-master-update-garage-api
       input:
         apiVersion: v1
         data:
