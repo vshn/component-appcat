@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-7a5731ed730c1f2c70144ea4291880704e7443df
+    metadata.appcat.vshn.io/revision: debug-fb75203c19e400379879e7ee3486984a469ca505
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-7a5731ed730c1f2c70144ea4291880704e7443df
+        name: function-appcat-debug-fb75203c19e400379879e7ee3486984a469ca505
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: 7a5731ed730c1f2c70144ea4291880704e7443df
+          imageTag: fb75203c19e400379879e7ee3486984a469ca505
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
