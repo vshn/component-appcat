@@ -37,11 +37,11 @@ parameters:
         chartName: vshnpostgresql
       garage:
         source: https://charts.appcat.ch/
-        version: 0.0.1
+        version: 0.0.3
         chartName: vshngaragecluster
       garageBucket:
         source: https://charts.appcat.ch/
-        version: 0.0.1
+        version: 0.0.2
         chartName: vshngaragebucket
       cnpgBarmanPlugin:
         # https://artifacthub.io/packages/helm/cloudnative-pg/plugin-barman-cloud
@@ -50,7 +50,7 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.1.4
+        version: 0.4.3
       openbao:
         source: https://openbao.github.io/openbao-helm
         version: 0.19.3
@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 6e4fe47f0f0749c62196e9c8a9ca20e8635f566c
+        tag: fix/service_level_ha
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -206,6 +206,8 @@ parameters:
           limits:
             # The default is a bit low for OpenShift deployments...
             memory: 512Mi
+        prometheusRules:
+          enabled: true
 
     crossplane:
       namespace: syn-crossplane

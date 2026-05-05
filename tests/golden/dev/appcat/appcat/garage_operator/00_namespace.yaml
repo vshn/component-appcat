@@ -4,4 +4,6 @@ metadata:
   annotations: {}
   labels:
     name: syn-garage-operator
+    openshift.io/cluster-monitoring: 'true'
+    openshift.io/user-monitoring: 'false'
   name: syn-garage-operator
