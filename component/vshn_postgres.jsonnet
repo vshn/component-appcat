@@ -201,6 +201,12 @@ local maintenanceClusterRole = kube.ClusterRole(additionalMaintenanceClusterRole
       resources: [ 'sgdbops' ],
       verbs: [ 'create', 'delete', 'get', 'list', 'watch' ],
     },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'configmaps' ],
+      resourceNames: [ params.maintenanceConfigMapName ],
+      verbs: [ 'get' ],
+    },
   ],
 };
 

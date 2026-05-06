@@ -48,6 +48,12 @@ local maintenanceRole = kube.ClusterRole(maintenanceRoleName) {
       resources: [ 'backups' ],
       verbs: [ 'get', 'watch', 'create' ],
     },
+    {
+      apiGroups: [ '' ],
+      resources: [ 'configmaps' ],
+      resourceNames: [ params.maintenanceConfigMapName ],
+      verbs: [ 'get' ],
+    },
   ],
 };
 
