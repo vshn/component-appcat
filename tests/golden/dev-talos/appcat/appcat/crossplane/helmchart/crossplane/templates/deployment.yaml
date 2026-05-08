@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 2e7c65656ed82828dbceb4a1196c17d128a2033f
+        function-revision: enable-forgejo-billing
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
