@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:enable-forgejo-billing
+          image: ghcr.io/vshn/appcat:v4.186.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
