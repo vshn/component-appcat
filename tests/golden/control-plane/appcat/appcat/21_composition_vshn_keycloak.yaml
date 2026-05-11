@@ -28,6 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
+          additionalResourcesEnabled: 'false'
           admin_ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging

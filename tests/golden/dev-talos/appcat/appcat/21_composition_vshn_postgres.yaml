@@ -29,6 +29,7 @@ spec:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
+          additionalResourcesEnabled: 'false'
           billingEnabled: 'false'
           bucketRegion: rma
           cloudProvider: cloudscale

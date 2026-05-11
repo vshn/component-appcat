@@ -65,6 +65,7 @@ parameters:
     grpcEndpoint: 172.18.0.1:9443
     proxyFunction: true
     quotasEnabled: false
+    additionalResourcesEnabled: true
     appuioManaged: false
     #billingEnabled: true
     monitoringEnabled: true

@@ -28,6 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
+          additionalResourcesEnabled: 'false'
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera

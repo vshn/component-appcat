@@ -28,6 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
+          additionalResourcesEnabled: 'false'
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: https://charts.appcat.ch/
