@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: f190eca3498c294dac628a629b19ea9b0c24c9ab
+        function-revision: fix/cnpg-antiaffinity
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
