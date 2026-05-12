@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/projectsyn/commodore-component-template.git",
-  "commit": "f12cbb49f928cf689cf39b98d8d7c9e88fb289f6",
+  "commit": "59137bf4d0e581390e40a7897ba3546a0d2270a7",
   "checkout": "main",
   "context": {
     "cookiecutter": {
@@ -24,7 +24,8 @@
       "github_owner": "vshn",
       "github_name": "component-appcat",
       "github_url": "https://github.com/vshn/component-appcat",
-      "_template": "https://github.com/projectsyn/commodore-component-template.git"
+      "_template": "https://github.com/projectsyn/commodore-component-template.git",
+      "_commit": "59137bf4d0e581390e40a7897ba3546a0d2270a7"
     }
   },
   "directory": null
