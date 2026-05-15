@@ -216,7 +216,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'gateway.networking.k8s.io' ],
-        resources: [ 'httproutes', 'tcproutes' ],
+        resources: [ 'httproutes', 'tcproutes', 'referencegrants' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {

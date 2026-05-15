@@ -417,6 +417,7 @@ rules:
     resources:
       - httproutes
       - tcproutes
+      - referencegrants
     verbs:
       - get
       - list
