@@ -54,3 +54,11 @@ rules:
       - get
       - watch
       - create
+  - apiGroups:
+      - ''
+    resourceNames:
+      - maintenance-config
+    resources:
+      - configmaps
+    verbs:
+      - get

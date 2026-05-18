@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  vshn-codey.disableAppcatRelease: 'false'
+  vshn-codey.disableServiceMaint: 'false'
+  vshn-forgejo.disableAppcatRelease: 'false'
+  vshn-forgejo.disableServiceMaint: 'false'
+  vshn-garage.disableAppcatRelease: 'false'
+  vshn-garage.disableServiceMaint: 'false'
+  vshn-postgresql.disableAppcatRelease: 'false'
+  vshn-postgresql.disableServiceMaint: 'false'
+  vshn-postgresqlcnpg.disableAppcatRelease: 'false'
+  vshn-postgresqlcnpg.disableServiceMaint: 'false'
+  vshn-redis.disableAppcatRelease: 'false'
+  vshn-redis.disableServiceMaint: 'false'
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: maintenance-config
+  name: maintenance-config
+  namespace: syn-appcat-control

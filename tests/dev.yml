@@ -207,6 +207,9 @@ parameters:
 
         postgres:
           sgNamespace: stackgres
+          # maintenance:
+          #   disableServiceMaint: false
+          #   disableAppcatRelease: true
           additionalInputs:
             loadbalancerAnnotations: |
               foo: bar
