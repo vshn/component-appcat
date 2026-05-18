@@ -168,7 +168,11 @@ parameters:
     quotasEnabled: false
     billingEnabled: false
     monitoringEnabled: true
-    additionalResourcesEnabled: false
+    # Allowlist for additional resources users may deploy via
+    # spec.parameters.additionalResources.configMapRef. RBAC-style rules:
+    # each rule is matched against the resource's apiGroup and kind.
+    # An empty list disables the feature.
+    additionalResourcesAllowed: []
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
@@ -716,7 +720,7 @@ parameters:
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
-        additionalResourcesEnabled: ${appcat:additionalResourcesEnabled}
+        additionalResourcesAllowed: ${appcat:additionalResourcesAllowed}
         secretNamespace: ${appcat:crossplane:namespace}
         forgejo:
           enabled: true

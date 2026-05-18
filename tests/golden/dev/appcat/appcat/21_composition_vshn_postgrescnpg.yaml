@@ -31,7 +31,7 @@ spec:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
-          additionalResourcesEnabled: 'true'
+          additionalResourcesAllowed: '[{"apiGroups":["gateway.networking.k8s.io"],"kinds":["ReferenceGrant"]}]'
           billingEnabled: 'false'
           bucketRegion: rma
           cloudProvider: cloudscale

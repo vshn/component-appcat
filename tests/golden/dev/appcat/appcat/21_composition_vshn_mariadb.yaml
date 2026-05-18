@@ -28,7 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          additionalResourcesEnabled: 'true'
+          additionalResourcesAllowed: '[{"apiGroups":["gateway.networking.k8s.io"],"kinds":["ReferenceGrant"]}]'
           billingEnabled: 'false'
           bucketRegion: rma
           chartRepository: oci://registry-1.docker.io/bitnamicharts/mariadb-galera

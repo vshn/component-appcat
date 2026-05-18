@@ -28,7 +28,7 @@ spec:
       input:
         apiVersion: v1
         data:
-          additionalResourcesEnabled: 'true'
+          additionalResourcesAllowed: '[{"apiGroups":["gateway.networking.k8s.io"],"kinds":["ReferenceGrant"]}]'
           admin_ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
