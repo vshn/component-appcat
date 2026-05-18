@@ -63,3 +63,11 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - ''
+    resourceNames:
+      - maintenance-config
+    resources:
+      - configmaps
+    verbs:
+      - get

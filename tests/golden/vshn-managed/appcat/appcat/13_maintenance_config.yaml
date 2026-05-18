@@ -10,6 +10,8 @@ data:
   vshn-keycloak.disableServiceMaint: 'false'
   vshn-mariadb.disableAppcatRelease: 'false'
   vshn-mariadb.disableServiceMaint: 'false'
+  vshn-minio.disableAppcatRelease: 'false'
+  vshn-minio.disableServiceMaint: 'false'
   vshn-nextcloud.disableAppcatRelease: 'false'
   vshn-nextcloud.disableServiceMaint: 'false'
   vshn-postgresql.disableAppcatRelease: 'false'
