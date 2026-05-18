@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-add-disable-maintenance
+  name: function-appcat-master-2af2b864988fee90b10b32cdcd2c63965ce71afd
 spec:
-  package: ghcr.io/vshn/appcat:add_disable_maintenance-func
+  package: ghcr.io/vshn/appcat:2af2b864988fee90b10b32cdcd2c63965ce71afd-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
