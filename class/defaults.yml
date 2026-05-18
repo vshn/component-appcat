@@ -169,8 +169,12 @@ parameters:
     billingEnabled: false
     monitoringEnabled: true
     # Allowlist for additional resources users may deploy via
-    # spec.parameters.additionalResources.configMapRef. RBAC-style rules:
-    # each rule is matched against the resource's apiGroup and kind.
+    # spec.parameters.additionalResources.configMapRef. Each entry has:
+    #   apiGroups: list of API groups (used for runtime allowlist check)
+    #   kinds:     list of Kinds (used for runtime allowlist check)
+    #   resources: optional list of plural resource names. When set, rules
+    #              are appended to the provider-kubernetes ClusterRole so
+    #              the provider can create/update/delete the resource.
     # An empty list disables the feature.
     additionalResourcesAllowed: []
     grpcEndpoint: host.docker.internal:9443

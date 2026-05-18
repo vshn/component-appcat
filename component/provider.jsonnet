@@ -34,6 +34,19 @@ local escapePackage(spec) =
     package: img[0] + ':' + std.strReplace(img[1], '/', '_'),
   };
 
+// Extra rules for provider-kubernetes derived from the additionalResources
+// allowlist. Only entries with an explicit `resources` field contribute,
+// since RBAC keys on plural resource names (not Kinds).
+local additionalKubernetesRBAC = [
+  {
+    apiGroups: entry.apiGroups,
+    resources: entry.resources,
+    verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+  }
+  for entry in params.services.vshn.additionalResourcesAllowed
+  if std.objectHas(entry, 'resources') && std.length(entry.resources) > 0
+];
+
 // We define the rbacs here, so we don't have these ginormous yamls in the class
 local providerRBAC = {
   kubernetes: {
@@ -229,7 +242,7 @@ local providerRBAC = {
         resources: [ 'backendconfigpolicies' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
-    ],
+    ] + additionalKubernetesRBAC,
   },
   helm: {
     rules: [

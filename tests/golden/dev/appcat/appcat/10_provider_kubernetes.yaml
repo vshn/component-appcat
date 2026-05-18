@@ -507,6 +507,18 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - referencegrants
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: v1
 kind: Service

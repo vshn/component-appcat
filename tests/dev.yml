@@ -68,6 +68,7 @@ parameters:
     additionalResourcesAllowed:
       - apiGroups: [gateway.networking.k8s.io]
         kinds: [ReferenceGrant]
+        resources: [referencegrants]
     appuioManaged: false
     #billingEnabled: true
     monitoringEnabled: true
