@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/cnpg-antiaffinity
+        function-revision: b7326429fc46cd730e2dcbe88cc2ffc809b4299d
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

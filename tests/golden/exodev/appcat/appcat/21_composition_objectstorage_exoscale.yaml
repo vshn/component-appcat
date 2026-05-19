@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-cnpg-antiaffinity
+        name: function-appcat-master-b7326429fc46cd730e2dcbe88cc2ffc809b4299d
       input:
         apiVersion: v1
         data:
