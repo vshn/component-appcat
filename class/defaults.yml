@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 532725e406679eb1bf4e7f3c30229d658606aa8c
+        tag: f190eca3498c294dac628a629b19ea9b0c24c9ab
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -168,6 +168,15 @@ parameters:
     quotasEnabled: false
     billingEnabled: false
     monitoringEnabled: true
+    # Allowlist for additional resources users may deploy via
+    # spec.parameters.additionalResources.configMapRef. Each entry has:
+    #   apiGroups: list of API groups (used for runtime allowlist check)
+    #   kinds:     list of Kinds (used for runtime allowlist check)
+    #   resources: optional list of plural resource names. When set, rules
+    #              are appended to the provider-kubernetes ClusterRole so
+    #              the provider can create/update/delete the resource.
+    # An empty list disables the feature.
+    additionalResourcesAllowed: []
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
@@ -715,6 +724,7 @@ parameters:
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
+        additionalResourcesAllowed: ${appcat:additionalResourcesAllowed}
         secretNamespace: ${appcat:crossplane:namespace}
         forgejo:
           enabled: true

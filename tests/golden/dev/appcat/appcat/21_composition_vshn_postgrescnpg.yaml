@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-532725e406679eb1bf4e7f3c30229d658606aa8c
+    metadata.appcat.vshn.io/revision: debug-f190eca3498c294dac628a629b19ea9b0c24c9ab
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,11 +26,12 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-532725e406679eb1bf4e7f3c30229d658606aa8c
+        name: function-appcat-debug-f190eca3498c294dac628a629b19ea9b0c24c9ab
       input:
         apiVersion: v1
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
+          additionalResourcesAllowed: '[{"apiGroups":["gateway.networking.k8s.io"],"kinds":["ReferenceGrant"],"resources":["referencegrants"]}]'
           billingEnabled: 'false'
           bucketRegion: rma
           cloudProvider: cloudscale
@@ -52,7 +53,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: 532725e406679eb1bf4e7f3c30229d658606aa8c
+          imageTag: f190eca3498c294dac628a629b19ea9b0c24c9ab
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
