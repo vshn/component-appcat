@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.186.2
+    metadata.appcat.vshn.io/revision: master-v4.187.0
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,10 +24,11 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-186-2
+        name: function-appcat-master-v4-187-0
       input:
         apiVersion: v1
         data:
+          additionalResourcesAllowed: '[]'
           billingEnabled: 'false'
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox
@@ -49,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: v4.186.2
+          imageTag: v4.187.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'

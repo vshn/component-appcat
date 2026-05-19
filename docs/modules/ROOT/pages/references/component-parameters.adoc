@@ -183,6 +183,18 @@ reference:: xref:references/services-exoscale.adoc[See service parameters]
 
 This parameter allows enabling and configuring exoscale specific AppCat services.
 
+=== `services.vshn.*.maintenance`
+[horizontal]
+type:: dict
+default:: `{
+  disableServiceMaint: false
+  disableAppcatRelease: false
+}`
+
+Manages per service maintenance configuration.
+This will generate a configMap which will be deployed to the AppCat Control Namespace.
+Maintenance runners will directly read this config map, circumventing any releasemanagement.
+
 === `services.generic`
 [horizontal]
 type:: dict

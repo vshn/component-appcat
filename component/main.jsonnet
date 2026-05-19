@@ -391,6 +391,42 @@ local servalaSATokenSecret = kube.Secret('servala-portal') + {
   type: 'kubernetes.io/service-account-token',
 };
 
+local contains(s, sub) = std.length(std.findSubstr(sub, s)) > 0;
+
+// because some services like postgres have
+// different implementations we have to patch those here
+local maintConfigServiceID(name) =
+  if contains(name, 'postgres') then
+    [
+      common.VSHNServiceID('postgresql'),
+      common.VSHNServiceID('postgresqlcnpg'),
+    ]
+  else
+    [ common.VSHNServiceID(name) ];
+
+local maintenanceConfig() =
+  local data =
+    std.prune({
+      [n + '.disableServiceMaint']: std.toString(common.GetAtPath(s, 'value.maintenance.disableServiceMaint', {}))
+      for s in common.FilterServiceByBoolean('enabled')
+      for n in maintConfigServiceID(s.name)
+    }) +
+    std.prune({
+      [n + '.disableAppcatRelease']: std.toString(common.GetAtPath(s, 'value.maintenance.disableAppcatRelease', {}))
+      for s in common.FilterServiceByBoolean('enabled')
+      for n in maintConfigServiceID(s.name)
+    });
+
+
+  local cm = kube.ConfigMap(params.maintenanceConfigMapName) + {
+    metadata+: {
+      namespace: params.services.controlNamespace,
+    },
+    data: data,
+  };
+
+  cm;
+
 {
   '10_clusterrole_view': xrdBrowseRole,
   [if vars.isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
@@ -406,6 +442,7 @@ local servalaSATokenSecret = kube.Secret('servala-portal') + {
   // golden tests where things get dynamically enabeld or disabled, so we
   // can't use an enabled filter in the post processing...
   'controllers/sts-resizer/.keep': '',
+  '13_maintenance_config': maintenanceConfig(),
   [if std.length(params.clusterManagementSystem.serviceClusterKubeconfigs) != 0 then '10_service_cluster_kubeconfigs']: serviceClusterKubeconfigs,
 } + (if vars.isSingleOrServiceCluster then {
        '11_control_plane_sa': common.ControlPlaneSa,

@@ -65,6 +65,10 @@ parameters:
     grpcEndpoint: 172.18.0.1:9443
     proxyFunction: true
     quotasEnabled: false
+    additionalResourcesAllowed:
+      - apiGroups: [gateway.networking.k8s.io]
+        kinds: [ReferenceGrant]
+        resources: [referencegrants]
     appuioManaged: false
     #billingEnabled: true
     monitoringEnabled: true
@@ -207,6 +211,9 @@ parameters:
 
         postgres:
           sgNamespace: stackgres
+          # maintenance:
+          #   disableServiceMaint: false
+          #   disableAppcatRelease: true
           additionalInputs:
             loadbalancerAnnotations: |
               foo: bar

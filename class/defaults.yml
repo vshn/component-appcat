@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.186.2
+        tag: v4.187.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -162,10 +162,21 @@ parameters:
     namespaceAnnotations:
       openshift.io/node-selector: node-role.kubernetes.io/infra=
 
+    maintenanceConfigMapName: maintenance-config
+
     appuioManaged: true
     quotasEnabled: false
     billingEnabled: false
     monitoringEnabled: true
+    # Allowlist for additional resources users may deploy via
+    # spec.parameters.additionalResources.configMapRef. Each entry has:
+    #   apiGroups: list of API groups (used for runtime allowlist check)
+    #   kinds:     list of Kinds (used for runtime allowlist check)
+    #   resources: optional list of plural resource names. When set, rules
+    #              are appended to the provider-kubernetes ClusterRole so
+    #              the provider can create/update/delete the resource.
+    # An empty list disables the feature.
+    additionalResourcesAllowed: []
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 
@@ -713,6 +724,7 @@ parameters:
         externalDatabaseConnectionsEnabled: "false"
         e2eTests: false
         quotasEnabled: ${appcat:quotasEnabled}
+        additionalResourcesAllowed: ${appcat:additionalResourcesAllowed}
         secretNamespace: ${appcat:crossplane:namespace}
         forgejo:
           enabled: true
@@ -751,6 +763,9 @@ parameters:
           helmChartVersion: ${appcat:charts:forgejo:version}
           imageRegistry: "${appcat:images:forgejo:registry}"
           maintenanceURL: "${appcat:images:forgejo:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: small
@@ -784,6 +799,9 @@ parameters:
           enabled: true
           billing: true
           maintenanceURL: https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/main/Debian/ClusterImageCatalog-bookworm.yaml
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             # Depending on the cluster, this needs to be set
@@ -970,6 +988,9 @@ parameters:
           imageRegistry: ${appcat:images:redis:registry}
           imageRepositoryPrefix: ${appcat:images:redis:repositoryPrefix}
           maintenanceURL: "${appcat:images:redis:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -1046,6 +1067,9 @@ parameters:
           defaultPlan: standard-1
           imageRegistry: ""
           maintenanceURL: "${appcat:images:minio:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           sla: 99.25
           plans:
             standard-1:
@@ -1096,6 +1120,9 @@ parameters:
           imageRegistry: ${appcat:images:mariadb:registry}
           imageRepositoryPrefix: ${appcat:images:mariadb:repositoryPrefix}
           maintenanceURL: "${appcat:images:mariadb:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-1
@@ -1170,6 +1197,9 @@ parameters:
           helmChartVersion: ${appcat:charts:keycloak:version}
           imageRegistry: ${appcat:images:keycloak:registry}/${appcat:images:keycloak:image}
           maintenanceURL: "${appcat:images:keycloak:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
@@ -1236,6 +1266,9 @@ parameters:
           helmChartVersion: ${appcat:charts:nextcloud:version}
           imageRegistry: ${appcat:images:nextcloud:registry}
           maintenanceURL: "${appcat:images:nextcloud:maintenanceURL}"
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2
@@ -1286,6 +1319,9 @@ parameters:
             defaultVersion: "22"
           enableNetworkPolicy: false
           secretNamespace: ${appcat:services:vshn:secretNamespace}
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           imageRegistry: ""
           defaultPlan: mini
           sla: 99.25
@@ -1327,6 +1363,9 @@ parameters:
           helmChartVersion: ${appcat:charts:garage:version}
           imageRegistry: ""
           maintenanceURL: ""
+          maintenance:
+            disableServiceMaint: false
+            disableAppcatRelease: false
           grpcEndpoint: ${appcat:grpcEndpoint}
           proxyFunction: ${appcat:proxyFunction}
           defaultPlan: standard-2

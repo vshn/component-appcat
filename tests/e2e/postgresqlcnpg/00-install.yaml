@@ -3,8 +3,6 @@ kind: VSHNPostgreSQL
 metadata:
   name: pg-cnpg-e2e
 spec:
-  compositionRef:
-    name: vshnpostgrescnpg.vshn.appcat.vshn.io
   parameters:
     security:
       deletionProtection: false
