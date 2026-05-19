@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-2af2b864988fee90b10b32cdcd2c63965ce71afd
+    metadata.appcat.vshn.io/revision: debug-532725e406679eb1bf4e7f3c30229d658606aa8c
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-2af2b864988fee90b10b32cdcd2c63965ce71afd
+        name: function-appcat-debug-532725e406679eb1bf4e7f3c30229d658606aa8c
       input:
         apiVersion: v1
         data:
@@ -57,7 +57,7 @@ spec:
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: 2af2b864988fee90b10b32cdcd2c63965ce71afd
+          imageTag: 532725e406679eb1bf4e7f3c30229d658606aa8c
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
