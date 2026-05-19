@@ -26,7 +26,7 @@ spec:
     - POSTGRESQL_GATEWAY_HOST
     - POSTGRESQL_GATEWAY_PORT
   defaultCompositionRef:
-    name: vshnpostgres.vshn.appcat.vshn.io
+    name: vshnpostgrescnpg.vshn.appcat.vshn.io
   defaultCompositionUpdatePolicy: Automatic
   group: vshn.appcat.vshn.io
   names:

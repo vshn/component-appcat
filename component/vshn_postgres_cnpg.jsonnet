@@ -38,7 +38,7 @@ local pgPlans = common.FilterDisabledParams(pgParams.plans);
 local xrd = xrds.XRDFromCRD(
               'xvshnpostgresqls.vshn.appcat.vshn.io',
               xrds.LoadCRD('vshn.appcat.vshn.io_vshnpostgresqls.yaml', params.images.appcat.tag),
-              defaultComposition='vshnpostgres.vshn.appcat.vshn.io',
+              defaultComposition='vshnpostgrescnpg.vshn.appcat.vshn.io',
               connectionSecretKeys=connectionSecretKeys,
             )
             + xrds.WithPlanDefaults(pgPlans, pgParams.defaultPlan)
