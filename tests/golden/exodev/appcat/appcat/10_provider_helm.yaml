@@ -246,6 +246,7 @@ rules:
       - garagebuckets
       - garageadmintokens
       - garagekeys
+      - garagereferencegrants
       - garagenodes
     verbs:
       - get
