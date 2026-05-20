@@ -32,7 +32,7 @@ spec:
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: https://charts.appcat.ch/
-          chartVersion: 0.0.3
+          chartVersion: 0.0.4
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
