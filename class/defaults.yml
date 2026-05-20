@@ -50,7 +50,7 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.4.3
+        version: 0.4.10
       openbao:
         source: https://openbao.github.io/openbao-helm
         version: 0.19.3
@@ -212,12 +212,21 @@ parameters:
     garageOperator:
       enabled: false
       namespace: syn-garage-operator
+      # Namespaces permitted to reference appcat-managed GarageClusters/Buckets
+      # via the operator's GarageReferenceGrant. Each entry becomes a `from:`
+      # in the grant deployed by the vshngaragecluster chart. The appcat
+      # namespace must remain in this list — that is where the comp-function's
+      # Release/Object CRs live.
+      allowedNamespaces:
+        - ${appcat:namespace}
       helmValues:
         resources:
           limits:
             # The default is a bit low for OpenShift deployments...
             memory: 512Mi
         prometheusRules:
+          enabled: true
+        webhooks:
           enabled: true
 
     crossplane:
@@ -1349,7 +1358,8 @@ parameters:
           offered: true
           restoreSA: garageserviceaccount
           restoreRoleRules: ${appcat:defaultRestoreRoleRules}
-          additionalInputs: {}
+          additionalInputs:
+            garageAllowedNamespaces: ${appcat:garageOperator:allowedNamespaces}
           openshiftTemplate:
             serviceName: garagebyvshn
             description: "Garage is a selfhosted S3 Object Storage"
