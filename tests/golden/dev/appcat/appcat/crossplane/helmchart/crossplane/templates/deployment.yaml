@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+        function-revision: feat/garage-reference-grant
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

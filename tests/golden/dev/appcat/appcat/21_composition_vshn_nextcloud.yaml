@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+    metadata.appcat.vshn.io/revision: debug-feat_garage-reference-grant
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+        name: function-appcat-debug-feat-garage-reference-grant
       input:
         apiVersion: v1
         data:
@@ -58,7 +58,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+          imageTag: feat_garage-reference-grant
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'false'
