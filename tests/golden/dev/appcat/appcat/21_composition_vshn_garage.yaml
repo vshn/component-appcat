@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_httproute-cert-fqdn-rename
+    metadata.appcat.vshn.io/revision: debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-httproute-cert-fqdn-rename
+        name: function-appcat-debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
       input:
         apiVersion: v1
         data:
@@ -49,7 +49,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: fix_httproute-cert-fqdn-rename
+          imageTag: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

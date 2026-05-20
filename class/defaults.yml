@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fix/httproute-cert-fqdn-rename
+        tag: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

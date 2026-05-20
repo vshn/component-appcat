@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-httproute-cert-fqdn-rename
+  name: function-appcat-master-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
 spec:
-  package: ghcr.io/vshn/appcat:fix_httproute-cert-fqdn-rename-func
+  package: ghcr.io/vshn/appcat:f2938c98b9feaf3fdd7f1fea6f906ee251625e76-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

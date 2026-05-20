@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-httproute-cert-fqdn-rename
+        name: function-appcat-master-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
       input:
         apiVersion: v1
         data:

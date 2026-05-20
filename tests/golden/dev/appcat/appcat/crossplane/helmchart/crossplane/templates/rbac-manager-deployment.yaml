@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/httproute-cert-fqdn-rename
+        function-revision: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
