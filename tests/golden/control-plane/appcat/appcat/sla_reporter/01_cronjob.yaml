@@ -30,7 +30,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: appcat-sla-reports-creds
-              image: ghcr.io/vshn/appcat:v4.187.0
+              image: ghcr.io/vshn/appcat:fix_httproute-cert-fqdn-rename
               name: sla-reporter
               resources:
                 limits:
