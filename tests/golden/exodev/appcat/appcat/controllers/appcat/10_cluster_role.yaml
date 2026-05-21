@@ -81,9 +81,9 @@ rules:
       - list
       - watch
   - apiGroups:
-      - gateway.networking.x-k8s.io
+      - gateway.networking.k8s.io
     resources:
-      - xlistenersets
+      - listenersets
     verbs:
       - get
       - list
