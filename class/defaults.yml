@@ -83,6 +83,10 @@ parameters:
         registry: ghcr.io
         repository: vshn/provider-s3
         tag: v0.0.2
+      provider-http:
+        registry: xpkg.upbound.io
+        repository: crossplane-contrib/provider-http
+        tag: v1.0.13
       sloth:
         registry: ghcr.io
         image: slok/sloth
@@ -708,6 +712,16 @@ parameters:
           package: ${appcat:images:provider-s3:registry}/${appcat:images:provider-s3:repository}:${appcat:images:provider-s3:tag}
         runtimeConfig:
           serviceAccountName: provider-s3
+        additionalProviderConfigs: []
+
+      http:
+        enabled: true
+        apiVersion: http.crossplane.io/v1alpha2
+        namespace: ${appcat:crossplane:namespace}
+        spec:
+          package: ${appcat:images:provider-http:registry}/${appcat:images:provider-http:repository}:${appcat:images:provider-http:tag}
+        runtimeConfig:
+          serviceAccountName: provider-http
         additionalProviderConfigs: []
 
     services:

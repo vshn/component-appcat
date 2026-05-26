@@ -1,0 +1,145 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-80'
+  labels:
+    name: provider-http
+  name: provider-http
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/provider-http:v1.0.13
+  packagePullPolicy: IfNotPresent
+  runtimeConfigRef:
+    name: provider-http
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-90'
+  name: provider-http
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              securityContext: {}
+          securityContext: {}
+          serviceAccountName: provider-http
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: provider-http
+  name: provider-http
+  namespace: syn-crossplane
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-provider-provider-http-system-custom
+  name: crossplane:provider:provider-http:system:custom
+rules:
+  - apiGroups:
+      - http.crossplane.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
+      - ''
+    resources:
+      - secrets
+      - configmaps
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-http
+    name: provider-http-metrics
+  name: provider-http-metrics
+  namespace: syn-crossplane
+spec:
+  ports:
+    - name: metrics
+      port: 8080
+  selector:
+    pkg.crossplane.io/provider: provider-http
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: provider-http
+    name: provider-http
+  name: provider-http
+  namespace: syn-crossplane
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: provider-http
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-provider-provider-http-control-plane
+  name: crossplane:provider:provider-http:control-plane
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane:provider:provider-http:system:custom
+subjects:
+  - kind: ServiceAccount
+    name: appcat-control-plane
+    namespace: syn-appcat
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '-100'
+  labels:
+    name: crossplane-provider-provider-http-system-custom
+  name: crossplane:provider:provider-http:system:custom
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: crossplane:provider:provider-http:system:custom
+subjects:
+  - kind: ServiceAccount
+    name: provider-http
+    namespace: syn-crossplane

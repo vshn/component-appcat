@@ -508,6 +508,20 @@ rules:
       - create
       - delete
   - apiGroups:
+      - http.crossplane.io
+    resources:
+      - requests
+      - disposablerequests
+      - providerconfigs
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
+  - apiGroups:
       - gateway.networking.k8s.io
     resources:
       - referencegrants

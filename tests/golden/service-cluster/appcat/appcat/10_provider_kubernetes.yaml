@@ -450,6 +450,20 @@ rules:
       - patch
       - create
       - delete
+  - apiGroups:
+      - http.crossplane.io
+    resources:
+      - requests
+      - disposablerequests
+      - providerconfigs
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - create
+      - delete
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
