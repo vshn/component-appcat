@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:feat_garage-reference-grant
+          image: ghcr.io/vshn/appcat:fff4106f96710b7d8c790a51f18ba2cf5952589f
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
