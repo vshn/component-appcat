@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+    metadata.appcat.vshn.io/revision: debug-fff4106f96710b7d8c790a51f18ba2cf5952589f
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+        name: function-appcat-debug-fff4106f96710b7d8c790a51f18ba2cf5952589f
       input:
         apiVersion: v1
         data:
@@ -32,7 +32,7 @@ spec:
           billingEnabled: 'false'
           bucketRegion: rma
           chartRepository: https://charts.appcat.ch/
-          chartVersion: 0.0.3
+          chartVersion: 0.0.4
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -45,11 +45,12 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          garageAllowedNamespaces: '["syn-appcat"]'
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: f2938c98b9feaf3fdd7f1fea6f906ee251625e76
+          imageTag: fff4106f96710b7d8c790a51f18ba2cf5952589f
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
