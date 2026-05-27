@@ -427,8 +427,22 @@ local maintenanceConfig() =
 
   cm;
 
+// compatMatrix renders the service-version / AppCat-revision compatibility
+// matrix consumed by the composition functions, the admission webhook, and
+// maintenance. currentRevision matches the revision label set on instances.
+local compatMatrix = kube.ConfigMap('appcat-compat-matrix') + {
+  metadata+: {
+    namespace: params.namespace,
+  },
+  data: {
+    currentRevision: common.AppCatRevision(),
+    'matrix.yaml': std.manifestYamlDoc(params.compatibilityMatrix),
+  },
+};
+
 {
   '10_clusterrole_view': xrdBrowseRole,
+  '10_appcat_compat_matrix': compatMatrix,
   [if vars.isOpenshift then '10_clusterrole_finalizer']: finalizerRole,
   '10_clusterrole_services_read': readServices,
   '10_appcat_namespace': ns,

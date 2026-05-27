@@ -164,6 +164,15 @@ parameters:
 
     maintenanceConfigMapName: maintenance-config
 
+    # Known service-version / AppCat-revision incompatibilities. Each service
+    # maps to a list of rows: a service version range and the AppCat revision
+    # range it is compatible with. Empty disables the compatibility checks.
+    # Add rows as incompatibilities are discovered at release time.
+    compatibilityMatrix:
+      postgresql:
+        - versionRange: "16.x"
+          compatibleRevisions: ">=v3.70.0"
+
     appuioManaged: true
     quotasEnabled: false
     billingEnabled: false

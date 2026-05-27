@@ -55,6 +55,11 @@ local truncateName(rev) =
   else
     rev;
 
+// appCatRevision is the AppCat revision couplet (component version + '-' +
+// appcat image tag) used as the value of the revision label, so the
+// compatibility matrix's currentRevision matches what instances are labelled with.
+local appCatRevision() = truncateName(getAppCatVersion() + '-' + getAppCatImageTag());
+
 local vshnMetaVshn(servicename, flavor, offered, plans) = {
   metadata+: {
     annotations+: {
@@ -68,7 +73,7 @@ local vshnMetaVshn(servicename, flavor, offered, plans) = {
     labels+: {
       'metadata.appcat.vshn.io/offered': offered,
       'metadata.appcat.vshn.io/serviceID': vshnServiceID(servicename),
-      'metadata.appcat.vshn.io/revision': truncateName(getAppCatVersion() + '-' + getAppCatImageTag()),
+      'metadata.appcat.vshn.io/revision': appCatRevision(),
     },
   },
 };
@@ -343,6 +348,8 @@ local parseAdditionalInputs(params) = if std.objectHas(params, 'additionalInputs
     getAppCatVersion(),
   GetAppCatImageTag():
     getAppCatImageTag(),
+  AppCatRevision():
+    appCatRevision(),
   GetApiserverImageTag():
     getApiserverImageTag(),
   GetApiserverImageString():

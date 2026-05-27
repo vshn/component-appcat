@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  currentRevision: master-feat_version-compatibility-matrix
+  matrix.yaml: |-
+    "postgresql":
+    - "compatibleRevisions": ">=v3.70.0"
+      "versionRange": "16.x"
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    name: appcat-compat-matrix
+  name: appcat-compat-matrix
+  namespace: syn-appcat
