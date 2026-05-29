@@ -158,6 +158,14 @@ rules:
       - list
       - create
       - delete
+  - apiGroups:
+      - ''
+    resources:
+      - serviceaccounts
+    verbs:
+      - get
+      - list
+      - watch
 ---
 apiVersion: v1
 data: {}
