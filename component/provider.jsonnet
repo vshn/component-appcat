@@ -319,7 +319,7 @@ local providerRBAC = {
       },
       {
         apiGroups: [ 'garage.rajsingh.info' ],
-        resources: [ 'garageclusters', 'garagebuckets', 'garageadmintokens', 'garagekeys', 'garagenodes' ],
+        resources: [ 'garageclusters', 'garagebuckets', 'garageadmintokens', 'garagekeys', 'garagereferencegrants', 'garagenodes' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {

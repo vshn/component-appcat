@@ -17,6 +17,8 @@ metadata:
   name: ${name}-restore
   namespace: ${NAMESPACE}
 spec:
+  compositionRef:
+    name: vshnpostgres.vshn.appcat.vshn.io
   parameters:
     restore:
       backupName: ${backup}

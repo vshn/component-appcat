@@ -314,7 +314,10 @@ local getAtPath(obj, path, default) = (
 );
 
 local parseAdditionalInputs(params) = if std.objectHas(params, 'additionalInputs') then {
-  [k]: if std.isObject(params.additionalInputs[k]) then std.manifestJsonMinified(params.additionalInputs[k]) else std.toString(params.additionalInputs[k])
+  [k]:
+    if std.isObject(params.additionalInputs[k]) then std.manifestJsonMinified(params.additionalInputs[k])
+    else if std.isArray(params.additionalInputs[k]) then std.manifestJsonMinified(params.additionalInputs[k])
+    else std.toString(params.additionalInputs[k])
   for k in std.objectFieldsAll(params.additionalInputs)
 } else {};
 
