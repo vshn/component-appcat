@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-pin-nested-pg
+  name: function-appcat-debug-v4-188-1
 spec:
-  package: ghcr.io/vshn/appcat:fix_pin-nested-pg-func
+  package: ghcr.io/vshn/appcat:v4.188.1-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
