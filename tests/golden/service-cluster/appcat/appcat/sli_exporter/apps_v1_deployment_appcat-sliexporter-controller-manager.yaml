@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:keycloak-optimized
+          image: ghcr.io/vshn/appcat:b367c088019948fcc881eb1b2bff7cc3838a2689
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
