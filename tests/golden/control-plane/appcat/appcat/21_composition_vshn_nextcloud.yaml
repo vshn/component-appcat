@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-b367c088019948fcc881eb1b2bff7cc3838a2689
+    metadata.appcat.vshn.io/revision: master-b5ccf4f82dfc6fbccca2ff5c173a2cabfe19c9a9
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-b367c088019948fcc881eb1b2bff7cc3838a2689
+        name: function-appcat-master-b5ccf4f82dfc6fbccca2ff5c173a2cabfe19c9a9
       input:
         apiVersion: v1
         data:
@@ -58,7 +58,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: b367c088019948fcc881eb1b2bff7cc3838a2689
+          imageTag: b5ccf4f82dfc6fbccca2ff5c173a2cabfe19c9a9
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
