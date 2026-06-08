@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_cnpg-encryption
+          image: ghcr.io/vshn/appcat:v4.188.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
