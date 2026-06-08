@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.188.2
+        tag: b5ccf4f82dfc6fbccca2ff5c173a2cabfe19c9a9
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -1188,6 +1188,7 @@ parameters:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
+            keycloak_images_optimized: "false"
             ingress_annotations: |
               cert-manager.io/cluster-issuer: letsencrypt-production
             admin_ingress_annotations: |
