@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-cnpg-retention
+        name: function-appcat-master-ecd063e53fef1a6fca96ff136153d884008ef169
       input:
         apiVersion: v1
         data:

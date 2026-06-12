@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix-cnpg-retention
+          image: ghcr.io/vshn/appcat:ecd063e53fef1a6fca96ff136153d884008ef169
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
