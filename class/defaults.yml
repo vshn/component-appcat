@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 1.20.1
+        version: 2.2.2
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
         version: 23.2.1
@@ -248,7 +248,6 @@ parameters:
           - --enable-usages
           - --poll-interval=1h
           - --enable-realtime-compositions=false
-          - --registry=xpkg.upbound.io
         image:
           pullPolicy: ${appcat:pullPolicy}
         alpha:
