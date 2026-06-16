@@ -132,7 +132,7 @@ parameters:
       busybox:
         registry: docker.io
         image: library/busybox
-        tag: "1.37"
+        tag: "1.38"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"

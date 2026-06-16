@@ -32,7 +32,7 @@ spec:
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox
-          busybox_image_tag: '1.37'
+          busybox_image_tag: '1.38'
           chartRepository: https://nextcloud.github.io/helm/
           chartVersion: 9.0.5
           cloudProvider: cloudscale
