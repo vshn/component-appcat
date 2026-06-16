@@ -50,7 +50,7 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.4.10
+        version: 0.6.15
       openbao:
         source: https://openbao.github.io/openbao-helm
         version: 0.19.3
