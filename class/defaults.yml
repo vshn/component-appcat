@@ -21,7 +21,7 @@ parameters:
         version: 7.2.0
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 9.0.5
+        version: 9.1.3
       forgejo:
         source: https://charts.appcat.ch/
         version: 16.2.1-vshn.1
