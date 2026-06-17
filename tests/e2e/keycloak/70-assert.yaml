@@ -21,7 +21,7 @@ spec:
     service:
       postgreSQLParameters:
         instances: 1
-      relativePath: /
+      relativePath: /auth
       serviceLevel: besteffort
     size:
       plan: standard-2
