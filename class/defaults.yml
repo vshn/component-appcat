@@ -63,6 +63,10 @@ parameters:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
         tag: v1.2.0
+      provider-http:
+        registry: ghcr.io
+        repository: crossplane-contrib/provider-http
+        tag: v1.0.14
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
@@ -94,7 +98,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.189.0
+        tag: feat/forgejo-runners
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -675,6 +679,17 @@ parameters:
           package: ${appcat:images:provider-helm:registry}/${appcat:images:provider-helm:repository}:${appcat:images:provider-helm:tag}
         runtimeConfig:
           serviceAccountName: provider-helm
+        defaultProviderConfig: {} # having this parameter will still create a ProviderConfig object with default values
+        additionalProviderConfigs: []
+
+      http:
+        enabled: false
+        apiVersion: http.crossplane.io/v1alpha1
+        namespace: ${appcat:crossplane:namespace}
+        spec:
+          package: ${appcat:images:provider-http:registry}/${appcat:images:provider-http:repository}:${appcat:images:provider-http:tag}
+        runtimeConfig:
+          serviceAccountName: provider-http
         defaultProviderConfig: {} # having this parameter will still create a ProviderConfig object with default values
         additionalProviderConfigs: []
 

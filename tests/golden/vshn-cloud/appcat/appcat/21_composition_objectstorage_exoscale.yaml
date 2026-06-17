@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-189-0
+        name: function-appcat-master-feat-forgejo-runners
       input:
         apiVersion: v1
         data:

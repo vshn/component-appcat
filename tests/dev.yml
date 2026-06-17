@@ -153,6 +153,8 @@ parameters:
                       - name: ca-certs
                         secret:
                           secretName: tls-server-certificate
+      http:
+        enabled: true
       minio:
         enabled: true
         defaultProviderConfig:

@@ -5406,6 +5406,58 @@ spec:
                           description: Email necessary to send alerts via email
                           type: string
                       type: object
+                    runners:
+                      description: Runners contains settings for the optional Forgejo
+                        Runners AddOn.
+                      properties:
+                        enabled:
+                          description: |-
+                            Enabled turns the runner AddOn on or off. When disabled, all runner
+                            resources are removed and the runner is deregistered from Forgejo.
+                          type: boolean
+                        replicas:
+                          default: 1
+                          description: |-
+                            Replicas is the fixed number of runner pods. Runners do not dynamically
+                            spawn job pods; concurrency is bounded by pre-provisioned capacity.
+                          minimum: 0
+                          type: integer
+                        size:
+                          description: |-
+                            Size controls the compute sizing of the runner pods. CPU, Memory and
+                            Plan are used; Disk is unused for runners.
+                          properties:
+                            cpu:
+                              description: CPU defines the amount of Kubernetes CPUs
+                                for an instance.
+                              type: string
+                            disk:
+                              description: Disk defines the amount of disk space for
+                                an instance.
+                              type: string
+                            memory:
+                              description: Memory defines the amount of memory in
+                                units of bytes for an instance.
+                              type: string
+                            plan:
+                              description: Plan is the name of the resource plan that
+                                defines the compute resources.
+                              type: string
+                            requests:
+                              description: Requests defines CPU and memory requests
+                                for an instance
+                              properties:
+                                cpu:
+                                  description: CPU defines the amount of Kubernetes
+                                    CPUs for an instance.
+                                  type: string
+                                memory:
+                                  description: Memory defines the amount of memory
+                                    in units of bytes for an instance.
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
                     scheduling:
                       description: Scheduling contains settings to control the scheduling
                         of an instance.
