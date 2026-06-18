@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
+  name: appcat-sliexporter-health
+  namespace: syn-appcat-slos
+spec:
+  groups:
+    - name: appcat-sliexporter-health
+      rules:
+        - alert: AppCatSLIExporterDown
+          annotations:
+            description: The AppCat SLI exporter is not reachable by Prometheus. SLO
+              measurements are not being collected, which may silently mask SLA violations.
+            summary: AppCat SLI exporter is down
+            title: AppCat SLI exporter is down
+          expr: absent(up{job="appcat-sliexporter-controller-manager-metrics-service"})
+            or up{job="appcat-sliexporter-controller-manager-metrics-service"} ==
+            0
+          for: 5m
+          labels:
+            OnCall: 'false'
+            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatSLIExporterDown.html
+            service: AppCatSLIExporter
+            severity: critical
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar
