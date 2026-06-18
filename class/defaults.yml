@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 2.2.2
+        version: 2.3.2
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
         version: 23.2.1
@@ -18,16 +18,16 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.1.9
+        version: 7.2.0
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 9.0.5
+        version: 9.1.3
       forgejo:
         source: https://charts.appcat.ch/
         version: 16.2.1-vshn.1
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.28.0
+        version: 0.28.2
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
@@ -50,7 +50,7 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.4.10
+        version: 0.6.15
       openbao:
         source: https://openbao.github.io/openbao-helm
         version: 0.19.3
@@ -58,7 +58,7 @@ parameters:
       provider-kubernetes:
         registry: ghcr.io
         repository: crossplane-contrib/provider-kubernetes
-        tag: v1.1.0
+        tag: v1.2.1
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.189.1
+        tag: 71faf2172a4967a7c94ed8df196a83613d23bae3
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -118,7 +118,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: "3.0.7"
+        version: "3.0.9"
       collabora:
         registry: docker.io
         image: collabora/code
@@ -132,7 +132,7 @@ parameters:
       busybox:
         registry: docker.io
         image: library/busybox
-        tag: "1.37"
+        tag: "1.38"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
