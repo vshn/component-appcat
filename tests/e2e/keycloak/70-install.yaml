@@ -6,6 +6,7 @@ spec:
   parameters:
     service:
       fqdn: keycloak-e2e.example.com
+      relativePath: /auth
     security:
       deletionProtection: false
   writeConnectionSecretToRef:
