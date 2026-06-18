@@ -69,7 +69,7 @@ spec:
             "8Gi"}}}'
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
-          proxysqlImage: docker.io/proxysql/proxysql:3.0.7
+          proxysqlImage: docker.io/proxysql/proxysql:3.0.9
           proxysqlMemoryLimit: 256Mi
           proxysqlMemoryRequests: 64Mi
           quotasEnabled: 'false'
