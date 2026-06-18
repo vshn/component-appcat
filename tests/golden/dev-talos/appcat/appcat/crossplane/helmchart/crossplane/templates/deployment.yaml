@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/mariadb-startup
+        function-revision: 71faf2172a4967a7c94ed8df196a83613d23bae3
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

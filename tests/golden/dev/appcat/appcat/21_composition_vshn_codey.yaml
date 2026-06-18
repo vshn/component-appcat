@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_mariadb-startup
+    metadata.appcat.vshn.io/revision: debug-71faf2172a4967a7c94ed8df196a83613d23bae3
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

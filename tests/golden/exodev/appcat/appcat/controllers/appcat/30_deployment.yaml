@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:fix_mariadb-startup
+          image: ghcr.io/vshn/appcat:71faf2172a4967a7c94ed8df196a83613d23bae3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
