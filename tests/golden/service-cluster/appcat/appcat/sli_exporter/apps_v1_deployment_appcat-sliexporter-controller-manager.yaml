@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fix_sli-prober
+          image: ghcr.io/vshn/appcat:v4.189.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
