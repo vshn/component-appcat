@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.189.2
+        tag: 498387692647f5c4fb894744694128534caee77e
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -151,9 +151,9 @@ parameters:
       redis-exporter:
         tag: 1.76.0-debian-12-r0
       openbao:
-        registry: docker.io
-        image: hashicorp/vault-k8s
-        tag: "1.7.2"
+        registry: quay.io
+        image: openbao/openbao
+        tag: "latest"
     =_crd_version: ${appcat:images:appcat:tag}
 
     pullPolicy: IfNotPresent
@@ -1402,8 +1402,9 @@ parameters:
                 disk: 200Gi
         openbao:
           enabled: false
-          billing: true
+          billing: false
           additionalInputs:
+            openbao_image: ${appcat:images:openbao:registry}/${appcat:images:openbao:image}:${appcat:images:openbao:tag}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
           serviceName: VSHNOpenBao
           compFunctionsOnly: true

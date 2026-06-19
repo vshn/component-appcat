@@ -265,7 +265,7 @@ local providerRBAC = {
       {
         apiGroups: [ '' ],
         resources: [ 'pods' ],
-        verbs: [ 'list', 'patch' ],
+        verbs: [ 'get', 'watch', 'list', 'update', 'patch' ],
       },
       {
         apiGroups: [ 'apps' ],
