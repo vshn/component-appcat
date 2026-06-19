@@ -34,6 +34,7 @@ rules:
       - apiextensions.crossplane.io
     resources:
       - compositeresourcedefinitions
+      - compositionrevisions
     verbs:
       - get
       - list

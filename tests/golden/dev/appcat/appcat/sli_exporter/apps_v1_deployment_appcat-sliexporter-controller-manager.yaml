@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:feat_openbao-auto-init-v2
+          image: ghcr.io/vshn/appcat:498387692647f5c4fb894744694128534caee77e
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

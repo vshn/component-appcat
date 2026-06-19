@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/openbao-auto-init-v2
+        function-revision: 498387692647f5c4fb894744694128534caee77e
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
