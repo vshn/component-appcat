@@ -46,6 +46,7 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          forgejoRunnerDefaultPlan: mini
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
@@ -67,13 +68,17 @@ spec:
             true, "memory": "8Gi"}}, "mini": {"size": {"cpu": "500m", "disk": "10Gi",
             "enabled": true, "memory": "2Gi"}}, "small": {"size": {"cpu": "1", "disk":
             "50Gi", "enabled": true, "memory": "4Gi"}}}'
-          proxyEndpoint: 172.18.0.1:9443
+          proxyEndpoint: 172.19.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''
           releaseManagementEnabled: 'false'
           restoreSA: forgejoserviceaccount
           routeType: Ingress
+          runnerChartName: forgejo-runner
+          runnerChartRepository: oci://codeberg.org/wrenix/helm-charts/
+          runnerChartVersion: 0.7.6
+          runnerPlans: '{"large":{"size":{"cpu":"4","disk":"0","enabled":true,"memory":"8Gi"}},"medium":{"size":{"cpu":"2","disk":"0","enabled":true,"memory":"4Gi"}},"mini":{"size":{"cpu":"500m","disk":"0","enabled":true,"memory":"1Gi"}},"small":{"size":{"cpu":"1","disk":"0","enabled":true,"memory":"2Gi"}}}'
           salesOrder: ''
           serviceID: vshn-forgejo
           serviceName: forgejo

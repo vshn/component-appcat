@@ -173,6 +173,11 @@ local providerRBAC = {
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
       },
       {
+        apiGroups: [ 'http.crossplane.io' ],
+        resources: [ 'providerconfigs' ],
+        verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],
+      },
+      {
         apiGroups: [ 'appcat.vshn.io' ],
         resources: [ 'objectbuckets' ],
         verbs: [ 'get', 'list', 'watch', 'update', 'patch', 'create', 'delete' ],

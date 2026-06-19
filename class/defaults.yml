@@ -25,6 +25,11 @@ parameters:
       forgejo:
         source: https://charts.appcat.ch/
         version: 16.2.1-vshn.1
+      forgejoRunner:
+        # OCI chart for the Forgejo Runners AddOn.
+        source: oci://codeberg.org/wrenix/helm-charts/
+        version: "0.7.6"
+        chartName: forgejo-runner
       cnpg:
         source: https://cloudnative-pg.io/charts/
         version: 0.28.0
@@ -773,6 +778,36 @@ parameters:
             tcpGatewayEnabled: "false"
             tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
             tcpGateways: {}
+            # Forgejo Runners AddOn: runner chart + plans (separate from the instance).
+            runnerChartRepository: ${appcat:charts:forgejoRunner:source}
+            runnerChartVersion: ${appcat:charts:forgejoRunner:version}
+            runnerChartName: ${appcat:charts:forgejoRunner:chartName}
+            forgejoRunnerDefaultPlan: mini
+            runnerPlans:
+              mini:
+                size:
+                  enabled: true
+                  cpu: "500m"
+                  memory: "1Gi"
+                  disk: "0"
+              small:
+                size:
+                  enabled: true
+                  cpu: "1"
+                  memory: "2Gi"
+                  disk: "0"
+              medium:
+                size:
+                  enabled: true
+                  cpu: "2"
+                  memory: "4Gi"
+                  disk: "0"
+              large:
+                size:
+                  enabled: true
+                  cpu: "4"
+                  memory: "8Gi"
+                  disk: "0"
           openshiftTemplate:
             serviceName: forgejobyvshn
             description: "Forgejo is a self-hosted lightweight software forge."
