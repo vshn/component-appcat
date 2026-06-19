@@ -11,6 +11,7 @@ spec:
           annotations:
             description: The hotfixjob job {{ $labels.job_name }} in namespace {{
               $labels.namespace }} has failed.
+            runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatHotfixJobError.html
             summary: AppCat Hotfix job has failed. Hotfixes might not be rolled out.
           expr: kube_job_failed{job_name="appcat-hotfixer", namespace="syn-appcat"}
             > 0

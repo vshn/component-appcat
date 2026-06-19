@@ -15,6 +15,7 @@ spec:
             description: Crossplane resource {{ $labels.name }} ({{ $labels.kind }})
               in namespace {{ $labels.claim_namespace }} has status_synced={{ $labels.status_synced
               }} for more than 20 minutes
+            runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/CrossplaneResourceUnsynced.html
             summary: Crossplane resource {{ $labels.kind }} is not synced
           expr: max by (api_version, kind, name, claim_name, claim_namespace, instance_name,
             status_synced, status_ready) (crossplane_resource_info{status_synced!="ReconcileSuccess"})
@@ -30,6 +31,7 @@ spec:
             description: Crossplane resource {{ $labels.name }} ({{ $labels.kind }})
               in namespace {{ $labels.claim_namespace }} has status_ready={{ $labels.status_ready
               }} for more than 15 minutes
+            runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/CrossplaneResourceNotReady.html
             summary: Crossplane resource {{ $labels.kind }} is not ready
           expr: max by (api_version, kind, name, claim_name, claim_namespace, instance_name,
             status_synced, status_ready) (crossplane_resource_info{status_ready!="Available"})

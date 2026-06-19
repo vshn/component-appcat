@@ -79,6 +79,7 @@ local appcatJobPrometheusRule = {
             annotations: {
               description: 'The hotfixjob job {{ $labels.job_name }} in namespace {{ $labels.namespace }} has failed.',
               summary: 'AppCat Hotfix job has failed. Hotfixes might not be rolled out.',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatHotfixJobError.html',
             },
             expr: 'kube_job_failed{job_name="appcat-hotfixer", namespace="' + params.namespace + '"} > 0',
             'for': '1m',

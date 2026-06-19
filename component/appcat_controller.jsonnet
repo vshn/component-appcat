@@ -243,6 +243,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
             annotations: {
               summary: 'Crossplane resource {{ $labels.kind }} is not synced',
               description: 'Crossplane resource {{ $labels.name }} ({{ $labels.kind }}) in namespace {{ $labels.claim_namespace }} has status_synced={{ $labels.status_synced }} for more than 20 minutes',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/CrossplaneResourceUnsynced.html',
             },
           },
           {
@@ -258,6 +259,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
             annotations: {
               summary: 'Crossplane resource {{ $labels.kind }} is not ready',
               description: 'Crossplane resource {{ $labels.name }} ({{ $labels.kind }}) in namespace {{ $labels.claim_namespace }} has status_ready={{ $labels.status_ready }} for more than 15 minutes',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/CrossplaneResourceNotReady.html',
             },
           },
         ],
