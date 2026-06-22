@@ -11,7 +11,7 @@ spec:
           annotations:
             description: The backup job {{ $labels.job_name }} in namespace {{ $labels.namespace
               }} has failed.
-            runbook_url: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatBackupJobError.html
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatBackupJobError.html
             summary: AppCat service backup failed.
           expr: kube_job_failed{job_name=~".*backup.*", namespace=~"vshn-(codey|forgejo|garage|postgresql|redis)-.*"}
             > 0

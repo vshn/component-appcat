@@ -228,7 +228,7 @@ local alertRule = {
             annotations: {
               summary: 'High rate of Odoo HTTP failures detected',
               description: 'The rate of failed Odoo HTTP requests (`billing_cloud_collector_http_requests_odoo_failed_total`) has increased significantly in the last minute.',
-              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/HighOdooHTTPFailureRate.html',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/framework/runbooks/HighOdooHTTPFailureRate.html',
             },
           },
           {
@@ -244,7 +244,7 @@ local alertRule = {
             annotations: {
               summary: "High rate of Automated-billing collector's providers HTTP failures detected",
               description: 'The rate of failed Odoo HTTP requests (`billing_cloud_collector_http_requests_provider_failed_total`) has increased significantly in the last minute.',
-              runbook_url: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/HighProviderHTTPFailureRate.html',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/framework/runbooks/HighProviderHTTPFailureRate.html',
             },
           },
         ],
