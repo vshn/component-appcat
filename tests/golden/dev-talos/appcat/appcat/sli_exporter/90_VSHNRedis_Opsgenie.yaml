@@ -13,6 +13,7 @@ spec:
       rules:
         - alert: VSHNRedisSla
           annotations:
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/GuaranteedUptimeTarget.html
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
@@ -20,7 +21,6 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
             service: VSHNRedis
             severity: critical
             syn: 'true'
@@ -28,6 +28,7 @@ spec:
             syn_team: schedar
         - alert: VSHNRedisSlaHA
           annotations:
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/GuaranteedUptimeTarget.html
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNRedis",
@@ -35,7 +36,6 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
             service: VSHNRedis
             severity: critical
             syn: 'true'
@@ -49,6 +49,7 @@ spec:
           annotations:
             description: Service {{ $labels.service }} is not connected to a master
               for 5m.
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatRedis.html
             summary: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
             title: 'Redis not master: {{ $labels.name }} ({{ $labels.instance_namespace
@@ -59,7 +60,6 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: critical
             syn: 'true'
@@ -68,6 +68,7 @@ spec:
         - alert: VSHNRedisQuorumNotOk
           annotations:
             description: Quorum failing for 5m.
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatRedis.html
             summary: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
             title: 'Redis quorum not OK: {{ $labels.name }} ({{ $labels.instance_namespace
@@ -77,7 +78,6 @@ spec:
           for: 5m
           labels:
             OnCall: 'false'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: warning
             syn: 'true'
@@ -86,6 +86,7 @@ spec:
         - alert: VSHNRedisQuorumFlapping
           annotations:
             description: Quorum state flipped {{ $value }} times in 10m.
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatRedis.html
             summary: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace
               }})'
             title: 'Redis quorum flapping: {{ $labels.name }} ({{ $labels.instance_namespace
@@ -94,7 +95,6 @@ spec:
             >= 4
           labels:
             OnCall: 'false'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatRedis.html
             service: VSHNRedis
             severity: warning
             syn: 'true'

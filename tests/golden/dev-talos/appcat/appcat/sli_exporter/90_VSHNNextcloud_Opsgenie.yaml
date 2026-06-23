@@ -13,6 +13,7 @@ spec:
       rules:
         - alert: VSHNNextcloudSla
           annotations:
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/GuaranteedUptimeTarget.html
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNNextcloud",
@@ -20,7 +21,6 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
             service: VSHNNextcloud
             severity: critical
             syn: 'true'
@@ -28,6 +28,7 @@ spec:
             syn_team: schedar
         - alert: VSHNNextcloudSlaHA
           annotations:
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/GuaranteedUptimeTarget.html
             summary: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
             title: '{{$labels.service}} {{$labels.name}} down in {{$labels.instance_namespace}}'
           expr: rate(appcat_probes_seconds_count{reason!="success", service="VSHNNextcloud",
@@ -35,7 +36,6 @@ spec:
           labels:
             OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
               }}'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/GuaranteedUptimeTarget.html
             service: VSHNNextcloud
             severity: critical
             syn: 'true'

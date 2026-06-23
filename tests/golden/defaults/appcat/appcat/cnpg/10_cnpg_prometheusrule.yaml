@@ -15,7 +15,7 @@ spec:
             description: |-
               The replication lag to {{ $labels.pod }} in {{ $labels.namespace }} has been over 300 seconds for 5 minutes.
                 Please investigate the replication status of this instance.
-            runbook_url: https://kb.vshn.ch/app-catalog/service/postgresql/runbooks/CNPGPostgreSQLReplicationLagCritical.html
+            runbook_url: https://kb.vshn.ch/app-catalog/service/postgresql/runbooks/system/CNPGPostgreSQLReplicationLagCritical.html
             summary: PostgreSQL replication lag critical
           expr: cnpg_pg_replication_lag > 300
           for: 5m

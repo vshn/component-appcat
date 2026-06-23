@@ -30,10 +30,10 @@ if params.slos.enabled && params.slos.alertsEnabled && vars.isSingleOrServiceClu
                 description: 'The AppCat SLI exporter is not reachable by Prometheus. SLO measurements are not being collected, which may silently mask SLA violations.',
                 summary: 'AppCat SLI exporter is down',
                 title: 'AppCat SLI exporter is down',
+                runbook_url: 'https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatSLIExporterDown.html',
               },
               labels: {
                 OnCall: 'false',
-                runbook: 'https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatSLIExporterDown.html',
                 service: 'AppCatSLIExporter',
                 severity: 'critical',
                 syn: 'true',

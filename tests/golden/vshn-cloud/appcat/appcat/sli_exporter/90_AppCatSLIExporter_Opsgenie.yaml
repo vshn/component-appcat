@@ -15,6 +15,7 @@ spec:
           annotations:
             description: The AppCat SLI exporter is not reachable by Prometheus. SLO
               measurements are not being collected, which may silently mask SLA violations.
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/AppCatSLIExporterDown.html
             summary: AppCat SLI exporter is down
             title: AppCat SLI exporter is down
           expr: absent(up{job="appcat-sliexporter-controller-manager-metrics-service"})
@@ -23,7 +24,6 @@ spec:
           for: 5m
           labels:
             OnCall: 'false'
-            runbook: https://kb.vshn.ch/app-catalog/how-tos/appcat/AppCatSLIExporterDown.html
             service: AppCatSLIExporter
             severity: critical
             syn: 'true'
