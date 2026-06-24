@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/maint-backup-disabled
+        function-revision: 33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

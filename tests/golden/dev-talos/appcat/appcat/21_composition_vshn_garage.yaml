@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_maint-backup-disabled
+    metadata.appcat.vshn.io/revision: debug-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-maint-backup-disabled
+        name: function-appcat-debug-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: fix_maint-backup-disabled
+          imageTag: 33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
