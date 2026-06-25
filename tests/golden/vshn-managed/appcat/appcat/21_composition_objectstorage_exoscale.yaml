@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+        name: function-appcat-master-feat-mariadb-ext
       input:
         apiVersion: v1
         data:

@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+          image: ghcr.io/vshn/appcat:feat_mariadb-ext
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
