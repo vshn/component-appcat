@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+        tag: c958d054682926bdad5336cd534bd244293810a3
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -966,6 +966,12 @@ parameters:
           additionalInputs:
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
             exporter_tag: ${appcat:images:redis-exporter:tag}
+            externalDatabaseConnectionsEnabled: "${appcat:services:vshn:externalDatabaseConnectionsEnabled}"
+            # Depending on the cluster, this needs to be set
+            loadbalancerAnnotations: ""
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           serviceName: VSHNRedis
           compFunctionsOnly: true
           connectionSecretKeys:
@@ -978,6 +984,9 @@ parameters:
             - REDIS_PASSWORD
             - REDIS_URL
             - SENTINEL_HOSTS
+            - REDIS_GATEWAY_HOST
+            - REDIS_GATEWAY_PORT
+            - LOADBALANCER_IP
           mode: standalone
           offered: true
           restoreSA: redisrestoreserviceaccount

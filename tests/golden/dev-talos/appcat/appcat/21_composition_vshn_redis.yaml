@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+    metadata.appcat.vshn.io/revision: debug-c958d054682926bdad5336cd534bd244293810a3
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+        name: function-appcat-debug-c958d054682926bdad5336cd534bd244293810a3
       input:
         apiVersion: v1
         data:
@@ -46,14 +46,17 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           exporter_tag: 1.76.0-debian-12-r0
+          externalDatabaseConnectionsEnabled: 'true'
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: 33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+          imageTag: c958d054682926bdad5336cd534bd244293810a3
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          loadbalancerAnnotations: |
+            foo: bar
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
           minimumRevisionAge: 168h
@@ -83,6 +86,9 @@ spec:
             {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests": {"cpu": "10m",
             "memory": "50Mi"}}}'
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'true'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{"redis-gateway":"redis.10.5.0.105.nip.io"}'
         kind: ConfigMap
         metadata:
           labels:
