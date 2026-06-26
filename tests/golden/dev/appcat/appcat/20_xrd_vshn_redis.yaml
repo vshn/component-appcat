@@ -22,6 +22,9 @@ spec:
     - REDIS_PASSWORD
     - REDIS_URL
     - SENTINEL_HOSTS
+    - REDIS_GATEWAY_HOST
+    - REDIS_GATEWAY_PORT
+    - LOADBALANCER_IP
   defaultCompositionRef:
     name: vshnredis.vshn.appcat.vshn.io
   defaultCompositionUpdatePolicy: Automatic

@@ -50,6 +50,7 @@ spec:
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
           exporter_tag: 1.76.0-debian-12-r0
+          externalDatabaseConnectionsEnabled: 'true'
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
@@ -58,6 +59,7 @@ spec:
           imageTag: feat_redis-ext
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://ghcr.io/v2/vshn/redis/tags/list?page_size=100
           minimumRevisionAge: 168h
@@ -95,6 +97,9 @@ spec:
             {"limits": {"cpu": "100m", "memory": "100Mi"}, "requests": {"cpu": "10m",
             "memory": "50Mi"}}}'
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'false'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:
