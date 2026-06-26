@@ -25,7 +25,7 @@ parameters:
   appcat:
     charts:
       crossplane:
-        version: 2.1.3
+        version: 2.3.2
     crossplane:
       helmValues:
         ~args:
@@ -142,6 +142,12 @@ parameters:
         httpGatewayNamespace: "kgateway-system"
         mariadb:
           enabled: true
+          additionalInputs:
+            tcpGatewayEnabled: "true"
+            tcpGateways:
+              mariadb-gateway: mariadb.10.5.0.106.nip.io
+            loadbalancerAnnotations: |
+              foo: bar
         keycloak:
           enabled: true
           additionalInputs:

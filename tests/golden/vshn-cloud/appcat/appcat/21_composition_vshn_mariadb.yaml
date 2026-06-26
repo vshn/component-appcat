@@ -45,6 +45,7 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          externalDatabaseConnectionsEnabled: 'true'
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
@@ -52,6 +53,7 @@ spec:
           imageRepositoryPrefix: bitnamilegacy
           imageTag: feat_mariadb-ext
           isOpenshift: 'true'
+          loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
           minimumRevisionAge: 168h
@@ -80,6 +82,9 @@ spec:
           serviceID: vshn-mariadb
           serviceName: mariadb
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'false'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:

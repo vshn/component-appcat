@@ -28,7 +28,7 @@ spec:
             - --crossplane-metrics=true
             - --garage-bucket-cleanup=false
             - --tcp-gateway-namespace=kgateway-system
-            - --tcp-gateways=ssh-gateway,ssh-gateway-2,tcp-gateway
+            - --tcp-gateways=mariadb-gateway,ssh-gateway,ssh-gateway-2,tcp-gateway
             - --tcp-port-range-start=10000
             - --tcp-port-range-end=10019
             - --tcp-gateway-capacity=5
