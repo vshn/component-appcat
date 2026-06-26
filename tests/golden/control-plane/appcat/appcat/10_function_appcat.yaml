@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b
+  name: function-appcat-master-feat-cnpg-common-external-access
 spec:
-  package: ghcr.io/vshn/appcat:33dabdb2a65d4228ad6b5a9348a5eb42e46bc01b-func
+  package: ghcr.io/vshn/appcat:feat_cnpg-common-external-access-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
