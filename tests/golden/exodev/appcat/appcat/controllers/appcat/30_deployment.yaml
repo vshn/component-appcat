@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:feat_redis-ext
+          image: ghcr.io/vshn/appcat:c958d054682926bdad5336cd534bd244293810a3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

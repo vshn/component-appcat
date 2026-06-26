@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_redis-ext
+    metadata.appcat.vshn.io/revision: master-c958d054682926bdad5336cd534bd244293810a3
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-redis-ext
+        name: function-appcat-master-c958d054682926bdad5336cd534bd244293810a3
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: feat_redis-ext
+          imageTag: c958d054682926bdad5336cd534bd244293810a3
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

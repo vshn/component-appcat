@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-redis-ext
+        name: function-appcat-master-c958d054682926bdad5336cd534bd244293810a3
       input:
         apiVersion: v1
         data:
