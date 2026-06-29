@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-c958d054682926bdad5336cd534bd244293810a3
+        name: function-appcat-master-del-pro-garage
       input:
         apiVersion: v1
         data:

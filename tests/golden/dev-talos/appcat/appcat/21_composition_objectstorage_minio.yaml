@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-c958d054682926bdad5336cd534bd244293810a3
+        name: function-appcat-debug-del-pro-garage
       input:
         apiVersion: v1
         data:
