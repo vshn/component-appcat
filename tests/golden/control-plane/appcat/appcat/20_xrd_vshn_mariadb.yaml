@@ -20,6 +20,8 @@ spec:
     - MARIADB_PASSWORD
     - MARIADB_URL
     - LOADBALANCER_IP
+    - MARIADB_GATEWAY_HOST
+    - MARIADB_GATEWAY_PORT
   defaultCompositionRef:
     name: vshnmariadb.vshn.appcat.vshn.io
   defaultCompositionUpdatePolicy: Manual

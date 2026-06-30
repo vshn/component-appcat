@@ -1113,6 +1113,8 @@ parameters:
             - MARIADB_PASSWORD
             - MARIADB_URL
             - LOADBALANCER_IP
+            - MARIADB_GATEWAY_HOST
+            - MARIADB_GATEWAY_PORT
           mode: standalone
           offered: true
           restoreSA: mariadbrestoreserviceaccount
@@ -1123,6 +1125,11 @@ parameters:
             proxysqlCPURequests: 50m
             proxysqlMemoryLimit: 256Mi
             proxysqlMemoryRequests: 64Mi
+            externalDatabaseConnectionsEnabled: "${appcat:services:vshn:externalDatabaseConnectionsEnabled}"
+            loadbalancerAnnotations: ""
+            tcpGatewayEnabled: "false"
+            tcpGatewayNamespace: "${appcat:controller:tcpRoute:tcpGatewayNamespace}"
+            tcpGateways: {}
           openshiftTemplate:
             serviceName: mariadbbyvshn
             description: "The open source relational database management system (DBMS) that is a compatible drop-in replacement for the widely used MySQL database technology"
