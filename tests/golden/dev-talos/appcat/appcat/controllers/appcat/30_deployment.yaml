@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
+          image: ghcr.io/vshn/appcat:v4.190.0
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
