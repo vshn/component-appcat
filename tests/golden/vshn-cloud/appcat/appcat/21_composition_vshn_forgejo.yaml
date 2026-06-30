@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_mariadb-ext
+    metadata.appcat.vshn.io/revision: master-9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-mariadb-ext
+        name: function-appcat-master-9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: feat_mariadb-ext
+          imageTag: 9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'true'

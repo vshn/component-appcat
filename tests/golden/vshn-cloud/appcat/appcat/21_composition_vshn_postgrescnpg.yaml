@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-feat_mariadb-ext
+    metadata.appcat.vshn.io/revision: master-9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-mariadb-ext
+        name: function-appcat-master-9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: feat_mariadb-ext
+          imageTag: 9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/mariadb-ext
+        function-revision: 9385b71abf2f2ee9c162ab7aebd9d1f402f8b82a
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
