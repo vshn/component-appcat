@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-cbd04f3224980ce08bc775471677b91c264e9a1d
+  name: function-appcat-master-fix-redis-pvc
 spec:
-  package: ghcr.io/vshn/appcat:cbd04f3224980ce08bc775471677b91c264e9a1d-func
+  package: ghcr.io/vshn/appcat:fix_redis-pvc-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
