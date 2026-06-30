@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_redis-pvc
+    metadata.appcat.vshn.io/revision: master-d878bad9ae03630b907db9e961041ad9f01c4d75
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-redis-pvc
+        name: function-appcat-master-d878bad9ae03630b907db9e961041ad9f01c4d75
       input:
         apiVersion: v1
         data:
@@ -58,7 +58,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: fix_redis-pvc
+          imageTag: d878bad9ae03630b907db9e961041ad9f01c4d75
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
