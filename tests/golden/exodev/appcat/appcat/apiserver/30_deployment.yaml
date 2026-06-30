@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:del-pro-garage
+          image: ghcr.io/vshn/appcat:91a85a6771c4a5de0aeff214d2b72636b8dc6841
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
