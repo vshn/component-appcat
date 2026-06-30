@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_job-deadline
+    metadata.appcat.vshn.io/revision: master-cbd04f3224980ce08bc775471677b91c264e9a1d
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-job-deadline
+        name: function-appcat-master-cbd04f3224980ce08bc775471677b91c264e9a1d
       input:
         apiVersion: v1
         data:
@@ -56,7 +56,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: vshn
-          imageTag: fix_job-deadline
+          imageTag: cbd04f3224980ce08bc775471677b91c264e9a1d
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: ''
