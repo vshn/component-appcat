@@ -114,7 +114,10 @@ rules:
     resources:
       - pods
     verbs:
+      - get
+      - watch
       - list
+      - update
       - patch
   - apiGroups:
       - apps

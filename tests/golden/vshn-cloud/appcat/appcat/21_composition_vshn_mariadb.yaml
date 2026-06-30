@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-v4.189.2
+    metadata.appcat.vshn.io/revision: master-v4.190.0
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-189-2
+        name: function-appcat-master-v4-190-0
       input:
         apiVersion: v1
         data:
@@ -45,13 +45,15 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          externalDatabaseConnectionsEnabled: 'true'
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: v4.189.2
+          imageTag: v4.190.0
           isOpenshift: 'true'
+          loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/bitnamilegacy/mariadb-galera/tags/?page_size=100
           minimumRevisionAge: 168h
@@ -69,7 +71,7 @@ spec:
             "8Gi"}}}'
           proxysqlCPULimit: 500m
           proxysqlCPURequests: 50m
-          proxysqlImage: docker.io/proxysql/proxysql:3.0.7
+          proxysqlImage: docker.io/proxysql/proxysql:3.0.9
           proxysqlMemoryLimit: 256Mi
           proxysqlMemoryRequests: 64Mi
           quotasEnabled: 'false'
@@ -80,6 +82,9 @@ spec:
           serviceID: vshn-mariadb
           serviceName: mariadb
           sliNamespace: syn-appcat-slos
+          tcpGatewayEnabled: 'false'
+          tcpGatewayNamespace: kgateway-system
+          tcpGateways: '{}'
         kind: ConfigMap
         metadata:
           labels:

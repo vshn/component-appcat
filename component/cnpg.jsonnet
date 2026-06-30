@@ -50,7 +50,7 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
             annotations: {
               summary: 'PostgreSQL replication lag critical',
               description: 'The replication lag to {{ $labels.pod }} in {{ $labels.namespace }} has been over 300 seconds for 5 minutes.\n  Please investigate the replication status of this instance.',
-              runbook_url: 'https://kb.vshn.ch/app-catalog/service/postgresql/runbooks/CNPGPostgreSQLReplicationLagCritical.html',
+              runbook_url: 'https://kb.vshn.ch/app-catalog/service/postgresql/runbooks/system/CNPGPostgreSQLReplicationLagCritical.html',
             },
           },
           {

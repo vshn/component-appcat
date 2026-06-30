@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.4.10
+    app.kubernetes.io/version: 0.6.15
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.4.10
+    helm.sh/chart: garage-operator-0.6.15
   name: appcat-garage-operator-webhook
   namespace: syn-garage-operator
 spec:
@@ -28,9 +28,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.4.10
+    app.kubernetes.io/version: 0.6.15
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.4.10
+    helm.sh/chart: garage-operator-0.6.15
   name: appcat-garage-operator-webhook-cert
   namespace: syn-garage-operator
 spec:
@@ -53,9 +53,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.4.10
+    app.kubernetes.io/version: 0.6.15
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.4.10
+    helm.sh/chart: garage-operator-0.6.15
   name: appcat-garage-operator-selfsigned-issuer
   namespace: syn-garage-operator
 spec:
@@ -70,9 +70,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.4.10
+    app.kubernetes.io/version: 0.6.15
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.4.10
+    helm.sh/chart: garage-operator-0.6.15
   name: appcat-garage-operator-mutating
 webhooks:
   - admissionReviewVersions:
@@ -165,9 +165,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.4.10
+    app.kubernetes.io/version: 0.6.15
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.4.10
+    helm.sh/chart: garage-operator-0.6.15
   name: appcat-garage-operator-validating
 webhooks:
   - admissionReviewVersions:

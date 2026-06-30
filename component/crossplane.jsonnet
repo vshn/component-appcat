@@ -104,6 +104,7 @@ local monitoring =
                 annotations: {
                   summary: 'Crossplane controller is down',
                   description: 'Crossplane pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is down',
+                  runbook_url: 'https://kb.vshn.ch/app-catalog/framework/runbooks/CrossplaneDown.html',
                 },
               },
             ],
