@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:v4.190.0
+          image: ghcr.io/vshn/appcat:fix_keycloak_drop
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
