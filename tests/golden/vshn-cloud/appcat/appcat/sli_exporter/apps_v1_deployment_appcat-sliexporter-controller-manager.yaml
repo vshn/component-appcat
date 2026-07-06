@@ -25,7 +25,7 @@ spec:
             - --health-probe-bind-address=:8081
             - --metrics-bind-address=127.0.0.1:8080
           env: []
-          image: ghcr.io/vshn/appcat:fix_keycloak_drop
+          image: ghcr.io/vshn/appcat:959b80aa844a8938e0776b1b976cd93d5cc87808
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

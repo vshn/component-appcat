@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/keycloak_drop
+        function-revision: 959b80aa844a8938e0776b1b976cd93d5cc87808
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
