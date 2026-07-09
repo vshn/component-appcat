@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-959b80aa844a8938e0776b1b976cd93d5cc87808
+    metadata.appcat.vshn.io/revision: debug-alert-pin-image-tag
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

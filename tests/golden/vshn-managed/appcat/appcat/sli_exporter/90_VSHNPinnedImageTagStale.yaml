@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    syn: 'true'
+    syn_component: appcat
+    syn_team: schedar
+  name: appcat-pinned-image-tag-stale
+  namespace: syn-appcat-slos
+spec:
+  groups:
+    - name: appcat-pinned-image-tag-stale
+      rules:
+        - alert: VSHNPinnedImageTagStale
+          annotations:
+            description: Service {{ $labels.kind }} "{{ $labels.name }}" in namespace
+              "{{ $labels.exported_namespace }}" has a pinned image tag "{{ $labels.pin_image_tag
+              }}" that has not been updated for {{ $value | humanizeDuration }}. The
+              instance may be missing security updates. Please inform the customer.
+            runbook_url: https://kb.vshn.ch/app-catalog/framework/runbooks/VSHNPinnedImageTagStale.html
+            summary: Pinned image tag not updated for {{ $labels.kind }}/{{ $labels.name
+              }}
+          expr: (time() - appcat_pinned_image_tag_set_timestamp) > (60 * 24 * 3600)
+          for: 1h
+          labels:
+            OnCall: 'false'
+            severity: warning
+            syn: 'true'
+            syn_component: appcat
+            syn_team: schedar

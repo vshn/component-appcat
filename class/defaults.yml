@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 959b80aa844a8938e0776b1b976cd93d5cc87808
+        tag: alert-pin-image-tag
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -163,6 +163,10 @@ parameters:
       openshift.io/node-selector: node-role.kubernetes.io/infra=
 
     maintenanceConfigMapName: maintenance-config
+
+    # pinnedTagStaleDays is the number of days after which a pinned image tag is considered stale
+    # and an alert is fired to inform ops so they can notify the customer.
+    pinnedTagStaleDays: 60
 
     appuioManaged: true
     quotasEnabled: false

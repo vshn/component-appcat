@@ -8,7 +8,7 @@ local common = import 'common.libsonnet';
 local vars = import 'config/vars.jsonnet';
 local prom = import 'prometheus.libsonnet';
 local slos = import 'slos.libsonnet';
-local opsgenieRules = import 'vshn_alerting.jsonnet';
+local vshnAlerting = import 'vshn_alerting_slos.libsonnet';
 local xrds = import 'xrds.libsonnet';
 
 local inv = kap.inventory();
@@ -403,6 +403,6 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
   if params.slos.enabled && params.services.vshn.enabled && params.services.vshn.postgres.enabled then {
     'sli_exporter/70_slo_vshn_postgresql': slos.Get('vshn-postgresql'),
     'sli_exporter/80_slo_vshn_postgresql_ha': slos.Get('vshn-postgresql-ha'),
-    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNPostgreSQL', promRulePostgresSLA),
+    [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNPostgreSQL_Opsgenie']: vshnAlerting.GenGenericAlertingRule('VSHNPostgreSQL', promRulePostgresSLA),
   } else {}
 else {}

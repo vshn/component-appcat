@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:959b80aa844a8938e0776b1b976cd93d5cc87808
+          image: ghcr.io/vshn/appcat:alert-pin-image-tag
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
