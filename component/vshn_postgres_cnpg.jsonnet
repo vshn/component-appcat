@@ -9,7 +9,6 @@ local common = import 'common.libsonnet';
 local vars = import 'config/vars.jsonnet';
 local prom = import 'prometheus.libsonnet';
 local slos = import 'slos.libsonnet';
-local opsgenieRules = import 'vshn_alerting.jsonnet';
 local xrds = import 'xrds.libsonnet';
 
 local inv = kap.inventory();

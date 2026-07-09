@@ -146,6 +146,7 @@ parameters:
           - ${_base_directory}/component/vshn_codey.jsonnet
           - ${_base_directory}/component/vshn_hotfixjob.jsonnet
           - ${_base_directory}/component/appcat_sli_exporter_alerts.jsonnet
+          - ${_base_directory}/component/vshn_alerting.jsonnet
         input_type: jsonnet
         output_path: appcat/
 
