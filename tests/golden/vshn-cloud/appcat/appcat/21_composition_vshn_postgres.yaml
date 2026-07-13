@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-727dc287657ece27ffb36afd6d714acb146f9eff
+    metadata.appcat.vshn.io/revision: master-13757f418e523eab3167ba033264b5b83d1564dd
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-727dc287657ece27ffb36afd6d714acb146f9eff
+        name: function-appcat-master-13757f418e523eab3167ba033264b5b83d1564dd
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: 727dc287657ece27ffb36afd6d714acb146f9eff
+          imageTag: 13757f418e523eab3167ba033264b5b83d1564dd
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
