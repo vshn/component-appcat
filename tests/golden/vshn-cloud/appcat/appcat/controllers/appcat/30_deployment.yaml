@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:fix_gatewaydomain-obs
+          image: ghcr.io/vshn/appcat:13757f418e523eab3167ba033264b5b83d1564dd
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
