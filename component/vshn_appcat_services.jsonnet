@@ -11,7 +11,7 @@ local xrds = import 'xrds.libsonnet';
 
 local vars = import 'config/vars.jsonnet';
 local slos = import 'slos.libsonnet';
-local opsgenieRules = import 'vshn_alerting.jsonnet';
+local vshnAlerting = import 'vshn_alerting_slos.libsonnet';
 
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
@@ -175,7 +175,7 @@ local vshn_appcat_service(name, serviceParams) =
     if params.services.vshn.enabled && serviceParams.enabled then {
       ['sli_exporter/70_slo_vshn_%s' % name]: slos.Get('vshn-' + name),
       ['sli_exporter/80_slo_vshn_%s_ha' % name]: slos.Get('vshn-' + name + '-ha'),
-      [if params.slos.alertsEnabled then 'sli_exporter/90_%s_Opsgenie' % xrd.spec.claimNames.kind]: opsgenieRules.GenGenericAlertingRule(xrd.spec.claimNames.kind, promRecordingRuleSLA),
+      [if params.slos.alertsEnabled then 'sli_exporter/90_%s_Opsgenie' % xrd.spec.claimNames.kind]: vshnAlerting.GenGenericAlertingRule(xrd.spec.claimNames.kind, promRecordingRuleSLA),
     } else {}
   else {};
 

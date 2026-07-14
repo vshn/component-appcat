@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
 local inv = kap.inventory();
 local params = inv.parameters.appcat;
 local garageParams = params.services.generic.objectstorage.compositions.garage;
-local opsgenieRules = import 'vshn_alerting.jsonnet';
+local vshnAlerting = import 'vshn_alerting_slos.libsonnet';
 local vars = import 'config/vars.jsonnet';
 
 local instances = [
@@ -30,6 +30,6 @@ local instances = [
 
 if params.services.vshn.enabled && garageParams.enabled && std.length(instances) != 0 then {
   '22_garage_instances': instances,
-  [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNGarage_Opsgenie']: opsgenieRules.GenGenericAlertingRule('VSHNGarage'),
+  [if params.slos.alertsEnabled then 'sli_exporter/90_VSHNGarage_Opsgenie']: vshnAlerting.GenGenericAlertingRule('VSHNGarage'),
 
 } else {}
