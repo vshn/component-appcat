@@ -133,6 +133,10 @@ parameters:
         registry: docker.io
         image: library/busybox
         tag: "1.38"
+      postgres_client:
+        registry: docker.io
+        image: library/postgres
+        tag: "17-alpine"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
@@ -1205,6 +1209,7 @@ parameters:
             busybox_image: ${appcat:images:busybox:registry}/${appcat:images:busybox:image}
             busybox_image_tag: ${appcat:images:busybox:tag}
             kubectl_image: ${appcat:images:kubectl:registry}/${appcat:images:kubectl:image}:${appcat:images:kubectl:tag}
+            postgres_client_image: ${appcat:images:postgres_client:registry}/${appcat:images:postgres_client:image}:${appcat:images:postgres_client:tag}
             registry_username: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_username}"
             registry_password: "?{vaultkv:__shared__/__shared__/appcat/inventage_registry_password}"
             keycloak_images_optimized: "false"
