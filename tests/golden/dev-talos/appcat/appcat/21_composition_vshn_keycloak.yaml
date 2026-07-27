@@ -74,7 +74,7 @@ spec:
             true, "memory": "2Gi"}}, "standard-4": {"size": {"cpu": "1", "disk": "16Gi",
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
-          postgres_client_image: docker.io/library/postgres:17-alpine
+          postgres_client_image: dockerhub.vshn.net/library/postgres:17-alpine
           proxyEndpoint: 10.5.0.1:9443
           quotasEnabled: 'false'
           registry_password: dummy

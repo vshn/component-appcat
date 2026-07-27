@@ -134,7 +134,7 @@ parameters:
         image: library/busybox
         tag: "1.38"
       postgres_client:
-        registry: docker.io
+        registry: dockerhub.vshn.net
         image: library/postgres
         tag: "17-alpine"
       forgejo:
