@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-cd3b8f73d7c1cd07996a29a1f7646c19792d9544
+  name: function-appcat-master-v4-192-0
 spec:
-  package: ghcr.io/vshn/appcat:cd3b8f73d7c1cd07996a29a1f7646c19792d9544-func
+  package: ghcr.io/vshn/appcat:v4.192.0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
