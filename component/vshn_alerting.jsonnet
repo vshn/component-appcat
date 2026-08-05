@@ -46,6 +46,6 @@ local pinnedTagStaleRule = {
   },
 };
 
-if params.slos.alertsEnabled && vars.isSingleOrServiceCluster then {
+if params.slos.enabled && params.slos.alertsEnabled && vars.isSingleOrServiceCluster then {
   'sli_exporter/90_VSHNPinnedImageTagStale': pinnedTagStaleRule,
 } else {}
