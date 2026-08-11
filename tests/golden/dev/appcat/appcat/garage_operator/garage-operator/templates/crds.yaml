@@ -8,9 +8,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garageadmintokens.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -296,9 +296,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garagebuckets.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -1247,9 +1247,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garageclusters.garage.rajsingh.info
 spec:
   conversion:
@@ -4564,6 +4564,216 @@ spec:
                     dataFsync:
                       description: DataFsync enables fsync for data block writes
                       type: boolean
+                    env:
+                      description: |-
+                        Env is a list of environment variables to set on the Garage container
+                        in the storage tier. These are appended AFTER the operator's built-in vars.
+                      items:
+                        description: EnvVar represents an environment variable present
+                          in a Container.
+                        properties:
+                          name:
+                            description: |-
+                              Name of the environment variable.
+                              May consist of any printable ASCII characters except '='.
+                            type: string
+                          value:
+                            description: |-
+                              Variable references $(VAR_NAME) are expanded
+                              using the previously defined environment variables in the container and
+                              any service environment variables. If a variable cannot be resolved,
+                              the reference in the input string will be unchanged. Double $$ are reduced
+                              to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+                              "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+                              Escaped references will never be expanded, regardless of whether the variable
+                              exists or not.
+                              Defaults to "".
+                            type: string
+                          valueFrom:
+                            description: Source for the environment variable's value.
+                              Cannot be used if value is not empty.
+                            properties:
+                              configMapKeyRef:
+                                description: Selects a key of a ConfigMap.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    default: ''
+                                    description: |-
+                                      Name of the referent.
+                                      This field is effectively required, but due to backwards compatibility is
+                                      allowed to be empty. Instances of this type with an empty value here are
+                                      almost certainly wrong.
+                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    type: string
+                                  optional:
+                                    description: Specify whether the ConfigMap or
+                                      its key must be defined
+                                    type: boolean
+                                required:
+                                  - key
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              fieldRef:
+                                description: |-
+                                  Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+                                  spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+                                properties:
+                                  apiVersion:
+                                    description: Version of the schema the FieldPath
+                                      is written in terms of, defaults to "v1".
+                                    type: string
+                                  fieldPath:
+                                    description: Path of the field to select in the
+                                      specified API version.
+                                    type: string
+                                required:
+                                  - fieldPath
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              fileKeyRef:
+                                description: |-
+                                  FileKeyRef selects a key of the env file.
+                                  Requires the EnvFiles feature gate to be enabled.
+                                properties:
+                                  key:
+                                    description: |-
+                                      The key within the env file. An invalid key will prevent the pod from starting.
+                                      The keys defined within a source may consist of any printable ASCII characters except '='.
+                                      During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+                                    type: string
+                                  optional:
+                                    default: false
+                                    description: |-
+                                      Specify whether the file or its key must be defined. If the file or key
+                                      does not exist, then the env var is not published.
+                                      If optional is set to true and the specified key does not exist,
+                                      the environment variable will not be set in the Pod's containers.
+
+                                      If optional is set to false and the specified key does not exist,
+                                      an error will be returned during Pod creation.
+                                    type: boolean
+                                  path:
+                                    description: |-
+                                      The path within the volume from which to select the file.
+                                      Must be relative and may not contain the '..' path or start with '..'.
+                                    type: string
+                                  volumeName:
+                                    description: The name of the volume mount containing
+                                      the env file.
+                                    type: string
+                                required:
+                                  - key
+                                  - path
+                                  - volumeName
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              resourceFieldRef:
+                                description: |-
+                                  Selects a resource of the container: only resources limits and requests
+                                  (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+                                properties:
+                                  containerName:
+                                    description: 'Container name: required for volumes,
+                                      optional for env vars'
+                                    type: string
+                                  divisor:
+                                    anyOf:
+                                      - type: integer
+                                      - type: string
+                                    description: Specifies the output format of the
+                                      exposed resources, defaults to "1"
+                                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                                    x-kubernetes-int-or-string: true
+                                  resource:
+                                    description: 'Required: resource to select'
+                                    type: string
+                                required:
+                                  - resource
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              secretKeyRef:
+                                description: Selects a key of a secret in the pod's
+                                  namespace
+                                properties:
+                                  key:
+                                    description: The key of the secret to select from.  Must
+                                      be a valid secret key.
+                                    type: string
+                                  name:
+                                    default: ''
+                                    description: |-
+                                      Name of the referent.
+                                      This field is effectively required, but due to backwards compatibility is
+                                      allowed to be empty. Instances of this type with an empty value here are
+                                      almost certainly wrong.
+                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    type: string
+                                  optional:
+                                    description: Specify whether the Secret or its
+                                      key must be defined
+                                    type: boolean
+                                required:
+                                  - key
+                                type: object
+                                x-kubernetes-map-type: atomic
+                            type: object
+                        required:
+                          - name
+                        type: object
+                      type: array
+                    envFrom:
+                      description: |-
+                        EnvFrom is a list of sources to populate environment variables in the
+                        Garage container for the storage tier.
+                      items:
+                        description: EnvFromSource represents the source of a set
+                          of ConfigMaps or Secrets
+                        properties:
+                          configMapRef:
+                            description: The ConfigMap to select from
+                            properties:
+                              name:
+                                default: ''
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                              optional:
+                                description: Specify whether the ConfigMap must be
+                                  defined
+                                type: boolean
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          prefix:
+                            description: |-
+                              Optional text to prepend to the name of each environment variable.
+                              May consist of any printable ASCII characters except '='.
+                            type: string
+                          secretRef:
+                            description: The Secret to select from
+                            properties:
+                              name:
+                                default: ''
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                              optional:
+                                description: Specify whether the Secret must be defined
+                                type: boolean
+                            type: object
+                            x-kubernetes-map-type: atomic
+                        type: object
+                      type: array
                     layoutPolicy:
                       description: |-
                         LayoutPolicy overrides the cluster layoutPolicy for the storage tier only
@@ -5179,7 +5389,8 @@ spec:
                       pattern: ^(\d+(\.\d+)?\s*(ns|us|ms|s|m|h|d|w|M|y)\s*)+$
                       type: string
                     metadataFsync:
-                      description: MetadataFsync enables fsync for metadata transactions
+                      description: MetadataFsync enables fsync on metadata writes
+                        for this node.
                       type: boolean
                     metadataSnapshotsDir:
                       description: MetadataSnapshotsDir specifies directory for metadata
@@ -13949,9 +14160,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garagekeys.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -14236,6 +14447,12 @@ spec:
                         type: string
                       description: Annotations to add to the secret
                       type: object
+                    bucketNameKey:
+                      default: bucket
+                      description: |-
+                        BucketNameKey is the data key under which the bucket name is written
+                        in the Secret. Defaults to "bucket". Only used when IncludeBucketName is true.
+                      type: string
                     endpointKey:
                       default: endpoint
                       description: EndpointKey is the key name for the S3 endpoint
@@ -14246,6 +14463,12 @@ spec:
                       description: HostKey is the key name for the S3 host (without
                         scheme, e.g., "host:port")
                       type: string
+                    includeBucketName:
+                      description: |-
+                        IncludeBucketName controls whether the bucket name is written to the Secret.
+                        Defaults to false. When true, the bucket name is populated only if the key
+                        references exactly one bucket (via bucketRef or globalAlias); omitted otherwise.
+                      type: boolean
                     includeEndpoint:
                       description: |-
                         IncludeEndpoint includes the S3 endpoint in the secret
@@ -14488,9 +14711,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garagenodes.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
@@ -16528,10 +16751,21 @@ spec:
                           items:
                             type: string
                           type: array
+                        annotations:
+                          additionalProperties:
+                            type: string
+                          description: Annotations to set on dynamically provisioned
+                            PVCs.
+                          type: object
                         existingClaim:
                           description: ExistingClaim references a pre-existing PVC
                             by name in the cluster namespace.
                           type: string
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: Labels to set on dynamically provisioned PVCs.
+                          type: object
                         path:
                           description: "Path is the in-container mount path for this\
                             \ volume. Only honored on\nmulti-HDD `storage.dataPaths[]`\
@@ -16566,16 +16800,12 @@ spec:
                             Uses the cluster default if not specified.
                           type: string
                         type:
-                          allOf:
-                            - enum:
-                                - PersistentVolumeClaim
-                                - EmptyDir
-                            - enum:
-                                - PVC
-                                - EmptyDir
                           description: |-
-                            Type specifies the volume type. Defaults to PVC.
+                            Type specifies the volume type. Defaults to PersistentVolumeClaim.
                             Use EmptyDir for ephemeral storage (e.g. testing).
+                          enum:
+                            - PersistentVolumeClaim
+                            - EmptyDir
                           type: string
                       type: object
                     dataFsync:
@@ -16609,10 +16839,22 @@ spec:
                             items:
                               type: string
                             type: array
+                          annotations:
+                            additionalProperties:
+                              type: string
+                            description: Annotations to set on dynamically provisioned
+                              PVCs.
+                            type: object
                           existingClaim:
                             description: ExistingClaim references a pre-existing PVC
                               by name in the cluster namespace.
                             type: string
+                          labels:
+                            additionalProperties:
+                              type: string
+                            description: Labels to set on dynamically provisioned
+                              PVCs.
+                            type: object
                           path:
                             description: "Path is the in-container mount path for\
                               \ this volume. Only honored on\nmulti-HDD `storage.dataPaths[]`\
@@ -16647,16 +16889,12 @@ spec:
                               Uses the cluster default if not specified.
                             type: string
                           type:
-                            allOf:
-                              - enum:
-                                  - PersistentVolumeClaim
-                                  - EmptyDir
-                              - enum:
-                                  - PVC
-                                  - EmptyDir
                             description: |-
-                              Type specifies the volume type. Defaults to PVC.
+                              Type specifies the volume type. Defaults to PersistentVolumeClaim.
                               Use EmptyDir for ephemeral storage (e.g. testing).
+                            enum:
+                              - PersistentVolumeClaim
+                              - EmptyDir
                             type: string
                         type: object
                       type: array
@@ -16670,10 +16908,21 @@ spec:
                           items:
                             type: string
                           type: array
+                        annotations:
+                          additionalProperties:
+                            type: string
+                          description: Annotations to set on dynamically provisioned
+                            PVCs.
+                          type: object
                         existingClaim:
                           description: ExistingClaim references a pre-existing PVC
                             by name in the cluster namespace.
                           type: string
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: Labels to set on dynamically provisioned PVCs.
+                          type: object
                         path:
                           description: "Path is the in-container mount path for this\
                             \ volume. Only honored on\nmulti-HDD `storage.dataPaths[]`\
@@ -16708,16 +16957,12 @@ spec:
                             Uses the cluster default if not specified.
                           type: string
                         type:
-                          allOf:
-                            - enum:
-                                - PersistentVolumeClaim
-                                - EmptyDir
-                            - enum:
-                                - PVC
-                                - EmptyDir
                           description: |-
-                            Type specifies the volume type. Defaults to PVC.
+                            Type specifies the volume type. Defaults to PersistentVolumeClaim.
                             Use EmptyDir for ephemeral storage (e.g. testing).
+                          enum:
+                            - PersistentVolumeClaim
+                            - EmptyDir
                           type: string
                       type: object
                     metadataAutoSnapshotInterval:
@@ -17254,9 +17499,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: garagereferencegrants.garage.rajsingh.info
 spec:
   group: garage.rajsingh.info
