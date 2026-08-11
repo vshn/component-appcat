@@ -5481,11 +5481,6 @@ spec:
                                     type: string
                                   description: https://forgejo.org/docs/latest/admin/config-cheat-sheet/#actions-actions
                                   type: object
-                                cors:
-                                  additionalProperties:
-                                    type: string
-                                  description: https://forgejo.org/docs/latest/admin/config-cheat-sheet/#cors-cors
-                                  type: object
                                 email.incoming:
                                   additionalProperties:
                                     type: string
@@ -5533,7 +5528,7 @@ spec:
                           minItems: 1
                           type: array
                         majorVersion:
-                          default: 14.0.0
+                          default: 15.0.0
                           description: |-
                             Version contains supported version of Forgejo.
                             Multiple versions are supported. Defaults to 14.0.0 if not set.
