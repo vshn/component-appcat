@@ -20,7 +20,7 @@ spec:
     backup:
       schedule: '0 22 * * *'
     service:
-      majorVersion: "15"
+      majorVersion: "18"
     size:
       plan: standard-2
   writeConnectionSecretToRef:
