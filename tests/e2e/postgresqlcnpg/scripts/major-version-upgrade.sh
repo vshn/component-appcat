@@ -5,15 +5,15 @@ NAMESPACE="${NAMESPACE:-appcat-e2e}"
 RESOURCE="pg-cnpg-e2e"
 DEADLINE=$(($(date +%s) + 1800))
 
-CURRENT=$(kubectl get vshnpostgresql "$RESOURCE" -n "$NAMESPACE" -o jsonpath='{.status.currentVersion}')
+CURRENT=$(kubectl get vshnpostgresql.vshn.appcat.vshn.io "$RESOURCE" -n "$NAMESPACE" -o jsonpath='{.status.currentVersion}')
 TARGET=$((CURRENT + 1))
 
 echo "Upgrading PostgreSQL major version: $CURRENT -> $TARGET"
 
-kubectl patch vshnpostgresql "$RESOURCE" -n "$NAMESPACE" --type=merge \
+kubectl patch vshnpostgresql.vshn.appcat.vshn.io "$RESOURCE" -n "$NAMESPACE" --type=merge \
   -p "{\"spec\":{\"parameters\":{\"service\":{\"majorVersion\":\"$TARGET\"}}}}"
 
-ns=$(kubectl -n "$NAMESPACE" get vshnpostgresql "$RESOURCE" -o jsonpath='{.status.instanceNamespace}')
+ns=$(kubectl -n "$NAMESPACE" get vshnpostgresql.vshn.appcat.vshn.io "$RESOURCE" -o jsonpath='{.status.instanceNamespace}')
 
 # Wait for composition function to reconcile and update the imageCatalogRef
 kubectl wait --for=jsonpath='{.spec.imageCatalogRef.major}'="$TARGET" \
