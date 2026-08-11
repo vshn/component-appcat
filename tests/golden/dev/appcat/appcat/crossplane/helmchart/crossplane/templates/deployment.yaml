@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: feat/forgejo-cors
+        function-revision: fa5ccd4ddf9dfa9e7e633fb6aa1167659f4d4234
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
