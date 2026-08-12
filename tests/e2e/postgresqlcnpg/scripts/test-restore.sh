@@ -22,6 +22,8 @@ spec:
       schedule: '0 22 * * *'
     security:
       deletionProtection: false
+    service:
+      majorVersion: "17"
     size:
       plan: standard-2
   writeConnectionSecretToRef:
