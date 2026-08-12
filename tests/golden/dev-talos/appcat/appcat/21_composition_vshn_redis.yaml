@@ -54,7 +54,7 @@ spec:
           imageRepositoryPrefix: vshn
           imageTag: b70f8fd5b158b29b28879d59f299652902036a15
           isOpenshift: 'false'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: docker.io/bitnamilegacy/kubectl:1.33.4
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance
