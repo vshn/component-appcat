@@ -22,7 +22,7 @@ spec:
     service:
       vacuumEnabled: true
       repackEnabled: true
-      majorVersion: "15"
+      majorVersion: "18"
       serviceLevel: besteffort
     size:
       plan: standard-2

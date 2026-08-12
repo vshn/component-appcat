@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: appcat-garage-operator-webhook
   namespace: syn-garage-operator
 spec:
@@ -28,9 +28,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: appcat-garage-operator-webhook-cert
   namespace: syn-garage-operator
 spec:
@@ -53,9 +53,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: appcat-garage-operator-selfsigned-issuer
   namespace: syn-garage-operator
 spec:
@@ -70,9 +70,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: appcat-garage-operator-mutating
 webhooks:
   - admissionReviewVersions:
@@ -101,9 +101,29 @@ webhooks:
       service:
         name: appcat-garage-operator-webhook
         namespace: syn-garage-operator
-        path: /mutate-garage-rajsingh-info-v1beta1-garagecluster
+        path: /mutate-garage-rajsingh-info-v1beta2-garagecluster
     failurePolicy: Fail
     name: mgaragecluster.kb.io
+    rules:
+      - apiGroups:
+          - garage.rajsingh.info
+        apiVersions:
+          - v1beta2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - garageclusters
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: appcat-garage-operator-webhook
+        namespace: syn-garage-operator
+        path: /mutate-garage-rajsingh-info-v1beta1-garagecluster
+    failurePolicy: Fail
+    name: mgarageclusterv1beta1.kb.io
     rules:
       - apiGroups:
           - garage.rajsingh.info
@@ -165,9 +185,9 @@ metadata:
     app.kubernetes.io/instance: appcat
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.15
+    app.kubernetes.io/version: 0.6.29
     control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.15
+    helm.sh/chart: garage-operator-0.6.29
   name: appcat-garage-operator-validating
 webhooks:
   - admissionReviewVersions:
@@ -216,9 +236,29 @@ webhooks:
       service:
         name: appcat-garage-operator-webhook
         namespace: syn-garage-operator
-        path: /validate-garage-rajsingh-info-v1beta1-garagecluster
+        path: /validate-garage-rajsingh-info-v1beta2-garagecluster
     failurePolicy: Fail
     name: vgaragecluster.kb.io
+    rules:
+      - apiGroups:
+          - garage.rajsingh.info
+        apiVersions:
+          - v1beta2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - garageclusters
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: appcat-garage-operator-webhook
+        namespace: syn-garage-operator
+        path: /validate-garage-rajsingh-info-v1beta1-garagecluster
+    failurePolicy: Fail
+    name: vgarageclusterv1beta1.kb.io
     rules:
       - apiGroups:
           - garage.rajsingh.info

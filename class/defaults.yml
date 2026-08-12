@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 2.3.2
+        version: 2.3.3
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
         version: 23.2.1
@@ -50,7 +50,7 @@ parameters:
         chartName: plugin-barman-cloud
       garageOperator:
         source: oci://ghcr.io/rajsinghtech/charts/garage-operator
-        version: 0.6.15
+        version: 0.6.29
       openbao:
         source: https://openbao.github.io/openbao-helm
         version: 0.19.3
@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.193.0
+        tag: b70f8fd5b158b29b28879d59f299652902036a15
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
