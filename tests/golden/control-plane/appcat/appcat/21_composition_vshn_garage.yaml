@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+    metadata.appcat.vshn.io/revision: master-fix_nextcloud_bootstrap
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+        name: function-appcat-master-fix-nextcloud-bootstrap
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: c7e4da99e5603c0074ffe07cb05e60b680c8896b
+          imageTag: fix_nextcloud_bootstrap
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

@@ -17,7 +17,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+    metadata.appcat.vshn.io/revision: master-fix_nextcloud_bootstrap
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -28,7 +28,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+        name: function-appcat-master-fix-nextcloud-bootstrap
       input:
         apiVersion: v1
         data:
@@ -56,7 +56,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
-          imageTag: c7e4da99e5603c0074ffe07cb05e60b680c8896b
+          imageTag: fix_nextcloud_bootstrap
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: ''
