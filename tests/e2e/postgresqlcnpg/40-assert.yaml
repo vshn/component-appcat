@@ -7,7 +7,7 @@ kind: VSHNPostgreSQL
 metadata:
   name: pg-cnpg-e2e-restore
   finalizers:
-  - finalizer.apiextensions.crossplane.io
+    - finalizer.apiextensions.crossplane.io
 spec:
   compositeDeletePolicy: Background
   compositionRef:
@@ -18,9 +18,7 @@ spec:
     security:
       deletionProtection: false
     backup:
-      schedule: '0 22 * * *'
-    service:
-      majorVersion: "18"
+      schedule: "0 22 * * *"
     size:
       plan: standard-2
   writeConnectionSecretToRef:

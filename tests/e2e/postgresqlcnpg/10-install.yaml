@@ -10,6 +10,7 @@ spec:
       deletionProtection: false
     service:
       vacuumEnabled: true
+      majorVersion: "17"
     size:
       plan: standard-2
   writeConnectionSecretToRef:
