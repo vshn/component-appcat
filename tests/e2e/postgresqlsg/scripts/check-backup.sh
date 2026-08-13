@@ -8,8 +8,8 @@ echo "=== Starting PostgreSQL backup test ==="
 echo "Namespace: $NAMESPACE"
 
 echo "Getting instance namespace and cluster name..."
-instancens=$(kubectl -n "$NAMESPACE" get vshnpostgresql pg-sg-e2e -oyaml | yq -r '.status.instanceNamespace')
-comp=$(kubectl -n "$NAMESPACE" get vshnpostgresql pg-sg-e2e -oyaml | yq -r '.spec.resourceRef.name')
+instancens=$(kubectl -n "$NAMESPACE" get vshnpostgresql.vshn.appcat.vshn.io pg-sg-e2e -oyaml | yq -r '.status.instanceNamespace')
+comp=$(kubectl -n "$NAMESPACE" get vshnpostgresql.vshn.appcat.vshn.io pg-sg-e2e -oyaml | yq -r '.spec.resourceRef.name')
 
 echo "Instance namespace: $instancens"
 echo "Cluster name: $comp"

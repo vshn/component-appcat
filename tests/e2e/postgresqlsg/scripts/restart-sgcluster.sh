@@ -6,10 +6,10 @@ NAMESPACE="${NAMESPACE:-appcat-e2e}"
 
 echo "=== Finding SGCluster namespace for pg-sg-e2e from control plane ==="
 
-COMPOSITE_NAME=$(kubectl -n ${NAMESPACE} get vshnpostgresql pg-sg-e2e -o jsonpath='{.spec.resourceRef.name}')
+COMPOSITE_NAME=$(kubectl -n ${NAMESPACE} get vshnpostgresql.vshn.appcat.vshn.io pg-sg-e2e -o jsonpath='{.spec.resourceRef.name}')
 echo "Composite resource name: ${COMPOSITE_NAME}"
 
-INSTANCE_NAMESPACE=$(kubectl -n "$NAMESPACE" get vshnpostgresql pg-sg-e2e -oyaml | yq -r '.status.instanceNamespace')
+INSTANCE_NAMESPACE=$(kubectl -n "$NAMESPACE" get vshnpostgresql.vshn.appcat.vshn.io pg-sg-e2e -oyaml | yq -r '.status.instanceNamespace')
 echo "SGCluster namespace: ${INSTANCE_NAMESPACE}"
 
 if [ -z "$INSTANCE_NAMESPACE" ]; then
