@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_collabora_certs
+    metadata.appcat.vshn.io/revision: debug-83b23f1055c880e9f9256613f15538aae25d514d
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-collabora-certs
+        name: function-appcat-debug-83b23f1055c880e9f9256613f15538aae25d514d
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fix_collabora_certs
+          imageTag: 83b23f1055c880e9f9256613f15538aae25d514d
           isOpenshift: 'false'
           loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
