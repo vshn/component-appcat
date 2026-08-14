@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:958a547da804e40ce41d1b2a00b18e652b0cc892
+          image: ghcr.io/vshn/appcat:feat_forgejo-git-timeout
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

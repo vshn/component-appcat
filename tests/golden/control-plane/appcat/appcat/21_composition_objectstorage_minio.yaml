@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-958a547da804e40ce41d1b2a00b18e652b0cc892
+        name: function-appcat-master-feat-forgejo-git-timeout
       input:
         apiVersion: v1
         data:
