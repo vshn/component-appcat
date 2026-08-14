@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/nextcloud_bootstrap
+        function-revision: 958a547da804e40ce41d1b2a00b18e652b0cc892
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
