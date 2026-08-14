@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+    metadata.appcat.vshn.io/revision: master-958a547da804e40ce41d1b2a00b18e652b0cc892
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-c7e4da99e5603c0074ffe07cb05e60b680c8896b
+        name: function-appcat-master-958a547da804e40ce41d1b2a00b18e652b0cc892
       input:
         apiVersion: v1
         data:
@@ -58,7 +58,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net
-          imageTag: c7e4da99e5603c0074ffe07cb05e60b680c8896b
+          imageTag: 958a547da804e40ce41d1b2a00b18e652b0cc892
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'
