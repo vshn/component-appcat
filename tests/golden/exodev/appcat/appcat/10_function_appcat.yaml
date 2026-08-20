@@ -5,8 +5,10 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
   name: function-appcat-master-19c2418e1e44471153a9ed87cd841bc8805bd023
+  name: function-appcat-master-fix-quota
 spec:
   package: ghcr.io/vshn/appcat:19c2418e1e44471153a9ed87cd841bc8805bd023-func
+  package: ghcr.io/vshn/appcat:fix_quota-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

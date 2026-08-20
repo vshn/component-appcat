@@ -14,6 +14,7 @@ metadata:
   labels:
     metadata.appcat.vshn.io/offered: 'false'
     metadata.appcat.vshn.io/revision: master-19c2418e1e44471153a9ed87cd841bc8805bd023
+    metadata.appcat.vshn.io/revision: master-fix_quota
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -25,6 +26,7 @@ spec:
   pipeline:
     - functionRef:
         name: function-appcat-master-19c2418e1e44471153a9ed87cd841bc8805bd023
+        name: function-appcat-master-fix-quota
       input:
         apiVersion: v1
         data:
@@ -50,6 +52,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
           imageTag: 19c2418e1e44471153a9ed87cd841bc8805bd023
+          imageTag: fix_quota
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100

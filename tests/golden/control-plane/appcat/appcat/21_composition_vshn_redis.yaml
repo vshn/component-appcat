@@ -18,6 +18,7 @@ metadata:
   labels:
     metadata.appcat.vshn.io/offered: 'true'
     metadata.appcat.vshn.io/revision: master-19c2418e1e44471153a9ed87cd841bc8805bd023
+    metadata.appcat.vshn.io/revision: master-fix_quota
     metadata.appcat.vshn.io/serviceID: vshn-redis
     name: vshnredis.vshn.appcat.vshn.io
   name: vshnredis.vshn.appcat.vshn.io
@@ -29,6 +30,7 @@ spec:
   pipeline:
     - functionRef:
         name: function-appcat-master-19c2418e1e44471153a9ed87cd841bc8805bd023
+        name: function-appcat-master-fix-quota
       input:
         apiVersion: v1
         data:
@@ -57,6 +59,7 @@ spec:
           imageRegistry: ghcr.io
           imageRepositoryPrefix: vshn
           imageTag: 19c2418e1e44471153a9ed87cd841bc8805bd023
+          imageTag: fix_quota
           isOpenshift: 'false'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: ''

@@ -5673,7 +5673,7 @@ spec:
                             type: object
                           type: array
                         majorVersion:
-                          default: '18'
+                          default: '15'
                           description: |-
                             MajorVersion contains supported version of PostgreSQL.
                             Multiple versions are supported. The latest version "15" is the default version.

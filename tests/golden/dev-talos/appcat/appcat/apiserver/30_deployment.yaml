@@ -32,6 +32,7 @@ spec:
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
           image: ghcr.io/vshn/appcat:19c2418e1e44471153a9ed87cd841bc8805bd023
+          image: ghcr.io/vshn/appcat:fix_quota
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
