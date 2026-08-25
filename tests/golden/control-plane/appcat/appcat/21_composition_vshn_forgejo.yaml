@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-bad0b82090f1a9e2fb6cdf9a3d48dd68c8441f19
+    metadata.appcat.vshn.io/revision: master-0946329d38bc2b1ce582287577c3863d0bcacdf7
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-bad0b82090f1a9e2fb6cdf9a3d48dd68c8441f19
+        name: function-appcat-master-0946329d38bc2b1ce582287577c3863d0bcacdf7
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: bad0b82090f1a9e2fb6cdf9a3d48dd68c8441f19
+          imageTag: 0946329d38bc2b1ce582287577c3863d0bcacdf7
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
