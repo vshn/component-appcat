@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:feat_forgejo-cron
+          image: ghcr.io/vshn/appcat:0946329d38bc2b1ce582287577c3863d0bcacdf7
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
