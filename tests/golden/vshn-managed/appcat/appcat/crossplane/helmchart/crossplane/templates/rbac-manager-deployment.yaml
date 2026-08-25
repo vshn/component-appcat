@@ -26,7 +26,6 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 19c2418e1e44471153a9ed87cd841bc8805bd023
         function-revision: fix/quota
       labels:
         app: crossplane-rbac-manager
