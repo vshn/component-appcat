@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-feat_forgejo-timeouts
+    metadata.appcat.vshn.io/revision: debug-04c1c27100d14a5278382482359d3c4cabed008a
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-feat-forgejo-timeouts
+        name: function-appcat-debug-04c1c27100d14a5278382482359d3c4cabed008a
       input:
         apiVersion: v1
         data:
@@ -50,7 +50,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: feat_forgejo-timeouts
+          imageTag: 04c1c27100d14a5278382482359d3c4cabed008a
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
