@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-feat-forgejo-git-timeout
+        name: function-appcat-debug-220f379751fe7c18f40fd67cacd442b2e76b1e39
       input:
         apiVersion: v1
         data:
