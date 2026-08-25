@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-quota
+        name: function-appcat-master-bad0b82090f1a9e2fb6cdf9a3d48dd68c8441f19
       input:
         apiVersion: v1
         data:
