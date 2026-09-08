@@ -37,7 +37,7 @@ spec:
           busybox_image: dockerhub.vshn.net/library/busybox
           busybox_image_tag: '1.38'
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 7.2.0
+          chartVersion: 7.2.3
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -75,7 +75,6 @@ spec:
             "enabled": true, "memory": "4Gi"}}, "standard-8": {"size": {"cpu": "2",
             "disk": "16Gi", "enabled": true, "memory": "8Gi"}}}'
           postgres_client_image: dockerhub.vshn.net/library/postgres:17-alpine
-          proxyEndpoint: 172.18.0.1:9443
           quotasEnabled: 'false'
           registry_password: ''
           registry_username: ''

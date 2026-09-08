@@ -63,7 +63,7 @@ parameters:
       busybox:
         registry: dockerhub.vshn.net
     grpcEndpoint: 172.18.0.1:9443
-    proxyFunction: true
+    proxyFunction: false
     quotasEnabled: false
     additionalResourcesAllowed:
       - apiGroups: [gateway.networking.k8s.io]
