@@ -147,6 +147,8 @@ local emailAlerting(alertingSettings) = {
   emailAlertingSmtpFromAddress: alertingSettings.smtpFromAddress,
   emailAlertingSmtpUsername: alertingSettings.smtpUsername,
   emailAlertingSmtpHost: alertingSettings.smtpHost,
+  emailAlertingTemplateHTML: alertingSettings.templateHTML,
+  emailAlertingTemplateSubject: alertingSettings.templateSubject,
 };
 
 local getApiserverImageTag() = std.strReplace(params.images.apiserver.tag, '/', '_');

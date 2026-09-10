@@ -47,6 +47,8 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          emailAlertingTemplateHTML: ''
+          emailAlertingTemplateSubject: ''
           externalDatabaseConnectionsEnabled: 'true'
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system

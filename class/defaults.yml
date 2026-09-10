@@ -730,6 +730,11 @@ parameters:
         smtpFromAddress: appcat@appuio.cloud
         secretNamespace: syn-appcat
         secretName: mailgun-smtp-credentials
+        # Body of the alert mails, empty to keep Alertmanager's default one.
+        # Rendered by AppCat with [[ ]] as delimiters, Alertmanager renders {{ }}
+        templateHTML: ""
+        # Mail subject. Empty keeps Alertmanager default
+        templateSubject: ""
       vshn:
         ocpDefaultAppsDomain: ""
         routeType: "Ingress"
