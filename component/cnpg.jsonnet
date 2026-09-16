@@ -180,24 +180,6 @@ local prometheusrule = std.prune(kube._Object('monitoring.coreos.com/v1', 'Prome
             },
           },
           {
-            alert: 'CNPGClusterOffline',
-            expr: 'count by(namespace)(cnpg_collector_up) == 0',
-            'for': '5m',
-            labels: {
-              severity: 'critical',
-              service: 'cnpg-postgres',
-              syn: 'true',
-              syn_team: 'schedar',
-              syn_component: 'appcat',
-              OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end }}',
-            },
-            annotations: {
-              summary: 'CNPG Cluster is offline',
-              description: 'All CNPG collectors in {{ $labels.namespace }} are reporting down. The cluster may be offline.',
-              runbook_url: 'https://github.com/cloudnative-pg/charts/blob/main/charts/cluster/docs/runbooks/CNPGClusterOffline.md',
-            },
-          },
-          {
             alert: 'CNPGClusterInstancesOnSameNode',
             expr: 'count by (namespace, node) (kube_pod_info{namespace=~"vshn-postgresql-.*",pod=~"postgresql-.*"} * on(pod,namespace) group_right(node) kube_pod_labels{label_cnpg_io_cluster=~".+"}) > 1',
             'for': '5m',
