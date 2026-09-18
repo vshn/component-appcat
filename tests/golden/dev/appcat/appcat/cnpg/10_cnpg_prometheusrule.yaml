@@ -145,22 +145,6 @@ spec:
             syn: 'true'
             syn_component: appcat
             syn_team: schedar
-        - alert: CNPGClusterOffline
-          annotations:
-            description: All CNPG collectors in {{ $labels.namespace }} are reporting
-              down. The cluster may be offline.
-            runbook_url: https://github.com/cloudnative-pg/charts/blob/main/charts/cluster/docs/runbooks/CNPGClusterOffline.md
-            summary: CNPG Cluster is offline
-          expr: count by(namespace)(cnpg_collector_up) == 0
-          for: 5m
-          labels:
-            OnCall: '{{ if eq $labels.sla "guaranteed" }}true{{ else }}false{{ end
-              }}'
-            service: cnpg-postgres
-            severity: critical
-            syn: 'true'
-            syn_component: appcat
-            syn_team: schedar
         - alert: CNPGClusterInstancesOnSameNode
           annotations:
             description: Multiple CNPG instances in {{ $labels.namespace }} are running
