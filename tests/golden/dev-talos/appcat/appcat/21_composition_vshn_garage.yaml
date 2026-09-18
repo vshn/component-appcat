@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-v4.194.0
+    metadata.appcat.vshn.io/revision: debug-075ff65672f1c9358e1c3f20e6593136fed7ccb9
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-v4-194-0
+        name: function-appcat-debug-075ff65672f1c9358e1c3f20e6593136fed7ccb9
       input:
         apiVersion: v1
         data:
@@ -45,12 +45,14 @@ spec:
           emailAlertingSmtpFromAddress: appcat@appuio.cloud
           emailAlertingSmtpHost: smtp.eu.mailgun.org:465
           emailAlertingSmtpUsername: appcat@appuio.cloud
+          emailAlertingTemplateHTML: ''
+          emailAlertingTemplateSubject: ''
           garageAllowedNamespaces: '["syn-appcat"]'
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: v4.194.0
+          imageTag: 075ff65672f1c9358e1c3f20e6593136fed7ccb9
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''

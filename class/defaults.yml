@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.194.0
+        tag: 075ff65672f1c9358e1c3f20e6593136fed7ccb9
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -730,6 +730,11 @@ parameters:
         smtpFromAddress: appcat@appuio.cloud
         secretNamespace: syn-appcat
         secretName: mailgun-smtp-credentials
+        # Body of the alert mails, empty to keep Alertmanager's default one.
+        # Rendered by AppCat with [[ ]] as delimiters, Alertmanager renders {{ }}
+        templateHTML: ""
+        # Mail subject. Empty keeps Alertmanager default
+        templateSubject: ""
       vshn:
         ocpDefaultAppsDomain: ""
         routeType: "Ingress"
