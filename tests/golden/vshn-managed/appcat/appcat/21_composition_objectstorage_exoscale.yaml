@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-075ff65672f1c9358e1c3f20e6593136fed7ccb9
+        name: function-appcat-master-fix-flapping-namespaces
       input:
         apiVersion: v1
         data:
