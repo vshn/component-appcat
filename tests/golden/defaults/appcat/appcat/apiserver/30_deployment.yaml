@@ -31,7 +31,7 @@ spec:
             - --secure-port=9443
             - --tls-cert-file=/apiserver.local.config/certificates/tls.crt
             - --tls-private-key-file=/apiserver.local.config/certificates/tls.key
-          image: ghcr.io/vshn/appcat:fix_ns_quota_flapping
+          image: ghcr.io/vshn/appcat:6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

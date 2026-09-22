@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fix/ns_quota_flapping
+        tag: 6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/ns_quota_flapping
+        function-revision: 6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
