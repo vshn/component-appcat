@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
+    metadata.appcat.vshn.io/revision: master-v4.195.0
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
+        name: function-appcat-master-v4-195-0
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: 6b1a6f7831f15bc47058cfe1cd2d2490d5c0601e
+          imageTag: v4.195.0
           isOpenshift: 'true'
           loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
