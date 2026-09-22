@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-075ff65672f1c9358e1c3f20e6593136fed7ccb9
+    metadata.appcat.vshn.io/revision: master-fix_ns_quota_flapping
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-075ff65672f1c9358e1c3f20e6593136fed7ccb9
+        name: function-appcat-master-fix-ns-quota-flapping
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 075ff65672f1c9358e1c3f20e6593136fed7ccb9
+          imageTag: fix_ns_quota_flapping
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://quay.io/v2/minio/minio/tags/list
