@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.194.0
+        tag: v4.195.0
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -128,7 +128,7 @@ parameters:
         image: library/nextcloud
         maintenanceURL: "https://hub.docker.com/v2/namespaces/library/repositories/nextcloud/tags?page_size=100"
       minio:
-        maintenanceURL: "https://hub.docker.com/v2/repositories/minio/minio/tags/?page_size=100"
+        maintenanceURL: "https://quay.io/v2/minio/minio/tags/list"
       busybox:
         registry: docker.io
         image: library/busybox
@@ -730,6 +730,11 @@ parameters:
         smtpFromAddress: appcat@appuio.cloud
         secretNamespace: syn-appcat
         secretName: mailgun-smtp-credentials
+        # Body of the alert mails, empty to keep Alertmanager's default one.
+        # Rendered by AppCat with [[ ]] as delimiters, Alertmanager renders {{ }}
+        templateHTML: ""
+        # Mail subject. Empty keeps Alertmanager default
+        templateSubject: ""
       vshn:
         ocpDefaultAppsDomain: ""
         routeType: "Ingress"
