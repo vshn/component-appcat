@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: cc33866cec9882972fd9abd7280be95d9ffa7998
+        function-revision: feat/forgejo-settings
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

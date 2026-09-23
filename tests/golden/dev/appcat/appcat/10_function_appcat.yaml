@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-cc33866cec9882972fd9abd7280be95d9ffa7998
+  name: function-appcat-debug-feat-forgejo-settings
 spec:
-  package: ghcr.io/vshn/appcat:cc33866cec9882972fd9abd7280be95d9ffa7998-func
+  package: ghcr.io/vshn/appcat:feat_forgejo-settings-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat

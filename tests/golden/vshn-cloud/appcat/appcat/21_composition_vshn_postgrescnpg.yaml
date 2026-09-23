@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-cc33866cec9882972fd9abd7280be95d9ffa7998
+    metadata.appcat.vshn.io/revision: master-feat_forgejo-settings
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-cc33866cec9882972fd9abd7280be95d9ffa7998
+        name: function-appcat-master-feat-forgejo-settings
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: cc33866cec9882972fd9abd7280be95d9ffa7998
+          imageTag: feat_forgejo-settings
           isOpenshift: 'true'
           kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
           loadbalancerAnnotations: |
