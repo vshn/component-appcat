@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-d40980cd93ebfe17ccf6954a20aa032d43f04da8
+    metadata.appcat.vshn.io/revision: debug-cc33866cec9882972fd9abd7280be95d9ffa7998
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-d40980cd93ebfe17ccf6954a20aa032d43f04da8
+        name: function-appcat-debug-cc33866cec9882972fd9abd7280be95d9ffa7998
       input:
         apiVersion: v1
         data:
@@ -57,7 +57,7 @@ spec:
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: d40980cd93ebfe17ccf6954a20aa032d43f04da8
+          imageTag: cc33866cec9882972fd9abd7280be95d9ffa7998
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
