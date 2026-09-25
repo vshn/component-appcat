@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-change_update_versions
+    metadata.appcat.vshn.io/revision: master-5dca2374fce1e99045c54814a9eee6191950e8c3
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-change-update-versions
+        name: function-appcat-master-5dca2374fce1e99045c54814a9eee6191950e8c3
       input:
         apiVersion: v1
         data:
@@ -60,7 +60,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: change_update_versions
+          imageTag: 5dca2374fce1e99045c54814a9eee6191950e8c3
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
             nginx.ingress.kubernetes.io/enable-cors: "true"
