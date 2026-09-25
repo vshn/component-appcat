@@ -21,46 +21,6 @@ spec:
     app.kubernetes.io/name: garage-operator
     control-plane: controller-manager
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  labels:
-    app.kubernetes.io/instance: appcat
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.29
-    control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.29
-  name: appcat-garage-operator-webhook-cert
-  namespace: syn-garage-operator
-spec:
-  dnsNames:
-    - appcat-garage-operator-webhook
-    - appcat-garage-operator-webhook.syn-garage-operator
-    - appcat-garage-operator-webhook.syn-garage-operator.svc
-    - appcat-garage-operator-webhook.syn-garage-operator.svc.cluster.local
-  duration: 8760h
-  issuerRef:
-    kind: Issuer
-    name: appcat-garage-operator-selfsigned-issuer
-  renewBefore: 720h
-  secretName: appcat-garage-operator-webhook-cert
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  labels:
-    app.kubernetes.io/instance: appcat
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: garage-operator
-    app.kubernetes.io/version: 0.6.29
-    control-plane: controller-manager
-    helm.sh/chart: garage-operator-0.6.29
-  name: appcat-garage-operator-selfsigned-issuer
-  namespace: syn-garage-operator
-spec:
-  selfSigned: {}
----
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -330,3 +290,43 @@ webhooks:
         resources:
           - garagereferencegrants
     sideEffects: None
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/instance: appcat
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: garage-operator
+    app.kubernetes.io/version: 0.6.29
+    control-plane: controller-manager
+    helm.sh/chart: garage-operator-0.6.29
+  name: appcat-garage-operator-webhook-cert
+  namespace: syn-garage-operator
+spec:
+  dnsNames:
+    - appcat-garage-operator-webhook
+    - appcat-garage-operator-webhook.syn-garage-operator
+    - appcat-garage-operator-webhook.syn-garage-operator.svc
+    - appcat-garage-operator-webhook.syn-garage-operator.svc.cluster.local
+  duration: 8760h
+  issuerRef:
+    kind: Issuer
+    name: appcat-garage-operator-selfsigned-issuer
+  renewBefore: 720h
+  secretName: appcat-garage-operator-webhook-cert
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  labels:
+    app.kubernetes.io/instance: appcat
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: garage-operator
+    app.kubernetes.io/version: 0.6.29
+    control-plane: controller-manager
+    helm.sh/chart: garage-operator-0.6.29
+  name: appcat-garage-operator-selfsigned-issuer
+  namespace: syn-garage-operator
+spec:
+  selfSigned: {}
