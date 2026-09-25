@@ -39,7 +39,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:5dca2374fce1e99045c54814a9eee6191950e8c3
+          image: ghcr.io/vshn/appcat:fix_nextcloud_backup_robustness
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

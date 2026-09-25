@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-5dca2374fce1e99045c54814a9eee6191950e8c3
+  name: function-appcat-debug-fix-nextcloud-backup-robustness
 spec:
-  package: ghcr.io/vshn/appcat:5dca2374fce1e99045c54814a9eee6191950e8c3-func
+  package: ghcr.io/vshn/appcat:fix_nextcloud_backup_robustness-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

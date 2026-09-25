@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: 5dca2374fce1e99045c54814a9eee6191950e8c3
+        tag: fix/nextcloud_backup_robustness
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
