@@ -6,7 +6,7 @@ parameters:
     charts:
       crossplane:
         source: https://charts.crossplane.io/stable
-        version: 2.3.3
+        version: 2.3.6
       redis:
         source: oci://registry-1.docker.io/bitnamicharts/redis
         version: 23.2.1
@@ -18,7 +18,7 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.2.3
+        version: 7.3.1
       nextcloud:
         source: https://nextcloud.github.io/helm/
         version: 9.2.6
@@ -58,7 +58,7 @@ parameters:
       provider-kubernetes:
         registry: ghcr.io
         repository: crossplane-contrib/provider-kubernetes
-        tag: v1.2.1
+        tag: v1.3.1
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
@@ -118,7 +118,7 @@ parameters:
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
-        version: "3.0.10"
+        version: "3.0.11"
       collabora:
         registry: docker.io
         image: collabora/code
