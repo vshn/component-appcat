@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-feat-forgejo-settings
+        name: function-appcat-master-6dbc24b26458b6513bdd42f0c4dce218f4ac5727
       input:
         apiVersion: v1
         data:
