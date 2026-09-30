@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: ff017af0f05a79371c80ce13da97342a3e735631
+        function-revision: fix/failed_maintenance_long_backup
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller

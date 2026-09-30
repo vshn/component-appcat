@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-ff017af0f05a79371c80ce13da97342a3e735631
+        name: function-appcat-master-fix-failed-maintenance-long-backup
       input:
         apiVersion: v1
         data:
