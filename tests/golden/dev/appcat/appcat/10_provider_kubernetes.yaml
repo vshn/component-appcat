@@ -226,6 +226,12 @@ rules:
       - create
       - delete
   - apiGroups:
+      - postgresql.cnpg.io
+    resources:
+      - backups
+    verbs:
+      - deletecollection
+  - apiGroups:
       - cert-manager.io
     resources:
       - issuers
