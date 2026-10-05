@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-1e5d296ba498caba0e2146402338e1c0810237fc
+        name: function-appcat-debug-fix-minio-image-registry
       input:
         apiVersion: v1
         data:

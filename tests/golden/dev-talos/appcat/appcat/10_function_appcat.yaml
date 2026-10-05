@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-1e5d296ba498caba0e2146402338e1c0810237fc
+  name: function-appcat-debug-fix-minio-image-registry
 spec:
-  package: ghcr.io/vshn/appcat:1e5d296ba498caba0e2146402338e1c0810237fc-func
+  package: ghcr.io/vshn/appcat:fix_minio_image_registry-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
