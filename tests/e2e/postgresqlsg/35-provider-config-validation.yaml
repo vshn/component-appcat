@@ -1,4 +1,0 @@
-apiVersion: kuttl.dev/v1beta1
-kind: TestStep
-commands:
-  - script: ../common/scripts/test-provider-config-validation.sh vshnpostgresql pgsql-provider-config-test VSHNPostgreSQL

@@ -46,7 +46,7 @@ local maintenanceRole = kube.ClusterRole(maintenanceRoleName) {
     {
       apiGroups: [ 'k8up.io' ],
       resources: [ 'backups' ],
-      verbs: [ 'get', 'watch', 'create' ],
+      verbs: [ 'get', 'list', 'watch', 'create' ],
     },
     {
       apiGroups: [ '' ],

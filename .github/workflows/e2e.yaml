@@ -18,7 +18,6 @@ jobs:
           - mariadb
           - nextcloud
           - postgresqlcnpg
-          - postgresqlsg
           - redis
     steps:
       - uses: actions/checkout@v3
