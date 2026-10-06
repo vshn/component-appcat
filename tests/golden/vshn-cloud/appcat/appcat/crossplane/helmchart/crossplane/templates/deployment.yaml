@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/initial_maintenance_backoff
+        function-revision: ff017af0f05a79371c80ce13da97342a3e735631
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
