@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:1e5d296ba498caba0e2146402338e1c0810237fc
+          image: ghcr.io/vshn/appcat:fix_initial_maintenance_backoff
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
