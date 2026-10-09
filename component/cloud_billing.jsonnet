@@ -31,31 +31,6 @@ local secret(key, suf) = [
   for s in std.objectFields(paramsCloud.secrets[key])
 ];
 
-local exoDbaasClusterRole = kube.ClusterRole('appcat:cloudcollector:exoscale:dbaas') + {
-  rules: [
-    {
-      apiGroups: [ '*' ],
-      resources: [ 'namespaces' ],
-      verbs: [ 'get', 'list' ],
-    },
-    {
-      apiGroups: [ 'exoscale.crossplane.io' ],
-      resources: [
-        'postgresqls',
-        'mysqls',
-        'redis',
-        'opensearches',
-        'kafkas',
-      ],
-      verbs: [
-        'get',
-        'list',
-        'watch',
-      ],
-    },
-  ],
-};
-
 local exoObjectStorageClusterRole = kube.ClusterRole('appcat:cloudcollector:exoscale:objectstorage') + {
   rules: [
     {
@@ -281,31 +256,6 @@ local serviceMonitor = {
    assert odoo.oauth.clientID != null : 'odoo.oauth.clientID must be set.',
    assert odoo.oauth.clientSecret != null : 'odoo.oauth.clientSecret must be set.',
  })
-+
-(if paramsCloud.exoscale.enabled && paramsCloud.exoscale.dbaas.enabled then {
-   local name = 'exoscale-dbaas',
-   local secrets = paramsCloud.secrets.exoscale,
-   local sa = serviceAccount(name, exoDbaasClusterRole),
-   local extraConfig = {
-     data+: {
-       COLLECT_INTERVAL: std.toString(paramsCloud.exoscale.dbaas.collectIntervalMinutes),
-     },
-   },
-   local cm = config(name + '-env', extraConfig),
-
-   assert secrets != null : 'secrets must be set.',
-   assert secrets.credentials != null : 'secrets.credentials must be set.',
-   assert secrets.credentials.stringData != null : 'secrets.credentials.stringData must be set.',
-   assert secrets.credentials.stringData.EXOSCALE_API_KEY != null : 'secrets.credentials.stringData.EXOSCALE_API_KEY must be set.',
-   assert secrets.credentials.stringData.EXOSCALE_API_SECRET != null : 'secrets.credentials.stringData.EXOSCALE_API_SECRET must be set.',
-
-   '10_exoscale_dbaas_secret': std.filter(function(it) it != null, secret('exoscale', 'dbaas')),
-   '10_exoscale_dbaas_cluster_role': exoDbaasClusterRole,
-   '10_exoscale_dbaas_service_account': sa.sa,
-   '10_exoscale_dbaas_role_binding': sa.rb,
-   '10_exoscale_dbaas_configmap': cm,
-   '10_exoscale_dbaas_exporter': deployment(name, [ 'exoscale', 'dbaas' ], name + '-env'),
- } else {})
 +
 (if paramsCloud.exoscale.enabled && paramsCloud.exoscale.objectStorage.enabled then {
    local name = 'exoscale-objectstorage',

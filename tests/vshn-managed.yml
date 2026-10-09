@@ -286,5 +286,3 @@ parameters:
               enabled: true
             minio:
               enabled: true
-      exoscale:
-        enabled: true

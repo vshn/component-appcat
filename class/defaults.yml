@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: v4.196.0
+        tag: remove-exoscale-dbaas
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
@@ -350,12 +350,6 @@ parameters:
           InstanceHour: uom_uom_45_1e112771
         exoscale:
           enabled: false
-          dbaas:
-            enabled: false
-            # in minutes
-            collectIntervalMinutes: 15
-          # Exoscale metrics are generally fast
-          # and we are less likely to miss and dbaas instances
           # in hours
           objectStorage:
             enabled: false
@@ -1485,32 +1479,6 @@ parameters:
                 cpu: "2"
                 memory: "8Gi"
                 disk: 16Gi
-
-      # Config for exoscale composites
-      exoscale:
-        enabled: false
-        secretNamespace: ${appcat:crossplane:namespace}
-        providerSecretNamespace: ${appcat:providers:exoscale:connectionSecretNamespace}
-        mysql:
-          enabled: true
-          secretNamespace: ${appcat:services:exoscale:secretNamespace}
-          providerSecretNamespace: ${appcat:services:exoscale:providerSecretNamespace}
-        postgres:
-          enabled: true
-          secretNamespace: ${appcat:services:exoscale:secretNamespace}
-          providerSecretNamespace: ${appcat:services:exoscale:providerSecretNamespace}
-        redis:
-          enabled: true
-          secretNamespace: ${appcat:services:exoscale:secretNamespace}
-          providerSecretNamespace: ${appcat:services:exoscale:providerSecretNamespace}
-        kafka:
-          enabled: true
-          secretNamespace: ${appcat:services:exoscale:secretNamespace}
-          providerSecretNamespace: ${appcat:services:exoscale:providerSecretNamespace}
-        opensearch:
-          enabled: true
-          secretNamespace: ${appcat:services:exoscale:secretNamespace}
-          providerSecretNamespace: ${appcat:services:exoscale:providerSecretNamespace}
 
       # Config for "generic" vendor agnositc composites that have more than one matching composition
       generic:
