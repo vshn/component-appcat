@@ -45,7 +45,6 @@ local finalizerRole = kube.ClusterRole('crossplane:appcat:finalizer') {
       apiGroups: [
         'appcat.vshn.io',
         'vshn.appcat.vshn.io',
-        'exoscale.appcat.vshn.io',
       ],
       resources: [
         '*/finalizers',

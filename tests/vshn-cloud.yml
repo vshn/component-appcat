@@ -49,8 +49,6 @@ parameters:
       cloud:
         exoscale:
           enabled: true
-          dbaas:
-            enabled: true
           objectStorage:
             enabled: true
         cloudscale:

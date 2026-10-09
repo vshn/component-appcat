@@ -32,7 +32,7 @@ vault login -method=oidc
 ----
 
 . Create an Organization on Exoscale Portal.
-. Create a new IAM key within the new project, give it a memorable name like `appcat-${CLUSTER_ID}` and give it access to the `sos` and `dbaas` services.
+. Create a new IAM key within the new project, give it a memorable name like `appcat-${CLUSTER_ID}` and give it access to the `sos` service.
 
 . Save the token in Vault.
 +
