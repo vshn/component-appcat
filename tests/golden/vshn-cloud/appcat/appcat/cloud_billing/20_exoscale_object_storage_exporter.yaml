@@ -46,7 +46,7 @@ spec:
                 name: exoscale-objectstorage-env
             - secretRef:
                 name: credentials-exoscale-objectstorage
-          image: ghcr.io/vshn/billing-collector-cloudservices:v3.6.0
+          image: ghcr.io/vshn/billing-collector-cloudservices:v3.10.0
           imagePullPolicy: IfNotPresent
           name: exporter
           ports:
