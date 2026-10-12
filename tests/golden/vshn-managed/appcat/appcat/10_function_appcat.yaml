@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-cd3a883c40f822942de3c31ff0c4014fb2442959
+  name: function-appcat-master-fix-billing-timestamp
 spec:
-  package: ghcr.io/vshn/appcat:cd3a883c40f822942de3c31ff0c4014fb2442959-func
+  package: ghcr.io/vshn/appcat:fix_billing_timestamp-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
