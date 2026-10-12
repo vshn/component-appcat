@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-remove-exoscale-dbaas
+        name: function-appcat-master-cd3a883c40f822942de3c31ff0c4014fb2442959
       input:
         apiVersion: v1
         data:
