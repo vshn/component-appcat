@@ -176,13 +176,6 @@ default:: `'appcat-control'`
 
 Name of the additional namespace for appcat that's needed for backups and maintenance
 
-=== `services.exoscale`
-[horizontal]
-type:: dict
-reference:: xref:references/services-exoscale.adoc[See service parameters]
-
-This parameter allows enabling and configuring exoscale specific AppCat services.
-
 === `services.vshn.*.maintenance`
 [horizontal]
 type:: dict

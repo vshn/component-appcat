@@ -4,7 +4,6 @@
 * xref:explanations/crossplane-secrets-non-provider.adoc[Manage secrets not coming from a provider]
 * xref:explanations/restore.adoc[]
 * xref:explanations/add-to-openshift-catalog.adoc[]
-* xref:explanations/exoscale-plans.adoc[]
 * xref:explanations/minio.adoc[]
 
 .Tutorials
@@ -24,7 +23,6 @@
 ** xref:references/provider-minio.adoc[Provider Minio]
 
 * Service Parameters
-** xref:references/services-exoscale.adoc[Exoscale Services]
 ** xref:references/services-vshn.adoc[VSHN Services]
 ** xref:references/service-objectstorage.adoc[Objectstorage Service]
 

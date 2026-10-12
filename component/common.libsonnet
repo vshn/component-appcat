@@ -30,22 +30,6 @@ local syncOptions = {
   },
 };
 
-local vshnMetaDBaaSExoscale(dbname) = {
-  metadata+: {
-    annotations+: {
-      'metadata.appcat.vshn.io/displayname': 'Exoscale ' + dbname,
-      'metadata.appcat.vshn.io/description': dbname + ' DBaaS instances by Exoscale',
-      'metadata.appcat.vshn.io/end-user-docs-url': 'https://vs.hn/exo-' + std.asciiLower(dbname),
-      'metadata.appcat.vshn.io/zone': strExoscaleZones,
-      'metadata.appcat.vshn.io/product-description': 'https://products.docs.vshn.ch/products/appcat/exoscale_dbaas.html',
-    },
-    labels+: {
-      'metadata.appcat.vshn.io/offered': 'true',
-      'metadata.appcat.vshn.io/serviceID': 'exoscale-' + std.asciiLower(dbname),
-    },
-  },
-};
-
 local getAppCatImageTag() = std.strReplace(params.images.appcat.tag, '/', '_');
 local getAppCatVersion() = std.strReplace(inv.parameters.components.appcat.version, '/', '_');
 
@@ -325,8 +309,6 @@ local parseAdditionalInputs(params) = if std.objectHas(params, 'additionalInputs
 
 {
   SyncOptions: syncOptions,
-  VshnMetaDBaaSExoscale(dbname):
-    vshnMetaDBaaSExoscale(dbname),
   VshnMetaObjectStorage(provider):
     vshnMetaObjectStorage(provider),
   MergeArgs(args, additional):
