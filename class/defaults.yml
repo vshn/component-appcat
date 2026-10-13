@@ -66,7 +66,7 @@ parameters:
       provider-exoscale:
         registry: ghcr.io
         repository: vshn/provider-exoscale
-        tag: v1.0.3
+        tag: v2.0.0
       provider-cloudscale:
         registry: ghcr.io
         repository: vshn/provider-cloudscale
@@ -110,7 +110,7 @@ parameters:
       collector:
         registry: ghcr.io
         repository: vshn/billing-collector-cloudservices
-        tag: v3.6.0
+        tag: v4.0.0
       kubectl:
         registry: docker.io
         image: bitnamilegacy/kubectl
