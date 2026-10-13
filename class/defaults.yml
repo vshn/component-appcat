@@ -58,7 +58,7 @@ parameters:
       provider-kubernetes:
         registry: ghcr.io
         repository: crossplane-contrib/provider-kubernetes
-        tag: v1.3.1
+        tag: v1.4.1
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
