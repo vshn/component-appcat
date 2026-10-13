@@ -44,7 +44,7 @@ spec:
                 }
             - name: CROSSPLANE_EXTRA_RESOURCES
               value: ''
-          image: ghcr.io/vshn/appcat:fix_billing_timestamp
+          image: ghcr.io/vshn/appcat:482e50fc018eb6a0b51e2b881b82489d93722365
           imagePullPolicy: Always
           livenessProbe:
             httpGet:

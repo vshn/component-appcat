@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/billing_timestamp
+        function-revision: 482e50fc018eb6a0b51e2b881b82489d93722365
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
