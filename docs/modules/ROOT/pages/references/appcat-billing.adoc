@@ -129,22 +129,6 @@ default:: 6
 
 Only collect billing metrics after a certain hour of the day.
 
-=== `cloud.exoscale.dbaas.enabled`
-
-[horizontal]
-type:: bool
-default:: `false`
-
-Enable exoscale dbaas collector.
-
-=== `cloud.exoscale.dbaas.collectIntervalMinutes`
-
-[horizotanl]
-type:: int
-default:: 15
-
-The interval (in minutes) that the collector collects billing metrics for Exoscale DBaaS services.
-
 === `cloud.secrets.exoscale.credentials.stringData.EXOSCALE_API_KEY`
 
 [horizontal]
@@ -186,7 +170,6 @@ The token to connect to a Kubernetes cluster.
 The Service Account connected to this token should have `get` and `list` permissions to the following managed resources:
 
 * `buckets.exoscale.crossplane.io`
-* `postgresqls.exoscale.crossplane.io`
 
 == `cloud.cloudscale.enabled`
 
