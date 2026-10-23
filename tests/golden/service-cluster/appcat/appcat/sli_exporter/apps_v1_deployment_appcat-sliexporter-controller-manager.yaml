@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:v4.197.0
+          image: ghcr.io/vshn/appcat:fix_keycloak_postgresql_instance_merge
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
