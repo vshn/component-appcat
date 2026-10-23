@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-48abe263055548cfd87c45a9c5180b9e6f6412bf
+    metadata.appcat.vshn.io/revision: master-fix_check_action_master_ahead
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-48abe263055548cfd87c45a9c5180b9e6f6412bf
+        name: function-appcat-master-fix-check-action-master-ahead
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 48abe263055548cfd87c45a9c5180b9e6f6412bf
+          imageTag: fix_check_action_master_ahead
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
