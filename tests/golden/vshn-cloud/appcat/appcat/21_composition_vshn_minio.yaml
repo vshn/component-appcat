@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'false'
-    metadata.appcat.vshn.io/revision: master-v4.197.0
+    metadata.appcat.vshn.io/revision: master-fix_resource_quota_readablity
     metadata.appcat.vshn.io/serviceID: vshn-minio
     name: vshnminio.vshn.appcat.vshn.io
   name: vshnminio.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-v4-197-0
+        name: function-appcat-master-fix-resource-quota-readablity
       input:
         apiVersion: v1
         data:
@@ -51,7 +51,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: dockerhub.vshn.net/
-          imageTag: v4.197.0
+          imageTag: fix_resource_quota_readablity
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: https://ghcr.io/v2/vshn/minio/tags/list?page_size=100

@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: v4.197.0
+        function-revision: fix/resource_quota_readablity
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
