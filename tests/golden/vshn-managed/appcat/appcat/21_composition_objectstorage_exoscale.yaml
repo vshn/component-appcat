@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-4b606f59aebc1c3f37b6e8fa341ba08158ae3ab1
+        name: function-appcat-master-feat-forgejo-admin-pw
       input:
         apiVersion: v1
         data:
