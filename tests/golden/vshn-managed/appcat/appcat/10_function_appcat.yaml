@@ -4,23 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-v4-198-0
+  name: function-appcat-master-revert-github-action
 spec:
-  package: ghcr.io/vshn/appcat:v4.198.0-func
-  packagePullPolicy: IfNotPresent
-  runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-79-0-v4-194-0
-spec:
-  package: ghcr.io/vshn/appcat:v4.194.0-func
+  package: ghcr.io/vshn/appcat:revert_github_action-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
@@ -77,6 +63,20 @@ metadata:
   name: function-appcat-v3-82-0-v4-196-0
 spec:
   package: ghcr.io/vshn/appcat:v4.196.0-func
+  packagePullPolicy: IfNotPresent
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-0-0-v4-197-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.197.0-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
