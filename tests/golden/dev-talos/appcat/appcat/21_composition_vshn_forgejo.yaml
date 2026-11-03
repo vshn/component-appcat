@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-9d7e177cbc718df54b6e11f60002c1e014592476
+    metadata.appcat.vshn.io/revision: debug-v4.198.0
     metadata.appcat.vshn.io/serviceID: vshn-forgejo
     name: vshnforgejo.vshn.appcat.vshn.io
   name: vshnforgejo.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-9d7e177cbc718df54b6e11f60002c1e014592476
+        name: function-appcat-debug-v4-198-0
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: code.forgejo.org
-          imageTag: 9d7e177cbc718df54b6e11f60002c1e014592476
+          imageTag: v4.198.0
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-production
           isOpenshift: 'false'
