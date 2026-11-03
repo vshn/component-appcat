@@ -56,7 +56,7 @@ spec:
           imageRepositoryPrefix: vshn
           imageTag: change_kubectl_image
           isOpenshift: 'false'
-          kubectl_image: docker.io/bitnamilegacy/kubectl:1.25.15
+          kubectl_image: quay.io/appuio/oc:v4.22
           loadbalancerAnnotations: |
             foo: bar
           maintenanceSA: helm-based-service-maintenance

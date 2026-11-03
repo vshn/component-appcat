@@ -112,9 +112,9 @@ parameters:
         repository: vshn/billing-collector-cloudservices
         tag: v4.0.0
       kubectl:
-        registry: docker.io
-        image: bitnamilegacy/kubectl
-        tag: "1.25.15"
+        registry: quay.io
+        image: appuio/oc
+        tag: v4.22
       proxysql:
         registry: docker.io
         image: proxysql/proxysql
