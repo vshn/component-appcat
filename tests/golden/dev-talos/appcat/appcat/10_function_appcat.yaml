@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-revert-github-action
+  name: function-appcat-debug-6c28711bbe096e04c308a709e8b4475578472a64
 spec:
-  package: ghcr.io/vshn/appcat:revert_github_action-func
+  package: ghcr.io/vshn/appcat:6c28711bbe096e04c308a709e8b4475578472a64-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
