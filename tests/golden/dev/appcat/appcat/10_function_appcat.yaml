@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-fix-check-action-master-ahead
+  name: function-appcat-debug-9d7e177cbc718df54b6e11f60002c1e014592476
 spec:
-  package: ghcr.io/vshn/appcat:fix_check_action_master_ahead-func
+  package: ghcr.io/vshn/appcat:9d7e177cbc718df54b6e11f60002c1e014592476-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat

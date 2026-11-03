@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-check-action-master-ahead
+        name: function-appcat-debug-9d7e177cbc718df54b6e11f60002c1e014592476
       input:
         apiVersion: v1
         data:
