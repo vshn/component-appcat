@@ -4,23 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-v4-198-0
+  name: function-appcat-debug-6c28711bbe096e04c308a709e8b4475578472a64
 spec:
-  package: ghcr.io/vshn/appcat:v4.198.0-func
-  packagePullPolicy: Always
-  runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-79-0-v4-194-0
-spec:
-  package: ghcr.io/vshn/appcat:v4.194.0-func
+  package: ghcr.io/vshn/appcat:6c28711bbe096e04c308a709e8b4475578472a64-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat
@@ -77,6 +63,20 @@ metadata:
   name: function-appcat-v3-82-0-v4-196-0
 spec:
   package: ghcr.io/vshn/appcat:v4.196.0-func
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-0-0-v4-197-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.197.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat
