@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: ba57ce48d693085751439bd291a951568ea52e96
+        function-revision: fix/memory-critical-rss
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

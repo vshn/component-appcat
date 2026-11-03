@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-ba57ce48d693085751439bd291a951568ea52e96
+  name: function-appcat-master-fix-memory-critical-rss
 spec:
-  package: ghcr.io/vshn/appcat:ba57ce48d693085751439bd291a951568ea52e96-func
+  package: ghcr.io/vshn/appcat:fix_memory-critical-rss-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
