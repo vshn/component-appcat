@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-maintenance-multiple-backups
+        name: function-appcat-debug-48abe263055548cfd87c45a9c5180b9e6f6412bf
       input:
         apiVersion: v1
         data:

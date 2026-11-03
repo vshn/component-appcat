@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_maintenance_multiple_backups
+    metadata.appcat.vshn.io/revision: master-48abe263055548cfd87c45a9c5180b9e6f6412bf
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-maintenance-multiple-backups
+        name: function-appcat-master-48abe263055548cfd87c45a9c5180b9e6f6412bf
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fix_maintenance_multiple_backups
+          imageTag: 48abe263055548cfd87c45a9c5180b9e6f6412bf
           isOpenshift: 'true'
           loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance

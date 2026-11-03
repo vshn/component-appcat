@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/maintenance_multiple_backups
+        function-revision: 48abe263055548cfd87c45a9c5180b9e6f6412bf
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

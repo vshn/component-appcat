@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_maintenance_multiple_backups
+    metadata.appcat.vshn.io/revision: debug-48abe263055548cfd87c45a9c5180b9e6f6412bf
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-maintenance-multiple-backups
+        name: function-appcat-debug-48abe263055548cfd87c45a9c5180b9e6f6412bf
       input:
         apiVersion: v1
         data:
@@ -57,7 +57,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: fix_maintenance_multiple_backups
+          imageTag: 48abe263055548cfd87c45a9c5180b9e6f6412bf
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
