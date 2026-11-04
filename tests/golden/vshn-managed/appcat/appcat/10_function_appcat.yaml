@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fix-keycloak-postgresql-instance-merge
+  name: function-appcat-master-ba57ce48d693085751439bd291a951568ea52e96
 spec:
-  package: ghcr.io/vshn/appcat:fix_keycloak_postgresql_instance_merge-func
+  package: ghcr.io/vshn/appcat:ba57ce48d693085751439bd291a951568ea52e96-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat

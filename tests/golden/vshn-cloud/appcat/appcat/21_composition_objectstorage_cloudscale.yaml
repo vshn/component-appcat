@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-keycloak-postgresql-instance-merge
+        name: function-appcat-master-ba57ce48d693085751439bd291a951568ea52e96
       input:
         apiVersion: v1
         data:

@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_keycloak_postgresql_instance_merge
+    metadata.appcat.vshn.io/revision: master-ba57ce48d693085751439bd291a951568ea52e96
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-keycloak-postgresql-instance-merge
+        name: function-appcat-master-ba57ce48d693085751439bd291a951568ea52e96
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: fix_keycloak_postgresql_instance_merge
+          imageTag: ba57ce48d693085751439bd291a951568ea52e96
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
