@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fix/memory-critical-rss
+        function-revision: 4b606f59aebc1c3f37b6e8fa341ba08158ae3ab1
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
