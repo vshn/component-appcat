@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 1e8993b57979205b511b4be025308a81cf92d431
+        function-revision: fbefcf422735448ecb454b1784ecf673079a31b9
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller
