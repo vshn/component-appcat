@@ -27,7 +27,7 @@ spec:
           env:
             - name: KUBECONFIG
               value: /.kube/config
-          image: ghcr.io/vshn/appcat:fbefcf422735448ecb454b1784ecf673079a31b9
+          image: ghcr.io/vshn/appcat:antora-ui-bundle-v3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
