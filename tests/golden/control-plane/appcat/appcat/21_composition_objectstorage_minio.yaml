@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fbefcf422735448ecb454b1784ecf673079a31b9
+        name: function-appcat-master-antora-ui-bundle-v3
       input:
         apiVersion: v1
         data:

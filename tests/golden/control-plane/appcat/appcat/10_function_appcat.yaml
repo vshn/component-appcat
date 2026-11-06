@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-master-fbefcf422735448ecb454b1784ecf673079a31b9
+  name: function-appcat-master-antora-ui-bundle-v3
 spec:
-  package: ghcr.io/vshn/appcat:fbefcf422735448ecb454b1784ecf673079a31b9-func
+  package: ghcr.io/vshn/appcat:antora-ui-bundle-v3-func
   packagePullPolicy: IfNotPresent
   runtimeConfigRef:
     name: function-appcat
