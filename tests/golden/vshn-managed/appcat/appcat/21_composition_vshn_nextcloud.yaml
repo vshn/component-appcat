@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-1e8993b57979205b511b4be025308a81cf92d431
+    metadata.appcat.vshn.io/revision: master-fix_oom_promrule
     metadata.appcat.vshn.io/serviceID: vshn-nextcloud
     name: vshnnextcloud.vshn.appcat.vshn.io
   name: vshnnextcloud.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-1e8993b57979205b511b4be025308a81cf92d431
+        name: function-appcat-master-fix-oom-promrule
       input:
         apiVersion: v1
         data:
@@ -60,7 +60,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
-          imageTag: 1e8993b57979205b511b4be025308a81cf92d431
+          imageTag: fix_oom_promrule
           ingress_annotations: |
             cert-manager.io/cluster-issuer: letsencrypt-staging
           isOpenshift: 'true'

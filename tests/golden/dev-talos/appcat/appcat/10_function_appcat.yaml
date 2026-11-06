@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-1e8993b57979205b511b4be025308a81cf92d431
+  name: function-appcat-debug-fix-oom-promrule
 spec:
-  package: ghcr.io/vshn/appcat:1e8993b57979205b511b4be025308a81cf92d431-func
+  package: ghcr.io/vshn/appcat:fix_oom_promrule-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy
