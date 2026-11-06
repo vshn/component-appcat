@@ -18,16 +18,16 @@ parameters:
         version: 5.4.0
       keycloak:
         source: https://codecentric.github.io/helm-charts
-        version: 7.3.1
+        version: 7.4.0
       nextcloud:
         source: https://nextcloud.github.io/helm/
-        version: 9.2.6
+        version: 9.4.0
       forgejo:
         source: https://charts.appcat.ch/
         version: 16.2.1-vshn.1
       cnpg:
         source: https://cloudnative-pg.io/charts/
-        version: 0.29.0
+        version: 0.29.1
         # Be aware that the cnpg post-process filter will append "-ubiX" to the operator image.
         # The UBI version might increase with newer versions, so check with skopeo first:
         # skopeo list-tags docker://ghcr.io/cloudnative-pg/cloudnative-pg
@@ -58,7 +58,7 @@ parameters:
       provider-kubernetes:
         registry: ghcr.io
         repository: crossplane-contrib/provider-kubernetes
-        tag: v1.3.1
+        tag: v1.4.1
       provider-helm:
         registry: ghcr.io
         repository: crossplane-contrib/provider-helm
@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: fbefcf422735448ecb454b1784ecf673079a31b9
+        tag: dependencies/monthly_updates_11_2026
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}
