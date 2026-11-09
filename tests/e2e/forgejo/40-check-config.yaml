@@ -63,6 +63,11 @@ spec:
                   fi
               done
 
+              # Admin is created with passwordMode=initialOnlyRequireReset, which blocks API access
+              # until the password is changed. Clear the flag so the test can use the API.
+              forgejo_pod=$(kubectl -n "$ns" get pod -l app.kubernetes.io/name=forgejo -o name | head -n 1)
+              kubectl -n "$ns" exec "$forgejo_pod" -c forgejo -- forgejo admin user must-change-password --unset "$username"
+
               curl -X POST -H "Content-Type: application/json" -u "$username:$password" -d "$payload" "$base_url/user/repos"
 
               # 3. Check if actions are enabled for repo (must be false)
