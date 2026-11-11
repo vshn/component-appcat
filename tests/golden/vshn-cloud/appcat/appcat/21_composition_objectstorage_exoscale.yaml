@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-nested-billing-race
+        name: function-appcat-master-39147a2a1eef4c82c0ee930b7aef5d3b737a0079
       input:
         apiVersion: v1
         data:
