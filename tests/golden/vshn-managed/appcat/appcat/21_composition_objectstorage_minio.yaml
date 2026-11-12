@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-39147a2a1eef4c82c0ee930b7aef5d3b737a0079
+        name: function-appcat-master-feat-disable-forgejo-metrics
       input:
         apiVersion: v1
         data:
