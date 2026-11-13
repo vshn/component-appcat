@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-070af22c2dee604694c70cfc39b99155c4afca76
+        name: function-appcat-debug-fix-flapping-alerts
       input:
         apiVersion: v1
         data:

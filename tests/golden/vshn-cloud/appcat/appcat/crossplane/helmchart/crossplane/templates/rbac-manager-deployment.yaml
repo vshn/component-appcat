@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 070af22c2dee604694c70cfc39b99155c4afca76
+        function-revision: fix/flapping_alerts
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
