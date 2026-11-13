@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-dependencies-monthly-updates-11-2026
+        name: function-appcat-master-96d2784d6aca2349941af31ace704a59696de6b7
       input:
         apiVersion: v1
         data:
