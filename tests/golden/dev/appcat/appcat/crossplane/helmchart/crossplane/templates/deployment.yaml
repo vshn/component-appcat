@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+        function-revision: fix/flapping_alerts
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

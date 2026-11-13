@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+        name: function-appcat-master-fix-flapping-alerts
       input:
         apiVersion: v1
         data:

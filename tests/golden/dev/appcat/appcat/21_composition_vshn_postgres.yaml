@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+    metadata.appcat.vshn.io/revision: debug-fix_flapping_alerts
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+        name: function-appcat-debug-fix-flapping-alerts
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+          imageTag: fix_flapping_alerts
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
