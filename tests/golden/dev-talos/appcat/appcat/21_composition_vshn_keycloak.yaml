@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+    metadata.appcat.vshn.io/revision: debug-96d2784d6aca2349941af31ace704a59696de6b7
     metadata.appcat.vshn.io/serviceID: vshn-keycloak
     name: vshnkeycloak.vshn.appcat.vshn.io
   name: vshnkeycloak.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+        name: function-appcat-debug-96d2784d6aca2349941af31ace704a59696de6b7
       input:
         apiVersion: v1
         data:
@@ -37,7 +37,7 @@ spec:
           busybox_image: dockerhub.vshn.net/library/busybox
           busybox_image_tag: '1.38'
           chartRepository: https://codecentric.github.io/helm-charts
-          chartVersion: 7.3.1
+          chartVersion: 7.4.0
           cloudProvider: cloudscale
           clusterName: c-green-test-1234
           controlNamespace: syn-appcat-control
@@ -57,7 +57,7 @@ spec:
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker-registry.inventage.com:10121/keycloak-competence-center/keycloak-managed
-          imageTag: fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+          imageTag: 96d2784d6aca2349941af31ace704a59696de6b7
           ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
