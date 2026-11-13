@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+    metadata.appcat.vshn.io/revision: debug-fix_psql_alerts
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+        name: function-appcat-debug-fix-psql-alerts
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fcf19b8b020f55ab0bfcbd86f2bad2b304fe3353
+          imageTag: fix_psql_alerts
           isOpenshift: 'false'
           loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
