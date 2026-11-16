@@ -496,6 +496,7 @@ parameters:
           memory: 300Mi
 
     stackgres:
+      enabled: true
       namespace: syn-stackgres-operator
       operator:
         channel: stable
