@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-070af22c2dee604694c70cfc39b99155c4afca76
+    metadata.appcat.vshn.io/revision: debug-92d1195d956ed5b8a38d72a504cfb9fa8dde9106
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-070af22c2dee604694c70cfc39b99155c4afca76
+        name: function-appcat-debug-92d1195d956ed5b8a38d72a504cfb9fa8dde9106
       input:
         apiVersion: v1
         data:
@@ -52,7 +52,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 070af22c2dee604694c70cfc39b99155c4afca76
+          imageTag: 92d1195d956ed5b8a38d72a504cfb9fa8dde9106
           isOpenshift: 'false'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
