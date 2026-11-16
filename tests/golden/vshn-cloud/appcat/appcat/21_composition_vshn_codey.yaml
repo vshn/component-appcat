@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-fix_flapping_alerts
+    metadata.appcat.vshn.io/revision: master-92d1195d956ed5b8a38d72a504cfb9fa8dde9106
     metadata.appcat.vshn.io/serviceID: vshn-codey
     name: codey.io
   name: codey.io

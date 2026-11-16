@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-fix_flapping_alerts
+    metadata.appcat.vshn.io/revision: debug-92d1195d956ed5b8a38d72a504cfb9fa8dde9106
     metadata.appcat.vshn.io/serviceID: vshn-mariadb
     name: vshnmariadb.vshn.appcat.vshn.io
   name: vshnmariadb.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-fix-flapping-alerts
+        name: function-appcat-debug-92d1195d956ed5b8a38d72a504cfb9fa8dde9106
       input:
         apiVersion: v1
         data:
@@ -53,7 +53,7 @@ spec:
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: docker.io
           imageRepositoryPrefix: bitnamilegacy
-          imageTag: fix_flapping_alerts
+          imageTag: 92d1195d956ed5b8a38d72a504cfb9fa8dde9106
           isOpenshift: 'false'
           loadbalancerAnnotations: ''
           maintenanceSA: helm-based-service-maintenance
