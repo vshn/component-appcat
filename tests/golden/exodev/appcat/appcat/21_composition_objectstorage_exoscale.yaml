@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-psql-alerts
+        name: function-appcat-master-c73e0092ac60131c87ce23993738aa711aa21465
       input:
         apiVersion: v1
         data:
