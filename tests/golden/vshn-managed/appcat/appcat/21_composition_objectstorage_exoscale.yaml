@@ -22,7 +22,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-fix-applyjob-tag
+        name: function-appcat-master-070af22c2dee604694c70cfc39b99155c4afca76
       input:
         apiVersion: v1
         data:
