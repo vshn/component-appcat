@@ -385,16 +385,16 @@ local appcatFuncRole = kube.Role('appcat-function:stackgres-restapi-admin') {
      '20_rbac_vshn_postgres': xrds.CompositeClusterRoles(xrd),
      '20_role_vshn_postgresrestore': [ restoreRole, restoreServiceAccount, restoreClusterRoleBinding ],
      '20_plans_vshn_postgresql': plansCM,
-     '21_composition_vshn_postgres': composition,
+     [if params.stackgres.enabled then '21_composition_vshn_postgres']: composition,
 
      [if vars.isOpenshift then '21_openshift_template_postgresql_vshn']: osTemplate,
    } else {})
 + (if vars.isSingleOrServiceCluster then {
-     '22_appcat_func_role': appcatFuncRole,
-     '22_appcat_func_role_binding': appcatFuncRoleBinding,
+     [if params.stackgres.enabled then '22_appcat_func_role']: appcatFuncRole,
+     [if params.stackgres.enabled then '22_appcat_func_role_binding']: appcatFuncRoleBinding,
      '22_appcat_postgres_maintenance_cluster_role': maintenanceClusterRole,
    } else {})
-+ (if vars.isSingleOrServiceCluster && vars.isOpenshift then {
++ (if vars.isSingleOrServiceCluster && vars.isOpenshift && params.stackgres.enabled then {
      '10_stackgres_openshift_operator_ns': stackgresOperatorNs,
      '11_stackgres_openshift_operator': std.prune(stackgresOperator),
      '12_stackgres_openshift_operator_netpol': stackgresNetworkPolicy,

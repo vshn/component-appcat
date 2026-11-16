@@ -55,6 +55,8 @@ parameters:
           enabled: true
       cloudZone: ${global:appuio_metered_billing_zone_label_map:${cluster:name}}
 
+    stackgres:
+      enabled: false
     slos:
       enabled: true
       alertsEnabled: true
