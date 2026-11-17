@@ -19,8 +19,6 @@ spec:
     security:
       deletionProtection: false
     service:
-      postgreSQLParameters:
-        instances: 1
       relativePath: /auth
       serviceLevel: besteffort
     size:
