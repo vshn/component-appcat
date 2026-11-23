@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-86bebd295657398f137b3f1833c55f4eae08695e
+        name: function-appcat-master-change-populate-ns-labels
       input:
         apiVersion: v1
         data:

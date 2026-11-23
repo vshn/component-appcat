@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: 86bebd295657398f137b3f1833c55f4eae08695e
+        function-revision: change/populate_ns_labels
       labels:
         app: crossplane-rbac-manager
         app.kubernetes.io/component: cloud-infrastructure-controller
