@@ -4,23 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-v4-200-0
+  name: function-appcat-debug-change-kubectl-image
 spec:
-  package: ghcr.io/vshn/appcat:v4.200.0-func
-  packagePullPolicy: Always
-  runtimeConfigRef:
-    name: function-appcat
-  skipDependencyResolution: true
----
-apiVersion: pkg.crossplane.io/v1beta1
-kind: Function
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-v3-81-0-v4-195-0
-spec:
-  package: ghcr.io/vshn/appcat:v4.195.0-func
+  package: ghcr.io/vshn/appcat:change_kubectl_image-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat
@@ -77,6 +63,20 @@ metadata:
   name: function-appcat-v4-0-1-v4-199-0
 spec:
   package: ghcr.io/vshn/appcat:v4.199.0-func
+  packagePullPolicy: Always
+  runtimeConfigRef:
+    name: function-appcat
+  skipDependencyResolution: true
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '-40'
+  name: function-appcat-v4-1-0-v4-200-0
+spec:
+  package: ghcr.io/vshn/appcat:v4.200.0-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat
