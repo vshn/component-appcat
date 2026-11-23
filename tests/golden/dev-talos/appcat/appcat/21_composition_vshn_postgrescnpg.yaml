@@ -30,6 +30,7 @@ spec:
         data:
           additionalMaintenanceClusterRole: crossplane:appcat:job:postgres:maintenance
           additionalResourcesAllowed: '[]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: rma
           cloudProvider: cloudscale

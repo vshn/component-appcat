@@ -185,6 +185,10 @@ parameters:
     #              the provider can create/update/delete the resource.
     # An empty list disables the feature.
     additionalResourcesAllowed: []
+
+    # A list of allowed label keys that get passed through
+    # from the claim to the namespace.
+    allowedNamespaceLabels: []
     grpcEndpoint: host.docker.internal:9443
     proxyFunction: false
 

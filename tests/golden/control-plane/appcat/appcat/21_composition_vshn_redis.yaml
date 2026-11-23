@@ -33,6 +33,7 @@ spec:
         apiVersion: v1
         data:
           additionalResourcesAllowed: '[]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: oci://registry-1.docker.io/bitnamicharts/redis

@@ -32,6 +32,7 @@ spec:
           admin_ingress_annotations: |
             nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             cert-manager.io/cluster-issuer: letsencrypt-staging
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: lpg
           busybox_image: docker.io/library/busybox

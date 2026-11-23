@@ -29,6 +29,7 @@ spec:
         apiVersion: v1
         data:
           additionalResourcesAllowed: '[{"apiGroups":["gateway.networking.k8s.io"],"kinds":["ReferenceGrant"],"resources":["referencegrants"]}]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox

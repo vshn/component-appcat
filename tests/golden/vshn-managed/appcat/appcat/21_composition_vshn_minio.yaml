@@ -29,6 +29,7 @@ spec:
         apiVersion: v1
         data:
           additionalResourcesAllowed: '[]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: https://charts.min.io

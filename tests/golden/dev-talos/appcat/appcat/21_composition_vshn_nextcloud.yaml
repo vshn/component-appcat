@@ -29,6 +29,7 @@ spec:
         apiVersion: v1
         data:
           additionalResourcesAllowed: '[]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: rma
           busybox_image: dockerhub.vshn.net/library/busybox

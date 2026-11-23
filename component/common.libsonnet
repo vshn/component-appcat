@@ -260,6 +260,7 @@ local getDefaultInputs(name, serviceParams, plans, xrd, appuioManaged) =
     defaultPlan: serviceParams.defaultPlan,
     quotasEnabled: std.toString(params.services.vshn.quotasEnabled),
     additionalResourcesAllowed: std.manifestJsonMinified(params.services.vshn.additionalResourcesAllowed),
+    allowedNamespaceLabels: std.manifestJsonMinified(params.allowedNamespaceLabels),
     cloudProvider: inv.parameters.facts.cloud,
     isOpenshift: std.toString(vars.isServiceClusterOpenShift),
     sliNamespace: params.slos.namespace,
