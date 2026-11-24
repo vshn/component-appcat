@@ -136,7 +136,7 @@ parameters:
       postgres_client:
         registry: dockerhub.vshn.net
         image: library/postgres
-        tag: "17-alpine"
+        tag: "19-alpine"
       forgejo:
         registry: code.forgejo.org
         maintenanceURL: "https://codeberg.org/v2/forgejo/forgejo/tags/list?page_size=100"
