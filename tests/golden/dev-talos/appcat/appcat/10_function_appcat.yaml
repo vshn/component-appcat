@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-change-populate-ns-labels
+  name: function-appcat-debug-a0d62132f497e1e46dcc22f4d424b943a7be51a3
 spec:
-  package: ghcr.io/vshn/appcat:change_populate_ns_labels-func
+  package: ghcr.io/vshn/appcat:a0d62132f497e1e46dcc22f4d424b943a7be51a3-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: enable-proxy

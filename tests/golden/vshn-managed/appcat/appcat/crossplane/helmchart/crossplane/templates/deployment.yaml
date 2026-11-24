@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: change/populate_ns_labels
+        function-revision: a0d62132f497e1e46dcc22f4d424b943a7be51a3
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

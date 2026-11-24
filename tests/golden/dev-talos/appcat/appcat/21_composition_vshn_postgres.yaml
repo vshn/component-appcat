@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-change_populate_ns_labels
+    metadata.appcat.vshn.io/revision: debug-a0d62132f497e1e46dcc22f4d424b943a7be51a3
     metadata.appcat.vshn.io/serviceID: vshn-postgresql
     name: vshnpostgres.vshn.appcat.vshn.io
   name: vshnpostgres.vshn.appcat.vshn.io
@@ -24,7 +24,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-change-populate-ns-labels
+        name: function-appcat-debug-a0d62132f497e1e46dcc22f4d424b943a7be51a3
       input:
         apiVersion: v1
         data:
@@ -54,7 +54,7 @@ spec:
           httpGatewayName: http-gateway
           httpGatewayNamespace: kgateway-system
           ignoreNamespaceForBilling: vshn-test
-          imageTag: change_populate_ns_labels
+          imageTag: a0d62132f497e1e46dcc22f4d424b943a7be51a3
           initContainers: '{"clusterReconciliationCycle": {"limits": {"cpu": "300m",
             "memory": "200Mi"}, "requests": {"cpu": "100m", "memory": "100Mi"}}, "pgbouncerAuthFile":
             {"limits": {"cpu": "300m", "memory": "500Mi"}, "requests": {"cpu": "100m",
