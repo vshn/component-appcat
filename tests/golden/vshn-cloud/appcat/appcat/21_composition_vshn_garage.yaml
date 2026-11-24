@@ -13,7 +13,7 @@ metadata:
     metadata.appcat.vshn.io/zone: rma1
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: master-86bebd295657398f137b3f1833c55f4eae08695e
+    metadata.appcat.vshn.io/revision: master-a0d62132f497e1e46dcc22f4d424b943a7be51a3
     metadata.appcat.vshn.io/serviceID: vshn-garage
     name: vshngarage.vshn.appcat.vshn.io
   name: vshngarage.vshn.appcat.vshn.io
@@ -24,11 +24,12 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-master-86bebd295657398f137b3f1833c55f4eae08695e
+        name: function-appcat-master-a0d62132f497e1e46dcc22f4d424b943a7be51a3
       input:
         apiVersion: v1
         data:
           additionalResourcesAllowed: '[]'
+          allowedNamespaceLabels: '[]'
           billingEnabled: 'false'
           bucketRegion: lpg
           chartRepository: https://charts.appcat.ch/
@@ -52,7 +53,7 @@ spec:
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
           imageRegistry: ''
-          imageTag: 86bebd295657398f137b3f1833c55f4eae08695e
+          imageTag: a0d62132f497e1e46dcc22f4d424b943a7be51a3
           isOpenshift: 'true'
           maintenanceSA: helm-based-service-maintenance
           maintenanceURL: ''
