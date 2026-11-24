@@ -94,7 +94,7 @@ parameters:
       appcat:
         registry: ghcr.io
         repository: vshn/appcat
-        tag: change/kubectl_image
+        tag: 86bebd295657398f137b3f1833c55f4eae08695e
       functionAppcat:
         registry: ${appcat:images:appcat:registry}
         repository: ${appcat:images:appcat:repository}

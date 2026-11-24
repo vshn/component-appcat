@@ -15,7 +15,7 @@ metadata:
     metadata.appcat.vshn.io/zone: lpg
   labels:
     metadata.appcat.vshn.io/offered: 'true'
-    metadata.appcat.vshn.io/revision: debug-change_kubectl_image
+    metadata.appcat.vshn.io/revision: debug-86bebd295657398f137b3f1833c55f4eae08695e
     metadata.appcat.vshn.io/serviceID: vshn-postgresqlcnpg
     name: vshnpostgrescnpg.vshn.appcat.vshn.io
   name: vshnpostgrescnpg.vshn.appcat.vshn.io
@@ -26,7 +26,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-change-kubectl-image
+        name: function-appcat-debug-86bebd295657398f137b3f1833c55f4eae08695e
       input:
         apiVersion: v1
         data:
@@ -55,7 +55,7 @@ spec:
           httpGatewayName: ''
           httpGatewayNamespace: ''
           ignoreNamespaceForBilling: vshn-test
-          imageTag: change_kubectl_image
+          imageTag: 86bebd295657398f137b3f1833c55f4eae08695e
           isOpenshift: 'false'
           kubectl_image: quay.io/appuio/oc:v4.22
           loadbalancerAnnotations: |

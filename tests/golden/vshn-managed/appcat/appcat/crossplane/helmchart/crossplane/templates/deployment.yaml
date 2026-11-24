@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        function-revision: change/kubectl_image
+        function-revision: 86bebd295657398f137b3f1833c55f4eae08695e
       labels:
         app: crossplane
         app.kubernetes.io/component: cloud-infrastructure-controller

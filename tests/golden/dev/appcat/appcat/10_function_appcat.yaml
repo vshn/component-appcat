@@ -4,9 +4,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: '-40'
-  name: function-appcat-debug-change-kubectl-image
+  name: function-appcat-debug-86bebd295657398f137b3f1833c55f4eae08695e
 spec:
-  package: ghcr.io/vshn/appcat:change_kubectl_image-func
+  package: ghcr.io/vshn/appcat:86bebd295657398f137b3f1833c55f4eae08695e-func
   packagePullPolicy: Always
   runtimeConfigRef:
     name: function-appcat

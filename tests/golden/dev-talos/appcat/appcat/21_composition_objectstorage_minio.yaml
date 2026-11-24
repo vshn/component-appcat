@@ -21,7 +21,7 @@ spec:
   mode: Pipeline
   pipeline:
     - functionRef:
-        name: function-appcat-debug-change-kubectl-image
+        name: function-appcat-debug-86bebd295657398f137b3f1833c55f4eae08695e
       input:
         apiVersion: v1
         data:
